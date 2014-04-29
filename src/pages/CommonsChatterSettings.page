@@ -1,0 +1,93 @@
+<apex:page sidebar="false" title="Course Chatter Settings" showHeader="false" standardstylesheets="false" controller="ChatterSettingsController" applyBodyTag="false">
+    <head>
+        <title>Course Chatter Settings</title>
+        <c:CommonsStaticResources />
+    </head>
+    
+    <div class='cc-popup cc-popup--settings non-responsive'>
+        
+        <div class="banner__ribbon">
+            <h2><span class='btn btn--square btn--dark '><span class='icon icon--chatter-setting'></span></span>Course Chatter Settings<!--<span class='sprite sprite--help right'></span>--></h2>
+        </div>
+        
+        <div class="cc-popup__content  cc-popup__content--700">
+            <apex:form >
+                <div class="well third-box break cc-popup--settings__profile">
+                    
+                    <img class='settings__profile__avatar' src="{!userDetail.photo.largePhotoUrl}" width='158' height='158'/>
+                    <h3 class="spacer-margin--10">{!userDetail.firstName} {!userDetail.lastName}</h3>
+                    <hr/>
+                    <div class='small'>
+                        <p class='semi-bold'>{!userDetail.title}</p>
+                        <p class='spacer-margin--20'>
+                            <a class='email semi-bold' href="mailto:{!userDetail.email}">{!userDetail.email}</a>
+                        </p>
+                        
+                        <apex:variable var="phoneCount" value="{!0}" /> 
+                        <apex:repeat var="phoneNumber" value="{!userDetail.phoneNumbers}">
+                            <p class='{!IF((phoneCount == 0), "spacer-margin--20", "")}'>{!phoneNumber.phoneNumber} ({!phoneNumber.type})</p>
+                            <apex:variable var="phoneCount" value="{!phoneCount+1}"/>
+                        </apex:repeat>
+                        
+                        <p class='spacer-margin--20'>{!userDetail.address.street}</p>
+                        <p>{!userDetail.address.city}{!IF(ISBLANK(userDetail.address.city) || ISBLANK(userDetail.address.state), '', ', ')}{!userDetail.address.state}</p>
+                        <p>{!userDetail.address.zip}</p>
+                    </div>
+                </div>
+                <div class='two-thirds-box small'>
+                    <div class="well cc-popup--settings__options clearfix">
+                        <div class='half-box break'>
+                            <p>Comments</p>
+                            <div class="checkboxes--blue">
+                                <apex:inputCheckbox id="check1" value="{!commentsOnMyPost}" /><label for="{!$Component.check1}">Comments on a post on my profile</label>
+                                <apex:inputCheckbox id="check2" value="{!commentsAfterMe}"/><label for="{!$Component.check2}">Comments after me</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="well cc-popup--settings__updates">
+                        
+                        <div class="cc-popup--settings__updates__controls clearfix">
+                            <div class='cc-popup--settings__updates__controls__name semi-bold' id='cc-popup--settings__sort__groups'>Sort by Groups <span class='icon icon--down-a'></span></div>
+                            <div class='cc-popup--settings__updates__controls__freq semi-bold' id='cc-popup--settings__sort__freq'>Sort by Frequency</div>
+                        </div>
+                        <div class="scroll" id="cc-popup--settings__updates__rows" style='height: 282px;'>
+                            <apex:repeat var="groupFrequency" value="{!groupEmailFrequencyList}">
+                                <apex:outputPanel rendered="{!groupFrequency.displayFrequency != 'Never'}">
+                                    <div class="cc-popup--settings__updates__row">
+                                        <div class='cc-popup--settings__updates__row__name'>{!groupFrequency.groupName}</div>
+                                        <div class='cc-popup--settings__updates__row__freq' data-freq='{!groupFrequency.displayFrequency}' data-group-id='{!groupFrequency.groupId}'>{!groupFrequency.displayFrequency}</div>
+                                    </div>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!groupFrequency.displayFrequency == 'Never'}">
+                                    <div class="cc-popup--settings__updates__row">
+                                        <div class='cc-popup--settings__updates__row__name'>{!groupFrequency.groupName}</div>
+                                        <div class='cc-popup--settings__updates__row__never' data-freq='{!groupFrequency.displayFrequency}'>{!groupFrequency.displayFrequency}</div>
+                                    </div>
+                                </apex:outputPanel>
+                            </apex:repeat>
+                            <apex:actionFunction action="{!actionChangeEmailFrequency}" name="actionUpdateEmailFrequency" reRender="none">
+                                <apex:param id="groupId" name="groupId" value="" />
+                                <apex:param id="emailFrequency" name="emailFrequency" value="" />
+                            </apex:actionFunction>
+                            <div class="cc-popup--settings__updates__popover" id='cc-popup--settings__updates__popover'>
+                                <ul>
+                                    <li data-freq='Each Post'>Each Post</li>
+                                    <li data-freq='Daily Digest'>Daily Digest</li>
+                                    <li data-freq='Weekly Digest'>Weekly Digest</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="full-box well well--invisible">
+                    <button type='button' data-action='close' class="btn right">Cancel</button>
+                    <button type='button' data-action-function='saveChanges' class='btn right'>Save</button>
+                    <apex:actionFunction name="saveChanges" action="{!saveChanges}" reRender="none" oncomplete="top.window.close();" />
+                    
+                    <!--                        <apex:commandButton value="save" action="{!saveChanges}" styleclass="btn right">Save</apex:commandButton>-->
+                </div>
+            </apex:form>
+        </div>
+    </div>
+</apex:page>

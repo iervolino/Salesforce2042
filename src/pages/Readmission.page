@@ -1,0 +1,186 @@
+<apex:page standardController="StudentProcess__c" extensions="ReadmissionController" sidebar="false" showHeader="false" >
+<table style="background:#B4B2CE" width="100%">
+    <tr>
+        <td width="310">
+            <img width="310" height="86" id="logo" alt="" src="{!URLFOR($Resource.AppealResources,'logo.png')}" class="fixPNG"/>
+        </td>
+    </tr>
+</table>
+<apex:form id="iForm" > 
+<apex:pageMessages />
+<apex:outputLabel rendered="{!waiveFeeFlag}"><font size="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To pay your readmission fee, please click &nbsp;</font> </apex:outputLabel> <apex:outputLink value="https://bannerweb.wgu.edu/prdx/WGU_SS_SSO.P_AUTHENTICATE_BANNER?URL=CASHNet_sso.p_CASHNet_login" rendered="{!waiveFeeFlag}" target="_blank"><font size="3">Pay Now</font></apex:outputLink>
+
+<apex:pageBlock rendered="{!NOT(disFlag)}">
+    <font size="3">We're excited that you are considering returning to WGU! To begin the readmission appeal process, you must complete all sections of the form below. You are always welcome to contact the Student Records department by e-mail at<font color ="blue"> <u>readmission@wgu.edu</u></font> or phone at 1-877-435-7948 extension 3146, if you need assistance. We will be happy to help you get started.</font><br/>
+    <br/>
+    <font size="3"><i>NOTE: If you've graduated from a WGU program and want to return to complete another program, please contact the enrollment department:<font color ="blue"> <u> admissions@wgu.edu.</u></font></i></font><br/>
+    <br/>
+    <font size="3">For more information about the readmission process please visit: <a href="https://www.wgu.edu/admissions/restart/" target="_blank"><font color ="blue"> https://www.wgu.edu/admissions/restart</font></a></font> 
+    <br/>
+    <br/>
+    
+    <apex:pageBlock >
+        <apex:pageBlockSection collapsible="false" title="Readmission Terms and Conditions: (Read Carefully Before Proceeding)" columns="1">
+            When appealing to be readmitted, you must conform and comply with current admission policies. This means that if your program now has pre-requisites, or other qualifying factors, you must satisfy them before you may return to your program. Additionally, if you are granted readmission you are required to return to the current catalog version of your program and must fulfill all new course, non-course, and other degree program requirements. Your prior course completion(s) may satisfy some of the courses in the current version of your program. However, you should expect to encounter new courses in your program. We encourage you to review the most current version of your program by clicking on the following link: (Program Guides). The date of readmission will determine the catalog version and attendant degree program requirements. The date of readmission is when you are returned to active status. 
+            <br/>
+            <br/>
+            WGU will make every attempt to meet your desired start date. However, with increasing enrollments, mentor availability is a factor that must be addressed. In the event we are unable to return you to start your term on your desired date, you will typically be started the next month.
+        </apex:pageBlockSection>
+        <br/>
+        <br/>
+        <apex:pageBlockSection >
+            <apex:pageBlockSectionItem >
+                <apex:outputlabel >I have read and AGREE to the Readmission Terms and Conditions.</apex:outputlabel>
+                <apex:Inputcheckbox value="{!stdProcess.Agree__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageblocksectionItem >
+                <apex:outputlabel >I have read and DO NOT AGREE to the Readmission Terms and Conditions.*</apex:outputlabel>
+                <apex:inputCheckbox value="{!stdProcess.DoNotAgree__c}"/>
+            </apex:pageblocksectionItem>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="1">
+            *By indicating that you DO NOT AGREE to the Readmission Terms and Conditions, you may still proceed with the readmission application form. However, you MUST address your concerns and explain why you should not be held to these terms and conditions within the “Letter of Appeal” portion of this form. Failure to address why you wish to be exempted from these terms and conditions may result in delays in the processing of your appeal, and possibly denial of your appeal.
+        </apex:pageBlockSection>
+        <apex:pageBlockSection collapsible="false" title="Student Information">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >First Name</apex:outputLabel>
+                <apex:outputText >{!stdProcess.FirstName__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Street Address</apex:outputLabel>
+                <apex:outputText >{!stdProcess.MailingStreet__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Last Name</apex:outputLabel>
+                <apex:outputText >{!stdProcess.LastName__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >City</apex:outputLabel>
+                <apex:outputText >{!stdProcess.MailingCity__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Student ID</apex:outputLabel>
+                <apex:outputText >{!stdProcess.StudentID__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >State</apex:outputLabel>
+                <apex:outputText >{!stdProcess.State__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+              <apex:pageBlockSectionItem >
+                <apex:outputLabel >Previous Program</apex:outputLabel>
+                <apex:outputText >{!stdProcess.ProgramCode__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Zip Code</apex:outputLabel>
+                <apex:outputText >{!stdProcess.MailingZip__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+          
+            
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+   
+        
+   
+    <apex:pageBlock >
+        <apex:pageBlockSection collapsible="false" title="Please verify your current mailing address above. If your address has changed, please enter your current address below.">
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Street 1</apex:outputLabel>
+                <apex:inputField value="{!stdProcess.ApplicationStreetAddress1__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Street 2</apex:outputLabel>
+                <apex:inputField value="{!stdProcess.ApplicationStreetAddress2__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >City</apex:outputLabel>
+                <apex:inputField value="{!stdProcess.ApplicationCity__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >State</apex:outputLabel>
+                <apex:inputField value="{!stdProcess.ApplicationState__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Zip</apex:outputLabel>
+               <apex:inputField value="{!stdProcess.ApplicationZipCode__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Current Phone Number</apex:outputLabel>
+                <apex:inputField value="{!stdProcess.ApplicationPhoneNumber__c}"/>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection collapsible="false" title="Please select your desired program, readmission date, and how you plan on paying for tuition. Please note that the readmission date you select must be at least 4 weeks out.  A new term begins on the first of every month.">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Desired College*</apex:outputLabel>
+                <apex:inputField value="{!stdProcess.College__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Desired Readmission Date*</apex:outputLabel>
+                <apex:inputField value="{!stdProcess.ReadmissionDesiredDate__c}"/>
+            </apex:pageBlockSectionItem>
+             <apex:pageBlockSectionItem >
+                <apex:outputLabel >Desired Program Name*</apex:outputLabel>
+                <apex:inputField value="{!stdProcess.ProgramName__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >How do you plan on paying for tuition?*</apex:outputLabel>
+                <apex:inputField value="{!stdProcess.FinancePaymentType__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Readmission Fee Waived</apex:outputLabel>
+                <apex:panelGrid > 
+                    <apex:outputText rendered="{!(stdProcess.WaiveFee__c==true)}" >Yes</apex:outputText>
+                    <apex:outputText rendered="{!(stdProcess.WaiveFee__c==false)}" >No</apex:outputText>
+                </apex:panelGrid>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="1" collapsible="false" title="Have you attended any institutions of higher education before or after attending WGU? If yes, please add the institution and attendance dates below. To add more than one institution please select the 'Add New Row' button.">
+            <apex:pageBlockTable value="{!studentProcessList}" var="tsa" rows="{!rowFlg}" id="pBlk">
+               <apex:column >
+                  <apex:facet name="header">Institution Name</apex:facet>
+                  <apex:inputText value="{!tsa.inName}" />
+               </apex:column>
+               <apex:column >
+                  <apex:facet name="header">Dates of Attendance(mm/dd/yyyy)</apex:facet>
+                  <apex:inputText value="{!tsa.doa}" size="10" />
+               </apex:column>
+            </apex:pageBlockTable>
+          <apex:panelGrid columns="2" >
+              <apex:commandButton value="Add New Row" action="{!incrementRowFlg}" /><apex:commandButton value="Remove Row" action="{!decrementRowFlg}" disabled="{!removeFlag}"/>
+          </apex:panelGrid>
+          If you attended any institutions after withdrawing from WGU, please submit an official transcript.  Official transcripts should be mailed directly from the sending institution to our Transcripts Department. (Your own copy of your transcript is not considered official unless it is sealed.) 
+          Please order official transcripts promptly as they can take a few weeks to arrive. Your transcripts should be received by the 15th of the month prior to your intended restart date.To facilitate proper routing, please have your transcript(s) addressed as follows :
+          <Strong>ATTN: Transcripts Department-Readmission  
+          Western Governors University  
+          4001 South 700 East, Suite 700 
+          Salt Lake City, UT 84107</Strong>
+
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+    
+   <apex:pageBlockSection collapsible="false" columns="1" title="Letter of Appeal">
+       <p><font size="3">In the space below, please answer the following:*</font></p>
+    <ul>
+        <li><font size="3">The circumstances that led to your withdrawal.</font></li>
+        <li><font size="3">Why you believe the WGU model is appropriate in reaching your academic goals.</font></li>
+        <li><font size="3">How you have prepared for return, both academically and otherwise.</font></li>
+        <li><font size="3">Why you believe you will be able to meet academic progress requirements in your studies if readmitted.</font></li>
+    </ul>
+    <p>&nbsp;</p>
+       <apex:pageBlockSectionItem >
+    
+    
+    <apex:inputTextarea rows="8" cols="250" value="{!stdProcess.ReadmissionAppeal__c}"/> 
+    </apex:pageBlockSectionItem> 
+    </apex:pageBlockSection>
+        
+    <apex:pageBlockButtons location="bottom">
+    <apex:commandButton value="Submit Appeal"  action="{!saveReadmission}" disabled="{!disFlag}"/>&nbsp;&nbsp;<apex:commandButton value="Cancel Appeal" action="{!cancel}"/> 
+    </apex:pageBlockButtons>
+     
+</apex:pageBlock>        
+</apex:form>
+</apex:page>

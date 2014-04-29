@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A child object to DataServiceDefinition that defines a specific end point and communication methodology.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Parameters__c</fullName>
+        <description>The parameters and value types that will be passed along the URL line after the endpoint.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The parameters and value types that will be passed along the URL line after the endpoint.</inlineHelpText>
+        <label>Parameters</label>
+        <length>2000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>6</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ParentService__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent Service</label>
+        <referenceTo>DataServiceDefinition__c</referenceTo>
+        <relationshipLabel>Endpoints</relationshipLabel>
+        <relationshipName>DataServiceEndpoints</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>RequestContent__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The JSON Document describing the request.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The JSON Document describing the request.</inlineHelpText>
+        <label>Request Content</label>
+        <referenceTo>DataObject__c</referenceTo>
+        <relationshipLabel>Data Service Endpoint Requests</relationshipLabel>
+        <relationshipName>Data_Service_Endpoint_Requests</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RequestHeaders__c</fullName>
+        <description>Headers that must be submitted as part of the request.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Headers that must be submitted as part of the request.</inlineHelpText>
+        <label>Request Headers</label>
+        <length>2000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ResponseContent__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The JSON Document that is returned as part of this request.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The JSON Document that is returned as part of this request.</inlineHelpText>
+        <label>Response Content</label>
+        <referenceTo>DataObject__c</referenceTo>
+        <relationshipLabel>Data Service Endpoint Responses</relationshipLabel>
+        <relationshipName>Data_Service_Endpoint_Responses</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ResponseHeaders__c</fullName>
+        <description>The headers that will be returned in the HTTP header.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The headers that will be returned in the HTTP header.</inlineHelpText>
+        <label>Response Headers</label>
+        <length>2000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>URL__c</fullName>
+        <description>Endpoint URL.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Endpoint URL.</inlineHelpText>
+        <label>URL</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Version__c</fullName>
+        <description>The version number of this endpoint.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The version number of this endpoint.</inlineHelpText>
+        <label>Version</label>
+        <precision>8</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Data Service Endpoint</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Data Service Endpoints</pluralLabel>
+    <recordTypes>
+        <fullName>DELETE</fullName>
+        <active>true</active>
+        <label>DELETE</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>GET</fullName>
+        <active>true</active>
+        <label>GET</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>PATCH</fullName>
+        <active>true</active>
+        <label>PATCH</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>POST</fullName>
+        <active>true</active>
+        <label>POST</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>PUT</fullName>
+        <active>true</active>
+        <label>PUT</label>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

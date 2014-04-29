@@ -1,0 +1,147 @@
+<apex:page title="WGU Field Experience Portal Start" contentType="text/html; charset=UTF-8" standardStylesheets="false" showHeader="false" sidebar="false" docType="html" controller="MyFieldExperienceStartController">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<html>
+<head>
+<title>Western Governors University - Student Field Experience</title>
+<link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"></link>
+<style rel="stylesheet" type="text/css">
+HTML, BODY, DIV, SPAN, APPLET, OBJECT, IFRAME, H1, H2, H3, H4, H5, H6, P, BLOCKQUOTE, PRE, A, ABBR, ACRONYM, ADDRESS, BIG, CITE, CODE, DEL, DFN, EM, IMG, INS, KBD, Q, S, SAMP, SMALL, STRIKE, STRONG, SUB, SUP, TT, VAR, B, U, I, CENTER, DL, DT, DD, OL, UL, LI, FIELDSET, FORM, LABEL, LEGEND, TABLE, CAPTION, TBODY, TFOOT, THEAD, TR, TH, TD, ARTICLE, ASIDE, CANVAS, DETAILS, EMBED, FIGURE, FIGCAPTION, FOOTER, HEADER, HGROUP, MENU, NAV, OUTPUT, RUBY, SECTION, SUMMARY, TIME, MARK, AUDIO, VIDEO
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+BODY
+{
+    font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+    background-color: #F2F2F2;
+}
+P SPAN
+{
+    font-weight: bold;
+}
+#wrapper
+{
+    width: 960px;
+    margin: 0 auto;
+    clear: both;
+    /*[disabled]padding:0 0 5px;*/
+}
+.mid-content P
+{
+    color: #191919;
+    margin-bottom: 10px;
+}
+A
+{
+    color: #2356AD;
+    cursor: pointer;
+    transition: color 40ms linear;
+    text-decoration: none;
+    font-weight: bold;
+}
+A:active
+{
+    color: #183C7A;
+    text-decoration: underline;
+    font-weight: bold;
+}
+A:hover
+{
+    color: #1E4994;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.container
+{
+    margin: 0px auto 0;
+    width: 960px;
+    overflow: hidden;
+    clear: both;
+    float: none;
+    line-height: 16px;
+}
+.mid-content
+{
+    color: #4C4C4C;
+    font: normal normal 13px / 17px Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+    overflow-x: auto;
+    /*[disabled]margin-bottom:40px;*/
+    padding-bottom: 30px;
+}
+.mid-content H1
+{
+    color: #2356AD;
+    font-size: 24px;
+    font-style: normal;
+    line-height: 24px;
+    margin: 0 26px 20px;
+}
+.mid-content B
+{
+    font-weight: bold;
+}
+.mid-content I
+{
+    font-style: italic;
+}
+.mid-content H2
+{
+    color: #3D5C15;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 26px 12px 0;
+}
+#fe-start
+{
+    margin: 28px auto 0 auto;
+    width: 480px;
+}
+.mid-content P
+{
+    color: #4C4C4C;
+    /*[disabled]margin:0 26px 12px;*/
+}
+
+    </style>
+    <script type="text/javascript" charset="utf-8" language="JavaScript">
+        var userProfilePage = '{!UserProfilePage}';
+        function redir(){
+           if ( userProfilePage != '' ) {
+             window.location = userProfilePage; 
+           }
+        }
+    </script>
+</head>
+
+<body  onLoad="redir()" >
+<div id="wrapper">
+    <div class="mid-content">
+        <div id="fe-start">
+
+<!-- oooooooooooooooooooooooooooooooooooooooo No JavaScript oooooooooooooooooooooooooooooooooooooooo-->
+        <noscript>
+            <p><span>Your browser is not supporting JavaScript, which is neccessary to use this page. Please enable JavaScript on your browser or <a href="http://www.mozilla.org/en-US/products/download.html">intall a browser with JavaScript</a>.</span></p>
+        </noscript>
+
+<!-- oooooooooooooooooooooooooooooooooooooooo Content oooooooooooooooooooooooooooooooooooooooo-->
+        <h2>WGU Field Experience Portal</h2>
+
+        <p>To begin the application, please click the 'Go To Field Experience Portal' button below. You do not need to complete all tasks at once. You are welcome to retun as needed to complete the tasks.</p>
+        
+        <p>Please use one of the following browsers: Mozilla Firefox, Safari, Google Chrome or Internet Explorer. Mobile devices such as Android and iOS are currently not supported. </p>
+
+        <p>
+            <FORM METHOD="LINK" ACTION="https://srm.my.salesforce.com/apex/myfieldexperience">
+                <INPUT TYPE="submit" VALUE="Go To Field Experience Portal" />
+            </FORM>
+        </p>
+    </div>
+    </div>
+</div>
+</body>
+</html>
+</apex:page>

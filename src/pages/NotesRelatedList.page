@@ -1,0 +1,1286 @@
+<apex:page title="Western Governors University - Student Notes" contentType="text/html; charset=UTF-8" standardController="Account" extensions="NotesController" standardStylesheets="false" showHeader="false" sidebar="false" docType="html">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<html>
+<head>
+    <title>Western Governors University - Student Notes</title>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v407, 'resources/css/ext-all.css')}"/> 
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v407}/ext-all.js"/>
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.ckeditor_v364}/ckeditor/ckeditor.js"/>
+    <link href="{!URLFOR($Resource.StandardPage,'assets/css/standard_page_lte.css')}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{!$Resource.extjsux_v407}/ux/grid/css/GridFilters.css" />
+   
+    <apex:outputText escape="false" value="{!lt}!--[if lte IE 7]{!gt}" />
+    <script src="{!URLFOR($Resource.iecompatible, 'IE7.js')}" />
+    <apex:outputText escape="false" value="{!lt}![endif]--{!gt}" />
+    
+
+    <apex:outputText escape="false" value="{!lt}!--[if IE 8]{!gt}" />
+    <script src="{!URLFOR($Resource.iecompatible, 'IE8.js')}" />
+    <link rel="stylesheet" type="text/css" href="{!$Resource.StandardPage}/assets/css/standard_page_lte_ie8.css" />
+    <apex:outputText escape="false" value="{!lt}![endif]--{!gt}" />
+    
+    <apex:outputText escape="false" value="{!lt}!--[if IE 9]{!gt}" />
+    <script src="{!URLFOR($Resource.iecompatible, 'IE9.js')}" />
+    <link rel="stylesheet" type="text/css" href="{!$Resource.StandardPage}/assets/css/standard_page_ie9.css" />
+    <apex:outputText escape="false" value="{!lt}![endif]--{!gt}" />
+    <apex:includeScript value="/soap/ajax/26.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/26.0/apex.js"/>
+    <apex:includeScript value="/support/console/26.0/integration.js"/>
+    
+    <style type="text/css">
+        div.subjectColumn span {
+          font-weight: bold;
+        }
+        span.cke_skin_kama {
+            -moz-border-radius: 0px;
+            -webkit-border-radius: 0px;
+            -o-border-radius: 0px;
+            border: 1px solid #D3D3D3;
+            padding: 0px !important;
+        }
+        .cke_focus { outline:0 !important; }
+        .x-grid-dirty-cell {
+            background-image: none;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="extContentDiv" style="width:100%"/>
+
+    <script type="text/javascript" >
+        var $soap;
+        if (sforce && sforce.connection) {
+            sforce.connection.sessionId = '{!$Api.Session_ID}';
+            if (!$soap) {
+              $soap = sforce.connection;
+            }
+        }
+        
+        var $sconsole;
+        if (!$sconsole && sforce && sforce.console && sforce.console.isInConsole() ) {
+          $sconsole = sforce.console;
+        }
+        
+        var $apex;
+        if (!$apex) {
+          $apex = sforce.apex;
+        }
+        
+        String.prototype.endsWith = function(suffix) {
+            return this.indexOf(suffix, this.length - suffix.length) !== -1;
+        };
+        String.prototype.startsWith = function (str){
+            return this.indexOf(str) == 0;
+        };
+        String.prototype.replaceAll = function(replace, with_this) {
+            return this.replace(new RegExp(replace, 'g'),with_this);
+        }
+        var resourceStr = Ext.Date.format(new Date(), "YmdHis").substring(0,10);
+
+        Ext.Loader.setConfig({enabled: true});
+        Ext.Loader.setPath('Ext.ux', '{!$Resource.extjsux_v407}/ux');
+        Ext.require([
+            'Ext.grid.*',
+            'Ext.data.*',
+            'Ext.ux.grid.FiltersFeature'
+        ]);
+        Ext.ns("Ext.WGU");   
+        Ext.override(Ext.data.Store, {
+            loadDataViaReader : function(data, append) {
+                var me      = this,
+                    result  = me.proxy.reader.read(data),
+                    records = result.records;
+        
+                me.loadRecords(records, { addRecords: append });
+                me.fireEvent('load', me, result.records, true);
+            }            
+        });
+        Ext.override(Ext.grid.Scroller, {
+            onAdded: function() {
+                this.callParent(arguments);
+                var me = this;
+                if (me.scrollEl) {
+                    me.mun(me.scrollEl, 'scroll', me.onElScroll, me);
+                    me.mon(me.scrollEl, 'scroll', me.onElScroll, me);
+                }
+            }
+        });                
+        var WGUView;
+        var performanceToolTip;
+        var attachmentImage;
+        var noteTypesPNG = '{!$Resource.noteTypesPNG}/';
+        var blankNoteJSON = '{"attributes":{"type": "WGUStudentNote__c","url":null},"ShortText__c":null,"WGUCreationDateTime__c":null,"Text__c":null,"SystemModstamp":null,"SubType__c":null,"Student__c":null,"PIDM__c":null,"Name":null,"MentorId__c":null,"Level1Image__c":null,"LastModifiedDate":null,"LastModifiedById":null,"LastActivityDate":null,"IsDeleted": false,"InteractionID__c":null,"Id":null,"CreatedDate":null,"CreatedById":null,"Type__c":null,"Author__c":null,"Author__r":{"attributes":{"type": "User","url":null},"Name":null},"CreatedBy":{"attributes":{"type": "User","url":null},"Name":null},"AuthorPidm__c":null}';
+        var noteRecord = Ext.decode( blankNoteJSON );
+        var thisUserId = '{!$User.Id}';
+        var thisUserName = '{!$User.UserName}';
+        var thisUserFullName = ("{!$User.FirstName + ' ' + $User.LastName}");
+        var thisUserPIDM = '{!$User.PIDM__c}';
+        var studentRecord;
+        var talismaLinkUrl = 'http://webapp4.wgu.edu/MentorNotes?pidm=';
+        var isPortalAccess = false;
+                var isGetNotesDone = true;
+                var isGetSurveysDone = false;
+                var notesQueryLocator = 0;
+                var surveysQueryLocator = 0;
+        var pidm;
+        var studentAccountId;
+        var studentWGUId;
+        var contactId;
+        var noteHistoryGridPanel;
+        var validNoteTypes = [];
+        var noteTypesFilterStore = Ext.create('Ext.data.Store', {
+            fields: ['value', 'name'],
+            data : {!NoteTypeFilterJSON}
+        });
+        (function() {
+            var x = 1;
+            noteTypesFilterStore.each( function(record) {
+                validNoteTypes[x-1] = record.data.value;
+                x++;
+            }, this);
+         })();
+         
+        var filterCombo = Ext.create('Ext.form.field.ComboBox', {
+                fieldLabel: 'Note Type Filter',
+                labelWidth: 85,
+                queryMode: 'local',
+                displayField: 'name',
+                valueField: 'value',
+                store: noteTypesFilterStore
+             });
+             
+        var searchTextField = Ext.create('Ext.form.field.Text', {
+                fieldLabel: 'Note Text Filter',
+                enableKeyEvents: true,
+                labelAlign: 'right',
+                listeners: {
+                    keyup: {
+                        fn: function(field, e){
+                            var val = field.getValue()==null? '' : field.getValue().trim();
+                            var noteTypeVal = (filterCombo.getRawValue()==null || filterCombo.getRawValue()=='') ?'All': filterCombo.getRawValue();
+
+                            noteHistoryGridPanel.getStore().filterBy( function(record) {
+                                if ( val == '' && noteTypeVal == 'All' ) {
+                                  return true;
+                                } else {
+                                  if ( noteTypeVal == 'All' ) {
+                                    return (record.get('Text__c').indexOf(val) != -1);
+                                  } else {
+                                    return (record.get('Text__c').indexOf(val) != -1) && record.get('Type__c')==noteTypeVal;
+                                  }
+                                }
+                            }, this);
+                        },
+                        buffer: 250
+                    }
+                }
+            });
+                
+        function clearFiltersClick() {
+            filterCombo.setRawValue('All');
+            searchTextField.setRawValue('');
+            noteHistoryGridPanel.filters.clearFilters();
+            noteHistoryGridPanel.getStore().filterBy( function(record) {
+               return true;
+            }, this);
+            notesStore.sort('WGUCreationDateTime__c', 'DESC');
+            Ext.Function.defer( function() {
+                noteHistoryGridPanel.columns[0].setSortState(null);
+                noteHistoryGridPanel.columns[3].setSortState(null);
+                noteHistoryGridPanel.columns[3].setSortState('DESC');
+            }, 300);
+        }
+            
+        Ext.onReady(function(){ 
+            Ext.tip.QuickTipManager.init(); 
+            Ext.FocusManager.enable();
+
+            pidm = getParameterByName("pidm");
+            isPortalAccess = ( pidm != null );
+            contactId = ( '{!Account.PersonContactId}' != ''? '{!Account.PersonContactId}': getParameterByName("contactId") );
+            studentAccountId = getParameterByName("id");
+            studentWGUId = getParameterByName("studentId");
+        
+            WGUView = new Ext.create('Ext.WGU.StudentNoteView',{}); 
+            WGUView.render( 'extContentDiv' );
+            WGUView.setWidth( Ext.getBody().getWidth() );
+            Ext.EventManager.onWindowResize(function () {
+                WGUView.setWidth( Ext.getBody().getWidth() );
+            });
+
+                        attachmentImage = Ext.create('Ext.Img', {
+                            src: noteTypesPNG+'Attachment.png',
+                            renderTo: 'noteViewerAttachment'
+                        });
+            performanceToolTip = Ext.create('Ext.tip.ToolTip', {
+                        target: 'noteViewerAttachment',
+                        maxHeight: 200,
+                        maxWidth: 500,
+                        width: 500,
+                        showDelay: 150,
+                        dismissDelay: 0,
+                        html: 'No Assessment Data for this Note'
+                    });
+
+            
+            CKEDITOR.replace( 'noteViewerHTML', {
+                on : {
+                    instanceReady : function( ev ) {
+                    }
+                },
+                toolbar: [],
+                uiColor: '#F2F2F2',
+                toolbarCanCollapse: false,
+                resize_enabled:  false,
+                height: '115px',
+                width: '100%',
+                customConfig: '',
+                removePlugins: 'elementspath,maximize,resize,image',
+                removeDialogTabs: 'link:advanced;table:advanced', 
+                enterMode: CKEDITOR.ENTER_BR,
+                shiftEnterMode: CKEDITOR.ENTER_P,
+                forcePasteAsPlainText: false,
+                forceSimpleAmpersand: true,
+                readOnly: true 
+            });
+            
+            noteHistoryGridPanel = Ext.getCmp('noteHistoryGridPanel');
+            noteHistoryGridPanel.getDockedItems()[0].add(searchTextField);
+            noteHistoryGridPanel.child('[dock=top]').add([
+                '->',
+                {
+                    xtype: 'displayfield',
+                    id: 'studentNoteCountText',
+                    fieldLabel: 'Note Count',
+                    labelWidth: 75,    
+                    labelAlign: 'right',
+                    name: 'studentNoteCountText',
+                    value: '0',
+                    fieldStyle: 'font-weight: 700;'
+                },
+                { xtype: 'tbspacer', width: 50 },
+                {
+                    text: 'Clear History Filters',
+                    tooltip: 'View all notes',
+                    handler: clearFiltersClick
+                },
+                {
+                    text: 'Refresh History',
+                    tooltip: 'Pull a refreshed list of this student\'s notes from the server\'s database',
+                    handler: viewHistoryButtonClick
+                }
+                  
+            ]);
+            
+                        
+            filterCombo.setRawValue('All');
+            filterCombo.on('select', function(combo, records, opts){
+                var val = records[0].get('value');
+                var searchText = searchTextField.getRawValue()==null? '': searchTextField.getRawValue();
+                noteHistoryGridPanel.getStore().filterBy( function(record) {
+                   if ( val == 'All' && searchText == '' ) {
+                     return true;
+                   } else {
+                    if ( searchText != '' ) {
+                      return (record.get('Type__c') == val) && ( record.get('Text__c').indexOf(searchText) != -1 ) ;
+                    } else {
+                      return record.get('Type__c') == val;
+                    }
+                   }
+                }, this);
+            });
+
+             
+                      
+            //process URL QueryString inputs
+            if ( studentAccountId || contactId || studentWGUId  ) {
+              if ( studentAccountId ) {
+                NotesController.getStudentJSON( studentAccountId, false, processStudentAjaxResponse, {escape:false} );
+              } else if ( studentWGUId ) {
+                NotesController.getStudentJSONByStudentWGUId( studentWGUId, processStudentAjaxResponse, {escape:false} );
+              } else {
+                NotesController.getStudentJSONByContactId( contactId, processStudentAjaxResponse, {escape:false} );
+              }
+            } else if ( pidm ) {
+                NotesController.getStudentJSON( pidm, true, processStudentAjaxResponse, {escape:false} );
+            } else {
+                  Ext.MessageBox.show({
+                     title:'Student Context Missing',
+                     msg: 'This page requires a data context for a specific student<br/>Please supply an Account Id:<br/>e.g. ../apex/notes?id=',
+                     buttons: Ext.Msg.OK,
+                     icon: Ext.Msg.INFO
+                  });   
+                  WGUView.setDisabled(true);
+            }    
+        }); //end Ext.onReady()
+
+        function viewHistoryButtonClick( e, target, options ) {
+          if (studentRecord.Id) {
+               notesQueryLocator = 0;
+               clearFiltersClick();
+               noteHistoryGridPanel.setLoading('Refreshing Notes List...');
+               NotesController.getNotesJSONByOffset( studentRecord.Id, notesQueryLocator, function(result, er) {
+                 if ( er.status ) {
+                    try {
+                        var parsedResult = Ext.decode(result);
+                        isGetNotesDone = parsedResult.isDone;
+                        notesQueryLocator = parsedResult.queryLocator;
+                        if ( parsedResult.Records.length > 0 ) {
+                            for ( var record in parsedResult.Records ) {
+                              parsedResult.Records[record].Text__c = ( parsedResult.Records[record].Text__c==null? null :Base64.decode( parsedResult.Records[record].Text__c ) );
+                              var shortText = parsedResult.Records[record].Text__c==null? null: parsedResult.Records[record].Text__c.replace( /<[^<|>]+?>/gi,'' );
+                              parsedResult.Records[record].ShortText__c = Ext.String.ellipsis(shortText,100,true);
+                              if ( Ext.Array.contains(validNoteTypes, parsedResult.Records[record].Type__c ) ) {
+                                parsedResult.Records[record].Level1Image__c = parsedResult.Records[record].Type__c==null?'':(noteTypesPNG+parsedResult.Records[record].Type__c.replace(/\s+/g, '').replace('/', '')+'.png');
+                              } else {
+                                parsedResult.Records[record].Level1Image__c = noteTypesPNG+'unknown.gif';
+                              }
+                              if ( parsedResult.Records[record].Author__r == null ) {
+                                parsedResult.Records[record].Author__r = { Name: '' };
+                              }
+                            }
+                        }
+                        notesStore.loadDataViaReader( parsedResult );
+                    } finally {
+                      noteHistoryGridPanel.setLoading(false);
+                    }
+                    if ( !isGetNotesDone ) {
+                        addMoreRecords();
+                        } else {
+                            getPerformanceResponses();
+                        }
+                 } else {
+                   noteHistoryGridPanel.setLoading(false);
+                   if ( er && er.type == "exception" ) {
+                       Ext.MessageBox.show({
+                         title:'Refresh History Program Exception',
+                         msg: er.message + '<br/>Reference: NotesController.getNotesJSONByOffset()',
+                         buttons: Ext.Msg.OK,
+                         icon: Ext.Msg.ERROR
+                      });
+                   }
+                 }
+               }, {escape:false} );
+           }
+        }
+        
+        function addMoreRecords() {
+            if ( !isGetNotesDone ) {
+                NotesController.getNotesJSONByOffset( studentRecord.Id, notesQueryLocator, function(result, er) {
+                 if ( er.status ) {            
+                    var parsedResult = Ext.decode(result);
+                    isGetNotesDone = parsedResult.isDone;
+                    notesQueryLocator = parsedResult.queryLocator;
+                    if ( parsedResult.Records.length > 0 ) {
+                        var newModels = [];
+                        for ( var x=0; x < parsedResult.Records.length; x++ ) {
+                            var thisRecord = parsedResult.Records[x];
+                            thisRecord.Text__c = ( thisRecord.Text__c==null? null :Base64.decode( thisRecord.Text__c ) );
+                            var newRecord = Ext.create('NotesModel');
+                            newRecord.set( 'Id', thisRecord.Id );
+                            newRecord.set( 'WGUCreationDateTime__c', thisRecord.WGUCreationDateTime__c );
+                            newRecord.set( 'Text__c', thisRecord.Text__c  );
+                            newRecord.set( 'Type__c', thisRecord.Type__c  );
+                            if ( Ext.Array.contains(validNoteTypes, thisRecord.Type__c ) ) {
+                              newRecord.set( 'Level1Image__c', (noteTypesPNG+thisRecord.Type__c.replace(/\s+/g, '').replace('/', '')+'.png') );
+                            } else {
+                              newRecord.set( 'Level1Image__c', noteTypesPNG+'unknown.gif' );
+                            }
+                            newRecord.set( 'SubType__c', thisRecord.SubType__c );
+                            newRecord.set( 'Name', thisRecord.Name  );
+                            newRecord.set( 'Author__c', thisRecord.Author__c  );
+                            if ( thisRecord.Author__r == null ) {
+                              thisRecord.Author__r = { Name: '' };
+                            }
+                            newRecord.set( 'AuthorName', thisRecord.Author__r.Name  );
+                            newRecord.set( 'AuthorPidm__c', thisRecord.AuthorPidm__c  );
+                            newRecord.set( 'Student__c', thisRecord.Student__c  );
+                            newRecord.set( 'PIDM__c', thisRecord.PIDM__c  );
+                            newRecord.set( 'ShortText__c', thisRecord.Text__c==null?null:Ext.String.ellipsis(thisRecord.Text__c.replace( /<[^<|>]+?>/gi,'' ),100,true)  );
+                            newModels[x] = newRecord;
+                        }
+                        notesStore.loadData( newModels, true ); 
+                        if ( !isGetNotesDone ) {
+                                addMoreRecords();
+                            } else {
+                                getPerformanceResponses();
+                            }
+                    }
+                 } else {
+                   isGetNotesDone = true;
+                   if ( er && er.type == "exception" ) {
+                       Ext.MessageBox.show({
+                         title:'Refresh History Program Exception',
+                         msg: er.message + '<br/>Reference: addMoreRecords() -> NotesController.getNotesJSONByOffset()',
+                         buttons: Ext.Msg.OK,
+                         icon: Ext.Msg.ERROR
+                      });
+                   }
+                 }
+               }, {escape:false} );
+            }
+        }
+
+
+                function getPerformanceResponses() {
+                    if ( !isGetSurveysDone ) {
+                        NotesController.getPerformanceSurveyJSONByOffset( studentRecord.Id, surveysQueryLocator, function(result, er) {
+                            if ( er.status ) {
+                                var parsedResult = Ext.decode(result);
+                                isGetSurveysDone = parsedResult.isDone;
+                                surveysQueryLocator = parsedResult.queryLocator;
+                                if ( parsedResult.Records.length > 0 ) {
+                                    var newModels = [];
+                                    for ( var x=0; x < parsedResult.Records.length; x++ ) {
+                                        var thisRecord = parsedResult.Records[x];
+                                        var newRecord = Ext.create('SurveyModel');
+                                        newRecord.set( 'Id', thisRecord.Id );
+                                        newRecord.set( 'NoteSubject', thisRecord.Name  );
+                                        newRecord.set( 'EvidenceOfAcademicActivity__c', thisRecord.EvidenceOfAcademicActivity__c );
+                                        newRecord.set( 'GoalPerformanceSinceLastCall__c', thisRecord.GoalPerformanceSinceLastCall__c  );
+                                        newRecord.set( 'Student__c', thisRecord.Student__c );
+                                        newRecord.set( 'WGUStudentNote__c', thisRecord.WGUStudentNote__c  );
+                                        newModels[x] = newRecord;
+                                    }
+                                    surveyStore.loadData( newModels, true );
+                                    if ( !isGetSurveysDone ) {
+                                        getPerformanceResponses();
+                                    } else {
+                                        //reset tokens for future refresh
+                                        isGetSurveysDone = false;
+                                        surveysQueryLocator = 0;
+                                    }
+                                }
+                            } else {
+                                isGetSurveysDone = false;
+                                surveysQueryLocator = 0;
+                                if ( er && er.type == "exception" ) {
+                                    Ext.MessageBox.show({
+                                        title:'Performance Survey Program Exception',
+                                        msg: er.message + '<br/>Reference: getPerformanceResponses() -> NotesController.getPerformanceSurveyJSONByOffset()',
+                                        buttons: Ext.Msg.OK,
+                                        icon: Ext.Msg.ERROR
+                                    });
+                                }
+                            }
+                        }, {escape:false} );
+                    }
+                }
+        
+        function loadNoteRecord( note ) {
+          if (note) {
+              if ( Ext.getCmp('gridViewCards').getLayout().getActiveItem().getId() != "noteHistoryGridPanel" ) {
+                  Ext.getCmp('noteViewerType').setRawValue( note.Type__c );
+                  Ext.getCmp('noteViewerSubType').setRawValue( note.SubType__c );
+                  Ext.getCmp('noteViewerSubject').setRawValue( note.Name );
+                  Ext.getCmp('noteViewerAuthor').setRawValue( note.Author__r? note.Author__r.Name: '' );
+                  Ext.getCmp('noteViewerCreationDate').setRawValue( (note.WGUCreationDateTime__c? Ext.Date.format(note.WGUCreationDateTime__c, "m/d/Y g:i a T"): '') );
+                 
+                  CKEDITOR.instances.noteViewerHTML.setData( note.Text__c==null?'':note.Text__c );
+                        
+                        if (note.Id) {
+                            var foundIndex = surveyStore.findExact( 'WGUStudentNote__c', note.Id );
+                            if ( foundIndex != -1 ) {
+                                var survey = surveyStore.getAt(foundIndex);
+                                var performancePercent = survey.get('GoalPerformanceSinceLastCall__c');
+                                var evidences = survey.get('EvidenceOfAcademicActivity__c').split(';');
+                                var evidenceHTML = '';
+                                var firstItem = true;
+                                for ( var x = 0; x < evidences.length ; x++ ) {
+                                  evidenceHTML += (firstItem?'':'<br/>') + evidences[x];
+                                  if ( firstItem ) {
+                                    firstItem = false;
+                                  }
+                                }
+                                performanceToolTip.update('<p style="font-weight:bold;padding:1px 0 4px 0;">Student Performance Questions for this Note:</p><table style="border:0;width:100%"><tr style="padding:0 0 5px 0;font-weight:bold"><td style="">Did this student meet the academic progress goals set on the last call?</td><td style="">What evidence is present that this student has been academically active since the previous call?</td></tr><tr style=""><td style="margin:3px 0 0 5px">'+performancePercent+'</td><td style="margin:3px 0 0 5px">'+evidenceHTML+'</td></tr></table>');
+                                performanceToolTip.setWidth(500);
+                                attachmentImage.setDisabled(false);
+                            } else {
+                                performanceToolTip.update('<p style="font-weight:bold">No Student Performance Questions for this Note</p>');
+                                performanceToolTip.setWidth(290);
+                                attachmentImage.setDisabled(true);
+                            }
+                        }
+              }
+                                      
+          }
+        }
+        
+        function processStudentAjaxResponse(result, er) {
+          if ( er.status ) {
+              var results = Ext.decode( result );
+              if ( results.count != 0 ) {
+                  studentRecord = results.Records[0];
+                  talismaLinkUrl = talismaLinkUrl + studentRecord.PIDM__c;
+                  
+                  if ( studentRecord.Id != null && contactId != studentRecord.Id ) {
+                    contactId = studentRecord.Id;
+                  }
+                  if ( studentRecord.AccountId != null && studentAccountId != studentRecord.AccountId ) {
+                    studentAccountId = studentRecord.AccountId;
+                  }
+                  if ( studentRecord.PIDM__c != null && pidm != studentRecord.PIDM__c ) {
+                    pidm = studentRecord.PIDM__c;
+                  }
+                  
+                  noteRecord.Author__c = thisUserId;
+                  noteRecord.AuthorPidm__c = thisUserPIDM;
+                  noteRecord.Student__c = studentRecord.Id;
+                  noteRecord.PIDM__c = studentRecord.PIDM__c;
+    
+                  NotesController.getNotesCountByContactId( studentRecord.Id, function( result, er ) {
+                    if ( er.status && result != null ) {
+                        Ext.getCmp('studentNoteCountText').setRawValue( result.toString() ); 
+                        viewHistoryButtonClick();             
+                    } else {
+                       if ( er && er.type == "exception" ) {
+                           Ext.MessageBox.show({
+                                 title:'Refresh Note Count Program Exception',
+                                 msg: er.message + '<br/>Reference: getNoteCount() -> NotesController.getNotesCountByContactId()',
+                                 buttons: Ext.Msg.OK,
+                                 icon: Ext.Msg.ERROR
+                              });
+                       }
+                    }
+                  }, {escape:false} );
+               } else {
+                   var msg = '';
+                   if ( studentAccountId ) {
+                     msg = 'Student Account Id: ' + studentAccountId;
+                   } else if ( pidm ) {
+                     msg = 'Student PIDM: ' + pidm;
+                   } else if ( contactId ) {
+                     msg = 'Student Contact Id: ' + contactId;
+                   } else if ( studentWGUId ) {
+                     msg = 'WGU Student Id: ' + studentWGUId;
+                   } else {
+                     msg = 'context lookup';
+                   }
+                   Ext.MessageBox.show({
+                     title:'Student Not Found',
+                     msg: 'No student was found for ' + msg + '<br/>This page requires a data context for a specific student.<br/>Please supply an Account Id, PIDM:<br/>e.g. ../apex/notes?id=  ../apex/notes?pidm=',
+                     buttons: Ext.Msg.OK,
+                     icon: Ext.Msg.ERROR
+                  });
+               }
+          } else {
+               if ( er && er.type == "exception" ) {
+                   Ext.MessageBox.show({
+                     title:'Get Student Record Program Exception',
+                     msg: er.message + '<br/>Reference: processStudentAjaxResponse()',
+                     buttons: Ext.Msg.OK,
+                     icon: Ext.Msg.ERROR
+                  });
+               }
+          }
+        }
+        
+        Ext.Date.patterns = {
+            ISO8601Long:"Y-m-d H:i:s",
+            ISO8601Short:"Y-m-d",
+            ShortDate: "n/j/Y",
+            LongDate: "l, F d, Y",
+            FullDateTime: "l, F d, Y g:i:s A",
+            MonthDay: "F d",
+            ShortTime: "g:i A",
+            LongTime: "g:i:s A",
+            SortableDateTime: "Y-m-d\\TH:i:s",
+            UniversalSortableDateTime: "Y-m-d H:i:sO",
+            Zulu: "Y-m-d\\TH:i:s\\Z",
+            YearMonth: "F, Y"
+        };
+        
+        Ext.define('Ext.WGU.StudentNoteView', {
+            extend: 'Ext.container.Container',
+            height: 212,
+            width: 960,
+            minWidth: 860,
+            maxWidth: 960,
+            layout: {
+                align: 'stretch',
+                type: 'vbox'
+            },
+        
+            initComponent: function() {
+                var me = this;
+        
+                Ext.applyIf(me, {
+                    items: [
+                        {
+                            xtype: 'container',
+                            id: 'gridViewCards',
+                            flex: 1,
+                            layout: {
+                                align: 'stretch',
+                                type: 'card'
+                            },
+                            items: [
+                                {
+                                    xtype: 'gridpanel',
+                                    flex: 1,
+                                    id: 'noteHistoryGridPanel',
+                                    store: notesStore,
+                                    title: '',
+                                    forceFit: true,
+                                    enableColumnHide: false,
+                                    columnLines: false,
+                                    multiSelect: false,
+                                    viewConfig: {
+                                        itemId: 'note-grid-view',
+                                        stripeRows: true,
+                                        floating: false,
+                                        trackOver: true,
+                                        listeners: {
+                                            itemclick: {
+                                                fn: me.onGridviewItemClick,
+                                                scope: me
+                                            },
+                                            itemdblclick: {
+                                                fn: me.onGridviewItemDblClick,
+                                                scope: me
+                                            }
+                                        }
+                                    },
+                                    listeners : {
+                                          itemcontextmenu :  function( grid, record, item, index, event){
+                                                event.stopEvent();
+                                                var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                var selModel = grid.getSelectionModel();
+                                                    if (selModel instanceof Ext.selection.RowModel) {
+                                                        if (!selModel.isSelected(record)) {
+                                                            selModel.select(record);
+                                                            grid.fireEvent('itemclick', grid, record, item, index, event);
+                                                        }
+                                                    }
+                                                var menu = Ext.create('Ext.menu.Menu',{
+                                                    plain: true,
+                                                    items: [{
+                                                        text: 'Open in Note View Mode',
+                                                        handler: function() {
+                                                           var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                           var selected = grid.getSelectionModel().getSelection();
+                                                           if ( selected.length > 0 ) {
+                                                               me.onGridviewItemDblClick( grid.getView(), selected[0], null, selected[0].index, null, null);
+                                                           } else {
+                                                               grid.getSelectionModel().select(0,false,false); 
+                                                               grid.getView().focusRow(0);               
+                                                               selected = grid.getSelectionModel().getSelection();
+                                                               Ext.getCmp('studentNoteIndexText').setRawValue( (selected[0].index+1)+' of '+ Ext.getCmp('studentNoteCountText').getRawValue() );
+                                                               me.onGridviewItemDblClick( grid.getView(), selected[0], null, selected[0].index, null, null);
+                                                           }
+                                                           Ext.getCmp('studentNoteIndexText').setRawValue( (selected[0].index+1)+' of '+ Ext.getCmp('studentNoteCountText').getRawValue() );
+                                                        }
+                                                    }]
+                                                });
+                                                menu.showAt(event.xy);
+                                            }
+                                    },
+                                    columns: [
+                                        {
+                                            xtype: 'gridcolumn',
+                                            text: 'Team / Author',
+                                            dataIndex: 'AuthorName',
+                                            width: 130,
+                                            filterable: true,
+                                            sortable: true
+                                        },
+                                        {
+                                            xtype: 'templatecolumn',
+                                            text: 'Type',
+                                            tpl: Ext.create('Ext.XTemplate', 
+                                                '<tpl for=".">',
+                                                '<img src="{Level1Image__c}"/>',
+                                                '</tpl>'),
+                                            width: 50,
+                                            align: 'center',
+                                            sortable: false
+                                        },
+                                        {
+                                            xtype: 'templatecolumn',
+                                            text: 'Subject / Text',
+                                            tpl: Ext.create('Ext.XTemplate', 
+                                                '<tpl for=".">',
+                                                '<div id="{Id}" class="subjectColumn"><span>{Name}: </span>{ShortText__c}</div>',
+                                                '</tpl>'),
+                                            width: 654,
+                                            sortable: false
+                                        },
+                                        {
+                                            xtype: 'datecolumn',
+                                            text: 'Date',
+                                            dataIndex: 'WGUCreationDateTime__c',
+                                            width: 105,
+                                            filterable: true,
+                                            format: "Y-m-d",
+                                            sortable: true
+                                        }
+                                    ],
+                                    features: [
+                                        {
+                                            ftype: 'filters',
+                                            encode: true, // json encode the filter query
+                                            local: true   // defaults to false (remote filtering)
+                                        }
+                                    ],
+                                    dockedItems: [
+                                    {
+                                        xtype: 'toolbar',
+                                        dock: 'top',
+                                        items: ['-',
+                                            { 
+                                                 xtype: 'button',
+                                                 text:  'Note View',
+                                                 tooltip: 'View the full text of all notes one at a time',
+                                                 width: 70,
+                                                 handler: function() {
+                                                   var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                   var selected = grid.getSelectionModel().getSelection();
+                                                   if ( selected.length == 0 ){
+                                                       grid.getSelectionModel().select(0,false,false); 
+                                                       grid.getView().focusRow(0);
+                                                       selected = grid.getSelectionModel().getSelection();
+                                                   }
+                                                   me.onGridviewItemDblClick(null, selected[0], null, null, null, null );
+                                                 }
+                                            },'-',
+                                        filterCombo]
+                                    }], 
+                                    selModel: Ext.create('Ext.selection.RowModel', {
+                                      enableKeyNav: true,
+                                      mode: 'SINGLE',
+                                      allowDeselect: false,
+                                      ignoreRightMouseSelection: true,
+                                      listeners: {
+                                            selectionchange: function( thisModel, selected, eOpts ) {
+                                              if ( selected.length > 0 ) {
+                                                  me.onGridviewItemClick( null, selected[0], null, null, null, eOpts );
+                                              } 
+                                            }
+                                      }
+                                    })
+                                },
+                                {
+                                    xtype: 'panel',
+                                    id: 'noteViewPanel',
+                                    flex: 1,
+                                    layout: {
+                                        align: 'stretch',
+                                        type: 'vbox'
+                                    },
+                                    listeners: {
+                                       resize: {
+                                           fn: me.onNoteViewContainerResize,
+                                           scope: me
+                                       }
+                                    },
+                                    title: '',
+                                    bodyStyle: 'background:#F2F2F2;',
+                                    items: [
+                                       {
+                                          xtype: 'container',
+                                          id: 'noteViewTopContainer',
+                                          height: 55,
+                                          layout: {
+                                              type: 'absolute'
+                                          },
+                                          items: [
+                                                {
+                                                    xtype: 'displayfield',
+                                                    x: 12,
+                                                    y: 2,
+                                                    width: 64,
+                                                    value: '',
+                                                    fieldLabel: 'Note Details',
+                                                    labelStyle: 'font-size: 11px;color: #797979;',
+                                                    fieldStyle: 'font-size: 11px;font-weight: bold;color: #505050;',
+                                                    labelAlign: 'left',
+                                                    labelPad: 0,
+                                                    labelWidth: 70
+                                                },
+                                                {
+                                                    xtype: 'displayfield',
+                                                    id: 'noteViewerType',
+                                                    x: 87,
+                                                    y: 5,
+                                                    width: 166,
+                                                    value: '',
+                                                    fieldLabel: 'Note Type',
+                                                    labelStyle: 'font-size: 10.5px;color: #797979;',
+                                                    fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #505050;',
+                                                    labelAlign: 'top',
+                                                    labelPad: 0,
+                                                    labelWidth: 70
+                                                },
+                                                {
+                                                    xtype: 'displayfield',
+                                                    id: 'noteViewerSubType',
+                                                    x: 253,
+                                                    y: 5,
+                                                    width: 205,
+                                                    value: '',
+                                                    fieldLabel: 'Sub Type',
+                                                    labelStyle: 'font-size: 10.5px;color: #797979;',
+                                                    fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #505050;',
+                                                    labelAlign: 'top',
+                                                    labelPad: 0,
+                                                    labelWidth: 70
+                                                },
+                                                {
+                                                    xtype: 'displayfield',
+                                                    id: 'noteViewerSubject',
+                                                    x: 455,
+                                                    y: 5,
+                                                    width: 460,
+                                                    value: '',
+                                                    fieldLabel: 'Subject',
+                                                    labelStyle: 'font-size: 10.5px;color: #797979;',
+                                                    fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #505050;',
+                                                    labelAlign: 'top',
+                                                    labelPad: 0,
+                                                    labelWidth: 70
+                                                },
+                                                {
+                                                    xtype: 'component',
+                                                    id: 'noteViewerAttachment',
+                                                    x: 915,
+                                                    y: 5,
+                                                    width: 32,
+                                                    height: 32,
+                                                    visible: true
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'container',
+                                            id: 'noteViewCKEditorContainer',
+                                            flex: 1,
+                                            padding: 3,
+                                            layout: {
+                                                type: 'fit'
+                                            },
+                                            listeners: {
+                                               resize: {
+                                                   fn: me.onNoteViewContainerResize,
+                                                   scope: me
+                                               }
+                                            },
+                                            items: [
+                                               {
+                                                    
+                                                    xtype: 'container',
+                                                    id: 'noteViewerHTMLWrapper',
+                                                    html: '<textarea id="noteViewerHTML" name="noteViewerHTML"></textarea>'
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    dockedItems: [
+                                    {
+                                        xtype: 'toolbar',
+                                        dock: 'top',
+                                        items: ['-',
+                                            {
+                                                 xtype: 'button',
+                                                 text: 'Grid View',
+                                                 width: 65,
+                                                 tooltip: 'Return to the grid view of this student\'s notes',
+                                                 handler: function() {
+                                                    Ext.getCmp('gridViewCards').getLayout().setActiveItem(0);
+                                                    var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                    if ( grid.getSelectionModel().getSelection().length > 0 ){
+                                                       var row = grid.getSelectionModel().getSelection()[0];
+                                                       grid.getView().focusRow(row.index);
+                                                       Ext.getCmp('studentNoteIndexText').setRawValue( (row.index+1)+' of '+ Ext.getCmp('studentNoteCountText').getRawValue() );
+                                                    }
+                                                 }
+                                            },
+                                            '-',
+                                            {
+                                                xtype: 'displayfield',
+                                                id: 'studentNoteIndexText',
+                                                fieldLabel: 'Note',
+                                                labelWidth: 32,    
+                                                labelAlign: 'left',
+                                                width: 165,
+                                                value: '0 of 0',
+                                                fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #2356AD; margin: -2px 3px 0 0;',
+                                                labelStyle: 'font-size: 10.5px;margin: -3px 3px 0 0;',
+                                                labelPad: '0 0 0 0'
+                                            },
+                                            {
+                                                xtype: 'displayfield',
+                                                id: 'noteViewerAuthor',
+                                                fieldLabel: 'Author',
+                                                labelWidth: 44,    
+                                                labelAlign: 'left',
+                                                width: 200,
+                                                value: '',
+                                                fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #2356AD;margin: -2px 3px 0 0;',
+                                                labelStyle: 'font-size: 10.5px;margin: -3px 3px 0 0;',
+                                                labelPad: '0 0 0 0'
+                                            },
+                                            {
+                                                xtype: 'displayfield',
+                                                id: 'noteViewerCreationDate',
+                                                fieldLabel: 'Created',
+                                                labelWidth: 47,    
+                                                labelAlign: 'left',
+                                                width: 205,
+                                                value: '',
+                                                fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #2356AD;margin: -2px 3px 0 0;',
+                                                labelStyle: 'font-size: 10.5px;margin: -3px 3px 0 0;',
+                                                labelPad: '0 0 0 0'
+                                            },
+                                            '->',
+                                            {
+                                                 xtype: 'button',
+                                                 id: 'firstNoteButton',
+                                                 text: '<< First',
+                                                 disabled: false,
+                                                 tooltip: 'Go to the first note in the history grid',
+                                                 handler: function() {
+                                                    var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                    grid.getSelectionModel().select(0,false,false); 
+                                                    grid.getView().focusRow(0);               
+                                                    Ext.getCmp('studentNoteIndexText').setRawValue( '1 of '+Ext.getCmp('studentNoteCountText').getRawValue());
+                                                 }
+                                            },
+                                            {
+                                                 xtype: 'button',
+                                                 id: 'previousNoteButton',
+                                                 text: '< Prev',
+                                                 disabled: false,
+                                                 tooltip: 'Go to the previous note in the history grid',
+                                                 handler: function() {
+                                                    var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                    if ( grid.getSelectionModel().getSelection().length > 0 ){
+                                                       var row = grid.getSelectionModel().getSelection()[0];
+                                                       if ( row && row.index != 0 ){
+                                                           grid.getSelectionModel().select(row.index-1,false,false);                
+                                                           grid.getView().focusRow(row.index-1);
+                                                           Ext.getCmp('studentNoteIndexText').setRawValue( (row.index)+' of '+Ext.getCmp('studentNoteCountText').getRawValue());
+                                                       }
+                                                    }
+                                                 }
+                                            },
+                                            {
+                                                 xtype: 'button',
+                                                 text: 'Next >',
+                                                 id: 'nextNoteButton',
+                                                 tooltip: 'Go to the next note in the history grid',
+                                                 handler: function() {
+                                                    var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                    var lastRowIndex = grid.getStore().count()-1;
+                                                    if ( grid.getSelectionModel().getSelection().length > 0 ){
+                                                        var row = grid.getSelectionModel().getSelection()[0];
+                                                        if (row && row.index != lastRowIndex ){
+                                                           grid.getSelectionModel().select(row.index+1 ,false,false);                
+                                                           grid.getView().focusRow(row.index+1);
+                                                           Ext.getCmp('studentNoteIndexText').setRawValue( (row.index+2)+' of '+Ext.getCmp('studentNoteCountText').getRawValue());
+                                                        }
+                                                    }
+                                                 }
+                                            },
+                                            {
+                                                 xtype: 'button',
+                                                 id: 'lastNoteButton',
+                                                 text: 'Last >>',
+                                                 tooltip: 'Go to the last note in the history grid',
+                                                 handler: function() {
+                                                    var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                    var lastRowIndex = grid.getStore().count()-1;
+                                                    grid.getSelectionModel().select(lastRowIndex ,false,false);                
+                                                    grid.getView().focusRow(lastRowIndex);
+                                                    Ext.getCmp('studentNoteIndexText').setRawValue( grid.getStore().count()+' of '+Ext.getCmp('studentNoteCountText').getRawValue());
+                                                 }
+                                            }
+                                        ]
+                                    }]
+                                }
+                            ]
+                        }
+                    ]
+                });
+        
+                me.callParent(arguments);
+            },
+            onNoteViewContainerResize: function( container, adjWidth, adjHeight, eOpts ) {
+              if ( CKEDITOR.instances && CKEDITOR.instances.noteViewerHTML ) {
+                CKEDITOR.instances.noteViewerHTML.resize(adjWidth-6, adjHeight-100);
+              }
+            },            
+            onGridviewItemClick: function(dataview, record, item, index, e, options) {
+                  var gridRecord = record.data;
+                  noteRecord = Ext.decode( blankNoteJSON );
+                  noteRecord.Text__c = gridRecord.Text__c;
+                  noteRecord.ShortText__c = noteRecord.Text__c==null? null: Ext.String.ellipsis(gridRecord.Text__c.replace( /<[^<|>]+?>/gi,'' ),100,true);
+                  noteRecord.Type__c = gridRecord.Type__c;
+                  noteRecord.SubType__c = gridRecord.SubType__c;
+                  noteRecord.Id = gridRecord.Id;
+                  noteRecord.Name = gridRecord.Name;
+                  noteRecord.Author__c = gridRecord.Author__c;
+                  noteRecord.AuthorPidm__c = gridRecord.AuthorPidm__c;
+                  noteRecord.Student__c = gridRecord.Student__c;
+                  noteRecord.PIDM__c = gridRecord.PIDM__c;
+                  noteRecord.ShortText__c = gridRecord.ShortText__c;
+                  noteRecord.Author__r = { Name: gridRecord.AuthorName };
+                  noteRecord.WGUCreationDateTime__c = gridRecord.WGUCreationDateTime__c;
+                  loadNoteRecord(noteRecord);
+            },
+            onGridviewItemDblClick: function(dataview, record, item, index, e, options) {
+                Ext.getCmp('gridViewCards').getLayout().setActiveItem(1);
+                this.onGridviewItemClick(dataview, record, item, index, e, options);
+                var grid = Ext.getCmp('noteHistoryGridPanel');
+                if ( grid.getSelectionModel().getSelection().length > 0 ){
+                    var row = grid.getSelectionModel().getSelection()[0];                                                          
+                    Ext.getCmp('studentNoteIndexText').setRawValue( (row.index+1)+' of '+Ext.getCmp('studentNoteCountText').getRawValue());
+                }                                                
+            }        
+        });
+
+                Ext.define('SurveyModel', {
+                    extend  : 'Ext.data.Model',
+                    fields  : [
+                        {name: 'Id' , mapping: 'Id', type: 'string'},
+                        {name: 'Student__c' , mapping: 'Student_c', type: 'string'},
+                        {name: 'WGUStudentNote__c' , mapping: 'WGUStudentNote__c', type: 'string'},
+                        {name: 'NoteSubject' , mapping: 'Name', type: 'string'},
+                        {name: 'EvidenceOfAcademicActivity__c' , mapping: 'EvidenceOfAcademicActivity__c', type: 'string'},
+                        {name: 'GoalPerformanceSinceLastCall__c' , mapping: 'GoalPerformanceSinceLastCall__c', type: 'string'}
+                    ]
+                });
+                        
+        Ext.define('NotesModel', { 
+            extend  : 'Ext.data.Model',   
+            fields  : [ 
+                        {name: 'Id' , mapping: 'Id', type: 'string'},
+                        {name: 'Name' , mapping: 'Name', type: 'string'},
+                        {name: 'Student__c' , mapping: 'Student__c', type: 'string'},
+                        {name: 'Author__c' , mapping: 'Author__c', type: 'string'},
+                        {name: 'AuthorName' , mapping: 'Author__r.Name', type: 'string'},
+                        {name: 'PIDM__c' , mapping: 'PIDM__c', type: 'string'},
+                        {name: 'AuthorPidm__c' , mapping: 'AuthorPidm__c', type: 'string'},
+                        {name: 'Level1Image__c' , mapping: 'Level1Image__c', type: 'string'},
+                        {name: 'WGUCreationDateTime__c', 
+                          mapping: 'WGUCreationDateTime__c', 
+                          type: 'date',
+                          convert: function(dateStr, record) {
+                            var date = new Date();
+                            if ( dateStr ) {
+                              date = convertDate(dateStr)
+                            }
+                            return date; 
+                          }
+                        },
+                        {name: 'Type__c' , mapping: 'Type__c', type: 'string'},
+                        {name: 'SubType__c' , mapping: 'SubType__c', type: 'string'},
+                        {name: 'Text__c' , mapping: 'Text__c', type: 'string'},
+                        {name: 'ShortText__c' , mapping: 'ShortText__c', type: 'string'}
+            ]
+        });
+        
+        function convertDate( dateStr ) {
+            var date = new Date();
+            var parts = dateStr==null? []: dateStr.split(/[- : T + .]/);
+            var offset = Ext.Date.getGMTOffset(date)/100;
+            if ( parts.length > 0 ) {
+                date.setFullYear(parts[0]);
+                date.setMonth(parts[1]-1);
+                date.setDate(parts[2]);
+                date.setHours(parts[3]==null?0: (parts[3]*1)+offset);
+                date.setMinutes(parts[4]==null?0: parts[4]);
+                date.setSeconds(parts[5]==null?0: parts[5]);
+                date.setMilliseconds(parts[6]==null?0: parts[6]);
+            }            
+            return date;
+        }
+
+                if ( !surveyStore ) {
+                    var surveyStore = Ext.create('Ext.data.Store', {
+                        model : 'SurveyModel',
+                        proxy : {
+                            type: 'memory',
+                            autoSync: true,
+                            reader: {
+                                type: 'json',
+                                root: 'Records'
+                            }
+                        },
+                        remoteSort: true
+                    });
+                }
+        
+        if ( !notesStore ) {
+            var notesStore = Ext.create('Ext.data.Store', { 
+                model : 'NotesModel', 
+                proxy : { 
+                    type: 'memory', 
+                    autoSync: true,
+                    reader: { 
+                        type: 'json',
+                        root: 'Records' 
+                    } 
+                },
+                remoteSort: false,
+                sorters: [{
+                    property: 'WGUCreationDateTime__c',
+                    direction: 'DESC'
+                }]
+            });
+        }
+                    
+        function getParameterByName(name) {
+          name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+          var regexS = "[\\?&]" + name + "=([^&#]*)";
+          var regex = new RegExp(regexS);
+          var results = regex.exec(window.location.search);
+          if(results == null)
+            return null;
+          else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+        
+        
+        var Base64 = {
+
+        // private property
+        _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+        
+        // public method for encoding
+        encode : function (input) {
+            var output = "";
+            var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+            var i = 0;
+        
+            input = Base64._utf8_encode(input);
+        
+            while (i < input.length) {
+        
+                chr1 = input.charCodeAt(i++);
+                chr2 = input.charCodeAt(i++);
+                chr3 = input.charCodeAt(i++);
+        
+                enc1 = chr1 >> 2;
+                enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+                enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                enc4 = chr3 & 63;
+        
+                if (isNaN(chr2)) {
+                    enc3 = enc4 = 64;
+                } else if (isNaN(chr3)) {
+                    enc4 = 64;
+                }
+        
+                output = output +
+                this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+                this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+        
+            }
+        
+            return output;
+        },
+        
+        // public method for decoding
+        decode : function (input) {
+            var output = "";
+            var chr1, chr2, chr3;
+            var enc1, enc2, enc3, enc4;
+            var i = 0;
+        
+            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+        
+            while (i < input.length) {
+        
+                enc1 = this._keyStr.indexOf(input.charAt(i++));
+                enc2 = this._keyStr.indexOf(input.charAt(i++));
+                enc3 = this._keyStr.indexOf(input.charAt(i++));
+                enc4 = this._keyStr.indexOf(input.charAt(i++));
+        
+                chr1 = (enc1 << 2) | (enc2 >> 4);
+                chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                chr3 = ((enc3 & 3) << 6) | enc4;
+        
+                output = output + String.fromCharCode(chr1);
+        
+                if (enc3 != 64) {
+                    output = output + String.fromCharCode(chr2);
+                }
+                if (enc4 != 64) {
+                    output = output + String.fromCharCode(chr3);
+                }
+        
+            }
+        
+            output = Base64._utf8_decode(output);
+        
+            return output;
+        
+        },
+        
+        // private method for UTF-8 encoding
+        _utf8_encode : function (string) {
+            string = string.replace(/\r\n/g,"\n");
+            var utftext = "";
+        
+            for (var n = 0; n < string.length; n++) {
+        
+                var c = string.charCodeAt(n);
+        
+                if (c < 128) {
+                    utftext += String.fromCharCode(c);
+                }
+                else if((c > 127) && (c < 2048)) {
+                    utftext += String.fromCharCode((c >> 6) | 192);
+                    utftext += String.fromCharCode((c & 63) | 128);
+                }
+                else {
+                    utftext += String.fromCharCode((c >> 12) | 224);
+                    utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                    utftext += String.fromCharCode((c & 63) | 128);
+                }
+        
+            }
+        
+            return utftext;
+        },
+        
+        // private method for UTF-8 decoding
+        _utf8_decode : function (utftext) {
+            var string = "";
+            var i = 0;
+            var c = c1 = c2 = 0;
+        
+            while ( i < utftext.length ) {
+        
+                c = utftext.charCodeAt(i);
+        
+                if (c < 128) {
+                    string += String.fromCharCode(c);
+                    i++;
+                }
+                else if((c > 191) && (c < 224)) {
+                    c2 = utftext.charCodeAt(i+1);
+                    string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                    i += 2;
+                }
+                else {
+                    c2 = utftext.charCodeAt(i+1);
+                    c3 = utftext.charCodeAt(i+2);
+                    string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                    i += 3;
+                }
+        
+            }
+        
+            return string;
+        }
+        
+      }
+             
+</script>
+            
+</body>
+</html>
+</apex:page>

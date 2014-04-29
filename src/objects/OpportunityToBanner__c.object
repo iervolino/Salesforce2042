@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Synchronization object for moving data from Salesforce to Banner for the Opportunity (CARE Profile) Object</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>CampusCodeOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(Opportunity__r.StudentAttributes__r.Affiliation__c)</formula>
+        <label>Campus Code (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>/* -0.0416 is used to adjust Daylight Saving Time changing. 
+  Delete -0.0416 in Summer; 
+  Keep -0.0416 in Winter, 
+  Winter: (LastSynchronizedToBanner__c - Opportunity__r.LastModifiedDate) &lt; -0.0011 - 0.0416
+  Summer: (LastSynchronizedToBanner__c - Opportunity__r.LastModifiedDate) &lt; -0.0011 
+*/ 
+
+IF(AND(NOT(ResynchronizeToBanner__c), NOT(SynchronizationError__c = &apos;None&apos;), NOT(OR(ISNULL(SynchronizationError__c), ISBLANK(SynchronizationError__c)))), 
+   &apos;Error&apos;, 
+   IF(AND(NOT(OR(ISNULL( Opportunity__r.PIDM__c ), ISBLANK(Opportunity__r.PIDM__c))), OR((LastSynchronizedToBanner__c - Opportunity__r.LastModifiedDate ) &lt; -0.0011, ResynchronizeToBanner__c, ISNULL(LastSynchronizedToBanner__c)), 
+   NOT(AND( Opportunity__r.LastModifiedBy.FirstName = &apos;System&apos;, Opportunity__r.LastModifiedBy.LastName = &apos;Administrator&apos;))), 
+      &apos;Update&apos;, 
+      IF(AND( Opportunity__r.StudentContact__r.BannerReady__c , OR(ISNULL(Opportunity__r.PIDM__c), ISBLANK(Opportunity__r.PIDM__c))), 
+         &apos;Insert&apos;, 
+         IF(Opportunity__r.StudentContact__r.BannerReady__c, &apos;Current&apos;, &apos;Ignore&apos;) 
+      ) 
+   ) 
+)</formula>
+        <label>Current Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DiscountAmountOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.DiscountAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Discount Amount (OUT)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ECPIDMOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Owner.PIDM__c</formula>
+        <label>EC PIDM (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FinAidOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Opportunity__r.LearnAboutFinancialAid__c, &apos;Y&apos;, &apos;N&apos;)</formula>
+        <label>Fin Aid (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FirstEnrollment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>First Enrollment</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IntakeInterviewUserPIDMOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.IntakeBy__c</formula>
+        <label>Intake Interview User PIDM (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastSynchronizedToBanner__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Synchronized To Banner</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>MajorOfInterestOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.MarketingProgram__r.BannerProgramCode__r.Name</formula>
+        <label>Major of Interest (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Opportunities To Banner</relationshipLabel>
+        <relationshipName>OpportunitiesToBanner</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>PIDMOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.PIDM__c</formula>
+        <label>PIDM (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PaymentAmountOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.ApplicationFeeAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Payment Amount (OUT)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PaymentTypeOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text(Opportunity__r.PaymentType__c)</formula>
+        <label>Payment Type (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProfileStatusOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.CAREStatusListView__c</formula>
+        <label>Profile Status (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ResynchronizeToBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Resynchronize To Banner</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StartDateOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.CloseDate</formula>
+        <label>Start Date (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>SynchronizationError__c</fullName>
+        <externalId>false</externalId>
+        <label>Synchronization Error</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <label>Opportunity To Banner</label>
+    <nameField>
+        <displayFormat>OTB-{0}</displayFormat>
+        <label>Opportunity To Banner Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Opportunities To Banner</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+</CustomObject>

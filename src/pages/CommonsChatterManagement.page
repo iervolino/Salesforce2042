@@ -1,0 +1,368 @@
+<apex:page controller="CommonsChatterManagementControl" standardStylesheets="false" showHeader="false">
+    <apex:stylesheet value="{!URLFOR($Resource.CourseCommons, 'global/css/build/wgu.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.CourseCommons, 'coursecommons/css/build/courseCommonsModerator.min.css')}"/>
+    <apex:includeScript value="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" />
+    <apex:includeScript value="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" />
+    <apex:includeScript value="{!URLFOR($Resource.CourseCommons, 'global/js/build/wgu.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.CourseCommons, 'coursecommons/js/build/courseCommonsModerator.min.js')}" />
+
+    <body class='non-responsive'>
+        <div class="container">
+            <h1 class='page-header'>Course Communities Moderator</h1>
+        	<apex:form >
+                <div class="form-group--dropdown quarter-box break">
+        
+                    <div class="btn btn--dropdown btn--sprite btn--full">
+                        <span class="sprite sprite--blue--folder"></span>
+                        <span class='dropdown__text'>{!selectedGroupName}</span>
+                        <span class="icon icon--triangle-down right"></span>
+                    </div>
+        
+                    <apex:selectList value="{!groupId}" size="1" styleClass="select">
+                        <apex:selectOptions value="{!groupOptions}"/>
+                        <apex:actionSupport event="onchange" rerender="group-selected" oncomplete="loadTabs(); initPage();"/>
+                    </apex:selectList>
+                </div>
+            </apex:form>
+            <apex:outputpanel id="group-selected">
+                <div class="full-box">
+                    <h2 class="color-accent spacer-padding--20 clear">Student Questions</h2>
+                    <div class="well">
+                            <div class="tabs">
+                                <ul>
+                                    <li><a href="#tab1">Questions (<span data-moderator='counter'>{!unansweredQuestionCount}</span>)</a></li>
+                                    <!--<li><a href="#tab2">Q/A (<span data-moderator='counter'>{!qaPaginator.totalResults}</span>)</a></li>
+                                    <li><a href="#tab3">Waiting for Clarification (<span data-moderator='counter'>{!waitingForClarificationPaginator.totalResults}</span>)</a></li>
+                                    <li><a href="#tab4">Resolved</a></li>-->
+                                </ul>
+                                <div id="tab1">
+                                    <p><button class='btn btn--square' data-action-function="refreshQuestions"><span class='icon icon--refresh'></span></button> Refresh</p>
+                                    <apex:form >
+                                        <apex:actionFunction name="refreshQuestions" reRender="questionFeed" oncomplete="getNumbers();initPage();"/>
+                                    </apex:form>
+                                    <apex:outputPanel id="questionFeed">
+                                        <div class="hide" id='unAnsweredQuestionCount'>{!unansweredQuestionCount}</div>
+                                        <div class="scroll scroll--moderator--questions spacer-margin--20" style='height: 410px;'>
+                                            
+                                            
+                                            <table class='table table--striped table--moderator table--moderator--questions'>
+                                                <thead>
+                                                    <tr class='text-left'>
+                                                        <th width='40px'></th>
+                                                        <th width='130px'>Student</th>
+                                                        <th width='325px'>Post</th>
+                                                        <th width='379px'>Response</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <apex:repeat value="{!communityAccessControlListUnanswered}" var="item">
+                                                        <tr>
+                                                            <td><span class="btn btn--square btn--square--small" data-moderator='row-control'><span class="icon icon--expand"></span></span></td>
+                                                            <td>{!item.feedItem.firstName} {!item.feedItem.lastName}</td>
+                                                            <td class='table--moderator--questions__post-col'>
+                                                                <div class='table--moderator--questions__post'>{!item.feeditem.feeditem.body.text}</div>
+                                                                <apex:variable var="itemUserType" value="person--mentor" rendered="{!item.feeditem.isStudent == false}" />
+                                                                <apex:variable var="itemUserType" value="" rendered="{!item.feeditem.isStudent == true}" />
+                                                                <div class="person {!itemUserType}">
+                                                                    <div class="person__avatar">
+                                                                        <img height="27" width="27" src="{!item.feeditem.feeditem.photoUrl}" alt="" />
+                                                                    </div>
+                                                                    <div class="person__content">
+                                                                        <p class="person__date">{!item.feeditem.formattedPostTime}
+                                                                            <apex:variable var="questionType" value="New Question" rendered="{!item.feeditem.question && NOT(item.feeditem.questionAnswered)}" />
+                                                                            <apex:variable var="questionType" value="Question" rendered="{!item.feeditem.question && item.feeditem.questionAnswered}" />
+                                                                            <apex:variable var="questionType" value="" rendered="{!NOT(item.feeditem.question)}" />
+                                                                            <apex:variable var="questionClass" value="person__type--new" rendered="{!item.feeditem.question && NOT(item.feeditem.questionAnswered)}" />
+                                                                            <apex:variable var="questionClass" value="" rendered="{!NOT(item.feeditem.question) || (item.feeditem.question && item.feeditem.questionAnswered)}" />
+                                                                            <span class='person__type {!questionClass} all-caps'>{!questionType}</span>
+                                                                        </p>
+                                                                        <p class="person__message">{!item.feeditem.feeditem.body.text}</p>
+                                                                        <!--<div class="person__attachment"><span class="icon icon--link"></span><a href="#">Link Name</a><a href="#">Link URL</a></div>-->
+                                                                        <apex:outputPanel rendered="{!item.feedItem.attachmentType != null}">
+                                                                            <div class="person__attachment clearfix">
+                                                                                <apex:outputPanel rendered="{!item.feedItem.attachmentType == 'link'}">
+                                                                                    <span class='icon icon--link'></span>
+                                                                                    <a href="{!item.feedItem.linkAttachment.url}">{!item.feedItem.linkAttachment.title}</a><a href='{!item.feedItem.linkAttachment.url}'>{!item.feedItem.linkAttachment.url}</a>
+                                                                                </apex:outputPanel>
+                                                                                <apex:outputPanel rendered="{!item.feedItem.attachmentType == 'file'}">
+                                                                                    <apex:outputPanel rendered="{!NOT(item.feedItem.hasPreview)}">
+                                                                                        <span class='icon icon--doc'></span>
+                                                                                    </apex:outputPanel>
+                                                                                    <apex:outputPanel rendered="{!item.feedItem.hasPreview}">
+                                                                                        <img src="{!item.feedItem.contentAttachment.renditionUrl}" />
+                                                                                    </apex:outputPanel>
+                                                                                    <a href="{!item.feedItem.contentAttachment.downloadUrl}">{!item.feedItem.contentAttachment.title}</a><a href='#'>Download document ({!item.feedItem.HumanReadableFileSize})</a>
+                                                                                </apex:outputPanel>
+                                                                            </div>
+                                                                        </apex:outputPanel>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td><div class='a' data-moderator='respond'>Respond</div> 
+                                                                <div class="response-feed">
+                                                                    <apex:repeat value="{!item.feedItem.commentlist}" var="commentItem">
+                                                                        <apex:variable var="commentUserType" value="person--mentor" rendered="{!commentItem.isStudent == false}" />
+                                                                        <apex:variable var="commentUserType" value="" rendered="{!commentItem.isStudent == true}" />
+                                                                        <div class="person {!commentUserType}">
+                                                                            <div class="person__avatar">
+                                                                                <img height="27" width="27" src="{!commentItem.comment.user.photo.smallPhotoUrl}" alt="" />
+                                                                            </div>
+                                                                            <div class="person__content">
+                                                                                <p class="person__name">{!commentItem.comment.user.firstName} {!LEFT(commentItem.comment.user.lastName,1)}.</p>
+                                                                                <p class="person__date">{!commentItem.formattedPostTime} 
+                                                                                    <apex:variable var="commentQuestionType" value="New Question" rendered="{!commentItem.question && NOT(commentItem.questionAnswered)}" />
+                                                                                    <apex:variable var="commentQuestionType" value="Question" rendered="{!commentItem.question && commentItem.questionAnswered}" />
+                                                                                    <apex:variable var="commentQuestionType" value="" rendered="{!NOT(commentItem.question)}" />
+                                                                                    <apex:variable var="commentQuestionClass" value="person__type--new" rendered="{!commentItem.question && NOT(commentItem.questionAnswered)}" />
+                                                                                    <apex:variable var="commentQuestionClass" value="" rendered="{!NOT(commentItem.question) || (commentItem.question && commentItem.questionAnswered)}" />
+                                                                                    <span class='person__type {!commentQuestionClass} all-caps'>{!commentQuestionType}</span>
+                                                                                </p>
+                                                                                <p class="person__message">{!commentItem.comment.body.text}</p>      
+                                                                                <apex:outputPanel rendered="{!commentItem.comment.attachment != null}">
+                                                                                    <div class="person__attachment clearfix">
+                                                                                        <apex:outputPanel rendered="{!NOT(commentItem.hasPreview)}">
+                                                                                            <span class='icon icon--doc'></span>
+                                                                                        </apex:outputPanel>
+                                                                                        <apex:outputPanel rendered="{!commentItem.hasPreview}">
+                                                                                            <img src="{!commentItem.contentAttachment.renditionUrl}" />
+                                                                                        </apex:outputPanel>
+                                                                                        <a href="{!commentItem.contentAttachment.downloadUrl}">{!commentItem.contentAttachment.title}</a><a href='{!commentItem.contentAttachment.downloadUrl}'>Download document ({!commentItem.HumanReadableFileSize})</a>
+                                                                                    </div>
+                                                                                </apex:outputPanel>
+                                                                            </div>
+                                                                        </div>
+                                                                    </apex:repeat>
+                                                                    
+                                                                    <div class="write-comment clearfix" data-flyout="parent">
+                                                                        <div class="write-comment__btns">
+                                                                            <span class="btn btn--square left btn--textarea " data-flyout="btn-file"><span class="icon icon--doc"></span></span>
+                                                                            
+                                                                        </div>
+                                                                        <textarea placeholder="Write a comment..." data-nested-id="{!item.feeditem.feeditem.id}" class="autosize" ></textarea>
+                                                                        
+                                                                        <div class="flyout__holder ">
+                                                                            <div class="flyout__box">
+                                                                                <div class="flyout__files">
+                                                                                    <div class="flyout__files__drop" data-flyout="drop-zone">
+                                                                                        <p class="flyout__files__title">Drag and Drop Your File Here</p>
+                                                                                        <p class="flyout__files__drop-file" data-flyout="drop-file">No file chosen</p>
+                                                                                        
+                                                                                    </div>
+                                                                                    <p class="flyout__files__or">or</p>
+                                                                                    <apex:form >
+                                                                                        <apex:inputFile value="{!fileBlob}" filename="{!filename}" contentType="{!filetype}" fileSize="{!filesize}" />
+                                                                                        <p class="flyout__files__file-size">Maximum file size 2GB</p>
+                                                                                        <apex:inputHidden value="{!fileMessage}" id="fileMessage" />
+                                                                                        <apex:inputHidden value="{!fileFeedItemId}" id="fileFeedItemId" />
+                                                                                        <apex:inputHidden value="{!postStatus}" id="postStatus" />
+                                                                                        <apex:commandButton action="{!postFileToChatter}" value="Submit" styleClass="hide"/>
+                                                                                    </apex:form>
+                                                                                </div>
+                                                                                <hr />
+                                                                                
+                                                                                <div class="form-group--dropdown quarter-box break">
+                                                                                    
+                                                                                    <div class="btn btn--dropdown btn--full btn--sprite">
+                                                                                        <div class="sprite sprite--blue--circle-check"></div>
+                                                                                        <span class='dropdown__text'>Select Status</span>
+                                                                                        <span class="icon icon--triangle-down right"></span>
+                                                                                    </div>
+                                                                                    
+                                                                                    <select data-flyout='post-status'>
+                                                                                        <option value="null">Select Status</option>
+                                                                                        <!--<option value="Unanswered">Unanswered</option>-->
+                                                                                        <option value="Waiting for Clarification" data-tab='2'>Waiting for Clarification</option>
+                                                                                        <option value="Course Mentor Satisfied">Course Mentor Satisfied</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <button class="btn btn--sprite left" disabled='disabled' data-flyout="btn-post-comment"><span class="sprite sprite--blue--bubble-exclamation"></span>Post Response</button>
+                                                                                <div class="btn btn--square btn--square--small right " data-flyout="btn-close"><span class="icon icon--close"></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </apex:repeat>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!--<apex:outputPanel rendered="{!unansweredPaginator.isAll == false}">
+                                            <div class="pagination">
+                                                <span>Showing {!unansweredPaginator.currentPage.pageStart}-{!unansweredPaginator.currentPage.pageEnd} of {!unansweredPaginator.totalResults} Results</span>
+                                                <ul>
+                                                    <apex:outputPanel rendered="{!unansweredPaginator.showPrevious}">
+                                                        <li><span class="a"><span class="icon icon--triangle-left-double"></span></span></li>
+                                                        <li><a href="#" class=""><span class="icon icon--triangle-left"></span></a></li>
+                                                        <apex:form >
+                                                            <apex:actionFunction name="unansweredPreviousPage" action="{!unansweredPaginator.previous}" reRender="questionFeed" />
+                                                        </apex:form>
+                                                    </apex:outputPanel>
+                                                    <li>Page</li>
+                                                    <apex:repeat value="{!unansweredPaginator.availablePageList}" var="num">
+                                                        <apex:variable var="active" value="pagination--active" rendered="{!num.currentPage}" />
+                                                        <apex:variable var="active" value="" rendered="{!num.currentPage == false}" />
+                                                        <li class="{!active}"><a href="#">{!num.pageNum}</a></li>
+                                                    </apex:repeat>
+                                                    <apex:outputPanel rendered="{!unansweredPaginator.showNext}">
+                                                        <li><span class="a"><span class="icon icon--triangle-right"></span></span></li>
+                                                        <li><a href="#" class=""><span class="icon icon--triangle-right-double"></span></a></li>
+                                                    </apex:outputPanel>
+                                                </ul>
+                                            </div>
+                                        </apex:outputPanel>-->
+                                	</apex:outputPanel>
+                                </div>
+                                <div id="tab2"></div>
+                                <div id="tab3"></div>
+                                <div id="tab4"></div>
+                            </div>
+                    </div>
+                </div>
+        
+                <apex:outputPanel id="announcementsAndTips">
+                    <div class="full-box break">
+                        <h2 class='color-accent'>Course Announcements</h2>
+                        <div class="well">
+                            <div class="scroll" style='height: 172px;'>
+                                <table class="table table--striped table--moderator">
+                                    <tbody>
+                                        <apex:repeat value="{!courseCommunityAnnouncements}" var="announcement">
+                                            <tr data-id='{!announcement.announcementOrTip.Id}'>
+                                                <td>{!announcement.announcementOrTip.MyResponse__c}</td>
+                                                <td width='200px' class='text-center'>
+                                                    <span class='moderator__deadline__date' >Expires: <span data-date='{!announcement.YYYYMMDDformattedExpirationDate}'>{!announcement.MMDDYYYYformattedExpirationDate}</span> (<span data-days='{!announcement.DaysToExpiration}'>{!announcement.DaysToExpiration}</span> days)</span>
+                                                    <div class="form-group--dropdown moderator__deadline__edit-date">
+                                                        <div class="btn btn--dropdown btn--full ">
+                                                            <span class="dropdown__text">Add more days</span>
+                                                            <span class="icon icon--triangle-down right"></span>
+                                                        </div>
+                                                        <select data-add-more-days="post-status">
+                                                            <option value="0">Add more days</option>
+                                                            <option value="1">1 Day</option>
+                                                            <option value="5">5 Days</option>
+                                                            <option value="15">15 Days</option>
+                                                            <option value="20">20 Days</option>
+                                                            <option value="25">25 Days</option>
+                                                            <option value="30" >30 Days</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td width='70px' class='text-center'><span class='a' data-action='edit'>Edit</span></td>
+                                                <td width='70px' class='text-center'><span class='a' data-action='delete'>Delete</span></td>
+                                            </tr>
+                                            
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+            
+                            </div>
+                            <div class="form-group--inline spacer-padding--10 clearfix moderator__deadline">
+                                <textarea class='autosize' data-type='Announcement' placeholder='Write an announcement...' ></textarea>
+                                <button class="btn btn--square btn--dark" data-submit="announcement"><span class="icon icon--chatter"></span></button>
+                                <div class="form-group--dropdown quarter-box break">
+                                    <div class="btn btn--dropdown btn--full ">
+                                        <span class="dropdown__text">Expires in...</span>
+                                        <span class="icon icon--triangle-down right"></span>
+                                    </div>
+                                    <select>
+                                        <option value="30">Expires in...</option>
+                                        <option value="1">1 Day</option>
+                                        <option value="5">5 Days</option>
+                                        <option value="10">10 Days</option>
+                                        <option value="15">15 Days</option>
+                                        <option value="20">20 Days</option>
+                                        <option value="25">25 Days</option>
+                                        <option value="30">30 Days</option>
+                                    </select>
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                    
+                    <div class="full-box">
+                        <h2 class="color-accent">Course Tips</h2>
+                        <div class="well">
+                            <div class="scroll" style='height: 172px;'>
+                                <table class="table table--striped table--moderator">
+                                    <tbody>
+                                        <apex:repeat var="tip" value="{!courseCommunityQuickTips}">
+                                            <tr data-id='{!tip.announcementOrTip.Id}'>
+                                                <td>{!tip.announcementOrTip.MyResponse__c}</td>
+                                                <td width='200px' class='text-center'>
+                                                    <span class='moderator__deadline__date' >Expires: <span data-date='{!tip.YYYYMMDDformattedExpirationDate}'>{!tip.MMDDYYYYformattedExpirationDate}</span> (<span data-days='{!tip.DaysToExpiration}'>{!tip.DaysToExpiration}</span> days)</span>
+                                                    <apex:outputPanel rendered="{!NOT(tip.eligibleForRenewal)}">
+                                                        <span class='moderator__tips__renew'>Renewable in {!tip.daysToRenewalEligibility} days</span>
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!tip.eligibleForRenewal}">
+                                                        <button data-action='renew' class="btn btn--full moderator__tips__renew">Renew Tip</button>
+                                                    </apex:outputPanel>
+                                                </td>
+                                                <td width='70px' class='text-center'><span class='a' data-action='edit'>Edit</span></td>
+                                                <td width='70px' class='text-center'><span class='a' data-action='delete'>Delete</span></td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-group--inline spacer-padding--10 clearfix">
+                                <textarea class='autosize' data-type='Quick Tip' placeholder='Write a tip...' ></textarea>
+                                <button class="btn btn--square btn--dark" data-submit="tips"><span class="icon icon--chatter"></span></button>
+                                
+                            </div>
+            
+                        </div>
+                    </div>
+                </apex:outputPanel>
+        
+                <div class="half-box break">
+                    <h2 class="color-accent">Group Files</h2>
+                    <div class="well">
+                        <div class="scroll" style='height: 175px;'>
+                            <table class="table table--striped table--moderator">
+                                <apex:repeat value="{!filesForGroup}" var="file">
+                                    <tr data-id='{!file.Id}'>
+                                        <td><apex:outputLink value="{!URLFOR($Action.Attachment.Download,file.Attachments[0].id)}">{!file.Attachments[0].Name}</apex:outputLink></td>
+                                        <td width='20%'><span class='a' data-action='delete'>Delete</span></td>
+                                    </tr>
+                                </apex:repeat>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </apex:outputpanel>
+            <apex:form >
+                <apex:actionFunction name="deleteItem" action="{!deleteCommunityAccessControl}" rerender="none">
+                    <apex:param id="id" name="id" value=""/>
+                </apex:actionFunction>
+            </apex:form>
+            <apex:form >
+                <apex:actionFunction name="createAdminCommunityAccessControl" action="{!createAdminCommunityAccessControl}" oncomplete="initPage();" rerender="announcementsAndTips">
+                    <apex:param id="message" name="message" value=""/>
+                    <apex:param id="adminType" name="adminType" value=""/>
+                    <apex:param id="numberOfDaysToExpiration" name="numberOfDaysToExpiration" value=""/>
+                </apex:actionFunction>
+            </apex:form>
+            <apex:form >
+                <apex:actionFunction name="editAdminCommunityAccessControl" action="{!editAdminCommunityAccessControl}" rerender="none">
+                    <apex:param id="itemId" name="itemId" value=""/>
+                    <apex:param id="updatedMessage" name="updatedMessage" value=""/>
+                    <apex:param id="addNumberOfDaysToExpiration" name="addNumberOfDaysToExpiration" value=""/>
+                </apex:actionFunction>
+            </apex:form>
+            <apex:form >
+                <apex:actionFunction name="postMessageToChatter" action="{!postMessageToChatter}" rerender="feed">
+                    <apex:param id="message" name="message" value="" />
+                    <apex:param id="feedItemId" name="feedItemId" value="" />
+                    <apex:param id="postStatus" name="postStatus" value="" />
+                </apex:actionFunction>
+            </apex:form>
+            <apex:form >
+                <apex:actionFunction name="renewCourseTip" action="{!renewCourseTip}" oncomplete="initPage();" rerender="announcementsAndTips">
+                    <apex:param id="id" name="id" value="" />
+                </apex:actionFunction>
+            </apex:form>
+        </div>
+    </body>
+</apex:page>

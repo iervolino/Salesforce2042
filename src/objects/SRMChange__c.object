@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>The SRM Change object is used as a change log as well as change request management object.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AdminComments__c</fullName>
+        <externalId>false</externalId>
+        <label>Admin Comments</label>
+        <length>5000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ApprovedByAdmin__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is the change requested approved by a Salesforce Admin.</description>
+        <externalId>false</externalId>
+        <label>Approved By Admin</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Categories__c</fullName>
+        <description>Multi-select picklist that allows users to select the area of the university that this request effects.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the area(s) of the University in which this change will impact.</inlineHelpText>
+        <label>Categories</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Academic Services/Student Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alumni / Career Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment / Program Development</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course Mentoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enrollment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Experiences</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finance / Bursar</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Financial Aid / Scholarship / VA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>HR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Institutional Research</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Marketing / PR / Strategic Relations</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Records / Transcript Evaluation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Mentoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>University Wide / Multiple Departments</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ChangeRequestDetails__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Please give a detailed explanation of what change you would like to have implemented.</inlineHelpText>
+        <label>Requested Changes</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ChangeRequestPriority__c</fullName>
+        <externalId>false</externalId>
+        <label>Change Request Priority</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medium</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>High</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Urgent</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ChangeRequestStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>Change Request Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Requested</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Under Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Denied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Converted to JIRA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted to Project Inception</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ChangeTime__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Please enter the exact  time the change was made.</inlineHelpText>
+        <label>Change Time</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ChangeType__c</fullName>
+        <externalId>false</externalId>
+        <label>Change Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Application Settings</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Data Records - Deletion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Data Records - Import</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Data Records - Update</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Deployment Deficiency</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Email Template</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Email Template Folder</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field on Existing Object</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Folder</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Formula Field</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>List View</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Org-wide Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other - Please Add Notes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Page Layout</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Page Layout Assignment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Permission Set</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Picklist Field</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Picklist Value by Record Type Assignment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Picklist Value Replacement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Profile</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Queue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Report</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Report Folder</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Role</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Roll Up Summary Field</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Search Layout</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sharing Rule</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tab</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>User Management - Creation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>User Management - Deactivation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>User Management - Update</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Validation Rule</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>View</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Workflow</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Workflow (Non-Email)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CreatedByDepartment__c</fullName>
+        <description>Formula field that determines the department that the requestor (creator) represents.</description>
+        <externalId>false</externalId>
+        <formula>CreatedBy.Department</formula>
+        <label>Created By Department</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DeploymentGroup__c</fullName>
+        <description>Picklist to indicate which type of deployment the change type relates to.</description>
+        <externalId>false</externalId>
+        <label>Deployment Group</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Production Approved Change</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pre-Authorized Change</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pre-Authorized Change with QA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Request for Change (RFC)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DetailsOfChangesMade__c</fullName>
+        <externalId>false</externalId>
+        <label>Changes Made</label>
+        <length>32768</length>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DevFull__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox to indicate if the change has been made in DevFull.</description>
+        <externalId>false</externalId>
+        <label>DevFull</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ExistingProject__c</fullName>
+        <description>Picklist field that allows users to select if their request is part of an existing project.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is this request tied to an existing project request?</inlineHelpText>
+        <label>Existing Project ?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unsure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>JIRATicket__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Please enter the exact JIRA ticket address (https://jira.wgu.edu/jira/browse/ RFC-9999).</inlineHelpText>
+        <label>JIRA Ticket</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Prod__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox to indicate if the change has been made in Prod.</description>
+        <externalId>false</externalId>
+        <label>Prod</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup to the Portfolio management project object.</description>
+        <externalId>false</externalId>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>SRM Changes</relationshipLabel>
+        <relationshipName>SRMChanges1</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>QAFull__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox to indicate if the change has been made in QAFull.</description>
+        <externalId>false</externalId>
+        <label>QAFull</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>QAResults__c</fullName>
+        <description>Open text field indicating the results of quality assurance testing and validation.</description>
+        <externalId>false</externalId>
+        <label>QA Results</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>QualityAssuranceStatus__c</fullName>
+        <description>Picklist field to indicate the status of Quality Assurance validation.</description>
+        <externalId>false</externalId>
+        <label>Quality Assurance Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>QA Requested</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>QA In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>QA Certified</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>QA Failed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Applicable</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ReasonDenied__c</fullName>
+        <description>Open text field that allows the Admin to explain why the change request was denied.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Use this area to explain why the change request was denied.</inlineHelpText>
+        <label>Reason Denied</label>
+        <length>5000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ReasonForChanges__c</fullName>
+        <description>Open text field that allows users to enter in the reason for making the request.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Briefly describe how this change will help the University and/or your department serve our students better.</inlineHelpText>
+        <label>Reason for Changes</label>
+        <length>5000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Requester__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The person who the SRM Admin can contact for further information and validation testing.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the person who the SRM Admin can contact for further information and validation testing.</inlineHelpText>
+        <label>Point of Contact</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>SRM_Changes</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SRMChangeNumber__c</fullName>
+        <displayFormat>SRM - {0}</displayFormat>
+        <externalId>false</externalId>
+        <label>SRM Change Number</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Scope__c</fullName>
+        <description>Picklist indicating the scope of the request.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Small - Can be completed in less than one day.
+Medium - Can be completed in less than three days.
+Large - Longer than three days to complete.
+Project Needed - a Project Request needs to be submitted through JIRA</inlineHelpText>
+        <label>Scope</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Small</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medium</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Large</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Project Needed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>UserIsPointOfContact__c</fullName>
+        <description>If the current user is the point of contact it returns True else False</description>
+        <externalId>false</externalId>
+        <formula>If($User.PIDM__c= Requester__r.PIDM__c,&apos;True&apos;,&apos;False&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>UserIsPointOfContact</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ValidationSteps__c</fullName>
+        <description>Open text field to list out the steps needed for quality assurance validation testing.</description>
+        <externalId>false</externalId>
+        <label>Validation Steps</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>WorkCompletedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>User Lookup for indicating who completed the change request</description>
+        <externalId>false</externalId>
+        <label>Work Completed By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>SRMChanges</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>SRM Change</label>
+    <listViews>
+        <fullName>MyOpenSRMRequests</fullName>
+        <columns>NAME</columns>
+        <columns>ChangeRequestStatus__c</columns>
+        <columns>ChangeRequestPriority__c</columns>
+        <columns>Scope__c</columns>
+        <columns>ChangeType__c</columns>
+        <columns>ChangeRequestDetails__c</columns>
+        <columns>ApprovedByAdmin__c</columns>
+        <columns>DetailsOfChangesMade__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>UserIsPointOfContact__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filters>
+        <filters>
+            <field>ChangeRequestStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Completed</value>
+        </filters>
+        <label>My Open SRM Requests</label>
+    </listViews>
+    <listViews>
+        <fullName>NeedProjectAssignment</fullName>
+        <columns>NAME</columns>
+        <columns>Project__c</columns>
+        <columns>ChangeRequestStatus__c</columns>
+        <columns>WorkCompletedBy__c</columns>
+        <columns>ChangeType__c</columns>
+        <columns>Requester__c</columns>
+        <columns>ChangeTime__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>JIRATicket__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+        </filters>
+        <label>Need Project Assignment</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>SRM1Queue</fullName>
+        <columns>CREATED_DATE</columns>
+        <columns>SRMChangeNumber__c</columns>
+        <columns>Scope__c</columns>
+        <columns>NAME</columns>
+        <columns>Requester__c</columns>
+        <columns>Categories__c</columns>
+        <columns>ChangeRequestStatus__c</columns>
+        <columns>ChangeRequestPriority__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Queue</filterScope>
+        <filters>
+            <field>ChangeRequestStatus__c</field>
+            <operation>equals</operation>
+            <value>Requested,Under Review,In Progress,On Hold</value>
+        </filters>
+        <filters>
+            <field>ChangeRequestStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Converted to JIRA</value>
+        </filters>
+        <label>SRM1: Queue</label>
+        <queue>SRMAdmins</queue>
+        <sharedTo>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>SRM2MyOpenRequests</fullName>
+        <booleanFilter>1</booleanFilter>
+        <columns>ChangeRequestStatus__c</columns>
+        <columns>NAME</columns>
+        <columns>AdminComments__c</columns>
+        <columns>ChangeType__c</columns>
+        <columns>JIRATicket__c</columns>
+        <columns>Requester__c</columns>
+        <columns>Scope__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>ChangeRequestStatus__c</field>
+            <operation>equals</operation>
+            <value>Requested,Under Review,In Progress,On Hold</value>
+        </filters>
+        <label>SRM2: My Open Requests</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>SRM3MyCompletedRequests</fullName>
+        <columns>NAME</columns>
+        <columns>ChangeRequestStatus__c</columns>
+        <columns>ChangeType__c</columns>
+        <columns>WorkCompletedBy__c</columns>
+        <columns>JIRATicket__c</columns>
+        <columns>ChangeTime__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>ChangeRequestStatus__c</field>
+            <operation>equals</operation>
+            <value>Denied,Completed,Canceled</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterThan</operation>
+            <value>8/25/2012 12:00 AM</value>
+        </filters>
+        <label>SRM3: My Completed Requests</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>SRM4AllOpen</fullName>
+        <columns>SRMChangeNumber__c</columns>
+        <columns>NAME</columns>
+        <columns>Requester__c</columns>
+        <columns>CreatedByDepartment__c</columns>
+        <columns>ChangeType__c</columns>
+        <columns>OWNER.FIRST_NAME</columns>
+        <columns>ChangeRequestStatus__c</columns>
+        <columns>ChangeRequestPriority__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ChangeRequestStatus__c</field>
+            <operation>equals</operation>
+            <value>Requested,Under Review,In Progress,On Hold</value>
+        </filters>
+        <label>SRM4: All Open</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>SRM5All</fullName>
+        <columns>SRMChangeNumber__c</columns>
+        <columns>NAME</columns>
+        <columns>ChangeRequestStatus__c</columns>
+        <columns>ChangeType__c</columns>
+        <columns>Requester__c</columns>
+        <columns>Project__c</columns>
+        <columns>WorkCompletedBy__c</columns>
+        <columns>JIRATicket__c</columns>
+        <columns>ChangeTime__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <label>SRM5: All</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>SRM6ProjectRequests</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <columns>CREATED_DATE</columns>
+        <columns>Scope__c</columns>
+        <columns>NAME</columns>
+        <columns>ChangeRequestStatus__c</columns>
+        <columns>ChangeRequestPriority__c</columns>
+        <columns>AdminComments__c</columns>
+        <columns>LAST_ACTIVITY</columns>
+        <columns>Requester__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Scope__c</field>
+            <operation>equals</operation>
+            <value>Project Needed</value>
+        </filters>
+        <filters>
+            <field>ChangeRequestStatus__c</field>
+            <operation>equals</operation>
+            <value>Submitted to Project Inception</value>
+        </filters>
+        <label>SRM6: Project Requests</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>SRM7ConvertedToJIRA</fullName>
+        <columns>NAME</columns>
+        <columns>Requester__c</columns>
+        <columns>JIRATicket__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ChangeRequestStatus__c</field>
+            <operation>equals</operation>
+            <value>Converted to JIRA</value>
+        </filters>
+        <label>SRM7: Converted to JIRA</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>SRM8QualityAssuranceRequested</fullName>
+        <columns>NAME</columns>
+        <columns>ChangeRequestPriority__c</columns>
+        <columns>ChangeRequestStatus__c</columns>
+        <columns>ChangeType__c</columns>
+        <columns>DetailsOfChangesMade__c</columns>
+        <columns>QualityAssuranceStatus__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>QualityAssuranceStatus__c</field>
+            <operation>equals</operation>
+            <value>QA Needed,QA In Progress</value>
+        </filters>
+        <label>SRM8: Quality Assurance Requested</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <role>QATeam</role>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>SRM Change Name</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>SRM Changes</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>AdminApprovalRequired</fullName>
+        <active>true</active>
+        <description>Do not allow the change to be completed until an admin has approved.</description>
+        <errorConditionFormula>AND(
+ApprovedByAdmin__c = false,
+text(ChangeRequestStatus__c) = &apos;Completed&apos;, 
+OR(
+INCLUDES(ChangeType__c, &apos;Formula Field&apos;),
+INCLUDES(ChangeType__c, &apos;Field on Existing Object&apos;),
+INCLUDES(ChangeType__c, &apos;Workflow&apos;),
+INCLUDES(ChangeType__c, &apos;Picklist Value Replacement&apos;)
+)
+)</errorConditionFormula>
+        <errorDisplayField>ApprovedByAdmin__c</errorDisplayField>
+        <errorMessage>This type of change needs to be approved by an Admin prior to completion.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>MakeChangeTimeRequiredWhenComplete</fullName>
+        <active>true</active>
+        <description>This validation rule makes the change time required whenever a change is marked as complete.</description>
+        <errorConditionFormula>AND
+(
+text(ChangeRequestStatus__c) = &apos;Completed&apos;, 
+ISNULL(ChangeTime__c) = TRUE
+)</errorConditionFormula>
+        <errorDisplayField>ChangeTime__c</errorDisplayField>
+        <errorMessage>Please enter the time the change was made.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>MakeReasonDeniedRequiredWhenDenied</fullName>
+        <active>true</active>
+        <description>This validation rule makes the reason denied required whenever a change is marked as denied.</description>
+        <errorConditionFormula>AND
+(
+text(ChangeRequestStatus__c) = &apos;Denied&apos;, 
+ISNULL( ReasonDenied__c ) = TRUE
+)</errorConditionFormula>
+        <errorDisplayField>ReasonDenied__c</errorDisplayField>
+        <errorMessage>Please enter the reason this request was denied.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>MakeTypeRequiredWhenComplete</fullName>
+        <active>true</active>
+        <description>This validation rule makes the change type required whenever a change is marked as complete.</description>
+        <errorConditionFormula>AND
+(
+text(ChangeRequestStatus__c) = &apos;Completed&apos;, 
+ISNULL( ChangeType__c ) = TRUE
+)</errorConditionFormula>
+        <errorDisplayField>ChangeType__c</errorDisplayField>
+        <errorMessage>Please enter the type of change that was made.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>MakeWorkByRequiredWhenComplete</fullName>
+        <active>true</active>
+        <description>This validation rule makes the workcompletedby__c required whenever a change is marked as complete.</description>
+        <errorConditionFormula>AND
+(
+text(ChangeRequestStatus__c) = &apos;Completed&apos;, 
+ISBLANK( WorkCompletedBy__c ) = TRUE 
+)</errorConditionFormula>
+        <errorDisplayField>WorkCompletedBy__c</errorDisplayField>
+        <errorMessage>Please enter the user that made the change.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>SendRecordLinkEmail</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send Record Link Email</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>javascript:location.href=&apos;mailto:?SUBJECT=&apos;+document.title+&apos;&amp;BODY=&apos;+escape(location.href);</url>
+    </webLinks>
+</CustomObject>

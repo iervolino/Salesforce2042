@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Custom object to manage student assessments, requirements, and zero CU tasks by recordtype.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AcademicId__c</fullName>
+        <description>The unique id that represents academic history in Banner. Required in order to update records from banner. Combination of the pidm-assessmentcode-termcode</description>
+        <externalId>true</externalId>
+        <label>Academic ID</label>
+        <length>60</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssessmentStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>Assessment Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Attempted</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Passed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Waived</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transferred</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Requirement Satisfied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Requirement Met</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Withdraw</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Manual Recheck</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>BannerActivityDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Banner Activity Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Classification__c</fullName>
+        <description>The type of task that is being complete. Example: Objective or Performance for Assessments.</description>
+        <externalId>false</externalId>
+        <label>Classification</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Objective</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Performance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>CompetencyUnits__c</fullName>
+        <externalId>false</externalId>
+        <label>Competency Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentUserIsMentor__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(Student__r.Mentor__r.PIDM__c = $User.PIDM__c,&apos;True&apos;,&apos;False&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current User Is Mentor</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LastFailedAssessmentAttemptDate__c</fullName>
+        <description>The date of the most recent failed objective assessment attempt.</description>
+        <externalId>false</externalId>
+        <label>Last Failed Assessment Attempt Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>NumberFailedAssessmentAttempts__c</fullName>
+        <description>Contains a count of the number of times a student has failedthe objective assessment for the course.</description>
+        <externalId>false</externalId>
+        <label>Number of Failed Assessment Attempts</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PAMSCourseVersionID__c</fullName>
+        <description>related pams course version id.</description>
+        <externalId>false</externalId>
+        <label>PAMS Course Version ID</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PAMSPK__c</fullName>
+        <description>Primary key of WGUSALESFORCE&quot;.&quot;ACAD_HIST_ASSESSMENT&quot; table</description>
+        <externalId>false</externalId>
+        <label>PAMS PK</label>
+        <length>60</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PrerequisiteTask__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Field to establish task hierarchy if necessary</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Choose a prerequisite task, if any.</inlineHelpText>
+        <label>Prerequisite Task</label>
+        <referenceTo>StudentCompletionTask__c</referenceTo>
+        <relationshipLabel>Subordinate Tasks</relationshipLabel>
+        <relationshipName>SubordinateTasks</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RequirementComplete__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Requirement Complete</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StatusDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Status Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>StudentPIDM__c</fullName>
+        <externalId>false</externalId>
+        <label>Student PIDM</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Student__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Student</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipName>StudentAssessments</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TaskDueDate__c</fullName>
+        <description>Date and time this task is due or expires</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the due date and time for this task.</inlineHelpText>
+        <label>Task Due Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>TaskStartDate__c</fullName>
+        <description>Date and time a task is started</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the data and time this task was started.</inlineHelpText>
+        <label>Task Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>TaskStreamId__c</fullName>
+        <externalId>true</externalId>
+        <label>TaskStream Id</label>
+        <length>15</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TermCode__c</fullName>
+        <externalId>false</externalId>
+        <label>Term Code</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Version__c</fullName>
+        <externalId>false</externalId>
+        <label>Version</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WGUCourseCompletionTask__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>WGU Course Completion Task</label>
+        <referenceTo>WGUCourseCompletionTask__c</referenceTo>
+        <relationshipName>StudentCourseCompletionTasks</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Student Completion Task</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>StudentPIDM__c</columns>
+        <columns>Student__c</columns>
+        <columns>AcademicId__c</columns>
+        <columns>AssessmentStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>meow</fullName>
+        <columns>WGUCourseCompletionTask__c</columns>
+        <columns>AssessmentStatus__c</columns>
+        <columns>Student__c</columns>
+        <columns>BannerActivityDate__c</columns>
+        <columns>RequirementComplete__c</columns>
+        <columns>Version__c</columns>
+        <columns>TermCode__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>meow</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Student Task Code</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Student Completion Tasks</pluralLabel>
+    <recordTypes>
+        <fullName>ObjectiveAssessment</fullName>
+        <active>false</active>
+        <label>Objective Assessment</label>
+        <picklistValues>
+            <picklist>AssessmentStatus__c</picklist>
+            <values>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Attempted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waived</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>PerformanceAssessment</fullName>
+        <active>false</active>
+        <label>Performance Assessment</label>
+        <picklistValues>
+            <picklist>AssessmentStatus__c</picklist>
+            <values>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Attempted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waived</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Requirement</fullName>
+        <active>false</active>
+        <label>Requirement</label>
+        <picklistValues>
+            <picklist>AssessmentStatus__c</picklist>
+            <values>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Attempted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waived</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ZeroCUTask</fullName>
+        <active>false</active>
+        <label>Zero CU Task</label>
+        <picklistValues>
+            <picklist>AssessmentStatus__c</picklist>
+            <values>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Attempted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waived</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

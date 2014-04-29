@@ -1,0 +1,1798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to be used by Enrollment for any additional Enrollment criteria for Prelicensure programs.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>ActualScienceGPA__c</fullName>
+        <externalId>false</externalId>
+        <label>Actual Science GPA</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ActualTEASScore__c</fullName>
+        <externalId>false</externalId>
+        <label>Actual TEAS Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>AnatomyWithLab__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Anatomy with Lab</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AssociatesDegree__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Associates Degree</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BSPRNApplicationStatus__c</fullName>
+        <description>The application status used in Talisma to track the progress of a BSPRN applicant</description>
+        <externalId>false</externalId>
+        <label>BSPRN Application Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Drop</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incomplete Nursing Files</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Intake Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Matriculated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Needs Prereqs - Consider</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Needs Prerequisites</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NEVR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Non Qualified State</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Interested</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Qualified</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Re-Entry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Semi-Qualified</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Under Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>BachelorsDegree__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Bachelors Degree</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CAREProfile__c</fullName>
+        <externalId>false</externalId>
+        <label>CARE Profile</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Enrollment Prelicensure</relationshipLabel>
+        <relationshipName>EnrollmentPrelicensure</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>CohortLocationNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>Cohort Location Notes</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CohortState__c</fullName>
+        <externalId>false</externalId>
+        <formula>Cohort__r.CohortHospital__r.BillingState</formula>
+        <label>Cohort State</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cohort__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Cohort</label>
+        <referenceTo>Cohort__c</referenceTo>
+        <relationshipLabel>Enrollment Prelicensure</relationshipLabel>
+        <relationshipName>EnrollmentPrelicensure</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CoursesApprovedList__c</fullName>
+        <description>List of courses that was approved, used for the migration of data from Talisima to Salesforce</description>
+        <externalId>false</externalId>
+        <label>Courses Approved List</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CoursesApproved__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Courses Approved</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CurrentEmployer__c</fullName>
+        <externalId>false</externalId>
+        <formula>CAREProfile__r.CurrentEmployer__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current Employer</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentHealthcareEmployer__c</fullName>
+        <externalId>false</externalId>
+        <label>Current Healthcare Employer</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DirectorNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>Director Notes</label>
+        <picklist>
+            <picklistValues>
+                <fullName>A</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>B</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>C</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>F</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DirectorsRank__c</fullName>
+        <externalId>false</externalId>
+        <label>Directors Rank</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DispositionValue__c</fullName>
+        <description>Formula field that brings over the disposition value from the associated contact&apos;s care profile.</description>
+        <externalId>false</externalId>
+        <formula>CAREProfile__r.DispositionValue__c</formula>
+        <label>Disposition Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DurationOfHealthcareExperience__c</fullName>
+        <externalId>false</externalId>
+        <label>Duration of Healthcare Experience</label>
+        <picklist>
+            <picklistValues>
+                <fullName>&gt;5 years</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1-5 years</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>&lt; 1 year</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DurationRubricScore__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(DurationOfHealthcareExperience__c,
+&apos;&gt;5 years&apos;, 1.5,
+&apos;1-5 years&apos;, 1.0,
+&apos;&lt; 1 year&apos;, 0.5,
+0.0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>DurationRubricScore</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ECNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>EC Notes</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ECRank__c</fullName>
+        <externalId>false</externalId>
+        <label>EC Rank</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>EmployedInHealthcareIndustry__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Employed in Healthcare Industry</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EmployeeOfPartner__c</fullName>
+        <externalId>false</externalId>
+        <label>Employee of Partner</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Volunteer or Other Affiliation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Affiliation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>EnglishComposition1__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>English Composition 1</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EnrollmentCounselor__c</fullName>
+        <externalId>false</externalId>
+        <formula>CAREProfile__r.Owner.FirstName &amp; &quot; &quot; &amp;CAREProfile__r.Owner.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Enrollment Counselor</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExperienceRubricScore__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(HealthcareExperience__c,
+&apos;LVN/LPN/Paramedic&apos;, 2.0,
+&apos;CNA/PCT/EMT&apos;, 1.5,
+&apos;RT/PT/OT/DC&apos;, 1.0,
+&apos;Indirect Patient Care&apos;, 0.5,
+0.0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>ExperienceRubricScore</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FirstCourseInBehavioralSciences__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>1st Course In Behavioral Sciences</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>FirstCourseInHumanities__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>1st Course In Humanities</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GenEdScoreNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>GenEdScoreNumber</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GenEdScore__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(EnglishComposition1__c, 1, 0) + IF(PublicSpeaking__c, 1, 0) + IF (USHistoryOrWorldHistory__c, 1, 0) + IF(OneCourseBasicMathematics__c, 1, 0) + IF(FirstCourseInBehavioralSciences__c, 1, 0) + IF(FirstCourseInHumanities__c, 1, 0) + IF(SecondCourseInBehavioralSciences__c, 1, 0) + IF(SecondCourseInHumanities__c, 1, 0) + IF(HumanGrowthAndDevelopment__c, 1, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>GenEdScore</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GraduateDegree__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Graduate Degree</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HealthcareCertificationLicenses__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Healthcare Certification/Licenses</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HealthcareExperience__c</fullName>
+        <externalId>false</externalId>
+        <label>Healthcare Experience</label>
+        <picklist>
+            <picklistValues>
+                <fullName>LVN/LPN/Paramedic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CNA/PCT/EMT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>RT/PT/OT/DC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Indirect Patient Care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>HealthcareProviderCPRCertification__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Healthcare Provider CPR Certification</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HumanGrowthAndDevelopment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Human Growth and Development</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>InternationalDegree__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>International Degree</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>JobTitle__c</fullName>
+        <externalId>false</externalId>
+        <label>Job Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastCallDisposition__c</fullName>
+        <description>Formula field that brings over the Last Call Disposition from the associated student&apos;s care profile.</description>
+        <externalId>false</externalId>
+        <formula>CAREProfile__r.LastCallDisposition__c</formula>
+        <label>Last Call Disposition</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LetterRec1__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Letter of Rec #1</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LetterRec2__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Letter of Rec #2</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LiberalArts__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Liberal Arts</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MicrobiologyWithLab__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Microbiology with Lab</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NameOfPreviousNursingSchool__c</fullName>
+        <description>Name of the institution that was previously attended.</description>
+        <externalId>false</externalId>
+        <label>Name of Previous Nursing School</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NursingFileComplete__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>All Nursing Docs Received</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NursingFileCompletedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Date All Docs Received</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>NursingScienceScoreNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>NursingScienceScoreNumber</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NursingScienceScore__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(AnatomyWithLab__c, 1, 0) + IF(MicrobiologyWithLab__c, 1, 0) + IF(PhysiologyWithLab__c, 1, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>NursingScienceScore</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OfficialTranscripts__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Official Transcripts</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>OneCourseBasicMathematics__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>1 Course in Basic Mathematics</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PartnerAffilitationRubricScore__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(EmployeeOfPartner__c,
+&apos;Employee&apos;, 1.5,
+&apos;Volunteer or Other Affiliation&apos;, 1.0,
+&apos;No Affiliation&apos;, 0.0,
+0.0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PartnerAffilitationRubricScore</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PhysiologyWithLab__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Physiology with Lab</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PrelicensureApplicantId__c</fullName>
+        <externalId>false</externalId>
+        <formula>CAREProfile__r.NursingPrelicenusreId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Prelicensure Applicant Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PrerequisiteNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>Prerequisite Notes</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>PreviousNursingSchool__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Previous Nursing School</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Enrollment Prelicensure</relationshipLabel>
+        <relationshipName>EnrollmentPrelicensure</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PriorDegreeCompletion__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Degree Completion</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Masters Degree</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bachelors Degree</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Associates Degree</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Degree</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>PriorDegreeRubricScore__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE( PriorDegreeCompletion__c,
+&apos;Masters Degree&apos;, 1.5,
+&apos;Bachelors Degree&apos;, 1.0,
+&apos;Associates Degree&apos;, 0.5,
+&apos;No Degree&apos;, 0.0,
+0.0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PriorDegreeRubricScore</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PriorNursingCourseworkRubricScore__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(PriorNursingSchoolAttendance__c,
+&apos;Voluntary Withdrawal&apos;, 0.5,
+&apos;Academic Failure with Extenuating Circumstances&apos;, -0.5,
+&apos;Academic Failure&apos;, -1.0,
+0.0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PriorNursingCourseworkRubricScore</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PriorNursingSchoolAttendance__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Nursing School Attendance</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Voluntary Withdrawal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Academic Failure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Academic Failure with Extenuating Circumstances</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ProspectStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(CAREProfile__r.CareStatus__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Prospect Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PublicSpeaking__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Public Speaking</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>QualificationLevel__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(AND(NursingScienceScoreNumber__c = 3, GenEdScoreNumber__c = 9), &apos;5&apos;,
+IF(AND(NursingScienceScoreNumber__c = 3, GenEdScoreNumber__c = 8), &apos;4&apos;, 
+IF(AND(NursingScienceScoreNumber__c = 3, GenEdScoreNumber__c = 7), &apos;4&apos;,
+IF(AND(NursingScienceScoreNumber__c = 3, GenEdScoreNumber__c = 6), &apos;3&apos;,
+IF(AND(NursingScienceScoreNumber__c = 3, GenEdScoreNumber__c = 5), &apos;3&apos;,
+IF(AND(NursingScienceScoreNumber__c = 3, GenEdScoreNumber__c = 4), &apos;2&apos;,
+IF(AND(NursingScienceScoreNumber__c = 3, GenEdScoreNumber__c = 3), &apos;2&apos;,
+IF(AND(NursingScienceScoreNumber__c = 3, GenEdScoreNumber__c &lt;= 2), &apos;1&apos;,
+IF(AND(NursingScienceScoreNumber__c = 2, GenEdScoreNumber__c = 9), &apos;4&apos;,
+IF(AND(NursingScienceScoreNumber__c = 2, GenEdScoreNumber__c = 8), &apos;4&apos;, 
+IF(AND(NursingScienceScoreNumber__c = 2, GenEdScoreNumber__c = 7), &apos;4&apos;,
+IF(AND(NursingScienceScoreNumber__c = 2, GenEdScoreNumber__c = 6), &apos;3&apos;,
+IF(AND(NursingScienceScoreNumber__c = 2, GenEdScoreNumber__c = 5), &apos;3&apos;,
+IF(AND(NursingScienceScoreNumber__c = 2, GenEdScoreNumber__c = 4), &apos;2&apos;,
+IF(AND(NursingScienceScoreNumber__c = 2, GenEdScoreNumber__c = 3), &apos;2&apos;,
+IF(AND(NursingScienceScoreNumber__c = 2, GenEdScoreNumber__c &lt;= 2), &apos;1&apos;,
+IF(AND(NursingScienceScoreNumber__c = 1, GenEdScoreNumber__c = 9), &apos;3&apos;,
+IF(AND(NursingScienceScoreNumber__c = 1, GenEdScoreNumber__c = 8), &apos;3&apos;, 
+IF(AND(NursingScienceScoreNumber__c = 1, GenEdScoreNumber__c = 7), &apos;3&apos;,
+IF(AND(NursingScienceScoreNumber__c = 1, GenEdScoreNumber__c = 6), &apos;2&apos;,
+IF(AND(NursingScienceScoreNumber__c = 1, GenEdScoreNumber__c = 5), &apos;2&apos;,
+IF(AND(NursingScienceScoreNumber__c = 1, GenEdScoreNumber__c = 4), &apos;1&apos;,
+IF(AND(NursingScienceScoreNumber__c = 1, GenEdScoreNumber__c = 3), &apos;1&apos;,
+IF(AND(NursingScienceScoreNumber__c = 1, GenEdScoreNumber__c &lt;= 2), &apos;1&apos;,
+IF(AND(NursingScienceScoreNumber__c = 0, GenEdScoreNumber__c = 9), &apos;2&apos;,
+IF(AND(NursingScienceScoreNumber__c = 0, GenEdScoreNumber__c = 8), &apos;2&apos;, 
+IF(AND(NursingScienceScoreNumber__c = 0, GenEdScoreNumber__c = 7), &apos;2&apos;,
+IF(AND(NursingScienceScoreNumber__c = 0, GenEdScoreNumber__c = 6), &apos;1&apos;,
+IF(AND(NursingScienceScoreNumber__c = 0, GenEdScoreNumber__c = 5), &apos;1&apos;,
+IF(AND(NursingScienceScoreNumber__c = 0, GenEdScoreNumber__c = 4), &apos;1&apos;,
+IF(AND(NursingScienceScoreNumber__c = 0, GenEdScoreNumber__c = 3), &apos;1&apos;,
+IF(AND(NursingScienceScoreNumber__c = 0, GenEdScoreNumber__c &lt;= 2), &apos;1&apos;,
+NULL))))))))))))))))))))))))))))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Qualification Level</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Qualified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Qualified</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Rank__c</fullName>
+        <externalId>false</externalId>
+        <label>Rank</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Resume__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Resume</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>RubricScore__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEASRubricScore__c + ScienceGPARubricScore__c + PriorDegreeRubricScore__c + ExperienceRubricScore__c + DurationRubricScore__c + PartnerAffilitationRubricScore__c + PriorNursingCourseworkRubricScore__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Rubric Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ScienceGPARange__c</fullName>
+        <externalId>false</externalId>
+        <label>Science GPA Range</label>
+        <picklist>
+            <picklistValues>
+                <fullName>3.50 - 4.0</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3.0 - 3.49</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2.50 - 2.99</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ScienceGPARubricScore__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE( ScienceGPARange__c,
+&apos;3.50 - 4.0&apos;, 1.5,
+&apos;3.0 - 3.49&apos;, 1.0,
+&apos;2.50 - 2.99&apos;, 0.5,
+0.0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>ScienceGPARubricScore</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SecondCourseInBehavioralSciences__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>2nd Course In Behavioral Sciences</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SecondCourseInHumanities__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>2nd Course In Humanities</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SemiQualifiedReason__c</fullName>
+        <externalId>false</externalId>
+        <label>Semi-Qualified Reason</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentStatement__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Student Statement</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StudentsState__c</fullName>
+        <externalId>false</externalId>
+        <formula>CAREProfile__r.ProspectsState__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Students State</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TEASExamRange__c</fullName>
+        <externalId>false</externalId>
+        <label>TEAS Exam Range</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Exemplary &gt;/= 90.7%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Advanced &gt;= 78.0%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Proficient &gt;/= 58.7%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Pass &lt;/= 58.6%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TEASRubricScore__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE( TEASExamRange__c ,
+&apos;Exemplary &gt;/= 90.7%&apos;, 1.5,
+&apos;Advanced &gt;= 78.0%&apos;, 1.0,
+&apos;Proficient &gt;/= 58.7%&apos;, 0.5,
+0.0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>TEASRubricScore</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TOEFLScore__c</fullName>
+        <externalId>false</externalId>
+        <label>TOEFL Score</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>USHistoryOrWorldHistory__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>US History or World History</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Enrollment Prelicensure</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>StudentsState__c</columns>
+        <columns>BSPRNApplicationStatus__c</columns>
+        <columns>ECRank__c</columns>
+        <columns>DirectorsRank__c</columns>
+        <columns>NursingFileComplete__c</columns>
+        <columns>HealthcareCertificationLicenses__c</columns>
+        <columns>HealthcareProviderCPRCertification__c</columns>
+        <columns>AssociatesDegree__c</columns>
+        <columns>BachelorsDegree__c</columns>
+        <columns>GraduateDegree__c</columns>
+        <columns>InternationalDegree__c</columns>
+        <columns>CAREProfile__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>AllEnrollmentPrelicensureRecordsList</fullName>
+        <columns>NAME</columns>
+        <columns>BSPRNApplicationStatus__c</columns>
+        <columns>ECRank__c</columns>
+        <columns>DirectorsRank__c</columns>
+        <columns>NursingFileComplete__c</columns>
+        <columns>HealthcareCertificationLicenses__c</columns>
+        <columns>HealthcareProviderCPRCertification__c</columns>
+        <columns>LetterRec1__c</columns>
+        <columns>LetterRec2__c</columns>
+        <columns>LiberalArts__c</columns>
+        <columns>AssociatesDegree__c</columns>
+        <columns>BachelorsDegree__c</columns>
+        <columns>GraduateDegree__c</columns>
+        <columns>InternationalDegree__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Enrollment Prelicensure Records</label>
+        <sharedTo>
+            <group>BSNursingPrelicensure</group>
+            <role>HPPrelicensure</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CAStudentRankings</fullName>
+        <columns>NAME</columns>
+        <columns>StudentsState__c</columns>
+        <columns>ActualScienceGPA__c</columns>
+        <columns>ActualTEASScore__c</columns>
+        <columns>DurationOfHealthcareExperience__c</columns>
+        <columns>EmployedInHealthcareIndustry__c</columns>
+        <columns>HealthcareCertificationLicenses__c</columns>
+        <columns>HealthcareExperience__c</columns>
+        <columns>RubricScore__c</columns>
+        <columns>DispositionValue__c</columns>
+        <columns>LastCallDisposition__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>StudentsState__c</field>
+            <operation>equals</operation>
+            <value>CA</value>
+        </filters>
+        <filters>
+            <field>RubricScore__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </filters>
+        <label>CA Student Rankings</label>
+        <sharedTo>
+            <role>AdmissionsCounselor</role>
+            <role>AssociateEnrollmentCounselor</role>
+            <role>BusinessGraduate</role>
+            <role>BusinessUndergrad</role>
+            <role>EnrollmentIT</role>
+            <role>EnrollmentManager</role>
+            <role>HPPrelicensure</role>
+            <role>HealthProfessions</role>
+            <role>HealthProfessionsCollege</role>
+            <role>TeachersCollegeElEdSoSci</role>
+            <role>TeachersCollegeMEd</role>
+            <role>TeachersCollegeMathScience</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Cohort_Rubric</fullName>
+        <columns>NAME</columns>
+        <columns>Cohort__c</columns>
+        <columns>DirectorsRank__c</columns>
+        <columns>DirectorNotes__c</columns>
+        <columns>RubricScore__c</columns>
+        <columns>ActualTEASScore__c</columns>
+        <columns>TEASExamRange__c</columns>
+        <columns>ActualScienceGPA__c</columns>
+        <columns>ScienceGPARange__c</columns>
+        <columns>PriorDegreeCompletion__c</columns>
+        <columns>HealthcareExperience__c</columns>
+        <columns>DurationOfHealthcareExperience__c</columns>
+        <columns>EmployeeOfPartner__c</columns>
+        <columns>PriorNursingSchoolAttendance__c</columns>
+        <columns>NursingFileComplete__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Cohort__c</field>
+            <operation>startsWith</operation>
+            <value>[cohort_name]</value>
+        </filters>
+        <filters>
+            <field>Qualified__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Cohort Rubric Template</label>
+    </listViews>
+    <nameField>
+        <label>Enrollment Prelicensure  Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Enrollment Prelicensure</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>NursingPrelicensure</fullName>
+        <active>true</active>
+        <label>Nursing Prelicensure</label>
+        <picklistValues>
+            <picklist>BSPRNApplicationStatus__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Drop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incomplete Nursing Files</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Matriculated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NEVR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Needs Prereqs - Consider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Needs Prerequisites</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non Qualified State</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Interested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Re-Entry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Semi-Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DirectorNotes__c</picklist>
+            <values>
+                <fullName>A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>C</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>F</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DurationOfHealthcareExperience__c</picklist>
+            <values>
+                <fullName>%3C 1 year</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%3E5 years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1-5 years</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ECRank__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>EmployeeOfPartner__c</picklist>
+            <values>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Affiliation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Volunteer or Other Affiliation</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HealthcareExperience__c</picklist>
+            <values>
+                <fullName>CNA%2FPCT%2FEMT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Indirect Patient Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVN%2FLPN%2FParamedic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RT%2FPT%2FOT%2FDC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PriorDegreeCompletion__c</picklist>
+            <values>
+                <fullName>Associates Degree</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bachelors Degree</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Masters Degree</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PriorNursingSchoolAttendance__c</picklist>
+            <values>
+                <fullName>Academic Failure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Academic Failure with Extenuating Circumstances</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Withdrawal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ScienceGPARange__c</picklist>
+            <values>
+                <fullName>2%2E50 - 2%2E99</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E0 - 3%2E49</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E50 - 4%2E0</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TEASExamRange__c</picklist>
+            <values>
+                <fullName>Advanced %3E%3D 78%2E0%25</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exemplary %3E%2F%3D 90%2E7%25</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Pass %3C%2F%3D 58%2E6%25</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proficient %3E%2F%3D 58%2E7%25</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>TeacherPrelicensure</fullName>
+        <active>true</active>
+        <label>Teacher Prelicensure</label>
+        <picklistValues>
+            <picklist>BSPRNApplicationStatus__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Drop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incomplete Nursing Files</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Matriculated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NEVR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Needs Prereqs - Consider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Needs Prerequisites</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non Qualified State</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Interested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Re-Entry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Semi-Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DirectorNotes__c</picklist>
+            <values>
+                <fullName>A</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>B</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>C</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>F</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DurationOfHealthcareExperience__c</picklist>
+            <values>
+                <fullName>%3C 1 year</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%3E5 years</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1-5 years</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ECRank__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>EmployeeOfPartner__c</picklist>
+            <values>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Affiliation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Volunteer or Other Affiliation</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HealthcareExperience__c</picklist>
+            <values>
+                <fullName>CNA%2FPCT%2FEMT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Indirect Patient Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVN%2FLPN%2FParamedic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RT%2FPT%2FOT%2FDC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PriorDegreeCompletion__c</picklist>
+            <values>
+                <fullName>Associates Degree</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bachelors Degree</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Masters Degree</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PriorNursingSchoolAttendance__c</picklist>
+            <values>
+                <fullName>Academic Failure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Academic Failure with Extenuating Circumstances</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Withdrawal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ScienceGPARange__c</picklist>
+            <values>
+                <fullName>2%2E50 - 2%2E99</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E0 - 3%2E49</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E50 - 4%2E0</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TEASExamRange__c</picklist>
+            <values>
+                <fullName>Advanced %3E%3D 78%2E0%25</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exemplary %3E%2F%3D 90%2E7%25</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Pass %3C%2F%3D 58%2E6%25</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proficient %3E%2F%3D 58%2E7%25</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>ScienceGPARange__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>TEASExamRange__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>DurationOfHealthcareExperience__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>EmployeeOfPartner__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>PriorNursingSchoolAttendance__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>RubricScore__c</customTabListAdditionalFields>
+        <excludedStandardButtons>New</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <searchResultsAdditionalFields>CAREProfile__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TEASExamRange__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+</CustomObject>

@@ -1,0 +1,563 @@
+<apex:page sidebar="false" showHeader="false" applyBodyTag="false" standardstylesheets="false" controller="PersonalPageController" action="{!initCheck}">
+    <html>
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Western Governors University</title>
+            <link rel="shortcut icon" href="{!$Resource.WGUFavicon}" />
+            <meta name='robots' content='noindex, nofollow' />
+            <apex:includeScript value="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" />
+
+            
+            <apex:stylesheet value="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/css/styles.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/fonts/stylesheet.css')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/js/build/personalPages.min.js')}"/>
+            
+           <script>
+
+
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-932736-15', 'wgu.edu');
+  ga('send', 'pageview');
+
+
+function gaSend(category,action,label,value){
+    
+    if( category == '' || action == '' ){
+        return false;
+    }
+    label = label || '';
+    value = value || '';
+    if( label && value){
+        ga('send', 'event', category, action, label, value);
+    }else if(label){
+        ga('send', 'event', category, action, label);
+    }else{
+        ga('send', 'event', category, action);
+    }
+}
+
+$(function(){
+    $('.tile-grid .tile[data-ga]').click(function(){
+        gaSend('tile','click', $(this).attr('data-ga') );
+    });
+    
+    $('.content__nav li[data-ga]').click(function(){
+        gaSend('dropdown','click', $(this).attr('data-ga') );
+    });
+});  
+            
+</script>
+
+            
+        </head> 
+        
+        <body class='iconfonts'>
+            <div class='banner'>
+                <div class='row row--full'>
+                    <div class='column column--large banner__logo'>
+                        
+                        <apex:image url="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/banner-logo.png')}"  styleClass="show-for-tablet show-for-desktop hide-for-mobile" alt="Western Governors University" />   
+                        <apex:image url="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/modal-banner-logo.png')}"  styleClass="hide-for-tablet hide-for-desktop show-for-mobile" alt="Western Governors University" />     
+                        <apex:outputPanel rendered="{!IF(step == 3 || step == 4,true,false)}">
+                            <div id='step3and4login'>
+                            <!--    <form class='banner__login hide-for-mobile' action='POST'>
+                                    <div >
+                                        <label for='banner-login-username'> User Name:</label><input name='username' id='banner-login-username' type="text" /> 
+                                    </div>
+                                    <div >
+                                        <label for="banner-login-password">Password:</label><input name='password' id='banner-login-password' type="password" />
+                                    </div>
+                                    <button type='submit' class='form__submit ficon-arrow-right'>Login</button>
+                                    <span class='form__forgot' title='Forgot Password?' data-modal='forgot-password'>Forgot Login?</span>
+                                </form> -->
+                            </div>
+                        </apex:outputPanel>
+                    </div>
+                    <div class='column column--tiny banner__vr'></div>
+                    
+                    <div class='column column--small hide-for-tablet hide-for-mobile'>
+                        <apex:outputPanel rendered="{!IF(step <= 4,true,false)}">
+                            <div id='stepbuttondiv' class='banner__cta'>
+                                <apex:outputPanel rendered="{!IF(step == 2,true,false)}">
+                                    <a id='step2button'  href='https://www.wgu.edu/wgu/app/app_step0' title='Finish Application' class='btn btn--finish'></a>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!IF(step == 3,true,false)}">
+                                    <a id='step3button'  href='http://www.wgu.edu/admissions/readiness_assessment' title='Take Readiness Assessment' class='btn btn--assessment'></a>
+    
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!IF(step == 4,true,false)}">
+                                    <span id='step4button' data-modal="login" title='Finish Admissions' class='btn btn--finish-adm'></span>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!IF(step == 1,true,false)}">
+                                    <a id='step1button' href='https://www.wgu.edu/wgu/app/app_step0' title='Start Application' class='btn btn--start'></a>
+                                </apex:outputPanel>
+                                <p id='bannerphonelabel' class='banner__call'>Or call us at:<span> 1.866.225.5948</span></p>
+                                
+                            </div>
+                        </apex:outputPanel>
+                            <!-- REMOVED FOR PART ONE OF PERSONAL PAGES, WILL RETURN FOR PART TWO -->
+                   <!--     <apex:outputPanel rendered="{!IF(step == 5,true,false)}">
+                            <form id='step5form' class='banner__login left' action='POST'>
+                                <div >
+                                    <label for='banner-login-username'> User Name:</label><input name='username' id='banner-login-username' type="text" />
+                                </div>
+                                <div >
+                                    <label for="banner-login-password">Password:</label><input name='password' id='banner-login-password' type="password" />
+                                </div>
+                                <button type='submit' class='form__submit'>Login</button>
+                                <span class='form__forgot' title='Forgot Password?' data-modal='forgot-password'>Forgot Login?</span>
+                            </form>
+                        </apex:outputPanel> -->
+                    </div>
+                </div>
+            </div>
+            <div class="maroon-bar--small"></div>
+            <div class='container row row--full'>
+                <div class="maroon-bar"></div>
+                <div class="content row">
+                    <div class="column column--large">
+                        
+                        <div class='hide-for-desktop show-for-tablet show-for-mobile'>
+                   <!-- REMOVED FOR PART ONE OF PERSONAL PAGES, WILL RETURN FOR PART TWO -->     
+                   <!--        <apex:outputPanel rendered="{!IF(step > 2,true,false)}">
+                                <form class='banner__login banner__login--mobile float-none hide-for-desktop show-for-tablet ' action='POST'>
+                                    <div >
+                                        <label for='banner-login-username'> User Name:</label><input name='username' id='banner-login-username' type="text" />
+                                    </div>
+                                    <div >
+                                        <label for="banner-login-password">Password:</label><input name='password' id='banner-login-password' type="password" />
+                                    </div>
+                                    <button type='submit' class='form__submit ficon-arrow-right'>Login</button>
+                                    <span class='form__forgot' title='Forgot Password?' data-modal='forgot-password'>Forgot Login?</span>
+                                </form>
+                                <hr class=''/>
+                            </apex:outputPanel>  -->
+                        </div>
+                        
+                        <h1>{!textAreaMap['Welcome Header']} {!firstName}</h1>
+                        <p>Your program of interest:</p>
+                        <h2><span id='ProgramOfInterest'>{!careProgramTitle}</span></h2>
+                        <p class='interested' data-modal='change-program'>Interested in a different program?</p>
+                        
+                        <p>{!textAreaMap['Welcome Paragraph']}</p>
+                        <hr/>
+                        <div class='tile-grid hide-for-mobile'>
+                            <div class="tile tile--empty"></div>
+                   
+                            <apex:outputPanel rendered="{!tileLinks[0].isNotBlank}"> 
+                            <div id='tile0div' class="tile tile--double tile--main" data-type='{!tileLinks[0].type}' data-ga='{!careProgramTitle}: {!tileLinks[0].label}' data-address='{!tileLinks[0].address}'>
+                                <h2><span id='tile0title'>{!tileLinks[0].label}</span></h2>
+                                <p><span id='tile0text'>{!careProgramTitle}</span></p>
+                                </div> 
+                            </apex:outputPanel> 
+                            <apex:outputPanel rendered="{!tileLinks[0].isBlank}">
+                                <div class="tile tile--empty tile--double"></div>
+                            </apex:outputPanel> 
+                            
+                            <div class="tile tile--empty"></div>
+                            
+                            <div class="tile tile--empty"></div>
+                            
+                            <div class="tile tile--empty"></div>
+                            
+                            <apex:outputPanel rendered="{!tileLinks[1].isNotBlank}"> 
+                            <div id='tile1div' class="tile"  data-type='{!tileLinks[1].type}'  data-ga='{!careProgramTitle}: {!tileLinks[1].label}' data-address='{!tileLinks[1].address}'>
+                                <p><span id='tile1title'>{!tileLinks[1].label}</span></p>
+                            </div>
+                            </apex:outputPanel> 
+                            <apex:outputPanel rendered="{!tileLinks[1].isBlank}">
+                                  <div class="tile tile--empty"></div>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!tileLinks[2].isNotBlank}"> 
+                            <div id='tile2div' class="tile" data-type='{!tileLinks[2].type}'  data-ga='{!careProgramTitle}: {!tileLinks[2].label}' data-address='{!tileLinks[2].address}'>
+                                <p><span id='tile2title'>{!tileLinks[2].label}</span></p>
+                            </div>
+                            </apex:outputPanel> 
+                            <apex:outputPanel rendered="{!tileLinks[2].isBlank}">
+                                  <div class="tile tile--empty"></div>
+                            </apex:outputPanel> 
+                            
+                            <div class="tile tile--empty"></div>
+                            
+                            <apex:outputPanel rendered="{!tileLinks[3].isNotBlank}"> 
+                            <div id='tile3div' class="tile" data-type='{!tileLinks[3].type}' data-ga='{!careProgramTitle}: {!tileLinks[3].label}' data-address='{!tileLinks[3].address}'>
+                                <p><span id='tile3title'>{!tileLinks[3].label}</span></p>
+                            </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!tileLinks[3].isBlank}">
+                                  <div class="tile tile--empty"></div>
+                            </apex:outputPanel>
+                            
+                             <apex:outputPanel rendered="{!tileLinks[4].isNotBlank}"> 
+                            <div  id='tile4div' class="tile" data-type='{!tileLinks[4].type}' data-ga='{!careProgramTitle}: {!tileLinks[4].label}' data-address='{!tileLinks[4].address}'>
+                                <p><span id='tile4title'>{!tileLinks[4].label}</span></p>
+                            </div>
+                            </apex:outputPanel>        
+                            <apex:outputPanel rendered="{!tileLinks[4].isBlank}">
+                                  <div class="tile tile--empty"></div>
+                            </apex:outputPanel>          
+                            
+                            <div class="tile tile--empty"></div>
+                            
+                            <apex:outputPanel rendered="{!tileLinks[5].isNotBlank}">       
+                            <div id='tile5div' class="tile" data-type='{!tileLinks[5].type}' data-ga='{!careProgramTitle}: {!tileLinks[5].label}' data-address='{!tileLinks[5].address}'>
+                                <p><span id='tile5title'>{!tileLinks[5].label}</span></p>
+                            </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!tileLinks[5].isBlank}">
+                                  <div class="tile tile--empty"></div>
+                            </apex:outputPanel>   
+                            
+                            <apex:outputPanel rendered="{!tileLinks[6].isNotBlank}"> 
+                            <div id='tile6div' class="tile" data-type='{!tileLinks[6].type}' data-ga='{!careProgramTitle}: {!tileLinks[6].label}' data-address='{!tileLinks[6].address}'>
+                                <p><span id='tile6title'>{!tileLinks[6].label}</span></p>
+                            </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!tileLinks[6].isBlank}">
+                                  <div class="tile tile--empty"></div>
+                            </apex:outputPanel>  
+                                          
+                            <div class="tile tile--empty"></div>
+                            
+                            <apex:outputPanel rendered="{!tileLinks[7].isNotBlank}"> 
+                            <div id='tile7div' class="tile" data-type='{!tileLinks[7].type}' data-ga='{!careProgramTitle}: {!tileLinks[7].label}' data-address='{!tileLinks[7].address}'>
+                                <p><span id='tile7title'>{!tileLinks[7].label}</span></p>
+                            </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!tileLinks[7].isBlank}">
+                                  <div class="tile tile--empty"></div>
+                            </apex:outputPanel>
+                            
+                           <apex:outputPanel rendered="{!tileLinks[8].isNotBlank}"> 
+                            <div id='tile8div' class="tile" data-type='{!tileLinks[8].type}' data-ga='{!careProgramTitle}: {!tileLinks[8].label}' data-address='{!tileLinks[8].address}'>
+                                <p><span id='tile8title'>{!tileLinks[8].label}</span></p>
+                            </div>
+                           </apex:outputPanel>
+                            <apex:outputPanel rendered="{!tileLinks[8].isBlank}">
+                                  <div class="tile tile--empty"></div>
+                            </apex:outputPanel>
+                            
+                            <div class="tile tile--empty"></div>
+                            
+                            <apex:outputPanel rendered="{!tileLinks[9].isNotBlank}">
+                            <div id='tile9div' class="tile" data-type='{!tileLinks[9].type}' data-ga='{!careProgramTitle}: {!tileLinks[9].label}' data-address='{!tileLinks[9].address}'>
+                                <p><span id='tile9title'>{!tileLinks[9].label}</span></p>
+                            </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!tileLinks[9].isBlank}">
+                                  <div class="tile tile--empty"></div>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!tileLinks[10].isNotBlank}">
+                            <div id='tile10div' class="tile" data-type='{!tileLinks[10].type}' data-ga='{!careProgramTitle}: {!tileLinks[10].label}' data-address='{!tileLinks[10].address}'>
+                                <p><span id='tile10title'>{!tileLinks[10].label}</span></p>
+                            </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!tileLinks[10].isBlank}">
+                                  <div class="tile tile--empty"></div>
+                            </apex:outputPanel>   
+                            
+                        </div>
+                        <hr class='hide-for-mobile'/>
+                        <h2>Resources and Links:</h2>
+                        <ul id='resourcesandlinkstable' class='content__nav'>
+                        
+                            <apex:repeat value="{!pageLinks}" var="category">
+                                <li>{!category.name}</li>
+                                <li class='content__nav__sub'>
+                                <ul>
+                                <apex:repeat value="{!category.linkList}" var="link">
+                                    <li data-type='{!link.type}' data-ga='{!careProgramTitle}: {!link.label}' data-address='{!link.address}'>{!link.label}</li>
+                                </apex:repeat>
+                                </ul></li>
+                            </apex:repeat>
+                        </ul>
+                    </div>
+                    <div class="column column--tiny content__vr"></div>
+                    <div class="column column--small content__sidebar">
+                        <div class='hide-for-mobile'>
+                            <hr class='show-for-tablet hide-for-desktop'/>
+                            <apex:outputPanel rendered="{!IF(step != 5,true,false)}">
+                                <h2>Your Next Step</h2>
+                                <p>to becoming a successful student<br/> at WGU:</p>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(step == 2,true,false)}">
+                                <a href='https://www.wgu.edu/wgu/app/app_step0' id='hiddenstepbutton2' title='Finish Application' class='btn btn--finish btn--extra'></a>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(step == 3,true,false)}">
+                                <a href='http://www.wgu.edu/admissions/readiness_assessment' id='hiddenstepbutton2' title='Take Readiness Assessment' class='btn btn--assessment btn--extra'></a>
+                       <!--         <span id='hiddenstepbutton3' data-modal="login" title='Take Readiness Assessment' class='btn btn--assessment btn--extra'></span> -->
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(step == 4,true,false)}">
+                           <!--       <a href='#' id='hiddenstepbutton4' title='Finish Admissions' class='btn btn--assessment btn--extra'></a> -->
+                                <span id='hiddenstepbutton4' data-modal="login" title='Finish Admissions' class='btn btn--finish-adm btn--extra'></span> 
+                                
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(step == 1 || step > 4,true,false)}">
+                                <a id='hiddenstepbutton1' href="https://www.wgu.edu/wgu/app/app_step0" title='Start Application' class='btn btn--start btn--extra'></a>
+                            </apex:outputPanel>
+                        </div>
+                        
+                        <apex:outputPanel rendered="{!IF(step < 5,true,false)}">
+                            <hr />
+                        </apex:outputPanel>
+                        <h2>Enrollment Steps:</h2>
+                        <div class="sidebar__checklist">
+                      <!--      <apex:outputPanel rendered="{!IF(step >= 2,true,false)}">
+                                <p id='step2plusnote'><em>Note: Content available after you log in.</em></p>
+                            </apex:outputPanel> -->
+                     <!--       <apex:outputPanel rendered="{!IF(step == 1,true,false)}">
+                                <p id='step1note'><em>Note: Content available after you finish your enrollment application.</em></p>
+                            </apex:outputPanel> -->
+                            <ul class='links'><em>Things to Do:</em>
+                                <apex:variable var="step3checked" value="checked" rendered="{!step > 2}" />
+                                <apex:variable var="step3checked" value="" rendered="{!step <= 2}}" />
+                                <!-- <apex:outputPanel rendered="{!step > 2}">      
+                                    <li id='linkFinishApplication' class='{!step3checked}'>Finish Application</li>
+                                </apex:outputPanel> -->
+                                <apex:outputPanel rendered="{!step <=  2}">     
+                                    <li id='linkFinishApplication' class='{!step3checked}'><a href='https://www.wgu.edu/wgu/app/app_step0' data-ga='{!careProgramTitle}: Finish Application'>Finish Application</a></li>                                   
+                                </apex:outputPanel>
+                            <!--     <apex:outputPanel rendered="{!step > 2}">      
+                                    <li id='linkFinishApplication' class='{!step3checked}'>Pay The Application Fee</li>
+                                </apex:outputPanel> -->
+                                <apex:outputPanel rendered="{!step <=  2}">     
+                                    <li id='linkFinishApplication' class='{!step3checked}'><a href='https://www.wgu.edu/wgu/app/app_step0' data-ga='{!careProgramTitle}: Pay The Application Fee'>Pay The Application Fee</a></li>                                   
+                                </apex:outputPanel>                               
+                                <apex:variable var="step4checked" value="checked" rendered="{!step > 10}" />
+                                <apex:variable var="step4checked" value="" rendered="{!step <= 4}}" /> 
+                              
+                                <li id='linkSendTranscripts' class='{!step4checked}'><a href='http://www.wgu.edu/admissions/how_to_request_transcript' data-ga='{!careProgramTitle}: Send in Your Official Transcripts'>Send in Your Official Transcripts</a></li>
+                                <apex:outputPanel rendered="{!step <  4}">      
+                                <li id='linkReadinessAssessment' class='{!step4checked}'><a href='http://www.wgu.edu/admissions/readiness_assessment' data-ga='{!careProgramTitle}: Complete the WGU Readiness Assessment'>Complete the WGU Readiness Assessment</a></li>
+                                </apex:outputPanel>  
+                                <apex:variable var="step5checked" value="checked" rendered="{!step > 4}" />
+                                <apex:variable var="step5checked" value="" rendered="{!step <= 4}}" />
+                                <li id='linkCompleteInterview' class='{!step5checked}'><a href='http://www.wgu.edu/admissions/requirements ' data-ga='{!careProgramTitle}: Interview with your Enrollment Counselor'>Interview with your Enrollment Counselor</a></li>
+                                <li id='linkFirstTuitionPayment' class='{!step5checked}'><a href='http://www.wgu.edu/tuition_financial_aid/overview' data-ga='{!careProgramTitle}: Satisfy First Tuition Payment'>Satisfy First Tuition Payment</a></li>
+                           
+                            <!--    <li id='linkCompleteOrientation' class='{!step5checked}'>Complete Orientation</li> -->
+                            </ul>
+                         <!--   <ul class='links'><em>Info and Status:</em>
+                                <li>Admission Status</li>
+                                <li>Financial Aid Status</li>
+                                <li>Readiness Assessment Results</li>
+                                <li>Transcript Evaluation</li>
+                            </ul> -->
+                        </div>
+                        <hr/>
+                        <div class='sidebar__counselor'>
+                            <h2>Your Enrollment Counselor:</h2>
+                            <div class='contact__counselor'>
+                                <p><span id='EnrollmentCounselor'>{!ecName}</span></p>
+                                <p class='contact__email' data-modal='counselor-email'><span id='EnrollmentCounselorEmail'>{!ecEmail}</span></p>
+                                <p class='contact__phone'><span id='EnrollmentCounselorPhone'>{!ecPhone}</span></p>
+                                <p class='contact__contact link ficon-arrow-right' data-modal='counselor-email'>Contact Your Enrollment Counselor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-overlay" id='modal-overlay'>
+                <div class="modal-centered">
+                    <div class="modal-before"></div>
+                    
+                    <div class='modal modal--standard' id='counselor-email'>
+                        <span class='close'>&times;</span>
+                        <div class="modal__banner">
+                            <img src="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/modal-banner-logo.png')}" />
+                        </div>
+                        <div class='modal__content'>
+                            <h2>Please contact your Enrollment Counselor by filling out the form below:</h2>
+                                <apex:form >
+                                <div>
+                                    <label for="emailname">Name:</label>
+                                    <apex:inputText value="{!fullName}" id="emailname"/>
+                                  
+                                </div>
+                                <div>
+                              
+                                    <label for="emailemail">Email:</label>
+                                    <apex:inputText value="{!studentEmail}" id="emailemail"/>
+                                </div>
+                                <div>
+                                   <label for="emailphone">Phone:</label>
+                                   <apex:inputText value="{!studentPhone}" id="emailphone"/>
+                                </div>
+                                
+                                <div>
+                                    <label for="emailcomments">Comments:</label>
+                                    <apex:inputTextarea rows="3"  value="{!studentComments}" id="emailcomments"/>
+                                </div>
+                                <button type='submit' onclick='sendMessage();closeModal();' class='form__submit ficon-arrow-right'>Send Message</button>
+                                <apex:actionFunction name="sendMessage" action="{!actionSend}"/>
+                            </apex:form>
+                   
+                        </div>
+                        <div class='modal__mobile-close ' data-action='modal-close'>
+                            <span class="btn btn--modal">Close <span class="close">&times;</span></span>
+                        </div>
+                    </div> 
+                    
+                    <div class='modal modal--standard' id='modal-error'>
+                        <span class='close'>&times;</span>
+                        <div class="modal__banner">
+                            
+                            <img src="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/modal-banner-logo.png')}" />
+                        </div>
+                        <div class='modal__content'>
+                            <apex:outputPanel rendered="{!IF(step == 1 || step == 2,true,false)}">
+                                <apex:variable var="buttonTile" value="Start Application" rendered="{!step == 1}" />
+                                <apex:variable var="buttonTile" value="Finish Application" rendered="{!step == 2}" />
+                                <div id='modalContentWithButton'>
+                                    <p>We're sorry, to access this personal information you need to complete your application for admission.  Click on the link below and you will be directed to your application:</p>
+                                    <a id='modalButton' href='#' class='btn btn--finish modal--btn--error' title='{!buttonTile}'></a>
+                                </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(step >2,true,false)}">
+                                <div id='modalContentWithLogin'>
+                                    <p>Click on the link below and you will be directed to my.wgu.edu:</p>
+                                <!--    <apex:outputPanel rendered="{!IF(step == 4,true,false)}">
+                                    <span id='hiddenstepbutton4' data-modal="login" title='Finish Admissions' class='btn btn--finish-adm btn--extra'></span> 
+                                     </apex:outputPanel> -->
+                                    <apex:outputPanel rendered="{!IF(step == 4,true,false)}">
+                                    <a id='modalButton' href='http://my.wgu.edu/' class='btn btn--finish-adm modal--btn--error' title='{!buttonTile}'></a>
+                                        </apex:outputPanel>    
+                                  
+                                </div>
+                            </apex:outputPanel>
+                        </div>
+                        <div class='modal__mobile-close ' data-action='modal-close'>
+                            <span class="btn btn--modal">Close <span class="close">&times;</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class='modal modal--standard' id='change-program'>
+                        <span data-action='modal-close' class='close'>&times;</span>
+                        <div class="modal__banner">
+                            <img src="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/modal-banner-logo.png')}" />
+                        </div>
+                        <div class='modal__content clearfix'>
+                            <h2>Would you like to change your Program of Interest?</h2>
+                            <p>Contact your Enrollment Counselor to change your program on interest for this page.</p>
+                            <p>Your Personal Enrollment Counselor is:</p>
+                            <div class="contact__counselor">
+                                <p id='ecNameModal'>{!ecName}</p>
+                                <p id='ecEmailModal' class="contact__email" data-modal='counselor-email'>{!ecEmail}</p>
+                                <p id='ecPhoneModal' class="contact__phone">{!ecPhone}</p>
+                                <p class="contact__contact link ficon-arrow-right" data-modal='counselor-email'>Contact Your Enrollment Counselor</p>
+                            </div>
+                            <p class='clear'><em>Note: The program of interest that you have selected is for information purposes only.  You will select your actual program in your enrollment application.</em></p>
+                        </div>
+                        <div class='modal__mobile-close ' data-action='modal-close'>
+                            <span class="btn btn--modal">Close <span class="close">&times;</span></span>
+                        </div>
+                    </div> 
+                    
+                    <div class='modal modal--standard' id='forgot-password'>
+                        <span class='close'>&times;</span>
+                        <div class="modal__banner">
+                            <img src="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/modal-banner-logo.png')}" />
+                        </div>
+                        <div class='modal__content clearfix'>
+                            <h2>Forgot your login?</h2>
+                            <p>Enter your email address below and we will send you an email with your login information.</p>
+                            <form>
+                                <div>
+                                    <label for="forgot-email">email:</label><input type="email" id='forgot-email'/>
+                                </div>
+                                <button type='submit' class='form__submit ficon-arrow-right'>Submit</button>
+                            </form>
+                        </div>
+                        <div class='modal__mobile-close ' data-action='modal-close'>
+                            <span class="btn btn--modal">Close <span class="close">&times;</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class='modal modal--standard' id='modal-login'>
+                        <span class='close'>&times;</span>
+                        <div class="modal__banner">
+                            <img src="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/modal-banner-logo.png')}" />
+                        </div>
+                        <div class='modal__content clearfix'>
+                            <h2>Please log in to access your personalized information.</h2>
+                            <form>
+                                <div>
+                                    <label for="login-username">User Name:</label><input type="email" id='login-username' />
+                                </div>
+                                <div>
+                                    <label for="login-password">Password:</label><input type="password" id='login-password' />
+                                </div>
+                                <button type='submit' class='form__submit ficon-arrow-right'>Login</button>
+                                <p class='modal__forgot-login link' data-modal='forgot-password'>Forgot login?</p>
+                                <p class="modal__access-account link"><a href="#">Can't access your account?<br/>New Student? Claim Your WGU Login Today!</a></p>
+                            </form>
+                        </div>
+                        <div class='modal__mobile-close ' data-action='modal-close'>
+                            <span class="btn btn--modal">Close <span class="close">&times;</span></span>
+                        </div>
+                    </div>
+                    <div class='modal modal--video' id='modal-video'>
+                        <span class='close'>&times;</span>
+                        <div class='modal__content' id='modal-video-content'>
+                        </div>
+                        <div class='modal__mobile-close ' data-action='modal-close'>
+                            <span class="btn btn--modal">Close <span class="close">&times;</span></span>
+                        </div>
+                    </div>
+                    <div class='modal modal--pdf' id='modal-pdf'>
+                        <span class='close'>&times;</span>
+                        <div class='modal__content' id='modal-pdf-content'>
+                        </div>
+                        <div class='modal__mobile-close ' data-action='modal-close'>
+                            <span class="btn btn--modal">Close <span class="close">&times;</span></span>
+                        </div>
+                    </div>
+                    <div class='modal modal--pdf' id='modal-link'>
+                        <span class='close'>&times;</span>
+                        <div class='modal__content' id='modal-link-content'>
+                        </div>
+                        <div class='modal__mobile-close ' data-action='modal-close'>
+                            <span class="btn btn--modal">Close <span class="close">&times;</span></span>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div class="row row--full ">
+                    <div class="footer__content row">
+                        <div class='footer__info column column--large'>
+                            <img src="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/footer-logo.png')}" alt="" class='left'/>
+                            <div class='left'>
+                                <p><a href='http://www.wgu.edu/privacy'>Privacy Policy</a> | <a href='http://www.wgu.edu/site_map'>Site Map</a> | <a href='http://www.wgu.edu/contact_us'>Contact Us</a></p>
+                                <p>&copy; 2013 Western Governors University. All rights reserved.</p>
+                                <p>WGU is an accredited online university offering online bachelor's and master's degree programs.</p>
+                            </div>
+                        </div>
+                        <div class="footer__social column column--small right">
+                            <a href="https://plus.google.com/117720411782042502583?prsrc=3" class='social social--gplus'></a>
+                            <a href="http://www.facebook.com/wgu.edu" class='social social--face'></a>
+                            <a href="http://twitter.com/wgu" class='social social--twit'></a>
+                            <a href="http://www.youtube.com/wgu" class='social social--tube'></a>
+                            <a href="http://www.wgu.edu/blog" class='social social--blog'></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </body>
+    </html>
+    
+    
+</apex:page>

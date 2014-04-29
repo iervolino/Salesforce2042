@@ -1,0 +1,618 @@
+<apex:page title="Western Governors University - Student Courses" contentType="text/html; charset=UTF-8" standardController="Contact" standardStylesheets="false" showHeader="false" sidebar="false" docType="html">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<html>
+<head>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v420, 'resources/css/ext-all.css')}"/> 
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v420}/ext-all.js"/>
+    <link rel="stylesheet" type="text/css" href="{!$Resource.extjsux_v407}/ux/css/CheckHeader.css" />
+   
+    <apex:includeScript value="/soap/ajax/29.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/29.0/apex.js"/> 
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.WGUMonkeyFix}" id="WGUMonkeyFix"></script>
+        
+    <script type="text/javascript" >
+        //This is a work-around due to the session id not populating automatically like it should
+        sforce.connection.init("{!$Api.Session_ID}","/services/Soap/u/29.0");
+    </script>
+    
+    <style type="text/css">
+        .x-grid-dirty-cell { background-image: none; }
+        .x-grid-checkheader-disabled { background-image: url('{!$Resource.disabledcheckbox}/unchecked-disabled.gif'); }
+        .x-grid-checkheader-checked-disabled { background-image: url('{!$Resource.disabledcheckbox}/checked-disabled.gif'); }
+    </style>
+
+</head>
+<body>
+    <div id="divAcademicCourses" style="width:100%"/>
+    <div id="extContentDiv" style="width:100%"/>
+    <script type="text/javascript" >
+        Ext.Loader.setConfig({enabled: true});
+        Ext.Loader.setPath('Ext.ux', '{!$Resource.extjs_v420}/examples/ux');
+        Ext.require([
+            'Ext.*',
+            'Ext.ux.CheckColumn'
+        ]); 
+        Ext.ns("Ext.WGU");
+        
+        //Variable to track whether the checkcolumn is disabled. Defaults to true.
+        var checkDisabled = true;
+        
+        /*
+        * Extensions to 'Ext.ux.CheckColumn' to allow full disabling of checkboxes.
+        */
+        Ext.define('MyApp.ux.DisableCheckColumn', 
+        {
+            extend: 'Ext.ux.CheckColumn',
+            alias: 'widget.disablecheckcolumn',
+        
+            //Only process events for checkboxes that do not have a "disabled" class
+            processEvent: function(type, view, cell, recordIndex, cellIndex, e) 
+            {
+                var me = this;
+                var record=view.panel.store.getAt(recordIndex);
+                
+                if (!checkDisabled && (record.get('Status')=='Planned' || record.get('Status')=='Registered' || record.get('Status')=='Not Passed'))
+                {
+                    me.callParent(arguments);
+                }
+            }        
+        });
+        
+        //Cell editing plugin. Necessary to enable changing the checkboxes.
+        var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', 
+        {
+            clicksToEdit: 1
+        });
+        
+        //Data model for Student Academic Course data
+        Ext.define('AcademicCourseModel',
+        {
+            extend: 'Ext.data.Model',
+            fields:
+            [
+                {name: 'Id', mapping: 'Id', type: 'string'},                
+                {name: 'CreatedDate', mapping: 'CreatedDate', type: 'date', dateFormat: 'c'},
+                {name: 'CurrentTerm', mapping: 'StudentContact__r.CurrentTerm__c', type: 'string'},
+                {name: 'Name', mapping: 'Name', type: 'string'},
+                {name: 'Attempts', mapping: 'Attempts__c', type: 'int'},
+                {name: 'CompetencyUnits', mapping: 'CompetencyUnits__c', type: 'int'},
+                {name: 'CourseCode', mapping: 'CourseCode__c', type: 'string'},
+                {name: 'EndDate', mapping: 'EndDate__c', type: 'date', dateFormat: 'Y-m-d'},
+                {name: 'FullCourseTitle', mapping: 'FullCourseTitle__c', type: 'string'},
+                {name: 'Requirements', mapping: 'Requirements__c', type: 'int'},
+                {name: 'RequirementsCompleted', mapping: 'RequirementsCompleted__c', type: 'int'},
+                {name: 'RequirementsEngaged', mapping: 'RequirementsEngaged__c', type: 'int'},
+                {name: 'RequirementsEngagedPreassessment', mapping: 'RequirementsEngagedPreassessment__c', type: 'int'},
+                {name: 'RequirementsReferred', mapping: 'RequirementsReferred__c', type: 'int'},
+                {name: 'StartDate', mapping: 'StartDate__c', type: 'date', dateFormat: 'Y-m-d'},
+                {name: 'Status', mapping: 'Status__c', type: 'string'},
+                {name: 'StudentContact', mapping: 'StudentContact__c', type: 'string'},
+                {name: 'Term', mapping: 'Term__c', type: 'string'},
+                {name: 'Type', mapping: 'Type__c', type: 'string'},
+                {name: 'Version', mapping: 'Version__c', type: 'string'},
+                {name: 'EngagementNotedBy', mapping: 'MentorVerifiedEngagementNotedBy__r.Name', type: 'string'},
+                {name: 'EngagementNotedDate', mapping: 'MentorVerifiedEngagementNotedDate__c', type: 'date', dateFormat: 'c'},
+                {name: 'IsEngaged', mapping: 'MentorVerifiedCurrentEngagement__c', type: 'bool'}
+            ]
+        });
+        
+        //Data model for Student Academic Course Requirement data
+        Ext.define('AcademicRequirementModel',
+        {
+            extend: 'Ext.data.Model',
+            fields:
+            [
+                {name: 'Id', mapping: 'Id', type: 'string'},                
+                {name: 'CreatedDate', mapping: 'CreatedDate', type: 'date', dateFormat: 'c'},
+                {name: 'Name', mapping: 'Name', type: 'string'},
+                {name: 'Attempts', mapping: 'Attempts__c', type: 'int'},
+                {name: 'Completed', mapping: 'Completed__c', type: 'bool'},
+                {name: 'Engaged', mapping: 'Engaged__c', type: 'bool'},
+                {name: 'EngagedPreassessment', mapping: 'EngagedPreassessment__c', type: 'bool'},
+                {name: 'FullTitle', mapping: 'FullTitle__c', type: 'string'},
+                {name: 'PreassessmentCode', mapping: 'PreassessmentCode__c', type: 'string'},
+                {name: 'Referred', mapping: 'Referred__c', type: 'bool'},
+                {name: 'Status', mapping: 'Status__c', type: 'string'},
+                {name: 'StudentAcademicCourse', mapping: 'StudentAcademicCourse__c', type: 'string'},
+                {name: 'Type', mapping: 'Type__c', type: 'string'}
+            ]
+        });
+        
+        //Data store for Student Academic Course data
+        var AcademicCourseStore = Ext.create('Ext.data.Store',
+        {
+            model : 'AcademicCourseModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [
+                //Custom sorter places uncompleted courses before completed courses
+                {
+                    sorterFn: function(o1, o2)
+                    {
+                        var getRank = function(o)
+                        {
+                            var Status=o.get('Status');
+                            if (Status=='Planned' || Status=='Registered' || Status=='Not Passed')
+                            {
+                                return 1;
+                            } 
+                            else 
+                            {
+                                return 2;
+                            }
+                        },
+                        rank1 = getRank(o1),
+                        rank2 = getRank(o2);
+
+                        if (rank1 === rank2) 
+                        {
+                            return 0;
+                        }
+
+                        return rank1 < rank2 ? -1 : 1;
+                    }
+                },              
+                //Custom sorter function that sorts the courses based on the term code.
+                //It places courses in the student's current term first, followed by courses in future terms, and finally courses in prior terms.
+                {
+                    sorterFn: function(o1, o2)
+                    {
+                        var getRank = function(o)
+                        {
+                            var CurrentTerm = o.get('CurrentTerm');
+                            var CourseTerm = o.get('Term');
+                            if (CurrentTerm === CourseTerm)
+                            {
+                                return 1;
+                            } 
+                            else if (parseInt(CourseTerm) > parseInt(CurrentTerm)) 
+                            {
+                                return 2;
+                            } 
+                            else 
+                            {
+                                return 3;
+                            }
+                        },
+                        rank1 = getRank(o1),
+                        rank2 = getRank(o2);
+
+                        if (rank1 === rank2) 
+                        {
+                            return 0;
+                        }
+
+                        return rank1 < rank2 ? -1 : 1;
+                    }
+                },
+                {
+                    property: 'Term',
+                    direction: 'DESC'
+                },
+                {
+                    property: 'CourseCode',
+                    direction: 'ASC'
+                }
+            ]
+        });
+        
+        //Data store for Student Academic Course Requirement data
+        var AcademicRequirementStore = Ext.create('Ext.data.Store',
+        {
+            model : 'AcademicRequirementModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            groupField: 'StudentAcademicCourse',
+            sorters:
+            [           
+                {
+                    property: 'Name',
+                    direction: 'ASC'
+                }
+            ]
+        });
+        
+        //Grid for Academic Courses
+        var academicCourseGrid=Ext.create('Ext.grid.Panel', 
+        {
+            //title: 'Student Academic Course View',
+            store: AcademicCourseStore,
+            columns: 
+            [
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Course Code',
+                    dataIndex: 'CourseCode',
+                    width: 72,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Version',
+                    dataIndex: 'Version',
+                    width: 50,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Title',
+                    dataIndex: 'FullCourseTitle',
+                    flex: 1,
+                    //maxWidth: 200,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record) 
+                    {
+                        meta.tdAttr='data-qtip="'+value+'"';
+                        return value;
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Term Code',
+                    dataIndex: 'Term',
+                    width: 65,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'CUs',
+                    dataIndex: 'CompetencyUnits',
+                    width: 35,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Course Status',
+                    dataIndex: 'Status',
+                    flex: 1,
+                    maxWidth: 120,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record) 
+                    {
+                        if(value=='Registered')
+                            value='Enrolled';
+                        meta.tdAttr='data-qtip="'+value+'"';
+                        return value;
+                    }
+                },
+                {
+                    xtype: 'datecolumn',
+                    header: 'Start Date',
+                    dataIndex: 'StartDate',
+                    width: 75,
+                    format: "m/d/Y",
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true
+                },
+                {
+                    xtype: 'datecolumn',
+                    header: 'End Date',
+                    dataIndex: 'EndDate',
+                    width: 75,
+                    format: "m/d/Y",
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Assessments',
+                    dataIndex: 'Id',
+                    flex: 1,
+                    minWidth: 90,
+                    maxWidth: 150,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record) 
+                    {
+                        /*
+                        * Custom render function for course requirements data.
+                        * This builds up a string containing an HTML img tag for each course requirement.
+                        * Each img tag has a mouse-over with an HTML table that contains all information available for the associated course req.
+                        */
+                        var reqString='';
+                        
+                        //Retrieve the group of course requirements associated with the parent course record
+                        var reqRecords=AcademicRequirementStore.getGroups(value);
+                        
+                        //Verify that a group was actually retrieved
+                        if (reqRecords!=null && reqRecords.children!=null)
+                        {
+                            //Loop through all Student Academic Course Requirement records
+                            for (var i=0; i<reqRecords.children.length; i++)
+                            {
+                                reqString=reqString+'<img src="{!$Resource.SmallAssessmentIcons}/';
+                            
+                                //Determine whether to use the Performance or Objective icon versions
+                                if (reqRecords.children[i].data.Type=='Performance')
+                                {
+                                    reqString=reqString+'P-';
+                                }
+                                else
+                                {
+                                    reqString=reqString+'O-';
+                                }
+                                
+                                //If the requirement is Completed use the blue icon, otherwise use green
+                                if (reqRecords.children[i].data.Completed)
+                                {
+                                    reqString=reqString+'blue';
+                                }
+                                else if (reqRecords.children[i].data.Attempts>=1)
+                                {
+                                    reqString=reqString+'red';
+                                }
+                                else
+                                {
+                                    reqString=reqString+'green';
+                                }
+                                
+                                //Dynamically set the mouse-over size based on the size of the title
+                                var qtipWidth=reqRecords.children[i].data.FullTitle.length*10;
+                                
+                                //If the width is too small set to 200
+                                if (qtipWidth<200)
+                                {
+                                    qtipWidth=200;
+                                }
+                                
+                                //Start building the mouse-over here. This line contains information that is always displayed in the mouse-over.
+                                reqString=reqString+'.png" data-qwidth="'+qtipWidth+'" data-qtip="<table><tr><td colspan=2>'+reqRecords.children[i].data.FullTitle+'</td></tr><tr><td>Type:</td><td>'+reqRecords.children[i].data.Type+'</td></tr><tr><td>Status:</td><td>'+reqRecords.children[i].data.Status+'</td></tr><tr><td>Attempts:</td><td>'+reqRecords.children[i].data.Attempts+'</td></tr>';
+                                
+                                //Preassessment Code is only displayed if populated
+                                if (reqRecords.children[i].data.PreassessmentCode!='')
+                                {
+                                    reqString=reqString+'<tr><td>Preassessment Code:</td><td>'+reqRecords.children[i].data.PreassessmentCode+'</td></tr>';
+                                }
+                                
+                                //The following are displayed as a basic text flag if the associated boolean field is set to true
+                                if (reqRecords.children[i].data.Engaged)
+                                {
+                                    reqString=reqString+'<tr><td colspan=2>Engaged</td></tr>';
+                                }
+                                
+                                if (reqRecords.children[i].data.EngagedPreassessment)
+                                {
+                                    reqString=reqString+'<tr><td colspan=2>Preassessment Engaged</td></tr>';
+                                }
+                                
+                                if (reqRecords.children[i].data.Completed)
+                                {
+                                    reqString=reqString+'<tr><td colspan=2>Completed</td></tr>';
+                                }
+                                
+                                reqString=reqString+'</table>" /> ';
+                            }
+                        }
+                        
+                        return reqString;
+                    }
+                },
+                {
+                    xtype: 'disablecheckcolumn',
+                    header: 'Is Engaged',
+                    dataIndex: 'IsEngaged',
+                    width: 65,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record) 
+                    {
+                        //Custom render function to handle disabled checkboxes
+                        var cssPrefix = Ext.baseCSSPrefix,
+                            cls = [cssPrefix + 'grid-checkheader'];
+                
+                        if (value && (checkDisabled || (record.get('Status')!='Planned' && record.get('Status')!='Registered' && record.get('Status')!='Not Passed'))) 
+                        {
+                            cls.push(cssPrefix + 'grid-checkheader-checked-disabled');
+                        } 
+                        else if (value) 
+                        {
+                            cls.push(cssPrefix + 'grid-checkheader-checked');
+                        } 
+                        else if (checkDisabled || (record.get('Status')!='Planned' && record.get('Status')!='Registered' && record.get('Status')!='Not Passed')) 
+                        {
+                            cls.push(cssPrefix + 'grid-checkheader-disabled');
+                        }
+                
+                        return '<div class="' + cls.join(' ') + '">&#160;</div>';                    
+                    },
+                    listeners:
+                    {
+                        //Listener function for the checkchanged event
+                        checkchange: function(column, recordIndex, checked)
+                        {
+                            //Only allow changes if the course is not passed or the user is unchecking
+                            if ((AcademicCourseStore.getAt(recordIndex).get('Status')=='Planned' || AcademicCourseStore.getAt(recordIndex).get('Status')=='Registered' || AcademicCourseStore.getAt(recordIndex).get('Status')=='Not Passed') && !checkDisabled)
+                            {
+                                //Create a StudentCourseRegistration__c object to be used to update the existing record
+                                var CourseRegObj=new sforce.SObject("StudentAcademicCourse__c");
+                                CourseRegObj.Id=AcademicCourseStore.getAt(recordIndex).get('Id');
+                                CourseRegObj.MentorVerifiedCurrentEngagement__c=checked;
+                                
+                                //If the checkbox is changed to checked populate the date with the current date and time and the Noted By with the current user Id.
+                                //Otherwise set these fields to null
+                                if (checked)
+                                {
+                                    CourseRegObj.MentorVerifiedEngagementNotedDate__c=new Date();
+                                    CourseRegObj.MentorVerifiedEngagementNotedBy__c='{!$User.Id}';
+                                    AcademicCourseStore.getAt(recordIndex).set('EngagementNotedBy', "{!$User.FirstName}"+" "+"{!$User.LastName}");
+                                }
+                                else
+                                {
+                                    CourseRegObj.MentorVerifiedEngagementNotedDate__c = null;
+                                    CourseRegObj.MentorVerifiedEngagementNotedBy__c = null;
+                                    AcademicCourseStore.getAt(recordIndex).set('EngagementNotedBy', '');
+                                }
+                                
+                                //1/10/14 yemeng :    Create a Case Load    
+                                try
+                                {
+                                    var result = sforce.apex.execute("CourseMentorStudentAssignmentUtility", "createAssignmentFromEngagement", {studentid:"{!Contact.Id}",coursecode:AcademicCourseStore.getAt(recordIndex).get('CourseCode'), check:checked}); 
+                                }
+                                catch(e)
+                                {
+                                    //do nothing
+                                }
+                                
+                                AcademicCourseStore.getAt(recordIndex).set('EngagementNotedDate', CourseRegObj.MentorVerifiedEngagementNotedDate__c);
+                                
+                                //Update the object in Salesforce
+                                sforce.connection.update([CourseRegObj]);
+                            }
+                        }
+                    }
+                },
+                {
+                    xtype: 'datecolumn',
+                    header: 'Noted',
+                    dataIndex: 'EngagementNotedDate',
+                    flex: 1,
+                    minWidth: 80,
+                    maxWidth: 120,
+                    format: "m/d/Y H:i:s",
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record) 
+                    {
+                        if (value!=null && value!='')
+                        {
+                            meta.tdAttr='data-qtip="Course Engagement Noted on '+value+'"';
+                        }
+                        return Ext.Date.format(value, "m/d/Y H:i:s");
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Noted By',
+                    dataIndex: 'EngagementNotedBy',
+                    flex: 1,
+                    maxWidth: 200,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record) 
+                    {
+                        if (value!=null && value!='')
+                        {
+                            meta.tdAttr='data-qtip="Course Engagement Noted by '+value+'"';
+                        }
+                        return value;
+                    }
+                }
+            ],
+            renderTo: 'divAcademicCourses',
+            minWidth: 900,
+            maxWidth: 1500,
+            height: 200,
+            plugins: [cellEditing]
+        });
+        
+        Ext.onReady(function()
+        {
+            Ext.tip.QuickTipManager.init();
+        
+            //Check if the user has permissions to edit the engagements
+            var profile='';
+            
+            //Check if the user is a mentor by looking for a Mentor object associated with the User
+            try
+            {
+                var hasMentorObj=sforce.connection.query("select MentorRole__c from Mentor__c where User__c='{!$User.Id}' limit 1").records.MentorRole__c;
+                
+                if (hasMentorObj!=null && hasMentorObj!='')
+                {
+                    checkDisabled=false;
+                    profile='Mentor';
+                }
+            }
+            catch(err)
+            {
+                checkDisabled=true;
+            }
+            
+            //If there is no Mentor object for the user query the Profile to determine if they are a Developer or System Administrator
+            if (profile!='Mentor')
+            {
+                try
+                {
+                    //Query the user profile
+                    profile=sforce.connection.query("select ProfileName__c from User where id='{!$User.Id}' limit 1").records.ProfileName__c;
+                    
+                    //If the user is a Developer or System Administrator the checkcolumn is enabled
+                    if (profile=='System Administrator' || profile=='Developer')
+                    {
+                        checkDisabled=false;
+                    }
+                }
+                catch(err)
+                {
+                    checkDisabled=true;
+                }
+            }
+            
+            academicCourseGrid.getView().setLoading('Retrieving Course List...');
+            
+            //Retrieve Student Academic Course records
+            //Query for requirement records first so they are available once the grid rows start to render (triggered by populating the Academic Course Store)
+            sforce.connection.query("select id, CreatedDate, Name, Attempts__c, Completed__c, Engaged__c, EngagedPreassessment__c, FullTitle__c, PreassessmentCode__c, Referred__c, Status__c, StudentAcademicCourse__c, Type__c from StudentAcademicCourseRequirement__c where StudentAcademicCourse__r.StudentContact__c='{!Contact.Id}'",
+                function(result)
+                {
+                    result.size*=1;
+                    result.done=result.done=="true";
+                    result.records=!Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+
+                    AcademicRequirementStore.loadRawData(result.records, true);
+                    
+                    sforce.connection.query("select Id, CreatedDate, StudentContact__r.CurrentTerm__c, Name, Attempts__c, CompetencyUnits__c, CourseCode__c, EndDate__c, FullCourseTitle__c, Requirements__c, RequirementsCompleted__c, RequirementsEngaged__c, RequirementsEngagedPreassessment__c, RequirementsReferred__c, StartDate__c, Status__c, StudentContact__c, Term__c, Type__c, Version__c, MentorVerifiedCurrentEngagement__c, MentorVerifiedEngagementNotedBy__c, MentorVerifiedEngagementNotedBy__r.Name, MentorVerifiedEngagementNotedDate__c from StudentAcademicCourse__c where StudentContact__c='{!Contact.Id}'",
+                        function(result2)
+                        {
+                            result2.size*=1;
+                            result2.done=result.done=="true";
+                            result2.records=!Ext.isArray(result2.records)? (result2.size>0?[result2.records]:[]): result2.records;
+                            
+                            AcademicCourseStore.loadRawData(result2.records, true);
+                            
+                            academicCourseGrid.getView().setLoading(false);
+                        });
+                });
+        });
+    </script>            
+</body>
+</html>
+</apex:page>

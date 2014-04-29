@@ -1,0 +1,135 @@
+<apex:page >
+   <head>
+   <link href="https://horizon.wgu.edu/wgu-employee-theme/css/main.css" rel="stylesheet" type="text/css" />
+   <link rel="Shortcut Icon" href="https://horizon.wgu.edu/wgu-employee-theme/images/liferay.ico" />
+   <link href="https://horizon.wgu.edu/html/portal/css.jsp?browserId=firefox&amp;themeId=wguemployee_WAR_wguemployeetheme&amp;colorSchemeId=01&amp;minifierType=css&amp;t=1314725553000" rel="stylesheet" type="text/css" />
+   <script type="text/javascript">
+   /*<![CDATA[*/var Liferay={Browser:{acceptsGzip:function(){return true},getMajorVersion:function(){return 15},getRevision:function(){return"15.0"},getVersion:function(){return"15.0.1"},isAir:function(){return false},isChrome:function(){return false},isFirefox:function(){return true},isGecko:function(){return true},isIe:function(){return false},isIphone:function(){return false},isLinux:function(){return false},isMac:function(){return false},isMobile:function(){return false},isMozilla:function(){return true},isOpera:function(){return false},isRtf:function(){return true},isSafari:function(){return false},isSun:function(){return false},isWap:function(){return false},isWapXhtml:function(){return false},isWebKit:function(){return false},isWindows:function(){return true},isWml:function(){return false}},ThemeDisplay:{getCompanyId:function(){return"10113"},getUserId:function(){return"15950"},getUserName:function(){return"\u0054\u0072\u0061\u0076\u0069\u0073\u0020\u004f\u006c\u0069\u0076\u0065\u0072"},getDoAsUserIdEncoded:function(){return""},getPlid:function(){return"19805"},getLayoutId:function(){return"9"},getLayoutURL:function(){return"/group/it/home"},isPrivateLayout:function(){return"true"},getParentLayoutId:function(){return"0"},getScopeGroupId:function(){return"11279"},isSignedIn:function(){return true},getLanguageId:function(){return"en_US"},isFreeformLayout:function(){return false},isStateExclusive:function(){return false},isStateMaximized:function(){return false},isStatePopUp:function(){return false},getPathContext:function(){return""},getPathImage:function(){return"/image"},getPathMain:function(){return"/c"},getPathThemeImages:function(){return"/wgu-employee-theme/images"},getPathThemeRoot:function(){return"/wgu-employee-theme/"},getURLHome:function(){return"https://horizon.wgu.edu/web/guest"},getSessionId:function(){return"12c71939131ad009dc8f7f657e30"},getPortletSetupShowBordersDefault:function(){return true}}};var themeDisplay=Liferay.ThemeDisplay;/*]]>*/</script><script src="/html/js/barebone.jsp?browserId=firefox&amp;themeId=wguemployee_WAR_wguemployeetheme&amp;colorSchemeId=01&amp;minifierType=js&amp;minifierBundleId=javascript.barebone.files&amp;t=1314725553000" type="text/javascript"></script><script src="/html/js/everything.jsp?browserId=firefox&amp;themeId=wguemployee_WAR_wguemployeetheme&amp;colorSchemeId=01&amp;minifierType=js&amp;minifierBundleId=javascript.everything.files&amp;t=1314725553000" type="text/javascript"></script><script type="text/javascript">/*<![CDATA[*/Liferay.currentURL="\u002f\u0067\u0072\u006f\u0075\u0070\u002f\u0069\u0074\u002f\u0068\u006f\u006d\u0065";Liferay.currentURLEncoded="%2Fgroup%2Fit%2Fhome";jQuery(function(){Liferay.Util.addInputType();Liferay.Util.addInputFocus()});Liferay.Portlet.ready(function(b,a){Liferay.Util.addInputType(b,a);if(Liferay.Menu){new Liferay.Menu({button:".lfr-actions",context:a[0],trigger:".lfr-trigger"})}});Liferay.Portlet.list=["WGU_IFrame_Portlet_INSTANCE_K6Ix","WGU_IFrame_Portlet_INSTANCE_NSj9","WGU_IFrame_Portlet_INSTANCE_K6fM","WGU_IFrame_Portlet_INSTANCE_y0iS"];if(jQuery.ui&&jQuery.ui.tabs){jQuery.extend(jQuery.ui.tabs.defaults,{navClass:"ui-tabs tabs",selectedClass:"current"})}jQuery(function(){if(Liferay.Dock){Liferay.Dock.init()}if(Liferay.Menu){new Liferay.Menu()}if(Liferay.Notice){Liferay.Notice.prototype.setClosing()}Liferay._editControlsState="visible";if(Liferay.Util){Liferay.Util.toggleControls()}if(Liferay.Poller){Liferay.Poller.init({encryptedUserId:"pJWVj2SlX0I=",supportsComet:false})}});/*]]>*/</script><link href="/wgu-employee-theme/css/main.css?browserId=firefox&amp;minifierType=css&amp;t=1328823791000" rel="stylesheet" type="text/css" />
+   <style type="text/css">#banner .logo a{background:url(/image/company_logo?img_id=0&amp;t=1349687846351) no-repeat;display:block;font-size:0;height:76px;text-indent:-9999em;width:209px;}</style><style type="text/css">#p_p_id_WGU_IFrame_Portlet_INSTANCE_K6Ix_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}#p_p_id_WGU_IFrame_Portlet_INSTANCE_NSj9_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}#p_p_id_WGU_IFrame_Portlet_INSTANCE_K6fM_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}#p_p_id_WGU_IFrame_Portlet_INSTANCE_y0iS_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}</style><script language="JavaScript">  document.domain = "wgu.edu";
+   </script>
+   <script language="JavaScript" src="https://horizon.wgu.edu/wgu-employee-theme/javascript/wgu-custom.js">
+   </script>
+   </head>
+   <div class="content">
+      <div id="p_p_id_103_" class="portlet-boundary portlet-boundary_103_">
+        <a id="p_103"></a> <script type="text/javascript">
+/*<![CDATA[*/Liferay.Portlet.onLoad({canEditTitle:false,columnPos:0,isStatic:"end",namespacedId:"p_p_id\u005f\u0031\u0030\u0033\u005f",portletId:"\u0031\u0030\u0033"});/*]]>*/
+        </script>
+      </div>
+      <div class="columns-3" id="content-wrapper">
+        <table class="lfr-grid" id="layout-grid">
+          <tr>
+            <td class="lfr-column thirty" id="column-1" valign="top">
+              <div class="lfr-portlet-column" id="layout-column_column-1">
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_K6Ix_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_K6Ix"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_K6Ix">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="Students At Risk" title="Students At Risk" /></span> Students
+                      At Risk</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_K6Ix"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+/*<![CDATA[*/function _WGU_IFrame_Portlet_INSTANCE_K6Ix_init(){var c=document.location.hash;if((c!="#")&&(c!="")){var d="";var b=c.substring(1);if(b.indexOf("http://")!=0){d="https://webapp10.wgu.edu/StudentsAtRisk/services/"}d+=b;var a=jQuery("#_WGU_IFrame_Portlet_INSTANCE_K6Ix_iframe");a.attr("src",d)}}function _WGU_IFrame_Portlet_INSTANCE_K6Ix_maximizeIframe(a){}function _WGU_IFrame_Portlet_INSTANCE_K6Ix_monitorIframe(){return true}function _WGU_IFrame_Portlet_INSTANCE_K6Ix_resizeIframe(){return true}function _WGU_IFrame_Portlet_INSTANCE_K6Ix_updateHash(a){}jQuery(function(){_WGU_IFrame_Portlet_INSTANCE_K6Ix_init()});/*]]>*/
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="365" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_K6Ix_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_K6Ix_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_K6Ix_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_K6Ix_resizeIframe();" scrolling="auto" src=
+                        "https://webapp10.wgu.edu/StudentsAtRisk/services/main.html?" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+/*<![CDATA[*/Liferay.Portlet.onLoad({canEditTitle:false,columnPos:0,isStatic:"end",namespacedId:"p_p_id\u005f\u0057\u0047\u0055\u005f\u0049\u0046\u0072\u0061\u006d\u0065\u005f\u0050\u006f\u0072\u0074\u006c\u0065\u0074\u005f\u0049\u004e\u0053\u0054\u0041\u004e\u0043\u0045\u005f\u004b\u0036\u0049\u0078\u005f",portletId:"\u0057\u0047\u0055\u005f\u0049\u0046\u0072\u0061\u006d\u0065\u005f\u0050\u006f\u0072\u0074\u006c\u0065\u0074\u005f\u0049\u004e\u0053\u0054\u0041\u004e\u0043\u0045\u005f\u004b\u0036\u0049\u0078"});/*]]>*/
+                  </script>
+                </div>
+              </div>
+            </td>
+            <td class="lfr-column thirty" id="column-2" valign="top">
+              <div class="lfr-portlet-column" id="layout-column_column-2">
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_NSj9_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_NSj9"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_NSj9">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="Pending Approvals" title="Pending Approvals" /></span> Pending
+                      Approvals</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_NSj9"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+/*<![CDATA[*/function _WGU_IFrame_Portlet_INSTANCE_NSj9_init(){var c=document.location.hash;if((c!="#")&&(c!="")){var d="";var b=c.substring(1);if(b.indexOf("http://")!=0){d="https://web5.wgu.edu/aap/"}d+=b;var a=jQuery("#_WGU_IFrame_Portlet_INSTANCE_NSj9_iframe");a.attr("src",d)}}function _WGU_IFrame_Portlet_INSTANCE_NSj9_maximizeIframe(a){}function _WGU_IFrame_Portlet_INSTANCE_NSj9_monitorIframe(){return true}function _WGU_IFrame_Portlet_INSTANCE_NSj9_resizeIframe(){return true}function _WGU_IFrame_Portlet_INSTANCE_NSj9_updateHash(a){}jQuery(function(){_WGU_IFrame_Portlet_INSTANCE_NSj9_init()});/*]]>*/
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="158" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_NSj9_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_NSj9_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_NSj9_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_NSj9_resizeIframe();" scrolling="auto" src=
+                        "https://web5.wgu.edu/aap/Pending_referrals.asp?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+/*<![CDATA[*/Liferay.Portlet.onLoad({canEditTitle:false,columnPos:0,isStatic:"end",namespacedId:"p_p_id\u005f\u0057\u0047\u0055\u005f\u0049\u0046\u0072\u0061\u006d\u0065\u005f\u0050\u006f\u0072\u0074\u006c\u0065\u0074\u005f\u0049\u004e\u0053\u0054\u0041\u004e\u0043\u0045\u005f\u004e\u0053\u006a\u0039\u005f",portletId:"\u0057\u0047\u0055\u005f\u0049\u0046\u0072\u0061\u006d\u0065\u005f\u0050\u006f\u0072\u0074\u006c\u0065\u0074\u005f\u0049\u004e\u0053\u0054\u0041\u004e\u0043\u0045\u005f\u004e\u0053\u006a\u0039"});/*]]>*/
+                  </script>
+                </div>
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_K6fM_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_K6fM"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_K6fM">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="Assessments Activity" title="Assessments Activity" /></span>
+                      Assessments Activity</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_K6fM"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+/*<![CDATA[*/function _WGU_IFrame_Portlet_INSTANCE_K6fM_init(){var c=document.location.hash;if((c!="#")&&(c!="")){var d="";var b=c.substring(1);if(b.indexOf("http://")!=0){d="https://web4.wgu.edu/cpip/"}d+=b;var a=jQuery("#_WGU_IFrame_Portlet_INSTANCE_K6fM_iframe");a.attr("src",d)}}function _WGU_IFrame_Portlet_INSTANCE_K6fM_maximizeIframe(a){}function _WGU_IFrame_Portlet_INSTANCE_K6fM_monitorIframe(){return true}function _WGU_IFrame_Portlet_INSTANCE_K6fM_resizeIframe(){return true}function _WGU_IFrame_Portlet_INSTANCE_K6fM_updateHash(a){}jQuery(function(){_WGU_IFrame_Portlet_INSTANCE_K6fM_init()});/*]]>*/
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="158" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_K6fM_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_K6fM_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_K6fM_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_K6fM_resizeIframe();" scrolling="auto" src=
+                        "https://web4.wgu.edu/cpip/assm_30_ver1.asp?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+/*<![CDATA[*/Liferay.Portlet.onLoad({canEditTitle:false,columnPos:1,isStatic:"end",namespacedId:"p_p_id\u005f\u0057\u0047\u0055\u005f\u0049\u0046\u0072\u0061\u006d\u0065\u005f\u0050\u006f\u0072\u0074\u006c\u0065\u0074\u005f\u0049\u004e\u0053\u0054\u0041\u004e\u0043\u0045\u005f\u004b\u0036\u0066\u004d\u005f",portletId:"\u0057\u0047\u0055\u005f\u0049\u0046\u0072\u0061\u006d\u0065\u005f\u0050\u006f\u0072\u0074\u006c\u0065\u0074\u005f\u0049\u004e\u0053\u0054\u0041\u004e\u0043\u0045\u005f\u004b\u0036\u0066\u004d"});/*]]>*/
+                  </script>
+                </div>
+              </div>
+            </td>
+            <td class="lfr-column thirty" id="column-3" valign="top">
+              <div class="lfr-portlet-column" id="layout-column_column-3">
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_y0iS_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_y0iS"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_y0iS">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="Student AAV" title="Student AAV" /></span> Student AAV</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_y0iS"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+/*<![CDATA[*/function _WGU_IFrame_Portlet_INSTANCE_y0iS_init(){var c=document.location.hash;if((c!="#")&&(c!="")){var d="";var b=c.substring(1);if(b.indexOf("http://")!=0){d="https://aavmentortool.wgu.edu/AAVProcess/"}d+=b;var a=jQuery("#_WGU_IFrame_Portlet_INSTANCE_y0iS_iframe");a.attr("src",d)}}function _WGU_IFrame_Portlet_INSTANCE_y0iS_maximizeIframe(a){}function _WGU_IFrame_Portlet_INSTANCE_y0iS_monitorIframe(){return true}function _WGU_IFrame_Portlet_INSTANCE_y0iS_resizeIframe(){return true}function _WGU_IFrame_Portlet_INSTANCE_y0iS_updateHash(a){}jQuery(function(){_WGU_IFrame_Portlet_INSTANCE_y0iS_init()});/*]]>*/
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="365" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_y0iS_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_y0iS_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_y0iS_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_y0iS_resizeIframe();" scrolling="auto" src=
+                        "https://aavmentortool.wgu.edu/AAVProcess/index.jsp?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+/*<![CDATA[*/Liferay.Portlet.onLoad({canEditTitle:false,columnPos:0,isStatic:"end",namespacedId:"p_p_id\u005f\u0057\u0047\u0055\u005f\u0049\u0046\u0072\u0061\u006d\u0065\u005f\u0050\u006f\u0072\u0074\u006c\u0065\u0074\u005f\u0049\u004e\u0053\u0054\u0041\u004e\u0043\u0045\u005f\u0079\u0030\u0069\u0053\u005f",portletId:"\u0057\u0047\u0055\u005f\u0049\u0046\u0072\u0061\u006d\u0065\u005f\u0050\u006f\u0072\u0074\u006c\u0065\u0074\u005f\u0049\u004e\u0053\u0054\u0041\u004e\u0043\u0045\u005f\u0079\u0030\u0069\u0053"});/*]]>*/
+                  </script>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <form action="" method="post" name="hrefFm"></form>
+    </div>
+    <div class="footer_container footer">
+      COPYRIGHT © 2011 Western Governors University. All rights reserved.
+    </div><script src="/wgu-employee-theme/javascript/javascript.js?browserId=firefox&amp;minifierType=js&amp;t=1328823791000" type="text/javascript">
+</script><script type="text/javascript">
+/*<![CDATA[*/null;null;null;/*]]>*/
+    </script><script type="text/javascript">
+/*<![CDATA[*/Liferay.Session.init({autoExtend:false,timeout:240,timeoutWarning:1,redirectOnExpire:false});/*]]>*/
+    </script>
+  
+</apex:page>

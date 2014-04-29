@@ -1,0 +1,164 @@
+<apex:page standardController="TransferEvaluation__c" Extensions="EvalTranscriptController" showHeader="false" standardStylesheets="false">
+    <head>
+        <title>Transfer Evaluation Results</title>
+        <link href="{!URLFOR($Resource.evalstyling, 'evalstyling.css')}" rel="stylesheet" type="text/css" />
+        <!--apex:includeScript value="/soap/ajax/26.0/connection.js"/-->
+        <!--apex:includeScript value="/soap/ajax/26.0/apex.js"/-->       
+    </head>
+    <body>
+     <div id="dynamicDiv"/>
+     <apex:form >
+      <apex:outputText id="opportunityId" value="{!TransferEvaluation__c.Opportunity__c}" rendered="true" style="display:none"/>
+      <apex:pageBlock > 
+        <div class="logo">
+            <apex:image url="{!URLFOR($Resource.evalstyling, 'wgu_logo.jpg')}" height="85" width="85"/>
+        </div>
+        <div class="programheader">
+            <br/>
+            <span class="largetext">&nbsp;Transfer Evaluation</span>
+            <br/>&nbsp;&nbsp;{!TransferEvaluation__c.WGUDegreeProgram__r.Title__c}
+        </div>
+        <div class="wrapper">
+                    <br/><br/>
+                    <table>
+                        <tr>
+                            <td>Name:</td> 
+                            <td><span class="graybg">{!TransferEvaluation__c.Opportunity__r.Name }</span></td>
+                            <td width="300px"></td>
+                            <td></td>
+                            <td>Student ID:</td>
+                            <td><span class="graybg">{!TransferEvaluation__c.StudentId__c}</span></td>
+                        </tr>
+                        <tr>
+                            <td/><td/><td/><td/>                      
+                            <td>Anticipated Start Date:</td> 
+                            <td><span class="graybg">{!TransferEvaluation__c.ExpectedStartDate__c}
+                            </span></td>
+                        </tr>
+                    </table>
+               <br/>                          
+            <table class="infotable">
+                <tr>
+                    <td colspan="2">A transcript evaluation is completed once official transcripts from all previously attended institutions have been received by WGU.&nbsp; Please note that transcripts must be sent to WGU directly from the issuing institution to be considered official.&nbsp; WGU does not perform unofficial evaluations or accept unofficial transcripts. Transfer credit awarded for the Business, Information Technology, or Health Professions College programs may not apply if a program change is made to the WGU Teacher&rsquo;s College. &nbsp; Transfer credit
+                    <u>will not</u> &nbsp;be awarded for transcripts received after your first term start date.&nbsp;<br/><br/></td>
+                </tr>
+                <tr>
+                    <td><span class="boldline">COURSES ACCEPTED FOR TRANSFER CREDIT:</span></td>
+                </tr>
+                <tr>
+                    <td>        
+                        <ul>
+                            <li>
+                            Must be college level from an institution that is recognized as 
+                            Nationally or Regionally accredited by the U.S. Department of Education. For a list of USDE recognized National and Regional accrediting agencies, see: 
+                            <a  href="http://www.ope.ed.gov/accreditation/Agencies.aspx">http://www.ope.ed.gov/accreditation/Agencies.aspx</a>
+                            </li>
+                            <li>Must have been awarded a grade of C- or better. For Teacher&rsquo;s College Programs and Pre-Licensure Nursing programs a grade of C or better is required.</li>
+                            <li>Courses used to satisfy Information Technology Requirements must have been completed within five years of the start date of your first term (College of Information Technology and select IT courses in other programs of study), and must be current/non-expired in order to be eligible for transfer. </li>
+                            <li>May not be used to fulfill more than one course of study.</li>
+                            <li>Must meet the competency unit and content equivalency requirements.&nbsp;&nbsp;</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <table class="infotable">
+                <tr>
+                    <td><span class="boldline">COURSES SATISFIED BY AN ASSOCIATE OR BACHELOR&rsquo;S DEGREE:</span>
+                        <ul>
+                            <li>Where transfer credit does not apply, courses may receive a Requirement Satisfied (RS). </li>
+                            <li>Courses that receive a Requirement Satisfied can be fulfilled by an Associate of Arts, Associate of Science, Associate of Applied Science, Bachelor of Arts, or Bachelor of Science from a Regionally or Nationally accredited institution.&nbsp; (Accrediting agency recognized by The U.S. Department of Education)</li>
+                            <li>In certain cases, the degree must be in a specific field of study.&nbsp;&nbsp;&nbsp; </li>
+                            <li>Requirement Satisfied by degree does not apply to all courses or programs at WGU.&nbsp; A change in majors at WGU may result in the removal of credit.</li>
+                            <li>Degrees in Information Technology must have been awarded within five years of start date to satisfy Information Technology transfer requirements.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <br/>
+                    <div class="instructions">
+                    <tr>
+                        <td COLSPAN="2">Only the assessments listed below are those that are eligible for transfer; see your specific program guidebook for a complete listing of your degree requirements. &nbsp; For questions regarding your transfer evaluation or on how to request a re-evaluation, please contact your enrollment counselor.
+                        </td>
+                    </tr>
+                </div>
+            </table>
+        </div>        
+        <p class="pagebreakhere"/>
+        <div class="largetext">
+            Courses Eligible for Transfer Credit
+        </div><br/>
+        <apex:dataTable value="{!TransferEvaluation__c.StudentEquivalentCourses__r}" styleClass="datadisplaytable" var="tc">
+            <apex:column value="{!tc.WGUCourse__c}" headerValue="CODE" headerClass="headerstyle" width="50px"  />
+            <apex:column value="{!tc.WGUTitle__c}" headerValue="ASSESSMENT TITLE" headerClass="headerstyle" width="20%" />
+            <apex:column value="{!tc.CompetencyUnits__c}" headerValue="CU" headerClass="headerstyle" width="20px"/>
+            <apex:column value="{!tc.TransferRuleText__c}" headerValue="REQUIREMENT FOR TRANSFER" headerClass="headerstyle" width="400px" />
+            <apex:column value="{!tc.SatisfiedBy__c}" headerValue="SATISFIED BY" headerClass="headerstyle" width="300px" />
+            <apex:column value="{!tc.Status__c}" headerValue="STATUS" headerClass="headerstyle" width="50px" />
+        </apex:dataTable>      
+        <br/><br/>
+        <div class="graytext">
+            <apex:outputText value="Effective {0,date,M'/'d'/'yyyy}">
+                <apex:param value="{!NOW()}" />
+            </apex:outputText>
+        </div>
+        <br/><br/>
+        <div class="centeredred">
+            Please direct any questions to your enrollment counselor.    
+        </div>
+        <p class="pagebreakhere"/>
+        <div class="normaltext">
+            WGU reserves the right to change transfer policies as necessary without notice.  If you have not declared a start date, or if your actual start date is more than 30 days from the
+            first day of the month subsequent to the date of this evaluation, your transfer evaluation may be subject to changed transfer policies and may be updated.<br/><br/>
+            This evaluation is based upon current transfer policies and is not guaranteed in perpetuity.  Please contact your Enrollment Counselor if your start date is more than 30 days
+            from the date of this evaluation to determine if any updates to transfer policies have occurred that will change the results of your evaluation.
+        </div> <br/><br/>
+       
+       <div class="centeredred">
+            All submitted transcripts which were considered in the application of transfer credit. 
+       </div><br/><br/>
+       
+       <apex:dataTable value="{!instCourses}" styleClass="datadisplaytable" var="st">
+           <apex:column value="{!st.TranscriptInstitution__r.Name}" headerValue="Institution" headerClass="headerstyle" width="300px" />
+           <apex:column value="{!st.InstitutionalAccreditation__c}" headerValue="Accreditation" headerClass="headerstyle" width="30%" />
+           <apex:column value="{!st.TranscriptReceivedDate__c}" headerValue="Date Received" headerClass="headerstyle" width="30%" />           
+       </apex:dataTable><br/><br/>              
+        
+       <div class="centeredred" rendered="{!displayDegrees}">
+            <apex:outputLabel rendered="{!displayDegrees}">All submitted degrees which were considered for credit.</apex:outputLabel> 
+        </div>
+        <br/><br/>
+        <apex:dataTable value="{!transAttendances}" styleClass="datadisplaytable" var="ta" rendered="{!displayDegrees}">
+            <apex:column value="{!ta.Transfer_Institution_Name__c}" headerValue="Institution" headerClass="headerstyle" width="300px" />
+            <apex:column value="{!ta.StudentTransferInstitution__r.InstitutionalAccreditation__c}" headerValue="Accreditation" headerClass="headerstyle" width="15%" />
+            <apex:column value="{!ta.DegreeAwarded__r.Value__c}" headerValue="Degree" headerClass="headerstyle" width="10%"/>
+            <apex:column value="{!ta.DegreeAwardedDate__c}" headerValue="Degree Date" headerClass="headerstyle" width="15%" />
+            <apex:column value="{!ta.ProgramName__c}" headerValue="Major" headerClass="headerstyle" width="180px" />                              
+        </apex:dataTable>
+        <br/><br/>
+        <table>
+            <tr>                     
+                <td>Notes: </td>
+                <td><span class="graybg">{!TransferEvaluation__c.EvaluatorComments__c}
+                </span></td>
+            </tr>
+        </table>
+        <br/><br/>
+        <table>        
+            <tr>
+                <td>Transcript Evaluator: </td> 
+                <td width="25%"><span class="graybg">{!TransferEvaluation__c.AssignedTo__r.Name}</span></td>
+                <td width="25%"></td>
+                <td></td>
+                <td>Date of Evaluation: </td>
+                <td>  <apex:outputText value=" {0,date,M'/'d'/'yyyy}">
+                         <apex:param value="{!NOW()}" />
+                     </apex:outputText></td>
+            </tr>
+        </table>
+        <br/>  
+              <apex:pageBlockButtons >
+        <apex:commandButton action="{!saveEval}" value="Save Eval"/>
+      </apex:pageBlockButtons>
+    </apex:pageBlock>
+  </apex:form>      
+    </body>  
+</apex:page>

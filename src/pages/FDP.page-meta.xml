@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <description>FDP Redirect page, modified Mar 18, 2014 by Paul Coleman. A Backup of the previous FDP page is in FDPTemp.page attached to https://jira.wgu.edu/jira/browse/RFC-3277</description>
+    <label>FDP</label>
+</ApexPage>

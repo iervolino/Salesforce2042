@@ -1,0 +1,213 @@
+<apex:page >
+  <head>
+    <link href="https://horizon.wgu.edu/wgu-employee-theme/css/main.css" rel="stylesheet" type="text/css" />
+    <link rel="Shortcut Icon" href="https://horizon.wgu.edu/wgu-employee-theme/images/liferay.ico" />
+    <link href="https://horizon.wgu.edu/html/portal/css.jsp?browserId=firefox&amp;themeId=wguemployee_WAR_wguemployeetheme&amp;colorSchemeId=01&amp;minifierType=css&amp;t=1314725553000" rel="stylesheet" type="text/css" />
+    <script src=
+    "https://horizon.wgu.edu/html/js/barebone.jsp?browserId=firefox&amp;themeId=wguemployee_WAR_wguemployeetheme&amp;colorSchemeId=01&amp;minifierType=js&amp;minifierBundleId=javascript.barebone.files&amp;t=1314725553000"
+    type="text/javascript">
+    </script>
+    <script src=
+    "https://horizon.wgu.edu/html/js/everything.jsp?browserId=firefox&amp;themeId=wguemployee_WAR_wguemployeetheme&amp;colorSchemeId=01&amp;minifierType=js&amp;minifierBundleId=javascript.everything.files&amp;t=1314725553000"
+    type="text/javascript">
+    </script>
+    <link href="https://horizon.wgu.edu/wgu-employee-theme/css/main.css?browserId=firefox&amp;minifierType=css&amp;t=1328823791000" rel="stylesheet" type="text/css" />
+    <script language="JavaScript" src="https://horizon.wgu.edu/wgu-employee-theme/javascript/wgu-custom.js" type="text/javascript">
+    </script>
+    <style type="text/css">#banner .logo a{background:url(/image/company_logo?img_id=0&amp;t=1349687846351) no-repeat;display:block;font-size:0;height:76px;text-indent:-9999em;width:209px;}</style>
+    <style type="text/css">#p_p_id_WGU_IFrame_Portlet_INSTANCE_7N2h_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}#p_p_id_WGU_IFrame_Portlet_INSTANCE_p4Yu_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}#p_p_id_WGU_IFrame_Portlet_INSTANCE_wZ4J_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}#p_p_id_WGU_IFrame_Portlet_INSTANCE_4AmQ_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}#p_p_id_WGU_IFrame_Portlet_INSTANCE_Fgl3_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;margin-top:0;margin-right:0;margin-bottom:0;margin-left:0;}#p_p_id_WGU_IFrame_Portlet_INSTANCE_69zS_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}#p_p_id_WGU_IFrame_Portlet_INSTANCE_Q0eW_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}#p_p_id_WGU_IFrame_Portlet_INSTANCE_M6ux_ .portlet{border-width:1px;border-style:solid;border-color:#a9a9a9;}
+    </style>
+    <script language="JavaScript">document.domain = "wgu.edu";</script>
+    </head>
+    
+    <div class="content">
+      <div id="p_p_id_103_" class="portlet-boundary portlet-boundary_103_">
+        <a id="p_103"></a> 
+        <script type="text/javascript">
+        </script>
+      </div>
+      <div class="columns-3" id="content-wrapper">
+        <table class="lfr-grid" id="layout-grid">
+          <tr>
+            <td class="lfr-column thirty" id="column-1" valign="top">
+              <div class="lfr-portlet-column" id="layout-column_column-1">
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_7N2h_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_7N2h"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_7N2h">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="WGU Resources" title="WGU Resources" /></span> WGU
+                      Resources</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_7N2h"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="375" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_7N2h_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_7N2h_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_7N2h_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_7N2h_resizeIframe();" scrolling="auto" src=
+                        "https://web3.wgu.edu/wguResources/employeeResources.asp?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+                  </script>
+                </div>
+              </div>
+            </td>
+            <td class="lfr-column thirty" id="column-2" valign="top">
+              <div class="lfr-portlet-column" id="layout-column_column-2">
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_p4Yu_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_p4Yu"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_p4Yu">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="EWB Master Report" title="EWB Master Report" /></span> EWB
+                      Master Report</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_p4Yu"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="100" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_p4Yu_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_p4Yu_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_p4Yu_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_p4Yu_resizeIframe();" scrolling="auto" src=
+                        "https://web5.wgu.edu/ewb_rpt/masterlaunch.asp?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+                  </script>
+                </div>
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_wZ4J_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_wZ4J"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_wZ4J">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="WGU ID Card" title="WGU ID Card" /></span> WGU ID Card</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_wZ4J"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="90" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_wZ4J_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_wZ4J_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_wZ4J_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_wZ4J_resizeIframe();" scrolling="auto" src=
+                        "https://web3.wgu.edu/wguidcard/luminisstartup.aspx?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+                  </script>
+                </div>
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_4AmQ_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_4AmQ"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_4AmQ">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="Student Handbook" title="Student Handbook" /></span> Student
+                      Handbook</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_4AmQ"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="80" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_4AmQ_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_4AmQ_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_4AmQ_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_4AmQ_resizeIframe();" scrolling="auto" src=
+                        "https://web4.wgu.edu/cpip/studenthandbook.html?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+                  </script>
+                </div>
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_Fgl3_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_Fgl3"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_Fgl3">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="WGU Approval" title="WGU Approval" /></span> WGU
+                      Approval</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_Fgl3"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="300" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_Fgl3_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_Fgl3_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_Fgl3_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_Fgl3_resizeIframe();" scrolling="auto" src=
+                        "https://web3.wgu.edu/wguapproval/default.aspx?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+                  </script>
+                </div>
+              </div>
+            </td>
+            <td class="lfr-column thirty" id="column-3" valign="top">
+              <div class="lfr-portlet-column" id="layout-column_column-3">
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_69zS_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_69zS"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_69zS">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="WGU Collaboration Tools" title=
+                      "WGU Collaboration Tools" /></span> WGU Collaboration Tools</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_69zS"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="195" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_69zS_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_69zS_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_69zS_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_69zS_resizeIframe();" scrolling="auto" src=
+                        "https://web3.wgu.edu/independentapps/ocsresources/collaborationtools.htm?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+                  </script>
+                </div>
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_Q0eW_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_Q0eW"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_Q0eW">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="Authenticated Resources" title=
+                      "Authenticated Resources" /></span> Authenticated Resources</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_Q0eW"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="135" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_Q0eW_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_Q0eW_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_Q0eW_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_Q0eW_resizeIframe();" scrolling="auto" src=
+                        "https://web3.wgu.edu/ResourceTools/Default.aspx?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+                  </script>
+                </div>
+                <div id="p_p_id_WGU_IFrame_Portlet_INSTANCE_M6ux_" class="portlet-boundary portlet-boundary_WGU_IFrame_Portlet_ portlet-iframe">
+                  <a id="p_WGU_IFrame_Portlet_INSTANCE_M6ux"></a>
+                  <div class="portlet" id="portlet-wrapper-WGU_IFrame_Portlet_INSTANCE_M6ux">
+                    <div class="portlet-topper">
+                      <span class="portlet-title"><span><img class="icon cleanuphtml-1" src="/wgu-employee-theme/images/spacer.png" alt="PCE" title="PCE" /></span> PCE</span>
+                      <div class="portlet-icons" id="portlet-small-icon-bar_WGU_IFrame_Portlet_INSTANCE_M6ux"></div>
+                    </div>
+                    <div class="portlet-content portlet-content-container">
+                      <script type="text/javascript">
+                      </script>
+                      <div>
+                        <iframe border="0" bordercolor="#000000" frameborder="0" allowtransparency="true" height="75" hspace="0" id="_WGU_IFrame_Portlet_INSTANCE_M6ux_iframe" name=
+                        "_WGU_IFrame_Portlet_INSTANCE_M6ux_iframe" onload="_WGU_IFrame_Portlet_INSTANCE_M6ux_monitorIframe(); _WGU_IFrame_Portlet_INSTANCE_M6ux_resizeIframe();" scrolling="auto" src=
+                        "https://web3.wgu.edu/FldExpLink.asp?&amp;" vspace="0" width="100%"></iframe>
+                      </div>
+                    </div>
+                  </div><script type="text/javascript">
+                  </script>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <form action="" method="post" name="hrefFm"></form>
+    </div>
+    <div class="footer_container footer">
+      COPYRIGHT © 2011 Western Governors University. All rights reserved.
+    </div><script src="https://horizon.wgu.edu/wgu-employee-theme/javascript/javascript.js?browserId=firefox&amp;minifierType=js&amp;t=1328823791000" type="text/javascript">
+</script><script type="text/javascript">
+    </script><script type="text/javascript">
+    </script>
+ </apex:page>

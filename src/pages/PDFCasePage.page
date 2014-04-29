@@ -1,0 +1,64 @@
+<apex:page standardController="Case" extensions="CreatePDFCaseController" sidebar="false" showHeader="false" id="thepage">
+<html>
+    <head>  
+    <style type="text/css">    
+        @page {    
+        margin-left:45px;
+        margin-right:45px;
+        margin-top:180px;
+        margin-bottom:87px;
+        
+            @top-center {                   
+                content: element(header); 
+                height:70px;
+                vertical-align:top;
+                
+            }
+            
+            @bottom-right{
+                content:"Page"  counter(page) "&nbsp; Of &nbsp;" counter(pages);
+                font-family:Arial;
+                font-size:12px;
+                color:#999999; 
+                
+            }  
+        }                       
+    
+        div.header {                                          
+            position: running(header); 
+            padding-top:70px;
+            padding-left:0px; 
+            padding-bottom:70px;  
+            
+        }
+        div.dtlcontent{
+            position:relative;
+            top:0px;
+            left:0px;
+            right:-5px;
+            margin-left: 50px;
+            margin-right:auto
+            text-align:justify
+        } 
+            
+        
+    </style>
+    </head>
+    <body>
+    <apex:form id="theform">
+     
+    <apex:pageMessages />
+    <div class="header">   
+        <img src="{!URLFOR($Resource.AppealResources,'logo.png')}" title="logo" /> 
+    </div>
+    <DIV class="dtlcontent">    
+        <apex:outputText value="{!content}" escape="false" ></apex:outputText> 
+        <apex:commandbutton value="Save PDF"  action="{!savePDF}"/>
+        <apex:commandButton value="Send Email" action="{!sendEmail}"/>
+        <apex:commandButton value="Cancel" action="{!cancel1}"/>
+    </div> 
+    </apex:form>
+    </body>
+</html>
+
+</apex:page>

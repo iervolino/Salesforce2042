@@ -1,0 +1,18 @@
+<apex:component allowDML="true">
+	<apex:attribute name="pkbCon" type="pkb_Controller" required="true" description="handle to the pkb controller" />
+	<apex:attribute name="showFeedbackYesNo" type="Boolean" required="true" description="flag to indicate if Yes/No buttons should be shown" />
+	<apex:attribute name="showBackLinks" type="Boolean" required="true" description="flag to indicate if 'back to...' buttons should be shown" />
+
+	<apex:variable var="pageNum" value="{!pkbCon.pageNumParam}={!pkbCon.currPage}" />
+	<apex:variable var="feedback" value="{!pkbCon.feedbackSourceParam}={!IF(pkbCon.displayContactUs, pkbCon.feedbackContactUs, pkbCon.feedbackSearch)}" />
+	<apex:variable var="params" value="{!IF(ISBLANK(pkbCon.allSearchParams), feedback, pkbCon.allSearchParams+ '&' +feedback+ '&' +pageNum)}" />
+	<apex:variable var="typeName" value="{!SUBSTITUTE($CurrentPage.parameters.articleTypeName, pkbCon.kavExtension, '')}" />
+	<apex:variable var="baseArticleURL" value="articles{!pkbCon.selectedLanguageURL}{!typeName}/{!$CurrentPage.parameters.urlName}/?{!params}" />
+	<apex:variable var="articleURL" value="{!IF( pkbCon.isSite, (pkbCon.currentSiteUrl + baseArticleURL), ('/' + baseArticleURL))}" />
+
+	<apex:variable var="pageNum" value="{!pkbCon.pageNumParam}={!pkbCon.currPage}" />
+	<iframe id="articleViewContainer" src="{!articleURL}" frameborder="0" seamless="seamless" style="display:block;width:100%;height:100%;min-height:400px;"></iframe>
+	<apex:outputPanel layout="block" styleClass="feedbackContainer" rendered="{!showFeedbackYesNo}">
+		<c:pkb_feedbackyesno pkbCon="{!pkbCon}" />
+	</apex:outputPanel>
+</apex:component>

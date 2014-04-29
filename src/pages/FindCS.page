@@ -1,0 +1,205 @@
+<apex:page standardController="Account" docType="html-5.0" sidebar="false" showHeader="true" >
+<apex:includeScript value="{!URLFOR($Resource.JQuery_1_9_1)}"  />
+<apex:includeScript value="{!URLFOR($Resource.JQuery_UI_1_10_1)}"  />
+<apex:stylesheet value="{!URLFOR($Resource.JQuery_UI_1_10_1_css)}"  />
+<apex:stylesheet value="{!URLFOR($Resource.googleStoreLocatorCSS)}"/>
+<apex:includeScript value="https://maps.googleapis.com/maps/api/js?key=AIzaSyBueK217xVv-eE0i8KtVINJQ9sccVuw9YA&sensor=true"/> 
+<script src="/soap/ajax/29.0/connection.js" type="text/javascript"/>
+<apex:includeScript value="{!URLFOR($Resource.googleStoreLocater)}"  />
+    
+<script type="text/javascript">
+    
+ function MedicareDataSource() {};
+   MedicareDataSource.prototype.getStores = function(bounds, features, callback) {
+  var center = bounds.getCenter();
+  var that = this;
+   var stores = [];
+      stores =that.parse_(getCS());
+
+    callback(stores); 
+};
+    //function to query cs's with SOQL Geolocation distance function
+     function getCS()
+    {
+         var $soap = (sforce? sforce.connection: null);
+            if (sforce && sforce.connection) { sforce.connection.sessionId = '{!$Api.Session_ID}';}
+        var $sconsole = (sforce && sforce.console && sforce.console.isInConsole()? sforce.console: null);
+        var $apex = ( sforce? sforce.apex: null );
+        
+        var queryString ="Select Id, Name,GeoLoc__latitude__s, GeoLoc__longitude__s,MailingStreet,MailingCity,MailingState, MailingPostalCode, Email, Phone   "+
+                                      "from Contact "+
+                                      "where Contact.ContactTypeFE__c includes ('Clinical Supervisor','CS Lead','CS Resource') " +
+                                      "and CSStatus__c not in ('Do Not Use','Inactive') " +
+                                      "and GeoLoc__latitude__s != null " +
+                                      "and DISTANCE(GeoLoc__c, GEOLOCATION(" +{!Account.GeoLoc__latitude__s} + "," +
+            {!Account.GeoLoc__longitude__s} +"), 'mi') < "+document.getElementById("distanceSelect").value
+                                       ;
+            //imit 10";
+        var degFilter = document.getElementById('{!$Component.theForm.degFilter}').value;
+        if (degFilter)
+            queryString = queryString + " and (CSDegree1__c = '" + degFilter + "' or CSDegree2__c='"+ degFilter + "' or CSDegree3__c ='" + degFilter + "')";
+        var degContFilter = document.getElementById('{!$Component.theForm.degContFilter}').value;
+        if (degContFilter)
+             queryString = queryString + " and (CSDegree1Content__c = '" + degContFilter + "' or CSDegree2Content__c='"+ 
+                 degContFilter + "' or CSDegree3Content__c ='" + degContFilter + "')";
+        var yearsFilter= document.getElementById('{!$Component.theForm.yearsFilter}').value;
+        if (yearsFilter)
+               queryString = queryString + " and CSYearsTeaching__c = '" + yearsFilter + "'";
+        var supFilter = document.getElementById("supFilter").value;
+        if (supFilter != "--None--")
+            queryString = queryString + " and CSSupervisionType__C includes ('"+supFilter+"')";
+        
+        queryString = queryString +" order by DISTANCE(GeoLoc__c, GEOLOCATION(" +{!Account.GeoLoc__latitude__s} + "," +
+            {!Account.GeoLoc__longitude__s} +"), 'mi') ";
+        //document.write(queryString);
+        var qr_pf = sforce.connection.query(queryString) ; 
+        var CliniclSups = qr_pf.getArray("records");
+        
+        return CliniclSups;   
+    }
+    
+ MedicareDataSource.prototype.parse_ = function(ClinicalSups) {
+  var stores = [];
+     
+   for (i=0;i<ClinicalSups.length; i++)
+    {
+        var features = new storeLocator.FeatureSet;
+        features.add(this.FEATURES_.getById('Wheelchair-Y'));
+        features.add(this.FEATURES_.getById('Audio-Y'));
+        var position = new google.maps.LatLng(ClinicalSups[i].GeoLoc__Latitude__s, ClinicalSups[i].GeoLoc__Longitude__s);
+        var linkHtml = "<a id='" + ClinicalSups[i].Id +"' href='/"+ ClinicalSups[i].Id + 
+            "' onmouseover=LookupHoverDetail.getHover('" + ClinicalSups[i].Id  + "','/" +
+            ClinicalSups[i].Id +"/m?retURL="+ ClinicalSups[i].Id  +"&isAjaxRequest=1').show();"+
+                    " onmouseout=LookupHoverDetail.getHover('"+ ClinicalSups[i].Id  +"').hide();" +
+                    " onfocus=LookupHoverDetail.getHover('"+ ClinicalSups[i].Id  +"', '/"+ ClinicalSups[i].Id +"/m?retURL="+ ClinicalSups[i].Id  +"&isAjaxRequest=1').show();" +
+                    " onblur=LookupHoverDetail.getHover('"+ ClinicalSups[i].Id +"').hide(); "+
+            ">Contact Record</a>";
+        
+        var store = new storeLocator.Store(ClinicalSups[i].Id, position, features, {
+            title: ClinicalSups[i].Name,
+            address:  ClinicalSups[i].MailingStreet+ '<BR>'+ClinicalSups[i].MailingCity+','+ 
+            ClinicalSups[i].MailingState + '  ' + ClinicalSups[i].MailingPostalCode +  '<BR>'+  linkHtml
+            });
+      stores.push(store);
+    }    
+     
+  return stores;
+};
+    
+MedicareDataSource.prototype.FEATURES_ = new storeLocator.FeatureSet();
+
+MedicareDataSource.prototype.getFeatures = function() {
+  return this.FEATURES_;
+};
+
+ </script>
+    
+    <script type="text/javascript">
+    //create the google map and center
+      mapCenter =  new google.maps.LatLng({!Account.GeoLoc__latitude__s},{!Account.GeoLoc__longitude__s} );
+    var map;
+    var radiausCircle;
+    google.maps.event.addDomListener(window, 'load', function() {
+    map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: new google.maps.LatLng({!Account.GeoLoc__latitude__s},{!Account.GeoLoc__longitude__s} ),
+    zoom: 10,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+        //icon for the school
+    var schoolIcon = {
+    anchor: null,
+    url: "{!$Resource.SchoolImage}",
+    scaledSize: new google.maps.Size(30,30)
+    };
+
+          // To add the marker to the map, use the 'map' property
+var marker = new google.maps.Marker({
+    position: mapCenter,
+    map: map,
+    title:"DT Location-{!Account.NAME}",
+    icon: schoolIcon  });
+        
+        //draw the radius search circle
+        drawCircle(mapCenter);        
+  var panelDiv = document.getElementById('panel');
+  var data = new MedicareDataSource;
+        //add the store locator layer
+  var view = new storeLocator.View(map, data, {
+    geolocation: false,
+    features: data.getFeatures()
+  });
+        //populate the panel
+  new storeLocator.Panel(panelDiv, {
+    view: view,
+      locationSearchLabel: 'DT Location'
+  });
+      
+        //default the the input
+    inputs = document.getElementsByTagName('input');
+    for(i=0; i< inputs.length; i++)
+    {
+        if ( inputs[i].parentNode.className =='location-search')   
+        {
+              inputs[i].value = '{!Account.ShippingStreet} {!Account.ShippingCity}, {!Account.ShippingState}  {!Account.ShippingPostalCode}'; 
+        }
+    }
+});
+
+function drawCircle()
+{
+    var searchRadius = document.getElementById("distanceSelect").value;
+
+   var circleOptions = { center: mapCenter, 
+        strokeColor : "Red",
+        radius:searchRadius*1609.3,
+        map: map
+      };
+    
+   if (radiausCircle == null)
+    radiausCircle = new google.maps.Circle(circleOptions);
+   else
+     radiausCircle.setOptions(circleOptions);
+     
+     map.setZoom(map.getZoom() - 1);
+    map.setZoom(map.getZoom() + 1);
+}
+    
+    </script>
+      <head>
+    <title>Store locator with Panel</title>
+   
+  </head>
+  <body>
+   <apex:form id="theForm">
+    <table>
+        <tr>
+            <td><b>Degree:</b></td><td> <apex:inputField id="degFilter" value="{!Account.StudentContact__r.CSDegree1__c}" onchange="drawCircle();"/></td>
+            <td><b>Degree Content:</b></td><td> <apex:inputField id="degContFilter" value="{!Account.StudentContact__r.CSDegree1Content__c}" onchange="drawCircle();"/></td>
+            <td><b>Years Teaching:</b></td><td> <apex:inputField id="yearsFilter" value="{!Account.StudentContact__r.CSYearsTeaching__c}" onchange="drawCircle();"/></td>
+             <td><b>Supervision Type:</b></td><td> <select id="supFilter" onChange="drawCircle();" >
+            		<option value="--None--">--None--</option>
+                    <option value="DT - Elementary">DT - Elementary</option>
+                    <option value="DT - Secondary">DT - Secondary</option>
+                    <option value="EDL">EDL</option>
+                    <option value="ELL">ELL</option>
+                    <option value="MSSP">MSSP</option>
+                </select></td>
+            <td><b>Distance:</b></td>
+            <td> 
+                <select id="distanceSelect" onChange="drawCircle();" >
+                    <option value="25">25 Miles</option>
+                    <option value="50">50 Miles</option>
+                    <option value="100">100 Miles</option>
+                    <option value="200">200 Miles</option>
+                </select>
+            </td>
+        </tr>
+     </table>
+    </apex:form>
+      
+    <h1>Clincial Supervisors</h1>
+    <div id="panel"></div>
+    <div id="map-canvas"></div>
+  </body>
+    
+</apex:page>

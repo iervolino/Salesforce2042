@@ -1,0 +1,68 @@
+<apex:page standardController="SRMChange__c">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageMessages />
+            <apex:pageBlockButtons location="bottom" >
+                <apex:commandButton value="Submit" action="{!save}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <h1>SRM Change Request</h1>
+            <p>Use this form to request a change or new feature within the Student Relationship Management (SRM) system.  Changes or new features could include permission sets, page layouts, page layout assignments, list view support, workflow activation, email alerts, picklist values, buttons, reports, dashboards, or data import/deletion.  Requests of this nature are usually items that can be completed in less than a day.</p>
+            <p>Certain requests may require involvement of a Business Analyst.  These types of requests require analysis and impact change planning, along with development time, testing and quality assurance.  Requests of this nature will be logged into the JIRA system for prioritization and completion during an active sprint.</p>
+            <p>Some changes may be denied by an Administrators. Please make sure the change requested are discussed, accepted and valuable for users before making the request. </p><p></p>
+            <apex:pageBlockSection collapsible="false" title="Request Information" >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Summary</apex:outputLabel>
+                    <apex:outputText >Summarize the change or new feature request. This should be a short, user-friendly description of the change.</apex:outputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputField value="{!SRMChange__c.Name}" label="" required="true"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Point of Contact</apex:outputLabel>
+                    <apex:outputText >Who can we contact about this request if further clarification is needed?</apex:outputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputField value="{!SRMChange__c.Requester__c}" required="true"/>
+                </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Category</apex:outputLabel>
+                    <apex:OutputText >Select the area(s) of the University in which this change or new request will have an effect on. </apex:OutputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputField value="{!SRMChange__c.Categories__c}" label=""/>
+                </apex:pageBlockSectionItem>
+            <!--</apex:pageBlockSection>
+            <apex:pageBlockSection collapsible="false" title="Request">-->
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Requested Change</apex:outputLabel>
+                    <apex:outputText >Provide a detailed description of the change or new feature requested.  Please include any information that might assist the SRM Administrator to understand and complete the change.</apex:outputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputField style="width:100%;" value="{!SRMChange__c.ChangeRequestDetails__c}" label="" required="true"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Reason for Change</apex:outputLabel>
+                    <apex:outputText >Briefly describe how this change will help the University and/or your department serve our students better.</apex:outputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputField style="width:100%" value="{!SRMChange__c.ReasonForChanges__c}"/>
+                </apex:pageBlockSectionItem>
+                <!--<apex:pageBlockSectionItem >
+               <apex:outputLabel value="Attachment (Max size is 5MB)" for="file"/>
+               <apex:inputFile value="{!attachment.body}" filename="{!attachment.name}" id="file"/>
+               </apex:pageBlockSectionItem>-->
+            </apex:pageBlockSection>
+            <apex:pageBlockSection collapsible="false" title="Project Information">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Is there already an existing project in the pipeline that this request could impact?</apex:outputLabel>
+                    <apex:inputField value="{!SRMChange__c.ExistingProject__c}" required="true"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >If yes, please enter the JIRA link here:</apex:outputLabel>
+                    <apex:inputField value="{!SRMChange__c.JIRATicket__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

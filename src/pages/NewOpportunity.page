@@ -1,0 +1,5 @@
+<apex:page standardController="Opportunity">
+    <script type="text/javascript">
+        window.location = 'NewProspect?sfdc.tabName=01ra0000001NrEM';
+    </script>
+</apex:page>

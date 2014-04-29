@@ -1,0 +1,170 @@
+<apex:page sidebar="false" showHeader="false" >
+  <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
+       'version':'1','packages':['timeline']}]}"></script>
+<script src="/soap/ajax/9.0/connection.js" type="text/javascript"></script>
+  <apex:includeScript value="{!URLFOR($Resource.JQuery_1_9_1)}"  />
+<apex:includeScript value="{!URLFOR($Resource.JQuery_UI_1_10_1)}"  />
+<script type="text/javascript">
+
+google.setOnLoadCallback(drawChart);
+    
+var $soap = (sforce? sforce.connection: null);
+if (sforce && sforce.connection) 
+{
+    sforce.connection.sessionId = '{!$Api.Session_ID}';
+}
+var $sconsole = (sforce && sforce.console && sforce.console.isInConsole()? sforce.console: null);
+var $apex = ( sforce? sforce.apex: null );
+    
+function initiateDropDown()
+{
+      var qr_pf = sforce.connection.query("select id,name from RecordType where sobjecttype='portfolio__c' order by name desc");
+  	var recordTypes = qr_pf.getArray("records");
+   
+    
+    for (i=0;i<qr_pf.size; i++)
+    {
+        var option = document.createElement("option");
+		option.text = recordTypes[i].Name;
+        option.value=recordTypes[i].Id; 
+        document.getElementById('RtList').add(option);
+   	}
+     var option = document.createElement("option");
+		option.text = '--None--';
+        option.value='none'; 
+        document.getElementById('RtList').add(option);
+}    
+    
+    
+function drawChart() {
+      if (document.getElementById('RtList').length==0) 
+    initiateDropDown();
+      
+    document.getElementById('mainTable').innerHTML ="";
+     var qr_pf = sforce.connection.query("Select Name from Portfolio__c where recordType.id='" +document.getElementById('RtList').value
+                                         + "' order by Name desc") ; 
+    var portfolios = qr_pf.getArray("records");
+    //loop through portfolios and seperate them in the table
+    for (i=0;i<qr_pf.size; i++)
+    {
+        //div for the chart
+        var newDiv = document.createElement('div');  
+  	    newDiv.Id='DIV' + i;
+        newDiv.style.width="100%";
+		 newDiv.style.height="auto";
+        //div for vertical label
+         var labelDiv = document.createElement('div');  
+        labelDiv.className ="rotated";
+        labelDiv.innerHTML='<center><h1>'+portfolios[i].Name+'</h1></center>';
+      	
+        //create table rows and cells
+        var tableRow = document.createElement('tr'); 
+        var labelCell = document.createElement('td');
+        labelCell.id = 'label' + i
+        labelCell.style.background="#F5F5F5";
+        var chartCell = document.createElement('td');
+        chartCell.id = 'chart' + i  
+        chartCell.width= '100%';
+        tableRow.appendChild(labelCell);
+        tableRow.appendChild(chartCell);
+        labelCell.appendChild(labelDiv);
+        chartCell.appendChild(newDiv);
+        //add to the main table
+        document.getElementById('mainTable').appendChild(tableRow);
+       
+        
+  var container = newDiv;
+         
+  var chart = [];
+   chart[i]=new google.visualization.Timeline(container);
+   
+        //create the google data table     
+   var dataTable =[];
+  dataTable[i] = new google.visualization.DataTable();  
+  dataTable[i].addColumn({ type: 'string', id: 'Position' });
+  dataTable[i].addColumn({ type: 'string', id: 'Name' });
+  dataTable[i].addColumn({ type: 'date', id: 'Start' });
+  dataTable[i].addColumn({ type: 'date', id: 'End' });
+   
+   var queryString ="Select ProjectRelated__r.Name,  Name  , StartDate__c ,EndDate__c, ProjectRelated__r.Portfolio__c"+
+                    " From ProjectPhase__c where ProjectRelated__r.Portfolio__r.Name = '" +portfolios[i].Name + "' "+
+                    " and EndDate__c > today ";
+            
+            
+    if (document.getElementById('RtList').value != 'none')
+    {
+        //  queryString = queryString + " and ProjectRelated__r.recordType.Id ='"  + document.getElementById('RtList').value + "' " ;
+    }
+     queryString=queryString +  " order by  ProjectRelated__r.Portfolio__c, ProjectRelated__r.Name,StartDate__c" ;  
+        //connect to SF to get the data      
+ var qr = sforce.connection.query(queryString);
+        
+        
+        
+  var records = qr.getArray("records");
+      var colorList = [];
+      var currProject;
+      var projectCount =0;
+    if (qr.size>0)
+    {
+        //loop through projects in the portfolio
+        for (var j=0; j<qr.size; j++)
+        {
+           
+            var record = records[j];
+            //get numbe of projects to dynamically size chart
+             if (currProject != record.get("ProjectRelated__r").Name)
+             {   projectCount += 1; }
+            currProject = record.get("ProjectRelated__r").Name;
+            
+            dataTable[i].addRow([ record.get("ProjectRelated__r").Name, record.Name, new Date(record.StartDate__c), new Date(record.EndDate__c)]);
+            
+            //set color based on text
+            if (record.Name.indexOf("Require")>=0)
+            {	colorList.push('#FFFF33'); }
+            else if (record.Name.indexOf("Dev")>=0)
+            {  colorList.push('#669966');  }
+            else if (record.Name.indexOf("Pilot")>=0 || record.Name.indexOf("Beta")>=0 )
+            {  colorList.push('#FF9966');  }
+            else if (record.Name.indexOf("Version")>=0 || record.Name.indexOf("V1")>=0 )
+            {  colorList.push('#3366cc');  }
+            else
+            {    colorList.push('#9999ff'); }  
+        }
+
+             
+    }
+        //alert(colorList);   
+        var options = { height:projectCount*80 +50, timeline: { colorByRowLabel: true }, avoidOverlappingGridLines: true };
+        chart[i].draw(dataTable[i], options);
+       
+
+   }
+    
+}
+</script>
+    <style>
+div.rotated
+{
+  width:130px;
+  height:50px;
+  -ms-transform:rotate(270deg); /* IE 9 */
+  -moz-transform:rotate(270deg); /* Firefox */
+  -webkit-transform:rotate(270deg); /* Safari and Chrome */
+  -o-transform:rotate(270deg); /* Opera */
+}
+</style>
+    <apex:form id="theForm" >
+        <table >
+          <tr>
+          <td>Record Type:</td>
+          <td> <select id="RtList" onChange="drawChart();"/></td>
+          </tr>
+          
+         </table>
+    </apex:form>
+		<table  id="mainTable" border="1" width="90%">
+		</table >
+    <BR/><BR/>
+   
+</apex:page>

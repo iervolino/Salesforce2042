@@ -1,0 +1,109 @@
+<apex:page sidebar="false" showHeader="false" standardstylesheets="false" applyHtmlTag="false" controller="CommonsSidebarController">
+    <html class="transparent">
+    <c:CommonsStaticResources />
+    
+    <div class='cc_sidebar cc_sidebar--mini' >
+            <button class="btn btn--square btn--sprite" data-btn='mentor' data-url='{!$Label.URL_for_Mentor_Contact_Info}' data-params="assessmentCode={!courseCode}"><span class="sprite sprite--blue--person"></span></button>
+            <hr class="hr--small"/>
+            <button class='btn btn--square btn--dark' data-btn='fyi' data-params="groupId={!groupId}"><span class='icon icon--exclamation'></span></button>
+            <button class='btn btn--square btn--dark' data-btn='tips' data-params="groupId={!groupId}"><span class='icon icon--check'></span></button>
+            <button class='btn btn--square btn--dark' data-btn='search' data-params='courseCode={!courseCode}&groupId={!groupId}'><span class='icon icon--magnify'></span></button>
+            <button class='btn btn--square btn--dark' data-btn='chatter' data-params="groupId={!groupId}"><span class='icon icon--chatter'></span></button>
+        </div>
+
+        <div class='cc_sidebar'>
+            <button data-btn='mentor' data-url='{!$Label.URL_for_Mentor_Contact_Info}' class="btn btn--sprite btn--full" data-params="assessmentCode={!courseCode}"><span class="sprite sprite--blue--person"></span> Contact a Course Mentor</button>
+            <hr class="hr--medium" />
+            <div class='accordion accordion--box'>
+                <div class='accordion--box__title'>
+                    <span class='btn btn--square btn--dark' data-btn='fyi' data-params="groupId={!groupId}">
+                        <span class='icon icon--exclamation'></span>
+                        <span class="cc_sidebar__notifications">{!unviewedAnnouncementCount}</span>
+                    </span>
+                    Course Announcements
+                    <span class='icon icon--carrot'></span>
+                </div>
+                <div class='accordion--box__content'>
+                    <div class='accordion--box__content__inner'>
+                        <ul class='cc-list'>
+                            <apex:repeat value="{!courseCommunityAnnouncementWithLimit}" var="announcement">
+                                <li>
+                                    <span class='accordion--box__content__date'>
+                                        <apex:outputText value="{0,date,MM/dd/yyyy}">
+                                            <apex:param value="{!announcement.createdDate}" />
+                                        </apex:outputText>
+                                    - </span><apex:outputtext escape="false" value="{!announcement.MyResponse__c}" />
+                                </li>
+                            </apex:repeat>
+                        </ul>
+                        <apex:outputPanel rendered="{!remainingAnnouncements != 0}">                            
+                            <span class='a accordion--box__content__more' data-btn='fyi' data-params="groupId={!groupId}">{!remainingAnnouncements} More...</span>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+            </div>
+
+            <div class='accordion accordion--box'>
+                <div class='accordion--box__title'>
+                    <span class='btn btn--square btn--dark' data-btn='tips' data-params="groupId={!groupId}">
+                        <span class='icon icon--check'></span>
+                    	<!--<span class="cc_sidebar__notifications">5</span>-->
+                    </span>
+                    Course Tips
+                    <span class='icon icon--carrot'></span>
+                </div>
+                <div class='accordion--box__content' >
+                    <div class='accordion--box__content__inner'>
+                        <ul class='cc-list'>
+                            <apex:repeat value="{!courseCommunityQuickTipWithLimit}" var="tip">
+                                <li><apex:outputtext escape="false" value="{!tip.MyResponse__c}" /></li>
+                            </apex:repeat>
+                        </ul>
+                        <apex:outputPanel rendered="{!remainingQuickTips != 0}">                            
+                            <span class='a accordion--box__content__more' data-btn='tips' data-params="groupId={!groupId}">{!remainingQuickTips} More...</span>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+            </div>
+
+            <div class='accordion accordion--box'>
+                <div class='accordion--box__title'>
+                    <span class='btn btn--square btn--dark' data-btn='search' data-params='courseCode={!courseCode}&groupId={!groupId}'><span class='icon icon--magnify'></span></span>
+                    Course Search
+                    <span class='icon icon--carrot'></span>
+                </div>
+                <div class='accordion--box__content' >
+                    <div class='accordion--box__content__inner'>
+                        <!--<div class='accordion--box__content__options'>
+                            <p>Keyword Search In:</p>
+                            <div class='checkboxes--blue'>
+                                <input type='checkbox' checked='checked' id='check1' /><label for='check1'>Knowledge Base</label>
+                                <input type='checkbox' checked='checked' id='check2' /><label for='check2'>FAQs</label>
+                                <input type='checkbox' checked='checked' id='check3' /><label for='check3'>Chatter</label>
+                            </div>
+                        </div>-->
+                        <div class='form-group--inline spacer-margin--10 '>
+                            <input type='text' placeholder='Enter Keyword'  />
+                            <span class='btn btn--square btn--dark'  data-btn='search' data-params='courseCode={!courseCode}&groupId={!groupId}'><span class='icon icon--magnify'></span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='accordion accordion--box'>
+                <div class='accordion--box__title'>
+                    <span class='btn btn--square btn--dark' data-btn='chatter' data-params="groupId={!groupId}"><span class='icon icon--chatter'></span></span>
+                    Course Chatter
+                    <span class='icon icon--carrot'></span>
+                </div>
+                <div class='accordion--box__content'>
+                    <div class='accordion--box__content__inner'>
+                        <c:CommonsChatterSidebar />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </html>
+</apex:page>

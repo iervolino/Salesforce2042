@@ -1,0 +1,163 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" contentType="text/html" cache="true" controller="FDPListController" action="{!initialize}">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<apex:outputText escape="false" value="{!"<html>"}"/>
+<head>
+  <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.FDP_Resources,'assets/css/global.css')}"/>
+<script type="text/javascript" src="{!URLFOR($Resource.FDP_Resources,'assets/js/jquery-1.7.2.min.js')}">
+</script>
+<script type="text/javascript" src="{!URLFOR($Resource.FDP_Resources,'assets/js/jquery.tablesorter.min.js')}">
+</script>
+<link id="size-stylesheet" rel="stylesheet" type="text/css" href="{!URLFOR($Resource.FDP_Resources,'assets/css/fdplist_narrow.css')}"/>
+<script type="text/javascript">
+  jQuery.noConflict();
+  jQuery(function() {
+    window.makeTableSortable = function() {
+      jQuery("table.table-sortable").tablesorter();
+    };
+    jQuery("div.mentors-list select").change(function() {
+      var mentorId = jQuery(this).val();
+      changeMentorInJavaScript(mentorId);
+    });
+    window.makeTableSortable();
+    window.adjustStyle = function(width) {
+      width = parseInt(width);
+      if(width < 701) {
+        jQuery("#size-stylesheet").attr("href","{!URLFOR($Resource.FDP_Resources,'assets/css/fdplist_narrow.css')}");
+      } else {
+        jQuery("#size-stylesheet").attr("href","{!URLFOR($Resource.FDP_Resources,'assets/css/fdplist_wide.css')}");
+      }
+    };
+    window.adjustStyle(jQuery(this).width());
+    jQuery(window).resize(function() {
+      window.adjustStyle(jQuery(this).width());
+    });
+  });
+</script>
+<style type="text/css">
+  table.table-sortable th {
+    cursor:pointer;
+  }
+  th.header.headerSortUp,
+  th.header.headerSortDown,
+  .table-bordered thead th.header.headerSortUp,
+  .table-bordered thead th.header.headerSortDown
+  {
+    background-color: rgba(0,0,0,0.178125);
+  }
+
+  th.header:after,
+  .table-bordered thead th.header:after
+  {
+    background: url("{!URLFOR($Resource.FDP_Resources,'assets/images/ui-icons_222222_256x240.png')}") no-repeat scroll -130px -16px transparent;
+    content: "";
+    display: block;
+    float: right;
+    height: 12px;
+    margin-right: 2px;
+    width: 12px;
+  }
+
+  th.header.headerSortUp:after,
+  .table-bordered thead th.header.headerSortUp:after
+  {
+    background: url("{!URLFOR($Resource.FDP_Resources,'assets/images/ui-icons_222222_256x240.png')}") no-repeat scroll -67px -15px transparent;
+  }
+
+  th.header.headerSortDown:after,
+  .table-bordered thead th.header.headerSortDown:after
+  {
+    background: url("{!URLFOR($Resource.FDP_Resources,'assets/images/ui-icons_222222_256x240.png')}") no-repeat scroll -2px -15px transparent;
+  }
+  h1.title {
+    float:left;
+  }
+  .mentors-list {
+    float:right;
+    margin:-15px 0;
+  }
+
+</style>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<apex:form >
+  <apex:actionFunction action="{!changeMentor}" name="changeMentorInJavaScript" rerender="studentListBlock" oncomplete="window.makeTableSortable();">
+    <apex:param name="MentorId" value=""/>
+  </apex:actionFunction>
+</apex:form>
+<div class="lock-width">
+ <article>
+  <div class="page-main">
+    <h1 class="title">Students Ready for Approval</h1>
+    <div class="mentors-list">
+      <span>Show students for mentor:</span>
+      <span>
+        <select>
+          <apex:repeat value="{!MentorsList}" var="mentor">
+            <apex:outputText rendered="{!mentor.IsCurrentUser}">
+              <option selected="selected" value="{!mentor.MentorUserId}">{!mentor.MentorName}</option>
+            </apex:outputText>
+            <apex:outputText rendered="{!NOT(mentor.IsCurrentUser)}">
+              <option value="{!mentor.MentorUserId}">{!mentor.MentorName}</option>
+            </apex:outputText>
+          </apex:repeat>
+        </select>
+      </span>
+    </div>
+    <apex:pageBlock id="studentListBlock">
+    <div class="col-container">
+      <table class="table table-striped table-bordered table-condensed table-sortable">
+       <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>StudentId</th>
+          <th>Due In</th>
+          <th>Roll Date</th>
+          <th>Status</th>
+          <th style="display:none;">Terms</th>
+        </tr>
+       </thead>
+       <tbody>
+       <apex:repeat value="{!StudentsList}" var="student">
+        <apex:outputText rendered="{!student.IsRendered}">
+          <tr>
+            <td><a target="_blank" href="FDP?pidm={!student.PIDM}">{!student.Name}</a></td>
+            <td>{!student.StudentId}</td>
+            <td>{!student.DueIn} Days</td>
+            <td>
+              <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                <apex:param value="{!student.RollDate}"/>
+              </apex:outputText>
+            </td>
+            <td>{!student.Status}</td>
+            <td style="display:none;">
+            <table class="table table-striped table-bordered table-condensed">
+                  <tr>
+                    <th>TermCode</th>
+                    <th>ApprovalDate</th>
+                    <th>ModifiedDate</th>
+                  </tr>
+              <apex:repeat value="{!student.TermCodesList}" var="tc">
+                <tr>
+                  <td>{!tc.TermCode}</td>
+                  <td>{!tc.LastApprovedDate}</td>
+                  <td>{!tc.LastModifiedDate}</td>
+                </tr>
+              </apex:repeat>
+              </table>
+            </td>
+          </tr>
+        </apex:outputText>
+       </apex:repeat>
+       </tbody>
+      </table>
+    </div>
+    </apex:pageBlock>
+  </div>
+ </article>
+</div>
+</body>
+<apex:outputText escape="false" value="{!"</html>"}"/>
+</apex:page>

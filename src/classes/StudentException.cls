@@ -1,0 +1,1 @@
+public without sharing class StudentException  extends Exception {}

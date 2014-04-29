@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to manage the transcripts that must be collected through in-take and viewed by Mentors</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AccreditationInstitutionName__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( TranscriptInstitution__r.ParentId = NULL, TranscriptInstitution__r.Name, TranscriptInstitution__r.Parent.Name )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Accreditation Institution Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Accreditation__c</fullName>
+        <externalId>false</externalId>
+        <formula>TranscriptInstitution__r.SchoolAccreditation__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Accreditation</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApplicationPaidDate__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Opportunity__r.ApplicationPaidDate__c  &lt;  TranscriptReceivedDate__c, &apos;Paid Before&apos;, &apos;Paid After&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Application Paid Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BarcodeSubtype__c</fullName>
+        <externalId>false</externalId>
+        <label>Barcode Subtype</label>
+        <picklist>
+            <controllingField>BarcodeType__c</controllingField>
+            <picklistValues>
+                <fullName>128A</fullName>
+                <controllingFieldValues>Code128</controllingFieldValues>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>128B</fullName>
+                <controllingFieldValues>Code128</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>128C</fullName>
+                <controllingFieldValues>Code128</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Code128A</fullName>
+                <controllingFieldValues>Code128</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>BarcodeType__c</fullName>
+        <externalId>false</externalId>
+        <label>Barcode Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Code128</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>code39</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ean13</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>CollegeEndDate__c</fullName>
+        <description>Date you stopped attending class</description>
+        <externalId>false</externalId>
+        <label>College End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CollegeStartDate__c</fullName>
+        <description>Date you started attending class</description>
+        <externalId>false</externalId>
+        <label>College Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The contact of the student</description>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Student Transfer Institution</relationshipLabel>
+        <relationshipName>StudentTransferInstitution</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CreditsPresented__c</fullName>
+        <externalId>false</externalId>
+        <label>Credits Presented</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DateDegreeReceived__c</fullName>
+        <description>The date they received the degree</description>
+        <externalId>false</externalId>
+        <label>Date Degree Received</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DegreeComment__c</fullName>
+        <description>A comment describing the degree earned</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Qualify the degree earned with an applicable comment or description, such as specialization, major, minor, etc.</inlineHelpText>
+        <label>Degree Comment</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DegreeType__c</fullName>
+        <externalId>false</externalId>
+        <label>Degree Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Associates</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bachelors</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Masters</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Doctorate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AAS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AAA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DegreestoWaiveRA__c</fullName>
+        <description>Count of the number of degrees that will waive the RA</description>
+        <externalId>false</externalId>
+        <label>Degrees to Waive RA</label>
+        <summarizedField>TransferAttendance__c.DegreeValue__c</summarizedField>
+        <summaryForeignKey>TransferAttendance__c.StudentTransferInstitution__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>DiscountAmount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>This is the highest discount that student can qualify</description>
+        <externalId>false</externalId>
+        <label>Discount Amount</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DocumentType__c</fullName>
+        <externalId>false</externalId>
+        <label>Document Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>ROCT</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ROCE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ROIT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>EndMonthYear__c</fullName>
+        <externalId>false</externalId>
+        <formula>EndMonth__c &amp;&quot; - &quot; &amp;EndYear__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>EndMonthYear</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndMonth__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(MONTH(CollegeEndDate__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>EndMonth</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndYear__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(YEAR(CollegeEndDate__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>EndYear</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EvaluationCount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.CompletedTransferEvaluations__c +  Opportunity__r.OutstandingTransferEvaluations__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Evaluation Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IndexedCourses__c</fullName>
+        <externalId>false</externalId>
+        <label>Indexed Courses</label>
+        <summaryForeignKey>StudentTransferredCourse__c.StudentTransferInstitution__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>IndexedTotal__c</fullName>
+        <externalId>false</externalId>
+        <formula>IndexedCourses__c +  IndexedTransferAttendance__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Indexed Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IndexedTransferAttendance__c</fullName>
+        <externalId>false</externalId>
+        <label>Indexed Transfer Attendance</label>
+        <summaryForeignKey>TransferAttendance__c.StudentTransferInstitution__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>InstitutionAccountName__c</fullName>
+        <externalId>false</externalId>
+        <formula>TranscriptInstitution__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Institution Account Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstitutionCity__c</fullName>
+        <externalId>false</externalId>
+        <label>Institution City</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstitutionName__c</fullName>
+        <description>Represents a Institution that was manually entered because the applicant did not find it on the Institution drop down list.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Manually enter an institution name that is not available in the known institutions listing.</inlineHelpText>
+        <label>Institution Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstitutionState__c</fullName>
+        <externalId>false</externalId>
+        <label>Institution State</label>
+        <length>125</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstitutionZip__c</fullName>
+        <externalId>false</externalId>
+        <label>Institution Zip</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstitutionalAccreditation__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(TranscriptInstitution__r.HEAccreditationType__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Institutional Accreditation</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstitutionalAccreditingBody__c</fullName>
+        <description>The field from the account object for Higher Education Institution</description>
+        <externalId>false</externalId>
+        <formula>text( TranscriptInstitution__r.HEAccreditationOrganization__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Institutional Accrediting Body</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LegacyCARETranscript__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Legacy CARE Transcript</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Major__c</fullName>
+        <description>Major of the degree</description>
+        <externalId>false</externalId>
+        <label>Major</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Minor__c</fullName>
+        <description>Minor of the degree</description>
+        <externalId>false</externalId>
+        <label>Minor</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OnBaseFirstName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Account.StudentContact__r.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>OnBase First Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OnBaseLastName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Account.StudentContact__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>OnBase Last Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Student Transfer Institution</relationshipLabel>
+        <relationshipName>opportunityTransferInstitution</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>PIDM__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Account.PIDM__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PIDM</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StartMonthYear__c</fullName>
+        <externalId>false</externalId>
+        <formula>StartMonth__c  &amp;&quot; - &quot; &amp; StartYear__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>StartMonthYear</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StartMonth__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text (MONTH ( CollegeStartDate__c ))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>StartMonth</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StartYear__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(YEAR(CollegeStartDate__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>StartYear</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>StudentAccount</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipName>StudentTranscripts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StudentID__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Opportunity__r.Account.StudentContact__r.StudentID__c ), &quot;NO ID&quot;,  RIGHT(Opportunity__r.Account.StudentContact__r.StudentID__c, 9))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalCredits__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Credits Presented</label>
+        <summarizedField>StudentTransferredCourse__c.Credits__c</summarizedField>
+        <summaryForeignKey>StudentTransferredCourse__c.StudentTransferInstitution__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptID__c</fullName>
+        <externalId>false</externalId>
+        <formula>LEFT(Id, 15)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Transcript ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TranscriptInstitution__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Transcript Institution</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Student Transfer Institution (Transcript Institution)</relationshipLabel>
+        <relationshipName>SchoolTranscripts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Account.StudentContact__r.LastName+ &quot;, &quot; + Opportunity__r.Account.StudentContact__r.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Transcript Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TranscriptOPEID__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( TranscriptInstitution__r.ParentId = NULL,  TranscriptInstitution__r.OPEID__c, TranscriptInstitution__r.Parent.OPEID__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Transcript OPEID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TranscriptProgram__c</fullName>
+        <externalId>false</externalId>
+        <formula>LEFT(Opportunity__r.MarketingProgram__r.Name, 60)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Transcript Program</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TranscriptReceivedDate__c</fullName>
+        <description>The date the transcript was received by the transcript team.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date the transcript was physically received</inlineHelpText>
+        <label>Transcript Received Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptStatus__c</fullName>
+        <description>Indicates the status of the transcripts associated with this school. The default is Expected. The status should be set to received when the scans are attached to the object record.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>When a transcript is expected, set the status to Expected and change the status to Received when it is attached. If a transcript is appealed, it will result in an approved or denied appeal.</inlineHelpText>
+        <label>Transcript Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Requested</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expected</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Received</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Updated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Expected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Needs Update</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Invalid - Unofficial</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Invalid - Non Accredited School</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Invalid - No Degree Posted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Invalid - Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Excluded</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appeal Denied – Transfer Credit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appeal Denied – Military</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>WeightedInstitutionalDiscount__c</fullName>
+        <externalId>false</externalId>
+        <formula>TranscriptInstitution__r.DiscountAmount__c  *  VALUE(TEXT(TranscriptInstitution__r.NumberDiscountedTerms__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Weighted Institutional Discount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Student Transfer Institution</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>InstitutionName__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>TranscriptInstitution__c</columns>
+        <columns>TranscriptName__c</columns>
+        <columns>TranscriptReceivedDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>Institution-{0000}</displayFormat>
+        <label>Student Transfer Institution Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Student Transfer Institution</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>DegreeComment__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>TranscriptStatus__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CollegeEndDate__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CollegeStartDate__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>CollegeEndDate__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CollegeStartDate__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>TranscriptStatus__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>InstitutionName__c</searchFilterFields>
+        <searchFilterFields>TranscriptInstitution__c</searchFilterFields>
+        <searchFilterFields>TranscriptStatus__c</searchFilterFields>
+        <searchResultsAdditionalFields>CollegeEndDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CollegeStartDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TranscriptStatus__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>DateReceived</fullName>
+        <active>true</active>
+        <errorConditionFormula>IF( AND(ISBLANK(TranscriptReceivedDate__c ), NOT(OR(TEXT(TranscriptStatus__c) = &quot;Requested&quot;, TEXT(TranscriptStatus__c) = &quot;Expected&quot;,  TEXT(TranscriptStatus__c) = &quot;Received&quot;, TEXT(TranscriptStatus__c) = &quot;Not Expected&quot;, TEXT(TranscriptStatus__c) = &quot;Appeal Denied – Transfer Credit&quot;, TEXT(TranscriptStatus__c) = &quot;Appeal Denied – Military&quot;,TEXT(TranscriptStatus__c) = &quot;Appealed&quot;, TEXT(TranscriptStatus__c) = &quot;Excluded&quot;))), true, false)</errorConditionFormula>
+        <errorMessage>Please add the Transcript Received Date to the record</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>NoExclusionFA</fullName>
+        <active>true</active>
+        <description>If &quot;No Exclusion-FA&quot; is true then the status can not be changed to &quot;appeal&quot; or &quot;exclude&quot;.</description>
+        <errorConditionFormula>AND(( Opportunity__r.NoExclusionFA__c=TRUE),(TEXT(TranscriptStatus__c)= &quot;Appealed&quot;)||(TEXT(TranscriptStatus__c)=&quot;Excluded&quot;)||(TEXT(TranscriptStatus__c)=&quot;Appeal Denied – Transfer Credit&quot;)||(TEXT(TranscriptStatus__c)=&quot;Appeal Denied – Military&quot;))</errorConditionFormula>
+        <errorDisplayField>TranscriptStatus__c</errorDisplayField>
+        <errorMessage>This record can not be &quot;Appeal&quot; or &quot;Exclude&quot; due to a financial aid restriction.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>ExcludeTranscript</fullName>
+        <availability>online</availability>
+        <description>Exclude transcript or courses request</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Exclude Transcript</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&apos;/jslibrary/&apos; &amp; LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TEXT(NOW()),&apos;:&apos;,&apos;&apos;),&apos;-&apos;,&apos;&apos;),&apos; &apos;,&apos;&apos;),10) &amp; &apos;/sfdc/VFRemote.js&apos;)}{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/connection.js&quot;)}{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/apex.js&quot;)}{!REQUIRESCRIPT(&apos;/resource/&apos; &amp; LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TEXT(NOW()),&apos;:&apos;,&apos;&apos;),&apos;-&apos;,&apos;&apos;),&apos; &apos;,&apos;&apos;),10) &amp; &apos;000/extjs_v407/builds/ext-all-sandbox.js&apos;)}{!REQUIRESCRIPT(&apos;/resource/&apos; &amp; LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TEXT(NOW()),&apos;:&apos;,&apos;&apos;),&apos;-&apos;,&apos;&apos;),&apos; &apos;,&apos;&apos;),10) &amp; &apos;000/WGUScriptMgr&apos;)}
+(function () {
+
+    Ext4.define(&apos;WGU.view.ExcludeDlg&apos;, {
+        extend: &apos;Ext.window.Window&apos;,
+
+        id: &apos;wguExcludeDialog&apos;,
+        activeItem: 0,
+        height: 125,
+        width: 415,
+        layout: {
+            type: &apos;card&apos;
+        },
+        title: &apos;Exclude this Transcript(s)?&apos;,
+        modal: true,
+
+        initComponent: function() {
+            var me = this;
+
+            Ext.applyIf(me, {
+                items: [
+                    {
+                        xtype: &apos;container&apos;,
+                        id: &quot;excludeConfirmation&quot;,
+                        layout: {
+                            type: &apos;absolute&apos;
+                        },
+                        items: [
+                            {
+                                xtype: &apos;label&apos;,
+                                x: 10,
+                                y: 20,
+                                text: &apos;Please confirm that you want to exclude this transcript(s).&apos;
+                            },
+                            {
+                                xtype: &apos;button&apos;,
+                                x: 200,
+                                y: 60,
+                                text: &apos;Confirm&apos;,
+                                width: 90,
+                                listeners: {
+                                    click: {
+                                        fn: me.onConfirmButtonClick,
+                                        scope: me
+                                    }
+                                }
+                            },
+                            {
+                                xtype: &apos;button&apos;,
+                                x: 300,
+                                y: 60,
+                                text: &apos;Cancel&apos;,
+                                width: 90,
+                                listeners: {
+                                    click: {
+                                        fn: me.onCancelButtonClick,
+                                        scope: me
+                                    }
+                                }
+                            }
+                        ],
+                        listeners: {
+                            afterlayout: {
+                                fn: me.onWindowAfterLayout,
+                                scope: me
+                            }
+                        }
+                    },
+                    {
+                        xtype: &apos;container&apos;,
+                        id: &quot;excludeWait&quot;
+                    }
+                ]
+            });
+
+            me.callParent(arguments);
+        },
+
+
+        onCancelButtonClick: function(button, e, eOpts) {
+            excludeDlg.close();
+        },
+
+        onConfirmButtonClick: function(button, e, eOpts) {
+            excludeDlg.getLayout().setActiveItem(1);
+            Ext4.getCmp(&quot;excludeWait&quot;).setLoading(&quot;Excluding Transcript(s)...&quot;);
+
+            Ext4.Function.defer( function() {
+
+                try {
+                    var student = sforce.connection.query(&quot;SELECT Id,FirstName,LastName from Contact WHERE StudentID__c = \&apos;&quot; +wguStudentTranscript.StudentID__c + &quot;\&apos; LIMIT 1&quot;).records;
+                    student.Name = student.FirstName + &quot; &quot; + student.LastName;
+                    var studentUserId = sforce.connection.query(&quot;SELECT Id from User WHERE ContactId = \&apos;&quot; + student.Id + &quot;\&apos; LIMIT 1&quot;).records.Id;
+                    var transcriptRecordTypeId = sforce.connection.query(&quot;SELECT Id FROM RecordType WHERE Name = &apos;Transcripts&apos; AND SobjectType = &apos;Case&apos; LIMIT 1&quot;).records.Id;
+                    var transcriptQueueId = sforce.connection.query(&quot;SELECT QueueId FROM QueueSobject WHERE Queue.Name = &apos;Transcripts&apos; LIMIT 1&quot;).records.QueueId;
+                    if ( Ext4.isChrome ) {
+                        console.log ( &quot;student: &quot; );
+                        console.log ( student );
+                        console.log ( &quot;studentUserId: &quot; + studentUserId );
+                        console.log ( &quot;transcriptRecordTypeId: &quot; + transcriptRecordTypeId );
+                        console.log ( &quot;transcriptQueueId: &quot; + transcriptQueueId );
+                    }
+
+                    //insert a new Case record
+                    var newCase = new sforce.SObject(&quot;Case&quot;);
+                    newCase.RecordTypeId = transcriptRecordTypeId;
+                    newCase.ContactId = student.Id;
+                    newCase.TranscriptTeamURL__c = &quot;https://&quot;+ location.hostname + &quot;/&quot; + wguStudentTranscript.Id;
+                    newCase.Reason = &quot;Exclusion&quot;;
+                    newCase.Subject = &apos;Exclude Transcript(s) for &apos; + student.Name;
+                    //newCase.StudentTranscript__c = wguStudentTranscript.Id;
+                    //newCase.ServiceDescription__c = &apos;&apos;;
+                    //newCase.RequestComments__c = &apos;&apos;;
+                    newCase.OwnerId = studentUserId;
+                    newCase.IsVisibleInSelfService = true;
+
+                    var saveResult = sforce.connection.create([newCase]);
+                    if ( saveResult ) {
+                        if (saveResult[0].success == &quot;true&quot;) {
+                            newCase.Id = saveResult[0].id;
+                            if ( Ext4.isChrome ) {
+                                console.log ( &quot;Case Create succeeded: &quot;  );
+                                console.log ( saveResult[0] );
+                            }
+
+                            //insert a new StudentCase__c record
+                            var studentCase = new sforce.SObject(&quot;StudentCase__c&quot;);
+                            studentCase.Contact__c = newCase.ContactId;
+                            studentCase.StudentTransferInstitution__c = wguStudentTranscript.Id;
+                            studentCase.OwnerId = studentUserId;
+                            studentCase.Case__c = newCase.Id;
+                            studentCase.ParentURL__c = newCase.TranscriptTeamURL__c;
+                            studentCase.StudentCaseReason__c  = newCase.Reason;
+                            //studentCase.ServiceDescription__c = &apos;&apos;;
+                            //studentCase.Comments__c = &apos;&apos;;
+
+                            saveResult = sforce.connection.create([studentCase]);
+                            if ( saveResult ) {
+                                if (saveResult[0].success == &quot;true&quot;) {
+                                    if ( Ext4.isChrome ) {
+                                        console.log ( &quot;StudentCase__c Create succeeded: &quot;  );
+                                        console.log ( saveResult[0] );
+                                    }
+                                    studentCase.Id = saveResult[0].id;
+
+                                    //Update Case with Queue Assignment
+                                    //Assign case to student as they need to take action first
+                                    newCase.OwnerId = studentUserId;
+                                    var saveResult = sforce.connection.update([newCase]);
+                                    if (saveResult[0].success == &quot;true&quot;) {
+
+                                        if ( Ext4.isChrome ) {
+                                            console.log ( &quot;Case Update succeeded: &quot;  );
+                                            console.log ( saveResult[0] );
+                                        }
+
+                                        //Update the current StudentTranscript__c record with the Appealed status
+                                        var evalUpdate = new sforce.SObject(&quot;StudentTranscript__c&quot;);
+                                        evalUpdate.Id = wguStudentTranscript.Id;
+                                        evalUpdate.TranscriptStatus__c = &quot;Appealed&quot;;
+                                        saveResult = sforce.connection.update([evalUpdate]);
+                                        if ( saveResult ) {
+                                            if (saveResult[0].success == &quot;true&quot;) {
+                                                Ext4.Msg.show({
+                                                    title:&apos;Exclusion Successful&apos;,
+                                                    msg: &apos;Case records for new Exclusion created successfully:&amp;nbsp;&amp;nbsp;&lt;a target=&quot;&apos;+newCase.Id+&apos;&quot; href=&quot;https://&apos; + location.host + &quot;/&quot; + newCase.Id  + &apos;&quot;&gt;New Case Link&lt;/a&gt;&apos;,
+                                                    buttons: Ext4.Msg.OK,
+                                                    icon: Ext4.MessageBox.INFO,
+                                                    fn: function(btn, text) {
+                                                        location = &quot;/&quot; + wguStudentTranscript.Id;
+                                                    }
+                                                });
+                                                if ( Ext4.isChrome ) {
+                                                    console.log ( &quot;StudentTranscript__c Update succeeded: &quot;  );
+                                                    console.log ( saveResult[0] );
+                                                }
+                                            } else {
+                                                if ( Ext4.isChrome ) {
+                                                    console.log ( &quot;StudentTranscript__c Update failed: &quot;  );
+                                                    console.log ( saveResult[0] );
+                                                }
+                                            }
+
+                                        }
+                                    } else {
+                                        Ext4.Msg.show({
+                                            title:&apos;Exclusion Creation Failed [Case UPDATE, Queue Assign]&apos;,
+                                            msg: saveResult[0].errors.message,
+                                            buttons: Ext4.Msg.OK,
+                                            icon: Ext4.MessageBox.ERROR
+                                        });
+                                        if ( Ext4.isChrome ) {
+                                            console.log ( &quot;Case Update failed: &quot;  );
+                                            console.log ( saveResult[0] );
+                                        }
+                                    }
+                                } else {
+                                    Ext4.Msg.show({
+                                        title:&apos;Exclusion Creation Failed [StudentCase__c INSERT]&apos;,
+                                        msg: saveResult[0].errors.message,
+                                        buttons: Ext4.Msg.OK,
+                                        icon: Ext4.MessageBox.ERROR
+                                    });
+                                    if ( Ext4.isChrome ) {
+                                        console.log ( &quot;StudentCase__c Create failed: &quot; );
+                                        console.log ( saveResult[0] );
+                                    }
+                                }
+                            }
+                        } else {
+                            Ext4.Msg.show({
+                                title:&apos;Exclusion Creation Failed [Case INSERT]&apos;,
+                                msg: saveResult[0].errors.message,
+                                buttons: Ext4.Msg.OK,
+                                icon: Ext4.MessageBox.ERROR
+                            });
+                            if ( Ext4.isChrome ) {
+                                console.log ( &quot;Case Create failed: &quot; );
+                                console.log ( saveResult[0] );
+                            }
+
+                        }
+
+                    }
+
+                } finally {
+                    Ext4.getCmp(&quot;excludeWait&quot;).setLoading(false);
+                    try { excludeDlg.close(); } catch(e) {}
+                }
+
+            }, 50);
+
+        },
+
+        onWindowAfterLayout: function(container, layout, eOpts) {
+        }
+
+
+    });
+
+    wguStudentTranscript = { Id: &quot;{!StudentTranscript__c.Id}&quot;, TranscriptStatus__c: &quot;{!StudentTranscript__c.TranscriptStatus__c}&quot;, StudentID__c:&quot;{!StudentTranscript__c.StudentID__c}&quot; };
+
+    window.$soap = sforce.connection;
+    if ( Ext.isEmpty($soap.sessionId) ) {
+        $soap.init(&apos;{!$Api.Session_ID}&apos;,&quot;/services/Soap/u/29.0&quot;);
+    }
+
+    if (Ext) {
+        Ext3 = Ext;
+    }
+
+    var stylesheetId = &apos;wgu-stylesheet-ext4sanbox&apos; ;
+    if ( Ext3 &amp;&amp; Ext3.fly( stylesheetId ) == null ) {
+        var ext4cssUrl = &quot;/resource/{!LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TEXT(NOW()),&apos;:&apos;,&apos;&apos;),&apos;-&apos;,&apos;&apos;),&apos; &apos;,&apos;&apos;),10)}000/extjs_v407/resources/css/ext-sandbox.css&quot;;
+        Ext4.WGUScriptMgr.loadCss( {
+            url: ext4cssUrl,
+            callback: onReady,
+            id: stylesheetId
+        } );
+    } else {
+        onReady();
+    }
+
+
+    function onReady() {
+        if ( Ext4.isEmpty(Ext4.util.CSS.getRule(&apos;.x4-shim&apos;, true)) ) {
+
+            Ext4.callback( function(){
+                    doDlg();
+                },
+                window, null, 2000 );
+
+        } else {
+            doDlg();
+        }
+
+    }
+
+    function doDlg() {
+        if ( wguStudentTranscript.TranscriptStatus__c != &apos;Appealed&apos; &amp;&amp; wguStudentTranscript.TranscriptStatus__c != &apos;Excluded&apos;) {
+            excludeDlg = Ext4.create(&quot;WGU.view.ExcludeDlg&quot;,{});
+            excludeDlg.show();
+        } else {
+            Ext4.Msg.show({
+                title:&apos;Transcript Exclusion in Progress&apos;,
+                msg: &apos;Transfer Evaluations must not be in Appealed or Excluded status. &lt;br/&gt;Please contact the Transcript Team for more information.&apos;,
+                buttons: Ext4.Msg.OK,
+                icon: Ext4.MessageBox.WARNING
+            });
+        }
+    }
+
+
+})();</url>
+    </webLinks>
+    <webLinks>
+        <fullName>GenerateBarcode</fullName>
+        <availability>online</availability>
+        <description>Generate barcode for document cover sheet</description>
+        <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Generate Barcode</masterLabel>
+        <openType>newWindow</openType>
+        <page>TranscriptBarcode</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewIDrive</fullName>
+        <availability>online</availability>
+        <description>View documents associated with the student</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View I Drive</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://docs.wgu.edu/Docs/Registrar/Forms/AllItems.aspx?RootFolder=%2FDocs%2FRegistrar%2FWorking%20Files%20for%20Evaluators%2F{LEFT(Opportunity__r.Account.LastName, 1}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewTranscript</fullName>
+        <availability>online</availability>
+        <description>Access to student records in document management platform</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View Transcript</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://imaging.wgu.edu/AppNet/docpop/docpop.aspx?KT213_0_0_0={! StudentTranscript__c.TranscriptID__c}&amp;&amp;clienttype=activex&amp;cqid=115&amp;viewerOnlyForSingle=true</url>
+    </webLinks>
+</CustomObject>

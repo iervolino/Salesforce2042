@@ -1,0 +1,102 @@
+<apex:component controller="CommonsChatterController" allowDML="true">
+    <button class='btn btn--full btn--sprite' data-btn='chatter' data-params="groupId={!groupId}"><span class='sprite sprite--blue--expand'></span>Expand Chatter</button>
+    <!--
+    <apex:form >
+        <div style='position:relative;'>
+            <apex:selectList value="{!groupId}" size="1" styleClass="select">
+                <apex:selectOptions value="{!groupOptions}"/>
+                <apex:actionSupport event="onchange" rerender="feed,group-selected,postSection"/>
+            </apex:selectList>
+        </div>
+    </apex:form>
+    
+    <apex:outputpanel id="group-selected">
+        <p class='active-group'><span class='light-text'>Active Group:</span> <span id='active-group'>{!selectedGroupName}</span></p>
+    </apex:outputpanel>
+    -->
+    <apex:outputPanel id="feed">
+        <div class='well'>
+            <div class='scroll scroll--chatter-sidebar' style='max-height: 240px;'>
+            <!--Output panel was here-->
+                <apex:repeat value="{!feedItemsWithUserType}" var="feedItem">
+                    <apex:variable var="userType" value="person--mentor" rendered="{!feedItem.isStudent == false}" />
+                    <apex:variable var="userType" value="" rendered="{!feedItem.isStudent == true}" />
+                    <div class='person {!userType}'>
+                        <div class="person__avatar">
+                            <img src="{!feedItem.feeditem.photoUrl}" width='28' height='28' alt="" />
+                        </div>
+                        <div class='person__content'>
+                            <p class='person__name'>{!feedItem.firstName} {!feedItem.lastName}</p>
+                            <apex:variable var="questionOrComment" value="Question" rendered="{!feedItem.question == true}" />
+                            <apex:variable var="questionOrComment" value="Comment" rendered="{!feedItem.question == false}" />
+                            <p class="person__type">{!questionOrComment}</p>
+                            <p class='person__date'>
+                                {!feedItem.formattedPostTime}
+                            </p>
+                            <p class='person__message'>{!feedItem.shortenedFeedBody}</p>
+                            <p class='person__comments a' data-btn='chatter' >
+                                <apex:outputPanel rendered="{!IF(feedItem.feeditem.comments.comments.size > 1,true,false)}">
+                                    {!feedItem.feeditem.comments.comments.size} comments
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!IF(feedItem.feeditem.comments.comments.size = 1,true,false)}">
+                                    1 comment
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!IF(feedItem.feeditem.comments.comments.size = 0,true,false)}">
+                                    No comments
+                                </apex:outputPanel>
+                            </p>
+                        </div>
+                    </div>
+                </apex:repeat>
+            </div>
+        </div>
+        <apex:outputPanel rendered="{!NOT(isReadOnly)}">
+            <div class='write-comment flyout flyout--overflow' data-flyout='parent' >
+                <input type='text' id='cc_add-comment_chat-input' placeholder='Write a comment...' class='full-box' />
+                <div class="flyout__holder">
+                    <div class="flyout__box">
+                        <div class="flyout__files">
+                            <div class="flyout__files__drop" data-flyout="drop-zone">
+                                <p class="flyout__files__title">Drag and Drop Your File Here</p>
+                                <p class="flyout__files__drop-file" data-flyout="drop-file">No file chosen</p>
+                                
+                            </div>
+                            <p class="flyout__files__or">or</p>
+                            <input type="file" value="click here" /> 
+                            <p class="flyout__files__file-size">Maximum file size 2GB</p>
+                        </div>
+                        <hr/>
+                        
+                        <button class="btn btn--sprite btn--full" data-flyout='btn-post-question'><span class="sprite sprite--blue--bubble-question"></span>Post as a Question</button>
+                        <button class="btn btn--sprite btn--full spacer-margin--5" data-flyout="btn-post-comment"><span class="sprite sprite--blue--bubble-exclamation"></span>Post as a Comment</button>
+                        <div class="btn btn--square btn--square--small right spacer-margin--5 " data-flyout="btn-close"><span class="icon icon--close"></span></div>
+                        <div class="sprite sprite--question hover right" title="Please tell us if your post is a question or a comment so that your mentors can respond appropriately in a timely manner."></div>
+                    </div>
+                </div>
+            </div>
+        </apex:outputPanel>
+    </apex:outputPanel>
+    <apex:form >
+        <apex:actionFunction name="postMessageToChatter" action="{!postMessageToChatter}" rerender="feed">
+            <apex:param id="message" name="message" value="" />
+            <apex:param id="question" name="question" value="" />
+            <apex:param id="feedItemId" name="feedItemId" value="" />
+        </apex:actionFunction>
+    </apex:form>
+    <apex:form >
+        <apex:actionFunction name="postLinkToChatter" action="{!postLinkToChatter}" rerender="feed">
+            <apex:param id="message" name="message" value="" />
+            <apex:param id="linkUrl" name="linkUrl" value="" />
+            <apex:param id="linkTitle" name="linkTitle" value="" />
+            <apex:param id="question" name="question" value="" />
+            <apex:param id="feedItemId" name="feedItemId" value="" />
+        </apex:actionFunction>
+    </apex:form>
+    <apex:form >
+        <apex:actionFunction name="postFileToChatter" action="{!postFileToChatter}" rerender="feed">
+            <apex:param id="message" name="message" value="" />
+            <apex:param id="question" name="question" value="" />
+            <apex:param id="feedItemId" name="feedItemId" value="" />
+        </apex:actionFunction>
+    </apex:form>
+</apex:component>

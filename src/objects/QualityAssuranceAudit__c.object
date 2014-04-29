@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Custom object used to perform quality assurance audits for individual employees or teams.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AuditURL__c</fullName>
+        <description>Displays the URL link to the audit record - for use in email templates and reports.</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK( &quot;https://srm.my.salesforce.com/&quot; + Id , &quot;https://srm.my.salesforce.com/&quot; + Id )</formula>
+        <label>Audit URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BestPracticeError__c</fullName>
+        <description>Picklist field that allows the user to select the type of best practice error found, if any, during the audit process.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the most appropriate option if any best practice error(s) were found.</inlineHelpText>
+        <label>Best Practice Error</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unprofessional Communication to Student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unprofessional Communication to Other Staff</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lack of Comments or Notes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lack of Communication to Student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lack of Communication to Other Staff</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Exceeded Service Level Agreement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Typo/Misspelling</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incorrect information on evaluation form</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Met where it should be listed as Met</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Failing to fill out a part of the evaluation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Case__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field that allows the user to select the case the audit is referencing.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the lookup icon, find the case you are auditing, and link the case to this audit record.</inlineHelpText>
+        <label>Case</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Quality Assurance Audits</relationshipLabel>
+        <relationshipName>Errors</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CauseOfError__c</fullName>
+        <description>Multiselect picklist that allows the user to identify the cause(s) of error relating to the audit.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the most appropriate option for why you believe the error(s) took place.</inlineHelpText>
+        <label>Cause of Error</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Employee Mistake</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Employee Misunderstanding</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lack of Training</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Miscommunication</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lack of Clarity in Policy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CorrectiveAction__c</fullName>
+        <description>Open text field that allows the user to enter in any corrective actions that need to take place on a student process, transfer evaluation, or case that was audited.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please describe any corrective actions that need to take place on the student process, transfer evaluation, or case based on your audit results.</inlineHelpText>
+        <label>Corrective Action</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ExplanationofAudit__c</fullName>
+        <description>Open text field that allows an auditor to explain what they found during the audit.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter in an explanation of what you found during the audit. Describe the error(s) found and any positive areas you would like to highlight.</inlineHelpText>
+        <label>Explanation of Audit</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FollowUpDate__c</fullName>
+        <description>Date field that allows the user to select a date in which to follow-up to ensure any corrective action has taken place.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select a date that will remind you to follow-up on any corrective action that was necessary.</inlineHelpText>
+        <label>Follow Up Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FollowUpNeeded__c</fullName>
+        <externalId>false</externalId>
+        <label>Follow Up Needed</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>FollowUpNotes__c</fullName>
+        <description>Select a date that will remind you to follow-up on any corrective action that was necessary.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter in any notes to remind you how / why to follow up with the audit.</inlineHelpText>
+        <label>Follow Up Notes</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>HighStakeError__c</fullName>
+        <description>Picklist field that allows the user to select the type of high stake error found, if any, during the audit process.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the most appropriate option if any high stake error(s) were found.</inlineHelpText>
+        <label>High Stake Error</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SWATEST</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SOAPCOL</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Misapplied Course</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Missed Course</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Improper Counsel to Mentor/Other Staff</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Improper Counsel to Student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Improper Counsel to Non-University Staff</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Approval Received</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Clearance Received (Bursar/FA)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incorrect Banner Processing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unofficial Documentation Used w/out Proper Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incorrect Documentation Accepted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incorrect Grade Posted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incorrect Crosswalk Applied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EV Letter Sent Before Course/Term Enrollment was Established</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incorrect Information Included in Letter to Student or Third Party</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>FERPA Violation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Diploma Printing Error</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Diploma Mailing Error</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Inappropriate Readmission Decision</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incorrect LDA Used for Withdrawal Processing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>QualityAssurance__c</fullName>
+        <description>Master detail relationship field that allows users to link the quality assurance individual audit to the over all monthly employee audit.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the lookup icon, find the Quality Assurance record you are working on, and link it to this audit record.</inlineHelpText>
+        <label>Quality Assurance</label>
+        <referenceTo>QualityAssurance__c</referenceTo>
+        <relationshipLabel>Quality Assurance Audits</relationshipLabel>
+        <relationshipName>Errors</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>SRMError__c</fullName>
+        <description>Picklist field that allows the user to select the type of SRM error found, if any, during the audit process.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the most appropriate option if any SRM error(s) were found.</inlineHelpText>
+        <label>SRM Error</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incorrect Properties and/or Categorization</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incomplete Properties and/or Categorization</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Contact was Set Incorrectly or Not At All</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incorrect &quot;From&quot; Email Address</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>StudentProcess__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field that allows the user to select the Student Process the audit is referencing.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the lookup icon, find the student process you are auditing, and link it to this audit record.</inlineHelpText>
+        <label>Student Process</label>
+        <referenceTo>StudentProcess__c</referenceTo>
+        <relationshipLabel>Quality Assurance Audits</relationshipLabel>
+        <relationshipName>Errors</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Subject__c</fullName>
+        <description>Open text field that allows the user to enter in a subject or description of the quality assurance audit.</description>
+        <externalId>false</externalId>
+        <label>Subject</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SystemError__c</fullName>
+        <description>Picklist field that allows the user to select the type of system error found, if any, during the audit process.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the most appropriate option if any system error(s) were found.</inlineHelpText>
+        <label>System Error</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SWATEST</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SOAPCOL</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Courses</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accreditation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student ID#/Institution Name/Degree Date</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Informatica</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TrainingIssue__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox field that indicates there may be a training issue. Used in workflow that notifies the training coordinator/manager to take action.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box if you believe there is a training issue. By checking this box, the training coordinator will be notified to take action.</inlineHelpText>
+        <label>Training Issue</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TransferEvaluation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field that allows the user to select the Transfer Evaluation the audit is referencing.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the lookup icon, find the transfer evaluation you are auditing, and link it to this audit record.</inlineHelpText>
+        <label>Transfer Evaluation</label>
+        <referenceTo>TransferEvaluation__c</referenceTo>
+        <relationshipLabel>Quality Assurance Audits</relationshipLabel>
+        <relationshipName>Errors</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TurnAroundTime__c</fullName>
+        <description>Number field that allows the user to enter in the number of business days the process or case took.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter in business days how long the evaluation, process, or case took to complete.</inlineHelpText>
+        <label>Turn Around Time</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TypeOfError__c</fullName>
+        <externalId>false</externalId>
+        <label>Type of Error</label>
+        <picklist>
+            <picklistValues>
+                <fullName>High Stake</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Best Practice</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CRM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Quality Assurance Audit</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Subject__c</columns>
+        <columns>QualityAssurance__c</columns>
+        <columns>HighStakeError__c</columns>
+        <columns>BestPracticeError__c</columns>
+        <columns>SRMError__c</columns>
+        <columns>SystemError__c</columns>
+        <columns>ExplanationofAudit__c</columns>
+        <columns>TrainingIssue__c</columns>
+        <columns>Case__c</columns>
+        <columns>StudentProcess__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>AssistantRegistrar</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CompletedAuditsByDate</fullName>
+        <booleanFilter>1 OR 2 OR 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Subject__c</columns>
+        <columns>HighStakeError__c</columns>
+        <columns>BestPracticeError__c</columns>
+        <columns>SRMError__c</columns>
+        <columns>SystemError__c</columns>
+        <columns>TurnAroundTime__c</columns>
+        <columns>ExplanationofAudit__c</columns>
+        <columns>TrainingIssue__c</columns>
+        <columns>Case__c</columns>
+        <columns>StudentProcess__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>FollowUpDate__c</columns>
+        <columns>FollowUpNeeded__c</columns>
+        <columns>FollowUpNotes__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>YESTERDAY</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>LAST_N_DAYS:5</value>
+        </filters>
+        <label>Completed Audits by Date</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>AssistantRegistrar</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>FollowUpNeeded</fullName>
+        <columns>NAME</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>FollowUpDate__c</columns>
+        <columns>FollowUpNeeded__c</columns>
+        <columns>FollowUpNotes__c</columns>
+        <columns>ExplanationofAudit__c</columns>
+        <columns>HighStakeError__c</columns>
+        <columns>BestPracticeError__c</columns>
+        <columns>SRMError__c</columns>
+        <columns>SystemError__c</columns>
+        <columns>QualityAssurance__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>FollowUpNeeded__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </filters>
+        <label>Follow Up Needed</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>AssistantRegistrar</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>TodaysAudits</fullName>
+        <columns>NAME</columns>
+        <columns>Subject__c</columns>
+        <columns>HighStakeError__c</columns>
+        <columns>BestPracticeError__c</columns>
+        <columns>SRMError__c</columns>
+        <columns>SystemError__c</columns>
+        <columns>TurnAroundTime__c</columns>
+        <columns>ExplanationofAudit__c</columns>
+        <columns>TrainingIssue__c</columns>
+        <columns>Case__c</columns>
+        <columns>StudentProcess__c</columns>
+        <columns>TransferEvaluation__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>Today&apos;s Audits</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>AssistantRegistrar</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <displayFormat>QAA-{000000}</displayFormat>
+        <label>Audit Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Quality Assurance Audits</pluralLabel>
+    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>StudentRecords</fullName>
+        <active>true</active>
+        <description>Record type used to perform an audit for a Student Records process or case.</description>
+        <label>Student Records</label>
+        <picklistValues>
+            <picklist>BestPracticeError__c</picklist>
+            <values>
+                <fullName>Exceeded Service Level Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Comments or Notes</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Communication to Other Staff</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Communication to Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Unprofessional Communication to Other Staff</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unprofessional Communication to Student</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CauseOfError__c</picklist>
+            <values>
+                <fullName>Employee Mistake</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Misunderstanding</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Clarity in Policy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Miscommunication</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>FollowUpNeeded__c</picklist>
+            <values>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HighStakeError__c</picklist>
+            <values>
+                <fullName>Diploma Mailing Error</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Diploma Printing Error</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EV Letter Sent Before Course%2FTerm Enrollment was Established</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FERPA Violation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Improper Counsel to Mentor%2FOther Staff</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Improper Counsel to Non-University Staff</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Improper Counsel to Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inappropriate Readmission Decision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Banner Processing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Crosswalk Applied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Documentation Accepted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Grade Posted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Information Included in Letter to Student or Third Party</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect LDA Used for Withdrawal Processing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Approval Received</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Clearance Received %28Bursar%2FFA%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unofficial Documentation Used w%2Fout Proper Approval</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SRMError__c</picklist>
+            <values>
+                <fullName>Contact was Set Incorrectly or Not At All</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incomplete Properties and%2For Categorization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect %22From%22 Email Address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Properties and%2For Categorization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SystemError__c</picklist>
+            <values>
+                <fullName>Informatica</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TypeOfError__c</picklist>
+            <values>
+                <fullName>Best Practice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CRM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>High Stake</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>TranscriptEvaluation</fullName>
+        <active>true</active>
+        <description>Record type used to perform an audit for a Transcript Evaluation process or case.</description>
+        <label>Transcript Evaluation</label>
+        <picklistValues>
+            <picklist>BestPracticeError__c</picklist>
+            <values>
+                <fullName>Exceeded Service Level Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Failing to fill out a part of the evaluation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect information on evaluation form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Comments or Notes</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Communication to Other Staff</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Communication to Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Met where it should be listed as Met</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Typo%2FMisspelling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unprofessional Communication to Other Staff</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unprofessional Communication to Student</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CauseOfError__c</picklist>
+            <values>
+                <fullName>Employee Mistake</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Misunderstanding</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Clarity in Policy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Miscommunication</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>FollowUpNeeded__c</picklist>
+            <values>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HighStakeError__c</picklist>
+            <values>
+                <fullName>Misapplied Course</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Missed Course</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOAPCOL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SWATEST</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SRMError__c</picklist>
+            <values>
+                <fullName>Contact was Set Incorrectly or Not At All</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incomplete Properties and%2For Categorization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect %22From%22 Email Address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Properties and%2For Categorization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SystemError__c</picklist>
+            <values>
+                <fullName>Accreditation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Courses</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>SOAPCOL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SWATEST</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student ID%23%2FInstitution Name%2FDegree Date</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TypeOfError__c</picklist>
+            <values>
+                <fullName>Best Practice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CRM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>High Stake</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

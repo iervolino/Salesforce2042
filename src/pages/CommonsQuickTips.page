@@ -1,0 +1,25 @@
+<apex:page sidebar="false" title="Course Tips" showHeader="false" standardstylesheets="false" controller="CommonsSidebarController" applyBodyTag="false">
+    <head>
+        <title>Course Tips</title>
+        <c:CommonsStaticResources />
+    </head>
+    <body class='cc-popup'>
+        <div class="banner__ribbon">
+            <h2><span class='btn btn--square btn--dark '><span class='icon icon--check'></span></span>Course Tips</h2>
+        </div>
+        <div class="cc-popup__content">
+            <div class="full-box well well--bottom">
+                <div class='scroll' style='height: 320px;'>
+                    <ul class='cc-list'>
+                        <apex:repeat value="{!courseCommunityQuickTip}" var="tip">
+                            <li><apex:outputtext escape="false" value="{!tip.MyResponse__c}" /></li>
+                        </apex:repeat>
+                    </ul>
+                </div>
+            </div>
+            <div class="full-box well well--invisible clearfix">
+                <button class="btn right" data-action='close'><span class="icon icon--close"></span> Close Window</button>
+            </div>
+        </div>
+    </body>
+</apex:page>

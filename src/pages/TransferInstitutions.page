@@ -1,0 +1,77 @@
+<apex:page standardController="Opportunity" Extensions="OppTranscriptController" sidebar="false" showHeader="false" >
+   
+        <apex:form >
+
+  <apex:outputPanel id="pb1" style="width: 450px; vertical-align:text-top;"  >
+        <div style="width:450px">
+      <apex:pageBlock >
+         <apex:pageBlockSection columns="7"  >
+                  <apex:pageBlockSectionItem >Subject:</apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >Course:</apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >Course Title:</apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >C:</apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >G:</apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >Term:</apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >Group:</apex:pageBlockSectionItem>
+                
+                  <apex:inputText id="NewSubject" maxlength="5" value="{!NewSubject}" style="width:40px;" />
+                  <apex:inputText id="NewCrseName" maxlength="5" value="{!NewCrseName}" style="width:30px;"/>
+                  <apex:inputText id="NewTitle" maxlength="50" value="{!NewTitle}" style="width:60px;"/>
+                  <apex:inputText id="NewCredits" maxlength="3" value="{!NewCredits}" style="width:20px;"/>
+                  <apex:inputText id="NewGrade" maxlength="3" value="{!NewGrade}" style="width:20px;"/>
+                  <apex:inputText id="NewTerm" maxlength="6" value="{!NewTerm}" style="width:50px;"/>
+                  <apex:inputText id="NewCourseGroup" maxlength="10" value="{!NewCourseGroup}" style="width:50px;"/>                             
+           </apex:pageBlockSection>
+        </apex:pageBlock>
+      </div>
+      <div style="height: 700px;width:450px; overflow: auto"> 
+          <apex:repeat value="{!InstCourses}" var="Institution">
+        <apex:pageBlock >      
+  
+         <apex:pageBlockSection columns="1" >
+           <apex:outputLink style="font-weight:bold;font-size:15px;" value="/{!Institution.Id}">
+                   {!Institution.TranscriptInstitution__r.Name} 
+           </apex:outputLink>
+    </apex:pageBlockSection>
+    <apex:pageBlockSection columns="2" >
+        <apex:outputText value="{!Institution.TranscriptStatus__c}" />
+         <apex:commandButton action="{!add}" value="Add Course" rerender="pb1"  >
+                    <apex:param name="CurrentInst"  value="{!Institution.id}"  assignTo="{!CurrentInstID}"/>
+             </apex:commandButton>
+         </apex:pageBlockSection>
+          <apex:pageBlockSection >
+           <apex:pageBlockTable value="{!Institution.TransferAttendances__r}" var="TA">
+              <apex:column value="{!TA.Name}" headerValue="ID"/>
+              <apex:column value="{! TA.DegreeAwarded__c}" headerValue="Degree"/>
+              <apex:column value="{! TA.StartDate__c}"/>
+              <apex:column value="{! TA.EndDate__c}"/>
+              <apex:column value="{! TA.GPA__c}"/>
+               <apex:column value="{! TA.DegreeRelatesToWGUProgram__c}" headerValue="Related"/>
+            </apex:pageBlockTable>
+          </apex:pageBlockSection>
+          <apex:pageBlockSection columns="1"> 
+          <apex:pageBlockTable value="{!Institution.TransferCourses__r }"  var="item2" >
+             <apex:facet name="Caption">Courses</apex:facet>
+             <apex:column headerValue="ID" style="" value="{! item2.Name}"/>
+              <apex:column headerValue="Subject" value="{! item2.Subject__c}" style="width:40px;"/>
+              <apex:column headerValue="Course" value="{! item2.Course__c}" style="width:30px;"/>
+              <apex:column headerValue="Course Title" value="{! item2.CourseTitle__c}" style="width:100px;"/>
+              <apex:column headerValue="C" value="{! item2.Credits__c}" style="width:20px;"/>
+              <apex:column headerValue="G" value="{! item2.Grade__c}" style="width:20px;"/>
+              <apex:column headerValue="Term" value="{! item2.Term__c}" style="width:50px;"/>
+              <apex:column headerValue="Group" value="{! item2.CourseGroup__c}" style="width:50px;"/>
+  
+              </apex:pageBlockTable>
+             
+                 
+           
+              </apex:pageBlockSection>
+          
+            
+  </apex:pageBlock>
+        
+    </apex:repeat>
+</div>
+          </apex:outputPanel>
+       </apex:form>
+ </apex:page>

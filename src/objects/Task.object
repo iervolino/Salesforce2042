@@ -1,0 +1,2686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Close</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>DeleteSeries</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>NewTask</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>CreatedById</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LastModifiedById</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Priority</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>High</fullName>
+                <default>false</default>
+                <highPriority>true</highPriority>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Normal</fullName>
+                <default>true</default>
+                <highPriority>false</highPriority>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Low</fullName>
+                <default>false</default>
+                <highPriority>false</highPriority>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Started</fullName>
+                <closed>false</closed>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <closed>false</closed>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <closed>true</closed>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Waiting on someone else</fullName>
+                <closed>false</closed>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Deferred</fullName>
+                <closed>false</closed>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Deactivated</fullName>
+                <closed>true</closed>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Subject</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Send Letter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Send Quote</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transcript Note</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Inbound</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ACD (Hunt call)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Outbound - General</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Outbound – Priority Calling</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>WhatId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>WhoId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <recordTypes>
+        <fullName>CAREforceTask</fullName>
+        <active>true</active>
+        <label>CAREforce Task</label>
+        <picklistValues>
+            <picklist>ActivityType__c</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Note</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CallDisposition__c</picklist>
+            <values>
+                <fullName>Bad Phone Number</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EC Recommendation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call- AR Live Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call- AR Set Appt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call- EC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call- No Appt Set</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call-AR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need Follow Up AEC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need Follow Up EC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Follow Up- Not Interested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 6</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CallorApptTime__c</picklist>
+            <values>
+                <fullName>11%3A00am-1%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00pm-4%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00am-7%3A59am</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00pm-7%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00am-10%3A59am</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00pm-10%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Category__c</picklist>
+            <values>
+                <fullName>Demonstration Teaching</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Followed-up on student%27s behalf %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Left Voicemail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Voicemail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Email</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Concerns__c</picklist>
+            <values>
+                <fullName>Access to IT systems</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Scheduling Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bursar%27s Office Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EWB %2F EWB Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment Expectations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grading Delays</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grading Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT Help Desk Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning %2F Program Communities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online or On-site Assessment Proctoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAP Specialist Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Assistance Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transcript Evaluation %2F Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Policy %2F Procedure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Transcripts %2F Records</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>EnrollmentNoteType__c</picklist>
+            <values>
+                <fullName>Chat-Live Website Chat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email Only</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVM-Follow Up to Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVM-General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVM-Response to Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Email Address%2FMailed Materials</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Ring No Answer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGA1</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Priority</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Normal</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Result__c</picklist>
+            <values>
+                <fullName>First Call %E2%80%93 Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call %E2%80%93 General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call %E2%80%93 General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call - Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow up Call %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA %E2%80%93 Or general questions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set Appointment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voicemail</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Started</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Waiting on someone else</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Category__c</picklist>
+            <values>
+                <fullName>Background Check</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Basic Skills Exam</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cohort Leader</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Content Exam</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Fee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Interview</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Observations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Placement %2F Cohort</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Placement Specialist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Timeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed OTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed WGU %2F personal issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed content detail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed current assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed next term goals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed term goals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up%2FRecap from phone call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Left instructions for assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Licensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Offered support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE I</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE II</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE Summary Task List</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provided information on assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reminded Student of Timelines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reminded students of timeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested a return call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested appt reschedule</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested course %2F general information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested email follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested phone contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reviewed grader feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFAW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set next appointment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set weekly goals %2F tasks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student attended webinar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Quote</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transcript Note</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>ACD %28Hunt call%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inbound</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outbound %E2%80%93 Priority Calling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outbound - General</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>CallTransfer</fullName>
+        <active>true</active>
+        <description>Record type used to log a call transfer.</description>
+        <label>Call Transfer</label>
+        <picklistValues>
+            <picklist>ActivityType__c</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Note</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CallDisposition__c</picklist>
+            <values>
+                <fullName>Bad Phone Number</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EC Recommendation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call- AR Live Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call- AR Set Appt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call- EC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call- No Appt Set</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call-AR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need Follow Up AEC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need Follow Up EC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Follow Up- Not Interested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone Attempt 6</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CallorApptTime__c</picklist>
+            <values>
+                <fullName>11%3A00am-1%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00pm-4%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00am-7%3A59am</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00pm-7%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00am-10%3A59am</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00pm-10%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Category__c</picklist>
+            <values>
+                <fullName>Demonstration Teaching</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Followed-up on student%27s behalf %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Left Voicemail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Voicemail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Email</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Concerns__c</picklist>
+            <values>
+                <fullName>Access to IT systems</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Scheduling Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bursar%27s Office Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EWB %2F EWB Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment Expectations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grading Delays</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grading Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT Help Desk Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning %2F Program Communities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online or On-site Assessment Proctoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAP Specialist Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Assistance Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transcript Evaluation %2F Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Policy %2F Procedure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Transcripts %2F Records</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>EnrollmentCallTime__c</picklist>
+            <values>
+                <fullName>06%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>06%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>06%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>06%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>07%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>07%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>07%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>07%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>08%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>08%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>08%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>08%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>09%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>09%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>09%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>09%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>13%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>13%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>13%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>13%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>14%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>14%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>14%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>14%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>15%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>15%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>15%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>15%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>16%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>16%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>16%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>16%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>17%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>17%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>17%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>17%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>18%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>18%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>18%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>18%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>19%3A00%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>19%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>19%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>19%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>20%3A00</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>20%3A15</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>20%3A30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>20%3A45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>21%3A00</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>EnrollmentNoteType__c</picklist>
+            <values>
+                <fullName>Chat-Live Website Chat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email Only</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVM-Follow Up to Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVM-General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVM-Response to Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Email Address%2FMailed Materials</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Ring No Answer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGA1</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>NoteType__c</picklist>
+            <values>
+                <fullName>Chat-Website Live Chat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email Only</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVM-- Follow up to Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVM-- General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LVM-- Response to Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Email Address%2F Mailed Material</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Ring No Answer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGA1</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>OriginType__c</picklist>
+            <values>
+                <fullName>Inbound</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outbound</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Priority</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Normal</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Result__c</picklist>
+            <values>
+                <fullName>First Call %E2%80%93 Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call %E2%80%93 General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call %E2%80%93 General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call - Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow up Call %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA %E2%80%93 Or general questions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set Appointment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voicemail</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deactivated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Started</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Waiting on someone else</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Category__c</picklist>
+            <values>
+                <fullName>Background Check</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Basic Skills Exam</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cohort Leader</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Content Exam</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Fee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Interview</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Observations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Placement %2F Cohort</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Placement Specialist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Timeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed OTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed WGU %2F personal issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed content detail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed current assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed next term goals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed term goals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up%2FRecap from phone call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Left instructions for assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Licensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Offered support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE I</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE II</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE Summary Task List</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provided information on assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reminded Student of Timelines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reminded students of timeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested a return call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested appt reschedule</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested course %2F general information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested email follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested phone contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reviewed grader feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFAW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set next appointment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set weekly goals %2F tasks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student attended webinar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Quote</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transcript Note</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TransferredTo__c</picklist>
+            <values>
+                <fullName>ADA Support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Admissions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alumni Affairs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bursar</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Career Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hang Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT Help Desk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Licensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Orientation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Records</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Refer a Friend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scholarships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Success</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Taskstream</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teacher Success</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Term Break</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transcript Evaluation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Veteran Affairs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Withdrawal Recovery</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>EmployeeTask</fullName>
+        <active>true</active>
+        <description>WGU Employee Task</description>
+        <label>Employee Task</label>
+        <picklistValues>
+            <picklist>CallorApptTime__c</picklist>
+            <values>
+                <fullName>11%3A00am-1%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00pm-4%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00am-7%3A59am</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00pm-7%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00am-10%3A59am</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00pm-10%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Category__c</picklist>
+            <values>
+                <fullName>Demonstration Teaching</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Followed-up on student%27s behalf %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Left Voicemail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Voicemail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Email</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Concerns__c</picklist>
+            <values>
+                <fullName>Access to IT systems</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Scheduling Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bursar%27s Office Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EWB %2F EWB Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment Expectations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grading Delays</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grading Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT Help Desk Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning %2F Program Communities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online or On-site Assessment Proctoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAP Specialist Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Assistance Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transcript Evaluation %2F Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Policy %2F Procedure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Transcripts %2F Records</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>OriginType__c</picklist>
+            <values>
+                <fullName>Inbound</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Outbound</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Priority</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Normal</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Result__c</picklist>
+            <values>
+                <fullName>First Call %E2%80%93 Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call %E2%80%93 General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call %E2%80%93 General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call - Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow up Call %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA %E2%80%93 Or general questions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set Appointment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voicemail</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Started</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Waiting on someone else</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Category__c</picklist>
+            <values>
+                <fullName>Background Check</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Basic Skills Exam</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cohort Leader</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Content Exam</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Fee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Interview</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Observations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Placement %2F Cohort</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Placement Specialist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Timeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed OTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed WGU %2F personal issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed content detail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed current assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed next term goals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed term goals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up%2FRecap from phone call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Left instructions for assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Licensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Offered support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE I</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE II</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE Summary Task List</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provided information on assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reminded Student of Timelines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reminded students of timeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested a return call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested appt reschedule</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested course %2F general information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested email follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested phone contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reviewed grader feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFAW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set next appointment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set weekly goals %2F tasks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student attended webinar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Quote</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>StudentTask</fullName>
+        <active>true</active>
+        <description>A task owned by a student user</description>
+        <label>Student Task</label>
+        <picklistValues>
+            <picklist>CallorApptTime__c</picklist>
+            <values>
+                <fullName>11%3A00am-1%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00pm-4%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00am-7%3A59am</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00pm-7%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00am-10%3A59am</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00pm-10%3A59pm</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Category__c</picklist>
+            <values>
+                <fullName>Demonstration Teaching</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Followed-up on student%27s behalf %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Left Voicemail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Voicemail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Email</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Concerns__c</picklist>
+            <values>
+                <fullName>Access to IT systems</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Scheduling Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bursar%27s Office Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EWB %2F EWB Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment Expectations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grading Delays</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grading Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT Help Desk Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning %2F Program Communities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online or On-site Assessment Proctoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAP Specialist Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Assistance Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Mentoring Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transcript Evaluation %2F Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Policy %2F Procedure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Transcripts %2F Records</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Priority</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Normal</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Result__c</picklist>
+            <values>
+                <fullName>First Call %E2%80%93 Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call %E2%80%93 General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Call - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call %E2%80%93 General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up Call - Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow up Call %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake %E2%80%93 Student returned VM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - Appt no-showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - Appt showed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intake - General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Live Transfer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA %E2%80%93 Or general questions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set Appointment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voicemail</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deactivated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Started</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Waiting on someone else</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Category__c</picklist>
+            <values>
+                <fullName>Background Check</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Basic Skills Exam</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cohort Leader</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Content Exam</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Fee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Interview</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Observations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Placement %2F Cohort</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Placement Specialist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Timeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed OTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed WGU %2F personal issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed content detail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed current assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed next term goals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussed term goals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up%2FRecap from phone call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Left instructions for assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Licensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Offered support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28please note%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE I</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE II</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE Summary Task List</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provided information on assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reminded Student of Timelines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reminded students of timeline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested a return call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested appt reschedule</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested course %2F general information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested email follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested phone contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reviewed grader feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFAW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set next appointment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set weekly goals %2F tasks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student attended webinar</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Quote</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+</CustomObject>

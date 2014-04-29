@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>The many to many relationship table for WGU Course Completion Task to WGU Course Version</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PAMSAssessmentCourseVersionId__c</fullName>
+        <description>The unique ID that will associate this record with a record in PAMS. assessment_id -course_version_id</description>
+        <externalId>true</externalId>
+        <label>PAMS Assessment Course Version Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PAMSAssessmentId__c</fullName>
+        <description>The id of the Assessment from PAMS.  Used to create the lookup to WGUCourseCompletionTask__c</description>
+        <externalId>false</externalId>
+        <label>PAMS Assessment Id</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PAMSCourseVersionId__c</fullName>
+        <description>The external id for the course version.  Used for create the lookup to WGUCourseVersion__c</description>
+        <externalId>false</externalId>
+        <label>PAMS Course Version Id</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WGUCourseCompletionTask__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The WGUCourseCompletion task associated with this mapping</description>
+        <externalId>false</externalId>
+        <label>WGU Course Completion Task</label>
+        <referenceTo>WGUCourseCompletionTask__c</referenceTo>
+        <relationshipLabel>WGU Completion Task in Course Version</relationshipLabel>
+        <relationshipName>WGUCompletionTaskInCourseVersion</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>WGUCourseVersion__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The WGUCourseVersion associated with this mapping</description>
+        <externalId>false</externalId>
+        <label>WGU Course Version</label>
+        <referenceTo>WGUCourseVersion__c</referenceTo>
+        <relationshipLabel>WGU Completion Task in Course Version</relationshipLabel>
+        <relationshipName>WGUCompletionTaskInCourseVersion</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>WGU Completion Task in Course Version</label>
+    <nameField>
+        <label>WGU Completion Task in Course Version Na</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>WGU Completion Task in Course Version</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

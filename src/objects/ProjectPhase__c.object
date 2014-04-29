@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>The different phases of a project as planned in iteration zero to drive swim charts.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AchievedbyDate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not the phase was finished by the committed date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the phase was finished by the committed date</inlineHelpText>
+        <label>Achieved by Date</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CommittedIndicator__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not we have actually committed to the date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not we have actually committed to the date</inlineHelpText>
+        <label>Committed Indicator</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <description>Date when the project is supposed to end</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date when the project is supposed to end</inlineHelpText>
+        <label>End Date</label>
+        <required>true</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ImproveGPTWRatings__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Will this phase increase our ratings for the Great Places to Work survey?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Will this phase increase our ratings for the Great Places to Work survey?</inlineHelpText>
+        <label>Improve GPTW Ratings</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ImproveVSAT__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Will this improve the number of very satisfied students?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Will this improve the number of very satisfied students?</inlineHelpText>
+        <label>Improve VSAT</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IncreaseApplicants__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Will this phase increase the number of applicants to WGU?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Will this phase increase the number of applicants to WGU?</inlineHelpText>
+        <label>Increase Applicants</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IncreaseMatriculates__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Will this increase the number of students matriculated to the university?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Will this increase the number of students matriculated to the university?</inlineHelpText>
+        <label>Increase Matriculates</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IncreaseOTP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Will this phase increase Student On Time Progress</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Will this phase increase Student On Time Progress?</inlineHelpText>
+        <label>Increase OTP</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IncreaseSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Will this phase increase financial aid eligibility?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Will this phase increase financial aid eligibility?</inlineHelpText>
+        <label>Increase SAP</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PhaseType__c</fullName>
+        <description>The general phase type this phase is part of</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The general phase type this phase is part of</inlineHelpText>
+        <label>Phase Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Requirements</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Building</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Testing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pilot</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Launch</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ProjectRelated__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>The project that this phase is related to</description>
+        <externalId>false</externalId>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipName>ProjectPhases</relationshipName>
+        <required>true</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <description>Date the phase is planned to start</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the phase is planned to start</inlineHelpText>
+        <label>Start Date</label>
+        <required>true</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Project Phase</label>
+    <nameField>
+        <label>Project Milestone Name</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Project Phases</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

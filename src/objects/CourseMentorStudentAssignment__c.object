@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A course mentor was assigned to a student&apos;s specific course.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AssignmentEndDate__c</fullName>
+        <description>The date this assignment actually terminated. (No longer active)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date this assignment actually terminated. (No longer active)</inlineHelpText>
+        <label>AssignmentEndDate</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>AssignmentStartDate__c</fullName>
+        <defaultValue>TODAY()</defaultValue>
+        <description>The date of creation</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date of creation</inlineHelpText>
+        <label>AssignmentStartDate</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CourseCode__c</fullName>
+        <description>Course Code of this student.</description>
+        <externalId>false</externalId>
+        <label>Course Code</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentAcademicCourse__r.EndDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>true: this assignment is current. false: this is  a history record</description>
+        <externalId>false</externalId>
+        <label>IsActive</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MentorPidm__c</fullName>
+        <description>Pidm of Course Mentor.</description>
+        <externalId>false</externalId>
+        <label>Mentor Pidm</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Mentor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Course Mentor of this Assginment. The mentor&apos;s role should be &apos;Course Mentor&apos; or &apos;Student Mentor / Cours Mentor&apos;.</description>
+        <externalId>false</externalId>
+        <label>Course Mentor</label>
+        <referenceTo>Mentor__c</referenceTo>
+        <relationshipLabel>Course Mentor Student Assignments</relationshipLabel>
+        <relationshipName>CourseMentorStudentAssignments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PIDM__c</fullName>
+        <description>student pidm</description>
+        <externalId>false</externalId>
+        <label>PIDM</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReasonOfAssignment__c</fullName>
+        <description>The reason and event triggers this assginment.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Planned Course Started:  If the student previously planned to start  his course(from today).
+Engagement Approved:  If the student engagement checked
+Previous Course Passed: If the student finished his/her course earlier.
+Manual:  Manually assigned.</inlineHelpText>
+        <label>Reason Of Assignment</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Standard Daily</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Engaged On</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unknow</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Manual Assignment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Standard Event</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ReasonOfDeassignment__c</fullName>
+        <description>Reason of why terminate this assignment between CM and student</description>
+        <externalId>false</externalId>
+        <label>ReasonOfDeassignment</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentAcademicCourse__r.StartDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>StudentAcademicCourse__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field to StudentAcademicCourse record which present 1 course of 1 student in 1 term.</description>
+        <externalId>false</externalId>
+        <label>Student Academic Course</label>
+        <referenceTo>StudentAcademicCourse__c</referenceTo>
+        <relationshipLabel>Course Mentor Student Assignments</relationshipLabel>
+        <relationshipName>Course_Mentor_Student_Assignments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StudentCourseRegistration__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Corresponding course of this assignment.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>the course student are currently taking.</inlineHelpText>
+        <label>Student Course Registration</label>
+        <referenceTo>StudentCourseRegistration__c</referenceTo>
+        <relationshipLabel>Course Mentor Student Assignments</relationshipLabel>
+        <relationshipName>CourseMentorStudentAssignments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StudentCourseVersion__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Point to the student course version record of given particular course of this student</description>
+        <externalId>false</externalId>
+        <label>Student Course Version</label>
+        <referenceTo>StudentCourseVersion__c</referenceTo>
+        <relationshipLabel>Course Mentor Student Assignments</relationshipLabel>
+        <relationshipName>Course_Mentor_Student_Assignments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Student__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The student whom the course mentor should helping with.</description>
+        <externalId>false</externalId>
+        <label>Student</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipName>CourseMentorStudentAssignments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TermCode__c</fullName>
+        <description>The initial TermCode of studentCourseRegistration__c</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The initial TermCode of studentCourseRegistration__c</inlineHelpText>
+        <label>TermCode</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Actual User of the mentor. Associate with the mentor&apos;s login account.</description>
+        <externalId>false</externalId>
+        <label>User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>CourseMentorStudentAssignments</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Course Mentor Student Assignment</label>
+    <listViews>
+        <fullName>All_Active</fullName>
+        <columns>NAME</columns>
+        <columns>CourseCode__c</columns>
+        <columns>Student__c</columns>
+        <columns>Mentor__c</columns>
+        <columns>StudentAcademicCourse__c</columns>
+        <columns>StudentCourseRegistration__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>ReasonOfAssignment__c</columns>
+        <columns>ReasonOfDeassignment__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>AssignmentStartDate__c</columns>
+        <columns>AssignmentEndDate__c</columns>
+        <columns>StartDate__c</columns>
+        <columns>EndDate__c</columns>
+        <columns>TermCode__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsActive__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All Active</label>
+    </listViews>
+    <listViews>
+        <fullName>All_History</fullName>
+        <columns>NAME</columns>
+        <columns>CourseCode__c</columns>
+        <columns>AssignmentStartDate__c</columns>
+        <columns>AssignmentEndDate__c</columns>
+        <columns>Mentor__c</columns>
+        <columns>User__c</columns>
+        <columns>Student__c</columns>
+        <columns>ReasonOfAssignment__c</columns>
+        <columns>ReasonOfDeassignment__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>StudentCourseRegistration__c</columns>
+        <columns>TermCode__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsActive__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>All History</label>
+    </listViews>
+    <nameField>
+        <label>CourseMentorStudentAssignmentName</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Course Mentor Student Assignments</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

@@ -1,0 +1,10 @@
+<apex:page >
+  <style>
+    .outer td.oRight{
+    padding: 0;}
+    
+    .sidebarCollapsed{
+    padding: 0;}
+  </style>
+  <apex:iframe src="CommonsChatterManagement" height="1600"/>
+</apex:page>

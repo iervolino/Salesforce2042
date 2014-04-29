@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Field settings for WGU employee roles like enrollment counselor, such as lead throttle threshold.</description>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReferenceId__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <description>Reference Id of the related record (user, group, role, etc).</description>
+        <externalId>true</externalId>
+        <label>ReferenceId</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>SObjectType__c</fullName>
+        <description>Type of sObject referenced by the Reference Id field</description>
+        <externalId>false</externalId>
+        <label>SObjectType</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Throttle__c</fullName>
+        <defaultValue>100</defaultValue>
+        <description>A number representing the work load capacity of this role, such as leads, opportunities, or enrollments to be assigned to this user</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the work load throttle threshold for this user.</inlineHelpText>
+        <label>Throttle</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TimeTillNextAssignment__c</fullName>
+        <defaultValue>1</defaultValue>
+        <description>A work load threshold for automatic work assignements</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the time in minutes before another work assignment should be automatically assigned to this user</inlineHelpText>
+        <label>Time till Next Assignment</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Enrollment Counselor&apos;s User account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the user account for this enrollment counselor</inlineHelpText>
+        <label>User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipLabel>Role Attributes</relationshipLabel>
+        <relationshipName>RoleAttributes</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>WGU Role Attributes</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>Counselor-{0000}</displayFormat>
+        <label>Role Id</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>WGU Roles Attributes</pluralLabel>
+    <recordTypes>
+        <fullName>AdmissionsCounselor</fullName>
+        <active>true</active>
+        <label>Admissions Counselor</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>CourseMentor</fullName>
+        <active>true</active>
+        <label>Course Mentor</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>EnrollmentCounselor</fullName>
+        <active>true</active>
+        <label>Enrollment Counselor</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>TranscriptEvaluator</fullName>
+        <active>true</active>
+        <label>Transcript Evaluator</label>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
+</CustomObject>

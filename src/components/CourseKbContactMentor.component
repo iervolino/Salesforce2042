@@ -1,0 +1,49 @@
+<apex:component controller="CourseKbContactMentorController">
+	<!-- Attribute Definitions -->
+    <apex:attribute name="courseCode" description="Course code to be displayed to the user." type="String" required="true" assignTo="{!studentCourseCode}"/>
+    <apex:attribute name="componentAttributes" description="Displays the modal when needed" type="CourseKbContactMentorAttributes" required="true" assignTo="{!cmComponentAttributes}"/>
+    <apex:attribute name="mentorEmail" description="Email that will be sent to the mentor by the user" type="String" required="true" assignTo="{!mentorContactEmail}"/>
+    <apex:attribute name="mentorName" description="Name that will be display in the email that will be sent to the mentor by the user" type="String" required="false" assignTo="{!mentorContactName}"/>
+		<apex:outputPanel id="contactMyMentorPopup">
+		    <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!componentAttributes.isVisible}" />
+		    <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!componentAttributes.isVisible}" >
+		    	<div class="modal-errors"><apex:pageMessages /></div>
+		        <div class="mentor-form-wrapper">
+		            <div class="student-info-box">
+		                <div class="student-name-title">Student Name: <span><apex:outputText value="{!$User.Alias}" id="StudentName" /></span></div>               
+		                <div class="course-title">Course: <span><apex:outputText value="{!courseCode}" id="CourseCode" /></span></div>
+		            </div>
+		            <div class="clear"></div>
+				    <div class="search-div-block">
+				        <label>Best Way to Contact Me</label>
+				        <apex:inputCheckbox value="{!contactViaEmail}" /> Email:&nbsp; 
+				        <apex:outputText value="{!contactEmail}" /><br></br>
+				        <apex:inputCheckbox value="{!contactViaPhone}" /> Phone:&nbsp;
+				        <apex:actionRegion >
+				            <apex:selectList value="{!contactPhone}" size="1">
+				                <apex:actionSupport event="onchange" reRender="OtherPhonePanel" />
+				                <apex:selectOptions value="{!phoneSelections}" />
+				            </apex:selectList>
+				        </apex:actionRegion>
+				        <apex:outputPanel id="OtherPhonePanel">
+				            <apex:inputText value="{!otherContactPhone}" id="OtherPhone" rendered="{!IF(contactPhone='Other',true,false)}" />
+				        </apex:outputPanel>
+				        <label style="margin-top:20px;">Best Time to Contact Me</label>
+				        <apex:inputText value="{!bestTimeToContact}" />
+				        <apex:selectList value="{!bestTimeToContactMeridiem}" size="1">
+			            	<apex:selectOption itemValue="AM" itemLabel="AM" />
+			            	<apex:selectOption itemValue="PM" itemLabel="PM" />
+				        </apex:selectList>
+				        <apex:selectList value="{!userTimeZone}" size="1">
+				            <apex:selectOptions value="{!timeZoneSelections}" />
+				        </apex:selectList>
+				        <label style="margin-top:20px;">Comments</label>
+				        <apex:inputTextArea value="{!Comments}" rows="5" cols="70" /> 
+				        
+				    </div>
+				    <apex:commandButton action="{!submitContactMyMentorRequest}" value="Submit" styleClass="btn green" id="contactMyMentorSubmitButton" />
+				    <apex:commandButton action="{!hideComponent}" value="Cancel" styleClass="btn grey" id="contactMyMentorCancelButton" />&nbsp;&nbsp;&nbsp;
+				</div>
+			</apex:outputPanel>
+		</apex:outputPanel>
+</apex:component>

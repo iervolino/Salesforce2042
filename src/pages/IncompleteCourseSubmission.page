@@ -1,0 +1,12 @@
+<apex:page standardcontroller="StudentProcess__c" extensions="IncompleteCourseSubmissionController">
+
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.extjs_v340, 'resources/css/ext-all.css')}"/>    
+        <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v340}/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v340}/ext-all.js"></script>     
+    </head>
+    
+  <flow:interview name="ICLREOTRequestFlow" interview="{!Test1}" finishLocation="{!nextPage}">
+    <apex:param name="StudentProcessId" value="{!Id}"/>
+  </flow:interview>
+</apex:page>

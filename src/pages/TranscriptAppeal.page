@@ -1,0 +1,332 @@
+<apex:page standardController="Case" extensions="TranscriptAppealController"  sidebar="false" showHeader="false" id="iPage">
+<style>
+table {
+    font: 12px/24px arial;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+th {
+    padding: 0 0.5em;
+    text-align: left;
+    }
+
+tr.yellow td {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    background: #B4B2CE;
+    }
+
+td {
+    
+    padding: 0 0.5em;
+    }
+
+td.width {
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    width: 300px;
+    border-bottom: 1px solid #CCC;
+    }
+    td.width1 {
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    width: 100px;
+    border-bottom: 1px solid #CCC;
+    }
+    
+td.adjacent {
+    border-left: 1px solid #CCC;
+    text-align: center;
+    }
+
+div#loading {
+    background: url('/img/loading32.gif') no-repeat center center #ffffff;
+    border: solid 2px #999999;
+    border-radius:5px;
+    width: 10%;
+    height: 15%;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    }
+</style>
+    <script type="text/javascript">
+    function hideAndShowExBlk(chk,lbltag,errormsg)
+    {
+        var exBlock= document.getElementById(lbltag);
+        var exBlockError= document.getElementById(errormsg);
+        if(exBlock.style.display == "block" )
+        {
+            exBlock.style.display = "none";
+            exBlockError.style.display = "block";        
+        } 
+        else 
+        {
+            exBlock.style.display = "block";
+            exBlockError.style.display = "none";        
+        }
+    }
+</script>
+<body>
+<table style="background:#B4B2CE">
+    <tr>
+        <td width="310">
+            <img width="310" height="86" id="logo" alt="" src="{!URLFOR($Resource.AppealResources,'logo.png')}" class="fixPNG"/></td>
+    </tr>
+</table>
+
+<apex:form id="iForm" enctype="multipart/form-data"> 
+    <apex:pageMessages />
+    <apex:outputPanel rendered="{!contactUserFlag}">
+        <apex:pageBlock rendered="{!exclusionflag}" title="WGU Transcript Department">
+            <p>To initiate an exclusion request, applicants must submit this exclusion form along with supporting documentation to the Transfer Evaluation Department <strong>no less than three business days</strong> prior to the transcript deadline for your planned start term. You will be notified in writing of the final outcome within three business days of all required documentation being received.</p>
+            <p>Please note the following WGU policies:</p>
+            <ul>
+                <li>We require an Official or Unofficial transcript from the institution.</li>
+                <li>NO transfer credit will be accepted once a transcript exclusion has been processed for the requested institution.</li>
+                <li>NO exclusions will be processed for students using Military/VA funding.</li>
+                <li>Exclusions granted by the Transcript Evaluations Department may be voided later by other departments if the documentation is deemed necessary by the department requesting the void. In these cases the exclusion appeals will be recalled and the documentation will be required.</li>
+                <li>Exclusions requested for AP Tests, CLEP Tests, High school Diplomas, and IB’s will not require additional documentation to be submitted.</li>
+                <li>Only one school can be excluded per form. Please request additional forms for each school that you want to appeal.</li>
+            </ul>
+        </apex:pageBlock>
+        
+        <apex:pageBlock rendered="{!appealflag}" title="WGU Transcript Department">
+            <p>To initiate an appeal, students or applicants must submit the completed appeal form along with supporting documentation to the Transfer Evaluation Department <strong>within fifteen (15) business days </strong>of the official notification of transcript evaluation results. You will be notified in writing of the final outcome within ten business days. In certain circumstances, appeals received beyond the 15 business day window will be considered. These exceptions are rare, however, and subject to additional managerial review. Please use the link at the bottom of this email to initiate the transfer evaluation appeal process.</p>
+            <p>Please note the following WGU policies:</p>
+            <ul>
+                <li>We We require official transcripts from the issuing institution, and will not accept transfer credit awarded and listed by another institution.</li>
+                <li>We do not award transfer credit for transcripts received after the initial term start date.</li>
+                <li>No transfer credit will be accepted once a student begins studies at WGU.</li>
+                <li>Only WGU courses appearing on your evaluation are eligible for transfer.</li>
+            </ul>
+            <p>Courses accepted by transfer must meet the following requirements:</p>
+            <ul>
+                <li>Must be college level from an accredited institution (accrediting agency must be recognized by Department of Education)</li>
+                <li>Must have been awarded a letter grade of C- or better. Some programs in the Nursing or Teachers colleges require a grade of C or better.</li>
+                <li>May not be used to fulfill more than one course of study.</li>
+                <li>Must meet the competency unit and content equivalency. </li>
+                <li>May not be used to fulfill upper division requirements that do not appear on the evaluation form. </li> 
+            </ul>
+        </apex:pageBlock>
+        
+        <apex:outputPanel id="exclusionGridError" style="display:none" rendered="{!exclusionflag}" >
+            <table>
+                <tr>
+                    <td align="center"><font color="red" size="2"><b>Unfortunately, it is our policy based on Department of Defense guidelines that all transcripts are required if military benefits are being used. Please work with your enrollment counselor to have all transcripts sent in prior to your start date.</b></font></td>
+                </tr>
+            </table>
+        </apex:outputPanel>
+        
+        <apex:pageBlock rendered="{!contactUserFlag}" title="Request Form">
+            <apex:pageBlockSection collapsible="false" columns="2" >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Applicant Full Name: </apex:outputLabel>
+                    <apex:outputField value="{!contrStdCase.Contact__r.Name}"/>  
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Department: </apex:outputLabel>
+                    <apex:outputText value="Transcripts"/>  
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel style="" >Applicant Email: </apex:outputLabel>
+                    <apex:outputField value="{!contrStdCase.StudentEmail__c}"/> 
+                </apex:pageBlockSectionItem>  
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Request Reason: </apex:outputLabel>
+                    <apex:outputText value="{!contrStdCase.StudentCaseReason__c }"/>  
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection collapsible="false" columns="2" rendered="{!exclusionflag}">
+                <apex:panelGrid columns="2"> 
+                    <apex:outputLabel >While attending WGU will you be using any Military Funding for your education?</apex:outputLabel>
+                    <apex:inputField value="{!contrStdCase.FinancialAid__c}" label="" onclick="hideAndShowExBlk(this,'iPage:iForm:exclusionGrid','iPage:iForm:exclusionGridError');">
+                    </apex:inputField>      
+                </apex:panelGrid>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel ><strong>Institution Name</strong> </apex:outputLabel>
+                    <apex:outputText value="{!contrStdCase.InstitutionName__c}"/>  
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:outputPanel rendered="{!appealflag}">
+            <b>Please fill in the information below for the institution(s) and courses that you would like to appeal.</b> <br/><br/>
+            <table>
+                <tr class="yellow"> 
+                    <td class="width">Institution Name</td>
+                    <td class="width">WGU Course Code</td>
+                    <td class="width">WGU Course Title</td>
+                    <td class="width">Institution Course Code</td>
+                    <td class="width">Institution Course Title</td>
+                    <td class="width">Year Attended (YYYY)</td>
+                    <td class="width">Grade</td>
+                    <td class="width">Semester Credits</td>
+                    <td class="width">Attachment (File cannot exceed 10MB)</td>    
+                </tr>
+                <apex:repeat value="{!TranscriptsAppealList}" var="tsa" rows="{!rowFlg}" id="pBlk"> 
+                    <tr> 
+                        <td class="width"><apex:inputText value="{!tsa.inName}" /> </td>
+                        <td class="width"><apex:inputText value="{!tsa.wguCrsCode}" size="10" /></td>
+                        <td class="width"><apex:inputText value="{!tsa.wguCrsTitle}" size="10" /></td>
+                        <td class="width"><apex:inputText value="{!tsa.inCrsCode}" size="10" /></td>
+                        <td class="width"><apex:inputText value="{!tsa.inCrsTitle}" size="10" /> </td>
+                        <td class="width"><apex:inputText value="{!tsa.yearAttended}" size="10" maxlength="4" onkeypress="return allownums(event);" /></td>
+                        <td class="width">
+                            <apex:selectList value="{!tsa.selGrades}" size="1">
+                                <apex:selectOptions value="{!tsa.grade}"></apex:selectOptions>
+                            </apex:selectList>
+                        </td>
+                        <td class="width">
+                            <apex:selectList value="{!tsa.selCreditHrs}" size="1">
+                                <apex:selectOptions value="{!tsa.creditHrs}"></apex:selectOptions>
+                            </apex:selectList>
+                        </td>
+                        <td class="width">
+                            <!-- only display upload option if no previous upload, otherwise show upload's name -->
+                            <apex:inputFile rendered="{!tsa.canAddAttachment}" value="{!tsa.appealAttachment.body}" filename="{!tsa.appealAttachment.name}"></apex:inputFile>
+                            {!tsa.attachmentName}
+                        </td>
+                    </tr>
+                </apex:repeat>
+                <tr>
+                    <td colspan="10"><font size="1.5">The upload to this page is not secure. Please take care when uploading and protect your personal information. Do not upload documents that include sensitive information such as a social security number. The information requested will be used during the review of your request.</font></td>
+                </tr>
+                <tr>
+                    <td colspan ="10"><font size ="1.5">If you will be attaching more than one document for the same requirement please use one row per file attachment and reference the same WGU Course Code that is being appealed</font></td>
+                </tr>
+                <tr>
+                    <td><apex:commandButton onclick="loadingImage();" value="Add New Row" action="{!incrementRowFlg}" /></td>
+                    <td><apex:commandButton onclick="loadingImage();" value="Remove Row" action="{!decrementRowFlg}" /></td>
+                    <td colspan="8">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="10"><hr/> </td>
+                </tr>
+                <tr>
+                    <td colspan="6"><b>Comments</b>  (Please use this section to add any pertinent information that should be considered for Appeal)</td>
+                    <td colspan="4">&nbsp;</td>
+                    
+                </tr>
+                <tr>
+                    <td colspan="10" ><apex:inputTextarea value="{!contrStdCase.Comments__c}" cols="150" rows="5" /> </td>                  
+                </tr>
+                <tr>
+                    <td colspan="10"><hr/> </td>
+                </tr>
+                <tr>
+                    <td colspan="10"><b> By submitting this request, I acknowledge I have reviewed and understand the Admissions, Transcript Evaluation, and Transfer Guideline policies in the <a href="https://kb.wgu.edu/display/2/index.aspx" target="_blank">WGU Student Handbook</a>.</b></td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:commandButton onclick="loadingImage();" value="Submit" action="{!saveAppeal}" rendered="{!appealflag}" disabled="{!saveFlag}" /></td>
+                    <td><apex:commandButton value="Cancel" disabled="{!saveFlag}" action="{!cancel}"/> </td>
+                    <td colspan="6">&nbsp;</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="3">Please allow 3-5 business days to receive a reply.</td>
+                    <td colspan="7">&nbsp;</td>
+                </tr>
+            </table>
+        </apex:outputPanel> 
+        
+        <apex:outputPanel id="exclusionGrid" style="display:block" >
+            <apex:outputPanel rendered="{!exclusionflag}">
+                <b>Please fill in the information below for the institution(s) and courses that you would like to exclude.</b>
+            	<br /><br />
+                <table>     
+                    <tr class="yellow"> 
+                        <td class="width">Degree Earned</td>
+                        <td class="width">Reason for Exclusion</td>
+                        <td class="width1" colspan="5">Transcript (File cannot exceed 10MB)</td>    
+                    </tr>
+                    <apex:variable var="tel" value="{!TranscriptsExclusionList[0]}" /> 
+                    <tr> 
+                        <td class="width">
+                            <apex:selectList value="{!tel.selDegreeEarned}" size="1">
+                                <apex:selectOptions value="{!tel.degreeEarned}"></apex:selectOptions>
+                            </apex:selectList>
+                        </td>
+                        <td class="width">
+                            <apex:selectList value="{!tel.selReasonforExclusion}" size="1">
+                                <apex:selectOptions value="{!tel.reasonforExclusion}"></apex:selectOptions>
+                            </apex:selectList>
+                        </td>
+                        <td class="width1" colspan="5">
+                            <apex:inputFile value="{!tel.exclusionAttachment.body}" filename="{!tel.exclusionAttachment.name}"></apex:inputFile>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="10"><font size="1.5">The upload to this page is not secure. Please take care when uploading and protect your personal information. Do not upload documents that include sensitive information such as a social security number. The information requested will be used during the review of your request.</font></td>
+                    </tr>
+                    <tr>
+                        <td colspan="10"><hr /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"><b>Comments</b>  (Please use this section to add any pertinent information that should be considered for Exclusion)</td>
+                        <td colspan="4">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="10" ><apex:inputTextarea value="{!contrStdCase.Comments__c}" cols="150" rows="5" /> </td>                  
+                    </tr>
+                    <tr>
+                        <td colspan="10"><hr /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="10"><b> By submitting this request, I acknowledge I have reviewed and understand the Admissions, Transcript Evaluation, and Transfer Guideline policies in the <a href="https://kb.wgu.edu/display/2/index.aspx" target="_blank">WGU Student Handbook</a>.  If my exclusion is granted, I understand that I am waiving the option to submit the transcript for transfer credit following the transcript deadline and my scheduled start date.</b></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <apex:commandButton onclick="loadingImage();" value="Submit"  action="{!saveExclusion}" disabled="{!saveFlag}"/> &nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;<apex:commandButton value="Cancel" action="{!cancel}" disabled="{!saveFlag}"/>
+                        </td>
+                        <td colspan="8">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Please allow 3-5 business days to receive a reply.</td>
+                        <td colspan="7"></td>
+                    </tr>
+                </table>
+            </apex:outputPanel> 
+        </apex:outputPanel>
+    </apex:outputPanel>  
+    
+    <apex:includeScript value="{!$Resource.JQuery_1_9_1}" />
+    
+    <script type="text/javascript">
+    $j = jQuery.noConflict();
+    
+    $j(document).ready(function() {
+        $j('#loading').hide();
+    });
+    
+    function allownums(a){
+        var keycode;
+        if(a.keyCode) //For IE
+            keycode = a.keyCode;
+        else if(a.Which)
+            keycode = a.Which; // For FireFox
+            else
+                keycode = a.charCode;
+        
+        if(keycode  <= 57 || (keycode >= 96 && keyCode <= 105)) {
+            return true;
+        } 
+        else {
+            alert("Please enter number only");
+            return false;
+        }
+    }
+    
+    function loadingImage() {
+        $j('#loading').show();
+    }
+    </script>  
+</apex:form>
+<div id="loading">&nbsp;</div>
+</body>
+</apex:page>

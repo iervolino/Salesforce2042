@@ -1,0 +1,4132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Activate</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ChangeStatus</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Terminate</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>AccountId</fullName>
+        <inlineHelpText>Name of vendor/supplier</inlineHelpText>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ActivatedById</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Agreement_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Agreement Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Master Services Agreement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Software License Purchase</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Software Maintenance Agreement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hardware Maintenance Agreement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Statement of Work</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Subscription</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Staffing Agreement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Annual_Contract_Value__c</fullName>
+        <description>Calculates an annual value of contract based on whether estimated is based on monthly or annual cost estimates</description>
+        <externalId>false</externalId>
+        <formula>CASE(Pricing_Calculation__c,
+&quot;Annual&quot;, Estimated_Annual_Cost__c * 1,
+&quot;Monthly&quot;, Estimated_Monthly_Cost__c  * 12,
+&quot;No Cost&quot;, 0,
+null)</formula>
+        <inlineHelpText>Calculates total annual value of contract</inlineHelpText>
+        <label>Annual Contract Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Associated_Cost__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Cost associated with an amendment, SOW, etc</inlineHelpText>
+        <label>Associated Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Auto_Renew__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Does the contract renew automatically?</inlineHelpText>
+        <label>Auto Renew</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Billing_Structure__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>How is WGU billed under contract?</inlineHelpText>
+        <label>Billing Structure</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Cost</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>One-Time</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Per Project/SOW</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Per Unit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Quarterly</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Budget_Org__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Budget group responsible for contract</inlineHelpText>
+        <label>Budget Org</label>
+        <picklist>
+            <controllingField>Responsible_Department__c</controllingField>
+            <picklistValues>
+                <fullName>D100 - Chief Information Officer</fullName>
+                <controllingFieldValues>IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D101 - Software Engineering</fullName>
+                <controllingFieldValues>IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D102 - Infrastructure Services</fullName>
+                <controllingFieldValues>IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D103 - Quality Assurance</fullName>
+                <controllingFieldValues>IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D104 - General IT</fullName>
+                <controllingFieldValues>IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D105 - Service Desk</fullName>
+                <controllingFieldValues>IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D106 - Business Analysis</fullName>
+                <controllingFieldValues>IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>D107 - Database Administration</fullName>
+                <controllingFieldValues>IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Placement - BSHI (F102A)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Placement - MBA (F102A)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Placement - Nursing (F102A)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Placement - Teachers (F102A)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Registrar (F102)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Services (F102)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment (F103)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Learning Resources (F104)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentoring (F105)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Institutional Research (F107)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Campus_License__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Campus License</description>
+        <externalId>false</externalId>
+        <label>Campus License</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CancellationDays__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Days prior to contract end date for action or notice to cancel, renew, etc</inlineHelpText>
+        <label>Notice/Cancellation (days prior)</label>
+        <picklist>
+            <picklistValues>
+                <fullName>30</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>45</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>60</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>90</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>120</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>180</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>CompanySignedId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contract_Value_Annual__c</fullName>
+        <description>Calculates total annual cost under contract</description>
+        <externalId>false</externalId>
+        <formula>Payment_Amount__c * of_Payments_Per_Year__c</formula>
+        <inlineHelpText>Total annual cost of contract</inlineHelpText>
+        <label>Contract Value (Annual)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Cost_Per_Unit__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Average cost per unit</inlineHelpText>
+        <label>Cost Per Unit (Average)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>CustomerSignedId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DateToBeNotified__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+  ISPICKVAL (CancellationDays__c, &quot;&quot;), 
+  EndDate-30,
+ (EndDate - VALUE(TEXT( CancellationDays__c )) - 30)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Date to be Notified</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DaysLeftOfContract__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(EndDate &gt;= TODAY(), EndDate  - TODAY(), 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days Left of Contract</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DepartmentContact1__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Individual responsible for vendor relationship</inlineHelpText>
+        <label>Department Contact</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DepartmentContact2__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Secondary Dept Contact</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Contracts1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Document_Description__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of document (e.g., Services Agreement; Amendment No. 1; Statement of Work, etc)</inlineHelpText>
+        <label>Document Description</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Document_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Document Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Addendum</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Amendment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lease</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Master</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NDA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Order Form</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Schedule</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SOW</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Early_Termination__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Options or penalties for early termination of contract</inlineHelpText>
+        <label>Early Termination</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Estimated_Annual_Cost__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>If cost is calculated annually, what is the estimated annual cost of the contract?</inlineHelpText>
+        <label>Estimated Cost (if annual)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Estimated_Cost_Annual__c</fullName>
+        <description>Calculates estimated annual cost based on units purchased</description>
+        <externalId>false</externalId>
+        <formula>Cost_Per_Unit__c * Total_Units__c</formula>
+        <inlineHelpText>Estimated annual cost based on number of units purchased</inlineHelpText>
+        <label>Estimated Cost (Annual)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Estimated_Monthly_Cost__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>If cost is calculated monthly, what is the estimated monthly cost of the contract?</inlineHelpText>
+        <label>Estimated Cost (if monthly)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Event_upon_Expiration__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Action to be taken for contract to expire or be renewed/extended</inlineHelpText>
+        <label>Action (at expiration)</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Expire</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renew automatically</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renew with signed amendment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renew upon payment of fees</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cancellation only upon notice</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>FinalNoticeDate__c</fullName>
+        <externalId>false</externalId>
+        <formula>EndDate - VALUE(TEXT( CancellationDays__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Final Notice Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IT_Executive_Relationship_Mgr__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>IT Executive Relationship Mgr</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Contracts2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LegalResource__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Legal Resource</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>LegalResource</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Legal_Review_Required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Legal Review Required</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>License_Keys__c</fullName>
+        <externalId>false</externalId>
+        <label>License Keys</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>No_of_Auto_Renewals__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of times contract renewals automatically</inlineHelpText>
+        <label># of Auto Renewals</label>
+        <picklist>
+            <picklistValues>
+                <fullName>0</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Limit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>NotificationDaysLeft__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(FinalNoticeDate__c &gt;= TODAY(), FinalNoticeDate__c - TODAY(), null)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Notification Days Left</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Num_of_Licenses__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Licenses</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>One_Time_Cost__c</fullName>
+        <externalId>false</externalId>
+        <label>One-Time Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Original_Effective_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the contract originally began (prior to renewals or extensions)</inlineHelpText>
+        <label>Original Effective Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ParentContract__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Primary or master contract to which an amendment or SOW is linked</inlineHelpText>
+        <label>Parent Contract</label>
+        <referenceTo>Contract</referenceTo>
+        <relationshipLabel>Contract Changes</relationshipLabel>
+        <relationshipName>ChildContracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Amount__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Amount due for each payment</inlineHelpText>
+        <label>Payment Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Perpetual__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Contract is perpetual until canceled.</inlineHelpText>
+        <label>Perpetual</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Pricing_Calculation__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Is cost calculated/estimated on a monthly or annual basis?</inlineHelpText>
+        <label>Pricing Calculation</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Cost</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Product_s_Covered__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Products covered by this agreement</inlineHelpText>
+        <label>Product(s) Covered</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Program__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Program associated with contract</inlineHelpText>
+        <label>Program (if applicable)</label>
+        <picklist>
+            <controllingField>Responsible_Department__c</controllingField>
+            <picklistValues>
+                <fullName>Teachers</fullName>
+                <controllingFieldValues>Field Experience</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health Informatics</fullName>
+                <controllingFieldValues>Field Experience</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MSN</fullName>
+                <controllingFieldValues>Field Experience</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>RN to BSN</fullName>
+                <controllingFieldValues>Field Experience</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prelicensure</fullName>
+                <controllingFieldValues>Field Experience</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lab</fullName>
+                <controllingFieldValues>Field Experience</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MBA</fullName>
+                <controllingFieldValues>Field Experience</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>HR</fullName>
+                <controllingFieldValues>Independent Contractor</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment</fullName>
+                <controllingFieldValues>Independent Contractor</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Marketing</fullName>
+                <controllingFieldValues>Independent Contractor</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nursing</fullName>
+                <controllingFieldValues>Independent Contractor</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ambassador</fullName>
+                <controllingFieldValues>Independent Contractor</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>General Education</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>eBooks</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Renewal_Term__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Length (in months) that contract will run when renewed or extended</inlineHelpText>
+        <label>Renewal Term (months)</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Renewal__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Identify the requirements for contract renewal (automatic, written notice, payment of fee etc)</inlineHelpText>
+        <label>Renewal Option</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Responsible_Department__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Department/Group responsible for contracted services</inlineHelpText>
+        <label>Responsible Department</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Articulation &amp; Promotional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment Delivery</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment Development</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Corporate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Facilities &amp; Events</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Experience</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Financial Aid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grants</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Human Resources</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Independent Contractor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Institutional Research</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Learning Resources</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Library</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Marketing/PR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Non-Disclosure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Trademarks</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SOW__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates whether there is a Statement of Work or Amendment on file</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is there a Statement of Work (SOW) or Amendment?</inlineHelpText>
+        <label>SOW/Amendment</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Signed_Contract__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates whether there is a signed contract on file</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is there a signed contract on file?</inlineHelpText>
+        <label>Signed Contract</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>State__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Location associated with contract, if applicable (such as field experience or facilities)</inlineHelpText>
+        <label>State (if applicable)</label>
+        <picklist>
+            <picklistValues>
+                <fullName>AK</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AL</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AZ</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CO</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>FL</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>GA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>HI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>IA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ID</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>IL</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>IN</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>KS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>KY</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MD</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ME</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MN</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MO</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ND</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NH</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NJ</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NV</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NY</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OH</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OK</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>RI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SD</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TN</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TX</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>UT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>VA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>VT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WV</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WY</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved by WGU</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Do Not Renew</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Draft</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Edits Require Supplier Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expiring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Approval Process</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Legal Edits Declined by Supplier</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Legal Review Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Legal Review Required</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Contract</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ready for Signature</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Supplier Edits Accepted by Legal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Under Legal Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Waiting for Executed Docs</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Waiting for Supplier Response on Edits</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Techincal_Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The person responsible for carrying out the techincal duties associated with the contract.</description>
+        <externalId>false</externalId>
+        <label>Techincal Contact</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Contracts3</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Term_Provision__c</fullName>
+        <description>Provision of contract affecting the term</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What section(s) of the contract describes the term (length) of the contract?</inlineHelpText>
+        <label>Term Provision</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Test_Cost_del__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(Pricing_Calculation__c,
+&quot;Annual&quot;,  Estimated_Annual_Cost__c * 1,
+&quot;Monthly&quot;, Estimated_Monthly_Cost__c * 12,
+&quot;No Cost&quot;, 0,
+null)</formula>
+        <inlineHelpText>Calculate the total annual cost of a fixed contract</inlineHelpText>
+        <label>Test Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Contract_Cost__c</fullName>
+        <description>Annual or Monthly Estimated Cost + One-Time Cost</description>
+        <externalId>false</externalId>
+        <formula>ContractTerm* 
+(CASE(Pricing_Calculation__c,
+&quot;Annual&quot;, Estimated_Annual_Cost__c /12,
+&quot;Monthly&quot;, Estimated_Monthly_Cost__c,
+&quot;No Cost&quot;, 0,0))
++ One_Time_Cost__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Annual or Monthly Estimated Cost + One-Time Cost</inlineHelpText>
+        <label>Total Contract Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Units__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Units purchased annually</inlineHelpText>
+        <label>Total Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>W_9__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates whether there is a W-9 on file</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is there a W-9 on file?</inlineHelpText>
+        <label>W-9</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>of_Payments_Per_Year__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of payments due each year</inlineHelpText>
+        <label># of Payments Per Year</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <listViews>
+        <fullName>AllActivatedContracts</fullName>
+        <columns>CONTRACT.CONTRACT_NUMBER</columns>
+        <columns>SALES.ACCOUNT.NAME</columns>
+        <columns>Responsible_Department__c</columns>
+        <columns>CONTRACT.START_DATE</columns>
+        <columns>CONTRACT.END_DATE</columns>
+        <columns>CONTRACT.STATUS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>A</value>
+        </filters>
+        <filters>
+            <field>CONTRACT.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Contract.ContractAgreement,Contract.IT_Contract</value>
+        </filters>
+        <label>All Activated Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>AllContracts</fullName>
+        <columns>CONTRACT.CONTRACT_NUMBER</columns>
+        <columns>CONTRACT.NAME</columns>
+        <columns>SALES.ACCOUNT.NAME</columns>
+        <columns>CONTRACT.STATUS</columns>
+        <columns>CONTRACT.STATUS_CODE</columns>
+        <columns>CONTRACT.START_DATE</columns>
+        <columns>CONTRACT.END_DATE</columns>
+        <columns>CONTRACT_TERM</columns>
+        <columns>COMPANY_SIGNED_DATE</columns>
+        <columns>CUSTOMER_SIGNED_DATE</columns>
+        <columns>OWNER_EXPIRATION_NOTICE</columns>
+        <columns>CONTRACT.BILLING_STATE</columns>
+        <columns>CONTRACT.CREATED_DATE</columns>
+        <columns>CONTRACT.LAST_UPDATE</columns>
+        <columns>Responsible_Department__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>AllDraftContracts</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>D</value>
+        </filters>
+        <label>All Draft Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInApprovalContracts</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>P</value>
+        </filters>
+        <label>All In Approval Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>MyActivatedContracts</fullName>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>A</value>
+        </filters>
+        <label>My Activated Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>MyDraftContracts</fullName>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>D</value>
+        </filters>
+        <label>My Draft Contracts</label>
+    </listViews>
+    <listViews>
+        <fullName>MyInApprovalContracts</fullName>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>CONTRACT.STATUS_CODE</field>
+            <operation>equals</operation>
+            <value>P</value>
+        </filters>
+        <label>My In Approval Contracts</label>
+    </listViews>
+    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>AmendmentContract</fullName>
+        <active>true</active>
+        <description>Amendment, SOW, Addendum, etc., to primary/master agreement</description>
+        <label>Amendment/SOW</label>
+        <picklistValues>
+            <picklist>Billing_Structure__c</picklist>
+            <values>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Cost</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>One-Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Per Project%2FSOW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Per Unit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quarterly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Budget_Org__c</picklist>
+            <values>
+                <fullName>Assessment %28F103%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D100 - Chief Information Officer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D101 - Software Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D102 - Infrastructure Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D103 - Quality Assurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D104 - General IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D105 - Service Desk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D106 - Business Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D107 - Database Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - BSHI %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - MBA %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - Nursing %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - Teachers %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Institutional Research %28F107%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources %28F104%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentoring %28F105%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registrar %28F102%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services %28F102%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CancellationDays__c</picklist>
+            <values>
+                <fullName>120</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>180</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>90</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Document_Type__c</picklist>
+            <values>
+                <fullName>Addendum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Amendment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Master</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>NDA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Order Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Schedule</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_upon_Expiration__c</picklist>
+            <values>
+                <fullName>Cancellation only upon notice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expire</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew automatically</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew upon payment of fees</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew with signed amendment</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>No_of_Auto_Renewals__c</picklist>
+            <values>
+                <fullName>0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Limit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Pricing_Calculation__c</picklist>
+            <values>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Cost</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Program__c</picklist>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Informatics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>eBooks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Responsible_Department__c</picklist>
+            <values>
+                <fullName>Articulation %26 Promotional</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Delivery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Development</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Corporate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Facilities %26 Events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Experience</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grants</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Human Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Institutional Research</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Library</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing%2FPR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Disclosure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trademarks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>State__c</picklist>
+            <values>
+                <fullName>AK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AZ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ID</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ME</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ND</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NH</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NJ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OH</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WY</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approved by WGU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Do Not Renew</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Edits Require Supplier Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expiring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Approval Process</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Edits Declined by Supplier</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Review Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Review Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Contract</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ready for Signature</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Supplier Edits Accepted by Legal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Legal Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Executed Docs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Supplier Response on Edits</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ContractAgreement</fullName>
+        <active>true</active>
+        <description>Primary contract/agreement (not an amendment, addendum, statement of work, etc)</description>
+        <label>Contract/Agreement</label>
+        <picklistValues>
+            <picklist>Billing_Structure__c</picklist>
+            <values>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Cost</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>One-Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Per Project%2FSOW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Per Unit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quarterly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Budget_Org__c</picklist>
+            <values>
+                <fullName>Assessment %28F103%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D100 - Chief Information Officer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D101 - Software Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D102 - Infrastructure Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D103 - Quality Assurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D104 - General IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D105 - Service Desk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D106 - Business Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D107 - Database Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - BSHI %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - MBA %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - Nursing %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - Teachers %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Institutional Research %28F107%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources %28F104%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentoring %28F105%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registrar %28F102%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services %28F102%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CancellationDays__c</picklist>
+            <values>
+                <fullName>120</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>180</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>90</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Document_Type__c</picklist>
+            <values>
+                <fullName>Addendum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Amendment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Master</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>NDA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Order Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Schedule</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_upon_Expiration__c</picklist>
+            <values>
+                <fullName>Cancellation only upon notice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expire</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew automatically</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew upon payment of fees</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew with signed amendment</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>No_of_Auto_Renewals__c</picklist>
+            <values>
+                <fullName>0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Limit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Pricing_Calculation__c</picklist>
+            <values>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Cost</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Program__c</picklist>
+            <values>
+                <fullName>Ambassador</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Informatics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lab</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RN to BSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>eBooks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Responsible_Department__c</picklist>
+            <values>
+                <fullName>Articulation %26 Promotional</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Delivery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Development</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Corporate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Facilities %26 Events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Experience</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grants</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Human Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Independent Contractor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Institutional Research</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Library</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing%2FPR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Disclosure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trademarks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>State__c</picklist>
+            <values>
+                <fullName>AK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AZ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ID</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ME</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ND</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NH</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NJ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OH</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WY</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approved by WGU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Do Not Renew</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Edits Require Supplier Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expiring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Approval Process</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Edits Declined by Supplier</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Review Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Review Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Contract</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ready for Signature</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Supplier Edits Accepted by Legal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Legal Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Executed Docs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Supplier Response on Edits</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>IT_Addendum_SOW</fullName>
+        <active>true</active>
+        <description>IT Addendum, Amendment, SOW</description>
+        <label>IT Addendum/SOW</label>
+        <picklistValues>
+            <picklist>Agreement_Type__c</picklist>
+            <values>
+                <fullName>Hardware Maintenance Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Master Services Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Software License Purchase</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Software Maintenance Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Staffing Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Statement of Work</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Subscription</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Billing_Structure__c</picklist>
+            <values>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Cost</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>One-Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Per Project%2FSOW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Per Unit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quarterly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Budget_Org__c</picklist>
+            <values>
+                <fullName>Assessment %28F103%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D100 - Chief Information Officer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D101 - Software Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D102 - Infrastructure Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D103 - Quality Assurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D104 - General IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D105 - Service Desk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D106 - Business Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D107 - Database Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - BSHI %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - MBA %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - Nursing %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - Teachers %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Institutional Research %28F107%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources %28F104%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentoring %28F105%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registrar %28F102%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services %28F102%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CancellationDays__c</picklist>
+            <values>
+                <fullName>120</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>180</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>90</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Document_Type__c</picklist>
+            <values>
+                <fullName>Addendum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Amendment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Master</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>NDA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Order Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Schedule</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_upon_Expiration__c</picklist>
+            <values>
+                <fullName>Cancellation only upon notice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expire</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew automatically</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew upon payment of fees</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew with signed amendment</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>No_of_Auto_Renewals__c</picklist>
+            <values>
+                <fullName>0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Limit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Pricing_Calculation__c</picklist>
+            <values>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Cost</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Program__c</picklist>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Informatics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>eBooks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Responsible_Department__c</picklist>
+            <values>
+                <fullName>Articulation %26 Promotional</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Delivery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Development</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Corporate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Facilities %26 Events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Experience</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grants</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Human Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Institutional Research</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing%2FPR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Disclosure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trademarks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>State__c</picklist>
+            <values>
+                <fullName>AK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AZ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ID</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ME</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ND</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NH</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NJ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OH</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WY</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approved by WGU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Do Not Renew</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Edits Require Supplier Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Approval Process</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Edits Declined by Supplier</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Review Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Review Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Contract</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ready for Signature</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Supplier Edits Accepted by Legal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Legal Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Executed Docs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Supplier Response on Edits</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>IT_Contract</fullName>
+        <active>true</active>
+        <description>IT Contract/Agreement</description>
+        <label>IT Contract</label>
+        <picklistValues>
+            <picklist>Agreement_Type__c</picklist>
+            <values>
+                <fullName>Hardware Maintenance Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Master Services Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Software License Purchase</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Software Maintenance Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Staffing Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Statement of Work</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Subscription</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Billing_Structure__c</picklist>
+            <values>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Cost</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>One-Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Per Project%2FSOW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Per Unit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quarterly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Budget_Org__c</picklist>
+            <values>
+                <fullName>Assessment %28F103%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D100 - Chief Information Officer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D101 - Software Engineering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D102 - Infrastructure Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D103 - Quality Assurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D104 - General IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D105 - Service Desk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D106 - Business Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>D107 - Database Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - BSHI %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - MBA %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - Nursing %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement - Teachers %28F102A%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Institutional Research %28F107%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources %28F104%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentoring %28F105%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registrar %28F102%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services %28F102%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CancellationDays__c</picklist>
+            <values>
+                <fullName>120</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>180</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>45</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>60</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>90</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Document_Type__c</picklist>
+            <values>
+                <fullName>Addendum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Amendment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Master</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>NDA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Order Form</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Schedule</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_upon_Expiration__c</picklist>
+            <values>
+                <fullName>Cancellation only upon notice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expire</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew automatically</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew upon payment of fees</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renew with signed amendment</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>No_of_Auto_Renewals__c</picklist>
+            <values>
+                <fullName>0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Limit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Pricing_Calculation__c</picklist>
+            <values>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Cost</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Program__c</picklist>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Informatics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>eBooks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Responsible_Department__c</picklist>
+            <values>
+                <fullName>Articulation %26 Promotional</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Delivery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Development</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Corporate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Facilities %26 Events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Experience</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grants</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Human Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Institutional Research</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing%2FPR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Disclosure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trademarks</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>State__c</picklist>
+            <values>
+                <fullName>AK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AZ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ID</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>KY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ME</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MO</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ND</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NH</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NJ</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OH</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OK</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TX</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>VT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WY</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approved by WGU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Do Not Renew</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Edits Require Supplier Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Approval Process</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Edits Declined by Supplier</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Review Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Review Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Contract</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ready for Signature</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Supplier Edits Accepted by Legal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Legal Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Executed Docs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Supplier Response on Edits</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>CONTRACT.CONTRACT_NUMBER</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CONTRACT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>SALES.ACCOUNT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CONTRACT.STATUS</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>CONTRACT.CONTRACT_NUMBER</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>SALES.ACCOUNT.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Responsible_Department__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CONTRACT.STATUS</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTRACT.CONTRACT_NUMBER</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>SALES.ACCOUNT.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Responsible_Department__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTRACT.STATUS</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>CONTRACT.CONTRACT_NUMBER</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTRACT.NAME</searchResultsAdditionalFields>
+    </searchLayouts>
+</CustomObject>

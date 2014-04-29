@@ -1,0 +1,776 @@
+<apex:page title="Mentor Office Hours" contentType="text/html; charset=UTF-8" standardController="Mentor__c" standardStylesheets="false" showHeader="false" sidebar="false">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<html>
+<head>
+    <title>Western Governors University - Mentor Office Hours</title>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v420, 'resources/css/ext-all.css')}"/> 
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v420}/ext-all.js"/>
+   
+    <apex:includeScript value="/soap/ajax/29.0/connection.js"/>
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.WGUMonkeyFix}" id="WGUMonkeyFix"></script>
+    
+    <script type="text/javascript" >
+        //This is a work-around due to the session id not populating automatically like it should
+        sforce.connection.init("{!$Api.Session_ID}","/services/Soap/u/29.0");
+    </script>
+    
+    <style type="text/css">
+        .x-grid-dirty-cell { background-image: none; }
+    </style>
+</head>
+<body>
+    <div id="divShiftForm" />
+    <br/>
+    <div id="divShiftGrid" />
+
+    <script type="text/javascript" >
+        Ext.Loader.setConfig({enabled: true});
+        Ext.require([
+            'Ext.*'
+        ]);
+        Ext.ns("Ext.WGU");
+        
+        //Globals
+        var MentorId;
+        var MentorUser;
+        var currentHours;
+        
+        //ArryStore for day of week drop downs. Currently uses a three character day code for the underlying data.
+        var dayStore = new Ext.data.ArrayStore({
+                fields: ['value', 'text'],
+                data: [
+                    ['MON', 'Monday'],
+                    ['TUE', 'Tuesday'],
+                    ['WED', 'Wednesday'],
+                    ['THU', 'Thursday'],
+                    ['FRI', 'Friday'],
+                    ['SAT', 'Saturday'],
+                    ['SUN', 'Sunday']
+                ]
+            });
+        
+        //ArrayStore for hour of the day drop downs. Currently uses a two digit 12-hour format.
+        var hourStore = new Ext.data.ArrayStore({
+                fields: ['value', 'text'],
+                data: [
+                    ['01', '01'],
+                    ['02', '02'],
+                    ['03', '03'],
+                    ['04', '04'],
+                    ['05', '05'],
+                    ['06', '06'],
+                    ['07', '07'],
+                    ['08', '08'],
+                    ['09', '09'],
+                    ['10', '10'],
+                    ['11', '11'],
+                    ['12', '12']
+                ]
+            });
+        
+        //ArrayStore for minute of the hour drop downs. Currently uses 15 minute increments.
+        var minStore = new Ext.data.ArrayStore({
+                fields: ['value', 'text'],
+                data: [
+                    ['00', '00'],
+                    ['15', '15'],
+                    ['30', '30'],
+                    ['45', '45']
+                ]
+            });
+            
+        //ArrayStore for time zone drop downs. Currently only has continental US time zones.
+        var zoneStore = new Ext.data.ArrayStore({
+                fields: ['value', 'text'],
+                data: [
+                    ['-5', 'EST'],
+                    ['-6', 'CST'],
+                    ['-7', 'MST'],
+                    ['-8', 'PST']
+                ]
+            });
+        
+        //Data model for office hours    
+        Ext.define('ShiftHoursModel',
+        {
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [
+                {name: 'StartDay', type: 'string'},
+                {name: 'StartHour', type: 'string'},
+                {name: 'StartMin', type: 'string'},
+                {name: 'StartM', type: 'string'},
+                {name: 'EndDay', type: 'string'},
+                {name: 'EndHour', type: 'string'},
+                {name: 'EndMin', type: 'string'},
+                {name: 'EndM', type: 'string'},
+                {name: 'TimeZone', type: 'string'}
+            ]
+        });
+        
+        var shiftHoursStore = Ext.create('Ext.data.Store',
+        {
+            model : 'ShiftHoursModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false
+        });
+        
+        //Creates the form for entering mentor office hours
+        var hourEntryForm = new Ext.form.FormPanel(
+        {
+            title: 'Add New Shift Block',
+            frame: false,
+            width: 595,
+            height: 115,
+            layout:
+            {
+                type: 'table',
+                columns: 5
+            },
+            defaultType: 'combo',
+            items: [
+                {
+                    name: 'StartDay',
+                    fieldLabel: 'Start Day',
+                    labelAlign: 'left',
+                    labelWidth: 60,
+                    labelPad: 2,
+                    width: 160,
+                    padding: '3 3 1 3',
+                    store: dayStore,
+                    displayField: 'text',
+                    valueField: 'value',
+                    value: 'MON',
+                    editable: false
+                },
+                {
+                    name: 'StartHour',
+                    fieldLabel: 'Start Hour',
+                    labelAlign: 'left',
+                    labelWidth: 65,
+                    labelPad: 2,
+                    width: 110,
+                    padding: '3 3 1 3',
+                    store: hourStore,
+                    displayField: 'text',
+                    valueField: 'value',
+                    value: '01',
+                    editable: false
+                },
+                {
+                    name: 'StartMin',
+                    fieldLabel: 'Start Minute',
+                    labelAlign: 'left',
+                    labelWidth: 75,
+                    labelPad: 2,
+                    width: 120,
+                    padding: '3 3 1 3',
+                    store: minStore,
+                    displayField: 'text',
+                    valueField: 'value',
+                    value: '00',
+                    editable: false
+                },
+                {
+                    name: 'StartM',
+                    padding: '3 3 1 3',
+                    xtype: 'combo',
+                    width: 50,
+                    store: new Ext.data.ArrayStore({
+                        fields: ['value', 'text'],
+                        data: [
+                            ['AM', 'AM'],
+                            ['PM', 'PM']
+                        ]
+                    }),
+                    displayField: 'text',
+                    valueField: 'value',
+                    value: 'AM',
+                    editable: false
+                },
+                {
+                    name: 'TimeZone',
+                    width: 50,
+                    padding: '3 3 1 3',
+                    store: zoneStore,
+                    displayField: 'text',
+                    valueField: 'value',
+                    value: '-7',
+                    editable: false
+                },
+                {
+                    name: 'EndDay',
+                    fieldLabel: 'End Day',
+                    labelAlign: 'left',
+                    labelWidth: 60,
+                    labelPad: 2,
+                    width: 160,
+                    padding: '1 3 3 3',
+                    store: dayStore,
+                    displayField: 'text',
+                    valueField: 'value',
+                    value: 'MON',
+                    editable: false
+                },
+                {
+                    name: 'EndHour',
+                    fieldLabel: 'End Hour',
+                    labelAlign: 'left',
+                    labelWidth: 65,
+                    labelPad: 2,
+                    width: 110,
+                    padding: '1 3 3 3',
+                    store: hourStore,
+                    displayField: 'text',
+                    valueField: 'value',
+                    value: '01',
+                    editable: false
+                },
+                {
+                    name: 'EndMin',
+                    fieldLabel: 'End Minute',
+                    labelAlign: 'left',
+                    labelWidth: 75,
+                    labelPad: 2,
+                    width: 120,
+                    padding: '1 3 3 3',
+                    store: minStore,
+                    displayField: 'text',
+                    valueField: 'value',
+                    value: '00',
+                    editable: false
+                },
+                {
+                    name: 'EndM',
+                    padding: '1 3 3 3',
+                    xtype: 'combo',
+                    width: 50,
+                    store: new Ext.data.ArrayStore({
+                        fields: ['value', 'text'],
+                        data: [
+                            ['AM', 'AM'],
+                            ['PM', 'PM']
+                        ]
+                    }),
+                    displayField: 'text',
+                    valueField: 'value',
+                    value: 'AM',
+                    editable: false
+                }
+            ],
+            buttons: [
+                {
+                    text: 'Add Block',
+                    handler: function()
+                    {
+                        var form = this.up('form').getForm();
+                    
+                        if(form.isValid())
+                        {
+                            if (shiftHoursGrid.getStore().getCount()<30)
+                            {
+                                //Adds the hours set in the form to the data store
+                                shiftHoursGrid.getStore().add(Ext.create('ShiftHoursModel', 
+                                    {
+                                        StartDay: form.findField("StartDay").getValue(),
+                                        StartHour: form.findField("StartHour").getValue(),
+                                        StartMin: form.findField("StartMin").getValue(),
+                                        StartM: form.findField("StartM").getValue(),
+                                        EndDay: form.findField("EndDay").getValue(),
+                                        EndHour: form.findField("EndHour").getValue(),
+                                        EndMin: form.findField("EndMin").getValue(),
+                                        EndM: form.findField("EndM").getValue(),
+                                        TimeZone: form.findField("TimeZone").getValue()
+                                    }));
+                            }
+                            else
+                            {
+                                //Prompts that the maximum number of shifts have been created if the store contains 30 or more records
+                                Ext.MessageBox.show({
+                                        title:'Mentor Office Hours Error',
+                                        msg: 'The maximum number of shifts allowed (30) have been created!',
+                                        buttons: Ext.Msg.OK,
+                                        icon: Ext.Msg.ERROR
+                                    });
+                            }
+                        }
+                    }
+                },
+                {
+                    text: 'Clear',
+                    handler: function()
+                    {
+                        //Clears any entered values
+                        this.up('form').getForm().reset();
+                    }
+                }
+            ]
+        });
+        
+        var shiftHoursGrid = new Ext.grid.Panel(
+        {
+            title: "Mentor's In Office Shifts",
+            store: shiftHoursStore,
+            columns:
+            [
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Start Day',
+                    dataIndex: 'StartDay',
+                    width: 70,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value)
+                    {
+                        //Custom renderer ensures the full day name is displayed instead of the underlying abbreviation
+                        return dayStore.findRecord('value', value).get('text');
+                    },
+                    editor: {
+                        xtype: 'combo',
+                        store: dayStore,
+                        displayField: 'text',
+                        valueField: 'value',
+                        value: 'MON',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Start Hour',
+                    dataIndex: 'StartHour',
+                    width: 60,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor: {
+                        xtype: 'combo',
+                        store: hourStore,
+                        displayField: 'text',
+                        valueField: 'value',
+                        value: '01',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Start Minute',
+                    dataIndex: 'StartMin',
+                    width: 70,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor: {
+                        xtype: 'combo',
+                        store: minStore,
+                        displayField: 'text',
+                        valueField: 'value',
+                        value: '00',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'AM/PM',
+                    dataIndex: 'StartM',
+                    width: 45,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor: {
+                        xtype: 'combo',
+                        store: new Ext.data.ArrayStore({
+                            fields: ['value', 'text'],
+                            data: [
+                                ['AM', 'AM'],
+                                ['PM', 'PM']
+                            ]
+                        }),
+                        displayField: 'text',
+                        valueField: 'value',
+                        value: 'AM',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'End Day',
+                    dataIndex: 'EndDay',
+                    width: 70,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value)
+                    {
+                        //Custom renderer ensures the full day name is displayed instead of the underlying abbreviation
+                        return dayStore.findRecord('value', value).get('text');
+                    },
+                    editor: {
+                        xtype: 'combo',
+                        store: dayStore,
+                        displayField: 'text',
+                        valueField: 'value',
+                        value: 'MON',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'End Hour',
+                    dataIndex: 'EndHour',
+                    width: 60,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor: {
+                        xtype: 'combo',
+                        store: hourStore,
+                        displayField: 'text',
+                        valueField: 'value',
+                        value: '01',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'End Minute',
+                    dataIndex: 'EndMin',
+                    width: 65,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor: {
+                        xtype: 'combo',
+                        store: minStore,
+                        displayField: 'text',
+                        valueField: 'value',
+                        value: '00',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'AM/PM',
+                    dataIndex: 'EndM',
+                    width: 45,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor: {
+                        xtype: 'combo',
+                        store: new Ext.data.ArrayStore({
+                            fields: ['value', 'text'],
+                            data: [
+                                ['AM', 'AM'],
+                                ['PM', 'PM']
+                            ]
+                        }),
+                        displayField: 'text',
+                        valueField: 'value',
+                        value: 'AM',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Time Zone',
+                    dataIndex: 'TimeZone',
+                    width: 65,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value)
+                    {
+                        //Custom renderer ensures the time zone abbreviation is displayed instead of the underlying offset value
+                        return zoneStore.findRecord('value', value).get('text');
+                    },
+                    editor: {
+                        xtype: 'combo',
+                        store: zoneStore,
+                        displayField: 'text',
+                        valueField: 'value',
+                        value: '-7',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'actioncolumn',
+                    width: 25,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    items: [{
+                        icon: '{!$Resource.profile}/images/delete.png',
+                        tooltip: 'Delete',
+                        handler: function(grid, rowIndex, colIndex)
+                        {
+                            shiftHoursStore.removeAt(rowIndex);
+                        }
+                    }]
+                }
+            ],
+            width: 595,
+            height: 200,
+            renderTo: 'divShiftGrid',
+            selType: 'rowmodel',
+            plugins: [
+                Ext.create('Ext.grid.plugin.RowEditing', {
+                    clicksToEdit: 1,
+                    triggerEvent: 'cellclick'
+                })
+            ],
+            listeners:
+            {
+                //beforeedit event is used here to prevent the edit view from displaying if the user clicks the delete button
+                beforeedit: function (grid, e, eOpts)
+                {
+                    return e.column.xtype!=='actioncolumn';
+                }
+            },
+            bbar:
+            [
+                {
+                    text: 'Save Hours',
+                    handler: function()
+                    {
+                        //Default to null value if no shifts are present
+                        var hourString=null;
+                    
+                        //Create a JSON string of the shift hours only if the shift hours store contains one or more entries
+                        if(shiftHoursGrid.store.getCount()>0)
+                        {
+                            //Create a string to start building the JSON for the hours
+                            hourString = '{"Shift":[';
+                            
+                            //Iterate through each shift in the shift hours store and add them to the string
+                            for(var i=0; i<shiftHoursGrid.store.getCount(); i++)
+                            {
+                                hourString=hourString+'{"Start":{"Day":"'+shiftHoursGrid.store.getAt(i).get('StartDay')+'","Time":"'+convert12to24(shiftHoursGrid.store.getAt(i).get('StartHour'), shiftHoursGrid.store.getAt(i).get('StartM'))+shiftHoursGrid.store.getAt(i).get('StartMin')+'"},"End":{"Day":"'+shiftHoursGrid.store.getAt(i).get('EndDay')+'","Time":"'+convert12to24(shiftHoursGrid.store.getAt(i).get('EndHour'), shiftHoursGrid.store.getAt(i).get('EndM'))+shiftHoursGrid.store.getAt(i).get('EndMin')+'"},"Offset":"'+shiftHoursGrid.store.getAt(i).get('TimeZone')+'"},';
+                            }
+                            
+                            //Removes the final comma from the string created by the loop
+                            hourString=hourString.substring(0, hourString.length-1);
+                            
+                            hourString+=']}';
+                        }
+                            
+                        //Update OfficeHours field on mentor object
+                        var MentorObj=new sforce.SObject("Mentor__c");
+                        MentorObj.Id=MentorId;
+                        MentorObj.OfficeHours__c=hourString;
+                        
+                        var updateResult=sforce.connection.update([MentorObj]);
+                        
+                        if (updateResult[0].success=='true')
+                        {
+                            //Query for any course assignments and update office hours to match
+                            sforce.connection.query("select ID, MentorOfficeHours__c from MentorCourseAssignment__c where Mentor__c='"+MentorUser+"'",
+                                function(result)
+                                {
+                                    result.size *= 1;
+                                    result.done = result.done == "true";
+                                    result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                                
+                                    if (result.records.length>0)
+                                    {
+                                        for (var i=0; i<result.records.length; i++)
+                                        {
+                                            result.records[i].MentorOfficeHours__c=hourString;
+                                        }
+                                        
+                                        //Update the objects in Salesforce
+                                        sforce.connection.update(result.records);
+                                    }
+                                    
+                                    //Clears any entered values
+                                    hourEntryForm.getForm().reset();
+                                    
+                                    //If in a pop-up window close the window
+                                    if (window.location.search.indexOf('scontrolCaching=1')!=-1)
+                                    {
+                                        shiftHoursStore.removeAll();
+                                        window.close();
+                                    }
+                                    else
+                                    {
+                                        //If not in a pop-up display save successful message
+                                        Ext.MessageBox.show({
+                                            title:'Mentor Office Hours Saved',
+                                            msg: 'The mentor office hours were successfully saved.',
+                                            buttons: Ext.Msg.OK,
+                                            icon: Ext.Msg.INFO
+                                        });
+                                    }
+                                });
+                        }
+                        else
+                        {
+                            Ext.MessageBox.show({
+                                    title:'Mentor Office Hours Save Error',
+                                    msg: 'An error occured trying to save mentor office hours.<br/>Error Msg: '+updateResult[0].errors.message,
+                                    buttons: Ext.Msg.OK,
+                                    icon: Ext.Msg.ERROR
+                                });
+                        }
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    handler: function()
+                    {
+                        //Clears any entered values
+                        hourEntryForm.getForm().reset();
+                        
+                        //If in a pop-up window close the window
+                        if (window.location.search.indexOf('scontrolCaching=1')!=-1)
+                        {
+                            shiftHoursStore.removeAll();
+                            window.close();
+                        }
+                        else
+                        {
+                            //If not in a pop-up revert any changes and display cancel message
+                            parseStoreHours(currentHours);
+                            
+                            Ext.MessageBox.show({
+                                title:'Mentor Office Hours Changes Canceled',
+                                msg: 'Changes to the mentor office hours were canceled.',
+                                buttons: Ext.Msg.OK,
+                                icon: Ext.Msg.INFO
+                            });
+                        }                   
+                    }
+                }
+            ]
+        });
+        
+        Ext.onReady(function()
+        {
+            hourEntryForm.render('divShiftForm');
+            
+            //If there is no current Mentor object context query for the Mentor object for the current user.
+            //Otherwise use the current Mentor object context to get the Mentor values.
+            if ('{!Mentor__c.Id}'=='' || '{!Mentor__c.Id}'==null)
+            {
+                sforce.connection.query("select Id, User__c, OfficeHours__c from Mentor__c where User__c='{!$User.Id}' limit 1",
+                    function(result)
+                    {
+                        MentorId=result.records.Id;
+                        MentorUser=result.records.User__c;
+                        currentHours=result.records.OfficeHours__c;
+                        
+                        parseStoreHours(currentHours);
+                    });
+            }
+            else
+            {
+                MentorId='{!Mentor__c.Id}';
+                MentorUser='{!Mentor__c.User__c}';
+                currentHours='{!Mentor__c.OfficeHours__c}';
+                parseStoreHours(currentHours);
+            }
+        });
+        
+        //Function to parse the mentor hours JSON and store it in the shiftHoursStore
+        function parseStoreHours(mentorHoursJSON)
+        {
+            shiftHoursStore.removeAll();
+        
+            if (mentorHoursJSON!=null && mentorHoursJSON!='' && mentorHoursJSON.substring(0, 10)=='{"Shift":[')
+            {
+                //Parse the string in to objects using the built-in parser
+                var shiftObject=JSON.parse(mentorHoursJSON);
+                
+                //Iterate through each object and add the values to the shift hours store
+                for(var i=0; i<shiftObject.Shift.length; i++)
+                {
+                    var newRecord=Ext.create('ShiftHoursModel');
+                    
+                    newRecord.set('StartDay', shiftObject.Shift[i].Start.Day);
+                    newRecord.set('StartHour', convert24to12(shiftObject.Shift[i].Start.Time.substring(0,2))[0]);
+                    newRecord.set('StartM', convert24to12(shiftObject.Shift[i].Start.Time.substring(0,2))[1]);
+                    newRecord.set('StartMin', shiftObject.Shift[i].Start.Time.substring(2,4));
+                    newRecord.set('EndDay', shiftObject.Shift[i].End.Day);
+                    newRecord.set('EndHour', convert24to12(shiftObject.Shift[i].End.Time.substring(0,2))[0]);
+                    newRecord.set('EndM', convert24to12(shiftObject.Shift[i].End.Time.substring(0,2))[1]);
+                    newRecord.set('EndMin', shiftObject.Shift[i].End.Time.substring(2,4));
+                    
+                    if (shiftObject.Shift[i].Offset==null)
+                    {
+                        newRecord.set('TimeZone', '-7');
+                    }
+                    else
+                    {
+                        newRecord.set('TimeZone', shiftObject.Shift[i].Offset);
+                    }
+                
+                    shiftHoursStore.add(newRecord);
+                }
+            }
+        }
+        
+        //Converts 12 hour time format to 24 hour time format
+        function convert12to24(hour, half)
+        {
+            if (half=='PM' && hour!='12')
+            {
+                return (parseInt(hour)+12).toString();
+            }
+            else if (half=='AM' && hour=='12')
+            {
+                return '00';
+            }
+            else
+            {
+                if (hour.length==1)
+                {
+                    return '0'+hour;
+                }
+                else
+                {
+                    return hour;
+                }
+            }
+        }
+        
+        //Converts a 24 hour format to an array with a 12 hour format hour and accompanying AM/PM
+        function convert24to12(hour)
+        {
+            var hourM=[];
+            
+            hourM[0]=hour;
+            hourM[1]='AM';
+            
+            if (parseInt(hour)>=12)
+            {
+                if (parseInt(hour)>12)
+                {
+                    hourM[0]=(parseInt(hour)-12).toString();
+                    if (hourM[0].length==1)
+                    {
+                        hourM[0]='0'+hourM[0];
+                    }
+                }
+                hourM[1]='PM';
+            }
+            else if (hour=='00')
+            {
+                hourM[0]='12';              
+            }
+            
+            return hourM;
+        }
+    </script>
+</body>
+</html>
+</apex:page>

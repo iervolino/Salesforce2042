@@ -1,0 +1,4706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Financial Application used by the Scholarship department for evaluation scholarship application and award or deny based on the information provided by the student.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>ActiveDuty__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not the student is active duty</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the student is active duty</inlineHelpText>
+        <label>Active Duty</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AidYear__c</fullName>
+        <description>Aid year for applied financial scholarship/fund.</description>
+        <externalId>false</externalId>
+        <label>Aid Year</label>
+        <length>4</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApplicationCSVFileLastUpdated__c</fullName>
+        <description>Date the application Status was lasted updated but the .csv file form Academic Works.</description>
+        <externalId>false</externalId>
+        <label>Application CSV File Last Updated</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ApplicationStatus__c</fullName>
+        <description>Status of application as it moves through the workflow.</description>
+        <externalId>false</externalId>
+        <label>Application Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>New Application</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Document Gathering</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Schedule Interview</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Interview Scheduled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Review Prep</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ready for Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Review Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Application Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Interview Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ready for Renewal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending FA Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DUPLICATE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Discount Applied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Discount Denied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Discount Appealed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Bi-Weekly Plan</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wait for Tuition</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wait for CU&apos;s</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ApplicationType__c</fullName>
+        <description>Applications may had the same record type however different Application types that require different treatment.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Applications may had the same record type however different Application types that require different treatment.</inlineHelpText>
+        <label>Application Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>New Student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Current Student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DT Student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>First Time</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ApplicationURL__c</fullName>
+        <description>The URL that points to the application the student has submitted</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The URL that points to the application the student has submitted</inlineHelpText>
+        <label>Application URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>AttendTerm__c</fullName>
+        <description>The calculation of when the student will most likely attend</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The calculation of when the student will most likely attend.  (Term Break Return, New Student Start, or Active Student Current Term)</inlineHelpText>
+        <label>Attend Term</label>
+        <length>6</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AwardStatus__c</fullName>
+        <description>After all documentation is gathered and the students application has been reviewed by Committee a decision is then made as the weather or not the an award is not approved or approved.</description>
+        <externalId>false</externalId>
+        <label>Award Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Awarded</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Awarded</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>AwardedinBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Marks that the Scholarship has been awarded in Banner</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Marks that the Scholarship has been awarded in Banner</inlineHelpText>
+        <label>Awarded in Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BannerRowid__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <description>The Banner Rowid of the informatica Load</description>
+        <externalId>true</externalId>
+        <inlineHelpText>The Banner Rowid of the informatica Load</inlineHelpText>
+        <label>BannerRowid</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>BenefitType__c</fullName>
+        <description>Type of benefit sought.  VA -Chapter</description>
+        <externalId>false</externalId>
+        <label>Benefit Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>AIR FORCE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ARMY</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ARMY CONT ED</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CH 1606</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CH 1607</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CH 30</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CH 30/33</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CH 31</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CH 31/33</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CH 33</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CH 33 TOE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CH 35</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>COAST GUARD</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>GO ARMY</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MARINES</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NATIONAL GUARD</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NAVY</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>UTAH NATIONAL GUARD</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>POST 9/11</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>BusinessAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Business Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Financial Applications (Business Account)</relationshipLabel>
+        <relationshipName>Financial_Applications</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CAREStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Opportunity__r.CareStatus__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>CARE Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CUsTransferred__c</fullName>
+        <description>Number of CUs from a student transfer.</description>
+        <externalId>false</externalId>
+        <label>CU&apos;s Transferred</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChapterAmount__c</fullName>
+        <externalId>false</externalId>
+        <label>Chapter Amount</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CloseDate__c</fullName>
+        <description>Date/time the application is completed.</description>
+        <externalId>false</externalId>
+        <label>Close Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>CommitteeReviewDate__c</fullName>
+        <description>Date the Committee reviews the students application including all documentation and notes from phone interview.</description>
+        <externalId>false</externalId>
+        <label>Committee Review Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CommitteeReviewNotes__c</fullName>
+        <description>After Committee meets and reviews students application, notes are then added indicating their decision and additional information.</description>
+        <externalId>false</externalId>
+        <label>Committee Review Notes</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CompletionDate__c</fullName>
+        <description>Date the Financial Application is marked as Complete.</description>
+        <externalId>false</externalId>
+        <label>Completion Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CumulativeCUsandSAP__c</fullName>
+        <description>Banner Cumulative CUs and SAP from Contact</description>
+        <externalId>false</externalId>
+        <formula>Student__r.TotalCUsandSAP__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Cumulative CU&apos;s and SAP</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CumulativeSAP__c</fullName>
+        <description>Banner Cumulative SAP from the Contact object</description>
+        <externalId>false</externalId>
+        <formula>Student__r.CumulativeSAP__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Cumulative SAP %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>CurrentTermCompletedCUs__c</fullName>
+        <externalId>false</externalId>
+        <formula>Student__r.CurrentTermCompletedCUs__c</formula>
+        <label>Current Term Completed CU&apos;s</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentTermEnrolledCUs__c</fullName>
+        <externalId>false</externalId>
+        <formula>Student__r.CurrentTermEnrolledCUs__c</formula>
+        <label>Current Term Enrolled CU&apos;s</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentTerm__c</fullName>
+        <description>Current Term for Student</description>
+        <externalId>false</externalId>
+        <formula>Student__r.CurrentTerm__c</formula>
+        <inlineHelpText>Current Term for Student</inlineHelpText>
+        <label>Current Term</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DateEnteredStage1__c</fullName>
+        <description>The Date the Financial Application entered Stage 1</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Date the Financial Application entered Stage 1</inlineHelpText>
+        <label>Date Entered Stage 1</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateEnteredStage2__c</fullName>
+        <description>The Date the Financial Application entered Stage 2</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Date the Financial Application entered Stage 2</inlineHelpText>
+        <label>Date Entered Stage 2</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateEnteredStage3__c</fullName>
+        <description>The Date the Financial Application entered Stage 3</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Date the Financial Application entered Stage 3</inlineHelpText>
+        <label>Date Entered Stage 3</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateEnteredStage4__c</fullName>
+        <description>The Date the Financial Application entered Stage 4</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Date the Financial Application entered Stage 4</inlineHelpText>
+        <label>Date Entered Stage 4</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateEnteredStage5__c</fullName>
+        <description>The Date the Financial Application entered Stage 5</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Date the Financial Application entered Stage 5</inlineHelpText>
+        <label>Date Entered Stage 5</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateEnteredStage6__c</fullName>
+        <description>The Date the Financial Application entered Stage 6</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Date the Financial Application entered Stage 6</inlineHelpText>
+        <label>Date Entered Stage 6</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateEnteredStage7__c</fullName>
+        <description>The Date the Financial Application entered Stage 7</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Date the Financial Application entered Stage 7</inlineHelpText>
+        <label>Date Entered Stage 7</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateEnteredStage8__c</fullName>
+        <description>The Date the Financial Application entered Stage 8</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Date the Financial Application entered Stage 8</inlineHelpText>
+        <label>Date Entered Stage 8</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateEnteredStage9__c</fullName>
+        <description>The Date the Financial Application entered Stage 9</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Date the Financial Application entered Stage 9</inlineHelpText>
+        <label>Date Entered Stage 9</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateOfInterview__c</fullName>
+        <description>Date of phone interview between applicant and processor.</description>
+        <externalId>false</externalId>
+        <label>Date Of Interview</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DeclinedAid__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not the student has declined Aid</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the student has declined Aid</inlineHelpText>
+        <label>Declined Aid</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DiscountApplicantDegreeProgram__c</fullName>
+        <description>The degree program as indicated on the discount form.</description>
+        <externalId>false</externalId>
+        <label>Discount Applicant Degree Program</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DiscountApplicantID__c</fullName>
+        <description>The Student ID as indicated on the discount form.</description>
+        <externalId>false</externalId>
+        <label>Discount Applicant ID</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DiscountApplicantName__c</fullName>
+        <description>The name of the student as indicated on the discount form.</description>
+        <externalId>false</externalId>
+        <label>Discount Applicant Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DiscountApplicantSignature__c</fullName>
+        <description>Employee confirmation as indicated on the discount form.</description>
+        <externalId>false</externalId>
+        <label>Discount Applicant Signature</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DiscountApplicantTermStartDate__c</fullName>
+        <description>The anticipated term start date as indicated on the discount form.</description>
+        <externalId>false</externalId>
+        <label>Discount Applicant Term Start Date</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DiscountType__c</fullName>
+        <description>Picklist of values used to determine what type of discount should be applied.</description>
+        <externalId>false</externalId>
+        <label>Discount Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Full time employee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Part time employee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family member of full time employee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DurationinStage1__c</fullName>
+        <description>Duration of time in Stage 1</description>
+        <externalId>false</externalId>
+        <formula>IF(  NOT( ISNULL(DateEnteredStage1__c)), 
+  (IF( NOT( ISNULL(DateEnteredStage2__c)),
+    (DateEnteredStage2__c -  DateEnteredStage1__c) * 1440,
+    (IF( NOT( ISNULL(DateEnteredStage3__c)),
+      (DateEnteredStage3__c -  DateEnteredStage1__c)  * 1440,
+      (IF( NOT( ISNULL(DateEnteredStage4__c)),
+        (DateEnteredStage4__c -  DateEnteredStage1__c) * 1440,
+        (IF( NOT( ISNULL(DateEnteredStage5__c)),
+          (DateEnteredStage5__c -  DateEnteredStage1__c) * 1440,
+          (IF( NOT( ISNULL(DateEnteredStage6__c)),
+            (DateEnteredStage6__c -  DateEnteredStage1__c) * 1440,
+            (IF( NOT( ISNULL(DateEnteredStage7__c)),
+              (DateEnteredStage7__c -  DateEnteredStage1__c) * 1440,
+              (IF( NOT( ISNULL(DateEnteredStage8__c)),
+                (DateEnteredStage8__c -  DateEnteredStage1__c) * 1440,
+                (IF( NOT( ISNULL(DateEnteredStage9__c)),
+                  (DateEnteredStage9__c -  DateEnteredStage1__c) * 1440,
+                  (NOW() - DateEnteredStage1__c) * 1440)))))))))))))))), null)</formula>
+        <inlineHelpText>Duration of time in Stage 1</inlineHelpText>
+        <label>Duration in Stage 1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DurationinStage2__c</fullName>
+        <description>Minutes in Stage 2</description>
+        <externalId>false</externalId>
+        <formula>IF(  NOT( ISNULL(DateEnteredStage2__c)), 
+  (IF( NOT( ISNULL(DateEnteredStage3__c)),
+    (DateEnteredStage3__c -  DateEnteredStage2__c) * 1440,
+    (IF( NOT( ISNULL(DateEnteredStage4__c)),
+      (DateEnteredStage4__c -  DateEnteredStage2__c)  * 1440,
+      (IF( NOT( ISNULL(DateEnteredStage5__c)),
+        (DateEnteredStage5__c -  DateEnteredStage2__c) * 1440,
+        (IF( NOT( ISNULL(DateEnteredStage6__c)),
+          (DateEnteredStage6__c -  DateEnteredStage2__c) * 1440,
+          (IF( NOT( ISNULL(DateEnteredStage7__c)),
+            (DateEnteredStage7__c -  DateEnteredStage2__c) * 1440,
+            (IF( NOT( ISNULL(DateEnteredStage8__c)),
+              (DateEnteredStage8__c -  DateEnteredStage2__c) * 1440,
+              (IF( NOT( ISNULL(DateEnteredStage9__c)),
+                (DateEnteredStage9__c -  DateEnteredStage2__c) * 1440,
+                (NOW() - DateEnteredStage1__c) * 1440)))))))))))))), null)</formula>
+        <inlineHelpText>Minutes in Stage 2</inlineHelpText>
+        <label>Duration in Stage 2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DurationinStage3__c</fullName>
+        <description>Minutes in Stage 3</description>
+        <externalId>false</externalId>
+        <formula>IF(  NOT( ISNULL(DateEnteredStage3__c)), 
+  (IF( NOT( ISNULL(DateEnteredStage4__c)),
+    (DateEnteredStage4__c -  DateEnteredStage3__c) * 1440,
+    (IF( NOT( ISNULL(DateEnteredStage5__c)),
+      (DateEnteredStage5__c -  DateEnteredStage3__c)  * 1440,
+      (IF( NOT( ISNULL(DateEnteredStage6__c)),
+        (DateEnteredStage6__c -  DateEnteredStage3__c) * 1440,
+        (IF( NOT( ISNULL(DateEnteredStage7__c)),
+          (DateEnteredStage7__c -  DateEnteredStage3__c) * 1440,
+          (IF( NOT( ISNULL(DateEnteredStage8__c)),
+            (DateEnteredStage8__c -  DateEnteredStage3__c) * 1440,
+            (IF( NOT( ISNULL(DateEnteredStage9__c)),
+              (DateEnteredStage9__c -  DateEnteredStage3__c) * 1440,
+              (NOW() - DateEnteredStage3__c) * 1440)))))))))))), null)</formula>
+        <inlineHelpText>Minutes in Stage 3</inlineHelpText>
+        <label>Duration in Stage 3</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DurationinStage4__c</fullName>
+        <description>Minutes in Stage 4</description>
+        <externalId>false</externalId>
+        <formula>IF(  NOT( ISNULL(DateEnteredStage4__c)), 
+  (IF( NOT( ISNULL(DateEnteredStage5__c)),
+    (DateEnteredStage5__c -  DateEnteredStage4__c) * 1440,
+    (IF( NOT( ISNULL(DateEnteredStage6__c)),
+      (DateEnteredStage6__c -  DateEnteredStage4__c)  * 1440,
+      (IF( NOT( ISNULL(DateEnteredStage7__c)),
+        (DateEnteredStage7__c -  DateEnteredStage4__c) * 1440,
+        (IF( NOT( ISNULL(DateEnteredStage8__c)),
+          (DateEnteredStage8__c -  DateEnteredStage4__c) * 1440,
+          (IF( NOT( ISNULL(DateEnteredStage9__c)),
+            (DateEnteredStage9__c -  DateEnteredStage4__c) * 1440,
+            (NOW() - DateEnteredStage4__c) * 1440)))))))))), null)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Minutes in Stage 4</inlineHelpText>
+        <label>Duration in Stage 4</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DurationinStage5__c</fullName>
+        <description>Minutes in Stage 5</description>
+        <externalId>false</externalId>
+        <formula>IF(  NOT( ISNULL(DateEnteredStage5__c)), 
+  (IF( NOT( ISNULL(DateEnteredStage6__c)),
+    (DateEnteredStage6__c -  DateEnteredStage5__c) * 1440,
+    (IF( NOT( ISNULL(DateEnteredStage7__c)),
+      (DateEnteredStage7__c -  DateEnteredStage5__c)  * 1440,
+      (IF( NOT( ISNULL(DateEnteredStage8__c)),
+        (DateEnteredStage8__c -  DateEnteredStage5__c) * 1440,
+        (IF( NOT( ISNULL(DateEnteredStage9__c)),
+          (DateEnteredStage9__c -  DateEnteredStage5__c) * 1440,
+          (NOW() - DateEnteredStage5__c) * 1440)))))))), null)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Minutes in Stage 5</inlineHelpText>
+        <label>Duration in Stage 5</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DurationinStage6__c</fullName>
+        <description>Minutes in Stage 6</description>
+        <externalId>false</externalId>
+        <formula>IF(  NOT( ISNULL(DateEnteredStage6__c)), 
+  (IF( NOT( ISNULL(DateEnteredStage7__c)),
+    (DateEnteredStage7__c -  DateEnteredStage6__c) * 1440,
+    (IF( NOT( ISNULL(DateEnteredStage8__c)),
+      (DateEnteredStage8__c -  DateEnteredStage6__c)  * 1440,
+      (IF( NOT( ISNULL(DateEnteredStage9__c)),
+        (DateEnteredStage9__c -  DateEnteredStage6__c) * 1440,
+        (NOW() - DateEnteredStage6__c) * 1440)))))), null)</formula>
+        <inlineHelpText>Minutes in Stage 6</inlineHelpText>
+        <label>Duration in Stage 6</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DurationinStage7__c</fullName>
+        <description>Minutes in Stage 7</description>
+        <externalId>false</externalId>
+        <formula>IF(  NOT( ISNULL(DateEnteredStage7__c)), 
+  (IF( NOT( ISNULL(DateEnteredStage8__c)),
+    (DateEnteredStage8__c -  DateEnteredStage7__c) * 1440,
+    (IF( NOT( ISNULL(DateEnteredStage9__c)),
+      (DateEnteredStage9__c -  DateEnteredStage7__c) * 1440,
+      (NOW() - DateEnteredStage7__c) * 1440)))), null)</formula>
+        <inlineHelpText>Minutes in Stage 7</inlineHelpText>
+        <label>Duration in Stage 7</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DurationinStage8__c</fullName>
+        <description>Minutes in Stage 8</description>
+        <externalId>false</externalId>
+        <formula>IF(  NOT( ISNULL(DateEnteredStage8__c)), 
+  (IF( NOT( ISNULL(DateEnteredStage9__c)),
+    (DateEnteredStage9__c -  DateEnteredStage8__c) * 1440,
+    (NOW() - DateEnteredStage9__c) * 1440)), null)</formula>
+        <inlineHelpText>Minutes in Stage 8</inlineHelpText>
+        <label>Duration in Stage 8</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DurationinStage9__c</fullName>
+        <description>Minutes in Stage 9</description>
+        <externalId>false</externalId>
+        <formula>IF( NOT( ISNULL( DateEnteredStage9__c)), 
+  (NOW() - DateEnteredStage9__c) * 1440,NULL)</formula>
+        <inlineHelpText>Minutes in Stage 9</inlineHelpText>
+        <label>Duration in Stage 9</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <description>The date at which the applicattion is done with funding</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date at which the applicattion is done with funding</inlineHelpText>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EnrollmentCounselor__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Owner.FirstName&amp;&quot; &quot;&amp;Opportunity__r.Owner.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Enrollment Counselor</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EnrollmentEstimatedStart__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.CloseDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Enrollment Estimated Start</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EnrollmentFinanceStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.BursarStatus__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Enrollment Finance Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Entitlement__c</fullName>
+        <externalId>false</externalId>
+        <label>Entitlement</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FAAidYearStartDate__c</fullName>
+        <description>Financial Aid Aid Year start date</description>
+        <externalId>false</externalId>
+        <formula>FAAidYear__r.BeginDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Financial Aid Aid Year start date</inlineHelpText>
+        <label>FA Aid Year Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FAAidYear__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Aid year for financial Aid</description>
+        <externalId>false</externalId>
+        <label>FA Aid Year</label>
+        <referenceTo>Year__c</referenceTo>
+        <relationshipLabel>Financial Applications</relationshipLabel>
+        <relationshipName>FinancialApplications</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>FamilyRelation__c</fullName>
+        <description>Open text field to indicate how the student applying for a discount is related to the WGU employee.</description>
+        <externalId>false</externalId>
+        <label>Family Relation</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FieldExperienceStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>Text( FieldExperience__r.AdmissionStatus__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Field Experience Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FieldExperience__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Field Experience</label>
+        <referenceTo>FieldExperience__c</referenceTo>
+        <relationshipLabel>Financial Applications</relationshipLabel>
+        <relationshipName>FinancialApplications</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>FinancialAwardAmount__c</fullName>
+        <description>Roll-up of Total Amount from the Financial Award object through trigger.</description>
+        <externalId>false</externalId>
+        <label>Financial Award Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>FundDenialReason__c</fullName>
+        <description>Reason for denial of financial fund if not approved after committee review.</description>
+        <externalId>false</externalId>
+        <label>Fund Denial Reason</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Qualified</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Not Enrolling</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Requirements Not Met</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Review Board Denial</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Follow Up</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Not Enrolling/No Follow Up</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Longer Interested</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Awarded up to Cost of Attendance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>GPANotes__c</fullName>
+        <description>Notes regarding the GPA from a student&apos;s transcripts</description>
+        <externalId>false</externalId>
+        <label>GPA Notes</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>GrantRenewTerm__c</fullName>
+        <description>The term that grants such as Pell or State grants will renew</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The term that grants such as Pell or State grants will renew</inlineHelpText>
+        <label>Grant Renew Term</label>
+        <length>6</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GrantsProcessed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not the student&apos;s grants(Pell, State etc) have been run through auto packaging</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the student&apos;s grants(Pell, State etc) have been run through auto packaging</inlineHelpText>
+        <label>Grants Processed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HasFAFSA__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not the student has a FAFSA this aid year</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the student has a FAFSA this aid year</inlineHelpText>
+        <label>Has FAFSA</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HasHold__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not the student has a hold on their account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the student has a hold on their account</inlineHelpText>
+        <label>Has Hold</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>InterviewNotes__c</fullName>
+        <description>Notes taken by the processor during the phone interview with the applicant.</description>
+        <externalId>false</externalId>
+        <label>Interview Notes</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>InterviewerComments__c</fullName>
+        <externalId>false</externalId>
+        <label>Interviewer Comments</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IsApplicantQualified__c</fullName>
+        <description>After the Processor reviews the students application they use this field to indicate qualification status of &quot;No, Not Qualified&quot; or &quot;Yes, Qualified&quot;.</description>
+        <externalId>false</externalId>
+        <label>Is Applicant Qualified?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No, Not Qualified</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yes, Qualified (Current Student)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yes, Qualified (New Student)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yes, Qualified</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yes Has Benefit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Benefit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Self Pay Benefit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yes, Qualified (DT)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DUPLICATE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LastAAVDate__c</fullName>
+        <description>Last date student set AAV</description>
+        <externalId>false</externalId>
+        <formula>Student__r.LastDateOfAAV__c</formula>
+        <inlineHelpText>Last date student set AAV</inlineHelpText>
+        <label>Last AAV Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LastCAREStatusDate__c</fullName>
+        <description>Last Date CARE Status Changed</description>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.LastStatusDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Last Date CARE Status Changed</inlineHelpText>
+        <label>Last CARE Status Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LastCertifiedDate__c</fullName>
+        <description>Last Date of Military Benefit Certification</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Last Date of Military Benefit Certification</inlineHelpText>
+        <label>Last Certified Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LastContact__c</fullName>
+        <description>Last time an activity occurred on the account</description>
+        <externalId>false</externalId>
+        <label>Last Contact</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LastSAPStanding__c</fullName>
+        <description>The last recorded sap standing</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Last Recorded SAP Standing. (X = First Term)</inlineHelpText>
+        <label>Last SAP Standing</label>
+        <picklist>
+            <picklistValues>
+                <fullName>GS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PB</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>X</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>LoanRenewTerm__c</fullName>
+        <description>The Term a student&apos;s loans are set to renew</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Term a student&apos;s loans are set to renew</inlineHelpText>
+        <label>Loan Renew Term</label>
+        <length>6</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LoansProcessed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not the student has been run through auto packaging for loans</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the student has been run through auto packaging for loans.  Student may not have loans because they are pending processing or were not eligible/declined.</inlineHelpText>
+        <label>Loans Processed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MethodsOfPayment__c</fullName>
+        <description>Method(s) of payment as indicated on the discount form.</description>
+        <externalId>false</externalId>
+        <label>Method(s) of Payment</label>
+        <length>500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>MilitaryScholarshipPriority__c</fullName>
+        <description>This is a formula field that pulls the information from Opportunity__r.MilitaryScholarshipPriority__c. It was created by Rhett Bolton for the use of the Scholarship Department upon request from Ashley Wankier.</description>
+        <externalId>false</externalId>
+        <formula>IF(Opportunity__r.MilitaryScholarshipPriority__c , &quot;Yes&quot;, &quot;No&quot;)</formula>
+        <inlineHelpText>Military/Scholarship Priority from the CARE Profile.</inlineHelpText>
+        <label>Military/Scholarship Priority</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>NSLDSCheckNeeded__c</fullName>
+        <description>Indicates that the Student needs NSLDS to be reviewed</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates that the Student needs NSLDS to be reviewed</inlineHelpText>
+        <label>NSLDS Check Needed</label>
+        <summaryFilterItems>
+            <field>FinancialRequirement__c.RequirementDescription__c</field>
+            <operation>startsWith</operation>
+            <value>NSLDS</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>FinancialRequirement__c.RequirementsStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Received and Satisfied, Satisfied</value>
+        </summaryFilterItems>
+        <summaryForeignKey>FinancialRequirement__c.FinancialApplication__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Look-up to Opportunity Object (CARE)</description>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Financial Applications</relationshipLabel>
+        <relationshipName>FinancialApplications</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>OverallGPA__c</fullName>
+        <description>Overall GPA from a student&apos;s transcripts</description>
+        <externalId>false</externalId>
+        <label>Overall GPA</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Less than 2.0</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2.0-2.9</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3.0-3.2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3.3-3.5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3.6-3.8</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3.9-4.0</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>OverallRenewTerm__c</fullName>
+        <description>The overall term of renewal</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The overall term of renewal</inlineHelpText>
+        <label>Overall Renew Term</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>PackageGroup__c</fullName>
+        <description>The categorization of the student&apos;s package</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field helps decide what funds a student can get and how much they can get.</inlineHelpText>
+        <label>Package Group</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PackageType__c</fullName>
+        <description>Tells how the student was packaged.  By ACS, by WGU etc.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Tells how the student was packaged.  By ACS, WGU, Autopackaged</inlineHelpText>
+        <label>Package Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Packaged ACS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Packaged WGU</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Autopackaged</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>PckgReqCompleteDate__c</fullName>
+        <description>The date that packaging requirements were marked as complete</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date that packaging requirements were marked as complete</inlineHelpText>
+        <label>Pckg Req Complete Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>PellEligible__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not the student is Pell eligible based on FAFSA information</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the student is Pell eligible based on FAFSA information and student records</inlineHelpText>
+        <label>Pell Eligible</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PendingRequirements__c</fullName>
+        <description>The number of child requirements in a not satisfied status</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of child requirements in a not satisfied status</inlineHelpText>
+        <label>Pending Requirements</label>
+        <summaryFilterItems>
+            <field>FinancialRequirement__c.SatisfiedIndicator__c</field>
+            <operation>notEqual</operation>
+            <value>Y</value>
+        </summaryFilterItems>
+        <summaryForeignKey>FinancialRequirement__c.FinancialApplication__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Program__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.MarketingProgram__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Program</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProvisionallyReviewed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox that allows users to mark whether or not transcripts and financial applications have been reviewed prior to completing a scholarship review.</description>
+        <externalId>false</externalId>
+        <label>Provisionally Reviewed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>RBIIndicator__c</fullName>
+        <description>Indicates that the Student is part of the Responsible Borrowing Initiative</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates that the Student is part of the Responsible Borrowing Initiative</inlineHelpText>
+        <label>RBI Indicator</label>
+        <summaryFilterItems>
+            <field>FinancialRequirement__c.RequirementDescription__c</field>
+            <operation>startsWith</operation>
+            <value>RESPONSIBLE BORROWING INITIATIVE</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>FinancialRequirement__c.RequirementsStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Received and Satisfied, Satisfied</value>
+        </summaryFilterItems>
+        <summaryForeignKey>FinancialRequirement__c.FinancialApplication__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>RelatedEmployee__c</fullName>
+        <description>The name of the employee related to the student applying for the discount.</description>
+        <externalId>false</externalId>
+        <label>Related Employee</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RequirementCount__c</fullName>
+        <description>Roll-Up Summary of the Financial Requirements Object.</description>
+        <externalId>false</externalId>
+        <label>Requirement Count</label>
+        <summaryForeignKey>FinancialRequirement__c.FinancialApplication__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <description>Day the application&apos;s .csv file is uploaded.</description>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>StatusCode__c</fullName>
+        <description>The Numerical Representation of the status of the application</description>
+        <externalId>false</externalId>
+        <label>Status Code</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Look-up field for Student Account linking it to the Account Object.</description>
+        <externalId>false</externalId>
+        <label>Student Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Financial Applications</relationshipLabel>
+        <relationshipName>FinancialApplications</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StudentEmail__c</fullName>
+        <description>Student Mail address from the Person Account Email</description>
+        <externalId>false</externalId>
+        <label>Student Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentFirstName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Student__r.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student First Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentID__c</fullName>
+        <description>Banner ID from associated Student Account</description>
+        <externalId>false</externalId>
+        <formula>Student__r.StudentID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentLastName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Student__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Last Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentPIDM__c</fullName>
+        <externalId>false</externalId>
+        <formula>Student__r.PIDM__c</formula>
+        <label>Student PIDM</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentPhone__c</fullName>
+        <description>The students phone number.</description>
+        <externalId>false</externalId>
+        <formula>Student__r.Phone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentSFID__c</fullName>
+        <description>Formula field to allow the contact ID of the student to be accessed via a custom button</description>
+        <externalId>false</externalId>
+        <formula>Student__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student SF ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentState__c</fullName>
+        <description>The STATE according to the students mailing address on the account object.</description>
+        <externalId>false</externalId>
+        <formula>Student__r.MailingState</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student State</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Student__r.Status__c)</formula>
+        <label>Student Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Student__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Link to the contact from financial application</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The student that this financial application belongs to</inlineHelpText>
+        <label>Student</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Financial Applications</relationshipLabel>
+        <relationshipName>FinancialApplications</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TeachEligible__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not the student passed all checks, including the records check to receive teach</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the student passed all checks, including the records check to receive teach</inlineHelpText>
+        <label>Teach Eligible</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TeachProgramEligible__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not a student is in a program that is teach eligible regardless of the check done by records</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the student passed all checks, including the records check to receive teach</inlineHelpText>
+        <label>Teach Program Eligible</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TermEndDate__c</fullName>
+        <description>Term End Date from Contact</description>
+        <externalId>false</externalId>
+        <formula>Student__r.TermEndDate__c</formula>
+        <inlineHelpText>Term End Date from Contact</inlineHelpText>
+        <label>Term End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TermSAP__c</fullName>
+        <description>Banner Term SAP % from Contact</description>
+        <externalId>false</externalId>
+        <formula>Student__r.TermSap__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Term SAP %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>TotalAttemptedCUs__c</fullName>
+        <description>Banner Total Attempted CU&apos;s from Contact</description>
+        <externalId>false</externalId>
+        <formula>Student__r.TotalAttemptedCUs__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Attempted CU&apos;s</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalCompletedCUs__c</fullName>
+        <description>Banner Total Completed CUs from Contact</description>
+        <externalId>false</externalId>
+        <formula>Student__r.TotalCompletedCUs__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Completed CU&apos;s</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalElapsedTime__c</fullName>
+        <description>Total Elapsed Time</description>
+        <externalId>false</externalId>
+        <formula>CloseDate__c - CreatedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Elapsed Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalTermAmount__c</fullName>
+        <description>Roll-up of Total term amount from the Financial Award object through trigger.</description>
+        <externalId>false</externalId>
+        <label>Total Term Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>TrackingGroup__c</fullName>
+        <description>The students group for requirement tracking</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The students group for requirement tracking</inlineHelpText>
+        <label>Tracking Group</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationsStatus__c</fullName>
+        <description>Transfer Evaluation Status from CARE</description>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.TransferEvaluationStatus__c</formula>
+        <label>Transcript Evaluations Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TranscriptStatus__c</fullName>
+        <description>Transcript status from the CARE Record.</description>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.TranscriptStatus__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Transcript Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UnusualEnrollmentHistory__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>ISIR indicates unusual Enrollment history</description>
+        <externalId>false</externalId>
+        <inlineHelpText>ISIR indicated unusual enrollment history</inlineHelpText>
+        <label>Unusual Enrollment History</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Financial Application</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>CommitteeReviewDate__c</columns>
+        <columns>AwardStatus__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>ApplicationCompleteStatus</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>CommitteeReviewDate__c</columns>
+        <columns>AwardStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Application Complete</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <label>9 Application Complete Status</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+            <roleAndSubordinatesInternal>DirectorFinancialAid</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Awarded</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>CommitteeReviewDate__c</columns>
+        <columns>TotalTermAmount__c</columns>
+        <columns>FinancialAwardAmount__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>AwardStatus__c</field>
+            <operation>equals</operation>
+            <value>Awarded</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <label>Awarded</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>BoardDenials</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>CompletionDate__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>FundDenialReason__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>StudentEmail__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>FundDenialReason__c</field>
+            <operation>equals</operation>
+            <value>Review Board Denial</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <label>Board Denials</label>
+        <sharedTo>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>EleniVANewApplications</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>BenefitType__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>PendingRequirements__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.VA</value>
+        </filters>
+        <filters>
+            <field>IsApplicantQualified__c</field>
+            <operation>equals</operation>
+            <value>Undecided</value>
+        </filters>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>R,S,T,U,V</value>
+        </filters>
+        <label>Eleni - VA New Applications</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>VAEmployee</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>EmployeeTuitionDiscountFormsDone</fullName>
+        <columns>NAME</columns>
+        <columns>Student__c</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>DiscountApplicantID__c</columns>
+        <columns>DiscountApplicantName__c</columns>
+        <columns>DiscountApplicantTermStartDate__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Discounts</value>
+        </filters>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Discount Applied,Discount Denied</value>
+        </filters>
+        <label>Employee Tuition Discount Forms - Done</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>BursarManager</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>EmployeeTuitionDiscount_Forms</fullName>
+        <columns>NAME</columns>
+        <columns>Student__c</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>DiscountApplicantID__c</columns>
+        <columns>DiscountApplicantName__c</columns>
+        <columns>DiscountApplicantTermStartDate__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Discounts</value>
+        </filters>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Discount Applied,Discount Denied</value>
+        </filters>
+        <label>Employee Tuition Discount Forms</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>BursarManager</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>FAMyNSLDSChecks</fullName>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7</booleanFilter>
+        <columns>NAME</columns>
+        <columns>FAAidYear__c</columns>
+        <columns>CAREStatus__c</columns>
+        <columns>AttendTerm__c</columns>
+        <columns>EnrollmentEstimatedStart__c</columns>
+        <columns>OverallRenewTerm__c</columns>
+        <columns>EnrollmentFinanceStatus__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>NSLDSCheckNeeded__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>startsWith</operation>
+            <value>AAMT,ADMT,INTV</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.FinancialAid</value>
+        </filters>
+        <filters>
+            <field>FAAidYearStartDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>LAST_N_DAYS:365</value>
+        </filters>
+        <filters>
+            <field>LastCAREStatusDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>LAST_N_DAYS:60</value>
+        </filters>
+        <filters>
+            <field>LastAAVDate__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Student__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <label>FA - My NSLDS Checks</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>DirectorFinancialAid</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>FANSLDSChecks</fullName>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7</booleanFilter>
+        <columns>NAME</columns>
+        <columns>FAAidYear__c</columns>
+        <columns>CAREStatus__c</columns>
+        <columns>AttendTerm__c</columns>
+        <columns>EnrollmentEstimatedStart__c</columns>
+        <columns>OverallRenewTerm__c</columns>
+        <columns>EnrollmentFinanceStatus__c</columns>
+        <columns>OWNER.FIRST_NAME</columns>
+        <columns>OWNER.LAST_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NSLDSCheckNeeded__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>startsWith</operation>
+            <value>AAMT,ADMT,INTV</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.FinancialAid</value>
+        </filters>
+        <filters>
+            <field>FAAidYearStartDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>LAST_N_DAYS:365</value>
+        </filters>
+        <filters>
+            <field>LastCAREStatusDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>LAST_N_DAYS:60</value>
+        </filters>
+        <filters>
+            <field>LastAAVDate__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Student__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <label>FA - NSLDS Checks</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>DirectorFinancialAid</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>FANextAidYearNSLDSChecks</fullName>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7</booleanFilter>
+        <columns>NAME</columns>
+        <columns>FAAidYear__c</columns>
+        <columns>CAREStatus__c</columns>
+        <columns>AttendTerm__c</columns>
+        <columns>EnrollmentEstimatedStart__c</columns>
+        <columns>OverallRenewTerm__c</columns>
+        <columns>EnrollmentFinanceStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NSLDSCheckNeeded__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>startsWith</operation>
+            <value>AAMT,ADMT,INTV</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.FinancialAid</value>
+        </filters>
+        <filters>
+            <field>FAAidYearStartDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>NEXT_90_DAYS</value>
+        </filters>
+        <filters>
+            <field>LastCAREStatusDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>LAST_N_DAYS:60</value>
+        </filters>
+        <filters>
+            <field>LastAAVDate__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Student__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <label>FA - Next Aid Year NSLDS Checks</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>DirectorFinancialAid</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>FARBIStudents</fullName>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7</booleanFilter>
+        <columns>NAME</columns>
+        <columns>FAAidYear__c</columns>
+        <columns>CAREStatus__c</columns>
+        <columns>CurrentTerm__c</columns>
+        <columns>EnrollmentEstimatedStart__c</columns>
+        <columns>OverallRenewTerm__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RBIIndicator__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>startsWith</operation>
+            <value>PROS,PRAP,APNN,APIN,APCO,APAC,REDI,PEND,AAMT,ADMT,INTV</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.FinancialAid</value>
+        </filters>
+        <filters>
+            <field>FAAidYearStartDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>LAST_N_DAYS:365</value>
+        </filters>
+        <filters>
+            <field>LastCAREStatusDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>LAST_90_DAYS</value>
+        </filters>
+        <filters>
+            <field>LastAAVDate__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Student__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <label>FA - RBI Students</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>DirectorFinancialAid</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>FAUnusualEnrollmentHistoryAll</fullName>
+        <columns>NAME</columns>
+        <columns>FAAidYear__c</columns>
+        <columns>AttendTerm__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.FinancialAid</value>
+        </filters>
+        <filters>
+            <field>UnusualEnrollmentHistory__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>FA Unusual Enrollment - All</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>DirectorFinancialAid</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>FAUnusualEnrollmentHistoryAllTransRcvd</fullName>
+        <columns>NAME</columns>
+        <columns>FAAidYear__c</columns>
+        <columns>AttendTerm__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.FinancialAid</value>
+        </filters>
+        <filters>
+            <field>UnusualEnrollmentHistory__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>TranscriptStatus__c</field>
+            <operation>equals</operation>
+            <value>All Transcripts Received</value>
+        </filters>
+        <label>FA Unusual Enrollment - All Trans Rcvd</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>DirectorFinancialAid</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>FAUnusualEnrollmentHistoryPendingTrans</fullName>
+        <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>FAAidYear__c</columns>
+        <columns>AttendTerm__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.FinancialAid</value>
+        </filters>
+        <filters>
+            <field>UnusualEnrollmentHistory__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>TranscriptStatus__c</field>
+            <operation>startsWith</operation>
+            <value>Pending</value>
+        </filters>
+        <filters>
+            <field>TranscriptStatus__c</field>
+            <operation>startsWith</operation>
+            <value>Waiting</value>
+        </filters>
+        <label>FA Unusual Enrollment - Pending Trans</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>DirectorFinancialAid</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>GatheringRequirementsNewStudents</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>CAREStatus__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Document Gathering</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>notEqual</operation>
+            <value>DT Student</value>
+        </filters>
+        <label>2 Gathering Requirements - New Students</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>InterviewScheduledStatus</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>ApplicationType__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Interview Scheduled</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <label>4 Interview Scheduled Status</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>InterviewScheduledStatus1</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>MilitaryScholarshipPriority__c</columns>
+        <columns>TranscriptEvaluationsStatus__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>CAREStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Interview Complete</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <label>5 Interview Complete</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>JackieVANewApplications</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>BenefitType__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>PendingRequirements__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.VA</value>
+        </filters>
+        <filters>
+            <field>IsApplicantQualified__c</field>
+            <operation>equals</operation>
+            <value>Undecided</value>
+        </filters>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>A,M,O,W</value>
+        </filters>
+        <label>Jackie - VA New Applications</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>VAEmployee</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>JoVANewApplications</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>BenefitType__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>PendingRequirements__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.VA</value>
+        </filters>
+        <filters>
+            <field>IsApplicantQualified__c</field>
+            <operation>equals</operation>
+            <value>Undecided</value>
+        </filters>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>C,D,G,N</value>
+        </filters>
+        <label>Jo - VA New Applications</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>VAEmployee</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>MigratedScholarship</fullName>
+        <columns>NAME</columns>
+        <columns>FAAidYear__c</columns>
+        <columns>FinancialAwardAmount__c</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>AwardStatus__c</columns>
+        <columns>PackageType__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>StudentFirstName__c</columns>
+        <columns>StudentLastName__c</columns>
+        <columns>StudentEmail__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>AwardStatus__c</field>
+            <operation>equals</operation>
+            <value>Migrated</value>
+        </filters>
+        <label>Migrated Scholarships</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>IT_Group</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>ScholarshipManager</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>NewAppsSchl</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>StudentID__c</columns>
+        <columns>ApplicationType__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>New Application</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <label>1 New Application Status</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>NotAwarded</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>CommitteeReviewDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>AwardStatus__c</field>
+            <operation>equals</operation>
+            <value>Not Awarded</value>
+        </filters>
+        <label>Not Awarded</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+            <role>IT_Group</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ReadyforReviewStatusCurrent</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>CommitteeReviewDate__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>TranscriptEvaluationsStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Ready for Review</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>Current Student</value>
+        </filters>
+        <label>7 Ready for Review - Current Student</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ReadyforReviewStatusDT</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>CommitteeReviewDate__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>TranscriptEvaluationsStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Ready for Review</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>DT Student</value>
+        </filters>
+        <label>7 Ready for Review - DT</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ReadyforReviewStatusNewStudent</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>CommitteeReviewDate__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>TranscriptEvaluationsStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Ready for Review</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>New Student</value>
+        </filters>
+        <label>7 Ready for Review - New Student</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ReviewCompleteStatus</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>CommitteeReviewDate__c</columns>
+        <columns>AwardStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>FieldExperience__c</columns>
+        <columns>FieldExperienceStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Review Complete</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <label>8 Review Complete Status</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ReviewPrepCurrentStudents</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>TranscriptEvaluationsStatus__c</columns>
+        <columns>CAREStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Review Prep</value>
+        </filters>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>Current Student</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <label>6 Review Prep - Current Students</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ReviewPrepNewStudents</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>TranscriptEvaluationsStatus__c</columns>
+        <columns>CAREStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Review Prep</value>
+        </filters>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>New Student</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <label>6 Review Prep - New Students</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ScheduleInterviewStatusCurrent</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>TranscriptEvaluationsStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>CAREStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Schedule Interview</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>Current Student</value>
+        </filters>
+        <label>3 Schedule Interview - Current Student</label>
+        <sharedTo>
+            <group>BSIT</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ScheduleInterviewStatusNewNotReviewed</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>TranscriptEvaluationsStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>CAREStatus__c</columns>
+        <columns>MilitaryScholarshipPriority__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Schedule Interview</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>New Student</value>
+        </filters>
+        <filters>
+            <field>ProvisionallyReviewed__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>3 Schedule Interview - New: Not Reviewed</label>
+        <sharedTo>
+            <group>BSIT</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ScheduleInterviewStatusNewReviewed</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>TranscriptEvaluationsStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>CAREStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Schedule Interview</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>New Student</value>
+        </filters>
+        <filters>
+            <field>ProvisionallyReviewed__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>3 Schedule Interview - New: Reviewed</label>
+        <sharedTo>
+            <group>BSIT</group>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ScholarshipsReadytoAward</fullName>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 AND 8</booleanFilter>
+        <columns>NAME</columns>
+        <columns>AidYear__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>DateOfInterview__c</columns>
+        <columns>CommitteeReviewDate__c</columns>
+        <columns>AwardStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Application Complete</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>AwardStatus__c</field>
+            <operation>equals</operation>
+            <value>Awarded</value>
+        </filters>
+        <filters>
+            <field>FundDenialReason__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>IsApplicantQualified__c</field>
+            <operation>notEqual</operation>
+            <value>&quot;No, Not Qualified&quot;</value>
+        </filters>
+        <filters>
+            <field>CommitteeReviewDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>LAST_N_DAYS:30</value>
+        </filters>
+        <filters>
+            <field>AwardedinBanner__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>TotalTermAmount__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </filters>
+        <label>9.1 Scholarships Ready to Award</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>Scholarship</group>
+            <roleAndSubordinatesInternal>DirectorFinancialAid</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>TerriVANewApplications</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>BenefitType__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>PendingRequirements__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.VA</value>
+        </filters>
+        <filters>
+            <field>IsApplicantQualified__c</field>
+            <operation>equals</operation>
+            <value>Undecided</value>
+        </filters>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>B,E,F,P</value>
+        </filters>
+        <label>Terri - VA New Applications</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>VAEmployee</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ThirdParty</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>TranscriptStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.ThirdParty</value>
+        </filters>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>New Application</value>
+        </filters>
+        <label>Bursar - Third Party - New</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>BursarManager</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>VAAAVSet</fullName>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>BenefitType__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>TermEndDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.VA</value>
+        </filters>
+        <filters>
+            <field>LastAAVDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>LAST_N_DAYS:30</value>
+        </filters>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>New Application,Pending,Active</value>
+        </filters>
+        <filters>
+            <field>LastCertifiedDate__c</field>
+            <operation>lessThan</operation>
+            <value>LAST_N_DAYS:30</value>
+        </filters>
+        <filters>
+            <field>LastCertifiedDate__c</field>
+            <operation>equals</operation>
+        </filters>
+        <label>VA - AAV Set</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>VAEmployee</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>VAHasBenefit</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>BenefitType__c</columns>
+        <columns>ApplicationStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.VA</value>
+        </filters>
+        <filters>
+            <field>IsApplicantQualified__c</field>
+            <operation>equals</operation>
+            <value>Yes Has Benefit,Self Pay Benefit</value>
+        </filters>
+        <filters>
+            <field>AwardStatus__c</field>
+            <operation>equals</operation>
+            <value>Undecided,Not Awarded</value>
+        </filters>
+        <label>VA Has Benefit</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>VAManager</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>VANewApplications</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>BenefitType__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>PendingRequirements__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.VA</value>
+        </filters>
+        <filters>
+            <field>IsApplicantQualified__c</field>
+            <operation>equals</operation>
+            <value>Undecided</value>
+        </filters>
+        <label>VA New Applications</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>VAManager</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>VATermEnding</fullName>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND (5 OR 6)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>BenefitType__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>TermEndDate__c</columns>
+        <columns>LastCertifiedDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.VA</value>
+        </filters>
+        <filters>
+            <field>TermEndDate__c</field>
+            <operation>lessOrEqual</operation>
+            <value>NEXT_N_DAYS:14</value>
+        </filters>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>New Application,Pending,Active</value>
+        </filters>
+        <filters>
+            <field>TermEndDate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>TODAY</value>
+        </filters>
+        <filters>
+            <field>LastCertifiedDate__c</field>
+            <operation>lessThan</operation>
+            <value>LAST_N_DAYS:14</value>
+        </filters>
+        <filters>
+            <field>LastCertifiedDate__c</field>
+            <operation>equals</operation>
+        </filters>
+        <label>VA - Term Ending</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>VAManager</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>WayneVANewApplications</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>BenefitType__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>PendingRequirements__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.VA</value>
+        </filters>
+        <filters>
+            <field>IsApplicantQualified__c</field>
+            <operation>equals</operation>
+            <value>Undecided</value>
+        </filters>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>H,I,J,K,L,Q,Y,Z</value>
+        </filters>
+        <label>Wayne - VA New Applications</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>VAEmployee</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>X2GatheringRequirementsDTJanuary</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>StudentID__c</columns>
+        <columns>FieldExperience__c</columns>
+        <columns>FieldExperienceStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>DT Student</value>
+        </filters>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Document Gathering</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>FieldExperience__c</field>
+            <operation>contains</operation>
+            <value>January</value>
+        </filters>
+        <label>2 Gathering Requirements - DT January</label>
+        <sharedTo>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>X2GatheringRequirementsDTSept</fullName>
+        <columns>NAME</columns>
+        <columns>ApplicationStatus__c</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>ApplicationType__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>StudentID__c</columns>
+        <columns>FieldExperience__c</columns>
+        <columns>FieldExperienceStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>DT Student</value>
+        </filters>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Document Gathering</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>FieldExperience__c</field>
+            <operation>contains</operation>
+            <value>September</value>
+        </filters>
+        <label>2 Gathering Requirements - DT September</label>
+        <sharedTo>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>X6ReviewPrepDTJanuary</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>FieldExperience__c</columns>
+        <columns>FieldExperienceStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>DT Student</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Review Prep</value>
+        </filters>
+        <filters>
+            <field>FieldExperience__c</field>
+            <operation>contains</operation>
+            <value>January</value>
+        </filters>
+        <label>6 Review Prep - DT January</label>
+        <sharedTo>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>X6ReviewPrepDTSept</fullName>
+        <columns>NAME</columns>
+        <columns>IsApplicantQualified__c</columns>
+        <columns>PendingRequirements__c</columns>
+        <columns>FieldExperience__c</columns>
+        <columns>FieldExperienceStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ApplicationType__c</field>
+            <operation>equals</operation>
+            <value>DT Student</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>FinancialApplication__c.Scholarship</value>
+        </filters>
+        <filters>
+            <field>ApplicationStatus__c</field>
+            <operation>equals</operation>
+            <value>Review Prep</value>
+        </filters>
+        <filters>
+            <field>FieldExperience__c</field>
+            <operation>contains</operation>
+            <value>September</value>
+        </filters>
+        <label>6 Review Prep - DT September</label>
+        <sharedTo>
+            <group>Scholarship</group>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Financial Application Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Financial Applications</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Discounts</fullName>
+        <active>true</active>
+        <description>Record type used for the discount process(es).</description>
+        <label>Discounts</label>
+        <picklistValues>
+            <picklist>ApplicationStatus__c</picklist>
+            <values>
+                <fullName>Discount Appealed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discount Applied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discount Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Bi-Weekly Plan</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wait for CU%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wait for Tuition</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ApplicationType__c</picklist>
+            <values>
+                <fullName>First Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AwardStatus__c</picklist>
+            <values>
+                <fullName>Awarded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Awarded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>BenefitType__c</picklist>
+            <values>
+                <fullName>AIR FORCE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ARMY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ARMY CONT ED</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 1606</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 1607</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 30%2F33</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 31</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 31%2F33</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 33</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 33 TOE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 35</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>COAST GUARD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GO ARMY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MARINES</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NATIONAL GUARD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NAVY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>POST 9%2F11</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UTAH NATIONAL GUARD</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DiscountType__c</picklist>
+            <values>
+                <fullName>Family member of full time employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Full time employee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Part time employee</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>FundDenialReason__c</picklist>
+            <values>
+                <fullName>Awarded up to Cost of Attendance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Follow Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Longer Interested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requirements Not Met</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review Board Denial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Not Enrolling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Not Enrolling%2FNo Follow Up</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IsApplicantQualified__c</picklist>
+            <values>
+                <fullName>DUPLICATE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Benefit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No%2C Not Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Self Pay Benefit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Yes Has Benefit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes%2C Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes%2C Qualified %28Current Student%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes%2C Qualified %28DT%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes%2C Qualified %28New Student%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LastSAPStanding__c</picklist>
+            <values>
+                <fullName>GS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>X</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>OverallGPA__c</picklist>
+            <values>
+                <fullName>2%2E0-2%2E9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E0-3%2E2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E3-3%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E6-3%2E8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E9-4%2E0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Less than 2%2E0</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PackageType__c</picklist>
+            <values>
+                <fullName>Autopackaged</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Packaged ACS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Packaged WGU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>FinancialAid</fullName>
+        <active>true</active>
+        <description>Record Type for use in Financial Aid</description>
+        <label>Financial Aid</label>
+        <picklistValues>
+            <picklist>ApplicationStatus__c</picklist>
+            <values>
+                <fullName>Application Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document Gathering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interview Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interview Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Application</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Ready for Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review Prep</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Schedule Interview</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AwardStatus__c</picklist>
+            <values>
+                <fullName>Awarded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Awarded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>FundDenialReason__c</picklist>
+            <values>
+                <fullName>No Follow Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requirements Not Met</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review Board Denial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Not Enrolling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Not Enrolling%2FNo Follow Up</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IsApplicantQualified__c</picklist>
+            <values>
+                <fullName>No%2C Not Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Yes%2C Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes%2C Qualified %28Current Student%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes%2C Qualified %28New Student%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LastSAPStanding__c</picklist>
+            <values>
+                <fullName>GS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>X</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>OverallGPA__c</picklist>
+            <values>
+                <fullName>2%2E0-2%2E9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E0-3%2E2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E3-3%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E6-3%2E8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E9-4%2E0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Less than 2%2E0</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PackageType__c</picklist>
+            <values>
+                <fullName>Autopackaged</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Packaged ACS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Packaged WGU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Scholarship</fullName>
+        <active>true</active>
+        <description>A Scholarship application</description>
+        <label>Scholarship</label>
+        <picklistValues>
+            <picklist>ApplicationStatus__c</picklist>
+            <values>
+                <fullName>Application Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document Gathering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interview Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interview Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Application</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Ready for Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review Prep</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Schedule Interview</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ApplicationType__c</picklist>
+            <values>
+                <fullName>Current Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Student</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AwardStatus__c</picklist>
+            <values>
+                <fullName>Awarded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Awarded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undecided</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>FundDenialReason__c</picklist>
+            <values>
+                <fullName>Awarded up to Cost of Attendance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Follow Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Longer Interested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requirements Not Met</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review Board Denial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Not Enrolling</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IsApplicantQualified__c</picklist>
+            <values>
+                <fullName>No%2C Not Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Yes%2C Qualified</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>OverallGPA__c</picklist>
+            <values>
+                <fullName>2%2E0-2%2E9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E0-3%2E2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E3-3%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E6-3%2E8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E9-4%2E0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Less than 2%2E0</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ThirdParty</fullName>
+        <active>true</active>
+        <description>Third Party Application</description>
+        <label>Third Party</label>
+        <picklistValues>
+            <picklist>ApplicationStatus__c</picklist>
+            <values>
+                <fullName>Application Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document Gathering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Application</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Pending FA Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ready for Renewal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ApplicationType__c</picklist>
+            <values>
+                <fullName>New Student</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AwardStatus__c</picklist>
+            <values>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>BenefitType__c</picklist>
+            <values>
+                <fullName>AIR FORCE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ARMY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ARMY CONT ED</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 1606</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 1607</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 30%2F33</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 31</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 31%2F33</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 33</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 33 TOE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 35</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>COAST GUARD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GO ARMY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MARINES</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NATIONAL GUARD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NAVY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>POST 9%2F11</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UTAH NATIONAL GUARD</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>FundDenialReason__c</picklist>
+            <values>
+                <fullName>No Follow Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Longer Interested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requirements Not Met</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review Board Denial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Not Enrolling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Not Enrolling%2FNo Follow Up</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IsApplicantQualified__c</picklist>
+            <values>
+                <fullName>No Benefit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Yes Has Benefit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LastSAPStanding__c</picklist>
+            <values>
+                <fullName>GS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>X</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>OverallGPA__c</picklist>
+            <values>
+                <fullName>2%2E0-2%2E9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E0-3%2E2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E3-3%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E6-3%2E8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E9-4%2E0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Less than 2%2E0</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PackageType__c</picklist>
+            <values>
+                <fullName>Autopackaged</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Packaged ACS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Packaged WGU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>VA</fullName>
+        <active>true</active>
+        <description>The record type used to manage VA</description>
+        <label>VA</label>
+        <picklistValues>
+            <picklist>ApplicationStatus__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DUPLICATE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AwardStatus__c</picklist>
+            <values>
+                <fullName>Awarded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Awarded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>BenefitType__c</picklist>
+            <values>
+                <fullName>AIR FORCE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ARMY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ARMY CONT ED</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 1606</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 1607</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 30</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 30%2F33</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 31</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 31%2F33</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 33</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 33 TOE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CH 35</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>COAST GUARD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GO ARMY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MARINES</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NATIONAL GUARD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NAVY</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>POST 9%2F11</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>UTAH NATIONAL GUARD</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>FundDenialReason__c</picklist>
+            <values>
+                <fullName>No Follow Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Longer Interested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Qualified</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requirements Not Met</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review Board Denial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Not Enrolling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Not Enrolling%2FNo Follow Up</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IsApplicantQualified__c</picklist>
+            <values>
+                <fullName>DUPLICATE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Benefit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Self Pay Benefit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undecided</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Yes Has Benefit</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LastSAPStanding__c</picklist>
+            <values>
+                <fullName>GS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>X</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>OverallGPA__c</picklist>
+            <values>
+                <fullName>2%2E0-2%2E9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E0-3%2E2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E3-3%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E6-3%2E8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E9-4%2E0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Less than 2%2E0</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PackageType__c</picklist>
+            <values>
+                <fullName>Autopackaged</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Packaged ACS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Packaged WGU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>ApplicationStatus__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>PendingRequirements__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AwardStatus__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>ApplicationStatus__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>FAAidYear__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>ApplicationStatus__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>FAAidYear__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>DenialReasonRequired</fullName>
+        <active>true</active>
+        <description>Denial Reason Required when denying applicant.</description>
+        <errorConditionFormula>ISPICKVAL( FundDenialReason__c , &quot;&quot;) &amp;&amp; ISPICKVAL (AwardStatus__c, &quot;Not Awarded&quot;) &amp;&amp;  $RecordType.Name =&apos;Scholarship&apos;</errorConditionFormula>
+        <errorDisplayField>AwardStatus__c</errorDisplayField>
+        <errorMessage>Please Select a Reason For Denial</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>DenialWithNoAwardStatus</fullName>
+        <active>true</active>
+        <description>If a processor tries to deny an applicant without selection an award status the will get an error.</description>
+        <errorConditionFormula>NOT (ISPICKVAL( FundDenialReason__c , &quot;&quot; ))  &amp;&amp;  ISPICKVAL( AwardStatus__c , &quot;Undecided&quot;) &amp;&amp;  $RecordType.Name =&apos;Scholarship&apos;</errorConditionFormula>
+        <errorDisplayField>FundDenialReason__c</errorDisplayField>
+        <errorMessage>Please make sure you choose an award status before choosing a fund denial reason.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>FAFundDenialReason</fullName>
+        <active>true</active>
+        <description>FA Fund Denial Reason</description>
+        <errorConditionFormula>AND(ISPICKVAL(IsApplicantQualified__c, &quot;Undecided&quot;), ISNULL(DateOfInterview__c),  ISNULL(CommitteeReviewDate__c ), ISPICKVAL( FundDenialReason__c , &quot;Not Qualified, Student Not Enrolling, Requirements Not Met, Review Board Denial, No Follow Up, No Longer Interested, Awarded up to Cost of Attendance&quot;)) &amp;&amp;  $RecordType.Name =&apos;Scholarship&apos;</errorConditionFormula>
+        <errorDisplayField>FundDenialReason__c</errorDisplayField>
+        <errorMessage>Please make sure the application has been properly reviewed by checking to see if they are qualified, have interviewed and that the application has been reviewed.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>AllFADocuments</fullName>
+        <availability>online</availability>
+        <description>Links to All Financial Aid Documents for student ID in OnBase</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>All FA Documents</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://imaging.wgu.edu/appnet/docpop/docpop.aspx?KT102_0_0_0={!FinancialApplication__c.StudentID__c}&amp;clienttype=activex&amp;cqid=110</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Authorizations</fullName>
+        <availability>online</availability>
+        <description>Realease of Information Authorization forms captured in OnBase</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Authorizations</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://imaging.wgu.edu/AppNet/docpop/docpop.aspx?KT102_0_0_0={!Contact.StudentID__c}&amp;clienttype=activex&amp;cqid=116</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Dashboard</fullName>
+        <availability>online</availability>
+        <description>Link to Banner Dashboard</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Dashboard</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://bannerweb.wgu.edu/prdx/WGU_SS_SSO.P_AUTHENTICATE_BANNER?URL=bwrksnap.p_disp_fasnap?P_ID={!FinancialApplication__c.StudentID__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>MilitaryDocuments</fullName>
+        <availability>online</availability>
+        <description>Student&apos;s documents for VA</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Military Documents</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://imaging.wgu.edu/appnet/docpop/docpop.aspx?KT102_0_0_0={!FinancialApplication__c.StudentID__c}&amp;clienttype=activex&amp;cqid=107</url>
+    </webLinks>
+    <webLinks>
+        <fullName>PrevDegPlan</fullName>
+        <availability>online</availability>
+        <description>View the students inactive degree plan</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Prev DegPlan</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://web5.wgu.edu/aap/aap_inactive_details.asp?stupidm={!FinancialApplication__c.StudentPIDM__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>QuickEmailBursar</fullName>
+        <availability>online</availability>
+        <description>Create Bursar case and send email</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Quick Email</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/apex/QuickCase?ContactId={!FinancialApplication__c.StudentSFID__c}&amp;ObjectId={!FinancialApplication__c.Id}&amp;RecordType=Bursar</url>
+    </webLinks>
+    <webLinks>
+        <fullName>QuickEmailFinaid</fullName>
+        <availability>online</availability>
+        <description>Create Finaid Case and send email</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Quick Email</masterLabel>
+        <openType>noSidebar</openType>
+        <protected>false</protected>
+        <url>/apex/QuickCase?ContactId={!FinancialApplication__c.StudentSFID__c}&amp;ObjectId={!FinancialApplication__c.Id}&amp;RecordType=Finaid</url>
+    </webLinks>
+    <webLinks>
+        <fullName>QuickEmailSchl</fullName>
+        <availability>online</availability>
+        <description>Quick Email for Scholarship</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Quick Email</masterLabel>
+        <openType>sidebar</openType>
+        <protected>false</protected>
+        <url>/apex/QuickCase?ContactId={!FinancialApplication__c.StudentSFID__c}&amp;ObjectId={!FinancialApplication__c.Id}&amp;RecordType=Scholarship</url>
+    </webLinks>
+    <webLinks>
+        <fullName>StudentDegreePlan</fullName>
+        <availability>online</availability>
+        <description>Opens the student&apos;s Current Degree Plan</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Student Degree Plan</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://osso.wgu.edu/opensso/UI/Login?goto=https%3A%2F%2Fweb5.wgu.edu%2Faap%2Find_aap_mstr.asp%3Fpidm%3D{!FinancialApplication__c.StudentPIDM__c}</url>
+    </webLinks>
+</CustomObject>

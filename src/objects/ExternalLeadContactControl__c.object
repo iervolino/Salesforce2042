@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object will control the integration with LeadQual and allow the modification of parameters for 
+the assignment of pre-leads to external vendor 
+ExternalLeadContactControl</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is this external vendor active</description>
+        <externalId>false</externalId>
+        <label>Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CurrentMonthlyCount__c</fullName>
+        <externalId>false</externalId>
+        <label>Current Monthly Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MonthlyLimit__c</fullName>
+        <description>Max number of lead that should be send to the external vendor in a 24 hour period</description>
+        <externalId>false</externalId>
+        <label>Monthly Limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PercentOfLeadsToAssignPicklist__c</fullName>
+        <externalId>false</externalId>
+        <label>Percent Of Leads To Assign</label>
+        <picklist>
+            <picklistValues>
+                <fullName>10</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>20</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>30</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>40</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>50</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>60</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>70</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>80</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>90</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>100</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>PercentOfLeadsToAssign__c</fullName>
+        <description>The is the percentage of leads to assign to the vendor, 0% is no leads, 100% is all leads</description>
+        <externalId>false</externalId>
+        <inlineHelpText>0% is no leads, 100% is all leads</inlineHelpText>
+        <label>Percent Of Leads To Assign</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>StartHour__c</fullName>
+        <description>The hour (24) when the leads should be start to be sent to the external vendor</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The hour (24) when the leads should be start to be sent to the external vendor</inlineHelpText>
+        <label>Start Hour</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StopHour__c</fullName>
+        <description>The hour (24) at which the leads should stop being send to the external vendor</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The hour (24) at which the leads should stop being send to the external vendor</inlineHelpText>
+        <label>Stop Hour</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>External Lead Contact Control</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>ExternalLeadContactControl Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>External Lead Contact Controls</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>ValidHours</fullName>
+        <active>true</active>
+        <description>Check to make sure the hours are valid and stop is greater then or equal to start</description>
+        <errorConditionFormula>StartHour__c &gt;= 24 ||
+StartHour__c &lt; 0  ||
+StartHour__c &gt;= StopHour__c</errorConditionFormula>
+        <errorDisplayField>StartHour__c</errorDisplayField>
+        <errorMessage>Start Hour must be between 0-23 and less than Stop Hour</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ValidStop</fullName>
+        <active>true</active>
+        <description>Stophours must be between 0 and 23 hours</description>
+        <errorConditionFormula>StopHour__c  &lt;0  ||
+StopHour__c &gt;24</errorConditionFormula>
+        <errorDisplayField>StopHour__c</errorDisplayField>
+        <errorMessage>Stop Hour must be between 0 and 24</errorMessage>
+    </validationRules>
+</CustomObject>

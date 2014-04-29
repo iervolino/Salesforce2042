@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object contains all student concerns escalated to the Student Conduct Board for review</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AdditionalSanctions__c</fullName>
+        <externalId>false</externalId>
+        <label>Additional Sanctions</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Loss of Privileges</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Fines</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Restitution</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disc Sanction: Essay</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disc Sanction: EWB Orientation Module 6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disc Sanction: Mandatory CWE Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disc Sanction: Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Revocation of Grades/Assessment Results</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alternate Assessment/Tasks</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Withholding Degree</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CoCResolvedDate__c</fullName>
+        <description>Date the code of conduct referral moved to a resolved status.</description>
+        <externalId>false</externalId>
+        <label>CoC Resolved Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>CodeofConductPrimarySanction__c</fullName>
+        <externalId>false</externalId>
+        <label>Code of Conduct Primary Sanction</label>
+        <picklist>
+            <picklistValues>
+                <fullName>CoC Level 1 Warning</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CoC Level 2 Warning</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disciplinary Probation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disposition Level 1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disposition Level 2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Formal Warning</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Revocation of Admission and/or Degree</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DateDeliveryNotification__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Delivery Notification</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FollowUpDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Follow Up Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>HearingDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Hearing Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>InvestigationTime__c</fullName>
+        <description>Formula field that subtracts the student concern resolved date from the investigation start date to determine first response time, excluding weekends in the calculation.</description>
+        <externalId>false</externalId>
+        <formula>CASE(MOD(DATEVALUE(StudentConcernResolvedDate__c)- DATE(1985,6,24),7), 
+0 , CASE( MOD( DATEVALUE(ReferralCreatedDate__c) - DATEVALUE(StudentConcernResolvedDate__c) ,7),1,2,2,3,3,4,4,5,5,5,6,5,1), 
+1 , CASE( MOD( DATEVALUE(ReferralCreatedDate__c) - DATEVALUE(StudentConcernResolvedDate__c) ,7),1,2,2,3,3,4,4,4,5,4,6,5,1), 
+2 , CASE( MOD( DATEVALUE(ReferralCreatedDate__c) - DATEVALUE(StudentConcernResolvedDate__c) ,7),1,2,2,3,3,3,4,3,5,4,6,5,1), 
+3 , CASE( MOD( DATEVALUE(ReferralCreatedDate__c) - DATEVALUE(StudentConcernResolvedDate__c) ,7),1,2,2,2,3,2,4,3,5,4,6,5,1), 
+4 , CASE( MOD( DATEVALUE(ReferralCreatedDate__c) - DATEVALUE(StudentConcernResolvedDate__c),7),1,1,2,1,3,2,4,3,5,4,6,5,1), 
+5 , CASE( MOD( DATEVALUE(ReferralCreatedDate__c) - DATEVALUE(StudentConcernResolvedDate__c) ,7),1,0,2,1,3,2,4,3,5,4,6,5,0), 
+6 , CASE( MOD( DATEVALUE(ReferralCreatedDate__c) - DATEVALUE(StudentConcernResolvedDate__c) ,7),1,1,2,2,3,3,4,4,5,5,6,5,0), 
+999) 
++ 
+(FLOOR(( DATEVALUE(ReferralCreatedDate__c) - DATEVALUE(StudentConcernResolvedDate__c) )/7)*5)</formula>
+        <label>Investigation Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IssueDetails__c</fullName>
+        <externalId>false</externalId>
+        <label>Issue Details</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Abuse of Student Conduct System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Academic Integrity: Collusion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Academic Integrity: Plagiarism</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Academic Integrity: Proctored Exam Violation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Academic Integrity: Solicitation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dispositional Issues</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disruption or Obstruction of WGU Activities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Misrepresentation:Forgery or alteration of WGU documents, records, and others</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Misrepresentation:Furnishing false information to WGU</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Misrepresentation: Identity</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Misuse of WGU Systems or Resources</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Theft of or Damage to WGU or other property</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unprofessional Conduct: Harassment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unprofessional Conduct: Physical Abuse</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unprofessional Conduct: Threats</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IssueSubType__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(StudentConcern__r.IssueSubType__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Issue Sub-Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MentorEmail__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.MentorEmail__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Mentor Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MentorName__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.MentorName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Mentor Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReferralCreatedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Referral Created Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ReferralResolutionTime__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(MOD(DATEVALUE(ReferralCreatedDate__c)- DATE(1985,6,24),7), 
+0 , CASE( MOD( DATEVALUE(CoCResolvedDate__c) - DATEVALUE(ReferralCreatedDate__c) ,7),1,2,2,3,3,4,4,5,5,5,6,5,1), 
+1 , CASE( MOD( DATEVALUE(CoCResolvedDate__c) - DATEVALUE(ReferralCreatedDate__c) ,7),1,2,2,3,3,4,4,4,5,4,6,5,1), 
+2 , CASE( MOD( DATEVALUE(CoCResolvedDate__c) - DATEVALUE(ReferralCreatedDate__c) ,7),1,2,2,3,3,3,4,3,5,4,6,5,1), 
+3 , CASE( MOD( DATEVALUE(CoCResolvedDate__c) - DATEVALUE(ReferralCreatedDate__c) ,7),1,2,2,2,3,2,4,3,5,4,6,5,1), 
+4 , CASE( MOD( DATEVALUE(CoCResolvedDate__c) - DATEVALUE(ReferralCreatedDate__c),7),1,1,2,1,3,2,4,3,5,4,6,5,1), 
+5 , CASE( MOD( DATEVALUE(CoCResolvedDate__c) - DATEVALUE(ReferralCreatedDate__c) ,7),1,0,2,1,3,2,4,3,5,4,6,5,0), 
+6 , CASE( MOD( DATEVALUE(CoCResolvedDate__c) - DATEVALUE(ReferralCreatedDate__c) ,7),1,1,2,2,3,3,4,4,5,5,6,5,0), 
+999) 
++ 
+(FLOOR(( DATEVALUE(CoCResolvedDate__c) - DATEVALUE(ReferralCreatedDate__c) )/7)*5)</formula>
+        <label>Referral Resolution Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ResolutionPath__c</fullName>
+        <externalId>false</externalId>
+        <label>Resolution Path</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Informal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Administrative</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hearing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Waiting on Student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hearing Scheduled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appeal Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appeal Denied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>StudentCollege__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.StudentCollege__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student College</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentConcernResolvedDate__c</fullName>
+        <description>Formula field that brings over the student concern resolved date from the associated Student Concern record.</description>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.ResolvedDate__c</formula>
+        <label>Student Concern Resolved Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>StudentConcern__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Student Concern</label>
+        <referenceTo>StudentDisposition__c</referenceTo>
+        <relationshipLabel>Code of Conduct Referrals</relationshipLabel>
+        <relationshipName>CodeofConductReferrals</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StudentEmail__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.Student__r.My_WGU_Email__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentID__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.StudentID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentMailingCity__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.Student__r.MailingCity</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Mailing City</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentMailingStreet__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.Student__r.MailingStreet</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Mailing Street</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentMailingZip__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.Student__r.MailingPostalCode</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Mailing Zip</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentName__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.Student__r.FirstName &amp; &apos; &apos; &amp; StudentConcern__r.Student__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentProgram__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.StudentProgram__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Program</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentState__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentConcern__r.Student__r.MailingState</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student State</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Student_del__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field to the Contact object.</description>
+        <externalId>false</externalId>
+        <label>Student</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Code of Conduct Referrals</relationshipLabel>
+        <relationshipName>CodeOfConductReferrals_del</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Today__c</fullName>
+        <externalId>false</externalId>
+        <formula>Today()</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Today</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TypeofIssue__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(StudentConcern__r.TypeOfIssue__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Type of Issue</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Code of Conduct Referral</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>CoCResolvedDate__c</columns>
+        <columns>Status__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Referral Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Code of Conduct Referrals</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Referral</fullName>
+        <active>true</active>
+        <description>Record type used to manage code of conduct referrals.</description>
+        <label>Referral</label>
+        <picklistValues>
+            <picklist>AdditionalSanctions__c</picklist>
+            <values>
+                <fullName>Alternate Assessment%2FTasks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disc Sanction%3A EWB Orientation Module 6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disc Sanction%3A Essay</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disc Sanction%3A Mandatory CWE Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disc Sanction%3A Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loss of Privileges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Restitution</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revocation of Grades%2FAssessment Results</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Withholding Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductPrimarySanction__c</picklist>
+            <values>
+                <fullName>CoC Level 1 Warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CoC Level 2 Warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disposition Level 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disposition Level 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revocation of Admission and%2For Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IssueDetails__c</picklist>
+            <values>
+                <fullName>Abuse of Student Conduct System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Academic Integrity%3A Collusion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Academic Integrity%3A Plagiarism</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Academic Integrity%3A Proctored Exam Violation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Academic Integrity%3A Solicitation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dispositional Issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disruption or Obstruction of WGU Activities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Misrepresentation%3A Identity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Misrepresentation%3AForgery or alteration of WGU documents%2C records%2C and others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Misrepresentation%3AFurnishing false information to WGU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Misuse of WGU Systems or Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Theft of or Damage to WGU or other property</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unprofessional Conduct%3A Harassment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unprofessional Conduct%3A Physical Abuse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unprofessional Conduct%3A Threats</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ResolutionPath__c</picklist>
+            <values>
+                <fullName>Administrative</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hearing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Informal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Appeal Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hearing Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting on Student</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>Private</sharingModel>
+    <webLinks>
+        <fullName>CopyNotesAttachmentsFromStudentConcern</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Copy Notes/Attachments From Student Concern</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/apex.js&quot;)} 
+
+var studentConcernId = &quot;{!CodeofConductReferral__c.StudentConcernId__c}&quot;; 
+var codeOfConductReferralId = &quot;{!CodeofConductReferral__c.Id}&quot;; 
+if(studentConcernId != null &amp;&amp; codeOfConductReferralId != null) { 
+sforce.apex.execute(&quot;CopyNotesAndAttachmentsUtil&quot;,&quot;copyNotesAndAttachments&quot;,{fromId:studentConcernId,toId:codeOfConductReferralId}); 
+document.location.reload(true) 
+} 
+else { 
+alert(&quot;Code of Conduct Referral must reference a Student Concern&quot;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>SendNotification</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Send Notification</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/_ui/core/email/author/EmailAuthor?p3_lkid={!CodeofConductReferral__c.Id}&amp;&amp;p26=studentconcerns@wgu.edu&amp;template_id=00Xa0000001j27O</url>
+    </webLinks>
+</CustomObject>

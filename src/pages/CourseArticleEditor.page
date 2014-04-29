@@ -1,0 +1,201 @@
+<apex:page controller="CourseArticleEditorController" tabstyle="WGUArticles__tab">
+    <apex:stylesheet value="{!URLFOR($Resource.Create_Article_Resources,'style.css')}"/>
+    <apex:includescript value="{!URLFOR($Resource.ckeditor_v364,'ckeditor/ckeditor.js')}" />
+    <!--<apex:stylesheet value="{!URLFOR($Resource.extjs_v420, 'resources/css/ext-all.css')}"/>-->     
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.jquery_jstree_vpre1}/_lib/jquery.js"></script>
+	<script type="text/javascript" charset="utf-8" src="{!$Resource.jquery_jstree_vpre1}/jquery.jstree.js"></script>
+    
+    <style>
+    	.detailList { width: 100%; }
+    	.labelCol { width: 18%; }
+    	.dataCol { width: 32% }
+    </style>
+    <apex:form id="mainForm">
+    
+	    <div id="header-wrapper">
+	      <div id="header">
+	        <a href="/home/" class="header-logo"></a>
+	      </div>
+	    </div>
+	
+	    <div id="subheader-wrapper">
+	      <div class="subheader">
+	        <h1>{!subHeaderTitle} Article</h1>
+	        <ul class="btns-top">
+	            <li><input type="button" value="Publish" class="btn" onclick="javascript:getAllCheckedValues(this);" style="display:{!IF(courseArticle.PublishStatus='Draft','inline','none')}" /></li>
+	            <li><input type="button" value="Save & Close" class="btn" onclick="javascript:getAllCheckedValues(this);" /></li>
+	            <li><input type="button" value="Save" class="btn" onclick="javascript:getAllCheckedValues(this);" /></li>
+	            <li style="display:{!IF(courseArticle.PublishStatus='Draft','inline','none')}">
+	            	<input type="button" value="Delete" class="btn" onclick="javascript:if (confirm('Delete Article?')) { deletePost(); }" />
+	            </li>
+	            <li><input type="button" value="Cancel" class="btn" onclick='javascript:window.location="{!previousUrl}"' /></li>
+	        </ul>
+	      </div>
+	    </div>
+	    
+	    <div id="wrapper">
+	    	<div>
+	    		<div class="search-div-block">
+	            	<apex:pageMessages id="pageMessages" />
+	            	<a href="#" style="display:{!IF(ISBLANK(errorMessage), 'none', 'inline')};padding-left:20px" onclick="javascript:$('#exceptionMessages').toggle();">Additional Errors</a>
+	            	<div class="message errorM3" style="display:none" id="exceptionMessages">
+			    		<span>{!errorMessage}</span>
+				    </div><br/>
+		            <table style="display:{!displayProperty}" class="detailList">
+		            	<tbody>
+			            	<tr>
+			            		<td class="labelCol"><label>{!$ObjectType.CourseArticle__kav.fields.PublishStatus.label}:</label></td>
+			            		<td class="dataCol">{!courseArticle.PublishStatus}</td>
+			            		<td class="labelCol"><label>{!$ObjectType.CourseArticle__kav.fields.ArticleNumber.label}:</label></td>
+			            		<td class="dataCol">{!courseArticle.ArticleNumber}</td>
+			            	</tr>
+			            	<tr>
+			            		<td><label>Created By:</label></td>
+			            		<td>{!courseArticle.CreatedBy.Name}</td>
+			            		<td><label>Last Modified By:</label></td>
+			            		<td>{!courseArticle.LastModifiedBy.Name}</td>
+			            	</tr>
+			            </tbody>
+		            </table>
+		            <label>{!$ObjectType.CourseArticle__kav.fields.Title.label}</label>
+		            <apex:inputText value="{!courseArticle.Title}" id="theArticleTitle" required="true" /><br/>
+	
+		            <label class="label-title">{!$ObjectType.CourseArticle__kav.fields.ArticleType__c.label}</label>
+		            <apex:selectList value="{!courseArticle.ArticleType__c}" size="1" id="theArticleType">
+		                <apex:selectOptions value="{!articleTypes}" />
+		            </apex:selectList><br/>
+		
+					<label class="label-title">{!$ObjectType.CourseArticle__kav.fields.Summary.label}</label>
+		            <apex:inputTextArea value="{!courseArticle.Summary}" id="theArticleSummary" /><br/>
+		            
+		            <div class="editor-box"><apex:inputtextarea value="{!courseArticle.RichTextArea__c}" styleClass="ckeditor" richtext="false"/></div>
+		            
+		            <div class="box-title">Course Assignment</div>
+		            <div id="courseListSelect" class="box-content"></div>
+		            <apex:inputHidden id="courseListValues" value="{!courseAssignmentsString}" />
+		            
+		            <label class="label-title">{!$ObjectType.CourseArticle__kav.fields.InternalTagging__c.label}</label>
+		            <apex:inputTextArea value="{!courseArticle.InternalTagging__c}" /><br/>
+		            
+		            <div id="fileUploadWrapper" style="display:{!IF(ISBLANK(courseArticle.FileUpload__Name__s),'inline','none')}">
+			            <label class="label-title">File Upload<sub> (5 MB max file size, most common formats supported)</sub></label>
+			                       
+			            <apex:inputFile value="{!uploadFileContents}" fileName="{!uploadFileName}" fileSize="{!uploadFileSize}" contentType="{!uploadContentType}" styleclass="upload-btn" />
+			            <label class="label-title">File Title</label>
+			            <apex:inputText id="uploadFileTitle" value="{!uploadFileTitle}" maxlength="40" />
+		            </div>
+		            <div id="fileViewWrapper" style="display:{!IF(!ISBLANK(courseArticle.FileUpload__Name__s),'inline','none')}">
+		            	 <label class="label-title">File</label>
+		            	<apex:outputLink value="{!URLFOR($Action.CourseArticle__kav.FileFieldDownload, courseArticle.id, ['field'=$ObjectType.CourseArticle__kav.fields.FileUpload__Body__s.name])}" 
+				        	rendered="{!courseArticle.FileUpload__Name__s != null}">{!courseArticle.FileUpload__Name__s}</apex:outputLink>
+				        <a href="#" onclick="javascript:removeFile('{!$Component.updateArticleInput}', '{!$Component.uploadFileTitle}');return false;">Remove</a>
+				        <apex:inputHidden value="{!updateArticle}" id="updateArticleInput" />
+		            </div>
+		        </div>
+				<ul class="btns-bottom">
+					<li style="display:{!IF(courseArticle.PublishStatus='Draft','inline','none')}"><input type="submit" value="Publish" class="btn" onclick="javascript:getAllCheckedValues(this);" /></li>
+				    <li><input type="button" value="Save & Close" class="btn" onclick="javascript:getAllCheckedValues(this);" /></li>
+				    <li><input type="button" value="Save" class="btn" onclick="javascript:getAllCheckedValues(this);" /></li>
+				    <li style="display:{!IF(courseArticle.PublishStatus='Draft','inline','none')}">
+				    	<input type="button" value="Delete" class="btn" onclick="javascript:if (confirm('Delete Article?')) { deletePost(); }" />
+				    </li>
+				    <li><input type="button" value="Cancel" class="btn" onclick='javascript:window.location="{!previousUrl}"' /></li>
+				</ul>
+			</div>
+	    </div>
+		<apex:actionFunction name="publishPost" action="{!publishArticle}" />
+		<apex:actionFunction name="saveAndClosePost" action="{!saveAndClose}" />
+		<apex:actionFunction name="savePost" action="{!save}" />
+		<apex:actionFunction name="deletePost" action="{!deleteArticle}" />
+    </apex:form>
+    <script type="text/javascript">
+    	var renderCourseList = function(results, event) {
+    		"use strict";
+   			if (event.status) {
+   				for (var i = 0; i < results.dataNode.length; i++) {
+   					updateCheckedClass(results.dataNode[i]);
+   					/*if (results.dataNode[i].data = "AAC1") {
+   						results.dataNode[i].attr = {};
+   						results.dataNode[i].attr.rel = "disabled";
+   						console.debug(results.dataNode[i].attr.rel);
+   					}*/
+   					if (results.dataNode[i].hasOwnProperty('children')) {
+   						for (var x = 0; x < results.dataNode[i].children.length; x++) {
+   							updateCheckedClass(results.dataNode[i].children[x]);
+   						}
+   					}
+   				}
+   				
+   				//console.debug(results.dataNode);
+				$("#courseListSelect").jstree({ 
+					"ui" : results.uiNode,
+					"checkbox" :  { "override_ui" : true, },
+					"json_data" : {
+						"data" : results.dataNode
+					},
+					"types" : {
+						"types" : {
+							"disabled" : {
+								"check_node" : false,
+								"uncheck_node" : false
+							}
+						}
+					},
+					"plugins" : [ "themes", "json_data", "ui", "checkbox", "sort", "types" ]
+				});
+			}
+		};
+    	$(document).ready(function(){
+    		"use strict";
+    		CourseArticleEditorController.getCourseListJson($('[id*=":courseListValues"]:first').val(), renderCourseList);
+    	});
+    	function updateCheckedClass(dataNode) {
+    		"use strict";
+    		if (dataNode.hasOwnProperty('attr')) {
+				var dataAttribute = dataNode.attr;
+				if (dataAttribute.hasOwnProperty('checked') && dataAttribute.checked) {
+					dataAttribute["class"] = "jstree-checked";
+				}
+			}
+    	}
+    	function getAllCheckedValues(button) {
+    		"use strict";
+    		var buttonValue = button.value;
+    		$("input[type=button]").attr({disabled: 'disabled', value: 'Processing...'});
+    		var checkedNodes = $("#courseListSelect").jstree("get_checked", null, true);
+    		var selectedValues = '';
+    		//console.debug(checkedNodes);
+    		for (var i = 0; i < checkedNodes.length; i++) {
+    			if (checkedNodes[i] !== null) {
+    				if (checkedNodes[i].attributes.hasOwnProperty('value')) {
+    				 	//console.debug(checkedNodes[i].attributes.value.value);
+    				 	if (selectedValues === '') {
+    				 		selectedValues = checkedNodes[i].attributes.value.value;
+    				 	} else {
+    				 		selectedValues = selectedValues + ',' + checkedNodes[i].attributes.value.value;
+    				 	}
+    				}
+    			}
+    		}
+    		
+    		//console.debug(selectedValues);
+    		$('[id*=":courseListValues"]:first').val(selectedValues);
+    		if (buttonValue === "Publish") {
+    			publishPost();
+    		} else if (buttonValue === "Save & Close") {
+    			saveAndClosePost();
+    		} else if (buttonValue === "Save") {
+    			savePost();
+    		}
+    		return true;
+    	}
+    	
+    	function removeFile(updateArticleInputId, uploadFileTitleId) {
+	    	"use strict";
+    		$('[id="' + updateArticleInputId + '"]').val(true);
+    		$('[id="' + uploadFileTitleId + '"]').val(null);
+    		$("#fileViewWrapper").hide();
+    		$("#fileUploadWrapper").show();
+    	}
+    </script>
+</apex:page>

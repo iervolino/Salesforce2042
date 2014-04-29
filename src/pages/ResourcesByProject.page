@@ -1,0 +1,131 @@
+<apex:page standardController="TeamMember__c" sidebar="false" showHeader="false" >
+  <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
+       'version':'1','packages':['timeline']}]}"></script>
+<script src="/soap/ajax/9.0/connection.js" type="text/javascript"></script>
+      <apex:includeScript value="{!URLFOR($Resource.JQuery_1_9_1)}"  />
+<apex:includeScript value="{!URLFOR($Resource.JQuery_UI_1_10_1)}"  />
+<script type="text/javascript">
+window.onresize = function() { drawChart(); };
+    
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+  
+  var $soap = (sforce? sforce.connection: null);
+if (sforce && sforce.connection) {
+    sforce.connection.sessionId = '{!$Api.Session_ID}';
+}
+var $sconsole = (sforce && sforce.console && sforce.console.isInConsole()? sforce.console: null);
+var $apex = ( sforce? sforce.apex: null );
+  
+      var dropDown = document.getElementById('{!$Component.theForm.roleFilter}');
+    
+    
+    //get query string
+    var queryString ="Select TeamMember__r.Name, Project__r.Name, StartDate__c ,EndDate__c,RequestedAllocation__c,Role__c  " +
+        			  "From TeamMember__c " +
+        			  "where RequestedAllocation__c >0  and Project__r.RecordType.Name = 'IT' and EndDate__c >=  LAST_N_DAYS:15 ";
+    if (dropDown.selectedIndex != 0)
+      {  queryString = queryString + " and Role__c='" + dropDown[dropDown.selectedIndex].value + "' "; }
+    
+    //get date range variables
+    var dateRange = [];
+    dateRange[0] =document.getElementById('{!$Component.theForm.startDateFilter}');
+    dateRange[1] =document.getElementById('{!$Component.theForm.endDateFilter}');
+    
+    //filter by date range
+    if (dateRange[0].value != "" )
+    {   
+        var startDate = new Date(dateRange[0].value);
+        var startDateString =$.datepicker.formatDate("yy-mm-dd",startDate);
+        queryString = queryString + " and endDate__c >= " + startDateString + "" ;
+    }
+    
+        if (dateRange[1].value !="")
+    {      
+        var endDate = new Date(dateRange[1].value);
+         var endDateString =$.datepicker.formatDate("yy-mm-dd",endDate);
+        queryString = queryString + " and StartDate__c <="  + endDateString + " " ;
+    }
+    
+    
+    if (document.getElementById("myDeptChk").checked)
+      {  
+          var userQueryString = "and TeamMember__r.Department= '{!$User.Department}' " ;
+          
+          queryString = queryString + userQueryString; 
+      } 
+    
+  var qr = sforce.connection.query(queryString) ;  
+    
+  var records = qr.getArray("records");
+
+  var container = document.getElementById('chartDiv');
+  var chart = new google.visualization.Timeline(container);
+  chart.clearChart();
+  var dataTable = new google.visualization.DataTable();
+  dataTable.addColumn({ type: 'string', id: 'Position' });
+  dataTable.addColumn({ type: 'string', id: 'Name' });
+  dataTable.addColumn({ type: 'date', id: 'Start' });
+  dataTable.addColumn({ type: 'date', id: 'End' });
+    container.innerHTML="";
+    
+var projectCount =0;
+   if (qr.size>0)
+    {
+        for (var i=0; i<qr.size; i++)
+        {
+            projectCount++;
+            var record = records[i];
+            var teamMember;
+            
+            //adjust date for range
+			var startDatePrint = new Date(record.StartDate__c);
+            if (startDate >startDatePrint && dateRange[0].value != "") 
+                startDatePrint = startDate;
+            
+            var endDatePrint = new Date(record.EndDate__c);
+            if (endDate <endDatePrint  && dateRange[1].value != "") 
+                endDatePrint = endDate;
+            
+          
+            
+            
+            if (record.get("TeamMember__r")==null)
+                teamMember = "Unassigned";
+            else
+                teamMember=record.get("TeamMember__r").Name ;
+            dataTable.addRow([  record.get("Project__r").Name, teamMember+ ' - ' + record.Role__c + ' - ' + record.RequestedAllocation__c + '%', startDatePrint, endDatePrint]);
+        }
+        var options = { height:projectCount*100, timeline: { colorByRowLabel: true }, avoidOverlappingGridLines: true };
+        chart.draw(dataTable, options);
+
+		
+   }
+}
+</script>
+    <apex:form id="theForm" >
+        <table><tr>
+          <td><b>Filter:</b></td>
+          <td width="30px"/>
+          <td>Role:</td>
+          <td><apex:inputField value="{!TeamMember__c.Role__c}" id="roleFilter" onchange="drawChart()" />
+          </td>
+          <td>Show Only My Dept:</td>
+          <td><input type="checkbox" id="myDeptChk" onchange="drawChart()" /> </td>
+           <td width="30px"/>
+          <td>End Date Range:</td>
+          <td><apex:inputField value="{!TeamMember__c.StartDate__c}" id="startDateFilter" onchange="drawChart()" /></td>
+          <td>To:</td>
+          <td><apex:inputField value="{!TeamMember__c.EndDate__c}" id="endDateFilter" onchange="drawChart()" /></td>
+          </tr>
+      </table>
+    </apex:form>
+
+
+  
+ <table width="95%">
+          <tr>
+              <td><div id="chartDiv" ></div>   </td>
+         </tr>
+      </table>
+</apex:page>

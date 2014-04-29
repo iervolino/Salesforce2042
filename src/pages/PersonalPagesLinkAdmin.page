@@ -1,0 +1,2306 @@
+<apex:page contentType="text/html; charset=UTF-8" standardController="Personal_Pages_Link__c" standardStylesheets="false">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<html>
+<head>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v420, 'resources/css/ext-all.css')}"/> 
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v420}/ext-all.js"/>
+   
+    <apex:includeScript value="/soap/ajax/28.0/connection.js"/>
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.WGUMonkeyFix}" id="WGUMonkeyFix"></script>
+    
+    <script type="text/javascript" >
+        //This is a work-around due to the session id not populating automatically like it should
+        sforce.connection.init("{!$Api.Session_ID}","/services/Soap/u/28.0");
+    </script>
+    
+    <style type="text/css">
+        .x-grid-dirty-cell { background-image: none; }
+        .x-grid-checkheader-disabled { background-image: url('{!$Resource.disabledcheckbox}/unchecked-disabled.gif'); }
+        .x-grid-checkheader-checked-disabled { background-image: url('{!$Resource.disabledcheckbox}/checked-disabled.gif'); }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <div id="divCategoryFilter" />          
+            </td>
+            <td>
+                <div id="divManageCategories" />    
+            </td>
+            <td>
+            </td>
+            <td>
+                <div id="divProgramFilter" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div id="divNewLink" />
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="divExistingLinks" />
+            </td>
+            <td>
+                <div id="divSortLinkUp" />
+                <div id="divSortLinkDown" />
+                <div id="divAddTiledLink" />
+            </td>
+            <td>
+                <div id="divTiledLinks" />
+            </td>
+            <td>
+                <div id="divTiledLinkUp" />
+                <div id="divTiledLinkDown" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div id="divNewTextArea" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div id="divExistingTextAreas" />
+            </td>
+        </tr>
+    </table>
+
+    <script type="text/javascript" >
+        Ext.Loader.setConfig({enabled: true});
+        Ext.Loader.setPath('Ext.ux', '{!$Resource.extjs_v420}/examples/ux');
+        Ext.require([
+            'Ext.*',
+            'Ext.ux.CheckColumn'
+        ]);
+        Ext.ns("Ext.WGU");
+        
+        /*
+        * Extensions to 'Ext.ux.CheckColumn' to allow full disabling of checkboxes.
+        */
+        Ext.define('MyApp.ux.DisableCheckColumn', 
+        {
+            extend: 'Ext.ux.CheckColumn',
+            alias: 'widget.disablecheckcolumn',
+        
+            //Only process events for checkboxes that do not have a "disabled" class
+            processEvent: function(type, view, cell, recordIndex, cellIndex, e) 
+            {
+                var me = this;
+                var record=view.panel.store.getAt(recordIndex);
+        
+                if (!record.get('ProgramSpecific'))
+                {
+                    //me.callParent(arguments);
+                }
+            }        
+        });
+        
+        //Variable to track the row id of the Personal Pages Link object calling the EditLinkWindow.
+        //-1 indicates a new record. 0 and above indicates an existing record in the courseAssignmentGrid
+        var LinkCallId = -1;
+        
+        //Data model of Personal Pages Link data for the grid panel
+        Ext.define('LinkModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [ 
+                {name: 'Id', mapping: 'Id', type: 'string'},
+                {name: 'Name', mapping: 'Name', type: 'string'},
+                {name: 'Active', mapping: 'active__c', type: 'bool'},
+                {name: 'Program', mapping: 'Program__c', type: 'string'},
+                {name: 'Label', mapping: 'label__c', type: 'string'},
+                {name: 'LastUpdated', mapping: 'last_updated__c', type: 'date', dateFormat: 'c'},
+                {name: 'Link', mapping: 'link__c', type: 'string'},
+                {name: 'LinkCategory', mapping: 'LinkCategory__c', type: 'string'},
+                {name: 'LinkGroup', mapping: 'LinkGroup__c', type: 'string'},
+                {name: 'LinkType', mapping: 'LinkType__c', type: 'string'},
+                {name: 'SortOrder', mapping: 'sort_order__c', type: 'int'},
+                {name: 'TilePosition', mapping: 'TilePosition__c', type: 'int'}
+            ]
+        });
+        
+        //Model for Link Category values
+        Ext.define('CategoryModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [ 
+                {name: 'Id', mapping: 'Id', type: 'string'},
+                {name: 'Name', mapping: 'Name', type: 'string'},
+                {name: 'ProgramSpecific', mapping: 'ProgramSpecific__c', type: 'bool'},
+                {name: 'SortOrder', mapping: 'SortOrder__c', type: 'int'}
+            ]
+        });
+        
+        //Model for Program values
+        Ext.define('ProgramModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [ 
+                {name: 'Name', type: 'string'}
+            ]
+        });
+        
+        //Model for Link Type values
+        Ext.define('LinkTypeModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [ 
+                {name: 'Name', type: 'string'}
+            ]
+        });
+        
+        //Model for Personal Page Text Areas
+        Ext.define('TextAreaModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [ 
+                {name: 'Id', mapping: 'Id', type: 'string'},
+                {name: 'Name', mapping: 'Name', type: 'string'},
+                {name: 'TextArea', mapping: 'TextArea__c', type: 'string'}
+            ]
+        });
+        
+        //Data store of Personal Pages Link data for the grid
+        var LinkStore = Ext.create('Ext.data.Store',
+        {
+            model : 'LinkModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'SortOrder',
+                direction: 'ASC'
+            }]
+        });
+        
+        //Second store for links that are part of a group under Program Specific categories
+        var GroupLinkStore = Ext.create('Ext.data.Store',
+        {
+            model : 'LinkModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'Label',
+                direction: 'ASC'
+            }]
+        });
+        
+        //Data store of Personal Pages Link data for the Tiled links grid
+        var TileLinkStore = Ext.create('Ext.data.Store',
+        {
+            model : 'LinkModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'TilePosition',
+                direction: 'ASC'
+            }]
+        });
+        
+        //Data store for Link Category data
+        var CategoryStore = Ext.create('Ext.data.Store',
+        {
+            model : 'CategoryModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'SortOrder',
+                direction: 'ASC'
+            }]
+        });
+        
+        //Data store for Program data
+        var ProgramStore = Ext.create('Ext.data.Store',
+        {
+            model : 'ProgramModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'Name',
+                direction: 'ASC'
+            }]
+        });
+        
+        //Data store for link type data
+        var LinkTypeStore = Ext.create('Ext.data.Store',
+        {
+            model : 'LinkTypeModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false
+        });
+        
+        //Data store for Text Area data
+        var TextAreaStore = Ext.create('Ext.data.Store',
+        {
+            model : 'TextAreaModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'Name',
+                direction: 'ASC'
+            }]
+        });
+        
+        //Drop-down for selecting the link category
+        var CategorySelect=Ext.create('Ext.container.Container',
+        {
+            items: [
+                {
+                    xtype: 'combo',
+                    id: 'Category',
+                    width: 350,
+                    typeAhead: true,
+                    store: CategoryStore,
+                    displayField: 'Name',
+                    valueField: 'Id',
+                    emptyText: 'Select a Link Category...',
+                    valueNotFoundText: 'Select a Link Category...',
+                    queryMode: 'local',
+                    listeners: 
+                    {
+                        change: 
+                        {
+                            fn: function(field, newValue, oldValue, eOpts)
+                                {
+                                    //Call function to retrieve links
+                                    if (newValue!=null)
+                                    {
+                                        getRecords(newValue);
+                                    }
+                                    else
+                                    {
+                                        LinkStore.removeAll(true);
+                                        LinkGrid.getView().refresh();
+                                        TileLinkStore.removeAll(true);
+                                        TileLinkGrid.getView().refresh();
+                                    }
+                                }
+                        }
+                    }
+                }
+            ],
+            renderTo: 'divCategoryFilter',
+            width: 360
+        });
+        
+        //Create button for Managing Link Categories
+        var ManageCategories=Ext.create('Ext.Button',
+        {
+            text: 'Manage Categories',
+            renderTo: 'divManageCategories',
+            handler: function()
+                {
+                    ManageCategoriesWindow.show();
+                },
+            tooltip: 'Click to manage link categories'
+        });
+        
+        //For for adding new Link Categories
+        var CategoryForm=new Ext.form.FormPanel(
+        {
+            title: 'Add New Category',
+            frame: false,
+            width: 550,
+            height: 85,
+            layout:
+            {
+                type: 'table',
+                columns: 2
+            },
+            items: [
+                {
+                    name: 'CategoryName',
+                    xtype: 'textfield',
+                    fieldLabel: 'Category Name',
+                    labelAlign: 'left',
+                    labelWidth: 90,
+                    width: 360,
+                    padding: '3 3 1 3',
+                    maxLength: 80,
+                    allowBlank: false,
+                    listeners:
+                    {
+                        specialkey: function(field, e)
+                            {
+                                if (e.getKey()==e.ENTER)
+                                {
+                                    addCategory(this.up('form').getForm());
+                                }
+                            }
+                    }
+                },
+                {
+                    name: 'ProgramSpecific',
+                    xtype: 'checkboxfield',
+                    fieldLabel: 'Links are Program Specific',
+                    labelAlign: 'left',
+                    labelWidth: 150,
+                    width: 180,
+                    padding: '3 3 1 3'
+                }
+            ],
+            buttons: 
+            [
+                {
+                    id: 'addCategoryButton',
+                    text: 'Add Category',
+                    handler: function()
+                    {
+                        addCategory(this.up('form').getForm());
+                    }
+                },
+                {
+                    text: 'Clear',
+                    handler: function()
+                    {
+                        //Clears any entered values
+                        this.up('form').getForm().reset();
+                    }
+                }
+            ]
+        });
+        
+        //Function to add a category. Separated out so it can be invoked by clicking the Add Category button or hitting Enter while in the Category Name field.
+        function addCategory(form)
+        {
+            if(form.isValid())
+            {
+                //Add new category to the Category Store and Salesforce
+                var saveCategoryObj = new sforce.SObject("PersonalPagesLinkCategory__c");
+                saveCategoryObj.Name=form.findField("CategoryName").getValue();
+                saveCategoryObj.ProgramSpecific__c=form.findField("ProgramSpecific").getValue();
+                
+                //Set sort order to be at the end of the list
+                saveCategoryObj.SortOrder__c=CategoryStore.getCount();
+                
+                try
+                {
+                    //Insert the Link Category
+                    var temp=sforce.connection.create([saveCategoryObj]);
+                    
+                    //Clear the entry fields
+                    form.reset();
+                    
+                    //If the insert is successful create a new model for the category and add it to the store
+                    if (temp[0].success)
+                    {
+                        saveCategoryObj.Id=temp[0].id;
+                        CategoryStore.loadRawData([saveCategoryObj], true);
+                    }
+                }
+                catch(e)
+                {
+                    //Show an error dialog if an error occurs trying to save the new Link Category
+                    Ext.MessageBox.show({
+                        title:'Link Category Creation Error',
+                        msg: 'Unable to create new Personal Pages Link Category.\nError Message: '+e.message,
+                        buttons: Ext.Msg.OK,
+                        icon: Ext.Msg.ERROR
+                    });
+                }
+            }
+        }
+        
+        //Grid for Link Categories
+        var CategoryGrid=Ext.create('Ext.grid.Panel',
+        {
+            title: "Link Categories",
+            store: CategoryStore,
+            columns:
+            [
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Category Name',
+                    dataIndex: 'Name',
+                    width: 375,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        meta.tdAttr='data-qwidth="100" data-qtip="Click to select. Double-click to edit."';
+                        return value;
+                    },
+                    editor: 
+                    {
+                        xtype: 'textfield',
+                        maxLength: 80
+                    }
+                },
+                {
+                    xtype: 'disablecheckcolumn',
+                    header: 'Program Specific',
+                    dataIndex: 'ProgramSpecific',
+                    width: 100,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true/*, //This isn't displaying properly right now
+                    renderer: function(value, meta, record) 
+                    {
+                        //Custom render function to handle disabled checkboxes
+                        var cssPrefix = Ext.baseCSSPrefix,
+                            cls = [cssPrefix + 'grid-checkheader'];
+                
+                        if (value) 
+                        {
+                            cls.push(cssPrefix + 'grid-checkheader-checked-disabled');
+                        } 
+                        else
+                        {
+                            cls.push(cssPrefix + 'grid-checkheader-disabled');
+                        }
+                
+                        return '<div class="' + cls.join(' ') + '">&#160;</div>';                    
+                    }*/
+                },
+                {
+                    xtype: 'actioncolumn',
+                    width: 25,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    items: [{
+                        icon: '{!$Resource.profile}/images/delete.png',
+                        tooltip: 'Delete Link Category',
+                        handler: function(grid, rowIndex, colIndex)
+                        {
+                            //Show a dialogue asking confirmation of link category deletion
+                            Ext.MessageBox.confirm('Confirm Delete','You are about to delete a Link Category.<br/>Any existing links associated with this category will also be deleted.<br/>Do you want to proceed?',
+                                function(btn)
+                                {
+                                    //If the user selects the "yes" button on the dialogue delete the link category
+                                    if (btn=='yes')
+                                    {
+                                        CategoryGrid.getView().setLoading('Deleting Link Category...');
+                                        
+                                        var deleteCategoryId=CategoryStore.getAt(rowIndex).get('Id');
+                                    
+                                        //Query for all links associated with the category to be deleted
+                                        sforce.connection.query("select Id, TilePosition__c FROM Personal_Pages_Link__c where LinkCategory__c='"+deleteCategoryId+"'",
+                                            function(result)
+                                            {
+                                                result.size *= 1;
+                                                result.done = result.done == "true";
+                                                result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                                                
+                                                //If links are found add their Id's to an array to be deleted
+                                                if (result.records.length>0)
+                                                {
+                                                    var linkIds=[];
+                                                    
+                                                    for (var i=0; i<result.records.length; i++)
+                                                    {
+                                                        linkIds[i]=result.records[i].Id;
+                                                        
+                                                        //If the link is tiled remove it from the tiled links first
+                                                        if (result.records[i].TilePosition__c>=0)
+                                                        {
+                                                            var tileIndex=TileLinkStore.findExact('Id', result.records[i].Id);
+                                                        
+                                                            if (tileIndex>=0)
+                                                            {
+                                                                removeTiledLink(tileIndex);
+                                                            }
+                                                        }
+                                                    }
+                                                    
+                                                    //Delete the links in Salesforce
+                                                    sforce.connection.deleteIds(linkIds);
+                                                }
+                                                
+                                                //Delete the category in Salesforce
+                                                sforce.connection.deleteIds([deleteCategoryId]); 
+                                                
+                                                CategoryStore.removeAt(rowIndex);
+                                                
+                                                //If the current selected category in the drop-down is being deleted reset to the first available category
+                                                if (deleteCategoryId==CategorySelect.getComponent('Category').getValue())
+                                                {
+                                                    CategorySelect.getComponent('Category').select(CategoryStore.getAt(0));
+                                                }
+                                                
+                                                //Fix Sort Order Values after delete so there are no duplicates or discontinuities. Works on 0 start index numbering.
+                                                for (var i=rowIndex; i<CategoryStore.getCount(); i++)
+                                                {
+                                                    CategoryStore.getAt(i).set('SortOrder', CategoryStore.getAt(i).get('SortOrder')-1);
+                                                    
+                                                    var fixSort=new sforce.SObject("PersonalPagesLinkCategory__c");
+                                
+                                                    fixSort.Id=CategoryStore.getAt(i).get('Id');
+                                                    fixSort.SortOrder__c=CategoryStore.getAt(i).get('SortOrder');
+                                                    
+                                                    sforce.connection.update([fixSort]);
+                                                }
+                                                
+                                                CategoryGrid.getView().setLoading(false);
+                                            });
+                                    }
+                                });
+                        }
+                    }]
+                }
+            ],
+            width: 550,
+            height: 200,
+            selType: 'rowmodel',
+            plugins: [
+                Ext.create('Ext.grid.plugin.CellEditing', 
+                {
+                    clicksToEdit: 2,
+                    listeners:
+                    {
+                        //beforeedit event is used here to prevent the edit view from displaying if the user clicks the delete button
+                        beforeedit: function (editor, e, eOpts)
+                        {
+                            return e.column.xtype!=='actioncolumn';
+                        },
+                        edit: function(editor, e, eOpts)
+                        {
+                            var categoryObj=new sforce.SObject("PersonalPagesLinkCategory__c");
+                            categoryObj.Id=e.record.data.Id;
+                            categoryObj.Name=e.record.data.Name;
+                            categoryObj.ProgramSpecific__c=e.record.data.ProgramSpecific;
+                            
+                            //Update the object in Salesforce
+                            sforce.connection.update([categoryObj]);
+                        }
+                    }
+                })
+            ],
+            rbar:
+            [
+                {
+                    xtype: 'button',
+                    icon: '{!$Resource.extjs_v420}/examples/ux/css/images/up2.gif',
+                    handler: function()
+                        {
+                            //Get the highlighted record index
+                            var index=CategoryStore.indexOf(CategoryGrid.getSelectionModel().getSelection()[0]);
+                            
+                            //Won't try to move an item up if it is already at the top of the list
+                            if (index>0)
+                            {
+                                //The logic essentially swaps the sort order of the selected record with the one above it
+                                var movedUp=new sforce.SObject("PersonalPagesLinkCategory__c");
+                                var movedDown=new sforce.SObject("PersonalPagesLinkCategory__c");
+                                
+                                movedUp.Id=CategoryStore.getAt(index).get('Id');
+                                movedDown.Id=CategoryStore.getAt(index-1).get('Id');
+                                movedUp.SortOrder__c=CategoryStore.getAt(index-1).get('SortOrder');
+                                movedDown.SortOrder__c=CategoryStore.getAt(index).get('SortOrder');
+                                
+                                //Update the sort orders in Salesforce
+                                sforce.connection.update([movedUp]);
+                                sforce.connection.update([movedDown]);
+                                
+                                //Update the sort orders in the data store. This is done separately to update the view without a page refresh.
+                                CategoryStore.getAt(CategoryStore.findExact('Id', movedUp.Id)).set('SortOrder', movedUp.SortOrder__c);
+                                CategoryStore.getAt(CategoryStore.findExact('Id', movedDown.Id)).set('SortOrder', movedDown.SortOrder__c);
+                                CategoryStore.sort();
+                            }
+                        },
+                    tooltip: 'Moves the selected category up in the sort order'
+                },
+                {
+                    xtype: 'button',
+                    icon: '{!$Resource.extjs_v420}/examples/ux/css/images/down2.gif',
+                    handler: function()
+                        {
+                            //Get the highlighted record index
+                            var index=CategoryStore.indexOf(CategoryGrid.getSelectionModel().getSelection()[0]);
+                            
+                            //Won't try to move an item down if it is already at the bottom of the list
+                            if (index<CategoryStore.getCount()-1 && index>=0)
+                            {
+                                //The logic essentially swaps the sort order of the selected record with the one below it
+                                var movedUp=new sforce.SObject("PersonalPagesLinkCategory__c");
+                                var movedDown=new sforce.SObject("PersonalPagesLinkCategory__c");
+                                
+                                movedUp.Id=CategoryStore.getAt(index+1).get('Id');
+                                movedDown.Id=CategoryStore.getAt(index).get('Id');
+                                movedUp.SortOrder__c=CategoryStore.getAt(index).get('SortOrder');
+                                movedDown.SortOrder__c=CategoryStore.getAt(index+1).get('SortOrder');
+                                
+                                //Update the sort orders in Salesforce
+                                sforce.connection.update([movedUp]);
+                                sforce.connection.update([movedDown]);
+                                
+                                //Update the sort orders in the data store. This is done separately to update the view without a page refresh.
+                                CategoryStore.getAt(CategoryStore.findExact('Id', movedUp.Id)).set('SortOrder', movedUp.SortOrder__c);
+                                CategoryStore.getAt(CategoryStore.findExact('Id', movedDown.Id)).set('SortOrder', movedDown.SortOrder__c);
+                                CategoryStore.sort();
+                            }
+                        },
+                    tooltip: 'Moves the selected category down in the sort order'
+                }
+            ]
+        });
+        
+        //Window for managing Link Categories
+        var ManageCategoriesWindow = new Ext.Window(
+        {
+            name: 'EditLinkWindow',
+            title: 'Edit Personal Pages Link',
+            closable: false,
+            width: 560,
+            height: 345,
+            plain: true,
+            modal: true,
+            layout: 'vbox',
+            items: [CategoryForm, CategoryGrid],
+            buttons: 
+            [
+                {
+                    text: 'Close',
+                    handler: function()
+                    {
+                        //Clears any entered values and hides the window
+                        CategoryForm.getForm().reset();
+                        ManageCategoriesWindow.hide();
+                    }
+                }
+            ]
+        });
+        
+        //Grid for existing links
+        var LinkGrid=Ext.create('Ext.grid.Panel',
+        {
+            title: "Existing Personal Pages Links",
+            store: LinkStore,
+            columns:
+            [
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Link Name',
+                    dataIndex: 'Name',
+                    width: 405,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        meta.tdAttr='data-qwidth="100" data-qtip="Click to select. Double-click to edit."';
+                        return value;
+                    }
+                },
+                {
+                    xtype: 'checkcolumn',
+                    header: 'Active',
+                    dataIndex: 'Active',
+                    width: 40,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    listeners:
+                    {
+                        //Listener function for the checkchanged event
+                        checkchange: function(column, recordIndex, checked)
+                        {
+                            if ((!checked && (LinkStore.getAt(recordIndex).get('TilePosition')==null || LinkStore.getAt(recordIndex).get('TilePosition')<0)) || checked)
+                            {
+                                var linkObj = new sforce.SObject("Personal_Pages_Link__c");
+                                linkObj.Id = LinkStore.getAt(recordIndex).get('Id');
+                                linkObj.active__c = checked;
+                                
+                                //Update the object in Salesforce
+                                sforce.connection.update([linkObj]);
+                                
+                                //If the link is a group get the group members and set the active to the group head
+                                if (CategoryStore.getAt(CategoryStore.findExact('Id', LinkStore.getAt(recordIndex).get('LinkCategory'))).get('ProgramSpecific'))
+                                {
+                                    sforce.connection.query("SELECT Id, active__c FROM Personal_Pages_Link__c where LinkCategory__c='"+LinkStore.getAt(recordIndex).get('LinkCategory')+"' and LinkGroup__c='"+LinkStore.getAt(recordIndex).get('Name')+"' and link__c!=null and link__c!=''",
+                                        function(result)
+                                        {
+                                            result.size *= 1;
+                                            result.done = result.done == "true";
+                                            result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                                            
+                                            for (var x=0; x<result.records.length; x++) 
+                                            {
+                                                result.records[x].active__c=checked;
+                                            }
+                                            
+                                            sforce.connection.update(result.records);
+                                        });
+                                }
+                            }
+                            else
+                            {
+                                LinkStore.getAt(recordIndex).set('Active', !checked);
+                                
+                                Ext.MessageBox.show({
+                                    title:'Link Is Tiled',
+                                    msg: 'Cannot set a link inactive that is tiled.<br/>Please remove the link from the tiled links first.',
+                                    buttons: Ext.Msg.OK,
+                                    icon: Ext.Msg.ERROR
+                                });
+                            }
+                        }
+                    }/*, //This currently doesn't work
+                    renderer: function(value, meta, record)
+                    {
+                        meta.tdAttr='data-qwidth="100" data-qtip="Toggle whether the link is displayed or hidden"';
+                        return value;
+                    }*/
+                },
+                {
+                    xtype: 'actioncolumn',
+                    width: 25,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    items: [{
+                        icon: '{!$Resource.profile}/images/delete.png',
+                        tooltip: 'Delete Link',
+                        handler: function(grid, rowIndex, colIndex)
+                        {
+                            //Show a dialogue asking confirmation of link deletion
+                            Ext.MessageBox.confirm('Confirm Delete','You are about to delete a Personal Pages Link.<br/>Do you want to proceed?',
+                                function(btn)
+                                {
+                                    //If the user selects the "yes" button on the dialogue delete the link
+                                    if (btn=='yes')
+                                    {
+                                        LinkGrid.getView().setLoading('Deleting Link...');
+                                        
+                                        //If the link/link group is tiled remove from the tiled links first
+                                        if (LinkStore.getAt(rowIndex).get('TilePosition')>=0)
+                                        {
+                                            //Call function to handle removing the link/link group
+                                            removeTiledLink(TileLinkStore.findExact('Id', LinkStore.getAt(rowIndex).get('Id')));
+                                        }
+                                        
+                                        var deletes=[];
+                                        
+                                        deletes[0]=LinkStore.getAt(rowIndex).get('Id');
+                                        
+                                        //If the link is a group get the group members and delete them
+                                        sforce.connection.query("SELECT Id FROM Personal_Pages_Link__c where LinkCategory__c='"+LinkStore.getAt(rowIndex).get('LinkCategory')+"' and LinkCategory__r.ProgramSpecific__c=true and LinkGroup__c='"+LinkStore.getAt(rowIndex).get('Name')+"' and link__c!=null and link__c!=''",
+                                            function(result)
+                                            {
+                                                result.size *= 1;
+                                                result.done = result.done == "true";
+                                                result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                                                
+                                                for (var x=0; x<result.records.length; x++) 
+                                                {
+                                                    deletes[deletes.length]=result.records[x].Id;
+                                                }
+                                                
+                                                sforce.connection.deleteIds(deletes);
+                                        
+                                                LinkStore.removeAt(rowIndex);
+                                                
+                                                //Fix Sort Order Values after delete so there are no duplicates or discontinuities. Works on 0 start index numbering.
+                                                for (var i=rowIndex; i<LinkStore.getCount(); i++)
+                                                {
+                                                    LinkStore.getAt(i).set('SortOrder', LinkStore.getAt(i).get('SortOrder')-1);
+                                                    
+                                                    var fixSort=new sforce.SObject("Personal_Pages_Link__c");
+                                
+                                                    fixSort.Id=LinkStore.getAt(i).get('Id');
+                                                    fixSort.sort_order__c=LinkStore.getAt(i).get('SortOrder');
+                                                    
+                                                    sforce.connection.update([fixSort]);
+                                                    
+                                                    fixSortLinkMember(LinkStore.getAt(i).get('LinkCategory'), LinkStore.getAt(i).get('Name'), fixSort.sort_order__c);
+                                                }
+                                                
+                                                LinkGrid.getView().setLoading(false);
+                                            });
+                                    }
+                                });
+                        }
+                    }]
+                }
+            ],
+            renderTo: 'divExistingLinks',
+            width: 490,
+            height: 285,
+            selType: 'rowmodel',
+            plugins: [
+                Ext.create('Ext.grid.plugin.CellEditing', {
+                    clicksToEdit: 2,
+                    listeners:
+                    {
+                        //beforeedit event is used here to prevent the edit view from displaying if the user clicks the delete button
+                        beforeedit: function (editor, e, eOpts)
+                        {
+                            //Set the call ID to the row firing the before edit event
+                            LinkCallId = e.rowIdx;
+                            
+                            //If the user double-clicks the Name column display the edit window
+                            if (e.column.xtype!='actioncolumn' && e.colIdx==0)
+                            {
+                                //Call the group link edit window if the selected link is ProgramSpecific, otherwise use the single link window
+                                if (CategoryStore.getAt(CategoryStore.findExact('Id', e.record.data.LinkCategory)).get('ProgramSpecific'))
+                                {                   
+                                    EditGroupLinksWindow.show();
+                                }
+                                else
+                                {
+                                    EditLinkWindow.show();
+                                }
+                            }
+                            
+                            return e.column.xtype!=='actioncolumn';
+                        }
+                    }
+                })
+            ]
+        });
+        
+        var TileLinkGrid=Ext.create('Ext.grid.Panel',
+        {
+            title: "Tiled Personal Pages Links",
+            store: TileLinkStore,
+            columns:
+            [
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Link Name',
+                    dataIndex: 'Name',
+                    width: 405,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        //meta.tdAttr='data-qwidth="100" data-qtip="Click to select. Double-click to edit."';
+                        return value;
+                    }
+                },
+                {
+                    xtype: 'actioncolumn',
+                    width: 25,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    items: [{
+                        icon: '{!$Resource.profile}/images/delete.png',
+                        tooltip: 'Remove Link From Tiles',
+                        handler: function(grid, rowIndex, colIndex)
+                        {
+                            //Call function to handle removing the link/link group
+                            removeTiledLink(rowIndex);
+                        }
+                    }]
+                }
+            ],
+            renderTo: 'divTiledLinks',
+            width: 450,
+            height: 285,
+            selType: 'rowmodel'
+        });
+        
+        //Grid for displaying Text Areas
+        var TextAreaGrid=Ext.create('Ext.grid.Panel',
+        {
+            title: "Personal Pages Welcome Text Areas",
+            store: TextAreaStore,
+            columns:
+            [
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Name',
+                    dataIndex: 'Name',
+                    width: 110,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        meta.tdAttr='data-qwidth="100" data-qtip="Click to edit."';
+                        return value;
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Text',
+                    dataIndex: 'TextArea',
+                    width: 845,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        meta.tdAttr='data-qwidth="100" data-qtip="Click to edit."';
+                        return value.replace('<','&lt;').replace('>','&gt;');
+                    }
+                }
+            ],
+            renderTo: 'divExistingTextAreas',
+            width: 975,
+            minHeight: 95,
+            maxHeight: 250,
+            selType: 'rowmodel',
+            plugins: [
+                Ext.create('Ext.grid.plugin.CellEditing', {
+                    clicksToEdit: 1,
+                    listeners:
+                    {
+                        //beforeedit event is used here to prevent the edit view from displaying if the user clicks the delete button
+                        beforeedit: function (editor, e, eOpts)
+                        {
+                            //Set the call ID to the row firing the before edit event
+                            LinkCallId = e.rowIdx;
+                            
+                            //If the user clicks the name or text cell open the text area edit window
+                            if (e.column.xtype!='actioncolumn')
+                            {
+                                EditTextAreaWindow.show();
+                            }
+                            
+                            return e.column.xtype!=='actioncolumn';
+                        }
+                    }
+                })
+            ]
+        });
+        
+        //Form for creating and editing links
+        var EditLinkForm=new Ext.form.FormPanel(
+        {
+            frame: false,
+            width: 630,
+            height: 100,
+            layout:
+            {
+                type: 'table',
+                columns: 2
+            },
+            items: [
+                {
+                    name: 'Name',
+                    fieldLabel: 'Link Name',
+                    xtype: 'textfield',
+                    labelAlign: 'left',
+                    labelWidth: 60,
+                    labelPad: 2,
+                    width: 300,
+                    padding: '3 3 1 3',
+                    maxLength: 80,
+                    allowBlank: false
+                },
+                {
+                    name: 'Link',
+                    fieldLabel: 'Link URL',
+                    xtype: 'textfield',
+                    labelAlign: 'left',
+                    labelWidth: 55,
+                    labelPad: 2,
+                    width: 300,
+                    padding: '3 3 1 3',
+                    maxLength: 255,
+                    allowBlank: false,
+                    renderer: function(value, meta, record)
+                    {
+                        return value.replace('<','&lt;').replace('>','&gt;');
+                    }
+                },
+                {
+                    name: 'Label',
+                    fieldLabel: 'Label',
+                    xtype: 'textfield',
+                    labelAlign: 'left',
+                    labelWidth: 60,
+                    labelPad: 2,
+                    width: 300,
+                    padding: '3 3 1 3',
+                    maxLength: 255,
+                    allowBlank: false
+                },
+                {
+                    name: 'Type',
+                    fieldLabel: 'Type',
+                    labelAlign: 'left',
+                    labelWidth: 55,
+                    padding: '3 3 1 3',
+                    xtype: 'combo',
+                    width: 300,
+                    store: LinkTypeStore,
+                    displayField: 'Name',
+                    valueField: 'Name',
+                    value: 'Web Page',
+                    queryMode: 'local',
+                    editable: false,
+                    allowBlank: false
+                },
+                {
+                    name: 'Active',
+                    fieldLabel: 'Active',
+                    labelAlign: 'left',
+                    labelWidth: 55,
+                    padding: '3 3 1 3',
+                    xtype: 'checkboxfield',
+                    width: 100
+                }
+            ]
+        });
+        
+        //Pop-up window that holds the Edit Link form
+        var EditLinkWindow = new Ext.Window(
+        {
+            name: 'EditLinkWindow',
+            title: 'Edit Personal Pages Link',
+            closable: false,
+            width: 640,
+            height: 160,
+            plain: true,
+            modal: true,
+            layout: 'vbox',
+            items: [EditLinkForm],
+            listeners:
+            {
+                beforeshow: function()
+                {
+                    //If editing an existing link populate the edit form from the existing record
+                    if (LinkCallId!=-1)
+                    {
+                        this.setTitle('Edit Personal Pages Link');
+                        EditLinkForm.getForm().findField("Name").setValue(LinkStore.getAt(LinkCallId).get('Name'));
+                        EditLinkForm.getForm().findField("Active").setValue(LinkStore.getAt(LinkCallId).get('Active'));
+                        EditLinkForm.getForm().findField("Label").setValue(LinkStore.getAt(LinkCallId).get('Label'));
+                        EditLinkForm.getForm().findField("Type").setValue(LinkStore.getAt(LinkCallId).get('LinkType'));
+                        EditLinkForm.getForm().findField("Link").setValue(LinkStore.getAt(LinkCallId).get('Link'));
+                    }
+                    else
+                    {
+                        this.setTitle('Create New Personal Pages Link');
+                    }
+                }
+            },
+            buttons: [
+                {
+                    text: 'Save Link',
+                    handler: function()
+                    {
+                        if (EditLinkForm.getForm().isValid())
+                        {
+                            //Create and populate new instance of the Personal_Pages_Link__c object for saving the link record
+                            var saveLinkObj=new sforce.SObject("Personal_Pages_Link__c");
+                            
+                            saveLinkObj.Name=EditLinkForm.getForm().findField("Name").getValue();
+                            saveLinkObj.active__c=EditLinkForm.getForm().findField("Active").getValue();                            
+                            saveLinkObj.label__c=EditLinkForm.getForm().findField("Label").getValue();
+                            saveLinkObj.last_updated__c=new Date();
+                            saveLinkObj.LinkType__c=EditLinkForm.getForm().findField("Type").getValue()
+                            saveLinkObj.link__c=EditLinkForm.getForm().findField("Link").getValue();
+                        
+                            if (LinkCallId!=-1)
+                            {
+                                //Populate ID and Sort Order from existing link object
+                                saveLinkObj.Id=LinkStore.getAt(LinkCallId).get('Id');
+                                saveLinkObj.sort_order__c=LinkStore.getAt(LinkCallId).get('SortOrder');
+                                
+                                //Update existing link object in Salesforce and the data store
+                                sforce.connection.update([saveLinkObj]);
+                                
+                                LinkStore.getAt(LinkCallId).set('Name', saveLinkObj.Name);
+                                LinkStore.getAt(LinkCallId).set('Active', saveLinkObj.active__c);
+                                LinkStore.getAt(LinkCallId).set('Label', saveLinkObj.label__c);
+                                LinkStore.getAt(LinkCallId).set('LastUpdated', saveLinkObj.last_updated__c);
+                                LinkStore.getAt(LinkCallId).set('Link', saveLinkObj.link__c);
+                                LinkStore.getAt(LinkCallId).set('LinkType', saveLinkObj.LinkType__c);
+                                
+                                //Check if the link is tiled
+                                if (LinkStore.getAt(LinkCallId).get('TilePosition')>=0)
+                                {
+                                    //If the link is tiled and still active update the Tile name to match the link name, otherwise remove the link from the tiles.
+                                    if (saveLinkObj.active__c)
+                                    {
+                                        TileLinkStore.getAt(TileLinkStore.findExact('Id', saveLinkObj.Id)).set('Name', saveLinkObj.Name);
+                                    }
+                                    else
+                                    {
+                                        removeTiledLink(TileLinkStore.findExact('Id', saveLinkObj.Id));
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                //Set Sort Order for new link to be at the end of the list
+                                saveLinkObj.sort_order__c=LinkStore.getCount();
+                                saveLinkObj.LinkCategory__c=CategorySelect.getComponent('Category').getValue();
+                                saveLinkObj.TilePosition__c=-1;
+                                
+                                var temp=sforce.connection.create([saveLinkObj]);
+                                
+                                //Add new record to the link store
+                                if (temp[0].success)
+                                {
+                                    saveLinkObj.Id=temp[0].id;
+                                    LinkStore.loadRawData([saveLinkObj], true);
+                                }
+                            }
+                            
+                            //Clears any entered values and hides the window
+                            EditLinkForm.getForm().reset();
+                            LinkCallId=-1;
+                            EditLinkWindow.hide();
+                        }
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    handler: function()
+                    {
+                        //Clears any entered values and hides the window
+                        EditLinkForm.getForm().reset();
+                        if (LinkCallId!=-1)
+                        {
+                            LinkGrid.editingPlugin.cancelEdit();
+                        }
+                        LinkCallId=-1;
+                        EditLinkWindow.hide();
+                    }
+                }
+            ]
+        });
+        
+        //Form for managing link groups
+        var EditGroupLinksForm=new Ext.form.FormPanel(
+        {
+            frame: false,
+            width: 630,
+            height: 200,
+            layout: 'vbox',
+            items:
+            [
+                {
+                    xtype: 'fieldset',
+                    title: 'Group Information',
+                    layout:
+                    {
+                        type: 'table',
+                        columns: 2
+                    },
+                    items:
+                    [
+                        {
+                            name: 'GroupName',
+                            fieldLabel: 'Group Name',
+                            xtype: 'textfield',
+                            labelAlign: 'left',
+                            labelWidth: 80,
+                            labelPad: 2,
+                            width: 530,
+                            padding: '3 3 1 3',
+                            maxLength: 80,
+                            allowBlank: false
+                        },
+                        {
+                            name: 'GroupActive',
+                            fieldLabel: 'Active',
+                            labelAlign: 'left',
+                            labelWidth: 40,
+                            padding: '3 3 1 3',
+                            xtype: 'checkboxfield',
+                            width: 70
+                        }
+                    ]
+                    
+                },
+                {
+                    xtype: 'fieldset',
+                    title: 'Group Member',
+                    layout:
+                    {
+                        type: 'table',
+                        columns: 2
+                    },
+                    items:
+                    [
+                        {
+                            name: 'LinkLabel',
+                            fieldLabel: 'Label',
+                            xtype: 'textfield',
+                            labelAlign: 'left',
+                            labelWidth: 55,
+                            labelPad: 2,
+                            width: 300,
+                            padding: '3 3 1 3',
+                            maxLength: 255,
+                            allowBlank: false
+                        },
+                        {
+                            name: 'LinkURL',
+                            fieldLabel: 'Link URL',
+                            xtype: 'textfield',
+                            labelAlign: 'left',
+                            labelWidth: 60,
+                            labelPad: 2,
+                            width: 300,
+                            padding: '3 3 1 3',
+                            maxLength: 255,
+                            allowBlank: false
+                        },
+                        {
+                            name: 'LinkProgram',
+                            fieldLabel: 'Program',
+                            labelAlign: 'left',
+                            labelWidth: 55,
+                            padding: '3 3 1 3',
+                            xtype: 'combo',
+                            width: 300,
+                            typeAhead: true,
+                            multiSelect: false,
+                            store: ProgramStore,
+                            displayField: 'Name',
+                            valueField: 'Name',
+                            queryMode: 'local',
+                            editable: false,
+                            allowBlank: false
+                        },
+                        {
+                            name: 'LinkType',
+                            fieldLabel: 'Type',
+                            labelAlign: 'left',
+                            labelWidth: 55,
+                            padding: '3 3 1 3',
+                            xtype: 'combo',
+                            width: 300,
+                            store: LinkTypeStore,
+                            displayField: 'Name',
+                            valueField: 'Name',
+                            value: 'Web Page',
+                            queryMode: 'local',
+                            editable: false,
+                            allowBlank: false
+                        },
+                        {
+                            name: 'LinkActive',
+                            fieldLabel: 'Active',
+                            labelAlign: 'left',
+                            labelWidth: 55,
+                            padding: '3 3 1 3',
+                            xtype: 'checkboxfield',
+                            width: 100
+                        }
+                    ]
+                }
+            ],
+            buttons: [
+                {
+                    text: 'Add Link',
+                    handler: function()
+                    {
+                        var form=this.up('form').getForm();
+                    
+                        if(form.isValid())
+                        {
+                            //Add group member link to the group member store
+                            var newRecord=Ext.create('LinkModel');
+                            newRecord.set('Active', form.findField("LinkActive").getValue());
+                            newRecord.set('Program', form.findField("LinkProgram").getValue());
+                            newRecord.set('Label', form.findField("LinkLabel").getValue());
+                            newRecord.set('Link', form.findField("LinkURL").getValue());
+                            newRecord.set('LinkType', form.findField("LinkType").getValue());
+                            GroupLinkStore.add(newRecord);
+                            
+                            //Clear group member fields for next entry
+                            form.findField("LinkActive").reset();
+                            form.findField("LinkProgram").reset();
+                            form.findField("LinkLabel").reset();
+                            form.findField("LinkURL").reset();
+                            form.findField("LinkType").reset();
+                        }
+                    }
+                },
+                {
+                    text: 'Clear',
+                    handler: function()
+                    {
+                        //Clears any entered values
+                        var form=this.up('form').getForm();
+                        form.findField("LinkActive").reset();
+                        form.findField("LinkProgram").reset();
+                        form.findField("LinkLabel").reset();
+                        form.findField("LinkURL").reset();
+                        form.findField("LinkType").reset();
+                    }
+                }
+            ]
+        });
+        
+        //Grid to display group member links
+        var GroupLinkGrid=Ext.create('Ext.grid.Panel',
+        {
+            title: "Existing Group Members",
+            store: GroupLinkStore,
+            columns:
+            [
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Link Label',
+                    dataIndex: 'Label',
+                    width: 110,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor: 
+                    {
+                        xtype: 'textfield',
+                        maxLength: 255
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Link URL',
+                    dataIndex: 'Link',
+                    width: 200,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor: 
+                    {
+                        xtype: 'textfield',
+                        maxLength: 255
+                    },
+                    renderer: function(value, meta, record)
+                    {
+                        return value.replace('<','&lt;').replace('>','&gt;');
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Link Program',
+                    dataIndex: 'Program',
+                    width: 140,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor:
+                    {
+                        xtype: 'combo',
+                        typeAhead: true,
+                        multiSelect: false,
+                        store: ProgramStore,
+                        displayField: 'Name',
+                        valueField: 'Name',
+                        queryMode: 'local',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Type',
+                    dataIndex: 'LinkType',
+                    width: 90,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor:
+                    {
+                        xtype: 'combo',
+                        typeAhead: true,
+                        multiSelect: false,
+                        store: LinkTypeStore,
+                        displayField: 'Name',
+                        valueField: 'Name',
+                        queryMode: 'local',
+                        editable: false
+                    }
+                },
+                {
+                    xtype: 'checkcolumn',
+                    header: 'Active',
+                    dataIndex: 'Active',
+                    width: 40,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    editor:
+                    {
+                        xtype: 'checkboxfield'
+                    }
+                },
+                {
+                    xtype: 'actioncolumn',
+                    width: 25,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    items: [{
+                        icon: '{!$Resource.profile}/images/delete.png',
+                        tooltip: 'Delete Link',
+                        handler: function(grid, rowIndex, colIndex)
+                        {
+                            //Show a dialogue asking confirmation of link deletion
+                            Ext.MessageBox.confirm('Confirm Delete','You are about to delete a Personal Pages Link from the group.<br/>Do you want to proceed?',
+                                function(btn)
+                                {
+                                    //If the user selects the "yes" button on the dialogue delete the link
+                                    if (btn=='yes')
+                                    {
+                                        //If this is a new group member just remove the link from the store
+                                        if (GroupLinkStore.getAt(rowIndex).get('Id')==null || GroupLinkStore.getAt(rowIndex).get('Id')=="")
+                                        {
+                                            GroupLinkStore.removeAt(rowIndex);
+                                        }
+                                        else
+                                        {
+                                            //Mark the existing link for deletion upon saving
+                                            GroupLinkStore.getAt(rowIndex).set("Name", "DELETE");
+                                            GroupLinkStore.filterBy(function(record, id)
+                                                {
+                                                    return record.data.Name!="DELETE";
+                                                });
+                                                
+                                            GroupLinkGrid.getView().refresh();
+                                        }
+                                    }
+                                });
+                        }
+                    }]
+                }
+            ],
+            width: 630,
+            height: 250,
+            selType: 'rowmodel',
+            plugins: [
+                Ext.create('Ext.grid.plugin.CellEditing', {
+                    clicksToEdit: 1,
+                    listeners:
+                    {
+                        //beforeedit event is used here to prevent the edit view from displaying if the user clicks the delete button
+                        beforeedit: function (editor, e, eOpts)
+                        {
+                            return e.column.xtype!=='actioncolumn';
+                        }
+                    }
+                })
+            ]
+        });
+        
+        //Window for managing link groups
+        var EditGroupLinksWindow = new Ext.Window(
+        {
+            name: 'EditLinkWindow',
+            title: 'Edit Personal Pages Link Group',
+            closable: false,
+            width: 640,
+            height: 510,
+            plain: true,
+            modal: true,
+            layout: 'vbox',
+            items: [EditGroupLinksForm, GroupLinkGrid],
+            listeners:
+            {
+                beforeshow: function()
+                {
+                    //If editing an existing link populate the edit form from the existing record
+                    if (LinkCallId!=-1)
+                    {
+                        this.setTitle('Edit Personal Pages Link Group');
+                        GroupLinkGrid.getView().setLoading('Retrieving Link Group Members...');
+                        EditGroupLinksForm.getForm().findField("GroupName").setValue(LinkStore.getAt(LinkCallId).get('Name'));
+                        EditGroupLinksForm.getForm().findField("GroupActive").setValue(LinkStore.getAt(LinkCallId).get('Active'));
+                        
+                        //Query for and populate any group member links
+                        GroupLinkStore.removeAll(true);
+                        
+                        sforce.connection.query("SELECT active__c, Id, label__c, link__c, LinkCategory__c, LinkGroup__c, LinkType__c, Name, Program__c, sort_order__c, TilePosition__c FROM Personal_Pages_Link__c where LinkCategory__c='"+LinkStore.getAt(LinkCallId).get('LinkCategory')+"' and LinkGroup__c='"+LinkStore.getAt(LinkCallId).get('Name')+"' and link__c!=null and link__c!=''",
+                            function(result)
+                            {
+                                result.size *= 1;
+                                result.done = result.done == "true";
+                                result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                                
+                                GroupLinkStore.loadRawData(result.records, false);
+                                
+                                GroupLinkGrid.getView().setLoading(false);
+                            });
+                    }
+                    else
+                    {
+                        this.setTitle('Create New Personal Pages Link Group');
+                    }
+                }
+            },
+            buttons: [
+                {
+                    text: 'Save Group',
+                    handler: function()
+                    {
+                        if (EditGroupLinksForm.getForm().findField("GroupName").getValue()!=null && EditGroupLinksForm.getForm().findField("GroupName").getValue()!="")
+                        {
+                            //Create and populate new instance of the Personal_Pages_Link__c object for saving the group head record
+                            var saveGroupObj=new sforce.SObject("Personal_Pages_Link__c");
+                            
+                            saveGroupObj.Name=EditGroupLinksForm.getForm().findField("GroupName").getValue();
+                            saveGroupObj.active__c=EditGroupLinksForm.getForm().findField("GroupActive").getValue();                            
+                            saveGroupObj.LinkGroup__c=EditGroupLinksForm.getForm().findField("GroupName").getValue();
+                            saveGroupObj.last_updated__c=new Date();
+                        
+                            if (LinkCallId!=-1)
+                            {
+                                //Populate ID and Sort Order from existing link object
+                                saveGroupObj.Id=LinkStore.getAt(LinkCallId).get('Id');
+                                saveGroupObj.sort_order__c=LinkStore.getAt(LinkCallId).get('SortOrder');
+                                saveGroupObj.TilePosition__c=LinkStore.getAt(LinkCallId).get('TilePosition');
+                                saveGroupObj.LinkCategory__c=LinkStore.getAt(LinkCallId).get('LinkCategory');
+                                
+                                //Update existing link object in Salesforce and the data store
+                                sforce.connection.update([saveGroupObj]);
+                                
+                                LinkStore.getAt(LinkCallId).set('Name', saveGroupObj.Name);
+                                LinkStore.getAt(LinkCallId).set('Active', saveGroupObj.active__c);
+                                LinkStore.getAt(LinkCallId).set('LastUpdated', saveGroupObj.last_updated__c);
+                                LinkStore.getAt(LinkCallId).set('LinkGroup', saveGroupObj.LinkGroup__c);
+                                
+                                //Check if the group is tiled
+                                if (LinkStore.getAt(LinkCallId).get('TilePosition')>=0)
+                                {
+                                    //If the group is tiled and still active update the Tile name to match the group name, otherwise remove the group from the tiles.
+                                    if (saveGroupObj.active__c)
+                                    {
+                                        TileLinkStore.getAt(TileLinkStore.findExact('Id', saveGroupObj.Id)).set('Name', saveGroupObj.Name);
+                                    }
+                                    else
+                                    {
+                                        removeTiledLink(TileLinkStore.findExact('Id', saveGroupObj.Id));
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                //Set Sort Order for new link to be at the end of the list
+                                saveGroupObj.sort_order__c=LinkStore.getCount();
+                                saveGroupObj.TilePosition__c=-1;
+                                saveGroupObj.LinkCategory__c=CategorySelect.getComponent('Category').getValue();
+                                
+                                var temp=sforce.connection.create([saveGroupObj]);
+                                
+                                //Add new record to the link store
+                                if (temp[0].success)
+                                {
+                                    saveGroupObj.Id=temp[0].id;
+                                    LinkStore.loadRawData([saveGroupObj], true);
+                                }
+                            }
+                            
+                            var updateLinks=[];
+                            var createLinks=[];
+                            var deleteLinks=[];
+                            
+                            GroupLinkStore.removeFilter(null);
+                            
+                            //Add all group members to Salesforce
+                            for (var i=0; i<GroupLinkStore.getCount(); i++)
+                            {
+                                var currentRecord=GroupLinkStore.getAt(i);
+                                
+                                //Check if link is marked for deletion and add to deletion list if so
+                                if (currentRecord.get('Name')=="DELETE")
+                                {
+                                    deleteLinks[deleteLinks.length]=currentRecord.get('Id');
+                                }
+                                else
+                                {
+                                    var saveLinkObj=new sforce.SObject("Personal_Pages_Link__c");
+                                    saveLinkObj.Name=saveGroupObj.Name+"-"+currentRecord.get('Label');
+                                    
+                                    //If the group is set as active set the group members active status as the user defined, otherwise set everything to inactive.
+                                    if (saveGroupObj.active__c)
+                                    {
+                                        saveLinkObj.active__c=currentRecord.get('Active');
+                                    }
+                                    else
+                                    {
+                                        saveLinkObj.active__c=saveGroupObj.active__c;
+                                    }
+                                    
+                                    saveLinkObj.label__c=currentRecord.get('Label');
+                                    saveLinkObj.Program__c=currentRecord.get('Program');
+                                    saveLinkObj.LinkGroup__c=saveGroupObj.Name;
+                                    saveLinkObj.sort_order__c=saveGroupObj.sort_order__c;
+                                    saveLinkObj.TilePosition__c=saveGroupObj.TilePosition__c;
+                                    saveLinkObj.LinkCategory__c=saveGroupObj.LinkCategory__c;
+                                    saveLinkObj.last_updated__c=saveGroupObj.last_updated__c;
+                                    saveLinkObj.last_updated__c=new Date();
+                                    saveLinkObj.LinkType__c=currentRecord.get('LinkType');
+                                    saveLinkObj.link__c=currentRecord.get('Link');
+                                    
+                                    if (currentRecord.get('Id')!=null && currentRecord.get('Id')!="")
+                                    {
+                                        saveLinkObj.Id=currentRecord.get('Id');
+                                        
+                                        updateLinks[updateLinks.length]=saveLinkObj;
+                                    }
+                                    else
+                                    {
+                                        createLinks[createLinks.length]=saveLinkObj;
+                                    }
+                                }
+                            }
+                            
+                            //Insert and update group member links in Salesforce
+                            sforce.connection.update(updateLinks);
+                            sforce.connection.create(createLinks);
+                            sforce.connection.deleteIds(deleteLinks);
+                            
+                            //Clears any entered values and hides the window
+                            EditGroupLinksForm.getForm().reset();
+                            GroupLinkStore.removeAll(true);
+                            GroupLinkGrid.getView().refresh();
+                            LinkCallId=-1;
+                            EditGroupLinksWindow.hide();
+                        }
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    handler: function()
+                    {
+                        //Clears any entered values and hides the window
+                        EditGroupLinksForm.getForm().reset();
+                        if (LinkCallId!=-1)
+                        {
+                            LinkGrid.editingPlugin.cancelEdit();
+                        }
+                        GroupLinkStore.removeAll(true);
+                        GroupLinkGrid.getView().refresh();
+                        LinkCallId=-1;
+                        EditGroupLinksWindow.hide();
+                    }
+                }
+            ]
+        });
+        
+        //Add form for creating/editing Text Areas!!!
+        var EditTextAreaForm=new Ext.form.FormPanel(
+        {
+            frame: false,
+            width: 450,
+            height: 140,
+            layout:
+            {
+                type: 'vbox'
+            },
+            items: 
+            [
+                {
+                    name: 'TextArea',
+                    xtype: 'textareafield',
+                    width: 440,
+                    height: 130,
+                    padding: '3 3 1 3',
+                    maxLength: 32768,
+                    allowBlank: false
+                }
+            ]
+        });
+        
+        //Add window for creating/editing Text Areas!!!
+        var EditTextAreaWindow = new Ext.Window(
+        {
+            name: 'EditTextAreaWindow',
+            title: 'Edit Personal Pages Text Area',
+            closable: false,
+            width: 460,
+            height: 200,
+            plain: true,
+            modal: true,
+            layout: 'vbox',
+            items: [EditTextAreaForm],
+            listeners:
+            {
+                beforeshow: function()
+                {
+                    //Change the window title to include the area name and populate the form with the area text
+                    this.setTitle('Edit Personal Pages '+TextAreaStore.getAt(LinkCallId).get('Name'));
+                    EditTextAreaForm.getForm().findField("TextArea").setValue(TextAreaStore.getAt(LinkCallId).get('TextArea'));
+                }
+            },
+            buttons: [
+                {
+                    text: 'Save',
+                    handler: function()
+                    {
+                        if (EditTextAreaForm.getForm().isValid())
+                        {
+                            //Create and populate new instance of the PersonalPagesTextArea__c object for saving the text area record
+                            var saveTextAreaObj=new sforce.SObject("PersonalPagesTextArea__c");
+                            
+                            //Populate ID from existing text area object
+                            saveTextAreaObj.Id=TextAreaStore.getAt(LinkCallId).get('Id');
+                            saveTextAreaObj.TextArea__c=EditTextAreaForm.getForm().findField("TextArea").getValue();
+                                
+                            //Update existing link object in Salesforce and the data store
+                            sforce.connection.update([saveTextAreaObj]);
+                            
+                            TextAreaStore.getAt(LinkCallId).set('TextArea', saveTextAreaObj.TextArea__c);
+                            
+                            //Clears any entered values and hides the window
+                            EditTextAreaForm.getForm().reset();
+                            LinkCallId=-1;
+                            EditTextAreaWindow.hide();
+                        }
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    handler: function()
+                    {
+                        //Clears any entered values and hides the window
+                        EditTextAreaForm.getForm().reset();
+                        if (LinkCallId!=-1)
+                        {
+                            TextAreaGrid.editingPlugin.cancelEdit();
+                        }
+                        LinkCallId=-1;
+                        EditTextAreaWindow.hide();
+                    }
+                }
+            ]
+        });
+        
+        //Create button for creating new links
+        var NewLink=Ext.create('Ext.Button',
+        {
+            text: 'New Link',
+            renderTo: 'divNewLink',
+            handler: function()
+                {
+                    //Check that link categories exist, a link category is selected, and prompt the user to select one if one is not
+                    if (CategoryStore.getCount()==0)
+                    {
+                        Ext.MessageBox.show({
+                                title:'No Link Categories',
+                                msg: 'Please create Link Categories before attempting to create links.',
+                                buttons: Ext.Msg.OK,
+                                icon: Ext.Msg.ERROR
+                            });
+                    }                   
+                    else if (CategoryStore.findExact('Id', CategorySelect.getComponent('Category').getValue())<0)
+                    {
+                        Ext.MessageBox.show({
+                                title:'No Link Category Selected',
+                                msg: 'Please select a Link Category before attempting to create links.',
+                                buttons: Ext.Msg.OK,
+                                icon: Ext.Msg.ERROR
+                            });
+                    }
+                    else
+                    {
+                        LinkCallId=-1;
+                        
+                        //Call the group link edit window if the selected category is ProgramSpecific, otherwise use the single link window
+                        if (CategoryStore.getAt(CategoryStore.findExact('Id', CategorySelect.getComponent('Category').getValue())).get('ProgramSpecific'))
+                        {                   
+                            EditGroupLinksWindow.show();
+                        }
+                        else
+                        {
+                            EditLinkWindow.show();
+                        }
+                    }
+                },
+            tooltip: 'Click to create a new Personal Pages Link'
+        });
+        
+        //Button for moving links up in the sort order
+        var SortLinkUpButton=Ext.create('Ext.Button',
+        {
+            icon: '{!$Resource.extjs_v420}/examples/ux/css/images/up2.gif',
+            renderTo: 'divSortLinkUp',
+            handler: function()
+                {
+                    //Get the highlighted record index
+                    var index=LinkStore.indexOf(LinkGrid.getSelectionModel().getSelection()[0]);
+                    
+                    //Won't try to move an item up if it is already at the top of the list
+                    if (index>0)
+                    {
+                        LinkGrid.getView().setLoading('Moving Link...');
+                    
+                        //The logic essentially swaps the sort order of the selected record with the one above it
+                        var movedUp=new sforce.SObject("Personal_Pages_Link__c");
+                        var movedDown=new sforce.SObject("Personal_Pages_Link__c");
+                        
+                        movedUp.Id=LinkStore.getAt(index).get('Id');
+                        movedDown.Id=LinkStore.getAt(index-1).get('Id');
+                        movedUp.sort_order__c=LinkStore.getAt(index-1).get('SortOrder');
+                        movedDown.sort_order__c=LinkStore.getAt(index).get('SortOrder');
+                        
+                        //Update the sort orders in Salesforce
+                        sforce.connection.update([movedUp]);
+                        sforce.connection.update([movedDown]);
+                        
+                        //Update the sort orders in the data store. This is done separately to update the view without a page refresh.
+                        LinkStore.getAt(LinkStore.findExact('Id', movedUp.Id)).set('SortOrder', movedUp.sort_order__c);
+                        LinkStore.getAt(LinkStore.findExact('Id', movedDown.Id)).set('SortOrder', movedDown.sort_order__c);
+                        LinkStore.sort();
+                        
+                        fixSortLinkMember(LinkStore.getAt(LinkStore.findExact('Id', movedUp.Id)).get('LinkCategory'), LinkStore.getAt(LinkStore.findExact('Id', movedUp.Id)).get('Name'), movedUp.sort_order__c);
+                        fixSortLinkMember(LinkStore.getAt(LinkStore.findExact('Id', movedDown.Id)).get('LinkCategory'), LinkStore.getAt(LinkStore.findExact('Id', movedDown.Id)).get('Name'), movedDown.sort_order__c);
+                        
+                        LinkGrid.getView().setLoading(false);
+                    }
+                },
+            tooltip: 'Moves the selected link up in the sort order'
+        });
+        
+        //Button for moving links down in the sort order
+        var SortLinkDownButton=Ext.create('Ext.Button',
+        {
+            icon: '{!$Resource.extjs_v420}/examples/ux/css/images/down2.gif',
+            renderTo: 'divSortLinkDown',
+            handler: function()
+                {
+                    //Get the highlighted record index
+                    var index=LinkStore.indexOf(LinkGrid.getSelectionModel().getSelection()[0]);
+                    
+                    //Won't try to move an item down if it is already at the bottom of the list
+                    if (index<LinkStore.getCount()-1 && index>=0)
+                    {
+                        LinkGrid.getView().setLoading('Moving Link...');
+                    
+                        //The logic essentially swaps the sort order of the selected record with the one below it
+                        var movedUp=new sforce.SObject("Personal_Pages_Link__c");
+                        var movedDown=new sforce.SObject("Personal_Pages_Link__c");
+                        
+                        movedUp.Id=LinkStore.getAt(index+1).get('Id');
+                        movedDown.Id=LinkStore.getAt(index).get('Id');
+                        movedUp.sort_order__c=LinkStore.getAt(index).get('SortOrder');
+                        movedDown.sort_order__c=LinkStore.getAt(index+1).get('SortOrder');
+                        
+                        //Update the sort orders in Salesforce
+                        sforce.connection.update([movedUp]);
+                        sforce.connection.update([movedDown]);
+                        
+                        //Update the sort orders in the data store. This is done separately to update the view without a page refresh.
+                        LinkStore.getAt(LinkStore.findExact('Id', movedUp.Id)).set('SortOrder', movedUp.sort_order__c);
+                        LinkStore.getAt(LinkStore.findExact('Id', movedDown.Id)).set('SortOrder', movedDown.sort_order__c);
+                        LinkStore.sort();
+                        
+                        fixSortLinkMember(LinkStore.getAt(LinkStore.findExact('Id', movedUp.Id)).get('LinkCategory'), LinkStore.getAt(LinkStore.findExact('Id', movedUp.Id)).get('Name'), movedUp.sort_order__c);
+                        fixSortLinkMember(LinkStore.getAt(LinkStore.findExact('Id', movedDown.Id)).get('LinkCategory'), LinkStore.getAt(LinkStore.findExact('Id', movedDown.Id)).get('Name'), movedDown.sort_order__c);
+                        
+                        LinkGrid.getView().setLoading(false);
+                    }
+                },
+            tooltip: 'Moves the selected link down in the sort order'
+        });
+        
+        //Button for moving links down in the sort order
+        var AddTileLinkButton=Ext.create('Ext.Button',
+        {
+            icon: '{!$Resource.extjs_v420}/examples/ux/css/images/right2.gif',
+            renderTo: 'divAddTiledLink',
+            handler: function()
+                {
+                    //Get the highlighted record index
+                    var index=LinkStore.indexOf(LinkGrid.getSelectionModel().getSelection()[0]);
+                    
+                    if (index>=0)
+                    {
+                        var newTile=LinkStore.getAt(index);
+                    
+                        if (TileLinkStore.getCount()<11 && TileLinkStore.findExact('Id', newTile.get('Id'))<0 && newTile.get('Active'))
+                        {
+                            newTile.set('TilePosition', TileLinkStore.getCount());
+                            
+                            TileLinkStore.add(newTile);
+                            
+                            var updateLink=new sforce.SObject("Personal_Pages_Link__c");
+                            updateLink.Id=newTile.get('Id');
+                            updateLink.TilePosition__c=newTile.get('TilePosition');
+                            
+                            sforce.connection.update([updateLink]);
+                            
+                            fixTiledLinkMember(newTile.get('LinkCategory'), newTile.get('Name'), newTile.get('TilePosition'));
+                        }
+                        else if (TileLinkStore.getCount()>=11)
+                        {
+                            Ext.MessageBox.show({
+                                    title:'Maximum Tiles Assigned',
+                                    msg: 'The maximum supported Tiled Links (11) have been alocated.',
+                                    buttons: Ext.Msg.OK,
+                                    icon: Ext.Msg.ERROR
+                                });
+                        }
+                        else if (!newTile.get('Active'))
+                        {
+                            Ext.MessageBox.show({
+                                    title:'Link Inactive',
+                                    msg: 'Cannot assign an inactive link to the tiled links.<br/>Please re-activate the link first.',
+                                    buttons: Ext.Msg.OK,
+                                    icon: Ext.Msg.ERROR
+                                });
+                        }
+                    }
+                },
+            tooltip: 'Adds the selected link to the Tiled Links'
+        });
+        
+        //Button for moving links up in the tile position
+        var TiledLinkUpButton=Ext.create('Ext.Button',
+        {
+            icon: '{!$Resource.extjs_v420}/examples/ux/css/images/up2.gif',
+            renderTo: 'divTiledLinkUp',
+            handler: function()
+                {
+                    //Get the highlighted record index
+                    var index=TileLinkStore.indexOf(TileLinkGrid.getSelectionModel().getSelection()[0]);
+                    
+                    //Won't try to move an item up if it is already at the top of the list
+                    if (index>0)
+                    {
+                        TileLinkGrid.getView().setLoading('Moving Link...');
+                    
+                        //The logic essentially swaps the tile position of the selected record with the one above it
+                        var movedUp=new sforce.SObject("Personal_Pages_Link__c");
+                        var movedDown=new sforce.SObject("Personal_Pages_Link__c");
+                        
+                        movedUp.Id=TileLinkStore.getAt(index).get('Id');
+                        movedDown.Id=TileLinkStore.getAt(index-1).get('Id');
+                        movedUp.TilePosition__c=TileLinkStore.getAt(index-1).get('TilePosition');
+                        movedDown.TilePosition__c=TileLinkStore.getAt(index).get('TilePosition');
+                        
+                        //Update the tile positions in Salesforce
+                        sforce.connection.update([movedUp]);
+                        sforce.connection.update([movedDown]);
+                        
+                        //Update the tile positions in the data store. This is done separately to update the view without a page refresh.
+                        TileLinkStore.getAt(TileLinkStore.findExact('Id', movedUp.Id)).set('TilePosition', movedUp.TilePosition__c);
+                        TileLinkStore.getAt(TileLinkStore.findExact('Id', movedDown.Id)).set('TilePosition', movedDown.TilePosition__c);
+                        TileLinkStore.sort();
+                        
+                        //If the tiled links being moved are currently in the Link Store fix the tile positions in the Link Store as well
+                        if (LinkStore.findExact('Id', movedUp.Id)>=0)
+                        {
+                            LinkStore.getAt(LinkStore.findExact('Id', movedUp.Id)).set('TilePosition', movedUp.TilePosition__c);
+                        }
+                        
+                        if (LinkStore.findExact('Id', movedDown.Id)>=0)
+                        {
+                            LinkStore.getAt(LinkStore.findExact('Id', movedDown.Id)).set('TilePosition', movedDown.TilePosition__c);
+                        }
+                        
+                        fixTiledLinkMember(TileLinkStore.getAt(TileLinkStore.findExact('Id', movedUp.Id)).get('LinkCategory'), TileLinkStore.getAt(TileLinkStore.findExact('Id', movedUp.Id)).get('Name'), movedUp.TilePosition__c);
+                        fixTiledLinkMember(TileLinkStore.getAt(TileLinkStore.findExact('Id', movedDown.Id)).get('LinkCategory'), TileLinkStore.getAt(TileLinkStore.findExact('Id', movedDown.Id)).get('Name'), movedDown.TilePosition__c);
+                        
+                        TileLinkGrid.getView().setLoading(false);
+                    }
+                },
+            tooltip: 'Moves the selected link up in the tile positions'
+        });
+        
+        //Button for moving links down in the tile position
+        var TiledLinkDownButton=Ext.create('Ext.Button',
+        {
+            icon: '{!$Resource.extjs_v420}/examples/ux/css/images/down2.gif',
+            renderTo: 'divTiledLinkDown',
+            handler: function()
+                {
+                    //Get the highlighted record index
+                    var index=TileLinkStore.indexOf(TileLinkGrid.getSelectionModel().getSelection()[0]);
+                    
+                    //Won't try to move an item down if it is already at the bottom of the list
+                    if (index<TileLinkStore.getCount()-1 && index>=0)
+                    {
+                        TileLinkGrid.getView().setLoading('Moving Link...');
+                        
+                        //The logic essentially swaps the tile position of the selected record with the one below it
+                        var movedUp=new sforce.SObject("Personal_Pages_Link__c");
+                        var movedDown=new sforce.SObject("Personal_Pages_Link__c");
+                        
+                        movedUp.Id=TileLinkStore.getAt(index+1).get('Id');
+                        movedDown.Id=TileLinkStore.getAt(index).get('Id');
+                        movedUp.TilePosition__c=TileLinkStore.getAt(index).get('TilePosition');
+                        movedDown.TilePosition__c=TileLinkStore.getAt(index+1).get('TilePosition');
+                        
+                        //Update the tile positions in Salesforce
+                        sforce.connection.update([movedUp]);
+                        sforce.connection.update([movedDown]);
+                        
+                        //Update the tile positions in the data store. This is done separately to update the view without a page refresh.
+                        TileLinkStore.getAt(TileLinkStore.findExact('Id', movedUp.Id)).set('TilePosition', movedUp.TilePosition__c);
+                        TileLinkStore.getAt(TileLinkStore.findExact('Id', movedDown.Id)).set('TilePosition', movedDown.TilePosition__c);
+                        TileLinkStore.sort();
+                        
+                        //If the tiled links being moved are currently in the Link Store fix the tile positions in the Link Store as well
+                        if (LinkStore.findExact('Id', movedUp.Id)>=0)
+                        {
+                            LinkStore.getAt(LinkStore.findExact('Id', movedUp.Id)).set('TilePosition', movedUp.TilePosition__c);
+                        }
+                        
+                        if (LinkStore.findExact('Id', movedDown.Id)>=0)
+                        {
+                            LinkStore.getAt(LinkStore.findExact('Id', movedDown.Id)).set('TilePosition', movedDown.TilePosition__c);
+                        }
+                        
+                        fixTiledLinkMember(TileLinkStore.getAt(TileLinkStore.findExact('Id', movedUp.Id)).get('LinkCategory'), TileLinkStore.getAt(TileLinkStore.findExact('Id', movedUp.Id)).get('Name'), movedUp.TilePosition__c);
+                        fixTiledLinkMember(TileLinkStore.getAt(TileLinkStore.findExact('Id', movedDown.Id)).get('LinkCategory'), TileLinkStore.getAt(TileLinkStore.findExact('Id', movedDown.Id)).get('Name'), movedDown.TilePosition__c);
+                        
+                        TileLinkGrid.getView().setLoading(false);
+                    }
+                },
+            tooltip: 'Moves the selected link down in the tile positions'
+        });
+        
+        Ext.onReady(function()
+        {
+            Ext.tip.QuickTipManager.init();
+            
+            TileLinkGrid.getView().setLoading('Retrieving Links...');
+            
+            //Get Categories for the Category combo-boxes
+            sforce.connection.query("select Id, Name, ProgramSpecific__c, SortOrder__c from PersonalPagesLinkCategory__c",
+                function(result)
+                {
+                    result.size *= 1;
+                    result.done = result.done == "true";
+                    result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                
+                    CategoryStore.loadRawData(result.records, true);
+                    
+                    //Set the default selected Category to the first in the store
+                    CategorySelect.getComponent('Category').select(CategoryStore.getAt(0));
+                });
+                
+            //Get Programs for the Program combo-boxes
+            sforce.connection.query("select Name from CareProgramMiddleEarth__c where Active__c=true",
+                function(result)
+                {
+                    result.size *= 1;
+                    result.done = result.done == "true";
+                    result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                
+                    ProgramStore.loadRawData(result.records, true);
+                });
+                
+            //Query for links that are tiled
+            sforce.connection.query("SELECT active__c, Id, label__c, link__c, LinkCategory__c, LinkGroup__c, Name, Program__c, sort_order__c, TilePosition__c FROM Personal_Pages_Link__c where TilePosition__c>=0 and ((LinkCategory__r.ProgramSpecific__c=true and LinkGroup__c!=null and LinkGroup__c!='' and link__c='') or (LinkCategory__r.ProgramSpecific__c=false and (LinkGroup__c=null or LinkGroup__c='')))",
+                function(result)
+                {
+                    result.size *= 1;
+                    result.done = result.done == "true";
+                    result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                
+                    TileLinkStore.loadRawData(result.records, true);                    
+                    
+                    TileLinkGrid.getView().setLoading(false);
+                });
+                
+            //Query for Text Areas
+            sforce.connection.query("SELECT Id, Name, TextArea__c FROM PersonalPagesTextArea__c",
+                function(result)
+                {
+                    result.size *= 1;
+                    result.done = result.done == "true";
+                    result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                
+                    TextAreaStore.loadRawData(result.records, true);
+                });
+                
+            //Get Link Types
+            var linkFields=sforce.connection.describeSObject("Personal_Pages_Link__c").fields;
+            
+            for (var i=0; i<linkFields.length; i++)
+            {
+                if (linkFields[i].name=='LinkType__c')
+                {
+                    for (var j=0; j<linkFields[i].picklistValues.length; j++)
+                    {
+                        var newRecord = Ext.create('LinkTypeModel');
+                        newRecord.set('Name', linkFields[i].picklistValues[j].value);
+                        
+                        LinkTypeStore.loadData([newRecord], true);
+                    }
+                }
+            }
+        });
+        
+        //Function for querying and populating links based on the current selected category
+        function getRecords(Category)
+        {
+            //Clear any data currently in the data store
+            LinkStore.removeAll(true);
+            
+            LinkGrid.getView().setLoading('Retrieving Links...');
+            
+            var linkQuery="SELECT active__c, Id, label__c, link__c, LinkCategory__c, LinkGroup__c, LinkType__c, Name, Program__c, sort_order__c, TilePosition__c FROM Personal_Pages_Link__c where LinkCategory__c='"+Category+"' and ((LinkCategory__r.ProgramSpecific__c=true and LinkGroup__c!=null and LinkGroup__c!='' and (link__c=null or link__c='')) or (LinkCategory__r.ProgramSpecific__c=false and (LinkGroup__c=null or LinkGroup__c='')))";
+            
+            //Query for all links for the provided Category and load in to the store
+            sforce.connection.query(linkQuery,
+                function(result)
+                {
+                    result.size *= 1;
+                    result.done = result.done == "true";
+                    result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                
+                    LinkStore.loadRawData(result.records, true);                    
+                    
+                    LinkGrid.getView().setLoading(false);
+                });
+        }
+        
+        //Function for removing links from the tiled links
+        function removeTiledLink(rowIndex)
+        {
+            //Null Tile Position and remove from the tile link store
+            var RemoveTile=new sforce.SObject("Personal_Pages_Link__c");
+            
+            RemoveTile.Id=TileLinkStore.getAt(rowIndex).get('Id');
+            RemoveTile.TilePosition__c=-1;
+            
+            sforce.connection.update([RemoveTile]);
+            
+            //If the link being removed from the tile links is currently in the Link Store fix the tile position in the Link Store as well
+            if (LinkStore.findExact('Id', RemoveTile.Id)>=0)
+            {
+                LinkStore.getAt(LinkStore.findExact('Id', RemoveTile.Id)).set('TilePosition', -1);
+            }
+            
+            fixTiledLinkMember(TileLinkStore.getAt(rowIndex).get('LinkCategory'), TileLinkStore.getAt(rowIndex).get('Name'), RemoveTile.TilePosition__c);
+            
+            TileLinkStore.removeAt(rowIndex);
+            
+            //Fix Sort Order Values after remove so there are no duplicates or discontinuities. Works on 0 start index numbering.
+            for (var i=rowIndex; i<TileLinkStore.getCount(); i++)
+            {
+                TileLinkStore.getAt(i).set('TilePosition', TileLinkStore.getAt(i).get('TilePosition')-1);
+                
+                var fixSort=new sforce.SObject("Personal_Pages_Link__c");
+
+                fixSort.Id=TileLinkStore.getAt(i).get('Id');
+                fixSort.TilePosition__c=TileLinkStore.getAt(i).get('TilePosition');
+                
+                sforce.connection.update([fixSort]);
+                
+                //If the tiled link being fixed is currently in the Link Store fix the tile position in the Link Store as well
+                if (LinkStore.findExact('Id', fixSort.Id)>=0)
+                {
+                    LinkStore.getAt(LinkStore.findExact('Id', fixSort.Id)).set('TilePosition', fixSort.TilePosition__c);
+                }
+                
+                fixTiledLinkMember(TileLinkStore.getAt(i).get('LinkCategory'), TileLinkStore.getAt(i).get('Name'), fixSort.TilePosition__c);
+            }
+        }
+        
+        //Helper function for fixing tiled link group members. Does check on whether the supplied link category is Program Specific.
+        function fixTiledLinkMember(linkCategory, linkGroup, newPosition)
+        {
+            //If the link is a group get the group members and set their Tile Position to match the group head
+            sforce.connection.query("SELECT Id, TilePosition__c FROM Personal_Pages_Link__c where LinkCategory__c='"+linkCategory+"' and LinkCategory__r.ProgramSpecific__c=true and LinkGroup__c='"+linkGroup+"' and link__c!=null and link__c!=''",
+                function(result)
+                {
+                    result.size *= 1;
+                    result.done = result.done == "true";
+                    result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                    
+                    for (var x=0; x<result.records.length; x++) 
+                    {
+                        result.records[x].TilePosition__c=newPosition;
+                    }
+                    
+                    sforce.connection.update(result.records);
+                });
+        }
+        
+        //Helper function for fixing the sort order of link group members. Does check on whether the supplied link category is Program Specific.
+        function fixSortLinkMember(linkCategory, linkGroup, newPosition)
+        {
+            //If the link is a group get the group members and set their sort order to match the group head
+            sforce.connection.query("SELECT Id, sort_order__c FROM Personal_Pages_Link__c where LinkCategory__c='"+linkCategory+"' and LinkCategory__r.ProgramSpecific__c=true and LinkGroup__c='"+linkGroup+"' and link__c!=null and link__c!=''",
+                function(result)
+                {
+                    result.size *= 1;
+                    result.done = result.done == "true";
+                    result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                    
+                    for (var x=0; x<result.records.length; x++) 
+                    {
+                        result.records[x].sort_order__c=newPosition;
+                    }
+                    
+                    sforce.connection.update(result.records);
+                });
+        }
+    </script>
+</body>
+</html>
+</apex:page>

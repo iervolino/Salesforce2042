@@ -1,0 +1,74 @@
+<apex:page sidebar="false" showHeader="false" standardstylesheets="false" >
+         <html>
+            <head>
+               <meta charset="utf-8" />
+               <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+               <title>Personal Pages</title>
+               <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+               <apex:stylesheet value="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/css/styles.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/fonts/stylesheet.css')}"/>
+   			<apex:includeScript value="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/js/build/personalPages.min.js')}"/>
+            
+            </head>
+            <body class='iconfonts'>
+               <div class='banner'>
+                  <div class='row row--full'>
+                     <div class='column column--large banner__logo'>
+                         <apex:image url="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/banner-logo.png')}"  styleClass="show-for-tablet show-for-desktop hide-for-mobile" alt="Western Governors University" />
+                             <apex:image url="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/modal-banner-logo.png')}"  styleClass="hide-for-tablet hide-for-desktop show-for-mobile" alt="Western Governors University" />
+                     </div>
+                     <div class='column column--tiny banner__vr'></div>
+                     <div class='column column--small hide-for-tablet hide-for-mobile'>
+                        <apex:outputPanel rendered="true">
+                           <div id='stepbuttondiv' class='banner__cta'>
+                              <apex:outputPanel rendered="true">
+                                 <a id='step2button'  href='https://www.wgu.edu/wgu/inquiry_form' title='Request Information' class='btn btn--info'></a>
+                                     <p id='bannerphonelabel' class='banner__call'>Or call us at: <span> 1.866.225.5948</span> </p>
+
+                              </apex:outputPanel>
+                           </div>
+                        </apex:outputPanel>
+                     </div>
+                  </div>
+               </div>
+               <div class="maroon-bar--small"></div>
+               <div class='container row row--full'>
+                  <div class="maroon-bar"></div>
+                  <div class="content row">
+                     <div class="column column--large" height="100%">
+                        <h1>We're Sorry!</h1>
+                        <hr/>
+                        <p>This page can not be found. This may have been caused by mistyping the URL. If you typed the page address in the bar, make sure that it is spelled correctly.</p>
+                        <br/>
+                        <p>If this error continues please contact WGU Technical Support at </p>
+                        <br/>  
+                            <p>877-HELP-WGU </p>    
+             
+                     </div>
+                  <!--   <div class="column column--tiny content__vr"></div> -->
+                  </div>
+               </div>
+               <div class="footer">
+                  <div class="row row--full ">
+                     <div class="footer__content row">
+                        <div class='footer__info column column--large'>
+                            <img src="{!URLFOR($Resource.PersonalPageAssests, 'personalPages/images/footer-logo.png')}" alt="" class='left'/>
+                           <div class='left'>
+                              <p><a href='http://www.wgu.edu/privacy'>Privacy Policy</a> | <a href='http://www.wgu.edu/site_map'>Site Map</a> | <a href='http://www.wgu.edu/contact_us'>Contact Us</a></p>
+                              <p>&copy; 2013 Western Governors University. All rights reserved.</p>
+                              <p>WGU is an accredited online university offering online bachelor's and master's degree programs.</p>
+                           </div>
+                        </div>
+                        <div class="footer__social column column--small right">
+                           <a href="https://plus.google.com/117720411782042502583?prsrc=3" class='social social--gplus'></a>
+                           <a href="http://www.facebook.com/wgu.edu" class='social social--face'></a>
+                           <a href="http://twitter.com/wgu" class='social social--twit'></a>
+                           <a href="http://www.youtube.com/wgu" class='social social--tube'></a>
+                           <a href="http://www.wgu.edu/blog" class='social social--blog'></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </body>
+         </html>
+      </apex:page>

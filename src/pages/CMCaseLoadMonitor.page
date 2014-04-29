@@ -1,0 +1,736 @@
+<apex:page title="Western Governors University -  Course Mentor Caes Load Monitor" contentType="text/html; charset=UTF-8" standardController="Contact" standardStylesheets="false" showHeader="false" sidebar="false" docType="html">
+<apex:outputText escape="false" value="{!'<!DOCTYPE html>'}"/>
+<html>
+<head>
+    <title>Western Governors University - Display Case Loads need attention</title>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v407, 'resources/css/ext-all.css')}"/> 
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v407}/ext-all.js"/>
+    <link href="{!URLFOR($Resource.StandardPage,'assets/css/standard_page_lte.css')}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{!$Resource.extjsux_v407}/ux/css/CheckHeader.css" />
+   
+    <apex:includeScript value="/soap/ajax/27.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/27.0/apex.js"/>
+    <script type="text/javascript" >
+        //This is a work-around due to the session id not populating automatically like it should
+        sforce.connection.init("{!$Api.Session_ID}","/services/Soap/u/27.0");
+    </script>
+    <style type="text/css">
+        .x-grid-dirty-cell { background-image: none; }
+        .x-grid-checkheader-disabled { background-image: url('{!$Resource.disabledcheckbox}/unchecked-disabled.gif'); }
+        .x-grid-checkheader-checked-disabled { background-image: url('{!$Resource.disabledcheckbox}/checked-disabled.gif'); }
+    </style>
+
+</head>
+<body>
+    <div id="extContentDiv" style="width:100%" />
+    <div id="extLowerDiv" style="width:100%"/>
+    <script type="text/javascript" >
+        Ext.Loader.setConfig({enabled: true});
+        Ext.Loader.setPath('Ext.ux', '{!$Resource.extjsux_v407}/ux');
+        Ext.require([
+            'Ext.selection.CellModel',
+            'Ext.grid.*',
+            'Ext.data.*',
+            'Ext.util.*',
+            'Ext.state.*',
+            'Ext,panel.*',
+            'Ext.form.*',
+            'Ext.ux.CheckColumn'
+        ]);
+        Ext.ns("Ext.WGU");
+        
+        //Variable to track whether the checkcolumn is disabled. Defaults to true.
+        var checkDisabled = true;
+        
+     
+        
+        Ext.onReady(function()
+        {
+            try{
+            //11/1/13 yemeng : only  Case Load Manager can use this page
+            var result = sforce.apex.execute("CourseMentorStudentAssignmentUtility", 
+              "isCaseLoadManager", {}); 
+              if(result=='false')
+              {
+                 Ext.MessageBox.alert("Failed!"," This action is limited to Program Managers in Course Mentoring and Senior Managers");
+                 return;
+              }
+              }catch(e)
+              {
+                 Ext.MessageBox.alert("Failed!"," This action is limited to Program Managers in Course Mentoring and Senior Managers");
+                 return; 
+              }
+            //to enable tooltips
+            Ext.tip.QuickTipManager.init();
+            //Cell editing plugin. Necessary to enable changing the checkboxes.
+            var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', 
+            {
+                clicksToEdit: 1
+            });
+            
+            //Check if the user has permissions to edit the engagements
+            var profile='';
+            
+            //Check if the user is a mentor by looking for a Mentor object associated with the User
+            try
+            {
+                var hasMentorObj=sforce.connection.query("select MentorRole__c from Mentor__c where User__c='{!$User.Id}' limit 1").records.MentorRole__c;
+                
+                if (hasMentorObj!=null && hasMentorObj!='')
+                {
+                    checkDisabled=false;
+                    profile='Mentor';
+                }
+            }
+            catch(err)
+            {
+                checkDisabled=true;
+            }
+            
+            //If there is no Mentor object for the user query the Profile to determine if they are a Developer or System Administrator
+            if (profile!='Mentor')
+            {
+                try
+                {
+                    //Query the user profile
+                    profile=sforce.connection.query("select Profile.Name from User where id='{!$User.Id}' limit 1").records.Profile.Name;
+                    
+                    //If the user is a Developer or System Administrator the checkcolumn is enabled
+                    if (profile=='System Administrator' || profile=='Developer')
+                    {
+                        checkDisabled=false;
+                    }
+                }
+                catch(err)
+                {
+                    checkDisabled=true;
+                }
+            }
+            var titalPanel=Ext.create('Ext.form.Panel', {
+			    title: 'Case Loads need attention',
+			    width: 1500,
+			    height: 100,
+			    bodyPadding: 10,
+			    layout: {
+			    	type:'vbox',
+			    	align: 'left'
+			   	},
+			    renderTo:'extContentDiv',        
+			    items: [{ xtype: 'label',
+                             id: 'label1',
+                             //width: 620,
+                             flex: 1,
+                             visible: true,
+                             //fieldStyle: 'font-weight: 600;font-size:15px',
+                             text: 'Following case loads need your attention.'
+                         }, { xtype: 'label',
+                             id: 'label2',
+                             //width: 620,
+                             visible: true,
+                             flex: 1,
+                             //fieldStyle: 'font-weight: 600;font-size:15px',
+                             text: 'For each one, either you should find a StudentAcademicCourse to match, or remove it from current mentor.'
+                         } ]
+			});
+            //Creates the grid panel
+            var grid = Ext.create('Ext.grid.Panel', 
+            {
+                store: CaseLoadStore,
+                columns: 
+                [
+                	{
+					    xtype: 'rownumberer',
+					    width: 50,
+					    sortable: false,
+					    filterable: false,
+					    text: 'Row#',
+					    cls: 'wgu-grid-text',
+					    resizable: true
+					},
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Course',
+                        dataIndex: 'CourseCode__c',
+                        width: 80,
+                        sortable: true,
+                        hideable: false,
+                        menuDisabled: true,
+                        renderer: function(value,metaData,record){ 
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="Click URL to View the Detail:<br/> <font color = \'blue\' >'+record.get('FullCourseTitle__c')+' </font>  "';
+                            return "<a href='/"+record.get('Id')+"' target='_blank'>"+value+"</a>";
+                        }
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Id',
+                        dataIndex: 'Id',
+                        width: 100,
+                        sortable: false,
+                        hidden:true,
+                        menuDisabled: true 
+                    }, 
+                    {
+                        xtype: 'datecolumn',
+                        header: 'Date',
+                        dataIndex: 'EngagementNotedDate__c',
+                        width: 150,
+                        format: "Y-m-d H:i:s",
+                        sortable: false,
+                        hideable: true,
+                        hidden: true,
+                        menuDisabled: true
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Has Mentor',
+                        dataIndex: 'HasMentor__c',
+                        width: 150,
+                        sortable: false,
+                        hideable: true,
+                        hidden:true,
+                        menuDisabled: true
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Student',
+                        dataIndex: 'Student',
+                        width: 100,
+                        sortable: false,
+                        hideable: false,
+                        menuDisabled: true,
+                        renderer: function(value,metaData,record){ 
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                            return "<a href='/"+record.get('StudentId')+"' target='_blank'>"+value+"</a>";
+                        }
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Mentor',
+                        dataIndex: 'Mentor',
+                        width: 100,
+                        sortable: false,
+                        hideable: false,
+                        menuDisabled: true,
+                        renderer: function(value,metaData,record){ 
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                            return "<a href='/"+record.get('MentorId')+"' target='_blank'>"+value+"</a>";
+                        }
+                    },{
+                        header: 'Remove', 
+                        width: 50,
+                        menuDisabled: true,
+                        xtype: 'actioncolumn', 
+                        align: 'center',
+                        hideable: true,
+                        hidden:true,
+                        icon: "{!$Resource.extjs_v420}/resources/ext-theme-classic/images/dd/drop-no.gif",
+                        renderer: function(value, metaData, record, rowIdx, colIdx, store) { 
+                                var closed = record.get('HasMentor__c');
+                                if (closed == 0 ) {
+                                    //metaData.tdAttr = 'data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                                } else {
+                                    metaData.tdAttr = 'data-qwidth="200"  data-qtitle="Remove:", data-qtip=" Click to remove the current assignment with '+ record.get('Mentor')+'"';
+                                }  
+                            return value;
+                        },
+                        handler:  function (grid, rowIndex, colIndex) {
+                            var rec = grid.getStore().getAt(rowIndex);
+                           // alert("Remove assignment for "  +   "{!Contact.Id}"  + rec.get('CourseCode__c'));
+                           
+                               
+                              Ext.MessageBox.show({
+                                  title: 'Remove Assignment:',
+                                  msg: "Do you want to remove assigned mentor ["+rec.get("Mentor")+"] from course ["+rec.get("CourseCode__c")+"?",
+                                  buttons: Ext.MessageBox.YESNOCANCEL,
+                                  fn: function(buttonId){
+                                    switch(buttonId){
+                                      case 'no':  
+                                        break;
+                                      case 'yes':  
+                                        removeAssignment( rec.get('CourseCode__c'))    
+                                        break;
+                                      case 'cancel':  
+                                        break;
+                                    }
+                                  },
+                                  scope: this
+                                });      
+                             
+                        }, 
+                        getClass: function(value,metadata,record){
+                                var closed = record.get('HasMentor__c');
+                                if (closed == 0 ) {
+                                    return 'x-hide-display';    
+                                } else {
+                                    return 'x-grid-center-icon';                                
+                                }
+                        }
+
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Term',
+                        dataIndex: 'Term__c',
+                        width: 70,
+                        sortable: false,
+                        hideable: false,
+                        menuDisabled: true,
+                        renderer: function(value, metaData, record, rowIdx, colIdx, store) {
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                            return value;
+                        }
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Status',
+                        dataIndex: 'Status__c',
+                        width: 70,
+                        sortable: false,
+                        hideable: false,
+                        menuDisabled: true,
+                        renderer: function(value, metaData, record, rowIdx, colIdx, store) {
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                            return value;
+                        }
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Course',
+                        dataIndex: 'CourseStatus',
+                        width: 70,
+                        sortable: false,
+                        hideable: false,
+                        menuDisabled: true,
+                        renderer: function(value, metaData, record, rowIdx, colIdx, store) {
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                            return value;
+                        }
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Start Date',
+                        dataIndex: 'StartDate__c',
+                        width: 100,
+                        tooltip: 'something',
+                        sortable: true,
+                        hideable: false, 
+                        menuDisabled: true,
+                        renderer: function(value, metaData, record, rowIdx, colIdx, store) {
+                            var mDate = Ext.util.Format.date(value, 'M d, Y'); 
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                            return mDate;
+                        }
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'End Date',
+                        dataIndex: 'EndDate__c',
+                        width: 100,
+                        sortable: true,
+                        hideable: false,
+                        menuDisabled: true,
+                        renderer: function(value, metaData, record, rowIdx, colIdx, store) {
+                            var mDate = Ext.util.Format.date(value, 'M d, Y'); 
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                            return mDate;
+                        }
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Ass. Start Date',
+                        dataIndex: 'AssignmentStartDate__c',
+                        width: 100,
+                        sortable: true,
+                        hideable: false,
+                        menuDisabled: true,
+                        renderer: function(value, metaData, record, rowIdx, colIdx, store) {
+                            var mDate = Ext.util.Format.date(value, 'M d, Y'); 
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                            return mDate;
+                        }
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Ass. End Date',
+                        dataIndex: 'AssignmentEndDate__c',
+                        width: 100,
+                        sortable: true,
+                        hideable: false,
+                        menuDisabled: true,
+                        renderer: function(value, metaData, record, rowIdx, colIdx, store) {
+                            var mDate = Ext.util.Format.date(value, 'M d, Y'); 
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                            return mDate;
+                        }
+                    },
+                    {
+                        xtype: 'gridcolumn',
+                        header: 'Description',
+                        dataIndex: 'Note',
+                        width: 450,
+                        sortable: true,
+                        hideable: false,
+                        menuDisabled: true,
+                        renderer: function(value, metaData, record, rowIdx, colIdx, store) { 
+                            metaData.tdAttr = 'data-qwidth="200"  data-qtip="'+ record.get('Student')+'  '+record.get('CourseCode__c')+'"';
+                            return value;
+                        }
+                    }
+                     
+                             
+                ],  
+               listeners:
+                        {    
+                            
+                            itemclick: function(dv, record, item, index, e) {  
+                                // addMentorByCourse(record.get('CourseCode__c'));                                    
+                            }
+                        },
+                renderTo: 'extContentDiv', 
+                width: 1500,
+                height: 700
+            });
+        
+            addRecords();
+            
+             
+             
+        });
+        
+       
+           
+            
+            
+          
+        
+        //Data model for the grid panel
+        Ext.define('CaseLoadModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [ 
+                {name: 'Id' , mapping: 'Id', type: 'string'},
+                {name: 'StudentContact__c' , mapping: 'StudentContact__c', type: 'string'}, 
+                {name: 'StudentCourseRegistration__c' , mapping: 'StudentCourseRegistration__c', type: 'string'}, 
+                {name: 'StudentAcademicCourse__c' , mapping: 'StudentAcademicCourse__c', type: 'string'}, 
+                {name: 'StudentCourseVesion__c' , mapping: 'StudentCourseVesion__c', type: 'string'}, 
+                {name: 'AssignmentStartDate__c' , mapping: 'AssignmentStartDate__c', type: 'date', dateFormat: 'Y-m-d'}, 
+                {name: 'AssignmentEndDate__c' , mapping: 'AssignmentEndDate__c', type: 'date', dateFormat: 'Y-m-d'}, 
+                {name: 'ReasonOfAssignment__c' , mapping: 'ReasonOfAssignment__c', type: 'string'}, 
+                {name: 'ReasonOfDeassignment__c' , mapping: 'ReasonOfDeassignment__c', type: 'string'}, 
+                {name: 'Note' , mapping: 'Note', type: 'string'}, 
+                {name: 'CourseCode__c' , mapping: 'CourseCode__c', type: 'string'}, 
+                {name: 'Mentor' , mapping: 'Mentor', type: 'string'},
+                {name: 'MentorId' , mapping: 'MentorId', type: 'string'}, 
+                {name: 'Student' , mapping: 'Student', type: 'string'},
+                {name: 'StudentId' , mapping: 'StudentId', type: 'string'}, 
+                {name: 'HasMentor__c' , mapping: 'HasMentor__c', type: 'bool'},
+                {name: 'Term__c' , mapping: 'Term__c', type: 'string'},
+                {name: 'CourseStatus' , mapping: 'CourseStatus', type: 'string'},
+                {name: 'Status__c' , mapping: 'Status__c', type: 'string'},
+                {name: 'StartDate__c' , mapping: 'StartDate__c', type: 'date', dateFormat: 'Y-m-d'},
+                {name: 'EndDate__c' , mapping: 'EndDate__c', type: 'date', dateFormat: 'Y-m-d'}
+            ]
+        });
+        
+         //Data model for the mentor grid
+        Ext.define('MentorModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [ 
+                {name: 'Id' , mapping: 'Id', type: 'string'},
+                {name: 'Name' , mapping: 'Name', type: 'string'}, 
+                {name: 'CourseCode' , mapping: 'CourseCode', type: 'string'}, 
+                {name: 'PIDM__c' , mapping: 'PIDM__c', type: 'string'}, 
+                {name: 'MaxStudents__c' , mapping: 'MaxStudents__c', type: 'int'}, 
+                {name: 'CurrentStudents__c' , mapping: 'CurrentStudents__c', type: 'int'}, 
+                {name: 'MentorRole__c' , mapping: 'MentorRole__c', type: 'string'},
+                {name: 'AvailableSpots__c' , mapping: 'AvailableSpots__c', type: 'int'},
+                {name: 'Available__c' , mapping: 'Available__c', type: 'bool'}
+            ]
+        });
+        
+        //Function to convert the date from Salesforce to an ExtJs date. Milliseconds are disabled do to an issue with the date format.
+        function convertDate( dateStr ) 
+        {
+            var date = new Date();
+            var parts = dateStr==null? []: dateStr.split(/[- : T + .]/);
+            var offset = Ext.Date.getGMTOffset(date)/100;
+            if ( parts.length > 0 ) 
+            {
+                date.setFullYear(parts[0]);
+                date.setMonth(parts[1]-1);
+                date.setDate(parts[2]);
+                date.setHours(parts[3]==null?0: (parts[3]*1)+offset);
+                date.setMinutes(parts[4]==null?0: parts[4]);
+                date.setSeconds(parts[5]==null?0: parts[5]);
+                //date.setMilliseconds(parts[6]==null?0: parts[6]);
+            }
+            return date;
+        }
+        
+        //Data store for the grid
+        var CaseLoadStore = Ext.create('Ext.data.Store',
+        {
+            model : 'CaseLoadModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'CourseCode__c',
+                direction: 'ASC'
+            },
+            {
+                property: 'StartDate__c',
+                direction: 'ASC'
+            }
+            ]
+        });
+        
+        
+         //Data store for the grid
+        var mentorStore= Ext.create('Ext.data.Store',
+        {
+            model : 'MentorModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'AvailableSpots__c',
+                direction: 'ASC'
+            }
+            ]
+        });
+        
+        /*
+        * Function to populate the data model via the data store from the StudentAcademicCourse__c Salesforce object
+        */
+        function addRecords()
+        {
+            //Clear any data currently in the data store
+            CaseLoadStore.removeAll(true);
+            
+            //Query for all StudentAcademicCourse__c objects associated with the current contact
+            var result = sforce.connection.query("Select CourseCode__c,Student__c,Student__r.Name, Mentor__c,Mentor__r.name, User__c, Student__r.Status__c, Id, Pidm__c, TermCode__c, AssignmentStartDate__c, AssignmentEndDate__c, StudentCourseRegistration__c, StudentAcademicCourse__c,StudentAcademicCourse__r.Status__c, StudentCourseVersion__c,StudentCourseVersion__r.Status__c, ReasonOfAssignment__c,ReasonOfDeassignment__c, StartDate__c,EndDate__c from CourseMentorStudentAssignment__c where (StudentAcademicCourse__c = null or StudentAcademicCourse__r.Status__c = 'Planned') and IsActive__c = true limit 100");
+            
+            result = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+            
+            //Loop through the returned records and add them to the data model
+            var newModels = [];
+            for ( var x=0; x < result.length; x++ ) 
+            {
+                var thisRecord = result[x];
+                var newRecord = Ext.create('CaseLoadModel');        
+                
+                newRecord.set( 'Id', thisRecord.Id );
+                newRecord.set( 'Student__c', thisRecord.Student__c  );   
+                newRecord.set( 'CourseCode__c', thisRecord.CourseCode__c );  
+                newRecord.set( 'Term__c', thisRecord.TermCode__c);
+                newRecord.set( 'StartDate__c', thisRecord.StartDate__c);
+                newRecord.set( 'EndDate__c', thisRecord.EndDate__c);
+                newRecord.set( 'Status__c', thisRecord.Student__r.Status__c);
+                newRecord.set( 'CourseStatus', (thisRecord.StudentAcademicCourse__r?thisRecord.StudentAcademicCourse__r.Status__c:'---'));
+                newRecord.set( 'Pidm__c', thisRecord.PIDM__c); 
+                newRecord.set( 'MentorId', thisRecord.Mentor__c); 
+                newRecord.set( 'Mentor', thisRecord.Mentor__r.Name); 
+                newRecord.set( 'StudentId', thisRecord.Student__c); 
+                newRecord.set( 'Student', thisRecord.Student__r.Name); 
+                newRecord.set( 'AssignmentEndDate__c', thisRecord.AssignmentEndDate__c); 
+                newRecord.set( 'AssignmentStartDate__c', thisRecord.AssignmentStartDate__c); 
+                newRecord.set( 'ReasonOfAssignment__c', thisRecord.ReasonOfAssignment__c); 
+                newRecord.set( 'ReasonOfDeassignment__c', thisRecord.ReasonOfDeassignment__c); 
+                newRecord.set( 'StudentAcademicCourse__c', thisRecord.StudentAcademicCourse__c); 
+                newRecord.set( 'StudentCourseRegistration__c', thisRecord.StudentCourseRegistration__c); 
+                newRecord.set( 'StudentCourseVersion__c', thisRecord.StudentCourseVersion__c); 
+                newRecord.set( 'TermCode__c', thisRecord.TermCode__c); 
+                newRecord.set( 'Note','<i> unknown </i>'); 
+                if(thisRecord.StudentAcademicCourse__c==null && thisRecord.StudentCourseRegistration__c!=null )
+                {
+                	newRecord.set( 'Note','Could not find a StudentAcademicCourse matchs the existing case load, or term code has been changed. '); 
+                }
+                if(  thisRecord.StudentAcademicCourse__c==null && thisRecord.StudentCourseRegistration__c==null  )
+                {
+                	newRecord.set( 'Note','Student Probably dropped this course.'); 
+                }
+          		if(thisRecord.Student__r.Status__c != 'AS'&&thisRecord.Student__r.Status__c!='TB' && thisRecord.Student__r.Status__c!='IG')
+          		{
+          			newRecord.set( 'Note','Student\'s status is ' +thisRecord.Student__r.Status__c); 
+          		}
+          		if( thisRecord.StudentAcademicCourse__r!=null && thisRecord.StudentAcademicCourse__r.Status__c =='Planned')
+          		{
+          			newRecord.set( 'Note','Course go back to \'Planned\' status'  ); 
+          		}
+                newModels[x] = newRecord;
+            }
+            
+            //Load the data in to the data store
+            CaseLoadStore.loadData( newModels, true );
+            
+        }
+        
+         /*
+        * load mentors by given course code
+        */
+        function addMentors( )
+        {
+            //Clear any data currently in the data store
+            mentorStore.removeAll(true);
+            
+            //Query for all StudentCourseRegistration__c objects associated with the current contact
+            var result = sforce.connection.query("select ID, Name, PIDM__c, MaxStudents__c, CurrentStudents__c, Available__c, MentorRole__c, AvailableSpots__c from Mentor__c " );
+            
+            result = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+            
+            if ( result.length > 0 ) 
+            {
+                //Loop through the returned records and add them to the data model
+                var newModels = [];
+                for ( var x=0; x < result.length; x++ ) 
+                {
+                    var thisRecord = result[x];
+                    var newRecord = Ext.create('MentorModel');        
+                    
+                    newRecord.set( 'Id', thisRecord.Id );
+                    newRecord.set( 'MentorRole__c', thisRecord.MentorRole__c);
+                    newRecord.set( 'AvailableSpots__c', thisRecord.MaxStudents__c-thisRecord.CurrentStudents__c); 
+                    newRecord.set( 'Name', thisRecord.Name  ); 
+                    newRecord.set( 'MaxStudents__c', thisRecord.MaxStudents__c); 
+                    newRecord.set( 'CurrentStudents__c', thisRecord.CurrentStudents__c); 
+                    newRecord.set( 'CourseCode', thisRecord.CourseCode); 
+                    newRecord.set( 'PIDM__c', thisRecord.PIDM__c); 
+                    newModels[x] = newRecord;
+                }
+                
+                //Load the data in to the data store
+                mentorStore.loadData( newModels, true );
+            }
+        }
+        
+        //display a list of mentor by given course code. invoke the method at CourseMentorAssignmentUtility class.
+        function addMentorByCourse(course)
+        {
+             //Clear any data currently in the data store
+            mentorStore.removeAll(true);
+            
+            //Query for all StudentCourseRegistration__c objects associated with the current contact
+            var result = sforce.apex.execute("CourseMentorStudentAssignmentUtility", 
+                     "getMentorsByCourseCode", {coursecode:course});
+           
+          //window.alert(' apex works '  + result.length  );
+         //   window.alert(' result: '  + result  );
+            var newModels = [];
+            if ( result.length > 0 ) 
+            {  
+                //Loop through the returned records and add them to the data model
+                
+                for ( var x=0; x < result.length; x++ ) 
+                {
+                    var thisRecord = result[x];
+                    var newRecord = Ext.create('MentorModel');        
+                    
+                    newRecord.set( 'Id', thisRecord.Id );
+                    newRecord.set( 'MentorRole__c', thisRecord.MentorRole__c);
+                    newRecord.set( 'AvailableSpots__c', thisRecord.AvailableSpots__c); 
+                    newRecord.set( 'Name', thisRecord.Name  ); 
+                    newRecord.set( 'MaxStudents__c', thisRecord.MaxStudents__c); 
+                    newRecord.set( 'CurrentStudents__c', thisRecord.CurrentStudents__c); 
+                    newRecord.set( 'AvailableSpots__c', thisRecord.AvailableSpots__c); 
+                    newRecord.set( 'CourseCode', course); 
+                    newRecord.set( 'Available__c', thisRecord.Available__c); 
+                    newRecord.set( 'PIDM__c', thisRecord.PIDM__c); 
+                    newModels[x] = newRecord; 
+                }
+                
+               
+            } 
+            //Load the data in to the data store
+                mentorStore.loadData( newModels, true );
+        }
+        
+        //save a record
+        function createAssignment(mentorpidm, coursecode)
+        { 
+            var students = sforce.connection.query("select Id, PIDM__c,Name from Contact where Id='{!Contact.Id}'")   ;
+            var student=students.records;
+            var mentors = sforce.connection.query("select ID, Name, PIDM__c, MaxStudents__c, CurrentStudents__c, Available__c, MentorRole__c, AvailableSpots__c, User__c from Mentor__c where PIDM__c = '"+mentorpidm +"'")   ;
+            var mentor =mentors.records;
+            var records= sforce.connection.query("select Type__c, Term__c, StudentContact__c, StudentContact__r.Status__c,StudentContact__r.pidm__c,   Status__c,  StartDate__c, "
+            +" RequirementsReferred__c,  RequirementsEngaged__c,  RequirementsEngagedPreassessment__c,  RequirementsCompleted__c,  Name,  MentorVerifiedEngagementNotedDate__c, "
+            +" MentorVerifiedEngagementNotedBy__c,  MentorVerifiedCurrentEngagement__c,  Id,  FullCourseTitle__c,  EndDate__c,  CourseCode__c, "
+            +" CompositeKey__c,  CompetencyUnits__c,  Attempts__c " 
+                                             +" from StudentAcademicCourse__c where StudentContact__c='{!Contact.Id}' and CourseCode__c = '"+ coursecode +"' and ActiveCurrentTermCourse__c = true");
+            var record= records.records;
+            
+           // window.alert("select ID, Name, PIDM__c, MaxStudents__c, CurrentStudents__c, Available__c, MentorRole__c, AvailableSpots__c from Mentor__c where PIDM__c = '"+mentorpidm +"'");
+           // window.alert(coursecode+'|'+mentorpidm +'|'+student+ '|'+ mentor ); 
+            
+            var r=true;//confirm("Do you want to assign the mentor ["+mentor.Name+"] to student ["+ student.Name +"] ?");
+            if (r==true)
+             {  //call the assignment 
+              // window.alert("yes");
+                 var result = sforce.apex.execute("CourseMentorStudentAssignmentUtility", 
+                      "createAssignmentManual", {mentor:mentor, course:record});
+                    //  window.alert(result);
+                      if(result=='true')
+                      {
+                          Ext.MessageBox.alert("SUCCESS!"," ["+mentor.Name+"] assigned to student ["+ student.Name +"] for course "+coursecode);
+                      }
+                      else
+                      {
+                          Ext.MessageBox.alert("Failed!"," Failed to assign ["+mentor.Name+"]  to student ["+ student.Name +"] for course "+coursecode);
+                      }
+                      addRecords();
+                      addMentorByCourse(coursecode)  ;
+              }
+            else
+              {
+                 //nothing happen
+                 //window.alert("no");
+              } 
+           
+        }
+        
+        
+        function removeAssignment( coursecode)
+        { 
+           
+              var asss= sforce.connection.query("select id, Student__c, CourseCode__c, mentor__c, Mentor__r.CurrentStudents__c, IsActive__c from CourseMentorStudentAssignment__c where Student__c='{!Contact.Id}' and CourseCode__c = '"+coursecode+"' and IsActive__c = true")   ;
+              var ass=asss.records;
+              var result = sforce.apex.execute("CourseMentorStudentAssignmentUtility", 
+              "removeAssignment", {ass:ass, type:"Manual Un-Assignment"}); 
+              if(result=='true')
+              {
+                 Ext.MessageBox.alert("SUCCESS!"," Assignment removed");
+               }
+              else
+              {
+                 Ext.MessageBox.alert("Failed!"," Can not remove this assignment");
+              }
+              addRecords();     
+              addMentorByCourse(coursecode);          
+         
+        }
+    </script>            
+</body>
+</html>
+</apex:page>

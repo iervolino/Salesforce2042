@@ -1,0 +1,28 @@
+<apex:page sidebar="false" controller="ScholarshipController">
+    {!testval}
+   <apex:form >
+      <apex:sectionHeader title="Scholarship CSV Upload"/>
+      <apex:pagemessages />
+      <apex:pageBlock >
+             <center>
+              <apex:inputFile value="{!contentFile}" filename="{!nameFile}" /> <apex:commandButton action="{!ReadFile}" value="Upload File" id="theButton" style="width:70px;"/>
+              <br/> <br/>
+             </center> 
+
+     
+      </apex:pageBlock> 
+      
+       <apex:pageBlock rendered="{!NOT(ISNULL(lstScrship))}" >
+          <apex:pageBlockButtons location="bottom" >
+              <apex:commandButton value="Submit" action="{!saveFinApps}" rendered="{!NOT(ISNULL(lstScrship))}"/>
+          </apex:pageBlockButtons>   
+          <apex:pageblocktable value="{!lstScrship}" var="acc" rendered="{!NOT(ISNULL(lstScrship))}">
+                  <apex:column headerValue="PIDM" value="{!acc.pidm}" />
+                  <apex:column headerValue="NAME" value="{!acc.name}" />              
+                  <apex:column headerValue="Last Updated Date" value="{!acc.lastUpdatedDate}" />
+                  <apex:column headerValue="Academic Works URL" value="{!acc.view}" />
+          </apex:pageblocktable>
+      </apex:pageBlock>     
+   </apex:form>  
+
+</apex:page>

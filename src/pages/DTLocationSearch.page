@@ -1,0 +1,313 @@
+<apex:page standardController="Contact" docType="html-5.0" sidebar="false" showHeader="true" >
+<apex:includeScript value="{!URLFOR($Resource.JQuery_1_9_1)}"  />
+<apex:includeScript value="{!URLFOR($Resource.JQuery_UI_1_10_1)}"  />
+<apex:stylesheet value="{!URLFOR($Resource.JQuery_UI_1_10_1_css)}"  />
+<apex:stylesheet value="{!URLFOR($Resource.googleStoreLocatorCSS)}"/>
+<apex:includeScript value="https://maps.googleapis.com/maps/api/js?key=AIzaSyBueK217xVv-eE0i8KtVINJQ9sccVuw9YA&sensor=true"/> 
+<script src="/soap/ajax/29.0/connection.js" type="text/javascript"/>
+<apex:includeScript value="{!URLFOR($Resource.googleStoreLocater)}"  />
+    
+<script type="text/javascript">
+  
+   var stuLatitude;
+   var stuLongitude; 
+   var stuLocation; 
+    //var mapCenter =  stuLocation;
+    var map;
+    var radiausCircle;
+
+
+       
+    //kick everything off from the geoCodeAddress
+    google.maps.event.addDomListener(window, 'load', function(){geoCodeAddress();});
+    
+    function DTDataSource() {};
+     DTDataSource.prototype.getStores = function(bounds, features, callback) {
+  var center = bounds.getCenter();
+  var that = this;
+   var stores = [];
+   stores =that.parse_(getCS());
+
+callback(stores); 
+};
+    //this function either sets global variable stuLocation using the global variable,  the stored SF or the google geolocation service based on address
+    function geoCodeAddress()
+    {
+         if ('{!Contact.GeoLoc__latitude__s}' !=''  )  //if student is already geocoded use it
+        {	 
+             stuLocation = new google.maps.LatLng('{!Contact.GeoLoc__latitude__s}','{!Contact.GeoLoc__longitude__s} ');
+             loadMap();
+        }
+        else if (stuLocation == null)  //if the latitude variable is already set, skip it, if not geocode through google services.
+        {    
+            var address = '{!Contact.MailingStreet} {!Contact.MailingCity}, {!Contact.MailingState}  {!Contact.MailingPostalCode}';
+              var geocoder = new google.maps.Geocoder();
+    		geocoder.geocode( { 'address': address}, function(results, status) {
+     		 if (status == google.maps.GeocoderStatus.OK) 
+        {
+			  stuLocation = results[0].geometry.location;
+            loadMap();
+         } 
+        else {
+        alert("Geocode was not successful for the following reason: " + status);
+       }
+    });
+        }
+        else
+         	loadMap(); 
+        
+        
+       
+    }
+    //function to query cs's with SOQL Geolocation distance function
+     function getCS()
+    {
+         
+
+        //stuLocation = new google.maps.LatLng({!Contact.GeoLoc__latitude__s},{!Contact.GeoLoc__longitude__s} );
+        
+         var $soap = (sforce? sforce.connection: null);
+            if (sforce && sforce.connection) { sforce.connection.sessionId = '{!$Api.Session_ID}';}
+        var $sconsole = (sforce && sforce.console && sforce.console.isInConsole()? sforce.console: null);
+        var $apex = ( sforce? sforce.apex: null );
+        
+        var queryString ="Select Id, Name,GeoLoc__latitude__s, GeoLoc__longitude__s,ShippingStreet,ShippingCity,ShippingState, ShippingPostalCode, AccountEmail__c, Phone, " +
+            						  "(select id from schools__r where recordType.Name ='Placement Attempt' and placementOutcome__c ='Accepted'  ), " + 
+            						  "(select id from districts__r where recordType.Name ='Placement Attempt' and placementOutcome__c ='Accepted'  ) " + 
+                                      "from account "+
+                                      "where RecordType.Name ='" +document.getElementById('RTSelect').value + "' " +
+            						  "and GeoLoc__latitude__s != null " +
+                                      "and DISTANCE(GeoLoc__c, GEOLOCATION(" + stuLocation.k + "," +
+            stuLocation.A +"), 'mi') < "+document.getElementById("distanceSelect").value
+                                       ;
+       
+        //pce contract type
+            //imit 10";
+        var levelFilter= document.getElementById('{!$Component.theForm.levelFilter}').value;
+        var pceFilter = document.getElementById('{!$Component.theForm.pceFilter}').checked;
+        var typeFilter = document.getElementById('{!$Component.theForm.typeFilter}').value;
+        var contractFilter = document.getElementById('{!$Component.theForm.contractFilter}').checked;
+        var placementFilter = document.getElementById('{!$Component.theForm.placementFilter}').checked;
+        
+        if (levelFilter)
+            queryString = queryString + " and SchoolLevel__c='" +levelFilter +  "'";
+        
+         if (pceFilter)
+            queryString = queryString + " and WGUPlacesStudents__c=true";
+        
+         if (typeFilter)
+            queryString = queryString + " and IsPublicOrPrivate__c='" +typeFilter +  "'";
+        
+         if (contractFilter)
+            queryString = queryString + " and IsContractOnFile__c=true";
+
+        if (placementFilter && document.getElementById('RTSelect').value == 'School (K-12)') //check to see if exits an accepted placement attempt
+              queryString = queryString + " and id in (select school__c from fieldExperienceProcess__c where recordType.Name ='Placement Attempt' and placementOutcome__c ='Accepted' )";
+        
+          if (placementFilter && document.getElementById('RTSelect').value == 'District') //check to see if exits an accepted placement attempt
+              queryString = queryString + " and id in (select district__c from fieldExperienceProcess__c where recordType.Name ='Placement Attempt' and placementOutcome__c ='Accepted' )";
+        
+        
+        
+        
+        queryString = queryString +" order by DISTANCE(GeoLoc__c, GEOLOCATION(" +stuLocation.k+ "," +
+            stuLocation.A+"), 'mi') ";
+        //document.write(queryString);
+        var qr_pf = sforce.connection.query(queryString) ; 
+        var DTLocations = qr_pf.getArray("records");
+        
+        return DTLocations;   
+    }
+    
+ DTDataSource.prototype.parse_ = function(DTLocations) {
+  var stores = [];
+     
+   for (i=0;i<DTLocations.length; i++)
+    {
+        var features = new storeLocator.FeatureSet;
+        
+            //features.add(this.FEATURES_.getById('PREV'));
+        
+        //features.add(this.FEATURES_.getById('Audio-Y'));
+        var position = new google.maps.LatLng(DTLocations[i].GeoLoc__Latitude__s, DTLocations[i].GeoLoc__Longitude__s);
+        var linkHtml = "<a id='" + DTLocations[i].Id +"' href='/"+ DTLocations[i].Id + 
+            "' onmouseover=LookupHoverDetail.getHover('" + DTLocations[i].Id  + "','/" +
+            DTLocations[i].Id +"/m?retURL="+ DTLocations[i].Id  +"&isAjaxRequest=1').show();"+
+                    " onmouseout=LookupHoverDetail.getHover('"+ DTLocations[i].Id  +"').hide();" +
+                    " onfocus=LookupHoverDetail.getHover('"+ DTLocations[i].Id  +"', '/"+ DTLocations[i].Id +"/m?retURL="+ DTLocations[i].Id  +"&isAjaxRequest=1').show();" +
+                    " onblur=LookupHoverDetail.getHover('"+ DTLocations[i].Id +"').hide(); "+
+            ">Account Record</a>";
+        
+        var store = new storeLocator.Store(DTLocations[i].Id, position, features, {
+            title: DTLocations[i].Name,
+            address:  DTLocations[i].ShippingStreet+ '<BR>'+DTLocations[i].ShippingCity+','+ 
+            DTLocations[i].ShippingState + '  ' + DTLocations[i].ShippingPostalCode +  '<BR>'+  linkHtml
+            });
+        
+        if (DTLocations[i].Schools__r != null || DTLocations[i].Districts__r != null ) //turn previously used locations green
+         {
+            var greenIcon = {
+            anchor: null,
+            scaledSize: new google.maps.Size(25,40),
+            url: "https://maps.google.com/mapfiles/marker_green.png"
+            };
+                 
+            var markerOptions = {
+              position: store.getLocation(),
+              icon: greenIcon,
+              title: store.getDetails().title,
+             zIndex: 100   
+            }; 
+               
+            store.setMarker(new google.maps.Marker(markerOptions));
+           }
+		else  store.setMarker(new google.maps.Marker({ position: store.getLocation(), title: store.getDetails().title, zIndex: 50}));
+              
+      stores.push(store);
+    }    
+     
+  return stores;
+};
+    
+    DTDataSource.prototype.FEATURES_ = new storeLocator.FeatureSet(
+        // new storeLocator.Feature('PREV', 'Previous Placement')
+    );
+
+DTDataSource.prototype.getFeatures = function() {
+  return this.FEATURES_;
+};
+
+    //create the google map and center
+
+    function loadMap()
+   {
+    map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: stuLocation ,
+    zoom: 11,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+        //icon for the school
+    var schoolIcon = {
+    anchor: null,
+    url: "{!$Resource.GenericPerson}",
+    map:map,
+    scaledSize: new google.maps.Size(50,50)
+    };
+
+          // To add the marker to the map, use the 'map' property
+var marker = new google.maps.Marker({
+    position: stuLocation,
+    map: map,
+    title:"DT Location-{!Contact.Name}",
+    icon: schoolIcon  });
+        
+        //draw the radius search circle
+        drawCircle();        
+   var panelDiv = document.getElementById('panel');
+  var data = new DTDataSource;
+        //add the store locator layer
+        var view = new storeLocator.View(map, data, {
+    geolocation: false,
+    features: data.getFeatures()
+  });
+       
+         view.createMarker = function(store) {
+         
+     var greenIcon = {
+    anchor: null,
+    url: "https://maps.google.com/mapfiles/marker_green.png"
+    };
+         
+    var markerOptions = {
+      position: store.getLocation(),
+        //icon: greenIcon,
+      draggable: true,
+      title: store.getDetails().title
+    };
+             //return new google.maps.Marker(markerOptions);
+             return store.getMarker();
+  }
+
+        //populate the panel
+  new storeLocator.Panel(panelDiv, {
+    view: view,
+      locationSearchLabel: 'Schools/Districts'
+});
+      
+        //default the the input
+    inputs = document.getElementsByTagName('input');
+    for(i=0; i< inputs.length; i++)
+    {
+        if ( inputs[i].parentNode.className =='location-search')   
+        {
+              inputs[i].value = '{!Contact.MailingStreet} {!Contact.MailingCity}, {!Contact.MailingState}  {!Contact.MailingPostalCode}'; 
+        }
+    }
+}
+
+function drawCircle()
+{
+    var searchRadius = document.getElementById("distanceSelect").value;
+
+   var circleOptions = { center: stuLocation, 
+        strokeColor : "Red",
+        radius:searchRadius*1609.3,
+        map: map
+      };
+    
+   if (radiausCircle == null)
+    radiausCircle = new google.maps.Circle(circleOptions);
+   else
+     radiausCircle.setOptions(circleOptions);
+     
+    map.setZoom(map.getZoom() - 1);
+    map.setZoom(map.getZoom() + 1);
+}
+    
+    </script>
+      <head>
+    <title>Student DT Locator</title>
+   
+  </head>
+  <body>
+   <apex:form id="theForm">
+    <table>
+        <tr>
+            <td><b>Record Type:</b></td>
+            <td> 
+                <select id="RTSelect" onChange="drawCircle();" >
+                    <option value="School (K-12)">School (K-12)</option>
+                    <option value="District">District</option>
+                </select>
+            </td>
+            <td><b>Level:</b></td><td> <apex:inputField id="levelFilter" value="{!Contact.Account.SchoolLevel__c}" onchange="drawCircle();"/></td>
+
+            <td><b>Prior Placement:</b></td><td> <apex:inputField id="placementFilter" value="{!Contact.Account.IsContractOnFile__c}"  onclick="drawCircle();"/></td>
+            <td><b>Radius:</b></td>
+            <td> 
+                <select id="distanceSelect" onChange="drawCircle();" >
+                    <option value="10">10 Miles</option>
+                    <option value="25">25 Miles</option>
+                    <option value="50">50 Miles</option>
+                    <option value="100">100 Miles</option>
+                    <option value="200">200 Miles</option>
+                </select>
+            </td>
+            <td width ="40px"> 
+            </td>
+             <td><b>WGU Places-PCE:</b></td><td> <apex:inputField id="pceFilter" value="{!Contact.Account.WGUPlacesStudents__c}"  onclick="drawCircle();"/></td>
+            <td><b>Has Contract:</b></td><td> <apex:inputField id="contractFilter" value="{!Contact.Account.IsContractOnFile__c}"  onclick="drawCircle();"/></td>
+            <td><b>Type:</b></td><td> <apex:inputField id="typeFilter" value="{!Contact.Account.IsPublicOrPrivate__c}" onclick="drawCircle();"/></td>
+        </tr>
+     </table>
+    </apex:form>
+      
+    <h1>Demonstration Teaching Location Search</h1>
+
+      	 <div id="panel"></div>
+        <div id="map-canvas"></div>
+          
+
+  </body>
+    
+</apex:page>

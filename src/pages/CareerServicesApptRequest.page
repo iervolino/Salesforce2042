@@ -1,0 +1,102 @@
+<apex:page controller="CareerServicesApptRequestController" tabStyle="StudentProcess__c" sidebar="false" showHeader="false">
+<table style="background:#B4B2CE" width="100%">
+    <tr>
+        <td width="310">
+            <img width="310" height="86" id="logo" alt="" src="{!URLFOR($Resource.AppealResources,'logo.png')}" class="fixPNG"/>
+        </td>
+    </tr>
+</table>
+<apex:form id="iForm"> 
+<apex:pageMessages />
+<apex:pageBlock rendered="{!NOT(disFlag)}">
+    <apex:pageBlockSection collapsible="false" title="Student Information">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >First Name</apex:outputLabel>
+                <apex:outputText >{!studentInfo.FirstName}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Student ID</apex:outputLabel>
+                <apex:outputText >{!studentInfo.StudentID__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Last Name</apex:outputLabel>
+                <apex:outputText >{!studentInfo.LastName}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Status at WGU</apex:outputLabel>
+                <apex:outputText >{!studentInfo.Status__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Email</apex:outputLabel>
+                <apex:outputText >{!studentInfo.Email}</apex:outputText>
+            </apex:pageBlockSectionItem>
+             <apex:pageBlockSectionItem >
+                <apex:outputLabel >Degree</apex:outputLabel>
+                <apex:outputText >{!studentInfo.WGUDegreeProgram__r.Name}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Phone</apex:outputLabel>
+                <apex:outputText >{!studentInfo.Phone}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >College</apex:outputLabel>
+                <apex:outputText >{!studentInfo.College__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        
+         <apex:pageBlockSection columns="1" collapsible="false" title="Please fill the following  information">
+             <apex:pageBlockSectionItem >
+                <apex:outputLabel >Type</apex:outputLabel>                                              
+                <apex:inputField value="{!cs.Type__c}" required="true"/>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >What questions do you have or what assistance are you seeking?</apex:outputLabel>                                              
+                <apex:inputTextarea value="{!cs.Questionsandassistanceyouareseeking__c}" rows="8" cols="130"/>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Employment Status</apex:outputLabel>                                              
+                <apex:inputField value="{!cs.EmploymentStatus__c}" required="true"/>                
+            </apex:pageBlockSectionItem> 
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >If you are requesting a review of your resume and cover letter, please email your documents in a Word format to careers@wgu.edu or simply attach it at the bottom of this form</apex:outputLabel>                                                         
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Is this your first appt with Career and Professional Development?</apex:outputLabel>                                              
+                <apex:inputField value="{!cs.IsthisyourfirstapptwithCareerPr__c}"/>                
+            </apex:pageBlockSectionItem>
+             <apex:pageBlockSectionItem >
+                <apex:outputLabel >Please indicate the career specialist who is providing career support to you:</apex:outputLabel>                                              
+                <apex:inputField value="{!cs.Pleaseindicatethecareerspecialistwh__c}"/>                
+            </apex:pageBlockSectionItem>
+             <apex:pageBlockSectionItem >
+                <apex:outputLabel >How did you learn about Career and Professional Development?</apex:outputLabel>                                              
+                <apex:inputField value="{!cs.HowdidyoulearnaboutCareerProfess__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >             
+                <apex:outputLabel >Preferred Method of Contact</apex:outputLabel>                                              
+                <apex:inputField value="{!cs.PreferredMethondofContact__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Preferred Phone</apex:outputLabel>                                              
+                <apex:inputField value="{!cs.PreferredPhone__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Preferred Email</apex:outputLabel>                                              
+                <apex:inputField value="{!cs.Preferredemail__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >             
+                <apex:outputLabel >Time Zone</apex:outputLabel>                                              
+                <apex:inputField value="{!cs.TimeZone__c}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+               <apex:outputLabel value="Attachment (Max size is 5MB)" for="file"/>
+               <apex:inputFile value="{!attachment.body}" filename="{!attachment.name}" id="file"/>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Submit Request" action="{!submit}"/>
+            <apex:commandButton value="Cancel" action="{!cancel}"/>
+        </apex:pageBlockButtons>
+</apex:pageBlock>
+</apex:form> 
+</apex:page>

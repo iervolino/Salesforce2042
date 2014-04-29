@@ -1,0 +1,74 @@
+<apex:page controller="WithdrawalController" tabStyle="StudentProcess__c" sidebar="false" showHeader="false">
+<table style="background:#B4B2CE" width="100%">
+    <tr>
+        <td width="310">
+            <img width="310" height="86" id="logo" alt="" src="{!URLFOR($Resource.AppealResources,'logo.png')}" class="fixPNG"/>
+        </td>
+    </tr>
+</table>
+<apex:form id="iForm" > 
+<apex:pageMessages />
+<apex:pageBlock rendered="{!NOT(disFlag)}" title="Withdrawal Form">
+    <apex:pageBlockSection collapsible="false" title="Student Information">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Student Name</apex:outputLabel>
+                <apex:outputText >{!studentInfo.Name}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Student ID</apex:outputLabel>
+                <apex:outputText >{!studentInfo.StudentID__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Mentor</apex:outputLabel>
+                <apex:outputText >{!studentInfo.Mentor__r.Name}</apex:outputText>
+            </apex:pageBlockSectionItem>
+              <apex:pageBlockSectionItem >
+                <apex:outputLabel >Term End Date</apex:outputLabel>
+                <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                     <apex:param value="{!studentInfo.TermEndDate__c}" />
+                </apex:outputText>
+                
+            </apex:pageBlockSectionItem>
+                       
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection columns="1" collapsible="false" title="Please fill the following  information">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Why did you decide to withdraw from WGU?</apex:outputLabel>                               
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >                
+                <apex:inputField value="{!sp.Reason__c}" required="true"/>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >What suggestions do you have to improve the WGU experience?</apex:outputLabel>                                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >                
+                <apex:inputTextarea value="{!sp.WDSuggestions__c}" rows="8" cols="130"/>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Do you have other educational plans?  If so, what are they?</apex:outputLabel>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >                
+                <apex:inputTextarea value="{!sp.WDEducationalPlans__c}" rows="8" cols="130"/>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Would you consider re-enrolling at WGU in the future?  If yes, how soon?  How should we follow-up?</apex:outputLabel>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >                
+                <apex:inputTextarea value="{!sp.WDReEnrollmentPlans__c}" rows="8" cols="130"/>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Followup date</apex:outputLabel>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:inputField value="{!sp.FollowUpDate__c}" />                
+            </apex:pageBlockSectionItem>
+                       
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Submit Request" action="{!submit}"/>
+            <apex:commandButton value="Cancel" action="{!cancel}"/>
+        </apex:pageBlockButtons>
+</apex:pageBlock>
+</apex:form> 
+</apex:page>

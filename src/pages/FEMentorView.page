@@ -1,0 +1,196 @@
+<apex:page standardController="FieldExperience__c" sidebar="0" showheader="0" standardStylesheets="0">
+  <head>
+  <title>Demonstration Teaching Recommendation</title>
+  <style>
+    td.ar {text-align: right;}
+    tr {width: 100%;}
+    div table.recc {width: 100%;}
+    .dashboard h2 {
+        border-top: 2px solid #6589C6;
+        color: #3E3371;
+        height: 25px;
+        :text-transform: uppercase;
+        font-size: 19px;    
+        font-weight: bold;
+        padding: 10px 0 0 10px;
+        align: right;
+    }
+    .dashboard h2 span {
+        text-transform:lowercase;
+        color: #353536;
+        font-size: 18px;
+        font-family: 'Droid Serif', serif;
+        font-style: italic;
+        font-weight: bold;
+    }
+    
+    body {font: 12px/1.3em Arial, Helvetica, Geneva, sans-serif; color: #353536;}
+    .content {margin: 0 auto; width: 675px;}
+    .sections {
+        border-left: 0px solid #D9D9DC;
+        border-right: 0px solid #D9D9DC;
+        float: left;
+        padding: 0 30px 0 0;
+        margin: 0 0 40px;
+        width: 675px;
+    }
+
+    </style>
+    </head>
+  <body>
+  <apex:form id="MentorRecommend">
+      <div class="content">
+        <div class="sections">
+            <div style="height:20px">
+        </div>
+        <div class="dashboard">
+            <h2>MENTOR RATING OF PROFESSIONAL BEHAVIORS AND DISPOSITIONS
+            <br></br>
+            <br></br>
+            <apex:outputlabel value="{!FieldExperience__c.Student__r.Name}"></apex:outputlabel></h2>
+            <br></br> 
+            <br></br> 
+            <div id="Introduction">
+              <table class="recc">
+                <tr><td style="padding-left:10px">Please complete this evaluation form for {!FieldExperience__c.Student__r.Name}, who has applied for field experiences. The professional disposition questions come directly from the evaluations completed during field experiences. The full version of this form can be viewed <a target="_blank" href="https://sites.google.com/a/wgu.edu/last/MidtermandFinalEvaluationForm.pdf">here</a>.</td></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>                
+                <tr><td style="padding-left:10px">Please note that if more than two Needs Improvement ratings are entered, the Teacher Success team will contact you for further information.</td></tr>
+              </table>
+            </div></div>
+        </div>  
+        <div class="sections">
+            <div style="height:8px"/>
+        </div>     
+        <apex:commandButton action="{!save}" value="Save Evaluation"/>
+        <br></br> 
+        <br></br> 
+        <div class="dashboard">
+            <h2>Mentor Interview</h2>
+            <div id="Mentor Actions">
+              <table  class="recc">
+              <tr><td style="padding-left:10px"><u><strong>If a Mentor Action question does not apply to your student select N/A.</strong></u></td></tr>
+              <tr><td style="padding-left:10px">Did you conduct the DT interview with this teacher candidate?</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecConductedInterviewCall__c}"/></td></tr>
+              <tr><td style="padding-left:10px">When did you conduct this interview? (MM/DD/YYYY)</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecRecommendationDate__c}"/></td></tr>
+              <tr><td style="padding-left:10px">Do you recommend this teacher candidate?</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecMentorRecommend__c}"/></td></tr>
+              <tr><td style="padding-left:10px">If no, why not?</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecReasonNoRecommend__c}"/></td></tr>
+              </table>
+            </div>
+        </div>
+        <br></br>
+        <div class="dashboard">
+            <h2>Caring and Considerate</h2>
+            <div id = "Caring and Considerate">
+              <table class="recc">
+                <tr><td style="padding-left:10px">Uses voice inflection and expression</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecUsesVoiceInflection__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Projects voice appropriately</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecProjectsVoiceAppropriately__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Shows interest and enthusiasm</td><td align="right"><apex:inputField value="{!FieldExperience__c.MenRecShowsInterestandEnthusiasm__c}"/></td></tr>                
+                <tr><td style="padding-left:10px">Shows concern, caring and compassion</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecShowsConcernCaringCompassion__c}"/></td></tr>                                                
+              </table>
+            </div>
+        </div>            
+        <div class="dashboard">            
+            <h2>Affirming of Diversity and Cross-Culturally Competent</h2>
+            <div id = "Affirming of Diversity and Cross-Culturally Competent">
+              <table class="recc">
+                <tr><td style="padding-left:10px">Clearly enunciates words</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecEnunciatesWordsClearly__c}"/></td></tr>              
+                <tr><td style="padding-left:10px">Shows tolerance and awareness of others&apos; feelings</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecShowsTolerance__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Shows sensitivity to diversity issues</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecShowsSensitivity__c}"/></td></tr>                              
+              </table>
+            </div> 
+        </div>             
+        <div class="dashboard">                        
+            <h2>Reflective Practicioner</h2>
+            <div id = "Reflective Practicioner">
+              <table class="recc">            
+                <tr><td style="padding-left:10px">Maintains an agreeable and positive attitude</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecMaintainsAttitude__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Exhibits a professional demeanor</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecExhibitsProfessionalDemeanor__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Accepts responsibility for mistakes or actions</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecAcceptsResponsibility__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Attempts to solve own problems</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecAttemptstoSolveProblems__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Evaluates personal performance</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecEvaluatesPersonalPerformance__c}"/></td></tr>  
+                <tr><td style="padding-left:10px">Modifies actions after criticism</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecModifiesActionsAfterCriticism__c}"/></td></tr>                                                                                
+                <tr><td style="padding-left:10px">Presents a willingness to problem solve</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecPresentsWillingnessSolve__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Makes sound decisions</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecMakesSoundDecisions__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Accepts guidance and criticism</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecAcceptsGuidance__c}"/></td></tr>                                                                
+              </table>
+            </div>
+        </div>             
+        <div class="dashboard">                
+            <h2>Equitable and Fair</h2>
+            <div id = "Equitable and Fair">
+              <table class="recc">
+                <tr><td style="padding-left:10px">Listens carefully when others are speaking</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecListensCarefully__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Does not interrupt or cut off other</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecDoesNotCutOthersOff__c}"/></td></tr>                              
+                <tr><td style="padding-left:10px">Exhibits positive self-esteem</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecExhibitsSelfEsteem__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Exhibits apadaptability, flexibility and accepts change</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecExhibitsAdaptability__c}"/></td></tr>                                
+              </table>
+            </div>
+        </div>            
+        <div class="dashboard">                                  
+            <h2>Committed to the Belief that All Students Can Learn</h2>
+            <div id = "Committed to the Belief that All Students Can Learn">
+              <table class="recc">
+                <tr><td style="padding-left:10px">Exhibits self-confidence</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecExhibitsSelfConfidence__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Expresses a positive attitude about others</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecExpressesPositiveAttitude__c}"/></td></tr>               
+              </table>
+            </div>
+        </div>              
+        <div class="dashboard">                         
+            <h2>Collaborative Professional</h2>
+            <div id = "Collaborative Professional">
+              <table class="recc">
+                <tr><td style="padding-left:10px">Clarifies concepts or messages</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecClarifiesConcepts__c }"/></td></tr>
+                <tr><td style="padding-left:10px">Uses and accepts humor in positive ways</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecUsesandAcceptsHumor__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Faces problems realistically</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecFacesProblemsRealistically__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Works cooperatively with others</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecWorksCooperatively__c}"/></td></tr>                                                              
+              </table>
+            </div> 
+        </div>            
+        <div class="dashboard">                          
+            <h2>Technologically Proficient</h2>
+            <div id = "Technologically Proficient">
+              <table class="recc"> 
+                <tr><td style="padding-left:10px">Demonstrates proficient use of technology</td><td align="right"><apex:inputField value="{!FieldExperience__c.MenRecProficientInUseOfTechnology__c}"/></td></tr>              
+                <tr><td style="padding-left:10px">Employs the latest tools of technology</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecEmploysLatestToolsTechnology__c}"/></td></tr> 
+                <tr><td style="padding-left:10px">Communicates a professional tone in use of technology</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecCommProfessionalToneTechnology__c}"/></td></tr> 
+              </table>
+            </div>
+        </div>            
+        <div class="dashboard">            
+            <h2>Professional Behavior and Communications</h2>
+            <div id = "Professional Behavior and Communications">
+              <table class="recc">
+                <tr><td style="padding-left:10px">Does not use filler words which may distract listeners</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecDoesNotUseFillerWords__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Exhibits self-control</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecExhibitsSelfControl__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Expresses feelings constructively</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecExpressesFeelings__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Exhibits responsibility and dependability</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecExhibitsResponsibility__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Interacts positively and professionaly in all situations</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecInteractsProfessionally__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Uses respectful and polite language</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecUsesRespectfulLanguage__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Shows respect for rules, ethics, and others&apos; rights</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecShowsRespect__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Uses appropriate words to convey meaning</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecUsesAppropriateWords__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Uses appropriate syntax</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecUsesAppropriateSyntax__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Clearly conveys well thought out ideas</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecConveysThoughts__c}"/></td></tr>                                                                                                                                                                              
+              </table>
+            </div>
+        </div>                
+
+
+            <!--<h2>Professional Personality-Work Ethic</h2>
+            <div id="Professional Personality-Work Ethic">              
+            <table class="recc">
+                <tr><td style="padding-left:10px">Exhibits a commitment to the teaching profession</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecExhibitsCommitment__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Supports accountability/accepts responsibility</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecSupportsAccountability__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Shows a willingness to learn</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecShowsWillingnesstoLearn__c}"/></td></tr>
+                <tr><td style="padding-left:10px">Virtually maintains a supportive environment</td><td class="ar"><apex:inputField value="{!FieldExperience__c.MenRecMaintainsaSupportEnvironment__c}"/></td></tr>
+             </table> 
+             </div>-->
+      <br></br>
+      <apex:commandButton action="{!save}" value=" Save Evaluation"/>
+      <br></br>
+    <div class="clear"/>
+    </div>
+    </apex:form>
+    </body> 
+</apex:page>

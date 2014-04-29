@@ -1,0 +1,35 @@
+<apex:page standardController="TransferEvaluation__c" Extensions="EvalTranscriptController" sidebar="false" >
+         
+
+<div align="left" style="text-align: left"> 
+    <table style="align:left;vertical-align:text-top;">
+      <tr>
+         <td width="450px" style="vertical-align:top;"  >
+             <div style="align:center;vertical-align:text-top;">
+               <apex:iframe width="450px" height="800px" src="/apex/TransferInstitutions?id={!TransferEvaluation__c.Opportunity__r}" scrolling="true"  />
+             </div>
+         </td>
+          
+        
+         <td width="100%" style="vertical-align:text-top;">
+             <apex:detail title="false" relatedList="false" inlineEdit="true" /> 
+     
+           <div style="align:left;vertical-align:text-top;" >
+    
+             <apex:iframe height="430px" src="/apex/TransferEvalEquivalency?id={!TransferEvaluation__c.id}" scrolling="true" id="pb2" />
+
+       </div>
+        
+
+    
+    <!--apex:pageBlock id="pb2"-->    
+    <apex:iframe height="5px" />
+        <apex:relatedList id="Attachments" subject="{!TransferEvaluation__c}" list="NotesAndAttachments" title="Attached Documents"/>
+    <!--/apex:pageBlock-->        
+    </td>
+    
+  </tr>
+  </table>
+    </div>
+
+</apex:page>

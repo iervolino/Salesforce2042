@@ -1,0 +1,7 @@
+<apex:page ContentType="text/plain">
+{
+    "sessionId": "<apex:outputText value="{!$Api.Session_ID}" />",
+    "userId": "<apex:outputText value="{!$User.Id}" />",
+    "instanceUrl": "<apex:outputText value="{!SUBSTITUTE(SUBSTITUTE(LOWER($CurrentPage.URL), '/apex/sessionid', ''), '.visual', '')}"/>"
+}
+</apex:page>

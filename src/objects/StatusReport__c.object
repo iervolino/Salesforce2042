@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Status reports are a great way to formalize the progress of a project at the individual team member level.  Through reports and dashboards, summary reporting can help a project manager quickly gather information and export to excel as needed.</description>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Accomplishments__c</fullName>
+        <externalId>false</externalId>
+        <label>Current Outcome</label>
+        <length>32000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>8</visibleLines>
+    </fields>
+    <fields>
+        <fullName>EngagementSummary__c</fullName>
+        <externalId>false</externalId>
+        <label>Status Report Due Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>PlannedDeliverables__c</fullName>
+        <externalId>false</externalId>
+        <label>Next Upcoming</label>
+        <length>32000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>8</visibleLines>
+    </fields>
+    <fields>
+        <fullName>PotentialRisks__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box if there are any potential risks that came up during this assignment.  Please describe the risks using the &quot;risks&quot; tab.</inlineHelpText>
+        <label>Has Risk</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Status Reports</relationshipLabel>
+        <relationshipName>R00N80000002lZ2OEAU</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RisksBlockers__c</fullName>
+        <externalId>false</externalId>
+        <label>Key Issues</label>
+        <length>32000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>8</visibleLines>
+    </fields>
+    <fields>
+        <fullName>StatusIcon__c</fullName>
+        <description>The Status of the project for this status report</description>
+        <externalId>false</externalId>
+        <formula>CASE( StatusIndicator__c, 
+&quot;Yellow&quot;,
+IMAGE(&quot;/servlet/servlet.ImageServer?id=015a000000233dl&amp;oid=00Df0000002MhY1&amp;lastMod=1370876475000&quot;,&quot;Yellow&quot;,15,15),
+&quot;Green&quot;,
+IMAGE(&quot;/servlet/servlet.ImageServer?id=015a000000394LH&amp;oid=00Df0000002MhY1&amp;lastMod=1386867416000&quot;,&quot;Green&quot;,15,15),
+&quot;Red&quot;,
+IMAGE(&quot;/servlet/servlet.ImageServer?id=015a000000394LM&amp;oid=00Df0000002MhY1&amp;lastMod=1386867456000&quot;,&quot;Red&quot;,15,15),IMAGE(&quot;/servlet/servlet.ImageServer?id=015a000000394LH&amp;oid=00Df0000002MhY1&amp;lastMod=1386867416000&quot;,&quot;Green&quot;,15,15))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The Status of the project for this status report</inlineHelpText>
+        <label>Status Icon</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StatusIndicator__c</fullName>
+        <description>Indicator of the current state of the project, Red, Green or Yellow</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicator of the current state of the project, Red, Green or Yellow</inlineHelpText>
+        <label>Status Indicator</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Green</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yellow</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Red</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Draft</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accepted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TeamMember__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Team Member Assignment</label>
+        <referenceTo>TeamMember__c</referenceTo>
+        <relationshipLabel>Status Reports</relationshipLabel>
+        <relationshipName>R00N80000002lZ17EAE</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>whatwereyourgoals__c</fullName>
+        <description>What did you set out to accomplish since the last status date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>What did you set out to accomplish since the last status date?</inlineHelpText>
+        <label>What were your Goals</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <label>Status Report</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Project__c</columns>
+        <columns>StatusIndicator__c</columns>
+        <columns>whatwereyourgoals__c</columns>
+        <columns>Accomplishments__c</columns>
+        <columns>PlannedDeliverables__c</columns>
+        <columns>RisksBlockers__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Craig_s</fullName>
+        <columns>NAME</columns>
+        <columns>Project__c</columns>
+        <columns>PlannedDeliverables__c</columns>
+        <columns>Status__c</columns>
+        <columns>TeamMember__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>Craig&apos;s</label>
+    </listViews>
+    <listViews>
+        <fullName>Current_Status_Reports</fullName>
+        <columns>Project__c</columns>
+        <columns>StatusIndicator__c</columns>
+        <columns>whatwereyourgoals__c</columns>
+        <columns>Accomplishments__c</columns>
+        <columns>PlannedDeliverables__c</columns>
+        <columns>RisksBlockers__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>LAST_UPDATE</field>
+            <operation>greaterOrEqual</operation>
+            <value>3/16/2014 12:00 AM</value>
+        </filters>
+        <label>Current Status Reports</label>
+    </listViews>
+    <nameField>
+        <displayFormat>SR-{YYYY}{MM}-{0}</displayFormat>
+        <label>Status Report Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Status Reports</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Project__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>TeamMember__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>PotentialRisks__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>LAST_UPDATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Project__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>TeamMember__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>Project__c</searchFilterFields>
+        <searchFilterFields>TeamMember__c</searchFilterFields>
+        <searchFilterFields>Status__c</searchFilterFields>
+        <searchFilterFields>EngagementSummary__c</searchFilterFields>
+        <searchResultsAdditionalFields>Project__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Accomplishments__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

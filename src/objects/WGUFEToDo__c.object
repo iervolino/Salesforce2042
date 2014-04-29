@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Custom object to manage the definition of task sets for field experiences. The instance of a task list is managed via the Task records associated with a FieldExperience__c record via the StudentTask record type.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>AfterCompletionMessage__c</fullName>
+        <description>A Message to display to the student after the task is complete</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Supply a message that will be displayed to the student when this class is complete (instead of the instructions).</inlineHelpText>
+        <label>After Completion Message</label>
+        <length>2768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CardIndex__c</fullName>
+        <description>Index for UI purposes</description>
+        <externalId>false</externalId>
+        <label>CardIndex</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompletionCriteria__c</fullName>
+        <defaultValue>&quot;true&quot;</defaultValue>
+        <description>The value that determines pass/fail or complete/incomplete</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The score or pass/fail value for determining task completion</inlineHelpText>
+        <label>Completion Criteria</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompletionURL__c</fullName>
+        <description>A URL for the content or completion of the TO DO</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify a URL for the TO DO content or task completion, if any.</inlineHelpText>
+        <label>CompletionURL</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>FECheckboxFieldName__c</fullName>
+        <description>The API Fieldname that should be set to true when the associated To Do item is completed</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify the API Fieldname that should be set to true when the associated To Do item is completed</inlineHelpText>
+        <label>FE Checkbox FieldName</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FEFieldName__c</fullName>
+        <description>The API Fieldname on the FieldExperience__c object that might hold a data value for this To Do item, such as State__c of licensure.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Supply the Fieldname on the FieldExperience__c object, if any, that would hold the value provided by the student, such as State of Licensure.</inlineHelpText>
+        <label>FE FieldName</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Instructions__c</fullName>
+        <description>Instructions for completing the task</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify instructions for completing this task, the instructions will be visible to students</inlineHelpText>
+        <label>Instructions</label>
+        <length>6768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>NextCardIndex__c</fullName>
+        <description>Index of Card to be displayed next in the sequence</description>
+        <externalId>false</externalId>
+        <label>NextCardIndex</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PrerequisiteToDo__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Field for defining dependency between To Do items, if any.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the WGU FE ToDo item that must be completed before this item can be completed, if any.</inlineHelpText>
+        <label>Prerequisite ToDo</label>
+        <referenceTo>WGUFEToDo__c</referenceTo>
+        <relationshipLabel>WGU FE ToDo</relationshipLabel>
+        <relationshipName>SubordinateToDos</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SortOrder__c</fullName>
+        <externalId>false</externalId>
+        <label>Sort Order</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentTaskCode__c</fullName>
+        <description>The item identifier for locating the data in the StudentCompletionTask__c Name field</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify the task or assessment id for verifying this data item (the lookup value)</inlineHelpText>
+        <label>Student Task Code</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TaskDurationDays__c</fullName>
+        <description>How many days are provided to complete the task?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>How many days are provided to complete the task?</inlineHelpText>
+        <label>Task Duration Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VisualforceComponentName__c</fullName>
+        <externalId>false</externalId>
+        <label>VisualforceComponentName</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WGUDegreeProgram__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>WGU Degree Program</label>
+        <referenceTo>WGUDegreeProgram__c</referenceTo>
+        <relationshipName>WGUFETasks</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>isBannerDataVerificationRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Boolean used to indicate the task requires data verification from the Banner SIS</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicate if this task requires verification of Banner SIS data.</inlineHelpText>
+        <label>is Banner Data Verification Required?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isFileUpload__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates a student will upload a file in completion of this task.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check if a student will upload a file in completion of this task, such as a photo or resume.</inlineHelpText>
+        <label>is File Upload?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isManualVerification__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field which indicates that WGU employees verify the completeness of the To Do item, rather than using code automation or self-declared by the student</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicate checked if WGU Employees should manually verify this To Do Item, say, by checking TaskStream data, etc.</inlineHelpText>
+        <label>is Manual Verification?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>WGU FE ToDo</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>SortOrder__c</columns>
+        <columns>CardIndex__c</columns>
+        <columns>NextCardIndex__c</columns>
+        <columns>NAME</columns>
+        <columns>isFileUpload__c</columns>
+        <columns>FECheckboxFieldName__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>WGU FE ToDo Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>WGU FE ToDo</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

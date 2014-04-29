@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Control object</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>ActionNeeded__c</fullName>
+        <externalId>false</externalId>
+        <label>Action Needed</label>
+        <length>25</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssessmentTaskCodeIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Assessment / Task Code IN</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttemptedIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Attempted (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>CompositeKeyIN__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>PIDM + Course Code + Test Date</description>
+        <externalId>true</externalId>
+        <label>Composite Key (IN)</label>
+        <length>45</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CompositeParentKeyIN__c</fullName>
+        <description>PIDM + Course Code + Term Code</description>
+        <externalId>false</externalId>
+        <label>Composite Parent Key (IN)</label>
+        <length>45</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PassedIN__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Passed (IN)</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StudentAcademicCourseAttempt__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Student Academic Course Attempt</label>
+        <referenceTo>StudentAcademicCourseAttempt__c</referenceTo>
+        <relationshipLabel>Student Academic Course Atts From Banner</relationshipLabel>
+        <relationshipName>StudentAcademicCourseAttsFromBanner</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SynchronizationError__c</fullName>
+        <externalId>false</externalId>
+        <label>Synchronization Error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TypeIN__c</fullName>
+        <description>Obj/Prfm etc</description>
+        <externalId>false</externalId>
+        <label>Type (IN)</label>
+        <length>25</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Student Academic Course Att From Banner</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>OBJECT_ID</columns>
+        <columns>NAME</columns>
+        <columns>ActionNeeded__c</columns>
+        <columns>AssessmentTaskCodeIN__c</columns>
+        <columns>AttemptedIN__c</columns>
+        <columns>CompositeKeyIN__c</columns>
+        <columns>CompositeParentKeyIN__c</columns>
+        <columns>PassedIN__c</columns>
+        <columns>StudentAcademicCourseAttempt__c</columns>
+        <columns>SynchronizationError__c</columns>
+        <columns>TypeIN__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>SACAFB-{0}</displayFormat>
+        <label>Student Academic Course Att From Banner Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Student Academic Course Atts From Banner</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

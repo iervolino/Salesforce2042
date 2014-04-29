@@ -1,0 +1,73 @@
+<apex:page standardController="ProgramFeedback__c" extensions="CoSFeedbackController" standardStylesheets="0" sidebar="false" showHeader="false" id="iPage">
+<title>Feedback Form | Western Governors University Online</title>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0"></meta>
+    <link href="{!$Resource.statRes_wgu_favicon}" rel="icon" type="image/ico" />
+    <link href="{!$Resource.statResSvs}" rel="stylesheet" type="text/css" />
+    <link href="{!$Resource.statResGlobal}" rel="stylesheet" type="text/css" />
+<style>
+        #header1 {
+            padding: 0 50px;
+            /*min-width:728px;*/
+            max-width:1300px;
+            margin: 0 auto;
+            position: relative;
+        }
+        #header-wrapper1 {
+            background: #d3d3d4;
+            background: -webkit-linear-gradient(top, #ffffff 0%,#d3d3d4 45%,#a7a7a8 100%);
+            background: -moz-linear-gradient(top, #ffffff 0%,#d3d3d4 45%,#a7a7a8 100%);
+            background: -o-linear-gradient(top, #ffffff 0%,#d3d3d4 45%,#a7a7a8 100%);
+            background: -ms-linear-gradient(top, #ffffff 0%,#d3d3d4 45%,#a7a7a8 100%);
+            background: linear-gradient(top, #ffffff 0%,#d3d3d4 45%,#a7a7a8 100%);
+            -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+            -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+            height: 52px;
+            position: relative;
+            z-index: 2;
+        }
+        .header-logo1 {
+            background: url({!$Resource.statResSeal}) no-repeat left top;
+            display: block;
+            float: left;
+            height: 42px;
+            margin: 5px 0 0;
+            width: 42px;
+        }
+        #feedback-wrapper1 {
+            background: #6589C6;
+            height: 50px;
+            border-bottom: solid 1px #5273AB;
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, .4);
+            position: relative;
+            z-index: 1;
+        }
+        .feedback1 {
+            padding: 17px 0 0 20px;
+            font-family: arial;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+        }  
+        .submissionMessage {
+            position: relative;
+            margin-left: 20px !important;
+            font: 18px/1.45 verdana !important;
+        }
+</style>
+
+    <body>
+        <div id="header-wrapper1">
+            <div id="header1">
+                <a href="https://my.wgu.edu" Class="header-logo1"></a>
+            </div>
+        </div>
+        <div id="feedback-wrapper1">
+            <div class="feedback1">Feedback Submission Success</div>
+        </div>
+        <br/><br/>
+        <div class="submissionMessage ">Thank you! Your feedback is important to us and has been successfully submitted.</div>
+
+</body>
+</apex:page>

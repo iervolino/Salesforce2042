@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to handle the Marketing Refer Ids that are created</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CategoryId__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE( Category__c, 
+&apos;ACT Test Score Tape&apos;, &apos;ACT&apos;,
+&apos;Ad Campaigns&apos;, &apos;ADC&apos;,
+&apos;Agency Managed Affiliate Mktng&apos;, &apos;AGMAAFMA&apos;,
+&apos;AMCAS Test Score File&apos;, &apos;AMCS&apos;,
+&apos;Community Colleges&apos;, &apos;CC01&apos;,
+&apos;Content Ads&apos;, &apos;CNTADS&apos;,
+&apos;Content Marketing&apos;, &apos;CNTMRK&apos;,
+&apos;Display/Banners&apos;, &apos;PRTBAN&apos;,
+&apos;Ed Fairs/Info Sessions&apos;, &apos;EF01&apos;,
+&apos;Educ Opportunity Services&apos;, &apos;EOS_ACT&apos;,
+&apos;GMAT Test Score Tape&apos;, &apos;GMAT&apos;,
+&apos;GRE Test Score Tape&apos;, &apos;GRE&apos;,
+&apos;Inbound Phone/Mail/Email&apos;, &apos;IN01&apos;,
+&apos;K-12 School Districts&apos;, &apos;SCH01&apos;,
+&apos;Other&apos;, &apos;OT01&apos;,
+&apos;Peterson Search&apos;, &apos;PETERSON&apos;,
+&apos;PR/Publicity&apos;, &apos;PRP&apos;,
+&apos;Private College Guide Search&apos;, &apos;PCU&apos;,
+&apos;Refer a Friend&apos;, &apos;FRIEND&apos;,
+&apos;Retargeting&apos;, &apos;RETGT&apos;,
+&apos;Scholarship Announcements&apos;, &apos;SC01&apos;,
+&apos;SAT Test Score Tape&apos;, &apos;SAT&apos;,
+&apos;Search Engine Marketing&apos;, &apos;SEENMA&apos;,
+&apos;Search Engine Marketing- Non-Trademark&apos;, &apos;SEMNT&apos;,
+&apos;Search Engine Marketing- Trademark&apos;, &apos;SEMT&apos;,
+&apos;Search Engine Optimization&apos;, &apos;SEO&apos;,
+&apos;Social Media Marketing&apos;, &apos;SOCIAL&apos;,
+&apos;State Governments/Corporations&apos;, &apos;ST01&apos;,
+&apos;Student Service Search&apos;, &apos;SSS_SEARCH&apos;,
+&apos;Veterans/Military&apos;, &apos;MIL01&apos;,
+&apos;Web-based Marketing&apos;, &apos;WEB01&apos;,
+&apos;WGU Website&apos;, &apos;WGU01&apos;,
+TEXT(Category__c))</formula>
+        <label>Category Id</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Category__c</fullName>
+        <externalId>false</externalId>
+        <label>Category</label>
+        <picklist>
+            <picklistValues>
+                <fullName>ACT Test Score Tape</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ad Campaigns</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Agency Managed Affiliate Mktng</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AMCAS Test Score File</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community Colleges</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ed Fairs/Info Sessions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Educ Opportunity Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>GMAT Test Score Tape</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>GRE Test Score Tape</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Inbound Phone/Mail/Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Peterson Search</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PR/Publicity</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Private College Guide Search</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Refer a Friend</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SAT Test Score Tape</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scholarship Announcements</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>State Governments/Corporations</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Service Search</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Veterans/Military</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Web-based Marketing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WGU Website</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Content Ads</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Content Marketing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Display/Banners</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Retargeting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social Media Marketing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Search Engine Optimization</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Search Engine Marketing- Trademark</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Search Engine Marketing- Non-Trademark</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Code</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Marketing Source Code</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Description__c</columns>
+        <columns>Category__c</columns>
+        <columns>CategoryId__c</columns>
+        <columns>Active__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>UncategorizedSources</fullName>
+        <columns>NAME</columns>
+        <columns>Category__c</columns>
+        <columns>Description__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Category__c</field>
+            <operation>equals</operation>
+            <value>,Please select</value>
+        </filters>
+        <label>Uncategorized Sources</label>
+        <sharedTo>
+            <role>Marketing</role>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Refer Id</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Marketing Source Codes</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Description__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Category__c</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>Description__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Category__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>SourceCodeCategoryRequired</fullName>
+        <active>true</active>
+        <description>Require a category in order to save a source code</description>
+        <errorConditionFormula>OR ( 
+ISPICKVAL( Category__c, &quot;Please select&quot; ), 
+ISPICKVAL( Category__c, &quot;&quot; ) 
+)</errorConditionFormula>
+        <errorDisplayField>Category__c</errorDisplayField>
+        <errorMessage>Please select a category for this source.</errorMessage>
+    </validationRules>
+</CustomObject>

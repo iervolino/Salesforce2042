@@ -1,0 +1,298 @@
+<apex:page contentType="text/html; charset=UTF-8" standardController="Mentor__c" standardStylesheets="false" showHeader="false" sidebar="false">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<html>
+<head>
+    <title>Western Governors University - Mentor Course Assignments</title>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v420, 'resources/css/ext-all.css')}"/> 
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v420}/ext-all.js"/>
+   
+    <apex:includeScript value="/soap/ajax/29.0/connection.js"/>
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.WGUMonkeyFix}" id="WGUMonkeyFix"></script>
+    
+    <script type="text/javascript" >
+        //This is a work-around due to the session id not populating automatically like it should
+        sforce.connection.init("{!$Api.Session_ID}","/services/Soap/u/29.0");
+    </script>
+    
+    <style type="text/css">
+        .x-grid-dirty-cell { background-image: none; }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <div id="extContentDiv" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="divCloseButton" />
+            </td>
+        </tr>
+    </table>
+    
+    <script type="text/javascript" >
+        Ext.Loader.setConfig({enabled: true});
+        Ext.require([
+            'Ext.*'
+        ]);
+        Ext.ns("Ext.WGU");
+        
+        //Data model for the grid panel
+        Ext.define('CourseMentorModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [ 
+                {name: 'Id', mapping: 'Id', type: 'string'},
+                {name: 'Mentor__c', mapping: 'Mentor__c', type: 'string'},
+                {name: 'CourseNumber__c', mapping: 'CourseNumber__c', type: 'string'},
+                {name: 'MentorOfficeHours__c', mapping: 'MentorOfficeHours__c', type: 'string'},
+                {name: 'ActivityDate__c', mapping: 'ActivityDate__c', type: 'date', dateFormat: 'Y-m-d'},
+                {name: 'ActiveChk__c', mapping: 'ActiveChk__c', type: 'string'}
+            ]
+        });
+        
+        //Data store for the grid
+        var courseMentorStore = Ext.create('Ext.data.Store',
+        {
+            model : 'CourseMentorModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'CourseNumber__c',
+                direction: 'ASC'
+            }]
+        });
+        
+        //Create the course assignment grid
+        var courseAssignmentGrid = Ext.create('Ext.grid.Panel',
+        {
+            title: "Course Assignments for {!Mentor__c.User__r.Name}",
+            store: courseMentorStore,
+            columns:
+            [
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Course Number',
+                    dataIndex: 'CourseNumber__c',
+                    flex: 1,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true
+                },
+                {
+                    xtype: 'datecolumn',
+                    header: 'Last Updated',
+                    dataIndex: 'ActivityDate__c',
+                    flex: 1,
+                    format: "m/d/Y",
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true
+                },
+                {
+                    xtype: 'actioncolumn',
+                    width: 25,
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    items: [{
+                        icon: '{!$Resource.profile}/images/delete.png',
+                        tooltip: 'Delete',
+                        handler: function(grid, rowIndex, colIndex)
+                        {
+                            //Show a dialogue asking confirmation of course assignment deletion
+                            Ext.MessageBox.confirm('Confirm Delete','You are about to delete<br/>a course assignment.<br/>Do you want to proceed?',
+                                function(btn)
+                                {
+                                    //If the user selects the "yes" button on the dialogue delete the course assignment
+                                    if (btn=='yes')
+                                    {
+                                        var temp=sforce.connection.deleteIds([grid.getStore().getAt(rowIndex).get('Id')]);
+                                        
+                                        if (temp[0].success=='true')
+                                        {
+                                            grid.getStore().removeAt(rowIndex);
+                                        }
+                                        else
+                                        {
+                                            Ext.MessageBox.show({
+                                                title:'Mentor Course Assignment Error',
+                                                msg: 'Unable to delete course assignment.<br/>Error Msg: '+temp[0].errors.message,
+                                                buttons: Ext.Msg.OK,
+                                                icon: Ext.Msg.ERROR
+                                            });
+                                        }
+                                    }
+                                });
+                        }
+                    }]
+                }
+            ],
+            bbar: [
+            {
+                name: 'inputCourseNumber',
+                xtype: 'textfield',
+                fieldLabel: 'New Course Assignment',
+                labelAlign: 'left',
+                labelWidth: 120,
+                width: 185,
+                minLength: 4,
+                maxLength: 5,
+                allowBlank: false
+            },
+            {
+                text: 'Add',
+                xtype: 'button',
+                handler: function()
+                {
+                    //Get a reference to the Course Number TextField
+                    var CourseText = this.up('toolbar').items.items[0];
+                    
+                    if (CourseText.isValid())
+                    {
+                        //Query to determine if the course assignment already exists
+                        sforce.connection.query("select ID from MentorCourseAssignment__c where Mentor__c='{!Mentor__c.User__c}' and CourseNumber__c='" + CourseText.getValue() + "'",
+                            function(result)
+                            {
+                                result.size *= 1;
+                                result.done = result.done == "true";
+                                result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                                
+                                //Only proceed if no course assignment matches are found
+                                if (result.records.length==0) 
+                                {
+                                    //Create a new MentorCourseAssignment__c and populate required fields
+                                    var saveCourseObj = new sforce.SObject("MentorCourseAssignment__c");
+                                    saveCourseObj.Name=CourseText.getValue();
+                                    saveCourseObj.Mentor__c='{!Mentor__c.User__c}';
+                                    saveCourseObj.MentorPidm__c='{!Mentor__c.User__r.Pidm__c}';
+                                    saveCourseObj.CourseNumber__c=CourseText.getValue();
+                                    saveCourseObj.MentorOfficeHours__c='{!Mentor__c.OfficeHours__c}';
+                                    saveCourseObj.ActiveChk__c=true;
+                                    saveCourseObj.ActivityDate__c=new Date();
+                                    
+                                    try
+                                    {
+                                        //Query for the WGUCourse__c ID that belongs to the course number
+                                        saveCourseObj.WGUCourse__c=sforce.connection.query("select ID from WGUCourse__c where name='" + CourseText.getValue() + "' limit 1").records.Id;
+                                        
+                                        //Insert the Mentor Course Assignment
+                                        var temp=sforce.connection.create([saveCourseObj]);
+                                        
+                                        //If the insert was successful add new record to the store, otherwise display an error message.
+                                        if (temp[0].success=='true')
+                                        {
+                                            saveCourseObj.Id=temp[0].id;
+                                            courseMentorStore.loadRawData([saveCourseObj], true);
+                                        }
+                                        else
+                                        {
+                                            Ext.MessageBox.show({
+                                                title:'Mentor Course Assignment Error',
+                                                msg: 'Unable to save course assignment.<br/>Error Msg: '+temp[0].errors.message,
+                                                buttons: Ext.Msg.OK,
+                                                icon: Ext.Msg.ERROR
+                                            });
+                                        }
+                                        
+                                        //Clear the Course Number TextField
+                                        CourseText.reset();
+                                    }
+                                    catch(e)
+                                    {
+                                        //Show an error dialogue if the course number is not valid
+                                        Ext.MessageBox.show({
+                                            title:'Mentor Course Assignment Error',
+                                            msg: 'The provided course number is invalid!',
+                                            buttons: Ext.Msg.OK,
+                                            icon: Ext.Msg.ERROR
+                                        });
+                                    }
+                                }
+                                else
+                                {
+                                    //Show an error dialogue if the course assignment already exists
+                                    Ext.MessageBox.show({
+                                        title:'Mentor Course Assignment Error',
+                                        msg: 'The course assignment already<br/>exists for this mentor!',
+                                        buttons: Ext.Msg.OK,
+                                        icon: Ext.Msg.ERROR
+                                    });
+                                }
+                            });
+                    }
+                }
+            },
+            {
+                text: 'Clear',
+                xtype: 'button',
+                handler: function()
+                {
+                    //Reset the Course Number TextField
+                    this.up('toolbar').items.items[0].reset();
+                }
+            }],
+            renderTo: 'extContentDiv',
+            width: 290,
+            height: 300,
+            selType: 'rowmodel',
+            plugins: [
+                Ext.create('Ext.grid.plugin.CellEditing', {
+                    clicksToEdit: 1
+                })
+            ],
+            listeners:
+            {
+                //beforeedit event is used here to prevent the edit view from displaying if the user clicks the delete button
+                beforeedit: function (grid, e, eOpts)
+                {
+                    return e.column.xtype!=='actioncolumn';
+                }
+            }
+        });
+        
+        //Button for closing the tool window
+        var Close=Ext.create('Ext.Button',
+        {
+            text: 'Close',
+            renderTo: 'divCloseButton',
+            handler: function()
+                {
+                    window.close();
+                }
+        });
+        
+        Ext.onReady(function()
+        {
+            //Clear any data currently in the data store
+            courseMentorStore.removeAll(true);
+            
+            //Query for all MentorCourseAssignment__c objects associated with the current Mentor
+            sforce.connection.query("select ID, Mentor__c, CourseNumber__c, MentorOfficeHours__c, ActivityDate__c, ActiveChk__c from MentorCourseAssignment__c where Mentor__c='{!Mentor__c.User__c}'",
+                function(result)
+                {
+                    result.size *= 1;
+                    result.done = result.done == "true";
+                    result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                
+                    courseMentorStore.loadRawData(result.records, true);
+                });
+        });
+    </script>
+</body>
+</html>
+</apex:page>

@@ -1,0 +1,38 @@
+<apex:page sidebar="false" title="Course Announcements" showHeader="false" standardstylesheets="false" controller="CommonsSidebarController" applyBodyTag="false">
+    <head>
+        <title>Course Announcements</title>
+        <c:CommonsStaticResources />
+        <script>
+            $(window).load(function() {
+                markAnnouncementsAsViewed();
+            });
+        </script>
+    </head>
+    <body class='cc-popup'>
+        <apex:form >
+            <apex:actionFunction action="{!markAnnouncementsAsViewed}" name="markAnnouncementsAsViewed"  rerender="none" />
+        </apex:form>
+        <div class="banner__ribbon">
+            <h2><span class='btn btn--square btn--dark '><span class='icon icon--exclamation'></span></span>Course Announcements</h2>   
+        </div>
+        <div class="cc-popup__content">
+            <div class="well well--bottom full-box">
+                <div class='scroll' style='height: 320px;'>
+                    <ul class='cc-list'>
+                        <apex:repeat value="{!courseCommunityAnnouncement}" var="announcement">
+                            <li><span class='date'>
+                                <apex:outputText value="{0,date,MM/dd/yyyy}">
+                                    <apex:param value="{!announcement.createdDate}" />
+                                </apex:outputText>
+                                - </span><apex:outputtext escape="false" value="{!announcement.MyResponse__c}" /></li>
+                        </apex:repeat>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="full-box well well--invisible clearfix">
+                <button class="btn right" data-action='close'><span class="icon icon--close"></span> Close Window</button>
+            </div>
+        </div>
+    </body>
+</apex:page>

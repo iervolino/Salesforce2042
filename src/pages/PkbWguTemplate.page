@@ -1,0 +1,129 @@
+<apex:page cache="false"
+  standardStylesheets="false"
+  showHeader="false"
+  sidebar="false"
+  standardController="KnowledgeArticle"
+  extensions="pkb_Controller"
+  language="{!$CurrentPage.parameters.l}"
+  applyBodyTag="false"
+  applyHtmlTag="false"
+  >
+<html>
+<head>
+  <title>{!pageTitle}</title>
+      <link rel="shortcut icon" href="{!$Resource.WGUFavicon}" />
+    <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width"/>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!--<script src="{!$Resource.pkb_jquery_1_6_2}" type="text/javascript" />-->
+    
+    <!--<script src="{!$Resource.pkb_jquery_simplemodal_1_4_1}" type="text/javascript" />-->
+    
+        <!--<apex:includeScript value="{!URLFOR($Resource.pkb_jquery_1_6_2)}"/>-->
+            
+        <!--<apex:includeScript value="{!URLFOR($Resource.pkb_jquery_simplemodal_1_4_1)}"/>-->
+        
+    <apex:includeScript value="{!URLFOR($Resource.PKBassets, 'global/js/libs/jQuery.wgu.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.PKBassets, 'global/js/libs/jQueryUI.wgu.min.js')}"/>
+
+    <apex:includeScript value="{!URLFOR($Resource.PKBassets, 'global/js/build/wgu.min.js')}"/>
+    <apex:outputText rendered="{!viewingArticle}">
+    <apex:variable var="typeName" value="{!SUBSTITUTE(pkbCon.theKad.articleTypeName, pkbCon.kavExtension, '')}" />
+    <apex:variable var="articleURL" value="{!pkbCon.currentSiteUrl}articles{!pkbCon.selectedLanguageURL}{!typeName}/{!pkbCon.theKad.urlName}" />
+        <meta property="og:title" content="{!pkbCon.theKad.title}"/> 
+        <meta property="og:type" content="article"/>
+        <meta property="og:url" content="{!articleURL}"/> 
+        <meta property="og:site_name" content="{!SUBSTITUTE(pkbCon.siteName,'_',' ')}" /> 
+        <meta property="og:description" content="{!pkbCon.theKad.summary}"/>
+        <meta property="description" content="{!pkbCon.theKad.summary}"/>
+        <link rel="canonical" href="{!articleURL}"/>
+    </apex:outputText>
+    <c:PkbWguJs pkbCon="{!pkbCon}" />
+    <apex:stylesheet value="{!URLFOR($Resource.PKBassets, 'global/css/build/wgu.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.PKBassets, 'knowledgeBase/css/build/kb.min.css')}"/>
+
+</head>
+
+<body>
+
+<!--
+HELPFUL DEBUG DATA
+
+SITE ADMIN: {!pkbCon.siteAdmin.Email}, {!pkbCon.siteAdmin.Name}<br/>
+ALL PARAMS: {!allSearchParams}<br/>
+SITE/PAGE URL: {!pkbCon.currentSiteUrl}<br/>
+FEEDBACK? : {!displayFeedback}<br/>
+SESSION: {!$Api.Session_ID}<br/>
+RSS URL: {!$Page.pkb_RSS}<br/>
+CATEGORIES: {!selectedCategory}<br/>
+KNOWLEDGE ARTICLE ID: {!theKad.Id}<br/>
+KNOWLEDGE ARTICLE ID (FROM CONTROLLER): {!KnowledgeArticle.Id}<br/>
+-->
+
+<!--  HOME PAGE LAYOUT -->
+    <div class="nav">
+        <div class="nav__inner">
+            <img src="{!URLFOR($Resource.PKBassets, 'global/images/logo.png')}" alt="" />
+        </div>
+    </div>
+    <div class="nav__ribbon"></div>
+
+
+    <div class="container clearfix">
+        <c:PkbWguSearchBar />
+        
+        <!-- Home & Search Results -->
+        <div class="quarter-box break kb__narrow-search ">
+            <apex:outputText rendered="{!NOT(viewingArticle)}">
+                <apex:outputText rendered="{!pkbCon.displayNarrow}">
+                    <h3>{!$Label.PKB2_Narrow_Search}</h3>
+                    <hr />
+                    <apex:outputText rendered="{!pkbCon.displayCategory1}">
+                        <c:PkbWguCategorySelect catNum="1" catGroup="{!pkbCon.categoryGroup1}" catGroupLabel="{!pkbCon.categoryLabel1}" rootCat="{!pkbCon.rootCategory1}" />
+                    </apex:outputText>
+                    <apex:outputText rendered="{!pkbCon.displayCategory2}">
+                        <c:PkbWguCategorySelect catNum="2" catGroup="{!pkbCon.categoryGroup2}" catGroupLabel="{!pkbCon.categoryLabel2}" rootCat="{!pkbCon.rootCategory2}" />
+                    </apex:outputText>
+                    <apex:outputText rendered="{!pkbCon.displayCategory3}">
+                        <c:PkbWguCategorySelect catNum="3" catGroup="{!pkbCon.categoryGroup3}" catGroupLabel="{!pkbCon.categoryLabel2}" rootCat="{!pkbCon.rootCategory3}" />
+                    </apex:outputText>
+                    <script type="text/javascript">setCurrCategories();</script>
+                </apex:outputText>
+            </apex:outputText>
+        </div>
+
+        <div class='spacer-padding--30 hidden--large'></div>
+        
+        <!-- Home -->
+        <div class="three-quarters-box ">
+            <div class="well well--bottom" >
+                <apex:outputText rendered="{!NOT(displayContactUs)}">
+                    <apex:outputText rendered="{!NOT(viewingArticle)}">
+                        <c:PkbWguFeatured pkbCon="{!pkbCon}" rendered="{!NOT(searchExecuted)}" />
+                        <c:PkbWguPopular pkbCon="{!pkbCon}" rendered="{!NOT(searchExecuted)}" />
+                        <c:PkbWguResults pkbCon="{!pkbCon}" rendered="{!searchExecuted}" showHeaderInfo="true" />
+                    </apex:outputText>
+                </apex:outputText>
+                <apex:outputText rendered="{!viewingArticle}">
+                    <c:PkbWguArticleView pkbCon="{!pkbCon}" showFeedbackYesNo="true" showBackLinks="true" />
+                </apex:outputText>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <div class="footer__inner">
+            
+        </div>
+    </div>
+    
+    <site:googleAnalyticsTracking />
+</body>
+
+</html>
+<site:previewAsAdmin />
+</apex:page>

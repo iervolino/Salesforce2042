@@ -1,0 +1,1710 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Contains information about student ADA self-disclosure and requests. This object contains sensitive student information and should only be available to the ADA coordinator and Director of Student Services.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>ADAQuickEmail__c</fullName>
+        <description>Formula that allows user to select a quick button to send an email to the student, student&apos;s other email, from the adasupport@wgu.edu email address.</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;/_ui/core/email/author/EmailAuthor?p3_lkid=&quot;&amp;Id&amp;&quot;&amp;p2_lkid=&quot;&amp;Contact__r.Id&amp;&quot;&amp;p4=&quot;&amp;Contact__r.OtherEmail__c&amp; 
+&quot;&amp;p26=adasupport@wgu.edu&amp;retURL=/&quot;&amp;Id,IMAGE(&quot;/servlet/servlet.ImageServer?id=015a00000023DzZ&amp;oid=00Df0000002MhY1&amp;lastMod=1369231498000&quot;,&quot;Send Email&quot;),&quot;_self&quot; )</formula>
+        <label>ADA Quick Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ADARelatedFile__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup to related ADA File for Internal Referral record type.</description>
+        <externalId>false</externalId>
+        <label>ADA Related File</label>
+        <referenceTo>ADAFile__c</referenceTo>
+        <relationshipLabel>ADA Files</relationshipLabel>
+        <relationshipName>ADAFiles</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AccommodationReason__c</fullName>
+        <description>Describe how an accommodation will enable you to be successful as a student</description>
+        <externalId>false</externalId>
+        <label>Accommodation Reason</label>
+        <length>5000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Accommodation__c</fullName>
+        <externalId>false</externalId>
+        <label>Accommodation</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Additional Tutoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Aide for Reading</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Aide for Typing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scribes during Objective Assessment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alternative Assessment Delivery</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alternative Communication Method</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alternative Learning Resources</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alternative/Modified Test Solutions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Auxiliary Aids</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Calculator: Approved by WGU</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Extended Objective Assessment Time</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Extended Pre-Assessment Time</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internal Screen Share and Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Intermittent Breaks: Bathroom</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Intermittent Breaks: Food and Drink</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Intermittent Breaks:  Stretching</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Keystroke Override for OLP</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Notes:  Approved by WGU</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Part-Time Enrollment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prescription Medication Allowed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Quiet Room during Objective Assessment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reading Out Loud during Assessments</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Work with one Course Mentor per course</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>AllDocumentsReceived__c</fullName>
+        <description>Date field that indicates when all the ADA documents were received.</description>
+        <externalId>false</externalId>
+        <label>All Documents Received</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>AlternateEmail__c</fullName>
+        <externalId>false</externalId>
+        <label>Alternate Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApprovedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Approved Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>AssistiveSoftware__c</fullName>
+        <description>Please list any and all assistive software (including version if known), tools, and/or aids that are currently used as a result of your disability.</description>
+        <externalId>false</externalId>
+        <label>Assistive Software</label>
+        <length>5000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Awareness__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Student Aware of Referral</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BannerID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.StudentID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Banner ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BestTimetoContact__c</fullName>
+        <externalId>false</externalId>
+        <label>Best Time to Contact</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Daytime</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Evening (6-8pm)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ContactMethod__c</fullName>
+        <externalId>false</externalId>
+        <label>Contact Method</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>ADA Files</relationshipLabel>
+        <relationshipName>ADAFiles</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CreatedByDepartment__c</fullName>
+        <description>Formula field that displays the department the created works in.</description>
+        <externalId>false</externalId>
+        <formula>CreatedBy.Department</formula>
+        <label>Created By Department</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DaytimePhone__c</fullName>
+        <externalId>false</externalId>
+        <label>Daytime Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>DiagnosticianLetterDocumentation__c</fullName>
+        <externalId>false</externalId>
+        <label>Diagnostician Letter/Documentation</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Received</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Acceptable</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Received</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Needs Updated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DisabilityCategory__c</fullName>
+        <externalId>false</externalId>
+        <label>Disability Category</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Auditory System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Brain/Head Trauma</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Circulatory System/Cardiovascular System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Developmental Disorder</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Digestive System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Endocrine System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Immune System/Lymphatic System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Integumentary System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Learning Disorder</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Missing Limbs/Body Parts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Muscular System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nervous System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Neurological</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Psychiatric Disorder</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reproductive System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Respiratory System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Skeletal System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Urinary System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Visual System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Speech</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>EveningPhone__c</fullName>
+        <externalId>false</externalId>
+        <label>Evening Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>FirstName__c</fullName>
+        <externalId>false</externalId>
+        <label>First Name</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastName__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Name</label>
+        <length>60</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Limitations__c</fullName>
+        <description>(Medical documentation on these limitations must be submitted in order to complete this request.)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Describe in your own words limitations caused by the condition you have named.</inlineHelpText>
+        <label>Limitations</label>
+        <length>2500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>MedicalReleaseForm__c</fullName>
+        <externalId>false</externalId>
+        <label>Medical Release Form</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Received</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Acceptable</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Received</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Needs Updated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Message__c</fullName>
+        <externalId>false</externalId>
+        <label>Reason for Referral</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>MyDisability__c</fullName>
+        <externalId>false</externalId>
+        <label>My Disability</label>
+        <length>1500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>OperatingSystem__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Please indicate your current operating system software type (Mac/Windows/Linux/Other) and version, if known.</inlineHelpText>
+        <label>Operating System</label>
+        <length>500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>PermissionsForm__c</fullName>
+        <externalId>false</externalId>
+        <label>Permissions Form</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Received</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Acceptable</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Received</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Needs Updated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>PermissionsGranted__c</fullName>
+        <externalId>false</externalId>
+        <label>Permissions Granted</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Temporary Accommodation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accommodations Only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disability and Accommodations</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Permission – Do Not Discuss</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>PrimaryEmail__c</fullName>
+        <externalId>false</externalId>
+        <label>Primary Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReferralType__c</fullName>
+        <externalId>false</externalId>
+        <label>Referral Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Enrollment Counselor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Handbook</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ReferredBy__c</fullName>
+        <description>Open text field that will house the name of the person who referred the student to the ADA office.</description>
+        <externalId>false</externalId>
+        <label>Referred By</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referrer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Referrer</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>ADAFiles</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ReviewedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Reviewed Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Requested</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Under Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Awaiting Student Feedback</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reviewed Pending Finalization</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Denied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Appeal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Start</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>StudentID__c</fullName>
+        <externalId>false</externalId>
+        <label>Student ID</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>Student Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Prospective</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Orientation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Student (First Term)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Current Student (Term 2+)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TimeZone__c</fullName>
+        <externalId>false</externalId>
+        <label>Time Zone</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>ADA File</label>
+    <listViews>
+        <fullName>ADA1NewSelfDisclosures</fullName>
+        <columns>NAME</columns>
+        <columns>LAST_ACTIVITY</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>BannerID__c</columns>
+        <columns>Status__c</columns>
+        <columns>FirstName__c</columns>
+        <columns>LastName__c</columns>
+        <columns>StudentStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ADAFile__c.SelfDisclosure</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Inquiry,Requested</value>
+        </filters>
+        <label>ADA1: New Self-Disclosures</label>
+        <sharedTo>
+            <role>ADASupportAdministrator</role>
+            <role>Registrar</role>
+            <role>StudentConductAdministrator</role>
+            <role>StudentServicesDirector</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ADA2NewReferrals</fullName>
+        <columns>NAME</columns>
+        <columns>Contact__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>TimeZone__c</columns>
+        <columns>StudentStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ADAFile__c.Referral</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Requested,Under Review,Approved,Denied,In Appeal,Pending Start,Closed</value>
+        </filters>
+        <label>ADA2: New Referrals</label>
+        <sharedTo>
+            <group>ADASupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ADA3UnderReview</fullName>
+        <columns>Status__c</columns>
+        <columns>NAME</columns>
+        <columns>LAST_ACTIVITY</columns>
+        <columns>BannerID__c</columns>
+        <columns>StudentStatus__c</columns>
+        <columns>AllDocumentsReceived__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Under Review,Awaiting Student Feedback,In Appeal</value>
+        </filters>
+        <label>ADA3: Under Review</label>
+        <sharedTo>
+            <role>ADASupportAdministrator</role>
+            <role>Registrar</role>
+            <role>StudentConductAdministrator</role>
+            <role>StudentServicesDirector</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ADA4ApprovedPendingStart</fullName>
+        <columns>Status__c</columns>
+        <columns>NAME</columns>
+        <columns>Contact__c</columns>
+        <columns>BannerID__c</columns>
+        <columns>StudentStatus__c</columns>
+        <columns>AllDocumentsReceived__c</columns>
+        <columns>DiagnosticianLetterDocumentation__c</columns>
+        <columns>MedicalReleaseForm__c</columns>
+        <columns>PermissionsForm__c</columns>
+        <columns>ReviewedDate__c</columns>
+        <columns>ApprovedDate__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Pending Start</value>
+        </filters>
+        <label>ADA4: Approved, Pending Start</label>
+        <sharedTo>
+            <role>ADASupportAdministrator</role>
+            <role>Registrar</role>
+            <role>StudentConductAdministrator</role>
+            <role>StudentServicesDirector</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ADA5Denied</fullName>
+        <columns>Status__c</columns>
+        <columns>NAME</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>Contact__c</columns>
+        <columns>StudentStatus__c</columns>
+        <columns>ReviewedDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Denied</value>
+        </filters>
+        <label>ADA5: Denied</label>
+        <sharedTo>
+            <group>ADASupport</group>
+            <role>ADASupportAdministrator</role>
+            <role>Registrar</role>
+            <role>StudentConductAdministrator</role>
+            <role>StudentServicesDirector</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ADA6AllADAFiles</fullName>
+        <columns>NAME</columns>
+        <columns>Contact__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>AllDocumentsReceived__c</columns>
+        <columns>Status__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>ApprovedDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>ADA6: All ADA Files</label>
+        <sharedTo>
+            <role>ADASupportAdministrator</role>
+            <role>Registrar</role>
+            <role>StudentConductAdministrator</role>
+            <role>StudentServicesDirector</role>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>ADA File Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>ADA Files</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Referral</fullName>
+        <active>true</active>
+        <description>Record type used for internal staff ADA referrals.</description>
+        <label>Referral</label>
+        <picklistValues>
+            <picklist>Accommodation__c</picklist>
+            <values>
+                <fullName>Additional Tutoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aide for Reading</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aide for Typing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alternative Assessment Delivery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alternative Communication Method</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alternative Learning Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alternative%2FModified Test Solutions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Auxiliary Aids</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Calculator%3A Approved by WGU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Extended Objective Assessment Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Extended Pre-Assessment Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intermittent Breaks%3A  Stretching</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intermittent Breaks%3A Bathroom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intermittent Breaks%3A Food and Drink</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Screen Share and Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keystroke Override for OLP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Notes%3A %C2%A0Approved by WGU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Part-Time Enrollment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prescription Medication Allowed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quiet Room during Objective Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reading Out Loud during Assessments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scribes during Objective Assessment</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>BestTimetoContact__c</picklist>
+            <values>
+                <fullName>Daytime</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Evening %286-8pm%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ContactMethod__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DiagnosticianLetterDocumentation__c</picklist>
+            <values>
+                <fullName>Needs Updated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Acceptable</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Received</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DisabilityCategory__c</picklist>
+            <values>
+                <fullName>Auditory System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain%2FHead Trauma</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Circulatory System%2FCardiovascular System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developmental Disorder</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Digestive System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrine System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Immune System%2FLymphatic System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Integumentary System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Disorder</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Missing Limbs%2FBody Parts</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Muscular System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nervous System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurological</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychiatric Disorder</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reproductive System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Respiratory System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Skeletal System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Speech</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Urinary System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Visual System</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>MedicalReleaseForm__c</picklist>
+            <values>
+                <fullName>Needs Updated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Acceptable</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Received</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PermissionsForm__c</picklist>
+            <values>
+                <fullName>Needs Updated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Acceptable</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Received</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PermissionsGranted__c</picklist>
+            <values>
+                <fullName>Accommodations Only</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disability and Accommodations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Permission %E2%80%93 Do Not Discuss</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Temporary Accommodation</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralType__c</picklist>
+            <values>
+                <fullName>Enrollment Counselor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handbook</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Student</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Student Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Appeal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inquiry</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Pending Start</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reviewed Pending Finalization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>StudentStatus__c</picklist>
+            <values>
+                <fullName>Current Student %28Term 2%2B%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Student %28First Term%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Orientation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prospective</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>SelfDisclosure</fullName>
+        <active>true</active>
+        <description>Record type used for student self-disclosure of needed ADA accommodation.</description>
+        <label>Self Disclosure</label>
+        <picklistValues>
+            <picklist>Accommodation__c</picklist>
+            <values>
+                <fullName>Additional Tutoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aide for Reading</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aide for Typing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alternative Assessment Delivery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alternative Communication Method</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alternative Learning Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alternative%2FModified Test Solutions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Auxiliary Aids</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Calculator%3A Approved by WGU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Extended Objective Assessment Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Extended Pre-Assessment Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intermittent Breaks%3A  Stretching</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intermittent Breaks%3A Bathroom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intermittent Breaks%3A Food and Drink</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Screen Share and Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keystroke Override for OLP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Notes%3A %C2%A0Approved by WGU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Part-Time Enrollment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prescription Medication Allowed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quiet Room during Objective Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reading Out Loud during Assessments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scribes during Objective Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Work with one Course Mentor per course</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>BestTimetoContact__c</picklist>
+            <values>
+                <fullName>Daytime</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Evening %286-8pm%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ContactMethod__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DiagnosticianLetterDocumentation__c</picklist>
+            <values>
+                <fullName>Needs Updated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Acceptable</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Received</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DisabilityCategory__c</picklist>
+            <values>
+                <fullName>Auditory System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain%2FHead Trauma</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Circulatory System%2FCardiovascular System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developmental Disorder</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Digestive System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrine System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Immune System%2FLymphatic System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Integumentary System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Disorder</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Missing Limbs%2FBody Parts</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Muscular System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nervous System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurological</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychiatric Disorder</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reproductive System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Respiratory System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Skeletal System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Speech</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Urinary System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Visual System</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>MedicalReleaseForm__c</picklist>
+            <values>
+                <fullName>Needs Updated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Acceptable</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Received</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PermissionsForm__c</picklist>
+            <values>
+                <fullName>Needs Updated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Acceptable</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Received</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PermissionsGranted__c</picklist>
+            <values>
+                <fullName>Accommodations Only</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disability and Accommodations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Permission %E2%80%93 Do Not Discuss</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Temporary Accommodation</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralType__c</picklist>
+            <values>
+                <fullName>Enrollment Counselor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handbook</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Student</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Student Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Appeal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Start</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Reviewed Pending Finalization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>StudentStatus__c</picklist>
+            <values>
+                <fullName>Current Student %28Term 2%2B%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Student %28First Term%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Orientation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prospective</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>Private</sharingModel>
+    <webLinks>
+        <fullName>ViewDocuments</fullName>
+        <availability>online</availability>
+        <description>Link to view documents from On-Base related to the student ID.</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View Documents</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://imaging.wgu.edu/AppNet/docpop/docpop.aspx?KT102_0_0_0={!ADAFile__c.StudentID__c}&amp;clienttype=activex&amp;cqid=115</url>
+        <width>450</width>
+    </webLinks>
+</CustomObject>

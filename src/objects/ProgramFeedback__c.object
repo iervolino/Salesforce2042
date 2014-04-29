@@ -1,0 +1,2522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Item to house course and other product information gathered from feedback forms.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>CUsChanged__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Are the CUs affected by this change?</inlineHelpText>
+        <label>CUs Changed</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ChangeOwner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Change Owner</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>College__c</fullName>
+        <externalId>false</externalId>
+        <label>College</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>General Education</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health Professions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information Technology</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teachers College</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>CommunicationPlan__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Is there any communication before or after?</inlineHelpText>
+        <label>Communication Plan</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CourseChangesNeeded__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Does the change warrant other changes to the course (e.g., rubric, evaluation notes)?</inlineHelpText>
+        <label>Course Changes Needed</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>DateClosed__c</fullName>
+        <description>Date the record was closed</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the record was closed</inlineHelpText>
+        <label>DateClosed</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DegreeProgram__c</fullName>
+        <description>Submitting User&apos;s Degree Program</description>
+        <externalId>false</externalId>
+        <formula>OriginalFeedbackSubmitter__r.Contact.WGUDegreeProgram__r.Name</formula>
+        <inlineHelpText>Submitting User&apos;s Degree Program</inlineHelpText>
+        <label>Degree Program</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Feedback description details</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Feedback description details</inlineHelpText>
+        <label>Description</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DuplicateOfRecord__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Product Feedback object of which this record is a duplicate.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Product Feedback object of which this record is a duplicate.</inlineHelpText>
+        <label>Duplicate of Record</label>
+        <referenceTo>ProgramFeedback__c</referenceTo>
+        <relationshipName>ProductFeedback</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>External_Resources__c</fullName>
+        <description>Any Teams that are needed as a resource to help with this issue.</description>
+        <externalId>false</externalId>
+        <label>External Resources</label>
+        <picklist>
+            <picklistValues>
+                <fullName>E-Care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LegacyCreatedDate__c</fullName>
+        <description>The date which the record was added to the legacy system</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date which the record was added to the legacy system</inlineHelpText>
+        <label>Legacy Created Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <description>Location where the change will occur</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please describe where this change should occur. If CoS change, please provide both the subject and topic as listed in the course menu of the course of study.</inlineHelpText>
+        <label>Location</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>OriginalFeedbackSubmitter__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The user that originally submitted the feedback</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The user that originally submitted the feedback</inlineHelpText>
+        <label>Original Feedback Submitter</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>ProductFeedback</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>OtherCoursesAffected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Are there any other courses affected by this change?</inlineHelpText>
+        <label>Other Courses Affected</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Priority__c</fullName>
+        <description>Priority of the feedback</description>
+        <externalId>false</externalId>
+        <label>Priority</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Urgent</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>High</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medium</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Queue__c</fullName>
+        <defaultValue>&apos;Program Feedback Triage&apos;</defaultValue>
+        <description>Last queue to which this record was assigned</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Last queue to which this record was assigned</inlineHelpText>
+        <label>Queue</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Recommendation__c</fullName>
+        <externalId>false</externalId>
+        <label>Recommendation</label>
+        <length>600</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>The status or stage of processing the feedback</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The status or stage of processing the feedback</inlineHelpText>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed - No Action Required</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>For Future Development</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Legacy Closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Open</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Scheduled Release</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Vendor Reply</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reopened</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>StudentID__c</fullName>
+        <description>Banner ID from the submitting user&apos;s contact record</description>
+        <externalId>false</externalId>
+        <formula>OriginalFeedbackSubmitter__r.Contact.StudentID__c</formula>
+        <label>Student ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentMentorEmail__c</fullName>
+        <description>Submitting User&apos;s Mentor&apos;s Email</description>
+        <externalId>false</externalId>
+        <formula>OriginalFeedbackSubmitter__r.Contact.Mentor__r.Email</formula>
+        <inlineHelpText>Submitting User&apos;s Mentor&apos;s Email</inlineHelpText>
+        <label>Student Mentor Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentMentor__c</fullName>
+        <description>Submitting User&apos;s Mentor</description>
+        <externalId>false</externalId>
+        <formula>OriginalFeedbackSubmitter__r.Contact.Mentor__r.FirstName &amp; &apos; &apos; &amp; OriginalFeedbackSubmitter__r.Contact.Mentor__r.LastName</formula>
+        <inlineHelpText>Submitting User&apos;s Mentor</inlineHelpText>
+        <label>Student Mentor</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentPhone__c</fullName>
+        <externalId>false</externalId>
+        <formula>OriginalFeedbackSubmitter__r.Contact.Phone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentsAffected__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Approximate Number of Students Affected</inlineHelpText>
+        <label>Students Affected</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Less Than 50</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>50-199</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>200-349</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>350-499</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>More Than 500</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SubmitterFirstName__c</fullName>
+        <description>Submitter&apos;s First Name</description>
+        <externalId>false</externalId>
+        <formula>OriginalFeedbackSubmitter__r.FirstName</formula>
+        <inlineHelpText>Submitter&apos;s First Name</inlineHelpText>
+        <label>Submitter First Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SubmitterLastName__c</fullName>
+        <description>Submitter&apos;s Last Name</description>
+        <externalId>false</externalId>
+        <formula>OriginalFeedbackSubmitter__r.LastName</formula>
+        <inlineHelpText>Submitter&apos;s Last Name</inlineHelpText>
+        <label>Submitter Last Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SubmitterRole__c</fullName>
+        <description>The user role of the person that submitted the feedback</description>
+        <externalId>false</externalId>
+        <label>Submitter Role</label>
+        <picklist>
+            <picklistValues>
+                <fullName>CM Maintenance SME</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course Mentor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor/Mentor Manager</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Staff/Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Mentor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Subtype__c</fullName>
+        <description>Subtype of feedback</description>
+        <externalId>false</externalId>
+        <label>Subtype</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Assessment - Caseload</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment - Coaching report</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment – Content issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment - Exam item(s) needs to be reviewed for accuracy.</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment - Exam needs to be reviewed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment - Grammar errors or typos</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment - Need to update the 3rd party exam</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment – Order of tasks issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment - Preassessment Content Issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment preparation box not working</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment – Rubric details issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment - Task instructions issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CoS  - Activity instructions issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>COS - Arrangement of CoS issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CoS - Broken links</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CoS - Contact a Course Mentor Update</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CoS – Content issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CoS - Grammar errors or typos</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CoS - Portal Experience</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CoS – Upgrade suggestion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course CU Concern</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course - QA Review Assessment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course - QA Review CoS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course - QA Review Learning Resource</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course - Quality and Maintenance Check</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Evaluation - Guided Protocol Pilot</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Evaluation - Layered Feedback Pilot</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Evaluation - Object Exam</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Evaluation - Performance Assessment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Evaluation - Pilot Feedback</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Evaluation - Scheduling Issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>General Complaint</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>HTML formatting problems</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ideas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LR Access</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LR - Broken links</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LR - Content Issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LR - Not functioning properly</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LR - Platform &amp; LR Change</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LR - Platform Change</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LR Suggestions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LR Vendor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor - Community update request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor - Course welcome video</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor - Teach the Gap Knowledge Base</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor - Teach the Gap opportunity</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor - Teach the Gap supplemental resources</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor - Teach the Gap videos</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor Training</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Overall Course Issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Personnel complaints</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Praise</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program Design</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Services – Contact student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Training</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>University Policy Issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Ticket_Age_in_days__c</fullName>
+        <description>This Field will help calculate the difference of the number of days &quot;date created&quot; - &quot;today&quot; until there is a date closed on the ticket. If there is a date closed it stops calculating. If a date closed is removed it will start re-calculating. We need it to update automatically not only when record is edited.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL(Status__c , &quot;Open&quot; ), ROUND(NOW()-CreatedDate, 0), 
+IF(ISPICKVAL(Status__c , &quot;In Progress&quot; ), ROUND(NOW()-CreatedDate, 0), 
+IF(ISPICKVAL(Status__c , &quot;Reopened&quot; ), ROUND(NOW()-CreatedDate, 0), 
+IF(ISPICKVAL(Status__c , &quot;Duplicate&quot; ), ROUND(NOW()-CreatedDate, 0),
+IF(ISPICKVAL(Status__c , &quot;For Future Development&quot; ), ROUND(NOW()-CreatedDate, 0),
+IF(ISPICKVAL(Status__c , &quot;Pending Vendor Reply&quot; ), ROUND(NOW()-CreatedDate, 0),
+IF(ISPICKVAL(Status__c , &quot;Pending Scheduled Release&quot; ), ROUND(NOW()-CreatedDate, 0),
+IF(ISPICKVAL(Status__c , &quot;Closed&quot; ), ROUND(DateClosed__c-CreatedDate, 0), 
+IF(ISPICKVAL(Status__c , &quot;Closed - No Action required&quot; ), ROUND(DateClosed__c-CreatedDate, 0),
+IF(ISPICKVAL(Status__c , &quot;Legacy Closed&quot; ), ROUND(DateClosed__c-CreatedDate, 0), NULL))))))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Ticket Age in days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Timezone__c</fullName>
+        <description>Submitting User&apos;s Timezone</description>
+        <externalId>false</externalId>
+        <formula>OriginalFeedbackSubmitter__r.Contact.Timezone__c</formula>
+        <inlineHelpText>Submitting User&apos;s Timezone</inlineHelpText>
+        <label>Timezone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <description>Type of change required</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Type of change required</inlineHelpText>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Fast Lane</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Minor Enhancement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Major Enhancement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Praise</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teach the Gap</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Special Project</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>WGUCourseName__c</fullName>
+        <description>Free-text field for use on the entry form to self-report the course code</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Free-text field for use on the entry form to self-report the course code</inlineHelpText>
+        <label>WGU Course Name</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WGUCourse__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The course to which the feedback is tied</description>
+        <externalId>false</externalId>
+        <label>WGU Course</label>
+        <referenceTo>WGUCourse__c</referenceTo>
+        <relationshipName>ProductFeedback</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Program Feedback</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Priority__c</columns>
+        <columns>College__c</columns>
+        <columns>OriginalFeedbackSubmitter__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>AssessmentMaintenanceFeedbackOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 and 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Ticket_Age_in_days__c</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>assessment maintenance</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>assessment maintenance</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>Type__c</field>
+            <operation>equals</operation>
+            <value>Fast Lane,Minor Enhancement</value>
+        </filters>
+        <label>Assessment Maintenance Feedback Open</label>
+        <sharedTo>
+            <group>AssessmentMaintenance</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>AssessmentMaintenance_Feedback</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>assessment maintenance</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>assessment maintenance</value>
+        </filters>
+        <label>Assessment Maintenance Feedback</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Assessment_Maint_Feedback_Major_Open</fullName>
+        <booleanFilter>(1 OR 2) AND 3 and 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Ticket_Age_in_days__c</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>assessment maintenance</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>assessment maintenance</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>Type__c</field>
+            <operation>equals</operation>
+            <value>Major Enhancement</value>
+        </filters>
+        <label>Assessment Maint. Feedback Open Major</label>
+        <sharedTo>
+            <group>AssessmentMaintenance</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CoSFeedback</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>CoS</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>CoS</value>
+        </filters>
+        <label>CoS Feedback</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CoSFeedbackOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>CoS</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>Cos</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>CoS Feedback Open</label>
+        <sharedTo>
+            <group>CoS_Group</group>
+            <group>InstructionalDesignFeedback</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CourseMentorFeedback</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>General Education</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Course Mentor Feedback GE Open</label>
+        <sharedTo>
+            <group>CourseMentorSubjectMatterExperts</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CourseMentorFeedbackAll</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <label>Course Mentor Feedback</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CourseMentorFeedbackBSHIOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4 AND (5 OR 6)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Health Professions</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>WGUCourse__c</field>
+            <operation>contains</operation>
+            <value>EAV1,CLC1,BNC1,CTC1,CWC1,BBT1,EBV1,DGV1,CVV1,BDT1,MGC1,QST1,BFT1</value>
+        </filters>
+        <filters>
+            <field>WGUCourse__c</field>
+            <operation>contains</operation>
+            <value>TPV1,BGT1,DNV1,RYT1,BNT1,CWHJ</value>
+        </filters>
+        <label>Course Mentor Feedback BSHI Open</label>
+        <sharedTo>
+            <group>CourseMentorSubjectMatterExperts</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CourseMentorFeedbackCoBOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Course Mentor Feedback CoB Open</label>
+        <sharedTo>
+            <group>CourseMentorSubjectMatterExperts</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CourseMentorFeedbackHPOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Health Professions</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Course Mentor Feedback HP Open</label>
+        <sharedTo>
+            <group>CourseMentorSubjectMatterExperts</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CourseMentorFeedbackITOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Information Technology</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Course Mentor Feedback IT Open</label>
+        <sharedTo>
+            <group>CourseMentorSubjectMatterExperts</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CourseMentorFeedbackNursingOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Health Professions</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>WGUCourse__c</field>
+            <operation>notContain</operation>
+            <value>CVC1,EAV1,CLC1,BNC1,CTC1,CWC1,BBT1,EBV1,DGV1,CVV1,BDT1,MGC1,QST1,BFT1</value>
+        </filters>
+        <filters>
+            <field>WGUCourse__c</field>
+            <operation>notContain</operation>
+            <value>TPV1,BGT1,DNV1,RYT1,BNT1,CWHJ</value>
+        </filters>
+        <label>Course Mentor Feedback Nursing Open</label>
+        <sharedTo>
+            <group>CourseMentorSubjectMatterExperts</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CourseMentorFeedbackTCOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>course mentor</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Teachers College</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Course Mentor Feedback TC Open</label>
+        <sharedTo>
+            <group>CourseMentorSubjectMatterExperts</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ECare</fullName>
+        <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>External_Resources__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>External_Resources__c</field>
+            <operation>equals</operation>
+            <value>E-Care</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Reopened</value>
+        </filters>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>Evaluation</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>Evaluation</value>
+        </filters>
+        <label>ECare</label>
+        <sharedTo>
+            <group>ECare</group>
+            <group>ECareandPTask</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>EvaluationFeedbackOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>Evaluation</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>Evaluation</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed,Closed - No Action Required</value>
+        </filters>
+        <label>Evaluation Feedback Open</label>
+        <sharedTo>
+            <group>ECare</group>
+            <group>Evaluation_Feedback_Group</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Evaluation_Feedback</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>Evaluation</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>Evaluation</value>
+        </filters>
+        <label>Evaluation Feedback</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>InstructionalDesignFeedbackOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Instructional Design Feedback Open</label>
+        <sharedTo>
+            <group>CoS_Group</group>
+            <group>InstructionalDesignFeedback</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Instructional_Design_Feedback</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <label>Instructional Design Feedback</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Instructional_Design_Feedback_CoB_Open</fullName>
+        <booleanFilter>(1 OR 2) AND 3 and 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </filters>
+        <label>Instructional Design Feedback CoB Open</label>
+        <sharedTo>
+            <group>CoS_Group</group>
+            <group>InstructionalDesignFeedback</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Instructional_Design_Feedback_GE_Open</fullName>
+        <booleanFilter>(1 OR 2) AND 3 and 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>General Education</value>
+        </filters>
+        <label>Instructional Design Feedback GE Open</label>
+        <sharedTo>
+            <group>CoS_Group</group>
+            <group>InstructionalDesignFeedback</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Instructional_Design_Feedback_HP_Open</fullName>
+        <booleanFilter>(1 OR 2) AND 3 and 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Health Professions</value>
+        </filters>
+        <label>Instructional Design Feedback HP Open</label>
+        <sharedTo>
+            <group>CoS_Group</group>
+            <group>InstructionalDesignFeedback</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Instructional_Design_Feedback_IT_Open</fullName>
+        <booleanFilter>(1 OR 2) AND 3 and 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Information Technology</value>
+        </filters>
+        <label>Instructional Design Feedback IT Open</label>
+        <sharedTo>
+            <group>CoS_Group</group>
+            <group>InstructionalDesignFeedback</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Instructional_Design_Feedback_TC_Open</fullName>
+        <booleanFilter>(1 OR 2) AND 3 and 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>Instructional Design Feedback</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Teachers College</value>
+        </filters>
+        <label>Instructional Design Feedback TC Open</label>
+        <sharedTo>
+            <group>CoS_Group</group>
+            <group>InstructionalDesignFeedback</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>LearningOperationsFeedbackCoBOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </filters>
+        <label>Learning Operations Feedback CoB Open</label>
+        <sharedTo>
+            <group>LearningResources</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>LearningOperationsFeedbackGEOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>General Education</value>
+        </filters>
+        <label>Learning Operations Feedback GE Open</label>
+        <sharedTo>
+            <group>LearningResources</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>LearningOperationsFeedbackHPOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Health Professions</value>
+        </filters>
+        <label>Learning Operations Feedback HP Open</label>
+        <sharedTo>
+            <group>LearningResources</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>LearningOperationsFeedbackITOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Information Technology</value>
+        </filters>
+        <label>Learning Operations Feedback IT Open</label>
+        <sharedTo>
+            <group>LearningResources</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>LearningOperationsFeedbackOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>Status__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Ticket_Age_in_days__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Learning Operations Feedback Open</label>
+        <sharedTo>
+            <group>LearningResources</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>LearningOperationsFeedbackTCOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Teachers College</value>
+        </filters>
+        <label>Learning Operations Feedback TC Open</label>
+        <sharedTo>
+            <group>LearningResources</group>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Learning_Operations_Feedback</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>learning operations</value>
+        </filters>
+        <label>Learning Operations Feedback</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>MentoringFeedback</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>mentoring</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>mentoring</value>
+        </filters>
+        <label>Mentoring Feedback</label>
+        <sharedTo>
+            <group>ProgramFeedbackManagement</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>MentoringFeedbackOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>mentoring</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>mentoring</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Mentoring Feedback Open</label>
+        <sharedTo>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ProductFeedbackTriage</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>program feedback</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>program feedback</value>
+        </filters>
+        <label>Program Feedback Triage</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ProgramDevelopmentFeedback</fullName>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <label>Program Development Feedback</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ProgramDevelopmentFeedbackBSHIOpe</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4 AND (5 OR 6)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Health Professions</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>WGUCourse__c</field>
+            <operation>contains</operation>
+            <value>EAV1,CLC1,BNC1,CTC1,CWC1,BBT1,EBV1,DGV1,CVV1,BDT1,MGC1,QST1,BFT1</value>
+        </filters>
+        <filters>
+            <field>WGUCourse__c</field>
+            <operation>contains</operation>
+            <value>TPV1,BGT1,DNV1,RYT1,BNT1,CWHJ</value>
+        </filters>
+        <label>Program Development Feedback BSHI Open</label>
+        <sharedTo>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ProgramDevelopmentFeedbackCoBOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Program Development Feedback CoB Open</label>
+        <sharedTo>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ProgramDevelopmentFeedbackGEOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Ticket_Age_in_days__c</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>General Education</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Program Development Feedback GE Open</label>
+        <sharedTo>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ProgramDevelopmentFeedbackITOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Information Technology</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Program Development Feedback IT Open</label>
+        <sharedTo>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ProgramDevelopmentFeedbackNursingOpe</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Health Professions</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <filters>
+            <field>WGUCourse__c</field>
+            <operation>notContain</operation>
+            <value>CVC1,EAV1,CLC1,BNC1,CTC1,CWC1,BBT1,EBV1,DGV1,CVV1,BDT1,MGC1,QST1,BFT1</value>
+        </filters>
+        <filters>
+            <field>WGUCourse__c</field>
+            <operation>notContain</operation>
+            <value>TPV1,BGT1,DNV1,RYT1,BNT1,CWHJ</value>
+        </filters>
+        <label>Program Development Feedback Nursing Ope</label>
+        <sharedTo>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ProgramDevelopmentFeedbackTCOpen</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Teachers College</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Program Development Feedback TC Open</label>
+        <sharedTo>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Program_Development_Feedback_HP_Open</fullName>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>College__c</columns>
+        <columns>WGUCourse__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Status__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Queue__c</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>contains</operation>
+            <value>program development</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Health Professions</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress,Open,Pending Scheduled Release,Pending Vendor Reply,Reopened</value>
+        </filters>
+        <label>Program Development Feedback HP Open</label>
+        <sharedTo>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Undeleted</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Type__c</columns>
+        <columns>Subtype__c</columns>
+        <columns>Priority__c</columns>
+        <columns>College__c</columns>
+        <columns>OriginalFeedbackSubmitter__c</columns>
+        <columns>SubmitterRole__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>UPDATEDBY_USER</field>
+            <operation>equals</operation>
+            <value>Travis Oliver</value>
+        </filters>
+        <label>Undeleted 4-1-2013</label>
+        <sharedTo>
+            <group>ProgramFeedbackManagement</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <displayFormat>PF-{000000}</displayFormat>
+        <label>ProgramFeedback Name</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Program Feedback</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>College__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>SubmitterRole__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OriginalFeedbackSubmitter__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>WGUCourse__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Priority__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Subtype__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>DuplicateOfRecord</fullName>
+        <active>true</active>
+        <description>If the record status is &apos;Duplicate&apos; the user must fill out the &quot;Duplicate of Record&quot; field as well.</description>
+        <errorConditionFormula>AND( 
+ISPICKVAL(Status__c, &quot;Duplicate&quot;), 
+ISBLANK(DuplicateOfRecord__c) 
+)</errorConditionFormula>
+        <errorDisplayField>DuplicateOfRecord__c</errorDisplayField>
+        <errorMessage>This record&apos;s status as been set to Duplicate. The Duplicate of Record field must contain the record of which this is a duplicate.</errorMessage>
+    </validationRules>
+</CustomObject>

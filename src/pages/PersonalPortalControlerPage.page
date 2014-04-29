@@ -1,0 +1,8 @@
+<apex:page showHeader="false" sidebar="false" controller="PersonalPortalControler">
+	
+        Enrollment Counseler:
+
+{!o}
+
+
+</apex:page>

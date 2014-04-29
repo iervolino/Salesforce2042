@@ -1,0 +1,65 @@
+<apex:page standardController="Idea" sidebar="false" showHeader="false">
+ 
+<apex:iframe src="/ideas/editIdea.apexp" frameborder="false" scrolling="true" height="590px"/>
+
+<apex:form >
+     
+<apex:pageBlock >
+<apex:pageBlockSection collapsible="true" columns="2" title="Additional Help" showHeader="true" id="IdeasHelp">
+  
+<apex:pageBlockSectionItem >
+  <table class="Department Help" >
+               
+                <tr>
+                   <span class="boldline"> <h1>Which one is the correct department?</h1></span>
+                </tr>    
+                        <ul>
+                            <li><b>University Wide (Multiple Departments):</b>  Any idea that takes the coordination of two or more departments or that affects the entire university.</li><br/>
+                            <li><b>Academic Services:</b> Ideas related to student services, transcript evaluations, education without boundaries, student records.</li><br/>
+                            <li><b>Alumni/Career Services</b></li><br/>
+                            <li><b>Assessment:</b> Ideas related to assessment Development, Assessment Scheduling, Performance Evaluation, Grading Rubrics, and field placement.</li><br/> 
+                            <li><b>Course Mentoring</b></li><br/>
+                            <li><b>Student Mentoring</b></li><br/>
+                            <li><b>Enrollment</b></li><br/>
+                            <li><b>Finance / Bursar:</b> Ideas related to payment or billing.</li><br/>
+                            <li><b>Financial Aid:</b> Ideas related to Financial Aid and Veteran Affairs.</li><br/>
+                            <li><b>HR:</b> Ideas related to human resources. </li><br/>
+                            <li><b>Institutional Research:</b> Ideas related to data collection and reporting.</li><br/>
+                            <li><b>IT:</b> Ideas related to software development, hardware changes (phones, laptops, etc.), helpdesk improvements, and other IT related services.</li><br/>
+                            <li><b>Marketing/PR/Strategic Relations:</b> Ideas related to marketing, social media, scholarships, WGU website, and WGU relationships with media, education, business, and community partners.</li><br/>
+                            <li><b>New Student Experience:</b></li><br/>
+                            <li><b>Program Development:</b> Program Development, Learning Resources, Course Content, Degree Ideas.</li><br/>
+
+                          </ul>
+            </table>
+      </apex:pageBlockSectionItem>
+      
+     <apex:pageBlockSectionItem >
+           
+      <table class="Expectations">
+               
+                <tr>
+                   <span class="boldline"> <h1>What outcome should I expect from this idea?</h1></span>
+                  
+                <p>Your idea will be reviews by a WGU Ideas moderator. Please expect at least 30 days before a new idea receives a status update or other action. The potential outcomes for your idea are the following: </p>
+                        </tr> 
+                         <ul>
+                            <li><b>Closed (solution exists):</b> The aims of this idea are achieved by a policy or resource already in place.</li><br/>
+                            <li><b>Closed (approved for implementation): </b> The moderator and departmental decision-makers have decided to put this idea into place. </li><br/>
+                            <li><b>Closed (not applicable):</b> This idea falls outside the types of suggestions WGU Ideas is intended to address.</li><br/>
+                            <li><b>Closed (deferred to department):</b> A set of reasons prevent this idea from being implemented at the time but it may warrant future consideration.</li><br/>
+                            <li><b>Closed (not implemented): </b> The decision has been made not to implement this idea. </li><br/>
+                        </ul>
+            </table>
+       </apex:pageBlockSectionItem>     
+     
+       
+         </apex:pageBlockSection>
+     <apex:pageBlockButtons >
+           <apex:commandButton value="Back to Home Page" action="{!cancel}"/>
+        </apex:pageBlockButtons>
+     </apex:pageBlock>
+     
+  
+</apex:form>
+</apex:page>

@@ -1,0 +1,3419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object Description: Used to track vendor assessment scores information.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AdditionalContactInfo__c</fullName>
+        <description>Additional contact info outside of site name, address, phone and email</description>
+        <externalId>false</externalId>
+        <formula>CASE(SelectedScheduleOption__c,  1, ProctorSite1__r.AdditionalContactInfo__c, 
+                                 2, ProctorSite2__r.AdditionalContactInfo__c, 
+                                 3, ProctorSite3__r.AdditionalContactInfo__c, null)</formula>
+        <label>Additional Contact Info</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssessmentDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Assessment Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>AssessmentInstructions__c</fullName>
+        <description>Instructions from the assessment</description>
+        <externalId>false</externalId>
+        <formula>Assessment__r.Instructions__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Instructions from the assessment</inlineHelpText>
+        <label>Assessment Instructions</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssessmentName__c</fullName>
+        <description>The Name of the assessment</description>
+        <externalId>false</externalId>
+        <formula>Assessment__r.Description</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assessment Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assessment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Product with assessment record type</description>
+        <externalId>false</externalId>
+        <label>Assessment</label>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Student Task Attempts</relationshipLabel>
+        <relationshipName>StudentTaskAttempts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AttemptNumber__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>The number of previous attempts for this student on this assessment/task</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of previous attempts for this student on this assessment/task</inlineHelpText>
+        <label>Attempt Number</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Case__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Case</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipName>ScoresInformation</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ContactStatus__c</fullName>
+        <description>The status of the contact with the student/Proctor</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The status of the contact with the student/Proctor</inlineHelpText>
+        <label>Contact Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Proctor first contact</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Proctor second contact</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Proctor third contact</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student first contact</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student second contact</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student third contact</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Contacted Vendor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Need dates/times 1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Need dates&apos;times 2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Need location 1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Need location 2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ConvertedDate__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK(AssessmentDate__c) ,&quot; &quot;, CASE(MONTH(AssessmentDate__c), 
+1, &quot;January&quot;, 
+2, &quot;February&quot;, 
+3, &quot;March&quot;, 
+4, &quot;April&quot;, 
+5, &quot;May&quot;, 
+6, &quot;June&quot;, 
+7, &quot;July&quot;, 
+8, &quot;August&quot;, 
+9, &quot;September&quot;, 
+10, &quot;October&quot;, 
+11, &quot;November&quot;, 
+12, &quot;December&quot;,
+&quot;None&quot;) + &quot; &quot; + 
+TEXT(DAY(AssessmentDate__c)) 
++ &quot;, &quot; + TEXT(YEAR(AssessmentDate__c))
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assessment Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DeliveryType__c</fullName>
+        <description>Picklist field to indicate the assessment delivery method.</description>
+        <externalId>false</externalId>
+        <label>Delivery Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Preassessment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WGU Network</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Online Proctor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OTS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DoNotPushToARTS__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>The student has made changes to this record in ARTS</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The student has made changes to this record in ARTS</inlineHelpText>
+        <label>Do Not Push To ARTS</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Duration__c</fullName>
+        <description>Maximum time for assessment in minutes</description>
+        <externalId>false</externalId>
+        <formula>Assessment__r.Duration__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Maximum time for assessment in minutes</inlineHelpText>
+        <label>Duration</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EmailText__c</fullName>
+        <description>Additional custom text that that want in the email</description>
+        <externalId>false</externalId>
+        <label>Email Text</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Entity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The related contact that is the proctor site/vendor</description>
+        <externalId>false</externalId>
+        <label>Entity</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Student Task Attempts (Entity)</relationshipLabel>
+        <relationshipName>StudentTaskAttempts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MentorEmail__c</fullName>
+        <description>Field that is populated by the Student Task Attempt Created workflow rule. Populates the student&apos;s mentor email address to use in mail merges.</description>
+        <externalId>false</externalId>
+        <label>Mentor Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MentorName__c</fullName>
+        <description>Formula field that brings over the student&apos;s current mentor name.</description>
+        <externalId>false</externalId>
+        <formula>Student__r.Mentor__r.FirstName &amp;&quot; &quot; &amp; Student__r.Mentor__r.LastName</formula>
+        <label>Mentor Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <description>Notes with special instructions for this attempt</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Notes with special instructions for this attempt</inlineHelpText>
+        <label>Notes</label>
+        <length>2000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>PreviousAttempts__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>The number of previous attempts for this student on this assessment/task</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of previous attempts for this student on this assessment/task</inlineHelpText>
+        <label>Previous Attempts</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Proctor1SFID__c</fullName>
+        <description>The SF ID of Proctor Site 1</description>
+        <externalId>false</externalId>
+        <formula>ProctorSite1__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Proctor1SFID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Proctor2SFID__c</fullName>
+        <description>The ID for proctor Site 2 for the quick case button</description>
+        <externalId>false</externalId>
+        <formula>ProctorSite2__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Proctor2SFID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Proctor3SFID__c</fullName>
+        <description>The SF ID for proctor site 3 for the quick case buttons</description>
+        <externalId>false</externalId>
+        <formula>ProctorSite3__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Proctor3SFID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProctorAddress__c</fullName>
+        <description>Calculation to decide which proctor address to show based on record type and which proctor was selected.</description>
+        <externalId>false</externalId>
+        <formula>CASE(SelectedScheduleOption__c,  1, ProctorSite1__r.MailingStreet, 
+                                 2, ProctorSite2__r.MailingStreet, 
+                                 3, ProctorSite3__r.MailingStreet, null)</formula>
+        <label>Proctor Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProctorCity__c</fullName>
+        <description>The calculated City based on which schedule option was chosen</description>
+        <externalId>false</externalId>
+        <formula>CASE(SelectedScheduleOption__c,  1, ProctorSite1__r.MailingCity, 
+                                 2, ProctorSite2__r.MailingCity, 
+                                 3, ProctorSite3__r.MailingCity, null)</formula>
+        <label>Proctor City</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProctorName__c</fullName>
+        <description>The Name of the proctor calculated based on which selection they chose</description>
+        <externalId>false</externalId>
+        <formula>CASE(SelectedScheduleOption__c,  1,  ProctorSite1__r.FirstName+ &quot; &quot; + ProctorSite1__r.LastName , 
+                                 2,  ProctorSite2__r.FirstName+ &quot; &quot; + ProctorSite2__r.LastName ,  
+                                 3, ProctorSite3__r.FirstName+ &quot; &quot; + ProctorSite3__r.LastName ,  null)</formula>
+        <label>Proctor Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProctorSFID__c</fullName>
+        <description>The ID of the selected proctor used for quick email</description>
+        <externalId>false</externalId>
+        <formula>CASE(SelectedScheduleOption__c, 1,  ProctorSite1__c , 
+2, ProctorSite2__c , 
+3, ProctorSite3__c , null)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>ProctorSFID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProctorSite1__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The related contact that is the proctor site/vendor</description>
+        <externalId>false</externalId>
+        <label>Proctor Site 1</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Student Task Attempts Proc1</relationshipLabel>
+        <relationshipName>StudentTaskAttemptsProc1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProctorSite2__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>StudentTaskAttemptsProc2</description>
+        <externalId>false</externalId>
+        <label>Proctor Site 2</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Student Task Attempts (Proctor Site 2)</relationshipLabel>
+        <relationshipName>StudentTaskAttemptsProc2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProctorSite3__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The third option for the proctor site.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The third option for the proctor site.</inlineHelpText>
+        <label>Proctor Site 3</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Student Task Attempts (Proctor Site 3)</relationshipLabel>
+        <relationshipName>StudentTaskAttemptsProc3</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProctorSpecialInstructions__c</fullName>
+        <description>Calculated Special instructions based on which proctor is selected</description>
+        <externalId>false</externalId>
+        <formula>CASE(SelectedScheduleOption__c,  1, ProctorSite1__r.SpecialInstructions__c, 
+                                 2, ProctorSite2__r.SpecialInstructions__c, 
+                                 3, ProctorSite3__r.SpecialInstructions__c, null)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Proctor Special Instructions</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProctorState__c</fullName>
+        <description>The calculated state based on which proctor option is chosen</description>
+        <externalId>false</externalId>
+        <formula>CASE(SelectedScheduleOption__c,  1, ProctorSite1__r.MailingState, 
+                                 2, ProctorSite2__r.MailingState, 
+                                 3, ProctorSite3__r.MailingState, null)</formula>
+        <label>Proctor State</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProctorZip__c</fullName>
+        <description>Calculate the zip code based on which scheduling option is selected.</description>
+        <externalId>false</externalId>
+        <formula>CASE(SelectedScheduleOption__c,  1, ProctorSite1__r.MailingPostalCode  , 
+                                 2, ProctorSite2__r.MailingPostalCode, 
+                                 3, ProctorSite3__r.MailingPostalCode, null)</formula>
+        <label>Proctor Zip</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReferralKey__c</fullName>
+        <description>Unique number used to identify between SalesForce and Banner.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Unique number used to identify between SalesForce and Banner.</inlineHelpText>
+        <label>Referral Key</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ReferralNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>Referral Notes</label>
+        <length>3000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ReferralStatus__c</fullName>
+        <description>The status of the Assessment Schedule Event to be synchronized with ARTS</description>
+        <externalId>false</externalId>
+        <label>Referral Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Check requested</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kryterion Self Scheduling - Scheduled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Local student confirmed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New-Reschedule</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Reviewed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OLP appointment confirmed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OTV SHRM Request Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OTV Third + Attempt Email Sent</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OTV voucher sent</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Paid by Credit Card</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending 5th+ attempt approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pink Sheet Sent</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ready to Process</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Received referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Referral cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reschedule in Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scheduled in Banner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Schedule in Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tech Issues During Assessment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WA Confirmed in WA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Work Order complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ReferralType__c</fullName>
+        <description>The Type of Referral coming in</description>
+        <externalId>false</externalId>
+        <label>Referral Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OLP Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vendor Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hybrid Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ReleaseAutomaticPending__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Release automatic pending requirement in ARP for the assessment.</description>
+        <externalId>false</externalId>
+        <label>Release Automatic Pending</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReleaseDuplicateRequirement__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Release duplicate requirement in ARP for this assessment.</description>
+        <externalId>false</externalId>
+        <label>Release Duplicate Requirement</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Reqhm1__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(isNull(TextScheduledTime1__c),NULL,
+   if(right(TextScheduledTime1__c,2)=&apos;PM&apos;,
+      if(left(TextScheduledTime1__c,2)=&quot;12&quot;, &quot;12&quot;,
+        text(value(left(TextScheduledTime1__c,find(&quot;:&quot;,TextScheduledTime1__c)-1))+12) + left((right(TextScheduledTime1__c,5)),2) 
+	   ),
+	if(left(TextScheduledTime1__c,2)=&quot;12&quot;, &quot;00&quot;,
+       text(value(left(TextScheduledTime1__c,find(&quot;:&quot;,TextScheduledTime1__c)-1))) + left((right(TextScheduledTime1__c,5)),2)
+	 )
+   )
+)</formula>
+        <label>Req hm1</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reqhm2__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(isNull(TextScheduledTime2__c),NULL,
+   if(right(TextScheduledTime2__c,2)=&apos;PM&apos;,
+      if(left(TextScheduledTime2__c,2)=&quot;12&quot;, &quot;12&quot;,
+        text(value(left(TextScheduledTime2__c,find(&quot;:&quot;,TextScheduledTime2__c)-1))+12) + left((right(TextScheduledTime2__c,5)),2) 
+	   ),
+	if(left(TextScheduledTime2__c,2)=&quot;12&quot;, &quot;00&quot;,
+       text(value(left(TextScheduledTime2__c,find(&quot;:&quot;,TextScheduledTime2__c)-1))) + left((right(TextScheduledTime2__c,5)),2)
+	 )
+   )
+)</formula>
+        <label>Req hm2</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reqhm3__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(isNull(TextScheduledTime3__c),NULL,
+   if(right(TextScheduledTime3__c,2)=&apos;PM&apos;,
+      if(left(TextScheduledTime3__c,2)=&quot;12&quot;, &quot;12&quot;,
+        text(value(left(TextScheduledTime3__c,find(&quot;:&quot;,TextScheduledTime3__c)-1))+12) + left((right(TextScheduledTime3__c,5)),2) 
+	   ),
+	if(left(TextScheduledTime3__c,2)=&quot;12&quot;, &quot;00&quot;,
+       text(value(left(TextScheduledTime3__c,find(&quot;:&quot;,TextScheduledTime3__c)-1))) + left((right(TextScheduledTime3__c,5)),2)
+	 )
+   )
+)</formula>
+        <label>Req hm3</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Schedule1Mismatch__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(value(left(Scheduledhm1__c,2) + right(Scheduledhm1__c,2)) != (IF(ISNUMBER(Reqhm1__c), value(Reqhm1__c), 5)), true, false)</formula>
+        <label>Schedule 1 Mismatch</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Schedule2Mismatch__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(value(left(Scheduledhm2__c,2) + right(Scheduledhm2__c,2)) != (IF(ISNUMBER(Reqhm2__c), value(Reqhm2__c), 5)), true, false)</formula>
+        <label>Schedule 2 Mismatch</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Schedule3Mismatch__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(value(left(Scheduledhm3__c,2) + right(Scheduledhm3__c,2)) != (IF(ISNUMBER(Reqhm3__c), value(Reqhm3__c), 5)), true, false)</formula>
+        <label>Schedule 3 Mismatch</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ScheduleDate1__c</fullName>
+        <description>First date to attempt to schedule assessment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>First date to attempt to schedule assessment</inlineHelpText>
+        <label>Schedule Date 1</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ScheduleDate2__c</fullName>
+        <description>Second date to attempt to schedule the assessment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Second date to attempt to schedule the assessment</inlineHelpText>
+        <label>Schedule Date 2</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ScheduleDate3__c</fullName>
+        <description>Third date to attempt to schedule the assessment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Third date to attempt to schedule the assessment</inlineHelpText>
+        <label>Schedule Date 3</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ScheduleDate__c</fullName>
+        <description>The calculated value of schedule based on which option they chose</description>
+        <externalId>false</externalId>
+        <formula>CASE(SelectedScheduleOption__c, 1, ScheduleDate1__c , 
+2, ScheduleDate2__c , 
+3, ScheduleDate3__c , null)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Schedule Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ScheduleOption1__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Box to indicate which schedule option was successful.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For the combination of proctor and assessment time 1 check this box</inlineHelpText>
+        <label>Schedule Option 1</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ScheduleOption2__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Box to indicate which schedule option was successful.
+Help Text</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For the combination of proctor and assessment time 1 check this box</inlineHelpText>
+        <label>Schedule Option 2</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ScheduleOption3__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Box to indicate which schedule option was successful.
+Help Text</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For the combination of proctor and assessment time 1 check this box</inlineHelpText>
+        <label>Schedule Option 3</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ScheduledTimesMismatch__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(value(left(Scheduledhm1__c,2) + right(Scheduledhm1__c,2)) != value(Reqhm1__c),
+   value(left(Scheduledhm2__c,2) + right(Scheduledhm2__c,2)) != value(Reqhm2__c),
+   value(left(Scheduledhm3__c,2) + right(Scheduledhm3__c,2)) != value(Reqhm3__c))</formula>
+        <label>ScheduledTimes Mismatch</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Scheduledhm1__c</fullName>
+        <externalId>false</externalId>
+        <formula>left(right(text(ScheduleDate1__c + TimeZoneOffset1__c/24), 9),5)</formula>
+        <label>Scheduled hm1</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Scheduledhm2__c</fullName>
+        <externalId>false</externalId>
+        <formula>left(right(text(ScheduleDate2__c + TimeZoneOffset2__c/24), 9),5)</formula>
+        <label>Scheduled hm2</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Scheduledhm3__c</fullName>
+        <externalId>false</externalId>
+        <formula>left(right(text(ScheduleDate3__c + TimeZoneOffset3__c/24), 9),5)</formula>
+        <label>Scheduled hm3</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ScorePassFail__c</fullName>
+        <externalId>false</externalId>
+        <label>Score Pass/Fail</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ScorePercentage__c</fullName>
+        <externalId>false</externalId>
+        <label>Score (Percentage)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ScoreRaw__c</fullName>
+        <externalId>false</externalId>
+        <label>Score (Raw)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ScoresAssessmentCode__c</fullName>
+        <externalId>false</externalId>
+        <label>Scores Assessment Code</label>
+        <length>15</length>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ScoresRaworPercentage__c</fullName>
+        <externalId>false</externalId>
+        <label>Scores (Raw or Percentage)</label>
+        <length>15</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SelectedScheduleOption__c</fullName>
+        <description>This field summarizes which option was selected out of the proctor options</description>
+        <externalId>false</externalId>
+        <formula>CASE(RecordType.Name,&quot;OLP Assessment&quot;,1, 
+&quot;Vendor Assessment&quot;, 1, 
+if( ScheduleOption1__c, 1,if(ScheduleOption2__c, 2, if(ScheduleOption3__c,3,null))))</formula>
+        <label>Selected Schedule Option</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SendQuickEmail__c</fullName>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;/_ui/core/email/author/EmailAuthor?p2_lkid=&quot;&amp; Student__c &amp;&quot;&amp;rtype=003&amp;retURL=/&quot;&amp;Id,IMAGE(&quot;/servlet/servlet.ImageServer?id=015a000000233aP&amp;oid=00De00000009Moo&amp;lastMod=1364401613000&quot;,&quot;Send Email&quot;),&quot;_blank&quot; )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Send Quick Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StateRequirement__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Meets State Requirement</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StudentFirstName__c</fullName>
+        <description>The first name of the student</description>
+        <externalId>false</externalId>
+        <formula>Student__r.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student First Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentID__c</fullName>
+        <description>The ID of the student</description>
+        <externalId>false</externalId>
+        <formula>Student__r.StudentID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentInputProctor1__c</fullName>
+        <externalId>false</externalId>
+        <label>Student Input Proctor1</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentInputProctor2__c</fullName>
+        <externalId>false</externalId>
+        <label>Student Input Proctor2</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentInputProctor3__c</fullName>
+        <externalId>false</externalId>
+        <label>Student Input Proctor3</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentLastName__c</fullName>
+        <description>The Last Name of the student</description>
+        <externalId>false</externalId>
+        <formula>Student__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Last Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentSFID__c</fullName>
+        <description>Id field for Buttons that need it passed.</description>
+        <externalId>false</externalId>
+        <formula>Student__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>StudentSFID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Student__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Student</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Student Task Attempts</relationshipLabel>
+        <relationshipName>ScoresInformation2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TextScheduledTime1__c</fullName>
+        <externalId>false</externalId>
+        <label>Text Scheduled Time 1</label>
+        <length>60</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TextScheduledTime2__c</fullName>
+        <externalId>false</externalId>
+        <label>Text Scheduled Time 2</label>
+        <length>60</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TextScheduledTime3__c</fullName>
+        <externalId>false</externalId>
+        <label>Text Scheduled Time 3</label>
+        <length>60</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TimeZoneOffset1__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(
+      AND(ScheduleDate1__c&gt;DateTimeValue(&apos;2014-3-9 02:00:00&apos;)+7/24,
+          ScheduleDate1__c&lt;DateTimeValue(&apos;2014-11-2 02:00:00&apos;)+6/24),
+      AND(ScheduleDate1__c&gt;DateTimeValue(&apos;2015-3-8 02:00:00&apos;)+7/24,
+          ScheduleDate1__c&lt;DateTimeValue(&apos;2015-11-1 02:00:00&apos;)+6/24)
+    ), -6, -7)</formula>
+        <label>TimeZone Offset1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TimeZoneOffset2__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( AND(ScheduleDate2__c&gt;DateTimeValue(&apos;2014-3-9 02:00:00&apos;)+7/24,
+        ScheduleDate2__c&lt;DateTimeValue(&apos;2014-11-2 02:00:00&apos;)+6/24),
+   -6, -7)</formula>
+        <label>TimeZone Offset2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TimeZoneOffset3__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( AND(ScheduleDate3__c&gt;DateTimeValue(&apos;2014-3-9 02:00:00&apos;)+7/24,
+        ScheduleDate3__c&lt;DateTimeValue(&apos;2014-11-2 02:00:00&apos;)+6/24),
+  -6, -7)</formula>
+        <label>TimeZone Offset3</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VendorAssessmentName__c</fullName>
+        <description>Vendor Assessment name of the assessment</description>
+        <externalId>false</externalId>
+        <formula>Assessment__r.VendorAssessmentName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Vendor Assessment Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Vendor__c</fullName>
+        <description>Picklist field that allows users to select the appropriate vendor for a WGU assessment.</description>
+        <externalId>false</externalId>
+        <label>Vendor</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Action Selling</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AHIMA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ANCC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ATI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Basic Exams</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Certiport</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cisco</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CIW</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Clinical</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CompTia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CWSP</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EC Council</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Exam Force</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ExcelSoft</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>GIAC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>IMA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kryterion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Microsoft</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Oracle</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Praxis</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prometric</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Question Mark</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SHRM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SMEI CSE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>State Content</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sun Microsystems</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WGU</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>VoucherCode__c</fullName>
+        <description>The Voucher Code Associated with a vendor assessment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Voucher Code Associated with a vendor assessment</inlineHelpText>
+        <label>Voucher Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VoucherDate__c</fullName>
+        <description>The date the voucher was issued</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date the voucher was issued</inlineHelpText>
+        <label>Voucher Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>WGURequirement__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Meets WGU Grad Requirement</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>term_ends__c</fullName>
+        <externalId>false</externalId>
+        <formula>Student__r.TermEndDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>term ends</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Student Task Attempt</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>ScheduleDate__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>ContactStatus__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Assessment__c</columns>
+        <columns>AttemptNumber__c</columns>
+        <columns>ReferralType__c</columns>
+        <columns>ReferralNotes__c</columns>
+        <columns>ScoresAssessmentCode__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>LAST_ACTIVITY</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterOrEqual</operation>
+            <value>11/1/2013 12:00 AM</value>
+        </filters>
+        <label>All</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>OnlineProctoringScheduling</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>VendorAssessments</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CUC1</fullName>
+        <columns>NAME</columns>
+        <columns>ProctorSite1__c</columns>
+        <columns>AttemptNumber__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>ContactStatus__c</columns>
+        <columns>Student__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>ReferralType__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Assessment__c</field>
+            <operation>contains</operation>
+            <value>gpc1</value>
+        </filters>
+        <filters>
+            <field>ScheduleDate__c</field>
+            <operation>greaterThan</operation>
+            <value>2/20/2014 12:00 AM</value>
+        </filters>
+        <label>GPC1</label>
+        <sharedTo>
+            <group>AssessmentSchedulingAdmin</group>
+            <roleAndSubordinates>AssessmentScheduler</roleAndSubordinates>
+            <roleAndSubordinates>VendorAssessments</roleAndSubordinates>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Certiport_Payments</fullName>
+        <columns>NAME</columns>
+        <columns>StudentID__c</columns>
+        <columns>Student__c</columns>
+        <columns>ScoresAssessmentCode__c</columns>
+        <columns>ScheduleDate__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>ReferralNotes__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>UPDATEDBY_USER.ALIAS</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ReferralType__c</field>
+            <operation>equals</operation>
+            <value>CERTIPORT</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterOrEqual</operation>
+            <value>10/2/2013 12:00 AM</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>OTV voucher sent</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>sadmi</value>
+        </filters>
+        <label>Certiport Payments</label>
+        <sharedTo>
+            <roleAndSubordinates>AssessmentScheduler</roleAndSubordinates>
+            <roleAndSubordinates>VendorAssessments</roleAndSubordinates>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Liz_Workorders_scheduling</fullName>
+        <booleanFilter>1 OR 2 OR 3 OR 4 OR 5</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Assessment__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>Student__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>ContactStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_ACTIVITY</columns>
+        <columns>term_ends__c</columns>
+        <columns>ScheduleDate__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>In Progress,New Reviewed</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>On Hold,Pink Sheet Sent</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>Pending 5th+ attempt approval,Ready to Process</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>Received referral,Reschedule in Progress</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>Schedule in Progress,Tech Issues During Assessment</value>
+        </filters>
+        <label>My Open</label>
+        <sharedTo>
+            <roleAndSubordinates>AssessmentScheduler</roleAndSubordinates>
+            <roleAndSubordinates>VendorAssessments</roleAndSubordinates>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Locals</fullName>
+        <columns>NAME</columns>
+        <columns>Student__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>Assessment__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>Duration__c</columns>
+        <columns>AttemptNumber__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OWNER.FIRST_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ProctorSite1__c</field>
+            <operation>contains</operation>
+            <value>Governors</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>notEqual</operation>
+            <value>,Local student confirmed,OLP appointment confirmed</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Scheduled in Banner,WA Confirmed in WA</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Work Order complete</value>
+        </filters>
+        <label>Locals</label>
+        <sharedTo>
+            <roleAndSubordinates>AssessmentScheduler</roleAndSubordinates>
+            <roleAndSubordinates>VendorAssessments</roleAndSubordinates>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>OLPReferrals</fullName>
+        <columns>NAME</columns>
+        <columns>StudentID__c</columns>
+        <columns>Assessment__c</columns>
+        <columns>ReferralNotes__c</columns>
+        <columns>ScheduleDate1__c</columns>
+        <columns>ScheduleOption1__c</columns>
+        <columns>ScheduleDate2__c</columns>
+        <columns>ScheduleOption2__c</columns>
+        <columns>ScheduleDate3__c</columns>
+        <columns>ScheduleOption3__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>AttemptNumber__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentTaskAttempt__c.OLPAssessment</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterOrEqual</operation>
+            <value>2/14/2014 12:00 AM</value>
+        </filters>
+        <label>OLP Referrals - New</label>
+        <sharedTo>
+            <group>AssessmentSchedulingAdmin</group>
+            <roleAndSubordinates>AssessmentScheduler</roleAndSubordinates>
+            <roleAndSubordinates>OnlineProctoringScheduling</roleAndSubordinates>
+            <roleAndSubordinates>StudentSupportAgent</roleAndSubordinates>
+            <roleAndSubordinates>VendorAssessments</roleAndSubordinates>
+            <roleAndSubordinatesInternal>AssessmentScheduler</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>OnlineProctoringScheduling</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>StudentServicesAssociate</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>StudentSupportAgent</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>StudentSupportSupervisor</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>VendorAssessments</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>SiteReferrals</fullName>
+        <columns>NAME</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>ContactStatus__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>term_ends__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>contains</operation>
+            <value>Progress</value>
+        </filters>
+        <filters>
+            <field>ContactStatus__c</field>
+            <operation>notContain</operation>
+            <value>student</value>
+        </filters>
+        <filters>
+            <field>AssessmentInstructions__c</field>
+            <operation>lessOrEqual</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentTaskAttempt__c.SiteAssessment</value>
+        </filters>
+        <label>Site Referrals - In Progress</label>
+        <sharedTo>
+            <roleAndSubordinates>AssessmentScheduler</roleAndSubordinates>
+            <roleAndSubordinates>VendorAssessments</roleAndSubordinates>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Site_Assessments</fullName>
+        <columns>NAME</columns>
+        <columns>ScheduledTimesMismatch__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>Student__c</columns>
+        <columns>ProctorSite1__c</columns>
+        <columns>ProctorSite2__c</columns>
+        <columns>ProctorSite3__c</columns>
+        <columns>Assessment__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>AttemptNumber__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>ScheduleDate1__c</columns>
+        <columns>TextScheduledTime1__c</columns>
+        <columns>ContactStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentTaskAttempt__c.SiteAssessment</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterThan</operation>
+            <value>10/2/2013 12:00 AM</value>
+        </filters>
+        <filters>
+            <field>OWNER.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>System</value>
+        </filters>
+        <filters>
+            <field>ProctorSite1__c</field>
+            <operation>notContain</operation>
+            <value>Governors</value>
+        </filters>
+        <label>Site Referrals- News Only</label>
+        <sharedTo>
+            <roleAndSubordinates>AssessmentScheduler</roleAndSubordinates>
+            <roleAndSubordinates>VendorAssessments</roleAndSubordinates>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Site_Assessmentsreviewed</fullName>
+        <columns>NAME</columns>
+        <columns>StudentID__c</columns>
+        <columns>Student__c</columns>
+        <columns>ProctorSite1__c</columns>
+        <columns>ProctorSite2__c</columns>
+        <columns>ProctorSite3__c</columns>
+        <columns>Assessment__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>AttemptNumber__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>OWNER.FIRST_NAME</columns>
+        <columns>ScheduleDate1__c</columns>
+        <columns>TextScheduledTime1__c</columns>
+        <columns>ContactStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>notEqual</operation>
+            <value>StudentTaskAttempt__c.Hybrid,StudentTaskAttempt__c.VendorAssessment</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>New Reviewed</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterThan</operation>
+            <value>10/2/2013 12:00 AM</value>
+        </filters>
+        <filters>
+            <field>OWNER.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>System</value>
+        </filters>
+        <filters>
+            <field>AssessmentInstructions__c</field>
+            <operation>lessThan</operation>
+            <value>1</value>
+        </filters>
+        <label>Site Referrals- News Reviewed</label>
+        <sharedTo>
+            <roleAndSubordinates>AssessmentScheduler</roleAndSubordinates>
+            <roleAndSubordinates>VendorAssessments</roleAndSubordinates>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>VendorReferralsallother</fullName>
+        <booleanFilter>(1 AND 2 AND 3 AND 4 AND 5) OR (5 AND 3 AND 6 AND 7) OR (8 AND 9 AND 10)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>StudentID__c</columns>
+        <columns>Student__c</columns>
+        <columns>Assessment__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>ContactStatus__c</columns>
+        <columns>AttemptNumber__c</columns>
+        <columns>ReferralType__c</columns>
+        <columns>ScheduleDate1__c</columns>
+        <columns>ReferralNotes__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>LAST_ACTIVITY</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentTaskAttempt__c.VendorAssessment</value>
+        </filters>
+        <filters>
+            <field>ReferralType__c</field>
+            <operation>equals</operation>
+            <value>GIAC,Hybrid,AHIMA,HRCI,SMEI,CERTIPORT</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Scheduled in Banner,Work Order complete</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>sadmi</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>notEqual</operation>
+            <value>OTV voucher sent,On Hold</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>ebabcoc</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>notEqual</operation>
+            <value>OLP appointment confirmed,WA Confirmed in WA</value>
+        </filters>
+        <filters>
+            <field>ReferralType__c</field>
+            <operation>contains</operation>
+            <value>PEARSON,PROVUE,PROMETRIC,PRAXIS</value>
+        </filters>
+        <filters>
+            <field>AttemptNumber__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>3</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </filters>
+        <label>3rd Party - All other</label>
+        <sharedTo>
+            <group>AssessmentSchedulingAdmin</group>
+            <roleAndSubordinatesInternal>AssessmentScheduler</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>VendorAssessments</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>VendorReferralsvouchers</fullName>
+        <columns>NAME</columns>
+        <columns>StudentLastName__c</columns>
+        <columns>Assessment__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>StudentFirstName__c</columns>
+        <columns>AttemptNumber__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>ReferralType__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentTaskAttempt__c.VendorAssessment</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterOrEqual</operation>
+            <value>12/3/2013 12:00 AM</value>
+        </filters>
+        <filters>
+            <field>ReferralType__c</field>
+            <operation>contains</operation>
+            <value>Praxis,Prometric,Pearson,Provue,SHRM</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>New,New Reviewed</value>
+        </filters>
+        <label>3rd Party - New Vouchers</label>
+        <sharedTo>
+            <group>AssessmentSchedulingAdmin</group>
+            <roleAndSubordinates>ITHelpDesk</roleAndSubordinates>
+            <roleAndSubordinatesInternal>AssessmentScheduler</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>VendorAssessments</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>VendorReferralsvoucherscertiport</fullName>
+        <columns>NAME</columns>
+        <columns>StudentID__c</columns>
+        <columns>StudentFirstName__c</columns>
+        <columns>StudentLastName__c</columns>
+        <columns>AttemptNumber__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>Assessment__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>ReferralType__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentTaskAttempt__c.VendorAssessment</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterOrEqual</operation>
+            <value>12/3/2013 12:00 AM</value>
+        </filters>
+        <filters>
+            <field>ReferralType__c</field>
+            <operation>equals</operation>
+            <value>CERTIPORT</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>Scheduled in Banner,New Reviewed</value>
+        </filters>
+        <label>3rd Party - New Vouchers Certiport</label>
+        <sharedTo>
+            <group>AssessmentSchedulingAdmin</group>
+            <roleAndSubordinates>ITHelpDesk</roleAndSubordinates>
+            <roleAndSubordinatesInternal>AssessmentScheduler</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>VendorAssessments</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>X3rd_Party_All_other_done</fullName>
+        <booleanFilter>(1 AND 2 AND 3 AND 4) OR (4 AND 5 AND 6) OR (7 AND 8 AND 9)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>StudentID__c</columns>
+        <columns>Student__c</columns>
+        <columns>Assessment__c</columns>
+        <columns>ReferralStatus__c</columns>
+        <columns>ContactStatus__c</columns>
+        <columns>AttemptNumber__c</columns>
+        <columns>ReferralType__c</columns>
+        <columns>ScheduleDate1__c</columns>
+        <columns>ReferralNotes__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>LAST_ACTIVITY</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentTaskAttempt__c.VendorAssessment</value>
+        </filters>
+        <filters>
+            <field>ReferralType__c</field>
+            <operation>equals</operation>
+            <value>GIAC,Hybrid,AHIMA,HRCI,SMEI,CERTIPORT</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>sadmi</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>notEqual</operation>
+            <value>OTV voucher sent,On Hold</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>ebabcoc</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>notEqual</operation>
+            <value>OLP appointment confirmed,WA Confirmed in WA</value>
+        </filters>
+        <filters>
+            <field>ReferralType__c</field>
+            <operation>contains</operation>
+            <value>PEARSON,PROVUE,PROMETRIC,PRAXIS</value>
+        </filters>
+        <filters>
+            <field>AttemptNumber__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>3</value>
+        </filters>
+        <filters>
+            <field>ReferralStatus__c</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </filters>
+        <label>3rd Party - All other - done</label>
+        <sharedTo>
+            <group>AssessmentSchedulingAdmin</group>
+            <roleAndSubordinatesInternal>AssessmentScheduler</roleAndSubordinatesInternal>
+            <roleAndSubordinatesInternal>VendorAssessments</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Student Task Attempts</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Hybrid</fullName>
+        <active>true</active>
+        <description>Hybrid between a WGU administer assessment and a vendor provided.</description>
+        <label>Hybrid</label>
+        <picklistValues>
+            <picklist>ContactStatus__c</picklist>
+            <values>
+                <fullName>Contacted Vendor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need dates%27times 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need dates%2Ftimes 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need location 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need location 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor first contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor second contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor third contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student first contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student second contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student third contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DeliveryType__c</picklist>
+            <values>
+                <fullName>OTS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online Proctor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preassessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Network</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralStatus__c</picklist>
+            <values>
+                <fullName>Kryterion Self Scheduling - Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local student confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Reviewed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New-Reschedule</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OLP appointment confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending 5th%2B attempt approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pink Sheet Sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Schedule in Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled in Banner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tech Issues During Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WA Confirmed in WA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Work Order complete</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralType__c</picklist>
+            <values>
+                <fullName>Hybrid Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OLP Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Vendor Referral</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ScorePassFail__c</picklist>
+            <values>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>AHIMA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANCC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ATI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Action Selling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Basic Exams</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CIW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CWSP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Certiport</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cisco</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Clinical</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CompTia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EC Council</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exam Force</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ExcelSoft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GIAC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IMA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Kryterion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Microsoft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Oracle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Praxis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prometric</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Question Mark</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SHRM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SMEI CSE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>State Content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sun Microsystems</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>OLPAssessment</fullName>
+        <active>true</active>
+        <description>Online Proctoring Assessment</description>
+        <label>OLP Assessment</label>
+        <picklistValues>
+            <picklist>ContactStatus__c</picklist>
+            <values>
+                <fullName>Contacted Vendor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need dates%27times 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need dates%2Ftimes 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need location 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need location 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor first contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor second contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor third contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student first contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student second contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student third contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DeliveryType__c</picklist>
+            <values>
+                <fullName>OTS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online Proctor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preassessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Network</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralStatus__c</picklist>
+            <values>
+                <fullName>Kryterion Self Scheduling - Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local student confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Reviewed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New-Reschedule</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OLP appointment confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending 5th%2B attempt approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pink Sheet Sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Schedule in Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled in Banner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tech Issues During Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WA Confirmed in WA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Work Order complete</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralType__c</picklist>
+            <values>
+                <fullName>Hybrid Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OLP Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Vendor Referral</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ScorePassFail__c</picklist>
+            <values>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>AHIMA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANCC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ATI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Action Selling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Basic Exams</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CIW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CWSP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Certiport</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cisco</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Clinical</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CompTia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EC Council</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exam Force</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ExcelSoft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GIAC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IMA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Kryterion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Microsoft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Oracle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Praxis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prometric</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Question Mark</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SHRM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SMEI CSE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>State Content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sun Microsystems</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Score</fullName>
+        <active>true</active>
+        <label>Score</label>
+        <picklistValues>
+            <picklist>ContactStatus__c</picklist>
+            <values>
+                <fullName>Contacted Vendor</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DeliveryType__c</picklist>
+            <values>
+                <fullName>OTS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online Proctor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preassessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Network</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralStatus__c</picklist>
+            <values>
+                <fullName>Check requested</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Kryterion Self Scheduling - Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OLP appointment confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paid by Credit Card</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ready to Process</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reschedule in Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled in Banner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tech Issues During Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Work Order complete</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ScorePassFail__c</picklist>
+            <values>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>AHIMA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANCC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ATI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Action Selling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Basic Exams</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CIW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CWSP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Certiport</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cisco</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Clinical</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CompTia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EC Council</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exam Force</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ExcelSoft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GIAC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IMA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Kryterion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Microsoft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Oracle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Praxis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prometric</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Question Mark</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SHRM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SMEI CSE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>State Content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sun Microsystems</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>SiteAssessment</fullName>
+        <active>true</active>
+        <description>An Assessment that happens at a sign</description>
+        <label>Site Assessment</label>
+        <picklistValues>
+            <picklist>ContactStatus__c</picklist>
+            <values>
+                <fullName>Contacted Vendor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need dates%27times 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need dates%2Ftimes 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need location 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need location 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor first contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor second contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor third contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student first contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student second contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student third contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DeliveryType__c</picklist>
+            <values>
+                <fullName>OTS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online Proctor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preassessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Network</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralStatus__c</picklist>
+            <values>
+                <fullName>Kryterion Self Scheduling - Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local student confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Reviewed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New-Reschedule</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OLP appointment confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending 5th%2B attempt approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pink Sheet Sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reschedule in Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Schedule in Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled in Banner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tech Issues During Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WA Confirmed in WA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Work Order complete</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralType__c</picklist>
+            <values>
+                <fullName>Hybrid Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OLP Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Vendor Referral</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ScorePassFail__c</picklist>
+            <values>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>AHIMA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANCC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ATI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Action Selling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Basic Exams</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CIW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CWSP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Certiport</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cisco</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Clinical</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CompTia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EC Council</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exam Force</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ExcelSoft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GIAC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IMA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Kryterion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Microsoft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Oracle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Praxis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prometric</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Question Mark</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SHRM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SMEI CSE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>State Content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sun Microsystems</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>VendorAssessment</fullName>
+        <active>true</active>
+        <description>Assessments offered by a company outside of WGU (ie oracle cert)</description>
+        <label>Vendor Assessment</label>
+        <picklistValues>
+            <picklist>ContactStatus__c</picklist>
+            <values>
+                <fullName>Contacted Vendor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need dates%27times 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need dates%2Ftimes 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need location 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Need location 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor first contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor second contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctor third contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student first contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student second contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student third contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DeliveryType__c</picklist>
+            <values>
+                <fullName>OTS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Online Proctor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preassessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Network</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralStatus__c</picklist>
+            <values>
+                <fullName>New</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Reviewed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New-Reschedule</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OTV SHRM Request Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OTV Third %2B Attempt Email Sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OTV voucher sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending 5th%2B attempt approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pink Sheet Sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Schedule in Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled in Banner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Work Order complete</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ReferralType__c</picklist>
+            <values>
+                <fullName>Hybrid Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OLP Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Vendor Referral</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ScorePassFail__c</picklist>
+            <values>
+                <fullName>Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>AHIMA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANCC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ATI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Action Selling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Basic Exams</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CIW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CWSP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Certiport</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cisco</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Clinical</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CompTia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EC Council</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exam Force</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ExcelSoft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GIAC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IMA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Kryterion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Microsoft</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Oracle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Praxis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prometric</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Question Mark</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SHRM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SMEI CSE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>State Content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sun Microsystems</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ReferralStatus__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ReferralType__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ScheduleDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>StudentFirstName__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>StudentID__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>StudentLastName__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>ReferralStatusMustBeInProgress</fullName>
+        <active>true</active>
+        <description>When the Contact Status field is changed, the Referral Status value must be In Progress.</description>
+        <errorConditionFormula>AND( 
+ISCHANGED (ContactStatus__c), 
+NOT(ISPICKVAL (ReferralStatus__c, &quot;Schedule in Progress&quot;)), 
+NOT(ISPICKVAL (ReferralStatus__c, &quot;In Progress&quot;)) 
+)</errorConditionFormula>
+        <errorDisplayField>ReferralStatus__c</errorDisplayField>
+        <errorMessage>Please update the Referral Status to Scheduling In Progress.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>EmailProctor1</fullName>
+        <availability>online</availability>
+        <description>Send a Quick case to the proctor</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Email Proctor 1</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/apex/QuickCase?ContactId={!StudentTaskAttempt__c.Proctor1SFID__c}&amp;RecordType=Assessment+Scheduling&amp;ObjectId={!StudentTaskAttempt__c.Id}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>EmailProctor2</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Email Proctor 2</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/apex/QuickCase?ContactId={!StudentTaskAttempt__c.Proctor2SFID__c}&amp;RecordType=Assessment+Scheduling&amp;ObjectId={!StudentTaskAttempt__c.Id}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>EmailProctor3</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Email Proctor 3</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/apex/QuickCase?ContactId={!StudentTaskAttempt__c.Proctor3SFID__c}&amp;RecordType=Assessment+Scheduling&amp;ObjectId={!StudentTaskAttempt__c.Id}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>QuickCaseOLP</fullName>
+        <availability>online</availability>
+        <description>Create a Quick Case</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Quick Case</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/apex/QuickCase?ContactId={!StudentTaskAttempt__c.StudentSFID__c}&amp;RecordType=Assessment+Scheduling&amp;ObjectId={!StudentTaskAttempt__c.Id}</url>
+    </webLinks>
+</CustomObject>

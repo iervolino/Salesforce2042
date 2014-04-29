@@ -1,0 +1,2548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This is a generic template for Custom Object.  With this template, you may adjust the default elements and values and add new elements and values.</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>AssignedPrograms__c</fullName>
+        <description>Programs that an EC can be assigned to for Lead Assignment.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Programs that an EC can be assigned to for Lead Assignment.</inlineHelpText>
+        <label>Assigned Programs</label>
+        <picklist>
+            <controllingField>CollegeTeam__c</controllingField>
+            <picklistValues>
+                <fullName>BA Early Childhood Education</fullName>
+                <controllingFieldValues>Teachers College El Ed/SoSci</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Educational Studies</fullName>
+                <controllingFieldValues>Teachers College El Ed/SoSci</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Interdisciplinary Studies</fullName>
+                <controllingFieldValues>Teachers College El Ed/SoSci</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Mathematics</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Mathematics 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Mathematics 5-9</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Science 5-9</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Science Biology 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Science Chemistry 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Science Geoscience 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Science Physics 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BA Special Education</fullName>
+                <controllingFieldValues>Teachers College MEd</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS Accounting</fullName>
+                <controllingFieldValues>Business Undergrad</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS Business Management</fullName>
+                <controllingFieldValues>Business Undergrad</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS Health Informatics</fullName>
+                <controllingFieldValues>Enrollment IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS HR Management</fullName>
+                <controllingFieldValues>Business Undergrad</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS IT</fullName>
+                <controllingFieldValues>Enrollment IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS IT Database</fullName>
+                <controllingFieldValues>Enrollment IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS IT Management</fullName>
+                <controllingFieldValues>Business Undergrad</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS IT Network Administration</fullName>
+                <controllingFieldValues>Enrollment IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS IT Networks Design</fullName>
+                <controllingFieldValues>Enrollment IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS IT Security</fullName>
+                <controllingFieldValues>Enrollment IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS IT Software</fullName>
+                <controllingFieldValues>Enrollment IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS Marketing Management</fullName>
+                <controllingFieldValues>Business Undergrad</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS Nursing- Prelicensure</fullName>
+                <controllingFieldValues>HP Prelicensure</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS Nursing- RN to BSN</fullName>
+                <controllingFieldValues>Health Professions</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BS Sales and Sales Management</fullName>
+                <controllingFieldValues>Business Undergrad</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Educational Studies</fullName>
+                <controllingFieldValues>Teachers College El Ed/SoSci</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA English Language Learning PK-12</fullName>
+                <controllingFieldValues>Teachers College MEd</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Mathematics</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Mathematics 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Mathematics 5-9</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Mathematics K-6</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Science 5-9</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Science Biology 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Science Chemistry 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Science Geosciences 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Science Physics 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Teaching Elementary</fullName>
+                <controllingFieldValues>Teachers College El Ed/SoSci</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Teaching Mathematics</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Teaching Mathematics 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Teaching Mathematics 5-9</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Teaching Science</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Teaching Science 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Teaching Science 5-9</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MA Teaching Social Science</fullName>
+                <controllingFieldValues>Teachers College El Ed/SoSci</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MBA Healthcare Management</fullName>
+                <controllingFieldValues>Business Graduate</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MBA IT Management</fullName>
+                <controllingFieldValues>Business Graduate</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MBA Management and Strategy</fullName>
+                <controllingFieldValues>Business Graduate</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MBA Strategic Leadership</fullName>
+                <controllingFieldValues>Business Graduate</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS Management and Leadership</fullName>
+                <controllingFieldValues>Business Graduate</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MEd Instructional Design</fullName>
+                <controllingFieldValues>Teachers College MEd</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MEd Learning and Technology</fullName>
+                <controllingFieldValues>Teachers College MEd</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MEd Measurement and Evaluation</fullName>
+                <controllingFieldValues>Teachers College MEd</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS Curriculum and Instruction</fullName>
+                <controllingFieldValues>Teachers College MEd</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS Educational Leadership</fullName>
+                <controllingFieldValues>Teachers College MEd</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS IT Network Management</fullName>
+                <controllingFieldValues>Enrollment IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS IT Security and Assurance</fullName>
+                <controllingFieldValues>Enrollment IT</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS Nursing- Ed RN to MSN</fullName>
+                <controllingFieldValues>Health Professions</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS Nursing- Education</fullName>
+                <controllingFieldValues>Health Professions</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS Nursing- Lead/Mgmt RN to MSN</fullName>
+                <controllingFieldValues>Health Professions</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS Nursing- Leadership/Management</fullName>
+                <controllingFieldValues>Health Professions</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MS Special Education</fullName>
+                <controllingFieldValues>Teachers College MEd</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Post-bacc Elementary</fullName>
+                <controllingFieldValues>Teachers College El Ed/SoSci</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Post-bacc Mathematics</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Post-bacc Mathematics 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Post-bacc Mathematics 5-9</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Post-bacc Science</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Post-bacc Science 5-12</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Post-bacc Science 5-9</fullName>
+                <controllingFieldValues>Teachers College Math/Science</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Post-bacc Social Science</fullName>
+                <controllingFieldValues>Teachers College El Ed/SoSci</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Endorsement Prep Educational Leadership</fullName>
+                <controllingFieldValues>Teachers College MEd</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Endorsement Prep ELL PK-12</fullName>
+                <controllingFieldValues>Teachers College MEd</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Master of Accounting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>7</visibleLines>
+    </fields>
+    <fields>
+        <fullName>AssignmentMultiplier__c</fullName>
+        <externalId>false</externalId>
+        <label>Assignment Multiplier</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CollegeTeam__c</fullName>
+        <externalId>false</externalId>
+        <label>College Team</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Admissions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Associate Enrollment Counselor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Business Graduate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Business Undergrad</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enrollment IT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health Professions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>HP Prelicensure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teachers College El Ed/SoSci</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teachers College Math/Science</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teachers College MEd</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DirectPhoneNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Direct Phone Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Extension__c</fullName>
+        <externalId>false</externalId>
+        <label>Extension</label>
+        <length>5</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>JobTitle__c</fullName>
+        <externalId>false</externalId>
+        <label>Job Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JsonConfigData__c</fullName>
+        <description>A JSON Configuration String for Visualforce/Javascript purposes, the context and semantics of which should be dictated by RecordTypeId</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is typically not designed for manual editing</inlineHelpText>
+        <label>JsonConfigData</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Personal800Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Personal 800 Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>PreferredFirstName__c</fullName>
+        <externalId>false</externalId>
+        <label>Preferred First Name</label>
+        <length>125</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PreferredLastName__c</fullName>
+        <externalId>false</externalId>
+        <label>Preferred Last Name</label>
+        <length>125</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QAPercentage__c</fullName>
+        <description>Percentage to be used with objects to put into QA</description>
+        <externalId>false</externalId>
+        <label>QA Percentage</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>RelatedTo__c</fullName>
+        <description>Field that can be related to any other object by Record Id</description>
+        <externalId>true</externalId>
+        <label>Related To</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>University800Number__c</fullName>
+        <defaultValue>&quot;(866) 225-5948&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>University 800 number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>UserEmail__c</fullName>
+        <description>Pulls the email down from user.</description>
+        <externalId>false</externalId>
+        <formula>User__r.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>UserEmail</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>UserAttributes</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>User Attributes</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>QAPercentage__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>EnrollmentTeam</fullName>
+        <columns>NAME</columns>
+        <columns>CollegeTeam__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>AssignmentMultiplier__c</columns>
+        <columns>AssignedPrograms__c</columns>
+        <columns>University800Number__c</columns>
+        <columns>Extension__c</columns>
+        <columns>PreferredFirstName__c</columns>
+        <columns>PreferredLastName__c</columns>
+        <columns>JobTitle__c</columns>
+        <columns>User__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>UserAttributes__c.EnrollmentTeam</value>
+        </filters>
+        <label>Enrollment Team</label>
+        <sharedTo>
+            <role>EnrollmentManager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Enrollment_Team</fullName>
+        <columns>NAME</columns>
+        <columns>CollegeTeam__c</columns>
+        <columns>PreferredFirstName__c</columns>
+        <columns>PreferredLastName__c</columns>
+        <columns>JobTitle__c</columns>
+        <columns>AssignedPrograms__c</columns>
+        <columns>University800Number__c</columns>
+        <columns>Extension__c</columns>
+        <columns>User__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>UserAttributes__c.EnrollmentTeam</value>
+        </filters>
+        <filters>
+            <field>CollegeTeam__c</field>
+            <operation>contains</operation>
+            <value>Graduate</value>
+        </filters>
+        <label>Enrollment Team CoB MBA</label>
+        <sharedTo>
+            <role>EnrollmentManager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Enrollment_Team_BizUG</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>AssignmentMultiplier__c</columns>
+        <columns>CollegeTeam__c</columns>
+        <columns>AssignedPrograms__c</columns>
+        <columns>University800Number__c</columns>
+        <columns>Extension__c</columns>
+        <columns>PreferredFirstName__c</columns>
+        <columns>PreferredLastName__c</columns>
+        <columns>JobTitle__c</columns>
+        <columns>User__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>UserAttributes__c.EnrollmentTeam</value>
+        </filters>
+        <filters>
+            <field>CollegeTeam__c</field>
+            <operation>contains</operation>
+            <value>Prel,Health</value>
+        </filters>
+        <label>Enrollment Team (Health Professions)</label>
+        <sharedTo>
+            <role>EnrollmentManager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Enrollment_Team_Math_Sci</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>AssignmentMultiplier__c</columns>
+        <columns>CollegeTeam__c</columns>
+        <columns>AssignedPrograms__c</columns>
+        <columns>University800Number__c</columns>
+        <columns>Extension__c</columns>
+        <columns>PreferredFirstName__c</columns>
+        <columns>PreferredLastName__c</columns>
+        <columns>JobTitle__c</columns>
+        <columns>User__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>UserAttributes__c.EnrollmentTeam</value>
+        </filters>
+        <filters>
+            <field>CollegeTeam__c</field>
+            <operation>contains</operation>
+            <value>math</value>
+        </filters>
+        <label>Enrollment Team (Math/Sci)</label>
+        <sharedTo>
+            <role>EnrollmentManager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Enrollment_Team_New</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>AssignmentMultiplier__c</columns>
+        <columns>CollegeTeam__c</columns>
+        <columns>AssignedPrograms__c</columns>
+        <columns>University800Number__c</columns>
+        <columns>Extension__c</columns>
+        <columns>PreferredFirstName__c</columns>
+        <columns>PreferredLastName__c</columns>
+        <columns>JobTitle__c</columns>
+        <columns>User__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>UserAttributes__c.EnrollmentTeam</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterOrEqual</operation>
+            <value>8/1/2013 12:00 AM</value>
+        </filters>
+        <label>Enrollment Team (New)</label>
+        <sharedTo>
+            <role>EnrollmentManager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>FinaidUsers</fullName>
+        <columns>NAME</columns>
+        <columns>QAPercentage__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>QAPercentage__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <label>Finaid Users</label>
+        <sharedTo>
+            <role>DirectorFinancialAid</role>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>User Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>UserAttributes</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>EnrollmentTeam</fullName>
+        <active>true</active>
+        <description>Attributes as they pertain to the enrollment team</description>
+        <label>Enrollment Team</label>
+        <picklistValues>
+            <picklist>AssignedPrograms__c</picklist>
+            <values>
+                <fullName>BA Early Childhood Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Educational Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Interdisciplinary Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Biology 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Chemistry 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Geoscience 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Physics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Special Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Accounting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Business Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS HR Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Health Informatics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Database</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Network Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Networks Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Security</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Software</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Marketing Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Nursing- Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Nursing- RN to BSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Sales and Sales Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endorsement Prep ELL PK-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endorsement Prep Educational Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Educational Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA English Language Learning PK-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics K-6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Biology 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Chemistry 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Geosciences 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Physics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Elementary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Social Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Healthcare Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA IT Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Management and Strategy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Strategic Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Instructional Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Learning and Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Measurement and Evaluation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Curriculum and Instruction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Educational Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS IT Network Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS IT Security and Assurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Management and Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Ed RN to MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Lead%2FMgmt RN to MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Leadership%2FManagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Special Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Master of Accounting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Elementary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Social Science</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CollegeTeam__c</picklist>
+            <values>
+                <fullName>Admissions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Associate Enrollment Counselor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business Graduate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business Undergrad</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HP Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Professions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College El Ed%2FSoSci</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College MEd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Math%2FScience</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Mentors</fullName>
+        <active>true</active>
+        <label>Mentors</label>
+        <picklistValues>
+            <picklist>AssignedPrograms__c</picklist>
+            <values>
+                <fullName>BA Early Childhood Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Educational Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Interdisciplinary Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Biology 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Chemistry 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Geoscience 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Physics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Special Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Accounting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Business Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS HR Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Health Informatics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Database</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Network Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Networks Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Security</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Software</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Marketing Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Nursing- Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Nursing- RN to BSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Sales and Sales Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endorsement Prep ELL PK-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endorsement Prep Educational Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Educational Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA English Language Learning PK-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics K-6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Biology 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Chemistry 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Geosciences 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Physics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Elementary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Social Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Healthcare Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA IT Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Management and Strategy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Strategic Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Instructional Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Learning and Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Measurement and Evaluation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Curriculum and Instruction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Educational Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS IT Network Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS IT Security and Assurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Ed RN to MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Lead%2FMgmt RN to MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Leadership%2FManagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Special Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Elementary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Social Science</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CollegeTeam__c</picklist>
+            <values>
+                <fullName>Admissions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Associate Enrollment Counselor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business Graduate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business Undergrad</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HP Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Professions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College El Ed%2FSoSci</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College MEd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Math%2FScience</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>MyCoursesGridPanel</fullName>
+        <active>true</active>
+        <description>A View Config for MyStudents.page (Course Mentor)</description>
+        <label>MyCoursesGridPanel</label>
+        <picklistValues>
+            <picklist>AssignedPrograms__c</picklist>
+            <values>
+                <fullName>BA Early Childhood Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Educational Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Interdisciplinary Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Biology 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Chemistry 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Geoscience 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Physics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Special Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Accounting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Business Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS HR Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Health Informatics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Database</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Network Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Networks Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Security</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Software</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Marketing Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Nursing- Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Nursing- RN to BSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Sales and Sales Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endorsement Prep ELL PK-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endorsement Prep Educational Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Educational Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA English Language Learning PK-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics K-6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Biology 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Chemistry 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Geosciences 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Physics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Elementary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Social Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Healthcare Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA IT Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Management and Strategy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Strategic Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Instructional Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Learning and Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Measurement and Evaluation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Curriculum and Instruction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Educational Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS IT Network Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS IT Security and Assurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Ed RN to MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Lead%2FMgmt RN to MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Leadership%2FManagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Special Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Elementary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Social Science</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CollegeTeam__c</picklist>
+            <values>
+                <fullName>Admissions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Associate Enrollment Counselor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business Graduate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business Undergrad</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HP Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Professions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College El Ed%2FSoSci</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College MEd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Math%2FScience</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>MyStudentsGridPanel</fullName>
+        <active>true</active>
+        <description>A View Config for MyStudents.page (Student Mentor)</description>
+        <label>MyStudentsGridPanel</label>
+        <picklistValues>
+            <picklist>AssignedPrograms__c</picklist>
+            <values>
+                <fullName>BA Early Childhood Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Educational Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Interdisciplinary Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Biology 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Chemistry 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Geoscience 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Physics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Special Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Accounting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Business Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS HR Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Health Informatics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Database</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Network Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Networks Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Security</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Software</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Marketing Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Nursing- Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Nursing- RN to BSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Sales and Sales Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endorsement Prep ELL PK-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endorsement Prep Educational Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Educational Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA English Language Learning PK-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics K-6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Biology 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Chemistry 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Geosciences 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Physics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Elementary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Social Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Healthcare Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA IT Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Management and Strategy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Strategic Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Instructional Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Learning and Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Measurement and Evaluation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Curriculum and Instruction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Educational Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS IT Network Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS IT Security and Assurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Ed RN to MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Lead%2FMgmt RN to MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Leadership%2FManagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Special Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Elementary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Social Science</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CollegeTeam__c</picklist>
+            <values>
+                <fullName>Admissions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Associate Enrollment Counselor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business Graduate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business Undergrad</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HP Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Professions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College El Ed%2FSoSci</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College MEd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Math%2FScience</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>SearchGridPanel</fullName>
+        <active>true</active>
+        <description>A View Config for MyStudents.page (Search Panel)</description>
+        <label>SearchGridPanel</label>
+        <picklistValues>
+            <picklist>AssignedPrograms__c</picklist>
+            <values>
+                <fullName>BA Early Childhood Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Educational Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Interdisciplinary Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Biology 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Chemistry 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Geoscience 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Science Physics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BA Special Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Accounting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Business Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS HR Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Health Informatics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Database</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Network Administration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Networks Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Security</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS IT Software</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Marketing Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Nursing- Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Nursing- RN to BSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BS Sales and Sales Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endorsement Prep ELL PK-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endorsement Prep Educational Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Educational Studies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA English Language Learning PK-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Mathematics K-6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Biology 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Chemistry 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Geosciences 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Science Physics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Elementary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA Teaching Social Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Healthcare Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA IT Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Management and Strategy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MBA Strategic Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Instructional Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Learning and Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MEd Measurement and Evaluation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Curriculum and Instruction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Educational Leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS IT Network Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS IT Security and Assurance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Ed RN to MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Lead%2FMgmt RN to MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Nursing- Leadership%2FManagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MS Special Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Elementary</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Mathematics 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science 5-12</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Science 5-9</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post-bacc Social Science</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CollegeTeam__c</picklist>
+            <values>
+                <fullName>Admissions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Associate Enrollment Counselor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business Graduate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business Undergrad</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HP Prelicensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Professions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College El Ed%2FSoSci</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College MEd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Math%2FScience</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

@@ -1,0 +1,22 @@
+<apex:page standardController="FieldExperience__c" extensions="RelatedListFEP">
+<style>
+.fewerMore { display:none;}
+</style>
+<apex:form >
+    <apex:pageBlock id="FEPs" title="Field Experience Processes for Payments">
+        <apex:pageBlockTable value="{!FEPs}" var="f" rendered="{!NOT(ISNULL(FEPs))}">
+            <apex:column headerValue="Field Experience Process Name"><apex:outputLink value="/{!f.id}" target="_parent">{!f.Name}</apex:outputLink> </apex:column>
+            <apex:column value="{!f.CheckReadyForEval__c}"/>
+            <apex:column value="{!f.CheckStatus__c}"/>
+            <apex:column value="{!f.CheckWorkComplete__c}"/>
+            <apex:column value="{!f.HostTeacher__c}"/>
+            <apex:column value="{!f.ClinicalSupervisor__c}"/>
+            <apex:column value="{!f.CheckTotalAmount__c}"/>
+            <apex:column value="{!f.CheckFinalObservationOverride__c}"/>
+            <apex:column value="{!f.ObservationStatus__c}"/>
+            <apex:column value="{!f.ObservationType__c}"/>
+            <apex:column value="{!f.ObservationOutcome__c}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:form>    
+</apex:page>

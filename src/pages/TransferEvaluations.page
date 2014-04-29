@@ -1,0 +1,26 @@
+<apex:page showHeader="false" standardController="TransferEvaluation__c" >
+ <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />   
+    <style>
+        .activeTab {background-color: #236FBD; color:white; background-image:none}
+        .inactiveTab {background-color: lightgrey; color:black; background-image:none}
+        .br {mso-data-placement:same-cell;}
+    </style>
+ </head> 
+    <apex:tabPanel switchType="client" selectedTab="tabNotes" id="CustomObjectTabPanel" tabClass="activeTab" inactivetabClass="inactiveTab">          
+        <apex:tab label="Notes" name="Notes" id="tabNotes">           
+            <apex:form >
+                <apex:pageBlock title="Notes">
+                    <apex:pageBlockTable value="{!TransferEvaluation__c.Notes}" var="note">
+                        <apex:column value="{!note.createddate}" width="120px"/>
+                        <apex:column value="{!note.createdbyid}" width="120px"/>
+                        <apex:column value="{!note.body}" />
+                    </apex:pageBlockTable>
+                    <apex:pageBlockButtons location="top">
+                        <apex:commandbutton value="Add Comment" action="/002/e?parent_id={!LEFT(TransferEvaluation__c.Id,15)}&retURL=%2Fapex%2FTransferEvaluation%3Fid%3D{!TransferEvaluation__c.Id}"/>
+                    </apex:pageBlockButtons>
+                </apex:pageBlock>
+            </apex:form>
+        </apex:tab>
+    </apex:tabPanel>
+</apex:page>

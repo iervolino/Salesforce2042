@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <customSettingsVisibility>Public</customSettingsVisibility>
+    <description>State Attributes</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>DefaultTimeZoneKey__c</fullName>
+        <description>Default TimeZone Key value for use in User.TimeZoneSidKey field values.</description>
+        <externalId>false</externalId>
+        <label>Default Time Zone Key</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EducatorBasicSkillsCodes__c</fullName>
+        <description>Assessment code(s) for passing the Teachers&apos; Basic Skills Assessment for the given state.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If multiple assessments are required, separate each with a comma. If any of a list is acceptable, separate each with a space. E.g. &apos;MI01,MI02,MI03&apos; = &apos;MI01 AND MI02 AND MI03&apos;, &apos;ACBC AWBT PXST&apos; = &apos;ACBC OR AWBT OR PXST&apos;</inlineHelpText>
+        <label>Educator Basic Skills Codes</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StateFullName__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Full name of State</description>
+        <externalId>true</externalId>
+        <label>State FullName</label>
+        <length>40</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>States</label>
+</CustomObject>

@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Custom object used for the Registrar Office Quality Assurance processes and reporting.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Auditor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field for WGU user.</description>
+        <externalId>false</externalId>
+        <label>Auditor</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>QualityAssurance1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AverageTurnAroundTime__c</fullName>
+        <description>Calculated average of the turn around time for cases, student processes, or transcript evaluations performed in the month of the audit.</description>
+        <externalId>false</externalId>
+        <formula>SumOfTurnAroundTime__c / CountForTurnAroundTime__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Average Turn Around Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Case__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field to case object</description>
+        <externalId>false</externalId>
+        <label>Case</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Quality Assurance</relationshipLabel>
+        <relationshipName>QualityAssurance</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CauseOfError__c</fullName>
+        <externalId>false</externalId>
+        <label>Cause of Error</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Employee Mistake</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Employee Misunderstanding</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lack of Training</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Micommunication</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lack of Clarity in Policy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CorrectiveAction__c</fullName>
+        <description>Open text field that allows the user to indicate what, if any, corrective action has been taken.</description>
+        <externalId>false</externalId>
+        <label>Corrective Action</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CountForTurnAroundTime__c</fullName>
+        <description>Rollup summary field that counts the turn around time from the quality assurance audits object.</description>
+        <externalId>false</externalId>
+        <label>Count for Turn Around Time</label>
+        <summaryForeignKey>QualityAssuranceAudit__c.QualityAssurance__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>DateOfAuditCopy__c</fullName>
+        <description>Date field used in the background for the utility class that finds cases, student processes, or transcript evaluations performed by the employee in the month range selected.</description>
+        <externalId>false</externalId>
+        <formula>TEXT(YEAR(MonthOfAudit__c)) + &quot;-&quot; + 
+IF(MONTH(MonthOfAudit__c)&lt;10,
+&quot;0&quot;+TEXT(MONTH(MonthOfAudit__c)),
+TEXT(MONTH(MonthOfAudit__c))) + &quot;-&quot; + 
+IF(
+DAY(MonthOfAudit__c)&lt;10,
+&quot;0&quot;+TEXT(DAY(MonthOfAudit__c)),
+TEXT(DAY(MonthOfAudit__c)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Date of Audit (System)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DateOfAudit__c</fullName>
+        <description>Date field that allows a user to select the date in which the audit took place.</description>
+        <externalId>false</externalId>
+        <label>Date of Audit</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Employee__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field to a WGU employee</description>
+        <externalId>false</externalId>
+        <label>Employee</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>QualityAssurance</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ExplanationOfAudit__c</fullName>
+        <description>Open text field that allows the auditor to comment on the results of the full QA audit.</description>
+        <externalId>false</externalId>
+        <label>Explanation of Audit</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ManagerTeamLeadNotes__c</fullName>
+        <description>Text field that allows the manager or team lead to make notes as to the outcome of their review.</description>
+        <externalId>false</externalId>
+        <label>Manager/Team Lead Notes</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ManagerTeamLeadReviewStatus__c</fullName>
+        <description>Picklist field that displays the status of the employee audit review by the manager or team lead.</description>
+        <externalId>false</externalId>
+        <label>Manager/Team Lead Review Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ManagerTeamLeadReviewedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup to the user who is performing the manager or team lead review.</description>
+        <externalId>false</externalId>
+        <label>Manager/Team Lead Reviewed By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>QualityAssurance3</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ManagerTeamLeadReviewedOn__c</fullName>
+        <description>Date field that indicates when the audit was reviewed by the employees manager or team lead.</description>
+        <externalId>false</externalId>
+        <label>Manager/Team Lead Reviewed On</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>MonthOfAudit__c</fullName>
+        <description>Date field that allows the user to select the date of the month that the audit time period begins with.  This field is key in linking the transfer evaluations, cases, and student processes the employee completed.</description>
+        <externalId>false</externalId>
+        <label>Month of Audit</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>NumberOfSystemErrors__c</fullName>
+        <description>A count of the number of System errors reported based on the quality assurance audit results for the given time period.</description>
+        <externalId>false</externalId>
+        <label>Number of System Errors</label>
+        <summaryFilterItems>
+            <field>QualityAssuranceAudit__c.SystemError__c</field>
+            <operation>notEqual</operation>
+            <value>None</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QualityAssuranceAudit__c.QualityAssurance__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>NumberofBestPracticeErrors__c</fullName>
+        <description>A count of the number of Best Practice errors reported based on the quality assurance audit results for the given time period.</description>
+        <externalId>false</externalId>
+        <label>Number of Best Practice Errors</label>
+        <summaryFilterItems>
+            <field>QualityAssuranceAudit__c.BestPracticeError__c</field>
+            <operation>notEqual</operation>
+            <value>None</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QualityAssuranceAudit__c.QualityAssurance__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>NumberofHighStakeErrors__c</fullName>
+        <description>A count of the number of High Stake errors reported based on the quality assurance audit results for the given time period.</description>
+        <externalId>false</externalId>
+        <label>Number of High Stake Errors</label>
+        <summaryFilterItems>
+            <field>QualityAssuranceAudit__c.HighStakeError__c</field>
+            <operation>notEqual</operation>
+            <value>None</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QualityAssuranceAudit__c.QualityAssurance__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>NumberofSRMErrors__c</fullName>
+        <description>A count of the number of SRM errors reported based on the quality assurance audit results for the given time period.</description>
+        <externalId>false</externalId>
+        <label>Number of SRM Errors</label>
+        <summaryFilterItems>
+            <field>QualityAssuranceAudit__c.SRMError__c</field>
+            <operation>notEqual</operation>
+            <value>None</value>
+        </summaryFilterItems>
+        <summaryForeignKey>QualityAssuranceAudit__c.QualityAssurance__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>PercentageOfSystemErrors__c</fullName>
+        <description>A calculated field that divides the number of system errors by total number of audits performed for the month.</description>
+        <externalId>false</externalId>
+        <formula>NumberOfSystemErrors__c / TotalNumberOfAudits__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Percentage of System Errors</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>PercentageofBestPracticeErrors__c</fullName>
+        <description>A calculated field that divides the number of best practice errors by total number of audits performed for the month.</description>
+        <externalId>false</externalId>
+        <formula>NumberofBestPracticeErrors__c / TotalNumberOfAudits__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Percentage of Best Practice Errors</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>PercentageofHighStakeErrors__c</fullName>
+        <description>A calculated field that divides the number of high stake errors by the total number of audits performed for the month.</description>
+        <externalId>false</externalId>
+        <formula>NumberofHighStakeErrors__c / TotalNumberOfAudits__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Percentage of High Stake Errors</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>PercentageofSRMErrors__c</fullName>
+        <description>A calculated field that divides the number of SRM errors by the total number of audits performed for the month.</description>
+        <externalId>false</externalId>
+        <formula>NumberofSRMErrors__c / TotalNumberOfAudits__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Percentage of SRM Errors</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>QualityAssuranceURL__c</fullName>
+        <description>Displays the URL link to the quality assurance record - for use in email templates.</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK( &quot;https://srm.my.salesforce.com/&quot; + Id , &quot;https://srm.my.salesforce.com/&quot; + Id )</formula>
+        <label>Quality Assurance URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>Picklist field that will indicate the current status of the quality assurance.</description>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Requested</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Manager/Team Lead Review Needed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>StudentProcess__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field to the student process object</description>
+        <externalId>false</externalId>
+        <label>Student Process</label>
+        <referenceTo>StudentProcess__c</referenceTo>
+        <relationshipLabel>Quality Assurance</relationshipLabel>
+        <relationshipName>QualityAssurance</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Subject__c</fullName>
+        <description>Open text field that will allow the user to enter in a subject or name of the quality assurance audit.  Used for email templates, reporting, and list views.</description>
+        <externalId>false</externalId>
+        <label>Subject</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SumOfTurnAroundTime__c</fullName>
+        <description>Roll up summary that adds up the turn around time.</description>
+        <externalId>false</externalId>
+        <label>Sum of Turn Around Time</label>
+        <summarizedField>QualityAssuranceAudit__c.TurnAroundTime__c</summarizedField>
+        <summaryForeignKey>QualityAssuranceAudit__c.QualityAssurance__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TeamAssignedTo__c</fullName>
+        <description>Picklist field that allows a user to select which team the employee was assigned to during the time period of the audit.</description>
+        <externalId>false</externalId>
+        <label>Team Assigned To</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Articulation Agreements</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AS Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Basic Records Functions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>College of Business</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>College of Health Professions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>College of Information Technology</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Graduation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ICR/EOTs (Incomplete Course Request/End of Term Submissions)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LT3s (Less Than 3 CU appeals)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mail / Indexing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program Changes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Readmissions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scores</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teachers College</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Term Break</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WGU Transcript</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Withdrawal/Rescissions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TotalNumberOfAudits__c</fullName>
+        <description>Number field that indicates the total number of audits performed for the given time period.</description>
+        <externalId>false</externalId>
+        <label>Total Number of Audits</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TransferEvaluation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field to the transfer evaluation object</description>
+        <externalId>false</externalId>
+        <label>Transfer Evaluation</label>
+        <referenceTo>TransferEvaluation__c</referenceTo>
+        <relationshipLabel>Quality Assurance</relationshipLabel>
+        <relationshipName>QualityAssurance2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Quality Assurance</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Subject__c</columns>
+        <columns>Status__c</columns>
+        <columns>Auditor__c</columns>
+        <columns>DateOfAudit__c</columns>
+        <columns>Employee__c</columns>
+        <columns>MonthOfAudit__c</columns>
+        <columns>TotalNumberOfAudits__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>AssistantRegistrar</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>QAComplete</fullName>
+        <columns>NAME</columns>
+        <columns>Subject__c</columns>
+        <columns>Employee__c</columns>
+        <columns>MonthOfAudit__c</columns>
+        <columns>TotalNumberOfAudits__c</columns>
+        <columns>Status__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Complete</value>
+        </filters>
+        <label>QA - Complete</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>AssistantRegistrar</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>QAInProgress</fullName>
+        <columns>NAME</columns>
+        <columns>Subject__c</columns>
+        <columns>Employee__c</columns>
+        <columns>MonthOfAudit__c</columns>
+        <columns>TotalNumberOfAudits__c</columns>
+        <columns>Status__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>In Progress</value>
+        </filters>
+        <label>QA - In Progress</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>AssistantRegistrar</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>QAManagerReviewNeeded</fullName>
+        <columns>NAME</columns>
+        <columns>Subject__c</columns>
+        <columns>Employee__c</columns>
+        <columns>MonthOfAudit__c</columns>
+        <columns>TotalNumberOfAudits__c</columns>
+        <columns>Status__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Manager/Team Lead Review Needed</value>
+        </filters>
+        <label>QA - Manager Review Needed</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>AssistantRegistrar</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>QARequested</fullName>
+        <columns>NAME</columns>
+        <columns>Subject__c</columns>
+        <columns>Employee__c</columns>
+        <columns>MonthOfAudit__c</columns>
+        <columns>TotalNumberOfAudits__c</columns>
+        <columns>Status__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Requested</value>
+        </filters>
+        <label>QA - Requested</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>AssistantRegistrar</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <displayFormat>QA-{00000}</displayFormat>
+        <label>Quality Assurance Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Quality Assurance</pluralLabel>
+    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>StudentRecords</fullName>
+        <active>true</active>
+        <description>Record type used for a Student Records employee or process audit.</description>
+        <label>Student Records</label>
+        <picklistValues>
+            <picklist>CauseOfError__c</picklist>
+            <values>
+                <fullName>Employee Mistake</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Misunderstanding</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Clarity in Policy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Micommunication</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ManagerTeamLeadReviewStatus__c</picklist>
+            <values>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manager%2FTeam Lead Review Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TeamAssignedTo__c</picklist>
+            <values>
+                <fullName>AS Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Articulation Agreements</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Basic Records Functions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Graduation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ICR%2FEOTs %28Incomplete Course Request%2FEnd of Term Submissions%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LT3s %28Less Than 3 CU appeals%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program Changes</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Readmissions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scores</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Term Break</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WGU Transcript</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Withdrawal%2FRescissions</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>TranscriptEvaluation</fullName>
+        <active>true</active>
+        <description>Record type used for a transcript/transfer evaluation employee or process audit.</description>
+        <label>Transcript Evaluation</label>
+        <picklistValues>
+            <picklist>CauseOfError__c</picklist>
+            <values>
+                <fullName>Employee Mistake</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Employee Misunderstanding</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Clarity in Policy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lack of Training</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Micommunication</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ManagerTeamLeadReviewStatus__c</picklist>
+            <values>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manager%2FTeam Lead Review Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TeamAssignedTo__c</picklist>
+            <values>
+                <fullName>College of Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>College of Health Professions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>College of Information Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mail %2F Indexing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Employee__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>DateOfAudit__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Subject__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Employee__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>DateOfAudit__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Subject__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Employee__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>DateOfAudit__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Subject__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Employee__c</searchFilterFields>
+        <searchFilterFields>DateOfAudit__c</searchFilterFields>
+        <searchFilterFields>Subject__c</searchFilterFields>
+        <searchResultsAdditionalFields>Employee__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>DateOfAudit__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Subject__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <webLinks>
+        <fullName>LinkCases</fullName>
+        <availability>online</availability>
+        <description>Links the associated cases from the Employee to the QA record.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Link Cases</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/apex.js&quot;)} 
+
+sforce.apex.execute(&quot;QualityAssuranceUtility&quot;,&quot;SearchForCase&quot;, 
+{associateID:&quot;{!QualityAssurance__c.EmployeeId__c}&quot;, 
+auditMonth:&quot;{!QualityAssurance__c.DateOfAuditCopy__c}&quot;, 
+auditId:&quot;{!QualityAssurance__c.Id}&quot;}); 
+location.reload(true);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Link_Student_Processes</fullName>
+        <availability>online</availability>
+        <description>Links the associated Student Process records from the Employee to the QA record.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Link Student Processes</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/apex.js&quot;)} 
+
+sforce.apex.execute(&quot;QualityAssuranceUtility&quot;,&quot;SearchForSP&quot;, 
+{associateID:&quot;{!QualityAssurance__c.EmployeeId__c}&quot;, 
+auditMonth:&quot;{!QualityAssurance__c.DateOfAuditCopy__c}&quot;, 
+auditId:&quot;{!QualityAssurance__c.Id}&quot;}); 
+location.reload(true);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Link_Transfer_Evaluations</fullName>
+        <availability>online</availability>
+        <description>Links the associated Transfer Evaluation records from the Employee to the QA record.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Link Transfer Evaluations</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/apex.js&quot;)} 
+
+sforce.apex.execute(&quot;QualityAssuranceUtility&quot;,&quot;SearchForTR&quot;, 
+{associateID:&quot;{!QualityAssurance__c.EmployeeId__c}&quot;, 
+auditMonth:&quot;{!QualityAssurance__c.DateOfAuditCopy__c}&quot;, 
+auditId:&quot;{!QualityAssurance__c.Id}&quot;}); 
+location.reload(true);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>QAYearlyReport</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Yearly Report</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/00Oe0000000SSUZ?pv0={!QualityAssurance__c.Employee__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>SendRecordLinkEmail</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send Record Link Email</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>javascript:location.href=&apos;mailto:?SUBJECT=&apos;+document.title+&apos;&amp;BODY=&apos;+escape(location.href);</url>
+    </webLinks>
+</CustomObject>

@@ -1,0 +1,8 @@
+<apex:component >
+    <!-- oooooooooooooooooooo No JavaScript oooooooooooooooooooo-->
+    <noscript>
+        <div class="alert orange">
+            Your browser is not processing JavaScript, which is neccessary to effectively use this website. Please <a href='http://www.enable-javascript.com/' target='_blank'>enable JavaScript</a> on your browser.
+        </div>
+    </noscript>
+</apex:component>

@@ -1,0 +1,21 @@
+<apex:page standardController="User"
+	extensions="NewStudentMentorController">
+	<apex:messages />
+	<apex:variable var="s" value="{!User.PIDM__c}" />
+	<apex:form >
+		<apex:pageBlock >
+			<apex:pageBlockSection >
+				<apex:inputField value="{!studentMentor.User__c}" />
+				<apex:inputField value="{!studentMentor.AssignedCollege__c}" />
+				<apex:inputField value="{!studentMentor.MentorRole__c}" />
+				<apex:inputField value="{!studentMentor.PIDM__c}" />
+				<apex:inputField value="{!studentMentor.ProgramCodes__c}" />
+				<apex:inputField value="{!studentMentor.RemainingStudents__c}" />
+				<apex:inputField value="{!studentMentor.StudentCapacity__c}" />
+				<apex:inputField value="{!studentMentor.StudentsAssigned__c}" />
+				<apex:commandButton action="{!saveStudentMentor}" value="Save" />
+			</apex:pageBlockSection>
+		</apex:pageBlock>
+	</apex:form>
+
+</apex:page>

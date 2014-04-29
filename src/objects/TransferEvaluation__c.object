@@ -1,0 +1,1484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A Transfer evaluation is the parent object of the equivalent courses that will given to the student from their transfer work. It controls the overall status and assignment of the evaluation.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Whether or not this is the current active evaluation</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not this is the current active evaluation</inlineHelpText>
+        <label>Active</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AssignedTo__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Assigned To</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Transfer_Evaluations</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CAREStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT( Opportunity__r.CareStatus__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>CARE Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>College__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.CollegeInterest__c</formula>
+        <label>College</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EligibilityStatus__c</fullName>
+        <description>The status of the student&apos;s eligibility based on the transfer evaluation</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The status of the student&apos;s eligibility based on the transfer evaluation</inlineHelpText>
+        <label>Eligibility Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Eligible</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Eligible</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>EvaluationSentDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Evaluation Sent Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>EvaluationStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>Evaluation Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Ready for Evaluation</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Process</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Eligible</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sent</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>EvaluationType__c</fullName>
+        <externalId>false</externalId>
+        <label>Evaluation Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Transfer Evaluation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Content Evaluation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Degree Verification</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>EvaluatorComments__c</fullName>
+        <description>Comments made by the evaluator for the overall evaluation.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This comment section you can note things that the student may call and ask about if they didn&apos;t have.</inlineHelpText>
+        <label>Evaluator Comments</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>EvaluatorInitials__c</fullName>
+        <externalId>false</externalId>
+        <formula>LEFT( AssignedTo__r.FirstName, 1)  + LEFT( AssignedTo__r.LastName, 2)</formula>
+        <label>Evaluator Initials</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Evaluator__c</fullName>
+        <externalId>false</externalId>
+        <label>Evaluator</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExpectedStartDate__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Opportunity__r.CloseDate - Today() &gt;= 1095, &quot;Unknown Start Date&quot;, TEXT(Opportunity__r.CloseDate) )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Expected Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExpediteComments__c</fullName>
+        <externalId>false</externalId>
+        <label>Expedite Comments</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ExpeditePriority__c</fullName>
+        <description>Formula to determine the priority level</description>
+        <externalId>false</externalId>
+        <formula>IF( OR(TEXT(EvaluationStatus__c) = &quot;Sent&quot;, TEXT(EvaluationStatus__c) = &quot;Not Eligible&quot;), &quot;S&quot;,
+
+IF(Opportunity__r.MilitaryScholarshipPriority__c = true, &quot;EM/S&quot;,
+
+IF(Opportunity__r.LateAdd__c = true, &quot;Late Add&quot;,
+
+IF(Opportunity__r.ExpediteTranscriptEvaluation__c = True, &quot;EC&quot;,
+
+IF (OR(TEXT(ExpediteReason__c)  = &quot;Late Add&quot;, 
+            TEXT(ExpediteReason__c)  = &quot;Military&quot;, 
+            TEXT(ExpediteReason__c)  = &quot;Scholarship&quot;, 
+            TEXT(ExpediteReason__c)  = &quot;Service Failure&quot;, 
+            NOW() - Opportunity__r.TranscriptDate__c &gt;= 30), &quot;A&quot;,
+
+IF(OR(TEXT(ExpediteReason__c) = &quot;Degree Plan&quot;,
+            TEXT(ExpediteReason__c)  = &quot;Student Request&quot;, 
+             NOW() - Opportunity__r.TranscriptDate__c &gt;= 15), &quot;B&quot;,
+
+IF(TEXT(ExpediteReason__c)  = &quot;EWB&quot;, &quot;EWB&quot;,
+
+IF(NOW() - Opportunity__r.TranscriptDate__c &gt;= 7, &quot;C&quot;, 
+
+&quot;N&quot;))))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Priority</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExpediteReason__c</fullName>
+        <description>Reason for needing to Expedite the Transfer Evaluation</description>
+        <externalId>false</externalId>
+        <label>Expedite Reason</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Degree Plan</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enrollment Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EWB</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Late Add</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Military</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scholarship</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service Failure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Manager__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(  AssignedTo__r.ManagerId =  $User.Id , 1, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Manager</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <description>The Link Between opportunities and transfer evaluations</description>
+        <externalId>false</externalId>
+        <label>CARE Profile Name</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Transfer Evaluations</relationshipLabel>
+        <relationshipName>TransferEvaluations</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>QualityAssurance__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Quality Assurance</label>
+        <referenceTo>QualityAssurance__c</referenceTo>
+        <relationshipLabel>Transfer Evaluations</relationshipLabel>
+        <relationshipName>TransferEvaluations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ResolutionTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Resolution Time</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SDriveURL__c</fullName>
+        <externalId>false</externalId>
+        <formula>LEFT(Opportunity__r.Account.LastName, 1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SDriveURL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentEmail__c</fullName>
+        <externalId>false</externalId>
+        <label>Student Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Account.StudentContact__r.StudentID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentMaidenName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.StudentAttributes__r.MaidenName__c</formula>
+        <label>Student Maiden Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentSFID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Opportunity__r.Account.StudentContact__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student SF ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TurnAround__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( NOT(ISBLANK(EvaluationSentDate__c  )), EvaluationSentDate__c  -  (
+IF(OR(LastModifiedDate &lt;= Opportunity__r.ReadyforEvaluationDate__c, LastModifiedDate &lt;=Opportunity__r.ReadyforEvaluationDate__c, ISBLANK(Opportunity__r.ReadyforEvaluationDate__c)), CreatedDate, Opportunity__r.ReadyforEvaluationDate__c)),
+
+
+LastModifiedDate -(IF(OR(LastModifiedDate &lt;= Opportunity__r.ReadyforEvaluationDate__c, LastModifiedDate &lt;=Opportunity__r.ReadyforEvaluationDate__c, ISBLANK(Opportunity__r.ReadyforEvaluationDate__c)), CreatedDate, Opportunity__r.ReadyforEvaluationDate__c)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Turn Around</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Views__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF($User.Id =  AssignedTo__c, 1, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>View</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WGUDegreeProgram__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>The program that the student was eThe program that the student was evaluated for valuated for</description>
+        <externalId>false</externalId>
+        <label>WGU Degree Program</label>
+        <referenceTo>WGUDegreeProgram__c</referenceTo>
+        <relationshipLabel>Transfer Evaluations</relationshipLabel>
+        <relationshipName>TransferEvaluations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Transfer Evaluation</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>ExpediteReason__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>Active__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <role>TranscriptTeamManager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>BusinessCollegeEvals</fullName>
+        <booleanFilter>(1 AND 2 AND 3 AND 4) or (1 AND 2 AND 3 AND 5)</booleanFilter>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>NAME</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>Active__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>StudentMaidenName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>College__c</field>
+            <operation>contains</operation>
+            <value>Business</value>
+        </filters>
+        <filters>
+            <field>AssignedTo__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>notContain</operation>
+            <value>NAMT - Not Admitted,DROP</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Complete,Not Eligible,Canceled,Sent</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>equals</operation>
+            <value>Ready for Evaluation,In Process,Pending</value>
+        </filters>
+        <label>View for Business College Evals</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>BusinessCollegeEvals_EWB</fullName>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>NAME</columns>
+        <columns>CAREStatus__c</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>Active__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>StudentMaidenName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>contains</operation>
+            <value>INTV,CLRD</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>notContain</operation>
+            <value>NAMT - Not Admitted,DROP</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Complete,Not Eligible,Canceled,Sent</value>
+        </filters>
+        <label>View for Business College Evals EWB</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <role>EnrollmentManager</role>
+            <role>TranscriptTeamManager</role>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>HealthProfessionsEWB</fullName>
+        <columns>ExpeditePriority__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>NAME</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>StudentMaidenName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Health Professions</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>contains</operation>
+            <value>CLRD,INTV</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>notContain</operation>
+            <value>NAMT - Not Admitted,DROP</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Complete,Not Eligible,Sent,Canceled</value>
+        </filters>
+        <label>View for Health Professions Evals EWB</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>HealthProfessionsEvals</fullName>
+        <booleanFilter>(1 AND 2 AND 3 AND 4) OR (1 AND 2 AND 3 AND 5)</booleanFilter>
+        <columns>ExpeditePriority__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>NAME</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>StudentMaidenName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>College__c</field>
+            <operation>contains</operation>
+            <value>Health,Nursing</value>
+        </filters>
+        <filters>
+            <field>AssignedTo__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>notContain</operation>
+            <value>NAMT - Not Admitted,DROP</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Complete,Not Eligible,Sent,Canceled</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>equals</operation>
+            <value>Ready for Evaluation,In Process,Pending</value>
+        </filters>
+        <label>View for Health Professions Evals</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ITCollegeEvals</fullName>
+        <booleanFilter>(1 AND 2 AND 3 AND 4) AND (1 AND 2 AND 3 and 5)</booleanFilter>
+        <columns>ExpediteReason__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>NAME</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>Active__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>StudentMaidenName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>College__c</field>
+            <operation>contains</operation>
+            <value>information,IT</value>
+        </filters>
+        <filters>
+            <field>AssignedTo__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>notContain</operation>
+            <value>NAMT - Not Admitted,DROP</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Complete,Not Eligible,Sent,Canceled</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>equals</operation>
+            <value>Ready for Evaluation,In Process,Pending</value>
+        </filters>
+        <label>View for IT College Evals</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ITCollegeEvals_EWB</fullName>
+        <columns>ExpediteReason__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>NAME</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>Active__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>StudentMaidenName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>College__c</field>
+            <operation>contains</operation>
+            <value>information</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>contains</operation>
+            <value>CLRD,INTV</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>notContain</operation>
+            <value>NAMT - Not Admitted,DROP</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Complete,Not Eligible,Sent,Canceled</value>
+        </filters>
+        <label>View for IT College Evals EWB</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>MyAppealedEvaluations</fullName>
+        <columns>ExpeditePriority__c</columns>
+        <columns>ExpediteReason__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>NAME</columns>
+        <columns>StudentID__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Sent,Canceled,Not Eligible,Complete</value>
+        </filters>
+        <filters>
+            <field>Views__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>equals</operation>
+            <value>Appealed</value>
+        </filters>
+        <label>My Appealed Evaluations</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>MyEvaluations</fullName>
+        <columns>EvaluationStatus__c</columns>
+        <columns>NAME</columns>
+        <columns>StudentID__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>EligibilityStatus__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>Opportunity__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Views__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Evaluations</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>MyPendingEvaluations</fullName>
+        <columns>ExpeditePriority__c</columns>
+        <columns>ExpediteReason__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>NAME</columns>
+        <columns>StudentID__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Sent,Canceled,Not Eligible,Complete</value>
+        </filters>
+        <filters>
+            <field>Views__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Appealed</value>
+        </filters>
+        <label>My Pending Evaluations</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>NAMT_Students</fullName>
+        <columns>NAME</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>contains</operation>
+            <value>NAMT</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Canceled</value>
+        </filters>
+        <label>NAMT Students</label>
+        <sharedTo>
+            <role>IT_Group</role>
+            <role>TranscriptTeamManager</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>NOCollegeEvals</fullName>
+        <booleanFilter>( 1 AND 2 AND 3 and 5) AND (1 AND 2 and 4 and 5)</booleanFilter>
+        <columns>Opportunity__c</columns>
+        <columns>ExpediteReason__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>NAME</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>Active__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>StudentMaidenName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>AssignedTo__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>notEqual</operation>
+            <value>NAMT - Not Admitted</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Complete,Not Eligible,Sent,Canceled</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>equals</operation>
+            <value>Ready for Evaluation,In Process,Pending</value>
+        </filters>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+        </filters>
+        <label>View for No College of Interest Evals</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>QC_Evaluations</fullName>
+        <columns>ExpediteReason__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>NAME</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>StudentMaidenName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>equals</operation>
+            <value>Complete</value>
+        </filters>
+        <label>View Evaluations in QC</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>TeachersCollegeEvals</fullName>
+        <booleanFilter>(1 AND 2 AND 3 AND 4) or (1 AND 2 AND 3 AND 5)</booleanFilter>
+        <columns>ExpediteReason__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>NAME</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>StudentMaidenName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>College__c</field>
+            <operation>contains</operation>
+            <value>Teachers</value>
+        </filters>
+        <filters>
+            <field>AssignedTo__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>notContain</operation>
+            <value>NAMT - Not Admitted,DROP</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Complete,Not Eligible,Sent,Canceled</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>equals</operation>
+            <value>Ready for Evaluation,In Process,Pending</value>
+        </filters>
+        <label>View for Teachers College Evals</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>TeachersCollegeEvals_EWB</fullName>
+        <columns>ExpediteReason__c</columns>
+        <columns>EvaluationStatus__c</columns>
+        <columns>NAME</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>StudentID__c</columns>
+        <columns>ExpectedStartDate__c</columns>
+        <columns>Opportunity__c</columns>
+        <columns>WGUDegreeProgram__c</columns>
+        <columns>StudentMaidenName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>College__c</field>
+            <operation>equals</operation>
+            <value>Teachers College</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>contains</operation>
+            <value>INTV,CLRD</value>
+        </filters>
+        <filters>
+            <field>CAREStatus__c</field>
+            <operation>notContain</operation>
+            <value>NAMT - Not Admitted,DROP</value>
+        </filters>
+        <filters>
+            <field>EvaluationStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Complete,Not Eligible,Sent,Canceled</value>
+        </filters>
+        <label>View for Teachers College Evals EWB</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <roleAndSubordinatesInternal>TranscriptTeam</roleAndSubordinatesInternal>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Transfer Evaluation Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Transfer Evaluations</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>StudentID__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>EvaluationStatus__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AssignedTo__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>StudentID__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Opportunity__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>EvaluationStatus__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>AssignedTo__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Active__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Active__c</searchFilterFields>
+        <searchFilterFields>AssignedTo__c</searchFilterFields>
+        <searchFilterFields>EligibilityStatus__c</searchFilterFields>
+        <searchFilterFields>EvaluationStatus__c</searchFilterFields>
+        <searchResultsAdditionalFields>StudentID__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>EvaluationStatus__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>AssignedTo__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Opportunity__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>ContentOrDegreeVerification</fullName>
+        <active>true</active>
+        <description>Validate all fields are correctly populated when saving a content or degree verification</description>
+        <errorConditionFormula>IF( AND(OR(TEXT(EvaluationStatus__c) = &quot;Complete&quot;, TEXT(EvaluationStatus__c) = &quot;Sent&quot;),TEXT(EvaluationType__c ) &lt;&gt; &quot;Transfer Evaluation&quot;,  TEXT(EligibilityStatus__c)=NULL), true, false)</errorConditionFormula>
+        <errorMessage>Please define the eligibility status to save this record as completed or sent.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>SaveCompleted</fullName>
+        <active>true</active>
+        <description>Restriction when saving evaluations as completed</description>
+        <errorConditionFormula>IF(AND(OR(TEXT(EvaluationStatus__c) = &quot;Complete&quot;, TEXT(EvaluationStatus__c) = &quot;Sent&quot;), ISBLANK( AssignedTo__c )), true, false)</errorConditionFormula>
+        <errorMessage>Please assign the evaluation before saving the record as completed or sent.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>AppealEvaluation</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Appeal Evaluation</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&apos;/jslibrary/&apos; &amp; LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TEXT(NOW()),&apos;:&apos;,&apos;&apos;),&apos;-&apos;,&apos;&apos;),&apos; &apos;,&apos;&apos;),10) &amp; &apos;/sfdc/VFRemote.js&apos;)}{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/connection.js&quot;)}{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/apex.js&quot;)}{!REQUIRESCRIPT(&apos;/resource/&apos; &amp; LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TEXT(NOW()),&apos;:&apos;,&apos;&apos;),&apos;-&apos;,&apos;&apos;),&apos; &apos;,&apos;&apos;),10) &amp; &apos;000/extjs_v407/builds/ext-all-sandbox.js&apos;)}{!REQUIRESCRIPT(&apos;/resource/&apos; &amp; LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TEXT(NOW()),&apos;:&apos;,&apos;&apos;),&apos;-&apos;,&apos;&apos;),&apos; &apos;,&apos;&apos;),10) &amp; &apos;000/WGUScriptMgr&apos;)}
+(function () {
+
+    Ext4.define(&apos;WGU.view.AppealDlg&apos;, {
+        extend: &apos;Ext.window.Window&apos;,
+
+        id: &apos;wguAppealDialog&apos;,
+        activeItem: 0,
+        height: 125,
+        width: 415,
+        layout: {
+            type: &apos;card&apos;
+        },
+        title: &apos;Appeal this Transcript Evaluation?&apos;,
+        modal: true,
+
+        initComponent: function() {
+            var me = this;
+
+            Ext.applyIf(me, {
+                items: [
+                    {
+                        xtype: &apos;container&apos;,
+                        id: &quot;appealConfirmation&quot;,
+                        layout: {
+                            type: &apos;absolute&apos;
+                        },
+                        items: [
+                            {
+                                xtype: &apos;label&apos;,
+                                x: 10,
+                                y: 20,
+                                text: &apos;Please confirm that you want to appeal this transcript evaluation.&apos;
+                            },
+                            {
+                                xtype: &apos;button&apos;,
+                                x: 200,
+                                y: 60,
+                                text: &apos;Confirm&apos;,
+                                width: 90,
+                                listeners: {
+                                    click: {
+                                        fn: me.onConfirmButtonClick,
+                                        scope: me
+                                    }
+                                }
+                            },
+                            {
+                                xtype: &apos;button&apos;,
+                                x: 300,
+                                y: 60,
+                                text: &apos;Cancel&apos;,
+                                width: 90,
+                                listeners: {
+                                    click: {
+                                        fn: me.onCancelButtonClick,
+                                        scope: me
+                                    }
+                                }
+                            }
+                        ],
+                        listeners: {
+                            afterlayout: {
+                                fn: me.onWindowAfterLayout,
+                                scope: me
+                            }
+                        }
+                    },
+                    {
+                        xtype: &apos;container&apos;,
+                        id: &quot;appealWait&quot;
+                    }
+                ]
+            });
+
+            me.callParent(arguments);
+        },
+
+
+        onCancelButtonClick: function(button, e, eOpts) {
+            appealDlg.close();
+        },
+
+        onConfirmButtonClick: function(button, e, eOpts) {
+            appealDlg.getLayout().setActiveItem(1);
+            Ext4.getCmp(&quot;appealWait&quot;).setLoading(&quot;Appealing Transcript Eval...&quot;);
+
+            Ext4.Function.defer( function() {
+
+                try {
+                    var student = sforce.connection.query(&quot;SELECT Id,FirstName,LastName from Contact WHERE StudentID__c = \&apos;&quot; +wguStudentTranscript.StudentID__c + &quot;\&apos; LIMIT 1&quot;).records;
+                    student.Name = student.FirstName + &quot; &quot; + student.LastName;
+                    var studentUserId = sforce.connection.query(&quot;SELECT Id from User WHERE ContactId = \&apos;&quot; + student.Id + &quot;\&apos; LIMIT 1&quot;).records.Id;
+                    var transcriptRecordTypeId = sforce.connection.query(&quot;SELECT Id FROM RecordType WHERE Name = &apos;Transcripts&apos; AND SobjectType = &apos;Case&apos; LIMIT 1&quot;).records.Id;
+                    var transcriptQueueId = sforce.connection.query(&quot;SELECT QueueId FROM QueueSobject WHERE Queue.Name = &apos;Transcripts&apos; LIMIT 1&quot;).records.QueueId;
+                    if ( Ext4.isChrome ) {
+                        console.log ( &quot;student: &quot; );
+                        console.log ( student );
+                        console.log ( &quot;studentUserId: &quot; + studentUserId );
+                        console.log ( &quot;transcriptRecordTypeId: &quot; + transcriptRecordTypeId );
+                        console.log ( &quot;transcriptQueueId: &quot; + transcriptQueueId );
+                    }
+
+                    //insert a new Case record
+                    var newCase = new sforce.SObject(&quot;Case&quot;);
+                    newCase.RecordTypeId = transcriptRecordTypeId;
+                    newCase.ContactId = student.Id;
+                    newCase.TranscriptTeamURL__c = &quot;https://&quot;+ location.hostname + &quot;/&quot; + wguStudentTranscript.Id;
+                    newCase.Reason = &quot;Appeal&quot;;
+                    newCase.TransferEvaluation__c = wguStudentTranscript.Id;
+                    newCase.Subject = &apos;Transcript Appeal for &apos; + student.Name;
+                    //newCase.ServiceDescription__c = &apos;&apos;;
+                    //newCase.RequestComments__c = &apos;&apos;;
+                    newCase.IsVisibleInSelfService = true;
+
+                    var saveResult = sforce.connection.create([newCase]);
+                    if ( saveResult ) {
+                        if (saveResult[0].success == &quot;true&quot;) {
+                            newCase.Id = saveResult[0].id;
+                            if ( Ext4.isChrome ) {
+                                console.log ( &quot;Case Create succeeded: &quot;  );
+                                console.log ( saveResult[0] );
+                            }
+
+                            //insert a new StudentCase__c record
+                            var studentCase = new sforce.SObject(&quot;StudentCase__c&quot;);
+                            studentCase.Contact__c = newCase.ContactId;
+                            studentCase.TransferEvaluation__c = wguStudentTranscript.Id;
+                            studentCase.OwnerId = studentUserId;
+                            studentCase.Case__c = newCase.Id;
+                            studentCase.ParentURL__c = newCase.TranscriptTeamURL__c;
+                            studentCase.StudentCaseReason__c  = newCase.Reason;
+                            //studentCase.ServiceDescription__c = &apos;&apos;;
+                            //studentCase.Comments__c = &apos;&apos;;
+
+                            saveResult = sforce.connection.create([studentCase]);
+                            if ( saveResult ) {
+                                if (saveResult[0].success == &quot;true&quot;) {
+                                    if ( Ext4.isChrome ) {
+                                        console.log ( &quot;StudentCase__c Create succeeded: &quot;  );
+                                        console.log ( saveResult[0] );
+                                    }
+                                    studentCase.Id = saveResult[0].id;
+
+                                    //Update Case with Queue Assignment
+                                    //Assign case to student as they need to take action first
+                                    newCase.OwnerId = studentUserId;
+                                    var saveResult = sforce.connection.update([newCase]);
+                                    if (saveResult[0].success == &quot;true&quot;) {
+
+                                        if ( Ext4.isChrome ) {
+                                            console.log ( &quot;Case Update succeeded: &quot;  );
+                                            console.log ( saveResult[0] );
+                                        }
+
+                                        //Update the current TransferEvaluation__c record with the Appealed status
+                                        var evalUpdate = new sforce.SObject(&quot;TransferEvaluation__c&quot;);
+                                        evalUpdate.Id = wguStudentTranscript.Id;
+                                        evalUpdate.EvaluationStatus__c = &quot;Appealed&quot;;
+                                        saveResult = sforce.connection.update([evalUpdate]);
+                                        if ( saveResult ) {
+                                            if (saveResult[0].success == &quot;true&quot;) {
+                                                Ext4.Msg.show({
+                                                    title:&apos;Appeal Creation Successful&apos;,
+                                                    msg: &apos;Case records for new Appeal created successfully:&amp;nbsp;&amp;nbsp;&lt;a target=&quot;&apos;+newCase.Id+&apos;&quot; href=&quot;https://&apos; + location.host + &quot;/&quot; + newCase.Id  + &apos;&quot;&gt;New Case Link&lt;/a&gt;&apos;,
+                                                    buttons: Ext4.Msg.OK,
+                                                    icon: Ext4.MessageBox.INFO,
+                                                    fn: function(btn, text) {
+                                                        location = &quot;/&quot; + wguStudentTranscript.Id;
+                                                    }
+                                                });
+                                                if ( Ext4.isChrome ) {
+                                                    console.log ( &quot;TransferEvaluation__c Update succeeded: &quot;  );
+                                                    console.log ( saveResult[0] );
+                                                }
+                                            } else {
+                                                if ( Ext4.isChrome ) {
+                                                    console.log ( &quot;TransferEvaluation__c Update failed: &quot;  );
+                                                    console.log ( saveResult[0] );
+                                                }
+                                            }
+
+                                        }
+                                    } else {
+                                        Ext4.Msg.show({
+                                            title:&apos;Appeal Creation Failed [Case UPDATE, Queue Assign]&apos;,
+                                            msg: saveResult[0].errors.message,
+                                            buttons: Ext4.Msg.OK,
+                                            icon: Ext4.MessageBox.ERROR
+                                        });
+                                        if ( Ext4.isChrome ) {
+                                            console.log ( &quot;Case Update failed: &quot;  );
+                                            console.log ( saveResult[0] );
+                                        }
+                                    }
+                                } else {
+                                    Ext4.Msg.show({
+                                        title:&apos;Appeal Creation Failed [StudentCase__c INSERT]&apos;,
+                                        msg: saveResult[0].errors.message,
+                                        buttons: Ext4.Msg.OK,
+                                        icon: Ext4.MessageBox.ERROR
+                                    });
+                                    if ( Ext4.isChrome ) {
+                                        console.log ( &quot;StudentCase__c Create failed: &quot; );
+                                        console.log ( saveResult[0] );
+                                    }
+                                }
+                            }
+                        } else {
+                            Ext4.Msg.show({
+                                title:&apos;Appeal Creation Failed [Case INSERT]&apos;,
+                                msg: saveResult[0].errors.message,
+                                buttons: Ext4.Msg.OK,
+                                icon: Ext4.MessageBox.ERROR
+                            });
+                            if ( Ext4.isChrome ) {
+                                console.log ( &quot;Case Create failed: &quot; );
+                                console.log ( saveResult[0] );
+                            }
+
+                        }
+
+                    }
+
+                } finally {
+                    Ext4.getCmp(&quot;appealWait&quot;).setLoading(false);
+                    try { appealDlg.close(); } catch(e) {}
+                }
+
+            }, 50);
+
+        },
+
+        onWindowAfterLayout: function(container, layout, eOpts) {
+        }
+
+
+    });
+
+    wguStudentTranscript = { Id: &quot;{!TransferEvaluation__c.Id}&quot;, EvaluationStatus__c: &quot;{!TransferEvaluation__c.EvaluationStatus__c}&quot;, StudentID__c:&quot;{!TransferEvaluation__c.StudentID__c}&quot; };
+
+    window.$soap = sforce.connection;
+    if ( Ext.isEmpty($soap.sessionId) ) {
+        $soap.init(&apos;{!$Api.Session_ID}&apos;,&quot;/services/Soap/u/29.0&quot;);
+    }
+
+    if (Ext) {
+        Ext3 = Ext;
+    }
+
+    var stylesheetId = &apos;wgu-stylesheet-ext4sanbox&apos; ;
+    if ( Ext3 &amp;&amp; Ext3.fly( stylesheetId ) == null ) {
+        var ext4cssUrl = &quot;/resource/{!LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(TEXT(NOW()),&apos;:&apos;,&apos;&apos;),&apos;-&apos;,&apos;&apos;),&apos; &apos;,&apos;&apos;),10)}000/extjs_v407/resources/css/ext-sandbox.css&quot;;
+        Ext4.WGUScriptMgr.loadCss( {
+            url: ext4cssUrl,
+            callback: onReady,
+            id: stylesheetId
+        } );
+    } else {
+        onReady();
+    }
+
+
+    function onReady() {
+        if ( Ext4.isEmpty(Ext4.util.CSS.getRule(&apos;.x4-shim&apos;, true)) ) {
+
+            Ext4.callback( function(){
+                    doDlg();
+                },
+                window, null, 2000 );
+
+        } else {
+            doDlg();
+        }
+
+    }
+
+    function doDlg() {
+        if ( wguStudentTranscript.EvaluationStatus__c != &apos;Appealed&apos; ) {
+            appealDlg = Ext4.create(&quot;WGU.view.AppealDlg&quot;,{});
+            appealDlg.show();
+        } else {
+            Ext4.Msg.show({
+                title:&apos;Transcript Appeal in Progress&apos;,
+                msg: &apos;Transfer Evaluations must not be in Appealed status. &lt;br/&gt;Please contact the Transcript Team for more information.&apos;,
+                buttons: Ext4.Msg.OK,
+                icon: Ext4.MessageBox.WARNING
+            });
+        }
+    }
+
+
+})();</url>
+    </webLinks>
+    <webLinks>
+        <fullName>CourseEntry</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Course Entry</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://srm--gblite.na13.visual.force.com/apex/Grid?fpf=Opportunity__c&amp;ro=0&amp;fpv={!TransferEvaluation__c.OpportunityId__c}&amp;gname=Transfer+Entry&amp;gv=20&amp;fr=1&amp;ps=50</url>
+    </webLinks>
+    <webLinks>
+        <fullName>CreatePDF</fullName>
+        <availability>online</availability>
+        <description>Create the PDF for the output</description>
+        <displayType>button</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Create PDF</masterLabel>
+        <openType>replace</openType>
+        <page>TranscriptEvalOutput</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>PerformEvaluation</fullName>
+        <availability>online</availability>
+        <description>Click to perform the evaluation</description>
+        <displayType>button</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Perform Evaluation</masterLabel>
+        <openType>replace</openType>
+        <page>TransferEvalDetail</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>QuickEmail</fullName>
+        <availability>online</availability>
+        <description>Button to open the quick case email interface</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Quick Email</masterLabel>
+        <openType>sidebar</openType>
+        <protected>false</protected>
+        <url>/apex/QuickCase?ContactId={!TransferEvaluation__c.StudentSFID__c}&amp;ObjectId={!TransferEvaluation__c.Id}&amp;RecordType=Transcripts</url>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewDocsLegacy</fullName>
+        <availability>online</availability>
+        <description>Open the S drive and find the folder for the student</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View I Drive</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://docs.wgu.edu/Docs/Registrar/Forms/AllItems.aspx?RootFolder=%2FDocs%2FRegistrar%2FWorking%20Files%20for%20Evaluators%2F{!TransferEvaluation__c.SDriveURL__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>ViewDocuments</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>View Documents</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://imaging.wgu.edu/AppNet/docpop/docpop.aspx?KT102_0_0_0={!TransferEvaluation__c.StudentID__c}&amp;clienttype=activex&amp;cqid=115</url>
+    </webLinks>
+</CustomObject>

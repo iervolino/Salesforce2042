@@ -1,0 +1,1381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AAVApproval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>AAV was removed for the term only after proper approval, if applicable (AAV Admin Tool)</inlineHelpText>
+        <label>AAV - Approval</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AAVMentorHome__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Duplicate AAV was removed properly from mentor home channel (AAV Admin Tool)</inlineHelpText>
+        <label>AAV - Mentor Home</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AAVStudent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Student was reported correctly to be Administratively Withdrawn for No AAV</inlineHelpText>
+        <label>AAV - Student</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AAVTerm__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>AAV or duplicate AAV was removed from the correct past or current term</inlineHelpText>
+        <label>AAV - Term</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CUBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Part-time status code was entered correctly in Banner (SFAREGS or SGASTDN)</inlineHelpText>
+        <label>CU - Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CUBursar__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Interaction was appropriately assigned to Bursar</inlineHelpText>
+        <label>CU - Bursar</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Case__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Case</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Audit Checklists</relationshipLabel>
+        <relationshipName>AuditChecklists</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Category__c</fullName>
+        <externalId>false</externalId>
+        <label>Category</label>
+        <length>150</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChangeNote__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Change note was appropriately added (SPACMNT)</inlineHelpText>
+        <label>Change Note</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Comments were added as necessary</inlineHelpText>
+        <label>Comments</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Communication__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Communication to the student/mentor was appropriate and to/from the correct email.</inlineHelpText>
+        <label>Communication</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ContGradCrosswalk__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Appropriate crosswalk of assessments was performed and applied for continuing grad</inlineHelpText>
+        <label>Cont Grad - Crosswalk</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ContGradSWATEST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>RM’s were appropriately added to SWATEST</inlineHelpText>
+        <label>Cont Grad - SWATEST</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CourseDescription__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Descriptions were sent for all courses requested</inlineHelpText>
+        <label>Course - Description</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CourseFormat__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Correct format was used when sending descriptions (from template)</inlineHelpText>
+        <label>Course - Format</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CourseInfo__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Correct information was given to the student and/or other institution</inlineHelpText>
+        <label>Course - Info</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DPApproval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Proper program manager approval was received for request</inlineHelpText>
+        <label>DP - Approval</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DPBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Banner record was appropriately changed to reflect the change requested (i.e. Drop/Add a course, apply RM or WV, remove TR, RM, or WV)</inlineHelpText>
+        <label>DP - Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DateOfRequest__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentProcess__r.CreatedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Date Of Request</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DemographicsAddress__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Address change was performed correctly in Banner or Student AAP (SPAIDEN)</inlineHelpText>
+        <label>Demographics - Address</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DemographicsBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Name change was entered into Banner correctly (SPAIDEN)</inlineHelpText>
+        <label>Demographics - Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DemographicsDocumentation__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Correct documentation was accepted to perform a name change (SSN and Picture ID)</inlineHelpText>
+        <label>Demographics - Documentation</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DemographicsMentor__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Mentor was specifically notified of student’s changed name</inlineHelpText>
+        <label>Demographics - Mentor</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ECAAV__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Enrollment verification was sent only after AAV had been established for the current term</inlineHelpText>
+        <label>EC - AAV</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ECInfo__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Enrollment verification included correct information (i.e. term dates, expected grad date, program, etc)</inlineHelpText>
+        <label>EC - Info</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ECNSC__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Loan deferment was forwarded to NSC appropriately or completed with correct information</inlineHelpText>
+        <label>EC - NSC</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ECPDF__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>EV letter was converted to .pdf and attached to email</inlineHelpText>
+        <label>EC - PDF</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ECStudent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Student was given accurate information regarding loan deferment procedures</inlineHelpText>
+        <label>EC - Student</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Grad2Weeks__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Graduation was completed within 2 weeks</inlineHelpText>
+        <label>Grad - 2 Weeks</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GradAAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>AAP audit performed and all courses PA, TR, RM, or WV in the correct term</inlineHelpText>
+        <label>Grad - AAP</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GradBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Graduation Banner processing was completed correctly (SHADEGR, SHADIPL, SFAREGS)</inlineHelpText>
+        <label>Grad - Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GradBursar__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Graduated with proper clearance from Bursar</inlineHelpText>
+        <label>Grad - Bursar</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GradDiplomaMailed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Diploma and transcripts were mailed to the right student</inlineHelpText>
+        <label>Grad - Diploma Mailed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GradDiplomaPrint__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Diploma was printed with the correct student name, degree and major</inlineHelpText>
+        <label>Grad - Diploma Print</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GradPaper__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Appropriate paper stock was used for printing diploma and transcripts (WGU vs WGU Indiana)</inlineHelpText>
+        <label>Grad - Paper</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GradPraxis__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Appropriate Praxis and/or state content exam was completed prior to graduation (if applicable)</inlineHelpText>
+        <label>Grad - Praxis</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GradeApproval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Proper approval was received prior to grade change</inlineHelpText>
+        <label>Grade - Approval</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GradeCode__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Grade was changed for the correct term and assessment code (SHATCKN)</inlineHelpText>
+        <label>Grade - Code</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GradeSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>SAP was recalculated for the correct term (SWGUSAP)</inlineHelpText>
+        <label>Grade - SAP</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MentorBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Banner record was appropriately changed to the new mentor in the correct term (SGAADVR)</inlineHelpText>
+        <label>Mentor - Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MentorFolder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Student folder was moved</inlineHelpText>
+        <label>Mentor - Folder</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NeededFollowUp__c</fullName>
+        <externalId>false</externalId>
+        <label>Needed Follow Up</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ProcessedDate__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentProcess__r.ProcessedDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Processed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ProgramAAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>AAP reviewed before performing program change to check waives and potential grade level changes.  Acknowledge student on TB or MR.</inlineHelpText>
+        <label>Program - AAP</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ProgramCode__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Program change was completed for the correct program code and catalog term</inlineHelpText>
+        <label>Program - Code</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ProgramCrosswalk__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Crosswalk was applied appropriately</inlineHelpText>
+        <label>Program - Crosswalk</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ProgramPCTE__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Transcript re-evaluation was notified to perform a PCTE</inlineHelpText>
+        <label>Program - PCTE</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ProgramPrerequisites__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Any necessary pre-requisites were verified before performing the program change 
+(i.e. degree verification, Math pre-requisite, Science pre-requisite, IT pre-requisite)</inlineHelpText>
+        <label>Program - Prerequisites</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ProgramSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Program change was processed before term roll if 100% SAP</inlineHelpText>
+        <label>Program - SAP</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ProgramTerm__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Program change was completed for the right student current term</inlineHelpText>
+        <label>Program - Term</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Program__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentProcess__r.Student__r.ProgramName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Program</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Properties__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>All CRM properties were categorized correctly and subject description accurate</inlineHelpText>
+        <label>Properties</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>QAPerformedBy__c</fullName>
+        <externalId>false</externalId>
+        <formula>CreatedBy.FirstName + &quot; &quot; +  CreatedBy.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>QA Performed By</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QualityAssurance__c</fullName>
+        <externalId>false</externalId>
+        <label>Quality Assurance</label>
+        <referenceTo>QualityAssurance__c</referenceTo>
+        <relationshipLabel>Audit Checklists</relationshipLabel>
+        <relationshipName>AuditChecklists</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>ReadmissionAppropriatelyReadmitted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Student was appropriately readmitted (proper approvals received if DD, etc.)</inlineHelpText>
+        <label>Readmission - Appropriately Readmitted</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReadmissionBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Readmission Banner processing was completed correctly (SGASTDN, SGAADVR, SAADCRV, SPACMNT, &amp; Campus Code)</inlineHelpText>
+        <label>Readmission - Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReadmissionCorrectProgram__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Readmitted into the correct program, PCTE completed and/or crosswalks applied correctly</inlineHelpText>
+        <label>Readmission - Correct Program</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReadmissionLastTermofAttendance__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Readmission - Last Term of Attendance</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReadmissionSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Student was given the correct and appropriate information regarding SAP status (GS, PN, SU)</inlineHelpText>
+        <label>Readmission - SAP</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReadmissionWithin2Weeks__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Readmission decision made within 2 weeks</inlineHelpText>
+        <label>Readmission - Within 2 Weeks</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Response__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Appropriate canned response(s) sent to Mentors, Program Manager, and/or student</inlineHelpText>
+        <label>Response</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SAPGradeLevelsAcademicHistory__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Grade was changed correctly in Academic History after MR resolved (SWATEST, SHATCKN)</inlineHelpText>
+        <label>SAP/Grade Levels - Academic History</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SAPGradeLevelsApproval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Proper approval was received before processing Manual Recheck and/or Late Referral</inlineHelpText>
+        <label>SAP/Grade Levels - Approval</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SAPGradeLevelsAssessment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Assessment was removed from the current term if MR processed after term end</inlineHelpText>
+        <label>SAP/Grade Levels - Assessment</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SAPGradeLevelsIC__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>IC was entered for the correct assessment with the correct term end date (SWATEST, SHATCKN)</inlineHelpText>
+        <label>SAP/Grade Levels - IC</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SAPGradeLevelsLate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Late referral was processed for the correct assessment and scheduler notified correctly</inlineHelpText>
+        <label>SAP/Grade Levels - Late</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SAPGradeLevelsRF__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>RF was entered for the correct assessment (AAP, SWATEST)</inlineHelpText>
+        <label>SAP/Grade Levels - RF</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SAPGradeLevelsSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>SAP/Grade Levels - SAP</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SAPGradeLevelsTimely__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Communication to the assessment department was timely</inlineHelpText>
+        <label>SAP/Grade Levels - Timely</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SalesforceID__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentProcess__r.StudentID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Salesforce ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ScoreARPSWATEST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Score was entered correctly with the appropriate grade (PA or FD) using ARP (or SWATEST)</inlineHelpText>
+        <label>Score - ARP/SWATEST</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ScoreDate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Score was entered using the correct date according to assessment type</inlineHelpText>
+        <label>Score - Date</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ScoreVerification__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Score was posted from official score verification report only</inlineHelpText>
+        <label>Score - Verification</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StudentName__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentProcess__r.Student__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentProcess__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Student Process</label>
+        <referenceTo>StudentProcess__c</referenceTo>
+        <relationshipName>AuditingSteps</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TEBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>All transfer credits / crosswalks have been properly data entered in Banner (SWATEST)</inlineHelpText>
+        <label>TE - Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TECorrectProgram__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Evaluation was performed for the correct program</inlineHelpText>
+        <label>TE - Correct Program</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TECrosswalks__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Crosswalks were applied accurately according to the Master Program Schedule</inlineHelpText>
+        <label>TE - Crosswalks</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TEEmailed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Evaluation was emailed to the student and/or mentor appropriately</inlineHelpText>
+        <label>TE - Emailed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TEFiled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Evaluation was filed to the correct student folder and done backup folder</inlineHelpText>
+        <label>TE - Filed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TEGuidelines__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Evaluation was performed accurately according to the program transfer guidelines</inlineHelpText>
+        <label>TE - Guidelines</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TeachGrantApproved__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Approved admissions test score was verified according to the TEACH GRANT standards</inlineHelpText>
+        <label>Teach Grant - Approved</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TeachGrantBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Eligibility was marked appropriately in Banner (ROAHSDT, ROANYUD)</inlineHelpText>
+        <label>Teach Grant - Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TermBreakApproval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Proper approval was received prior to starting/ending term break</inlineHelpText>
+        <label>Term Break - Approval</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TermBreakBannerDates__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Term break dates were correctly entered in Banner - double check dates already entered(SGASTDN)</inlineHelpText>
+        <label>Term Break - Banner Dates</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TermBreakBannerStatus__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Term break status was correctly entered in Banner (SFAREGS/SGASTDN)</inlineHelpText>
+        <label>Term Break - Banner Status</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TermBreakBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Term break term was correctly created in Banner (SGASTDN)</inlineHelpText>
+        <label>Term Break - Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TermBreakHeader__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Term header was appropriately removed – for future TB (SFAREGS)</inlineHelpText>
+        <label>Term Break - Header</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptAddress__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Transcript was mailed and/or delivered to the correct address</description>
+        <externalId>false</externalId>
+        <label>Transcript - Address</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptApproval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Proper authorization to release transcript was received (consent of student, cleared by Bursar)</inlineHelpText>
+        <label>Transcript - Approval</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationCARE__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>All transcripts have been marked as received on intake and SAAACKL tabs in CARE</inlineHelpText>
+        <label>Transcript Evaluation - CARE</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationEWB__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Evaluation was completed by student’s EWB Start Date</inlineHelpText>
+        <label>Transcript Evaluation - EWB</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationFiled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Transcript evaluation has been filed to the appropriate student folder</inlineHelpText>
+        <label>Transcript Evaluation - Filed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationFolder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>All transcripts/RN license verifications have been properly scanned and filed to the 
+appropriate student folder</inlineHelpText>
+        <label>Transcript Evaluation - Folder</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationForm__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Evaluation form was filled out properly</inlineHelpText>
+        <label>Transcript Evaluation - Form</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationGrade__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Best grade used</inlineHelpText>
+        <label>Transcript Evaluation - Grade</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationGuidelines__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Evaluation was performed accurately according to the program transfer guidelines</inlineHelpText>
+        <label>Transcript Evaluation - Guidelines</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationNote__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Note has been entered that evaluation has been completed or any update to the 
+evaluation has been completed.</inlineHelpText>
+        <label>Transcript Evaluation - Note</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationProgram__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Evaluation was performed for the correct program</inlineHelpText>
+        <label>Transcript Evaluation - Program</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationSOAPCOL__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Degrees have been properly entered in SOAPCOL and verified</inlineHelpText>
+        <label>Transcript Evaluation - SOAPCOL</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationSWATEST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>All transfer credits have been properly data entered in SWATEST (TR’s or RM’s)</inlineHelpText>
+        <label>Transcript Evaluation - SWATEST</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptEvaluationUpdate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Any updates to the transcript evaluation has been filed to the appropriate student folder</inlineHelpText>
+        <label>Transcript Evaluation - Update</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptIowa__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Transcript was corrected for Iowa residents if applicable (CU’s vs Credit Hours)</inlineHelpText>
+        <label>Transcript - Iowa</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptPaper__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Transcript was printed on correct paper stock (WGU vs WGU Indiana)</inlineHelpText>
+        <label>Transcript - Paper</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptStudent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Transcript was prepared for the correct student</inlineHelpText>
+        <label>Transcript - Student</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TranscriptUnofficial__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Student was given the instructions to obtain unofficial transcript</inlineHelpText>
+        <label>Transcript - Unofficial</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TransferEvaluation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Transfer Evaluation</label>
+        <referenceTo>TransferEvaluation__c</referenceTo>
+        <relationshipLabel>Audit Checklists</relationshipLabel>
+        <relationshipName>AuditChecklists</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TurnAroundTime__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>In business days.</inlineHelpText>
+        <label>Turn Around Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WithdrawalBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Term with no AAV was removed properly from Banner prior to withdrawal (SGASTDN)</inlineHelpText>
+        <label>Withdrawal - Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>WithdrawalCommunication__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Communication with the student and/or other departments was appropriate</inlineHelpText>
+        <label>Withdrawal - Communication</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>WithdrawalDropCode__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Correct drop code was used (DD, DR, WI)</inlineHelpText>
+        <label>Withdrawal - Drop Code</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>WithdrawalLDA__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Withdrawal was processed using the correct LDA</inlineHelpText>
+        <label>Withdrawal - LDA</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>WithdrawalRecovery__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Withdrawal was processed only after Withdrawal Recovery team had a chance to connect</inlineHelpText>
+        <label>Withdrawal - Recovery</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>WithdrawalTerm__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Withdrawal was processed for the correct term</inlineHelpText>
+        <label>Withdrawal - Term</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Audit Checklist</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>AS-{00000}</displayFormat>
+        <label>Audit Checklist Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Audit Checklists</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>AAV</fullName>
+        <active>true</active>
+        <label>AAV</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>CUCompliance</fullName>
+        <active>true</active>
+        <label>CU Compliance</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ContinuingGrad</fullName>
+        <active>true</active>
+        <label>Continuing Grad</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Course</fullName>
+        <active>true</active>
+        <label>Course</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>DegreePlan</fullName>
+        <active>true</active>
+        <label>Degree Plan</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Demographics</fullName>
+        <active>true</active>
+        <label>Demographics</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>EnrollmentVerificationLoanDeferment</fullName>
+        <active>true</active>
+        <label>Enrollment Verification / Loan Deferment</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Grade</fullName>
+        <active>true</active>
+        <label>Grade</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Graduation</fullName>
+        <active>true</active>
+        <label>Graduation</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>MentorChange</fullName>
+        <active>true</active>
+        <label>Mentor Change</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ProgramChange</fullName>
+        <active>true</active>
+        <label>Program Change</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Readmission</fullName>
+        <active>true</active>
+        <label>Readmission</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>SAPGradeLevels</fullName>
+        <active>true</active>
+        <label>SAP/Grade Levels</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Scores</fullName>
+        <active>true</active>
+        <label>Scores</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>StudentProcessTranscriptEvaluation</fullName>
+        <active>true</active>
+        <label>Student Process Transcript Evaluation</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>TeachGrant</fullName>
+        <active>true</active>
+        <label>Teach Grant</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>TermBreak</fullName>
+        <active>true</active>
+        <label>Term Break</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>TranscriptEvaluation</fullName>
+        <active>true</active>
+        <label>Transcript Evaluation</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>TranscriptRequest</fullName>
+        <active>true</active>
+        <label>Transcript Request</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Withdrawal</fullName>
+        <active>true</active>
+        <label>Withdrawal</label>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <webLinks>
+        <fullName>NewStudentProcessChecklist</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>New Student Process Checklist</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>{!URLFOR($Action.AuditChecklist__c.New)}&amp;CF00Ne0000000V15A={!StudentProcess__c.QualityAssurance__c}&amp;CF00Ne0000000UxXe={!StudentProcess__c.Name}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>NewTransferEvaluationChecklist</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>New Transfer Evaluation Checklist</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>{!URLFOR($Action.AuditChecklist__c.New)}&amp;CF00Ne0000000V15A={!TransferEvaluation__c.QualityAssurance__c}&amp;CF00Ne0000000V1V8={! TransferEvaluation__c.Name}</url>
+    </webLinks>
+</CustomObject>

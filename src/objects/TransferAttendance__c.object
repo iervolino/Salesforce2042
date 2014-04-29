@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This is a record of attendance at other institutions including any degrees awarded, program, GPA, and dates of attendance.</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>DegreeAwardedDate__c</fullName>
+        <description>Date when the actual degree was awarded to the student</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please add the date when the degree was actually awarded to the student</inlineHelpText>
+        <label>Degree Awarded Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DegreeAwarded__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This is the degree awarded at a prior institution.</description>
+        <externalId>false</externalId>
+        <label>Degree Awarded</label>
+        <referenceTo>KeyValue__c</referenceTo>
+        <relationshipLabel>Transfer Attendance</relationshipLabel>
+        <relationshipName>TransferAttendance</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DegreeRelatesToWGUProgram__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If the transcript degree is related to the WGU enrolled program for transfer credit purposes</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is this degree related to the WGU enrolled program</inlineHelpText>
+        <label>Degree Relates to WGU Program</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DegreeValue__c</fullName>
+        <description>The number value associated to the degree awarded</description>
+        <externalId>false</externalId>
+        <label>Degree Value</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DiscountAmount__c</fullName>
+        <description>The calculated amount of what the discount amount should be based on whether they have a degree or not.</description>
+        <externalId>false</externalId>
+        <formula>IF( BLANKVALUE( DegreeAwarded__r.Name , &apos;ND&apos;) &lt;&gt; &apos;ND&apos;, StudentTransferInstitution__r.TranscriptInstitution__r.DiscountAmount__c,0 )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Discount Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <description>This is the last date of attendance at an institution either due to graduation, drop or withdrawal.</description>
+        <externalId>false</externalId>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>GPA__c</fullName>
+        <description>This is the Grade Point Average as displayed on an official transcript received from another institution.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This allows for two decimal places. If the transcript displays more than two places, please round.</inlineHelpText>
+        <label>GPA</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProgramName__c</fullName>
+        <description>The Program Name is the name of the last program in which the student was enrolled at a prior institution.</description>
+        <externalId>false</externalId>
+        <label>Program Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <description>The date a student started attending an institution.</description>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>StudentTransferInstitution__c</fullName>
+        <externalId>false</externalId>
+        <label>Student Transfer Institution</label>
+        <referenceTo>StudentTranscript__c</referenceTo>
+        <relationshipLabel>Transfer Attendance</relationshipLabel>
+        <relationshipName>TransferAttendances</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Transfer_Institution_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentTransferInstitution__r.TranscriptInstitution__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Transfer Institution Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Transfer Attendance</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>ProgramName__c</columns>
+        <columns>Transfer_Institution_Name__c</columns>
+        <columns>DegreeValue__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Transfer Attendance Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Transfer Attendance</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Transfer_Institution_Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ProgramName__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>DegreeAwarded__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>StudentTransferInstitution__c</searchFilterFields>
+        <searchFilterFields>Transfer_Institution_Name__c</searchFilterFields>
+        <searchFilterFields>ProgramName__c</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>EndDate</fullName>
+        <active>true</active>
+        <description>Validation for the end date vr start date</description>
+        <errorConditionFormula>EndDate__c &lt; StartDate__c</errorConditionFormula>
+        <errorMessage>The end date must occur after the start date. Please verify the information and try again.</errorMessage>
+    </validationRules>
+</CustomObject>

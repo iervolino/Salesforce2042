@@ -1,0 +1,465 @@
+<apex:page title="Western Governors University - Search Students By SSN or DOB" contentType="text/html; charset=UTF-8" controller="FindStudentController" standardStylesheets="true" showHeader="true" sidebar="true" docType="html">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<html>
+<head>
+<apex:includeScript value="/soap/ajax/27.0/connection.js"/>
+<apex:includeScript value="/support/console/27.0/integration.js"/>
+<script type="text/javascript" charset="utf-8" src="{!$Resource.WGUMonkeyFix}" id="WGUMonkeyFix"></script>
+
+<script type="text/javascript" >
+  sforce.connection.init( "{!$Api.session_id}", "/services/Soap/u/27.0" ); 
+  $soap = sforce.connection;
+  $sconsole = (sforce && sforce.console && sforce.console.isInConsole()? sforce.console: false);
+</script>    
+<link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"></link>
+<apex:stylesheet value="{!URLFOR($Resource.extjs_v420, 'resources/css/ext-all.css')}"/> 
+
+<script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v420}/ext-all.js"/>
+<title>Western Governors University - Search Students By SSN or DOB</title>
+
+
+</head>
+<body>
+    <apex:form id="apexForm">
+    <apex:pageMessages />
+    <div id="extContent">
+    </div>
+                                                
+    <script type="text/javascript" >
+        var WGUpanel;
+
+        var studentSearchGrid;
+        var studentSearchTermField;
+        var studentSearchButton;
+        var lastFourSearchRadio;
+        var viewStudentButton;
+        var birthdateSearchRadio;
+
+        Ext.ns("Ext.WGU");   
+        Ext.override(Ext.data.Store, {
+            loadDataViaReader : function(data, append) {
+                var me      = this,
+                    result  = me.proxy.reader.read(data),
+                    records = result.records;
+        
+                me.loadRecords(records, { addRecords: append });
+                me.fireEvent('load', me, result.records, true);
+            }            
+        });
+        
+        
+        Ext.onReady(function(){ 
+            Ext.tip.QuickTipManager.init();
+            Ext.FocusManager.enable();
+
+            WGUpanel = new Ext.create('Ext.WGU.SearchBySSNViewPort',{}); 
+            WGUpanel.render( 'extContent' ); 
+                     
+            studentSearchGrid = Ext.getCmp('studentSearchGrid');
+            studentSearchTermField = Ext.getCmp('studentSearchTermField');
+            studentSearchButton = Ext.getCmp('studentSearchButton');
+            lastFourSearchRadio = Ext.getCmp('lastFourSearchRadio');
+            viewStudentButton = Ext.getCmp('viewStudentButton');
+            birthdateSearchRadio = Ext.getCmp('birthdateSearchRadio');
+            
+            
+        }); //end Ext.onReady()
+        
+        
+        
+
+        Ext.define('Ext.WGU.SearchBySSNViewPort', {
+            extend: 'Ext.container.Container',
+            height: 350,
+            width: 780,
+            id: 'searchViewPort',
+            style: 'background-color:#F8F8F8;',
+            layout: {
+                type: 'absolute'
+            },
+        
+            initComponent: function() {
+                var me = this;
+        
+                Ext.applyIf(me, {
+                    items: [
+                        {
+                            //Account Search
+                            xtype: 'panel',
+                            id: 'studentSearchPanel',
+                            height: 350,
+                            width: 780,
+                            title: '',
+                            border: 0,
+                            layout: {
+                                type: 'absolute'
+                            },
+                            items: [
+                                    
+                                   {
+                                        xtype: 'fieldset',
+                                        title: 'Find a Student',
+                                        x: 15,
+                                        y: 7,
+                                        width: 330,
+                                        defaultType: 'radio', 
+                                        layout: 'anchor',
+                                        defaults: {
+                                            anchor: '100%',
+                                            hideEmptyLabel: false
+                                        },
+                                        items: [
+                                                {
+                                                    xtype: 'component',
+                                                    height: 5
+                                                },
+                                                {
+                                                    fieldLabel: 'Search for',
+                                                    labelWidth: 130,
+                                                    labelAlign: 'right',
+                                                    id: 'ssnSearchRadio',
+                                                    checked: false,
+                                                    boxLabel: 'Full Social Security',
+                                                    name: 'searchBy',
+                                                    inputValue: 'SSN',
+                                                    handler: function(radioButton, checked ) {
+                                                      if (checked) {
+                                                        studentSearchTermField.setRawValue('');
+                                                        studentSearchTermField.labelEl.dom.innerHTML = 'Enter #########:';
+                                                      }
+                                                    }
+                                                }, 
+                                                {
+                                                    labelWidth: 130,
+                                                    id: 'lastFourSearchRadio',
+                                                    checked: true,
+                                                    boxLabel: 'Last Four',
+                                                    name: 'searchBy',
+                                                    inputValue: 'Last Four',
+                                                    handler: function(radioButton, checked ) {
+                                                      if (checked) {
+                                                        studentSearchTermField.setRawValue('');
+                                                        studentSearchTermField.labelEl.dom.innerHTML = 'Enter ####:';
+                                                      }
+                                                    }
+                                                }, 
+                                                {
+                                                    labelWidth: 130,
+                                                    id: 'birthdateSearchRadio',
+                                                    checked: false,
+                                                    boxLabel: 'BirthDate',
+                                                    name: 'searchBy',
+                                                    inputValue: 'birthDate',
+                                                    handler: function(radioButton, checked ) {
+                                                      if (checked) {
+                                                        studentSearchTermField.setRawValue('');
+                                                        studentSearchTermField.labelEl.dom.innerHTML = 'Enter ##/##/####:';
+                                                      }
+                                                    }
+                                                }, 
+                                                {
+                                                    xtype: 'textfield',
+                                                    labelWidth: 130,
+                                                    labelAlign: 'right',
+                                                    id: 'studentSearchTermField',
+                                                    fieldLabel: 'Enter SSN ####',
+                                                    enableKeyEvents : true,
+                                                    //enforceMaxLength : true,
+                                                    //regex: /^\d{4,9}$/i,
+                                                    //maskRe: /\d/i,
+                                                    //maxLength: 9,
+                                                    //minLength: 4,
+                                                    //minLengthText: 'Must enter 4 to 9 digits',
+                                                    listeners: {
+                                                                   specialkey: function(field, event){
+                                                                        if ( event.getKey() == event.ENTER ) {
+                                                                           event.stopEvent();
+                                                                           studentSearchButton.fireEvent('click', studentSearchButton);
+                                                                        }
+                                                                   }
+                                                               }                                                                
+                                                },
+                                                {
+                                                xtype: 'container',
+                                                border: 0,
+                                                height: 25,
+                                                layout: {
+                                                    type: 'absolute'
+                                                },
+                                                items: [
+                                                                    {
+                                                                        xtype: 'button',
+                                                                        id: 'studentSearchButton',
+                                                                        text: 'Search',
+                                                                        x: 134,
+                                                                        y: 0,
+                                                                        width: 173,
+                                                                        listeners: {
+                                                                          click: function(button, event, eOpts ) {
+                                                                          
+                                                                            if ( birthdateSearchRadio.getValue() ) {
+                                                                              if ( studentSearchTermField.getRawValue() ) {
+                                                                                  var searchText = studentSearchTermField.getRawValue();
+                                                                                  studentSearchGrid.setLoading('Searching...');
+                                                                                  
+                                                                                      FindStudentController.searchBirthDate(searchText, function(result, er){
+                                                                                          if (result) {
+                                                                                              viewStudentButton.setDisabled(true); 
+                                                                                              var rawStudentRecords = Ext.decode( result );
+                                                                                              if ( rawStudentRecords.Records != null && rawStudentRecords.count > 0 ) {
+                                            
+                                                                                                  contactStore.loadDataViaReader( rawStudentRecords );
+                                                                                                  contactStore.sort( 'Name', 'ASC');
+                                                                                                  if ( rawStudentRecords.count == 1 ) {
+                                                                                                      studentSearchGrid.setLoading(false);
+                                                                                                      WGUpanel.setLoading('Redirecting to ' + rawStudentRecords.Records[0].Student__r.Name + '...' );
+                                                                                                      window.location= "/" + rawStudentRecords.Records[0].Student__c;                                                                                           
+                                                                                                  }
+                                                                                                  
+                                                                                              }  else {  // else rawStudentRecords.Records.length == 0
+                                                                                                Ext.Msg.show({
+                                                                                                     title:'NOT FOUND',
+                                                                                                     msg: 'No students found for that birthdate.',
+                                                                                                     buttons: Ext.Msg.OK,
+                                                                                                     icon: Ext.Msg.INFO
+                                                                                                     }
+                                                                                                ); 
+                                                                                              }
+                                                                                              studentSearchGrid.setLoading(false);
+                                                                                          } else {
+                                                                                            studentSearchGrid.setLoading(false);
+                                                                                            if ( er != null && er.type == 'exception' ) {
+                                                                                               Ext.Msg.show({
+                                                                                                     title:'SEARCH ERROR',
+                                                                                                     msg: er.message + ',\r\nPlease enter the birthdate in format mm/dd/yyyy.',
+                                                                                                     buttons: Ext.Msg.OK,
+                                                                                                     icon: Ext.Msg.ERROR
+                                                                                                     }
+                                                                                                ); 
+                                                                                            }
+                                                                                          }
+                                                                                      }, {escape:false});
+                                                                                      
+                                                                               } else {
+                                                                                      Ext.Msg.show({
+                                                                                         title:'Search Value',
+                                                                                         msg: 'Please specify a birthdate to search in the format mm/dd/yyyy.',
+                                                                                         buttons: Ext.Msg.OK,
+                                                                                         icon: Ext.Msg.INFO
+                                                                                      });
+                                                                               }
+                                                                           
+                                                                            } else {
+                                                                              var findLast4 = lastFourSearchRadio.getValue();                                                      
+                                                                              if (( findLast4 && studentSearchTermField.getRawValue() && studentSearchTermField.getRawValue().length == 4 ) || ( !findLast4 && studentSearchTermField.getRawValue() && studentSearchTermField.getRawValue().length == 9 )) {
+                                                                                  var searchText = studentSearchTermField.getRawValue();
+                                                                                  studentSearchGrid.setLoading('Searching...');
+                                                                                      FindStudentController.searchSSN(searchText, findLast4, function(result, er){
+                                                                                          if (result) {
+                                                                                              viewStudentButton.setDisabled(true); 
+                                                                                              var rawStudentRecords = Ext.decode( result );
+                                                                                              if ( rawStudentRecords.Records != null && rawStudentRecords.count > 0 ) {
+                                            
+                                                                                                  contactStore.loadDataViaReader( rawStudentRecords );
+                                                                                                  contactStore.sort( 'Name', 'ASC');
+                                                                                                  if ( rawStudentRecords.count == 1 ) {
+                                                                                                      studentSearchGrid.setLoading(false);
+                                                                                                      WGUpanel.setLoading('Redirecting to ' + rawStudentRecords.Records[0].Student__r.Name + '...' );
+                                                                                                      window.location= "/" + rawStudentRecords.Records[0].Student__c;                                                                                           
+                                                                                                  }
+                                                                                                  
+                                                                                              }  else {  // else rawStudentRecords.Records.length == 0
+                                                                                                Ext.Msg.show({
+                                                                                                     title:'NOT FOUND',
+                                                                                                     msg: 'No students found for that value.',
+                                                                                                     buttons: Ext.Msg.OK,
+                                                                                                     icon: Ext.Msg.INFO
+                                                                                                     }
+                                                                                                ); 
+                                                                                              }
+                                                                                              studentSearchGrid.setLoading(false);
+                                                                                          } else {
+                                                                                            studentSearchGrid.setLoading(false);
+                                                                                          }
+                                                                                      }, {escape:false});
+                                                                                      
+                                                                               } else {
+                                                                                 if ( lastFourSearchRadio.getValue() ) {
+                                                                                      Ext.Msg.show({
+                                                                                         title:'Search Value',
+                                                                                         msg: 'Please specify a valid Last 4 value to search.',
+                                                                                         buttons: Ext.Msg.OK,
+                                                                                         icon: Ext.Msg.INFO
+                                                                                      });
+                                                                                  } else {
+                                                                                      Ext.Msg.show({
+                                                                                         title:'Search Value',
+                                                                                         msg: 'Please specify a valid full SSN value to search.',
+                                                                                         buttons: Ext.Msg.OK,
+                                                                                         icon: Ext.Msg.INFO
+                                                                                      });
+                                                                                  }
+                                                                               }
+                                                                           
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                    }
+                                                ]
+                                                }, // end search button 
+                                                {
+                                                    xtype: 'component',
+                                                    height: 7
+                                                }
+                                          ]
+                                    }, // end fieldset
+                                    {
+                                        xtype: 'gridpanel',
+                                        id: 'studentSearchGrid',
+                                        title: '',
+                                        x: 15,
+                                        y: 175,
+                                        width: 740,
+                                        height: 130,
+                                        store: contactStore,
+                                        multiSelect: false,
+                                        forceFit: true,
+                                        viewConfig: {
+                                            itemId: 'search-grid-view',
+                                            stripeRows: true,
+                                            listeners: {
+                                                itemclick: function( thisView, record, item, index, e, eOpts ){
+                                                   viewStudentButton.setDisabled(false); 
+                                                },
+                                                itemdblclick: function( thisView, record, item, index, e, eOpts ){
+                                                   var data = record.data;
+                                                   if ( data.Student__c != null ) {
+                                                     window.location= "/" + data.Student__c ;
+                                                   }
+                                                },
+                                                selectionchange: function( thisModel, selected, eOpts ) {
+                                                  if ( selected.length == 0 ) {
+                                                    //disable or enable button if selected record
+                                                    viewStudentButton.setDisabled(true);
+                                                  } else {
+                                                    viewStudentButton.setDisabled(false);
+                                                  }
+                                                }
+                                            }
+                                        },
+                                        columns: [
+                                            {
+                                                xtype: 'gridcolumn',
+                                                dataIndex: 'string',
+                                                text: 'Student Name (Last, First)',
+                                                dataIndex: 'Name',
+                                                width: 40,
+                                                renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                                  var studentName = record.get("LastName") + ", " + record.get('FirstName');
+                                                  if ( $sconsole ) {
+                                                    metaData.tdAttr = 'data-qtip="Open tab for '+record.get('StudentFullName')+'"';
+                                                    var nameLastFirst = "<a id='"+record.get('Student__c')+"' href='#' onclick='$sconsole.openPrimaryTab( null, \"/"+record.get('Student__c')+"\", true, \""+studentName+"\", function(){}, \""+studentName+"\" );return false;'>" + studentName + "</a>";
+                                                    return nameLastFirst;
+                                                  } else {
+                                                    metaData.tdAttr = 'data-qtip="Open view for '+record.get('StudentFullName')+'"';
+                                                    var nameLastFirst = "<a id='" + record.get('Student__c') + "' href='#' onclick='window.open(\"/"+record.get('Student__c')+"\", \""+record.get('Student__c')+"\" );window.focus();return false;'>" + studentName + "</a>";
+                                                    return nameLastFirst;
+                                                  }
+                                                }
+                                            },
+                                            {
+                                                xtype: 'gridcolumn',
+                                                dataIndex: 'string',
+                                                text: 'Degree',
+                                                dataIndex: 'DegreeProgramCode',
+                                                width: 17
+                                            },
+                                            {
+                                                xtype: 'gridcolumn',
+                                                dataIndex: 'string',
+                                                text: 'Degree Program',
+                                                dataIndex: 'DegreeProgramName',
+                                                width: 55
+                                            },
+                                            {
+                                                xtype: 'gridcolumn',
+                                                dataIndex: 'string',
+                                                text: 'City',
+                                                dataIndex: 'City',
+                                                width: 24
+                                            },
+                                            {
+                                                xtype: 'gridcolumn',
+                                                dataIndex: 'string',
+                                                text: 'State',
+                                                dataIndex: 'State',
+                                                width: 12
+                                            },
+                                            {
+                                                xtype: 'gridcolumn',
+                                                dataIndex: 'string',
+                                                text: 'Record Type',
+                                                dataIndex: 'RecordType',
+                                                width: 30
+                                            }
+                                           
+                                        ]
+                                    },
+                                    {
+                                        xtype: 'button',
+                                        id: 'viewStudentButton',
+                                        text: 'View Student Record',
+                                        x: 15,
+                                        y: 310,
+                                        disabled: true,
+                                        handler: function() {
+                                            if ( studentSearchGrid.getSelectionModel().getSelection().length == 1 ) {
+                                               var data = studentSearchGrid.getSelectionModel().getSelection()[0].data;
+                                                   if ( data.Student__c != null ) {
+                                                     window.location= "/" + data.Student__c ;
+                                                   }                                               
+                                            } else {
+                                                  createPlacementButton.setDisabled(true);
+                                                  Ext.Msg.show({
+                                                     title:'No Student Selected',
+                                                     msg: 'Please select a student from the search results.',
+                                                     buttons: Ext.Msg.OK,
+                                                     icon: Ext.Msg.INFO
+                                                  });
+                                            }
+                                         }
+                                    }
+                                    
+                                   ]
+                        }
+                    ]
+                });
+        
+                me.callParent(arguments);
+            }
+        });
+        
+        Ext.define('ContactModel', { 
+            extend  : 'Ext.data.Model',      
+            fields  : [ 
+                        {name: 'Student__c' , mapping: 'Student__c', type: 'string'},
+                        {name: 'Name' , mapping: 'Name', type: 'string'},
+                        {name: 'StudentFullName' , mapping: 'Student__r.Name', type: 'string'},
+                        {name: 'FirstName' , mapping: 'Student__r.FirstName', type: 'string'},
+                        {name: 'LastName' , mapping: 'Student__r.LastName', type: 'string'},
+                        {name: 'DegreeProgramCode' , mapping: 'Student__r.ProgramCode__c', type: 'string'},
+                        {name: 'DegreeProgramName' , mapping: 'Student__r.ProgramName__c', type: 'string'},
+                        {name: 'City' , mapping: 'Student__r.MailingCity', type: 'string'},
+                        {name: 'State' , mapping: 'Student__r.MailingState', type: 'string'},
+                        {name: 'RecordType' , mapping: 'Student__r.RecordType.Name', type: 'string'}
+            ]
+        });
+        
+        var contactStore = Ext.create('Ext.data.Store', { model : 'ContactModel', proxy : { type    : 'memory', reader  : { type : 'json', root: 'Records' } } });
+        
+    </script>
+            
+</apex:form>
+</body>
+</html>
+</apex:page>

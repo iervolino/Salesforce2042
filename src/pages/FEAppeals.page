@@ -1,0 +1,462 @@
+<apex:page controller="FEAppealsController">
+<apex:pageMessages ></apex:pageMessages>
+<apex:includeScript value="{!URLFOR($Resource.jquery_v1_8_3, '/js/jquery-1.7.1.min.js')}"  />
+<apex:includeScript value="{!URLFOR($Resource.jquery_v1_8_3, '/js/jquery-ui-1.8.18.custom.min.js')}"  />
+<apex:stylesheet value="{!URLFOR($Resource.jquery_v1_8_3, '/css/smoothness/jquery-ui-1.8.18.custom.css')}"  />
+<script type="text/javascript">
+$j = jQuery.noConflict();
+$j(document).ready(function(){
+    $j("#q2").hide();
+    $j("#q3").hide();
+    $j("#q3a").hide();
+    $j("#q3b").hide();
+    $j("#q3c").hide();
+    $j("#q3d").hide();
+    $j("#q3e").hide();
+    $j("#q3f").hide();
+    $j("#q3g").hide();
+    $j("#q4").hide();
+    $j("#q5").hide();
+    $j("#q6").hide();
+    $j("#q7").hide();
+    $j("#q8").hide();
+    $j("#q9").hide();
+    $j("#q10").hide();
+    $j("#q11").hide();
+    $j("#q12").hide();
+    $j("#q15").hide();
+    $j("#q16").hide();
+    $j("#q17").hide();
+  });
+  
+  function q2Showfun(val){
+      if(val.value=='Yes'){
+       $j("#q2").show().slideDown();    
+      }else{
+          $j("#q2").hide();
+          $j("#q3").hide();
+          $j("#q3a").hide(); 
+          $j("#q3b").hide();
+          $j("#q3c").hide();
+          $j("#q3d").hide();
+          $j("#q3e").hide();
+          $j("#q3f").hide();
+          $j("#q3g").hide();
+          $j("#q4").hide();
+          $j("#q5").hide();
+          $j("#q6").hide();
+          $j("#q7").hide();
+          $j("#q8").hide();
+          $j("#q9").hide();
+          $j("#q10").hide();
+          $j("#q11").hide();
+          $j("#q12").hide();
+          $j("#q15").hide();
+          $j("#q16").hide();
+          $j("#q17").hide();
+          alert('Please review this Appeal with the Manager before proceeding');
+      }
+  }  
+  
+  function appealTypeShowfun(val){
+      if(val.value=='Late Entry to DT Cohort'){
+       
+       $j("#q3").show();
+       $j("#q3a").show(); 
+       $j("#q3b").show();
+       $j("#q3c").show();
+       $j("#q3d").hide();
+       $j("#q3e").show();
+       $j("#q3f").show();
+       $j("#q3g").show();
+       $j("#q10").show(); 
+       $j("#q11").hide();
+       $j("#q12").hide();
+       $j("#q15").hide();
+       $j("#q16").hide();
+       $j("#q17").hide();  
+      }else if(val.value=='Content Exam/s'){
+       $j("#q3").hide();
+       $j("#q3a").hide(); 
+       $j("#q3b").hide();
+       $j("#q3c").hide();
+       $j("#q3d").hide();
+       $j("#q3e").hide();
+       $j("#q3f").hide();
+       $j("#q3g").hide();
+       $j("#q4").hide();
+       $j("#q5").hide();
+       $j("#q6").hide();
+       $j("#q7").hide();
+       $j("#q8").hide();
+       $j("#q9").hide();
+       $j("#q10").hide(); 
+       $j("#q11").show();
+       $j("#q12").hide();
+       $j("#q15").hide();
+       $j("#q16").hide();
+       $j("#q17").hide();
+      }else if(val.value=='Progress Audit 1' || val.value=='Progress Audit 2' || val.value=='Final Audit'){
+        $j("#q3").hide();
+        $j("#q3a").hide();
+        $j("#q3b").hide();
+        $j("#q3c").hide();
+        $j("#q3d").hide();
+        $j("#q3e").hide();
+        $j("#q3f").hide();
+        $j("#q3g").hide();
+        $j("#q4").hide();
+        $j("#q5").hide();
+        $j("#q6").hide();
+        $j("#q7").hide();
+        $j("#q8").hide();
+        $j("#q9").hide();
+        $j("#q10").hide();
+        $j("#q11").hide();
+        $j("#q12").show();
+        $j("#q15").hide();
+        $j("#q16").hide();
+        $j("#q17").hide();
+      }else if(val.value=='3rd Cohort'){
+        $j("#q3").hide();
+        $j("#q3a").hide();
+        $j("#q3b").hide();
+        $j("#q3c").hide();
+        $j("#q3d").hide();
+        $j("#q3e").hide();
+        $j("#q3f").hide();
+        $j("#q3g").hide();
+        $j("#q4").hide();
+        $j("#q5").hide();
+        $j("#q6").hide();
+        $j("#q7").hide();
+        $j("#q8").hide();
+        $j("#q9").hide();
+        $j("#q10").hide();
+        $j("#q11").hide();
+        $j("#q12").hide();
+        $j("#q15").show();
+        $j("#q16").hide();
+        $j("#q17").hide();
+      }else if(val.value=='Other Appeal'){
+        $j("#q3").hide();
+        $j("#q3a").hide();
+        $j("#q3b").hide();
+        $j("#q3c").hide();
+        $j("#q3d").hide();
+        $j("#q3e").hide();
+        $j("#q3f").hide();
+        $j("#q3g").hide();
+        $j("#q4").hide();
+        $j("#q5").hide();
+        $j("#q6").hide();
+        $j("#q7").hide();
+        $j("#q8").hide();
+        $j("#q9").hide();
+        $j("#q10").hide();
+        $j("#q11").hide();
+        $j("#q12").hide();
+        $j("#q15").hide();
+        $j("#q16").show();
+        $j("#q17").hide();
+      }else if(val.value=='Placement Variation'){
+        $j("#q3").hide();
+        $j("#q3a").hide();
+        $j("#q3b").hide();
+        $j("#q3c").hide();
+        $j("#q3d").hide();
+        $j("#q3e").hide();
+        $j("#q3f").hide();
+        $j("#q3g").hide();
+        $j("#q4").hide();
+        $j("#q5").hide();
+        $j("#q6").hide();
+        $j("#q7").hide();
+        $j("#q8").hide();
+        $j("#q9").hide();
+        $j("#q10").hide();
+        $j("#q11").hide();
+        $j("#q12").hide();
+        $j("#q15").hide();
+        $j("#q16").hide();
+        $j("#q17").show();
+      }
+      
+  }  
+  
+  function q4Showfun(val){
+      if(val.value=='No'){
+       $j("#q4").show().slideDown();    
+      }else{
+          $j("#q4").hide();
+          
+      }
+  }  
+  
+  function q5Showfun(val){
+      if(val.value=='No'){
+       $j("#q5").show().slideDown();    
+      }else{
+          $j("#q5").hide();
+          
+      }
+  }  
+  
+  function q3dShowfun(val){
+      if(val.value=='No'){
+       $j("#q3d").show().slideDown();    
+      }else{
+          $j("#q3d").hide();
+          
+      }
+  } 
+  
+  function q6Showfun(val){
+      if(val.value=='No'){
+       $j("#q6").show().slideDown();    
+      }else{
+          $j("#q6").hide();
+          
+      }
+  }  
+  
+  function q7Showfun(val){
+      if(val.value=='No'){
+       $j("#q7").show().slideDown();    
+      }else{
+          $j("#q7").hide();
+          
+      }
+  }  
+  
+  function q8Showfun(val){
+      if(val.value=='No'){
+       $j("#q8").show().slideDown();    
+      }else{
+          $j("#q8").hide();
+          
+      }
+  } 
+  
+  function q9Showfun(val){
+      if(val.value=='No'){
+       $j("#q9").show().slideDown();    
+      }else{
+          $j("#q9").hide();
+      }
+  }  
+  function funcSave(){
+      alert('Your Appeal has been saved');
+      savefunction();
+  }
+  
+  
+</script>  
+<style>
+.padding1{
+     padding-left:50px;   
+}
+.padding2{
+     padding-left:100px;   
+}
+</style>
+ <apex:form >
+ 
+  <apex:pageBlock > 
+      <apex:pageBlockButtons >
+          <apex:commandButton value="Submit" action="{!save}" onclick="funcSave();"/>                  
+          <apex:commandButton value="Cancel" action="{!cancel}"/>
+      </apex:pageBlockButtons>
+      <apex:pageBlockSection columns="1" collapsible="true" >
+          <apex:outputText value="Q1.  Have you reviewed this appeal with your mentor manager and does he/she approve of its submission?"></apex:outputText>
+          <apex:selectRadio layout="pageDirection" value="{!q1AnsrSel}" onchange="q2Showfun(this)" >
+              <apex:selectOptions value="{!qOne}"></apex:selectOptions>               
+          </apex:selectRadio>
+      </apex:pageBlockSection>
+      <div id="q2"> 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q2.  Please indicate the basis for your appeal."></apex:outputText>
+                  <apex:selectRadio layout="pageDirection" value="{!q2AnsrSel}" onchange="appealTypeShowfun(this)" >
+                      <apex:selectOptions value="{!appealTypeValues}"></apex:selectOptions>
+                  </apex:selectRadio>    
+          </apex:pageBlockSection>
+      </div>
+      
+      <div id="q3"> 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q3. Mark all that apply."></apex:outputText>
+          </apex:pageBlockSection>
+      </div>
+      
+       <div id="q3a" class="padding1"> 
+          <apex:pageBlockSection columns="2" collapsible="true">
+              <apex:outputText value="A. SFAW (resume, photo and philosophy of teaching statement) – posted to Degree Plan?"></apex:outputText>
+               <apex:selectRadio value="{!q3aAnsrSel}" onchange="q4Showfun(this)" >
+                      <apex:selectOptions value="{!q3a}"></apex:selectOptions>
+               </apex:selectRadio>         
+          </apex:pageBlockSection>
+      </div>
+      <div id="q3b" class="padding1"> 
+          <apex:pageBlockSection columns="2" collapsible="true">
+              <apex:outputText value="B. Basic skills exams – passed and posted to Degree Plan?"></apex:outputText>
+               <apex:selectRadio value="{!q3bAnsrSel}" onchange="q5Showfun(this)">
+                      <apex:selectOptions value="{!q3b}"></apex:selectOptions>
+               </apex:selectRadio>         
+          </apex:pageBlockSection>
+      </div>
+      <div id="q3c" class="padding1"> 
+          <apex:pageBlockSection columns="2" collapsible="true">
+              <apex:outputText value="C. State Required content exams – passed and posted to Degree Plan? If No…"></apex:outputText>
+               <apex:selectRadio value="{!q3cAnsrSel}" onchange="q3dShowfun(this)" >
+                      <apex:selectOptions value="{!q3c}"></apex:selectOptions>
+               </apex:selectRadio>         
+          </apex:pageBlockSection>
+      </div>
+      <div id="q3d" class="padding1"> 
+          <apex:pageBlockSection columns="2" collapsible="true">
+              <apex:outputText value="Registered to take exam/s?"></apex:outputText>
+               <apex:selectRadio value="{!q3dAnsrSel}" onchange="q6Showfun(this)" >
+                      <apex:selectOptions value="{!q3d}"></apex:selectOptions>
+               </apex:selectRadio>         
+          </apex:pageBlockSection>
+      </div>
+      <div id="q3e" class="padding1"> 
+          <apex:pageBlockSection columns="2" collapsible="true">
+              <apex:outputText value="D. PCE Phase Approved?"></apex:outputText>
+               <apex:selectRadio value="{!q3eAnsrSel}"  onchange="q7Showfun(this)" >
+                      <apex:selectOptions value="{!q3e}"></apex:selectOptions>
+               </apex:selectRadio>         
+          </apex:pageBlockSection>
+      </div>
+      <div id="q3f" class="padding1"> 
+          <apex:pageBlockSection columns="2" collapsible="true">
+              <apex:outputText value="E. ETP – Has you student met assessment task requirements for Effective Teaching Practices as outlined in the DT Cohort requirements and Timeline?"></apex:outputText>
+               <apex:selectRadio value="{!q3fAnsrSel}"  onchange="q8Showfun(this)" >
+                      <apex:selectOptions value="{!q3f}"></apex:selectOptions>
+               </apex:selectRadio>         
+          </apex:pageBlockSection>
+      </div>
+      <div id="q3g" class="padding1"> 
+          <apex:pageBlockSection columns="2" collapsible="true">
+              <apex:outputText value="F. Other Timeline Requirements – Has your student met other prerequisite assessment requirements as outlined in the DT Cohort Requirements and Timeline (Interdisciplinary course work and Foundations of Teaching, if applicable)?"></apex:outputText>
+               <apex:selectRadio value="{!q3gAnsrSel}"  onchange="q9Showfun(this)" >
+                      <apex:selectOptions value="{!q3g}"></apex:selectOptions>
+               </apex:selectRadio>         
+          </apex:pageBlockSection>
+      </div>
+      <div id="q4" class="padding2"> 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q4.  You indicated that your student has not passed SFAW on the Degree Plan.  Please explain why not and why the student should be allowed to continue without this key component that is needed for obtaining a placement for the student."></apex:outputText>
+              <apex:inputTextarea value="{!q4AnsrSel}" cols="100" rows="5" />
+          </apex:pageBlockSection>
+      </div>
+      <div id="q5" class="padding2"> 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q5. You indicated that your student does not have passing scores for the basic skills exams posted to the Degree Plan.  Passing basic skills are required before a student may enter the classroom for PCE.  This means your student has not yet begun PCE.  Please explain why your student has not passed basic skills and why the student merits an extension.  What do you feel is a reasonable extension?"></apex:outputText>
+              <apex:inputTextarea value="{!q5AnsrSel}" cols="100" rows="5" />
+          </apex:pageBlockSection>
+      </div>
+      <div id="q6" class="padding2"> 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q6. You indicated that your student has not registered to take the content exam/s by the required deadline.  Please explain why not.  What do you feel is a reasonable extension?"></apex:outputText>
+              <apex:inputTextarea value="{!q6AnsrSel}" cols="100" rows="5" />
+          </apex:pageBlockSection>
+      </div>
+      <div id="q7" class="padding2"> 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q7. You indicated that your student has not yet been approved to begin in-school PCE tasks.  Please explain why not.  What do you feel is a reasonable extension?"></apex:outputText>
+              <apex:inputTextarea value="{!q7AnsrSel}"  cols="100" rows="5"/>
+          </apex:pageBlockSection>
+      </div>
+      <div id="q8" class="padding2"> 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q8. You indicated that your student has not completed the required number of Effective Teaching Practices (ETP) tasks by the required deadline.  Please explain why not.  What do you feel is a reasonable extension?"></apex:outputText>
+              <apex:inputTextarea value="{!q8AnsrSel}"  cols="100" rows="5"/>
+          </apex:pageBlockSection>
+      </div>
+      <div id="q9" class="padding2"> 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q9. You indicated that your student has not met other prerequisite assessments by the required deadline.  Please explain why not.  What do you feel is a reasonable extension?"></apex:outputText>
+              <apex:inputTextarea value="{!q9AnsrSel}" cols="100" rows="5" />
+          </apex:pageBlockSection>
+      </div>
+      
+      <div id="q10" > 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q10.  Please explain why you believe your student should be allowed to apply late."></apex:outputText>
+              <apex:inputTextarea value="{!q10AnsrSel}" cols="100" rows="5" />
+          </apex:pageBlockSection>
+      </div>   
+      <div id="q11" >
+          <apex:pageBlockSection columns="1" collapsible="true" >
+              <apex:outputText value="Q11.  State Required Content Exam/s."></apex:outputText>
+              <apex:selectRadio layout="pageDirection" value="{!q11AnsrSel}" >
+                  <apex:selectOptions value="{!Q11}"></apex:selectOptions>               
+              </apex:selectRadio>
+          </apex:pageBlockSection>
+          
+          <apex:pageBlockSection columns="1" collapsible="true" >
+              <apex:outputText value="Please explain the circumstance/s for this appeal."></apex:outputText>
+              <apex:inputTextarea value="{!q101AnsrSel}" cols="100" rows="5"/>
+          </apex:pageBlockSection>
+       </div>
+       
+       <div id="q12" >
+          <apex:pageBlockSection columns="1" collapsible="true" >
+              <apex:outputText value="Q12. Are you appealing because your student did not meet audit requirements?"></apex:outputText>
+              <apex:selectRadio layout="pageDirection" value="{!q12AnsrSel}" >
+                  <apex:selectOptions value="{!qOne}"></apex:selectOptions>               
+              </apex:selectRadio>
+          </apex:pageBlockSection>
+     
+          <apex:pageBlockSection columns="1" collapsible="true" >
+              <apex:outputText value="Q13. Mark all that apply. (Verify requirements as outlined on the DT cohort Timeline and Requirements.)"></apex:outputText>
+              
+          </apex:pageBlockSection>
+          <div class='padding2'>
+          <apex:pageBlockSection columns="2" collapsible="true"  >
+              <apex:outputText value="How many total tasks does your student have to complete in total for DT?"></apex:outputText>
+              <apex:inputText value="{!q131AnsrSel}" />
+          </apex:pageBlockSection>
+          </div>
+          <div class='padding2'>
+          <apex:pageBlockSection columns="2" collapsible="true" >
+              <apex:outputText value="How many objective exams does your student have to pass in total for DT?"></apex:outputText>
+              <apex:inputText value="{!q132AnsrSel}"/>
+          </apex:pageBlockSection>
+           </div>
+          <div class='padding2'>
+          <apex:pageBlockSection columns="2" collapsible="true" >
+              <apex:outputText value="What state content exam/s does your student need to pass for DT?"></apex:outputText>
+              <apex:inputText value="{!q133AnsrSel}"/>
+          </apex:pageBlockSection>
+           </div>
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q14. Please explain the circumstance’s for this appeal."></apex:outputText>
+              <apex:inputTextarea value="{!q14AnsrSel}" cols="100" rows="5"/>
+          </apex:pageBlockSection>
+      </div> 
+      
+      <div id="q15" > 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q15. Please explain the reason/s why your student did not complete DT 2 previous times."></apex:outputText>
+              <apex:inputTextarea value="{!q15AnsrSel}" cols="100" rows="5" />
+          </apex:pageBlockSection>
+      </div>
+      
+      <div id="q16" > 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q16. Please explain the circumstance’s for this appeal."></apex:outputText>
+              <apex:inputTextarea value="{!q16AnsrSel}" cols="100" rows="5" />
+          </apex:pageBlockSection>
+      </div>
+      
+      <div id="q17" > 
+          <apex:pageBlockSection columns="1" collapsible="true">
+              <apex:outputText value="Q17.  Please explain the circumstance’s for this appeal.  (Note that placements must meet certain criteria based on program area and state license.) "></apex:outputText>
+              <apex:inputTextarea value="{!q17AnsrSel}" cols="100" rows="5"/>
+          </apex:pageBlockSection>
+      </div>
+  </apex:pageBlock>        
+  </apex:form>
+</apex:page>

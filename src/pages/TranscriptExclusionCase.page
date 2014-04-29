@@ -1,0 +1,33 @@
+<apex:page standardController="StudentTranscript__c" extensions="TranscriptExclusionCaseController">
+<!-- <apex:sectionHeader Id="sh1" title="Coaching Report" subtitle="{!Coaching_Document__c.Name}"/>-->
+ <apex:pageMessages ></apex:pageMessages>
+  <apex:form > 
+    <apex:pageBlock title="Transcript Exclusion">
+        <apex:pageBlockSection collapsible="false" columns="2" >
+         <apex:pageBlockSectionItem >
+                  <apex:outputLabel >Applicant Full Name: </apex:outputLabel>
+                  <apex:outputField value="{!StudentTranscript__c.Opportunity__r.Account.StudentContact__r.Name }"/>  
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                  <apex:outputLabel >Department:</apex:outputLabel>
+                  <apex:outputText value="Transcript"/>  
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                  <apex:outputLabel >Applicant Email:</apex:outputLabel>
+                  <apex:outputField value="{!StudentTranscript__c.Opportunity__r.Account.StudentContact__r.Email}"/> 
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                  <apex:outputLabel >Request Reason:</apex:outputLabel>
+                  <apex:outputText value="Exclusion"/>  
+            </apex:pageBlockSectionItem>
+            
+       
+            
+       </apex:pageBlockSection>
+       <apex:pageBlockButtons location="bottom">
+         <apex:commandButton value="Save" action="{!SaveExclusion}" disabled="{!flag}"/>
+         <apex:commandButton value="Cancel" action="{!Cancel}" disabled="{!flag}" /> 
+    </apex:pageBlockButtons>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

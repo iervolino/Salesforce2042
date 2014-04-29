@@ -1,0 +1,3 @@
+<apex:page >
+  <apex:iframe src="https://horizon.wgu.edu" scrolling="true" id="CurrentCARE" title="CARE"/>
+</apex:page>

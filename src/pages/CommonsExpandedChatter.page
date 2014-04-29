@@ -1,0 +1,258 @@
+<apex:page controller="CommonsChatterController" sidebar="false" showHeader="false" standardstylesheets="false" title="Chatter" applyBodyTag="false">
+    <head>
+        <title>Chatter</title>
+        <c:CommonsStaticResources />
+    </head>
+    <apex:includeScript value="/soap/ajax/29.0/connection.js" />
+    <script>
+        apiSessionId = '{!$Api.Session_ID}';
+        userId = "{!$User.Id}";
+        networkScope = "{!communityId}";
+    </script>
+
+
+    <div class="cc-popup">
+        <div class='cc-popup--chatter non-responsive'>
+            <div class="banner__ribbon">
+                <h2><span class='btn btn--square btn--dark '><span class='icon icon--chatter'></span></span>Course Chatter</h2>
+            </div>
+            
+            <div class="cc-popup__content cc-popup__content--header cc-popup__content--700">
+                <div class='well clearfix well--invisible'>
+                    <apex:outputpanel id="group-selected">
+                        <p class='popup-active-group small'>Active Chatter Group: <span id="popup-active-group" class="bold">{!selectedGroupName}</span></p>
+                    </apex:outputpanel>
+                    <apex:form >
+                        <div class="form-group--dropdown quarter-box break spacer-margin--5">
+                            <div class="btn btn--dropdown btn--full btn--sprite"><div class="sprite sprite--blue--bubbles"></div><span class="dropdown__text">Select Chatter Group</span><span class="icon icon--triangle-down right"></span></div>
+                            <apex:selectList value="{!groupId}" id="group-select" size="1" styleClass="select">
+                                <apex:selectOptions value="{!groupOptions}"/>
+                                <apex:actionSupport event="onchange" rerender="feed,group-selected,members,files,topComment" oncomplete="initPage();"/>
+                            </apex:selectList>
+                        </div>
+                    </apex:form>
+                </div>
+                <div class="well small break two-thirds-box">
+                    <apex:outputPanel id="topComment">
+                        <apex:outputPanel rendered="{!isReadOnly == false}" layout="block">
+                            <div class='write-comment cc-popup--chatter__write-comment clearfix flyout flyout--overflow' data-flyout='parent'  >
+                                <div class="write-comment__btns">
+                                    <span class='btn btn--square left btn--textarea ' data-flyout='btn-file'><span class="icon icon--doc"></span></span>
+                                    <span class='btn btn--square left btn--textarea ' data-flyout='btn-link'><span class="icon icon--link"></span></span>
+                                </div>
+                                <textarea placeholder='Write a comment...' id='cc_add-comment_chat-input' required='required' class='left textarea textarea--chatter autosize'></textarea>
+                                    
+                                <div class='flyout__holder'>
+                                    <div class='flyout__box'>
+                                        
+                                        <div class="flyout__files">
+                                            <div class="flyout__files__drop" data-flyout='drop-zone'>
+                                                <p class='flyout__files__title'>Drag and Drop Your File Here</p>
+                                                <p class='flyout__files__drop-file' data-flyout='drop-file'>No file chosen</p>
+                                                
+                                            </div>
+                                            <p class='flyout__files__or'>or</p>
+                                            <apex:form >
+                                                <apex:inputFile value="{!fileBlob}" filename="{!filename}" contentType="{!filetype}" fileSize="{!filesize}" />
+                                                <p class='flyout__files__file-size'>Maximum file size 2GB</p>
+                                                <apex:inputHidden value="{!fileMessage}" id="fileMessage" />
+                                                <apex:inputHidden value="{!fileQuestion}" id="fileQuestion" />
+                                                <apex:inputHidden value="{!fileFeedItemId}" id="fileFeedItemId" />
+                                                <apex:commandButton action="{!postFileToChatter}" styleClass="hide" value="Submit"/>
+                                            </apex:form>
+                                        </div>
+                                        <div class="flyout__link">
+                                            <div class="form-group">
+                                                <label for="">Link URL:</label>
+                                                <input type='text' data-flyout='input-link-url'/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Link Name:</label>
+                                                <input type='text' data-flyout='input-link-name' />
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="btn btn--sprite" style='margin: 0;' data-flyout='btn-post-question'><span class="sprite sprite--blue--bubble-question"></span>Post as a Question</div>
+                                        <div class="btn btn--sprite" style='margin-top: 0;' data-flyout='btn-post-comment'><span class="sprite sprite--blue--bubble-exclamation"></span>Post as a Comment</div>
+                                        <div class="btn btn--square btn--square--small right " data-flyout="btn-close"><span class="icon icon--close"></span></div>
+                                        <div class="sprite sprite--question right" title='Please tell us if your post is a question or a comment so that your mentors can respond appropriately in a timely manner.'></div>
+                                    </div>
+                                </div>
+                                <apex:form >
+                                    <apex:actionFunction name="postMessageToChatter" action="{!postMessageToChatter}" rerender="feed" oncomplete="initPage();">
+                                        <apex:param id="message" name="message" value="" />
+                                        <apex:param id="question" name="question" value="" />
+                                        <apex:param id="feedItemId" name="feedItemId" value="" />
+                                    </apex:actionFunction>
+                                </apex:form>
+                                <apex:form >
+                                    <apex:actionFunction name="postLinkToChatter" action="{!postLinkToChatter}" rerender="feed" oncomplete="initPage();">
+                                        <apex:param id="message" name="message" value="" />
+                                        <apex:param id="linkUrl" name="linkUrl" value="" />
+                                        <apex:param id="linkTitle" name="linkTitle" value="" />
+                                        <apex:param id="question" name="question" value="" />
+                                        <apex:param id="feedItemId" name="feedItemId" value="" />
+                                    </apex:actionFunction>
+                                </apex:form>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                    <div class='scroll cc-popup--chatter__scroll'>
+                        <apex:outputpanel id="feed" layout="block">
+                            <apex:repeat value="{!feedItemsWithUserType}" var="feedItem">
+                                <apex:variable var="userType" value="person--mentor" rendered="{!feedItem.isStudent == false}" />
+                                <apex:variable var="userType" value="" rendered="{!feedItem.isStudent == true}" />
+                                <div class='person {!userType}'>
+                                    <div class="person__avatar">
+                                        <img height='40' width='40' src="{!feedItem.feeditem.photoUrl}" alt="" />
+                                    </div>
+                                    <div class='person__content'>
+                                        <p class='person__name'>{!feedItem.firstName} {!feedItem.lastName}</p>
+                                        <apex:variable var="questionOrComment" value="Question" rendered="{!feedItem.question == true}" />
+                                        <apex:variable var="questionOrComment" value="Comment" rendered="{!feedItem.question == false}" />
+                                        <p class='person__date'><span class="person__type">{!questionOrComment}: </span>
+                                            {!feedItem.formattedPostTime}
+                                        </p>
+                                        <p class='person__message'>{!feedItem.feeditem.body.text}</p>
+                                        <apex:outputPanel rendered="{!feedItem.attachmentType != null}">
+                                            <div class="person__attachment clearfix">
+                                                <apex:outputPanel rendered="{!feedItem.attachmentType == 'link'}">
+                                                    <span class="icon icon--link"></span>
+                                                    <a href="{!feedItem.linkAttachment.url}">{!feedItem.linkAttachment.title}</a><a href='{!feedItem.linkAttachment.url}'>{!feedItem.linkAttachment.url}</a>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel rendered="{!feedItem.attachmentType == 'file'}">
+                                                    <apex:outputPanel rendered="{!NOT(feedItem.hasPreview)}">
+                                                        <span class='icon icon--doc'></span>
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!feedItem.hasPreview}">
+                                                        <img src="{!feedItem.contentAttachment.renditionUrl}" />
+                                                    </apex:outputPanel>
+                                                    <a href="{!feedItem.contentAttachment.downloadUrl}">{!feedItem.contentAttachment.title}</a><a href='{!feedItem.contentAttachment.downloadUrl}'>Download document ({!feedItem.HumanReadableFileSize})</a>
+                                                </apex:outputPanel>
+                                            </div>
+                                        </apex:outputPanel>
+                                        <apex:repeat value="{!feedItem.commentlist}" var="commentItem">
+                                            <apex:variable var="commentUserType" value="person--mentor" rendered="{!commentItem.isStudent == false}" />
+                                            <apex:variable var="commentUserType" value="" rendered="{!commentItem.isStudent == true}" />
+                                            <div class='person {!commentUserType}'>
+                                                <div class="person__avatar">
+                                                    <img height='40' width='40' src="{!commentItem.comment.user.photo.smallPhotoUrl}" alt="" />
+                                                </div>
+                                                <div class='person__content'>
+                                                    <p class='person__name'>{!commentItem.comment.user.firstName} {!LEFT(commentItem.comment.user.lastName,1)}.</p>
+                                                    <apex:variable var="questionOrComment" value="Question" rendered="{!commentItem.question == true}" />
+                                                    <apex:variable var="questionOrComment" value="Comment" rendered="{!commentItem.question == false}" />
+                                                    <p class='person__date'><span class="person__type">{!questionOrComment}: </span>
+                                                        {!commentItem.formattedPostTime}
+                                                    </p>
+                                                    <p class='person__message'>{!commentItem.comment.body.text}</p>
+                                                    <apex:outputPanel rendered="{!commentItem.comment.attachment != null}">
+                                                        <div class="person__attachment clearfix">
+                                                            <apex:outputPanel rendered="{!NOT(commentItem.hasPreview)}">
+                                                                <span class='icon icon--doc'></span>
+                                                            </apex:outputPanel>
+                                                            <apex:outputPanel rendered="{!commentItem.hasPreview}">
+                                                                <img src="{!commentItem.contentAttachment.renditionUrl}" />
+                                                            </apex:outputPanel>
+                                                            <a href="{!commentItem.contentAttachment.downloadUrl}">{!commentItem.contentAttachment.title}</a><a href='{!commentItem.contentAttachment.downloadUrl}'>Download document ({!commentItem.HumanReadableFileSize})</a>
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                </div>
+                                            </div>
+                                        </apex:repeat>
+                                        <apex:outputPanel rendered="{!isReadOnly == false}">
+                                            <div class='write-comment clearfix flyout' data-flyout='parent'>
+                                                <div class="write-comment__btns">
+                                                    <span class='btn btn--square left btn--textarea ' data-flyout='btn-file'><span class="icon icon--doc"></span></span>
+                                                    
+                                                </div>
+                                                <textarea placeholder='Write a comment...' class='left textarea textarea--chatter autosize' data-nested-id='{!feedItem.feeditem.id}'></textarea>
+                                                <div class='flyout__holder'>
+                                                    <div class='flyout__box'>
+                                                        <div class="flyout__files">
+                                                            <div class="flyout__files__drop" data-flyout='drop-zone'>
+                                                                <p class='flyout__files__title'>Drag and Drop Your File Here</p>
+                                                                <p class='flyout__files__drop-file' data-flyout='drop-file'>No file chosen</p>
+                                                                
+                                                            </div>
+                                                            <p class='flyout__files__or'>or</p>
+                                                            <apex:form >
+                                                                <apex:inputFile value="{!fileBlob}" filename="{!filename}" contentType="{!filetype}" fileSize="{!filesize}" />
+                                                                <p class='flyout__files__file-size'>Maximum file size 2GB</p>
+                                                                <apex:inputHidden value="{!fileMessage}" id="fileMessage" />
+                                                                <apex:inputHidden value="{!fileQuestion}" id="fileQuestion" />
+                                                                <apex:inputHidden value="{!fileFeedItemId}" id="fileFeedItemId" />
+                                                                <apex:commandButton action="{!postFileToChatter}" styleClass="hide" value="Submit"/>
+                                                            </apex:form>
+                                                        </div>
+                                                        <div class="flyout__link">
+                                                            <div class="form-group">
+                                                                <label for="">Link URL:</label>
+                                                                <input type='text' />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="">Link Name:</label>
+                                                                <input type='text' />
+                                                            </div>
+                                                        </div>
+                                                        <hr />
+                                                        <div class="btn btn--sprite left" data-flyout='btn-post-question'><span class="sprite sprite--blue--bubble-question"></span>Post Question</div>
+                                                        <div class="btn btn--sprite left" data-flyout='btn-post-comment'><span class="sprite sprite--blue--bubble-exclamation"></span>Post Comment</div>
+                                                        <div class="btn btn--square btn--square--small right " data-flyout="btn-close"><span class="icon icon--close"></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                                <hr />
+                            </apex:repeat>
+                        </apex:outputpanel>
+                    </div>
+                </div>
+                <div class='third-box small cc-popup--chatter__sidebar'>    
+                    <div class='well'>
+                        <span class="sprite sprite--blue--warning"></span><span class='a' data-popup='settings-chatter'>My Chatter Settings</span>
+                    </div>
+                    <div class='well'>
+                        <apex:outputPanel id="members">
+                            <span class="sprite sprite--blue--group"></span>
+                            <span class='bold'>Members</span>
+                            <apex:outputPanel rendered="{!IF(groupMembers.size = null,true,false)}">
+                                (0)
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(groupMembers.size != null && groupMembers.size > 0,true,false)}">
+                                ({!groupMembers.size})
+                            </apex:outputPanel>
+                            <div class='scroll person--name-only' style='height: 215px;'>
+                                <apex:repeat value="{!groupMembers}" var="memberItem">
+                                    <apex:variable var="memberUserType" value="person--mentor" rendered="{!memberItem.isStudent == false}" />
+                                    <apex:variable var="memberUserType" value="" rendered="{!memberItem.isStudent == true}" />
+                                    <div class='person {!memberUserType}'>
+                                        <div class="person__avatar">
+                                            <img height='28' width='28' src="{!memberItem.member.user.photo.smallPhotoUrl}" alt="" />
+                                        </div>
+                                        <p class='person__name'>{!memberItem.member.user.firstName} {!LEFT(memberItem.member.user.lastName, 1)}.</p>
+                                    </div>
+                                </apex:repeat>
+                            </div>
+                        </apex:outputpanel>
+                    </div>
+                    <apex:outputPanel id="files">
+                        <div class="well cc-popup--chatter__sidebar__group-files">
+                            <p><span class="sprite sprite--blue--files"></span> Group Files</p>
+                            <div class='scroll  spacer-margin--10' style='height: 134px;' >
+                                <apex:repeat value="{!filesForGroup}" var="file">
+                                    <a href="{!URLFOR($Action.Attachment.Download,file.Attachments[0].id)}">{!file.Attachments[0].name}</a>
+                                </apex:repeat>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                </div>
+                <div class="well well--invisible full-box">
+                    <div class="btn right" data-action='close'><span class="icon icon--close"></span> Close Window</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:page>

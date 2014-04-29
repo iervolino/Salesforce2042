@@ -1,0 +1,14 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false">
+    <apex:includeScript value="/soap/ajax/29.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/29.0/apex.js"/>
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.WGUMonkeyFix}" id="WGUMonkeyFix"></script>
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v420}/ext-all.js"></script>
+
+    <script type="text/javascript" >
+        sforce.connection.init( "{!$Api.session_id}", "/services/Soap/u/29.0" );
+        $soap = sforce.connection;
+        $apex = sforce.apex;
+        $user = $soap.retrieve('Id,Name,FirstName,LastName,Username,Email,AccountId,ContactId,ProfileName__c,FullPhotoUrl,SmallPhotoUrl','User',["{!$User.Id}"])[0];
+    </script>
+
+</apex:page>

@@ -1,0 +1,71 @@
+<apex:page standardController="Mentor__c" recordSetvar="mentors">
+        <apex:form id="theForm">
+          <br></br>  
+          <apex:panelGrid columns="5">
+                <apex:outputLabel ><b>View:</b></apex:outputLabel>
+                <apex:selectList value="{!filterId}" size="1">
+                    <apex:actionSupport event="onchange" rerender="list,newLin1,editlink"/>
+                    <apex:selectOptions value="{!listviewoptions}"/>
+                </apex:selectList>
+            <apex:outputLink value="/ui/list/FilterEditPage?ftype=01I30000001tC6Q&retURL={!$CurrentPage.URL}" id="newLinl">Create New View</apex:outputLink>
+            &nbsp;|&nbsp;
+            <apex:outputLink value="/ui/list/FilterEditPage?id={!FilterId}&retURL={!$CurrentPage.URL}" id="editlink">Edit</apex:outputLink>
+            </apex:panelGrid> 
+            <br></br>       
+    <apex:pageBlock title="Edit Mentors Page - {!pageNumber}" id="list">
+                    <apex:pageBlockButtons location="both" id="mubut">
+                        <apex:commandLink action="{!first}" immediate="true">First</apex:commandLink>&nbsp;&nbsp;
+                        <apex:commandLink action="{!previous}" immediate="true">Previous</apex:commandlink>&nbsp;&nbsp;
+                        <apex:commandLink action="{!next}" immediate="true">Next</apex:commandlink>&nbsp;&nbsp;
+                        <apex:commandLink action="{!last}" immediate="true">Last</apex:commandLink>&nbsp;&nbsp;
+                    <apex:commandButton value="Save" action="{!quicksave}" id="butsav" reRender="list"/>
+                    </apex:pageBlockButtons>
+                <apex:pageBlockTable var="m" value="{!mentors}" rows="50">
+                    <apex:column width="150px">
+                        <apex:facet name="header">Name</apex:facet>
+                        <apex:outputField value="{!m.Name}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">College</apex:facet>
+                        <apex:inputField value="{!m.AssignedCollege__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Pidm</apex:facet>
+                        <apex:outputField value="{!m.PIDM__c}"/>
+                    </apex:column>                    
+                    <apex:column >
+                        <apex:facet name="header">Monthly Projection</apex:facet>
+                        <apex:inputField value="{!m.MonthlyProjection__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Monthly Remaining</apex:facet>
+                        <apex:inputField value="{!m.MentorCeiling__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Intended Capacity</apex:facet>
+                        <apex:inputField value="{!m.StudentCapacity__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Assigned Students</apex:facet>
+                        <apex:outputField value="{!m.StudentsAssigned__c}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Remaining Capacity</apex:facet>
+                        <apex:outputField value="{!m.RemainingStudents__c}"/>
+                    </apex:column>
+                    <apex:column rowspan="1" >
+                        <apex:facet name="header">Priority 1 Program Codes</apex:facet>
+                        <apex:inputField value="{!m.Priority1ProgramCodes__c}"/>
+                    </apex:column>
+                    <apex:column rowspan="1" >
+                        <apex:facet name="header">Program Codes</apex:facet>
+                        <apex:inputField value="{!m.ProgramCodes__c}"/>
+                    </apex:column>
+                    <apex:column rowspan="1" >
+                        <apex:facet name="header">Available</apex:facet>
+                        <apex:inputField value="{!m.Available__c}"/>
+                    </apex:column>                                                                                       
+                </apex:pageBlockTable>
+    </apex:pageBlock>
+            </apex:form>
+</apex:page>

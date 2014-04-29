@@ -1,0 +1,34 @@
+<apex:page standardController="TransferEvaluation__c" extensions="TranscriptAppealCaseController">
+
+<apex:pageMessages ></apex:pageMessages>
+<!-- <apex:sectionHeader Id="sh1" title="Coaching Report" subtitle="{!Coaching_Document__c.Name}"/>-->
+  <apex:form > 
+    <apex:pageBlock title="Transcript Appeal" >
+        <apex:pageBlockSection collapsible="false" columns="2" >
+            <apex:pageBlockSectionItem >
+                  <apex:outputLabel >Applicant Full Name: </apex:outputLabel>
+                  <apex:outputField value="{!TransferEvaluation__c.Opportunity__r.Account.StudentContact__r.Name }"/>  
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                  <apex:outputLabel >Department:</apex:outputLabel>
+                  <apex:outputText value="Transcript"/>  
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                  <apex:outputLabel >Applicant Email:</apex:outputLabel>
+                  <apex:outputField value="{!TransferEvaluation__c.Opportunity__r.Account.StudentContact__r.Email}"/> 
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                  <apex:outputLabel >Request Reason:</apex:outputLabel>
+                  <apex:outputText value="Appeal"/>  
+            </apex:pageBlockSectionItem>
+             
+           
+       </apex:pageBlockSection>
+       <apex:pageBlockButtons location="bottom">
+               
+         <apex:commandButton value="Save" action="{!SaveAppeal}" disabled="{!flag}"/>
+         <apex:commandButton value="Cancel" action="{!Cancel}" disabled="{!flag}"/> 
+    </apex:pageBlockButtons>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

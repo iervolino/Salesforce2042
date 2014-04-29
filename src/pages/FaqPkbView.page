@@ -1,0 +1,89 @@
+<apex:page standardStylesheets="false"
+    showHeader="false"
+    sidebar="false"
+    language="{!$CurrentPage.parameters.l}"
+    applyBodyTag="false"
+    applyHtmlTag="false"
+    standardController="FAQArticle__kav"
+    extensions="PkbWguArticleViewController">
+    <head>
+        <apex:includeScript value="{!URLFOR($Resource.PKBassets, 'global/js/libs/jQuery.wgu.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.PKBassets, 'global/js/libs/jQueryUI.wgu.min.js')}"/>
+
+        <apex:includeScript value="{!URLFOR($Resource.PKBassets, 'global/js/build/wgu.min.js')}"/>
+
+        <apex:stylesheet value="{!URLFOR($Resource.PKBassets, 'global/css/build/wgu.min.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.PKBassets, 'knowledgeBase/css/build/kb.min.css')}"/>
+        <apex:variable var="knowledgeArticleId" value="{!FAQArticle__kav.KnowledgeArticleId}" />
+    </head>
+    <body>
+        <div class="nav">
+            <div class="nav__inner">
+                <img src="{!URLFOR($Resource.PKBassets, 'global/images/logo.png')}" alt="" />
+            </div>
+        </div>
+        <div class="nav__ribbon"></div>
+
+        <div class="container clearfix">
+            <c:PkbWguSearchBar />
+            <c:PkbWguRelatedArticlesSideBar pkbCon="{!pkbCon}" relatedListKeyword="{!FAQArticle__kav.Title}" />
+
+            <!-- Home -->
+            <div class="three-quarters-box ">
+                <div class="well well--bottom" >
+                    <div class="tabs">
+                        <ul>
+                            <li><a href="#tabs-1">Information</a></li>
+                            <li><a href="#tabs-2">Attachments</a></li>
+                            <a class="relatedLink" href="javascript:goBackParent()">
+                                <li class='tabs__post'>
+                                    <span class="icon icon--triangle-left icon--half-width"></span>{!$Label.PKB2_Back_To_Search_Page}
+                                </li>
+                            </a>
+                        </ul>
+                        <div id="tabs-1">
+                            <h3>{!FAQArticle__kav.Title}</h3>
+                            <hr class='hr--medium' />
+                            <apex:outputText value="{!FAQArticle__kav.Body__c}" escape="false" />
+                        </div>
+                        <div id='tabs-2'>
+                            <div>
+                                <apex:outputLink value="{!URLFOR($Action.FAQArticle__kav.FileFieldDownload, FAQArticle__kav.id, ['field'=$ObjectType.FAQArticle__kav.fields.Attachment__Body__s.name])}"
+                                    rendered="{!!ISBLANK(FAQArticle__kav.Attachment__Length__s)}">{!BLANKVALUE(FAQArticle__kav.Attachment__Name__s, 'Download File')}</apex:outputLink>
+                            </div>
+                            <div>
+                                <apex:outputLink value="{!URLFOR($Action.FAQArticle__kav.FileFieldDownload, FAQArticle__kav.id, ['field'=$ObjectType.FAQArticle__kav.fields.Attachment2__Body__s.name])}"
+                                    rendered="{!!ISBLANK(FAQArticle__kav.Attachment2__Length__s)}">{!BLANKVALUE(FAQArticle__kav.Attachment2__Name__s, 'Download File')}</apex:outputLink>
+                            </div>
+                            <div>
+                                <apex:outputLink value="{!URLFOR($Action.FAQArticle__kav.FileFieldDownload, FAQArticle__kav.id, ['field'=$ObjectType.FAQArticle__kav.fields.Attachment3__Body__s.name])}"
+                                    rendered="{!!ISBLANK(FAQArticle__kav.Attachment3__Length__s)}">{!BLANKVALUE(FAQArticle__kav.Attachment3__Name__s, 'Download File')}</apex:outputLink>
+                            </div>
+                            <div>
+                                <apex:outputLink value="{!URLFOR($Action.FAQArticle__kav.FileFieldDownload, FAQArticle__kav.id, ['field'=$ObjectType.FAQArticle__kav.fields.Attachment4__Body__s.name])}"
+                                    rendered="{!!ISBLANK(FAQArticle__kav.Attachment4__Length__s)}">{!BLANKVALUE(FAQArticle__kav.Attachment4__Name__s, 'Download File')}</apex:outputLink>
+                            </div>
+                            <div>
+                                <apex:outputLink value="{!URLFOR($Action.FAQArticle__kav.FileFieldDownload, FAQArticle__kav.id, ['field'=$ObjectType.FAQArticle__kav.fields.Attachment5__Body__s.name])}"
+                                    rendered="{!!ISBLANK(FAQArticle__kav.Attachment5__Length__s)}">{!BLANKVALUE(FAQArticle__kav.Attachment5__Name__s, 'Download File')}</apex:outputLink>
+                            </div>
+                        </div>
+                    </div>
+                    <apex:outputPanel layout="block" styleClass="feedbackContainer">
+                        <c:pkb_feedbackyesno pkbCon="{!pkbCon}" />
+                    </apex:outputPanel>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer">
+            <div class="footer__inner">         
+            </div>
+        </div>
+        
+        <site:googleAnalyticsTracking />
+
+        <c:PkbArticleViewScripts pkbCon="{!pkbCon}" />
+        <c:PkbWguJs pkbCon="{!pkbCon}" />
+    </body>
+</apex:page>

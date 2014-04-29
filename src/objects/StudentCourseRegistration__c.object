@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This is an object for pulling current term registration  information from WGUFDP. No FDP user should have direct access to this Object,</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Banneractivitydate__c</fullName>
+        <description>last update or insert date on banner for this record</description>
+        <externalId>false</externalId>
+        <label>Banner Activity Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CourseCode__c</fullName>
+        <description>Banner code for the course</description>
+        <externalId>false</externalId>
+        <label>CourseCode</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EngagementNotedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>User who noted the student engagement with the course.</description>
+        <externalId>false</externalId>
+        <label>Engagement Noted By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>StudentCourseRegistrations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>EngagementNotedDate__c</fullName>
+        <description>Date and time when student engagement with the course was noted.</description>
+        <externalId>false</externalId>
+        <label>Engagement Noted Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>IsEngaged__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denotes whether the student is marked as being currently engaged with the course.</description>
+        <externalId>false</externalId>
+        <label>Is Engaged</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Student__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The student associated with this registration. (used to speed up queries on this table)</description>
+        <externalId>false</externalId>
+        <label>Student</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>StudentCourseRegistrations</relationshipLabel>
+        <relationshipName>StudentCourseRegistrations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Termcode__c</fullName>
+        <externalId>false</externalId>
+        <label>Termcode</label>
+        <length>10</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WGUCourse__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookout for wgucourse.</description>
+        <externalId>false</externalId>
+        <label>WGU Course</label>
+        <referenceTo>WGUCourse__c</referenceTo>
+        <relationshipLabel>Student Course Registrations</relationshipLabel>
+        <relationshipName>StudentCourseRegistrations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>enddate__c</fullName>
+        <externalId>false</externalId>
+        <label>enddate</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>pidm__c</fullName>
+        <description>Identifier referencing this contact&apos;s Sungard Banner UUID, which is the key value used internally by SunGard Banner for referential integrity</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specify the numerical identifier of this contact&apos;s SunGard Banner record identifier</inlineHelpText>
+        <label>pidm</label>
+        <length>18</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>startdate__c</fullName>
+        <externalId>false</externalId>
+        <label>startdate</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>uniqueid__c</fullName>
+        <externalId>true</externalId>
+        <label>uniqueid</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Student Course Registration</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Banneractivitydate__c</columns>
+        <columns>CourseCode__c</columns>
+        <columns>enddate__c</columns>
+        <columns>pidm__c</columns>
+        <columns>startdate__c</columns>
+        <columns>Termcode__c</columns>
+        <columns>uniqueid__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>StudentCourseRegistration Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Student Course Registrations</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Banneractivitydate__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CourseCode__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>enddate__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>startdate__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>pidm__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Termcode__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>uniqueid__c</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>Banneractivitydate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CourseCode__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>enddate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>pidm__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>startdate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Termcode__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>uniqueid__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

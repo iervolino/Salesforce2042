@@ -1,0 +1,10 @@
+<apex:component allowDML="true">
+<apex:attribute name="pkbCon" type="pkb_Controller" required="true" description="handle to the pkb controller" />
+<script type="text/javascript">
+    $('.tabs').tabs();
+
+    function goBackParent() {
+        window.location =  "/StudentHandbook/?{!pkbCon.allSearchParams}&pn={!pkbCon.currPage}";
+    }
+</script>
+</apex:component>

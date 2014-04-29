@@ -1,0 +1,1398 @@
+<apex:page title="Western Governors University - Transfer Student Mentor" contentType="text/html; charset=UTF-8" standardStylesheets="false" showHeader="false" sidebar="false" docType="html">
+<apex:outputText escape="false" value="{!'<!DOCTYPE html>'}"/>
+<html>
+<head>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <title>Western Governors University - Transfer Student Mentor</title>
+    <style>
+        a {color:blue;}      /* unvisited link */
+        a:hover {color:darkblue;}  /* mouse over link */
+        a:visited {color:blue;}  /* visited link */
+        a:active {color:darkblue;}  /* selected link */
+
+        .x-grid-dirty-cell {
+            background-image: none;
+        }
+        .wgu-grid-text {
+            font-size: 9.2px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="font-family:tahoma,arial,verdana,sans-serif;background-color: #F2F2F2;overflow:auto;min-width:1580px;min-height:800px" scroll="yes">
+
+<div id="LoadingDiv" style="font-size:15px;text-align:center;margin:100px 0 0 0;"><strong>Loading Transfer Student&apos;s Mentor Tool<br/>Please wait...</strong></div>
+
+<apex:includeScript value="/soap/ajax/27.0/connection.js"/>
+<apex:includeScript value="/soap/ajax/27.0/apex.js"/>
+<script type="text/javascript" charset="utf-8" src="{!$Resource.WGUMonkeyFix}" id="WGUMonkeyFix"></script>
+
+<script type="text/javascript" >
+    if(typeof String.prototype.trim !== 'function') {  //IE8 String.trim() compensator
+        String.prototype.trim = function() {
+            return this.replace(/^\s+|\s+$/g, '');
+        }
+    }
+
+    sforce.connection.init( "{!$Api.session_id}", "/services/Soap/u/27.0" );
+    $soap = sforce.connection;
+    $apex = sforce.apex;
+    var hostparts = location.hostname.split(".");
+    var orgName = hostparts[0].split("--")[1];
+    var boxName = orgName;
+    try {
+        boxName = $soap.retrieve('Value__c','Runtime__c',["a0P30000009q4RYEAY"])[0].Value__c;
+    } catch (e) {
+        boxName = orgName;
+    };
+</script>
+
+<apex:stylesheet value="{!URLFOR($Resource.extjs_v421, 'resources/css/ext-all.css')}"/>
+
+<script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v421}/ext-all.js"></script>
+
+<script type="text/javascript" >
+
+var WGUpanel;
+var studentStore;
+var mentorStore;
+var activeMentorStore;
+var separatedMentorStore;
+var transferRecordTypeId = $soap.query("SELECT id FROM RecordType WHERE SObjectType = 'StudentProcess__c' AND DeveloperName = 'MentorChange'").records.Id;
+
+
+Ext.Loader.setConfig({enabled: true});
+Ext.Loader.setPath('Ext.ux', '{!$Resource.extjs_v421}/examples/ux');
+Ext.require([
+    'Ext.ux.grid.FiltersFeature'
+]);
+
+Ext.onReady(function(){
+
+    studentStore = new Ext.create('WGU.store.StudentStore', {});
+    mentorStore = new Ext.create('WGU.store.MentorStore', {});
+    activeMentorStore = new Ext.create('WGU.store.MentorStore', {});
+
+    //get Separated Mentors that have active students assigned
+    $soap.batchSize = 2000;
+    separatedMentorStore = new Ext.create('WGU.store.SeparatedMentorStore', {});
+    var separatedMentorsQuery = "SELECT Mentor__c MentorId, count(Id) StudentCount FROM Contact WHERE Mentor__c IN (SELECT User__c from Mentor__c WHERE MentorRole__c = 'Separated From University') AND RecordType.DeveloperName = 'StudentRecord' AND Status__c IN ('AS','TB') GROUP BY Mentor__c HAVING Count(Id) > 0";
+    var results = $soap.query( separatedMentorsQuery );
+    var mentorResultSet = !Ext.isArray(results.records)? (results.size>0?[results.records]:[]): results.records;
+    separatedMentorStore.loadRawData(mentorResultSet, false);
+
+    delete Ext.tip.Tip.prototype.minWidth;
+
+    Ext.tip.QuickTipManager.init();
+    //setup quick tip default values
+    Ext.apply(Ext.tip.QuickTipManager.getQuickTip(), {
+        maxWidth: 750,
+        minHeight: 75,
+        showDelay: 50,      // Show 50ms after entering target
+        autoWidth: true,
+        autoHeight: true
+    });
+
+    Ext.FocusManager.enable({focusFrame: false});
+
+    //create main view panel and render automatically into HTML BODY (Ext Viewport)        
+    WGUpanel = new Ext.create("WGU.view.TransferMentorView",{});
+    var loadingDiv = Ext.fly("LoadingDiv");
+    loadingDiv.hide();
+    Ext.destroy(loadingDiv);
+
+    Ext.callback( function(){
+    
+        var me = WGUpanel;
+        $soap.batchSize = 2000;
+                
+        //get the other mentor records if this user can view others mentors' assignments
+        var mentorQuery = "SELECT Id,Name,User__c,User__r.Name,User__r.FirstName,User__r.LastName,User__r.Id,User__r.SmallPhotoUrl,User__r.State,User__r.WGUState__c,MentorRole__c,AssignedCollege__c,CanSelectOtherMentorsinMyStudents__c,ProgramCodes__c,Priority1ProgramCodes__c FROM Mentor__c ";
+        var getAllMentorsQuery = mentorQuery + " WHERE isTestData__c = false";
+        $soap.query(getAllMentorsQuery, function(queryResult) {
+            queryResult.size *= 1;
+            queryResult.done = (queryResult.done == "true");
+            if ( queryResult.size > 0 ){
+                var mentorResultSet = !Ext.isArray(queryResult.records)? (queryResult.size>0?[queryResult.records]:[]): queryResult.records;
+                var assignedMentors = [];
+                var activeMentors = [];
+                for ( var mentorIndex=0; mentorIndex < mentorResultSet.length; mentorIndex++ ) {
+                    var mentorRecord = mentorResultSet[mentorIndex];
+                    if ( !Ext.isEmpty(mentorRecord.User__c) && !Ext.isEmpty(mentorRecord.MentorRole__c) ) {
+                        var mentorRecordIndex = separatedMentorStore.findExact('MentorId', mentorRecord.User__c );
+                        if ( mentorRecord.MentorRole__c == 'Separated From University' && mentorRecordIndex != -1 ) {
+                            mentorRecord.NameLastFirst = mentorRecord.User__r.Name==null? mentorRecord.Name: (mentorRecord.User__r.LastName +", " + mentorRecord.User__r.FirstName);
+                            mentorRecord.StudentCount = separatedMentorStore.getAt(mentorRecordIndex).data.StudentCount;
+                            assignedMentors.push( mentorRecord );
+                        } else if (  mentorRecord.MentorRole__c != 'Separated From University' ) {
+                            mentorRecord.NameLastFirst = mentorRecord.User__r.Name==null? mentorRecord.Name: (mentorRecord.User__r.LastName +", " + mentorRecord.User__r.FirstName);
+                            assignedMentors.push( mentorRecord );
+                            //if ( mentorRecord.MentorRole__c != 'Course Mentor') {
+                                activeMentors.push( mentorRecord );
+                            //}
+                        }
+                    } else {
+                      if (Ext.isChrome) {
+                        console.log( "Mentor__c record with No User record or Role:" );
+                        console.log( mentorRecord );
+                        console.log( "https://" + window.location.hostname + "/" + mentorRecord.Id );
+                        console.log( "" );
+                      }
+                    }
+                }
+                mentorStore.loadRawData(assignedMentors, false);
+                activeMentorStore.loadRawData(activeMentors, false);
+
+                if ( !queryResult.done ) {
+                    if ( Ext.isChrome ) {
+                        console.log( 'Adding More Mentor mentors ' + mentorStore.count() + ' of ' +queryResult.size+ ' loaded...'  );
+                    }
+                    Ext.Function.defer( function(){ WGUpanel.addMoreMentors( queryResult.queryLocator ) }, 1);
+                } else {
+                    Ext.Function.defer( function() {WGUpanel.getMentorStudentCounts();}, 1);
+
+                    if ( Ext.isChrome ) {
+                        console.log( 'MentorStore load complete');
+                    }
+                    if ( mentorStore.count()>1 ) {
+                        mentorStore.sort('DisplayName','ASC');
+                        activeMentorStore.sort('DisplayName','ASC');
+                    }
+                }
+            }
+
+        }); //end asynchrounous query
+
+    }, window, null, 100);
+
+}); //end Ext.onReady()
+
+
+Ext.define('WGU.view.TransferMentorView', {
+    extend: 'Ext.container.Viewport',
+    id: 'WGUpanel',
+    layout: {
+        type: 'absolute'
+    },
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'combobox',
+                    x: 40,
+                    y: 40,
+                    itemId: 'SourceMentorComboBox',
+                    width: 450,
+                    fieldLabel: 'Select a Mentor',
+                    forceSelection: true,
+                    selectOnFocus: true,
+                    emptyText: 'Select a Mentor or Search for a Student...',
+                    typeAhead: true,
+                    allowBlank: true,
+                    queryMode: 'local',
+                    displayField: 'NameLastFirst',
+                    valueField: 'UserId',
+                    store: mentorStore,
+                    multiSelect: false,
+                    readOnly: false,
+                    listConfig: {
+                        maxHeight: 111,
+                        resizable: false,
+                        width: 550,
+                        matchFieldWidth: false,
+                        minWidth: 550,
+                        getInnerTpl: function() {
+                            return '<div><strong>{NameLastFirst}</strong>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<i>{MentorRole__c}</i>&nbsp;&nbsp;&nbsp;(students assigned: {StudentCount})</div>';
+                        }
+                    },
+                    listeners: {
+                        change: {
+                            fn: me.onSourceMentorComboBoxChange,
+                            scope: me
+                        },
+                        select: {
+                            fn: me.onSourceMentorComboBoxSelect,
+                            scope: me
+                        }
+                    }
+                },
+                {
+                    xtype: 'checkboxfield',
+                    itemId: 'FilterSeparatedMentorsCheckbox',
+                    x: 520,
+                    y: 40,
+                    handler: me.onFilterSeparatedMentorsCheckChange,
+                    fieldLabel: '',
+                    hideLabel: true,
+                    boxLabel: 'Show Only "Separated From University" Mentors',
+                    checked: false,
+                    inputValue: 'Show Only Separated Mentors'
+                },
+                {
+                    xtype: 'button',
+                    itemId: 'RefreshButon',
+                    x: 1300,
+                    y: 40,
+                    width: 100,
+                    handler: function() {
+                      window.location.reload();
+                    },
+                    text: 'Refresh All'
+                },
+                {
+                    xtype: 'gridpanel',
+                    x: 40,
+                    y: 70,
+                    height: 672,
+                    itemId: 'StudentsGridPanel',
+                    width: 1360,
+                    title: '',
+                    store: studentStore,
+                    dockedItems: [
+                        {
+                            xtype: 'toolbar',
+                            dock: 'top',
+                            minHeight: 55,
+                            itemId: 'StudentsViewToolbar',
+                            items: [
+                                { xtype: 'tbspacer', width: 2 },
+                                {
+                                    xtype: 'textfield',
+                                    itemId: 'StudentIdSearchTextField',
+                                    isSearchField: true,
+                                    selectOnFocus: true,
+                                    disabled: false,
+                                    fieldLabel: 'Student Id',
+                                    enableKeyEvents: true,
+                                    labelWidth: 82,
+                                    labelAlign: 'top',
+                                    width: 115,
+                                    listeners: {
+                                        keyup: {
+                                            fn: function(field, e){
+                                                me.onSearchCriteriaChange(field, field.getValue(), e);
+                                            },
+                                            buffer: 100
+                                        }
+                                    }
+                                },
+                                { xtype: 'tbspacer', width: 3 },
+                                {
+                                    xtype: 'textfield',
+                                    itemId: 'StudentLastNameSearchTextField',
+                                    isSearchField: true,
+                                    disabled: false,
+                                    selectOnFocus: true,
+                                    fieldLabel: 'Student\'s Last Name',
+                                    enableKeyEvents: true,
+                                    labelWidth: 82,
+                                    labelAlign: 'top',
+                                    width: 135,
+                                    listeners: {
+                                        keyup: {
+                                            fn: function(field, e){
+                                                me.onSearchCriteriaChange(field, field.getValue(), e);
+                                            },
+                                            buffer: 100
+                                        }
+                                    }
+                                },
+                                { xtype: 'tbspacer', width: 3 },
+                                {
+                                    xtype: 'textfield',
+                                    itemId: 'StudentFirstNameSearchTextField',
+                                    isSearchField: true,
+                                    disabled: false,
+                                    selectOnFocus: true,
+                                    fieldLabel: 'Student\'s First Name',
+                                    enableKeyEvents: true,
+                                    labelWidth: 82,
+                                    labelAlign: 'top',
+                                    width: 135,
+                                    listeners: {
+                                        keyup: {
+                                            fn: function(field, e){
+                                                me.onSearchCriteriaChange(field, field.getValue(), e);
+                                            },
+                                            buffer: 100
+                                        }
+                                    }
+                                },
+                                { xtype: 'tbspacer', width: 10 },
+                                {
+                                    itemId: 'SearchButton',
+                                    text: 'Search',
+                                    style: 'border-color: #81A4D0;',
+                                    width: 120,
+                                    height: 38,
+                                    disabled: true,
+                                    listeners: {
+                                        click: {
+                                            fn: me.onDoStudentSearchButtonClick,
+                                            scope: me
+                                        }
+                                    }
+                                },
+                                { xtype: 'tbspacer', width: 5 },
+                                {
+                                    text: 'Reset Search',
+                                    style: 'border-color: #81A4D0;',
+                                    width: 100,
+                                    height: 38,
+                                    listeners: {
+                                        click: {
+                                            fn: me.onClearSearchFieldsButtonClick,
+                                            scope: me
+                                        }
+                                    }
+                                },
+                                '->',
+                                {
+                                    xtype: 'button',
+                                    disabled: true,
+                                    itemId: 'TransferStudentsButton',
+                                    text: 'Create Transfer Requests...',
+                                    height: 38,
+                                    style: 'border-color: #81A4D0;',
+                                    listeners: {
+                                        click: {
+                                            fn: me.onTransferStudentsButtonClick,
+                                            scope: me
+                                        }
+                                    }
+                                },
+                                { xtype: 'tbspacer', width: 2 },
+                                {
+                                    xtype: 'button',
+                                    disabled: false,
+                                    itemId: 'ClearFiltersButton',
+                                    text: 'Clear Filters',
+                                    width: 100,
+                                    height: 38,
+                                    style: 'border-color: #81A4D0;',
+                                    listeners: {
+                                        click: {
+                                            fn: me.onClearFiltersButtonClick,
+                                            scope: me
+                                        }
+                                    }
+                                },
+                                { xtype: 'tbspacer', width: 2 },
+                                {
+                                    xtype: 'button',
+                                    disabled: false,
+                                    itemId: 'RefreshGridButton',
+                                    text: 'Refresh Grid',
+                                    width: 100,
+                                    height: 38,
+                                    style: 'border-color: #81A4D0;',
+                                    listeners: {
+                                        click: {
+                                            fn: me.onRefreshGridButtonClick,
+                                            scope: me
+                                        }
+                                    }
+                                },
+                                { xtype: 'tbspacer', width: 2 }
+
+                            ]
+                        },
+                        {
+                            xtype: 'toolbar',
+                            dock: 'bottom',
+                            itemId: 'StudentGridStatusBar',
+                            height: 24,
+                            items: [
+                                { xtype: 'tbspacer', width: 2 },
+                                {
+                                    xtype: 'label',
+                                    id: 'StudentGridStatusBarText',
+                                    anchor: '100%',
+                                    text: ''
+                                }
+                            ]
+                        }
+                    ],
+                    columns: [
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'NameLastFirst',
+                            text: 'Name (Last, First)',
+                            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                return record.get('DisplayName');
+                            },
+                            filterable: true,
+                            cls: 'wgu-grid-text',
+                                flex: 1
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 120,
+                            dataIndex: 'MentorName',
+                            text: 'Current Mentor',
+                            cls: 'wgu-grid-text',
+                            filterable: true
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 90,
+                            dataIndex: 'ProgramCode',
+                            text: 'Program Code',
+                            cls: 'wgu-grid-text',
+                            filterable: true
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 50,
+                            dataIndex: 'MailingState',
+                            text: 'State',
+                            align: 'center',
+                            cls: 'wgu-grid-text',
+                            filterable: true
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 85,
+                            dataIndex: 'TermNumber',
+                            text: 'Term Number',
+                            filterable: true,
+                            align: 'center',
+                            cls: 'wgu-grid-text',
+                            format: '0'
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 85,
+                            dataIndex: 'StudentId',
+                            text: 'Student Id',
+                            align: 'center',
+                            cls: 'wgu-grid-text',
+                            filterable: true
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 120,
+                            dataIndex: 'TransferRequested',
+                            text: 'Transfer Requested',
+                            cls: 'wgu-grid-text',
+                            filterable: false
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 180,
+                            dataIndex: 'TransferType',
+                            text: 'Transfer Type',
+                            cls: 'wgu-grid-text',
+                            filterable: true
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 120,
+                            dataIndex: 'TransferStatus',
+                            text: 'Request Status',
+                            cls: 'wgu-grid-text',
+                            filterable: true
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 130,
+                            dataIndex: 'TransferredTo',
+                            text: 'Transferred To',
+                            cls: 'wgu-grid-text',
+                            filterable: true
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 90,
+                            dataIndex: 'TransferStage',
+                            text: 'Request Stage',
+                            cls: 'wgu-grid-text',
+                            filterable: true
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            width: 130,
+                            dataIndex: 'ApprovingManager',
+                            text: 'Approved By',
+                            cls: 'wgu-grid-text',
+                            filterable: true
+                        }
+                    ],
+                    viewConfig: {
+                        listeners: {
+                            itemclick: {
+                                fn: me.onStudentGridViewItemClick,
+                                scope: me
+                            },
+                            itemcontextmenu: {
+                                fn: me.onStudentGridViewItemContextMenu,
+                                scope: me
+                            }
+                        }
+                    },
+                    features: [
+                        {
+                            ftype: 'filters',
+                            encode: true, // json encode the filter query
+                            local: true   // defaults to false (remote filtering)
+                        }
+                    ],
+                    selModel: Ext.create('Ext.selection.CheckboxModel', {
+                        checkOnly: true
+                    }),
+                    listeners: {
+                        selectionchange: {
+                            fn: me.onStudentsGridPanelSelectionChange,
+                            scope: me
+                        }
+                    }
+                }
+            ]
+        });
+
+        me.callParent(arguments);
+        me.contactQueryFields = " Id,Name,FirstName,LastName,MailingState,ProgramCode__c,StudentID__c,TermNumber__c,Mentor__c,Mentor__r.Name,(SELECT s.Id,s.Name,s.Status__c,s.Stage__c,s.NewMentorName__c,s.NewMentorName__r.Name,s.RecordTypeId,s.RecordType.DeveloperName,s.RecordType.Name,s.ApprovingManager__c,s.ApprovingManager__r.Name,s.Type__c,s.LastModifiedDate From StudentProcesses__r s WHERE RecordType.DeveloperName='MentorChange' AND s.Status__c != 'Closed' Order By LastModifiedDate DESC) ";
+        me.SourceMentorComboBox = me.queryById('SourceMentorComboBox');
+        me.TransferStudentsButton = me.queryById('TransferStudentsButton');
+        me.StudentsGridPanel = me.queryById('StudentsGridPanel');
+        me.StudentsGridPanelView = me.StudentsGridPanel.getView();
+        me.StudentGridStatusBarText = me.queryById('StudentGridStatusBarText');
+        me.SearchButton = me.queryById('SearchButton');
+        me.StudentIdSearchTextField = me.queryById('StudentIdSearchTextField');
+        me.StudentFirstNameSearchTextField = me.queryById('StudentFirstNameSearchTextField');
+        me.StudentLastNameSearchTextField = me.queryById('StudentLastNameSearchTextField');
+    },
+
+    onFilterSeparatedMentorsCheckChange: function(field, checked) {
+         mentorStore.filterBy( function(record) {
+           return (checked? record.data.MentorRole__c == 'Separated From University': true);
+         });
+    },
+    
+    onClearFiltersButtonClick: function() {
+        var me = WGUpanel;
+        me.StudentsGridPanel.filters.clearFilters();
+        me.StudentsGridPanel.getStore().filterBy( function(record) {
+            return true;
+        }, me);
+        studentStore.sort('NameLastFirst', 'ASC');
+        Ext.Function.defer( function() {
+            me.StudentsGridPanel.columns[0].setSortState(null);
+            me.StudentsGridPanel.columns[0].setSortState('ASC');
+        }, 1);
+    },
+
+    onClearSearchFieldsButtonClick: function() {
+        var me = WGUpanel;
+        me.StudentIdSearchTextField.setValue('');
+        me.StudentLastNameSearchTextField.setValue('');
+        me.StudentFirstNameSearchTextField.setValue('');
+        me.SearchButton.setDisabled(true);
+        Ext.Function.defer( function() { me.StudentGridStatusBarText.setText(''); }, 5);
+        Ext.Function.defer( function() { me.StudentIdSearchTextField.focus() }, 100);
+    },
+
+    onSearchCriteriaChange: function(field, fieldValue, e) {
+        var me = WGUpanel;
+        if ( !Ext.isEmpty(me.StudentIdSearchTextField.getValue()) || !Ext.isEmpty(me.StudentLastNameSearchTextField.getValue()) ) {
+            me.SearchButton.setDisabled(false);
+        } else {
+            me.SearchButton.setDisabled(true);
+        }
+
+        if ( !Ext.isEmpty(fieldValue) && (field.isSearchField) &&  e.keyCode == 13 ) {
+            me.onDoStudentSearchButtonClick();
+        }
+    },
+
+    onDoStudentSearchButtonClick: function() {
+        var me = WGUpanel;
+        var whereElements = [];
+        me.SourceMentorComboBox.setValue(null);
+
+        if ( !Ext.isEmpty(me.StudentIdSearchTextField.getValue()) ) {
+            whereElements.push( " (StudentID__c LIKE '%" + me.StudentIdSearchTextField.getValue() + "%') " );
+        }
+        if ( !Ext.isEmpty(me.StudentLastNameSearchTextField.getValue()) ) {
+            var searchName = me.StudentLastNameSearchTextField.getValue().replaceAll("'", "\\'");
+            var name = Ext.String.capitalize(searchName);
+            whereElements.push( " ((LastName LIKE '%" + name + "%') OR (LastName LIKE '%" + searchName + "%')) " );
+        }
+        if ( !Ext.isEmpty(me.StudentFirstNameSearchTextField.getValue()) ) {
+            var searchName = me.StudentFirstNameSearchTextField.getValue().replaceAll("'", "\\'");
+            var name = Ext.String.capitalize(searchName);
+            whereElements.push( " ((FirstName LIKE '%" + name + "%') OR (FirstName LIKE '%" + searchName + "%')) " );
+        }
+
+        var WHERE = "WHERE Status__c IN ('AS','TB') AND RecordType.DeveloperName IN ('StudentRecord','ProspectRecord') ";
+        for( var i =0; i< whereElements.length; i++ ) {
+            WHERE += " AND " + whereElements[i];
+        }
+
+        var studentQueryString = "SELECT " + me.contactQueryFields + " FROM Contact " + WHERE + ' LIMIT 200';
+        Ext.callback( function(){
+            me.onReloadStudentGrid(studentQueryString);
+        }, window, null, 500);
+    },
+
+    onTransferStudentsButtonClick: function(button, e, eOpts) {
+        var dialog = new Ext.create('WGU.view.TransferDialog',{});
+        dialog.show();
+    },
+
+    onStudentGridViewItemContextMenu: function(view, record, item, index, event, options) {
+        if ( "{!$User.ProfileName__c}" == "System Administrator" && !Ext.isEmpty(record.raw.StudentProcesses__r) ) {
+            var me = WGUpanel;
+            event.stopEvent();
+            var grid = me.StudentsGridPanel;
+            var model = grid.getView().getSelectionModel();
+            if (!model.isSelected(record)) {
+                model.select(record);
+                grid.fireEvent('itemclick', grid, record, item, index, event);
+            }
+            var menu = Ext.getCmp('GridContextMenu');
+            if( Ext.isEmpty(menu) ) {
+                menu = Ext.create('Ext.menu.Menu',{
+                    id: 'GridContextMenu',
+                    record: record,
+                    items: [
+                        {
+                            text: 'Delete Transfer Request',
+                            itemId: 'DeleteTransferRequestMenuItem',
+                            handler: function() {
+                                var record = Ext.getCmp('GridContextMenu').record;
+                                if ( !Ext.isEmpty(record.raw.StudentProcesses__r) && !Ext.isEmpty(record.raw.StudentProcesses__r.records) && !Ext.isEmpty(record.raw.StudentProcesses__r.records.Id) ) {
+                                    Ext.MessageBox.show({
+                                        title:'Delete Mentor Transfer Request?',
+                                        msg: 'Are you sure you want to delete the mentor transfer request for ' + record.get("Name") + ", transferring to " + record.raw.StudentProcesses__r.records.NewMentorName__r.Name + "?",
+                                        buttons: Ext.Msg.YESNO,
+                                        icon: Ext.Msg.QUESTION,
+                                        fn: function(btn, text) {
+                                            if (btn == 'yes') {
+                                                $soap.deleteIds([record.raw.StudentProcesses__r.records.Id], function(deleteResults){
+                                                    if ( deleteResults[0].success == "true" ) {
+                                                        record.raw.StudentProcesses__r = null;
+                                                        record.set('TransferredTo',"");
+                                                        record.set('TransferRequested',"");
+                                                        record.set('TransferType',"");
+                                                        record.set('TransferStatus','');
+                                                        record.set('TransferStage','');
+                                                        record.set('ApprovingManager',"");
+                                                        WGUpanel.StudentsGridPanelView.refresh();
+                                                        WGUpanel.StudentGridStatusBarText.setText('Transfer Request Successfully Deleted');
+                                                        Ext.Function.defer( function() {
+                                                            WGUpanel.StudentGridStatusBarText.setText('');
+                                                        },3000);
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    });
+                                }
+                                return false;
+                            }
+                        }
+                    ]
+                });
+            } else {
+                menu.record = record;
+            }
+            menu.queryById('DeleteTransferRequestMenuItem').setDisabled( Ext.isEmpty(record.raw.StudentProcesses__r) );
+            menu.showAt(event.xy);
+        }
+    },
+
+    onStudentGridViewItemClick: function(dataview, record, item, index, e, eOpts) {
+        var me = WGUpanel;
+        if ( record && !Ext.isEmpty(record.get("Id")) && e.xy[0] > 104 ) {
+            var model = me.StudentsGridPanelView.getSelectionModel();
+            if ( model.isSelected(record) ) {
+                model.doDeselect(record, false);
+            } else {
+                model.doSelect(record, true, false);
+            }
+        }
+    },
+
+    getMentorStudentCounts: function(mentorId) {
+        var me = WGUpanel;
+        $soap.batchSize = 2000;
+        var mentorCountQuery = "SELECT Mentor__c MentorId, count(Id) StudentCount FROM Contact WHERE "+(Ext.isEmpty(mentorId)?"":" Mentor__c = '"+mentorId+"' AND ")+" RecordType.DeveloperName = 'StudentRecord' AND Status__c IN ('AS','TB') GROUP BY Mentor__c";
+        $soap.query( mentorCountQuery, function(queryResult) {
+                    queryResult.size *= 1;
+                    queryResult.done = (queryResult.done == "true");
+                    if ( queryResult.size > 0 ) {
+                        var mentorResultSet = !Ext.isArray(queryResult.records)? (queryResult.size>0?[queryResult.records]:[]): queryResult.records;
+                        for ( var mentorIndex=0; mentorIndex < mentorResultSet.length; mentorIndex++ ) {
+                            var record = mentorResultSet[mentorIndex];
+                            var recordIndex = activeMentorStore.findExact( 'UserId', record.MentorId );
+                            if ( recordIndex != -1 ) {
+                                var mentorRecord = activeMentorStore.getAt(recordIndex);
+                                mentorRecord.set('StudentCount', record.StudentCount);
+                            }
+                            recordIndex = mentorStore.findExact( 'UserId', record.MentorId );
+                            if ( recordIndex != -1 ) {
+                                var mentorRecord = mentorStore.getAt(recordIndex);
+                                mentorRecord.set('StudentCount', record.StudentCount);
+                            }
+                        }
+                    }
+                    if ( Ext.isChrome ) {
+                        console.log( 'Mentor Student Counts Update Complete');
+                    }
+                }
+        );
+
+    },
+
+    addMoreMentors: function( queryLocator ) {
+        var me = WGUpanel;
+        $soap.batchSize = 2000;
+        $soap.queryMore( queryLocator, function(queryResult) {
+
+            queryResult.size *= 1;
+            queryResult.done = (queryResult.done == "true");
+            if ( queryResult.size > 0 ) {
+                                var mentorResultSet = !Ext.isArray(queryResult.records)? (queryResult.size>0?[queryResult.records]:[]): queryResult.records;
+                var assignedMentors = [];
+                var activeMentors = [];
+                for ( var mentorIndex=0; mentorIndex < mentorResultSet.length; mentorIndex++ ) {
+                    var mentorRecord = mentorResultSet[mentorIndex];
+                    if ( !Ext.isEmpty(mentorRecord.User__c) && !Ext.isEmpty(mentorRecord.MentorRole__c) ) {
+                        var mentorRecordIndex = separatedMentorStore.findExact('MentorId', mentorRecord.User__c );
+                        if ( mentorRecord.MentorRole__c == 'Separated From University' && mentorRecordIndex != -1 ) {
+                            mentorRecord.NameLastFirst = mentorRecord.User__r.Name==null? mentorRecord.Name: (mentorRecord.User__r.LastName +", " + mentorRecord.User__r.FirstName);
+                            mentorRecord.StudentCount = separatedMentorStore.getAt(mentorRecordIndex).data.StudentCount;
+                            assignedMentors.push( mentorRecord );
+                        } else if (  mentorRecord.MentorRole__c != 'Separated From University' ) {
+                            mentorRecord.NameLastFirst = mentorRecord.User__r.Name==null? mentorRecord.Name: (mentorRecord.User__r.LastName +", " + mentorRecord.User__r.FirstName);
+                            assignedMentors.push( mentorRecord );
+                            //if ( mentorRecord.MentorRole__c != 'Course Mentor') {
+                                activeMentors.push( mentorRecord );
+                            //}
+                        }
+                    } else {
+                      if (Ext.isChrome) {
+                        console.log( "Mentor__c record with No User record or Role:" );
+                        console.log( mentorRecord );
+                        console.log( "https://" + window.location.hostname + "/" + mentorRecord.Id );
+                        console.log( "" );
+                      }
+                    }
+                }
+                mentorStore.loadRawData(assignedMentors, false);
+                activeMentorStore.loadRawData(activeMentors, false);
+
+                if ( !queryResult.done ) {
+                    if ( Ext.isChrome ) {
+                        console.log( 'Adding More Mentor mentors ' + mentorStore.count() + ' of ' +queryResult.size+ ' loaded...'  );
+                    }
+                    Ext.Function.defer( function() { me.addMoreMentors( queryResult.queryLocator ) }, 1);
+                } else {
+                    Ext.Function.defer( function() {me.getMentorStudentCounts();}, 1);
+                    
+                    if ( Ext.isChrome ) {
+                        console.log( 'MentorStore load complete');
+                    }
+                    if ( mentorStore.count()>1 ) {
+                        mentorStore.sort('DisplayName','ASC');
+                        activeMentorStore.sort('DisplayName','ASC');
+                    }
+                }
+            }
+        });
+
+    },
+
+    onSourceMentorComboBoxSelect: function(combo, records, eOpts) {
+        WGUpanel.onSourceMentorComboBoxChange(combo, records[0].get("UserId"), combo.getValue(), eOpts);
+    },
+
+    onRefreshGridButtonClick: function() {
+        var me = WGUpanel;
+        if ( !Ext.isEmpty(me.StudentsGridPanel.LastQuery) ) {
+            if ( !Ext.isEmpty(studentStore.getProxy().getReader().jsonData) ) {
+                me.onReloadStudentGrid( me.StudentsGridPanel.LastQuery );
+            }
+        }
+    },
+
+
+    onReloadStudentGrid: function(query) {
+        var me = WGUpanel;
+        if ( !Ext.isEmpty(query) ) {
+            me.onClearFiltersButtonClick();
+            me.StudentsGridPanel.setLoading("Searching...");
+            try {
+                $soap.batchSize = 500;
+                $soap.query(query, function(queryResult) {
+                    try {
+                        queryResult.size *= 1;
+                        queryResult.done = (queryResult.done == "true");
+                        if ( queryResult.size > 0 ){
+                            me.StudentsGridPanel.LastQuery = query;
+                            var studentResultSet = !Ext.isArray(queryResult.records)? (queryResult.size>0?[queryResult.records]:[]): queryResult.records;
+                            studentStore.loadRawData(studentResultSet, false);
+
+                            while ( !queryResult.done ) {
+                                queryResult = $soap.queryMore( queryResult.queryLocator );
+                                queryResult.size *= 1;
+                                queryResult.done = (queryResult.done == "true");
+                                if ( queryResult.size > 0 ){
+                                    var studentResultSet = !Ext.isArray(queryResult.records)? (queryResult.size>0?[queryResult.records]:[]): queryResult.records;
+                                    studentStore.loadRawData(studentResultSet, true);
+                                }
+                            }
+
+                            if ( studentStore.count()>1 ) {
+                                studentStore.sort('NameLastFirst','ASC');
+                            }
+                            me.StudentGridStatusBarText.setText( 'Showing ' + studentStore.count() + ' Students');
+
+                        } else {
+                            me.StudentsGridPanel.LastQuery = null;
+                            studentStore.loadRawData([]);
+                            me.StudentGridStatusBarText.setText( 'No Students Assigned');
+                        }
+                    } finally {
+                        me.StudentsGridPanel.setLoading(false);
+                    }
+
+                }); //end asynchrounous query 
+            } catch (error) {
+                me.StudentsGridPanel.setLoading(false);
+            }
+        }
+    },
+
+    onSourceMentorComboBoxChange: function(field, newValue, oldValue, eOpts) {
+        var me = WGUpanel;
+        if ( newValue != oldValue && mentorStore.findExact( 'UserId', newValue ) != -1 ) {
+            //get the other student records for selected mentor id
+            me.StudentIdSearchTextField.setValue('') ;
+            me.StudentLastNameSearchTextField.setValue('');
+            me.StudentFirstNameSearchTextField.setValue('');
+            Ext.callback( function(){
+                me.onReloadStudentGrid("SELECT "+me.contactQueryFields+" FROM Contact WHERE Status__c IN ('AS','TB') AND Mentor__c = '"+field.getValue()+"'");
+            }, window,null,500);
+        } else {
+            if (newValue != oldValue && mentorStore.findExact( 'UserId', newValue ) == -1) {
+                studentStore.loadRawData([]);
+                me.StudentGridStatusBarText.setText( 'No Students Assigned');
+            }
+        }
+    },
+
+    onStudentsGridPanelSelectionChange: function(model, selected, eOpts) {
+        var me = WGUpanel;
+        if ( ( selected != null && selected.length > 0 ) ) {
+            var okToProcess = false;
+            for( var i = 0; i< selected.length; i++ ) {
+                if ( Ext.isEmpty( selected[i].raw.StudentProcesses__r) ) {
+                    okToProcess = true;
+                } else {
+                    model.doDeselect(selected[i]);
+                }
+            }
+            me.TransferStudentsButton.setDisabled( !okToProcess || selected.length > 200);
+            if ( selected.length > 200 ) {
+                Ext.MessageBox.show({
+                    title:'Too Many Students Selected',
+                    msg: 'Only 200 Students can be processed at one time.',
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.Msg.WARN
+                });
+            }
+        } else {
+            me.TransferStudentsButton.setDisabled( true );
+        }
+    },
+
+    transferStudentsToMentor: function(transfer) {
+        var me = WGUpanel;
+        var mentorid = transfer.mentorid;
+        var transferType = transfer.transferType;
+        var selected =  me.StudentsGridPanel.getSelectionModel().getSelection();
+        if ( mentorid != null && selected != null && selected.length > 0 ) {
+            me.StudentsGridPanel.setLoading("Creating Student Process Records...");
+            var newStudentProcessRecords = [];
+            for ( var i = 0; i < selected.length; i++ ) {
+                if ( Ext.isEmpty( selected[i].raw.StudentProcesses__r) && mentorid !== selected[i].get("MentorId")) {
+                    var newStudentProcess = new sforce.SObject("StudentProcess__c");
+                    newStudentProcess.Name = selected[i].get("Name") + " Change Mentor Request";
+                    newStudentProcess.Student__c = selected[i].get("Id");
+                    newStudentProcess.NewMentorName__c = mentorid;
+                    newStudentProcess.RecordTypeId = transferRecordTypeId;
+                    newStudentProcess.Status__c = 'New';
+                    newStudentProcess.Stage__c = 'New';
+                    newStudentProcess.ApprovingManager__c = "{!$User.Id}";
+                    newStudentProcess.Type__c = transferType;
+
+                    newStudentProcessRecords.push(newStudentProcess);
+                }
+            }
+
+            if ( newStudentProcessRecords.length > 0 && newStudentProcessRecords.length <= 200 ) {
+                try {
+                    $soap.create(newStudentProcessRecords, function(saveResult){
+                        try {
+                            var successes = 0;
+                            for ( var x = 0; x < saveResult.length; x++ ) {
+                                if (saveResult[x].success == "true") {
+                                    successes++;
+                                    var record = newStudentProcessRecords[x];
+                                    record.Id = saveResult[x].id;
+                                    record.ApprovingManager__r = {Name: "{!$User.FirstName}" + " " + "{!$User.LastName}"};
+                                    record.RecordType = {DeveloperName:"MentorChange",Id:null,Name:"Mentor Change",type:"RecordType"};
+                                    record.NewMentorName__r = {Name: activeMentorStore.findRecord('UserId',record.NewMentorName__c).get("Name")};
+                                    var studentRecordIndex = studentStore.findExact('Id', record.Student__c);
+                                    if ( studentRecordIndex != -1 ) {
+                                        var student = studentStore.getAt(studentRecordIndex);
+                                        student.raw.StudentProcesses__r = {done: "true", queryLocator: null, size:"1", records: record};
+                                        student.set('TransferredTo',"<a target='"+record.NewMentorName__c+"' href='/"+record.NewMentorName__c+"'>"+record.NewMentorName__r.Name+"</a>");
+                                        student.set('TransferRequested',"<a target='"+record.Id+"' href='/"+record.Id+"'>View Request Record</a>");
+                                        student.set('TransferType',record.Type__c);
+                                        student.set('TransferStatus','New');
+                                        student.set('TransferStage','New');
+                                        student.set('ApprovingManager',"<a target='"+record.ApprovingManager__c+"' href='/"+record.ApprovingManager__c+"'>"+record.ApprovingManager__r.Name+"</a>");
+                                        var data = student.getData(true);
+                                        if ( Ext.isChrome ) {
+                                            console.log ( "StudenProcess__c creation succeeded: " );
+                                            console.log ( record );
+                                            console.log ( "     For student: " + student );
+                                            console.log ( student );
+                                            console.log ( "     New Grid Data: " );
+                                            console.log ( data );
+                                        }
+                                        var model = me.StudentsGridPanelView.getSelectionModel();
+                                        if ( model.isSelected(student) ) {
+                                            model.doDeselect(student, true);
+                                        }
+
+                                    }
+                                } else {
+                                    me.StudentGridStatusBarText.setText( 'Save Error' );
+                                    if ( Ext.isChrome ) {
+                                        console.log ( "StudenProcess__c failed to insert: " +  saveResult[x] );
+                                    }
+                                }
+                            }
+                            me.StudentGridStatusBarText.setText( successes + ' of '+ newStudentProcessRecords.length + ' students processed succesfully');
+                            me.StudentsGridPanelView.refresh();
+                        } finally {
+                            me.onStudentsGridPanelSelectionChange(null,null);
+                            me.StudentsGridPanel.setLoading(false);
+                        }
+
+                    });
+                } catch( error ) {
+                    me.StudentsGridPanel.setLoading(false);
+                    if ( Ext.isChrome ) {
+                        console.log ( error );
+                    }
+                }
+
+            } else if (newStudentProcessRecords.length > 200) {
+                me.StudentsGridPanel.setLoading(false);
+                Ext.MessageBox.show({
+                    title:'Too Many Students Selected',
+                    msg: 'Only 200 Students can be processed at one time.',
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.Msg.WARN
+                });
+            } else {
+                me.StudentsGridPanel.setLoading(false);
+            }
+        }
+    }
+
+});
+
+Ext.define('WGU.view.TransferDialog', {
+    extend: 'Ext.window.Window',
+
+    height: 160,
+    id: 'TransferMentorDialog',
+    itemId: 'TransferMentorDialog',
+    width: 380,
+    resizable: false,
+    layout: {
+        type: 'absolute'
+    },
+    title: 'Create Mentor Transfer Request',
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'combobox',
+                    x: 10,
+                    y: 20,
+                    itemId: 'DlgTransferMentorComboBox',
+                    width: 350,
+                    fieldLabel: 'Transfer To',
+                    queryMode: 'local',
+                    forceSelection: true,
+                    typeAhead: true,
+                    allowBlank: false,
+                    emptyText: 'Select a Mentor...',
+                    blankText: 'A Mentor is required',
+                    displayField: 'DisplayName',
+                    valueField: 'UserId',
+                    multiSelect: false,
+                    selectOnFocus: true,
+                    readOnly: false,
+                    store: activeMentorStore,
+                    listConfig: {
+                        maxHeight: 265,
+                        resizable: false,
+                        width: 550,
+                        matchFieldWidth: false,
+                        minWidth: 550,
+                        getInnerTpl: function(displayField) {
+                                return '<div><table style="font-size: 11px;"><tr><td><img src="{SmallPhotoUrl}"></td><td><strong>{NameLastFirst}</strong><br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<i>Role: <strong>{MentorRole__c}</strong>&nbsp;&nbsp;&nbsp;(students assigned: {StudentCount})<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;State: <strong>{DisplayState}</strong><br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;College: <strong>{AssignedCollege}</strong><br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;Programs: <strong>{ProgramCodeList}</strong></i></td></table></div>';
+                        }
+                    },
+                    listeners: {
+                        change: {
+                            fn: me.onDlgTransferMentorComboBoxChange,
+                            scope: me
+                        },
+                        select: {
+                            fn: me.onDlgTransferMentorComboBoxSelect,
+                            scope: me
+                        }
+                    }
+                },
+                {
+                    xtype: 'combobox',
+                    x: 10,
+                    y: 50,
+                    itemId: 'DlgRequestTypeComboBox',
+                    selectOnFocus: true,
+                    width: 350,
+                    queryMode: 'local',
+                    typeAhead: true,
+                    forceSelection: true,
+                    allowBlank: false,
+                    emptyText: 'Select a Transfer Type...',
+                    blankText: 'A Transfer Type is required',
+                    store: Ext.create('Ext.data.Store', {
+                        fields: ['Value'],
+                        data : [
+                            {"Value":"Change in Mentor Status"},
+                            {"Value":"Change in Program"},
+                            {"Value":"Load Balancing"},
+                            {"Value":"Load Reducing"},
+                            {"Value":"Mentor Requested"},
+                            {"Value":"Second Degree Acceleration"},
+                            {"Value":"Student Requested with Bias"},
+                            {"Value":"Student Requested without Bias"}
+                        ]
+                    }),
+                    displayField: 'Value',
+                    value: null,
+                    valueField: 'Value',
+                    fieldLabel: 'Transfer Type',
+                    labelAlign: 'left',
+                    multiSelect: false,
+                    listConfig: {
+                        maxHeight: 111,
+                        resizable: false,
+                        width: 220,
+                        matchFieldWidth: false,
+                        minWidth: 220
+                    },
+                    listeners: {
+                        change: {
+                            fn: me.onDlgTransferMentorComboBoxChange,
+                            scope: me
+                        }
+                    }
+                },
+                {
+                    xtype: 'button',
+                    x: 160,
+                    y: 85,
+                    height: 30,
+                    itemId: 'DlgOkButton',
+                    width: 90,
+                    text: 'Ok',
+                    disabled: true,
+                    listeners: {
+                        click: {
+                            fn: me.onDlgOkButtonClick,
+                            scope: me
+                        }
+                    }
+                },
+                {
+                    xtype: 'button',
+                    x: 270,
+                    y: 85,
+                    height: 30,
+                    itemId: 'DlgCancelButton',
+                    width: 90,
+                    text: 'Cancel',
+                    listeners: {
+                        click: {
+                            fn: me.onDlgCancelButtonClick,
+                            scope: me
+                        }
+                    }
+                }
+            ]
+        });
+
+        me.callParent(arguments);
+        me.DlgTransferMentorComboBox = me.queryById('DlgTransferMentorComboBox');
+        me.DlgOkButton = me.queryById('DlgOkButton');
+        me.DlgRequestTypeComboBox = me.queryById('DlgRequestTypeComboBox');
+    },
+
+    onDlgCancelButtonClick: function(button, e, eOpts) {
+        Ext.getCmp('TransferMentorDialog').close();
+    },
+
+    onDlgTransferMentorComboBoxSelect: function(combo, records, eOpts) {
+        if ( !Ext.isEmpty(records) &&  !Ext.isEmpty(records[0]) ) {
+          Ext.getCmp('TransferMentorDialog').onDlgTransferMentorComboBoxChange(combo, records[0].get("UserId"), combo.getValue(), eOpts);
+        }
+    },
+
+    onDlgTransferMentorComboBoxChange: function(field, newValue, oldValue, eOpts) {
+        if ( !Ext.isEmpty(newValue) ) {
+            var Dlg = Ext.getCmp('TransferMentorDialog');
+            if ( newValue != oldValue && activeMentorStore.findExact( 'UserId', Dlg.DlgTransferMentorComboBox.getValue() ) != -1 ) {
+                var ok = !Ext.isEmpty(Dlg.DlgRequestTypeComboBox.getValue()) && !Ext.isEmpty(Dlg.DlgTransferMentorComboBox.getValue());
+                Dlg.DlgOkButton.setDisabled( ok == false );
+            }
+        }
+    },
+
+    onDlgOkButtonClick: function(button, e, eOpts) {
+        var me = Ext.getCmp('TransferMentorDialog');
+        Ext.callback( WGUpanel.transferStudentsToMentor, window, [{mentorid:me.DlgTransferMentorComboBox.getValue(),transferType:me.DlgRequestTypeComboBox.getValue()}], 100);
+        me.close();
+    }
+
+});
+
+Ext.define('WGU.model.MentorModel', {
+    extend  : 'Ext.data.Model',
+    autoLoad: true,
+    fields  : [
+        {name: 'Id' , mapping: 'Id', type: 'string'},
+        {name: 'SmallPhotoUrl' , mapping: 'User__r.SmallPhotoUrl', type: 'string'},
+        {name: 'NameLastFirst' , mapping: 'NameLastFirst', type: 'string'},
+        {name: 'Name' , mapping: 'Name', type: 'string'},
+        {name: 'UserId' , mapping: 'User__r.Id', type: 'string'},
+        {name: 'WGUState' , mapping: 'User__r.WGUState__c', type: 'string'},
+        {name: 'State' , mapping: 'User__r.State', type: 'string'},
+        {name: 'MentorRole__c' , mapping: 'MentorRole__c', type: 'string'},
+        {name: 'DisplayState', mapping: 'User__r.State', type: 'string',            
+            convert: function(value, record) {
+                return Ext.isEmpty(record.data.State) || value == "null"? record.data.WGUState: value;
+            }
+        },
+        {name: 'AssignedCollege__c' , mapping: 'AssignedCollege__c', type: 'string',            
+            convert: function(value, record) {
+                return Ext.isEmpty(value) || value == "null"? "College not assigned...": value;
+            }
+        },
+        {name: 'UserProfileName' , mapping: 'User__r.ProfileName__c', type: 'string'},
+        {name: 'ProgramCodes' , mapping: 'ProgramCodes__c', type: 'string',            
+            convert: function(value, record) {
+                return Ext.isEmpty(value) || value == "null"? "": value;
+            }
+        },
+        {name: 'ProgramCodeList' , mapping: 'ProgramCodes__c', type: 'string',            
+            convert: function(value, record) {
+              if (Ext.isEmpty(value) || value == "null" ) {
+                return "No Programs Defined...";
+              } else {
+                return value.replace(/\;/g,', ');
+              }
+            }
+        },
+        {name: 'Priority1ProgramCodes' , mapping: 'Priority1ProgramCodes__c', type: 'string',            
+            convert: function(value, record) {
+                return Ext.isEmpty(value) || value == "null"? "": value;
+            }
+        },
+        {name: 'AssignedCollege' , mapping: 'AssignedCollege__c', type: 'string'},
+        {name: 'StudentCount' , type: 'int'},
+        {name: 'CanSelectOtherMentorsinMyStudents__c' , mapping: 'CanSelectOtherMentorsinMyStudents__c', type: 'string'},
+        {name: 'DisplayName', mapping: '', type: 'string',
+            convert: function(value, record) {
+                return record.data.NameLastFirst + "   [" + record.data.MentorRole__c + "] ";
+            }
+        }
+    ]
+});
+
+Ext.define('WGU.model.SeparatedMentorModel', {
+    extend  : 'Ext.data.Model',
+    autoLoad: true,
+    fields  : [
+        {name: 'MentorId', type: 'string'},
+        {name: 'StudentCount' , type: 'int'}
+    ]
+});
+
+
+Ext.define('WGU.model.StudentModel', {
+    extend: 'Ext.data.Model',
+
+    fields: [
+        {name: 'Name', mapping: 'Name'},
+        {name: 'FirstName', mapping: 'FirstName'},
+        {name: 'LastName', mapping: 'LastName'},
+        {name: 'StudentId', mapping: 'StudentID__c'},
+        {name: 'ProgramCode', mapping: 'ProgramCode__c'},
+        {name: 'MailingState', mapping: 'MailingState'},
+        {name: 'TermNumber', mapping: 'TermNumber__c', type: 'int'},
+        {name: 'MentorName', mapping: 'Mentor__r.Name'},
+        {name: 'MentorId', mapping: 'Mentor__c'},
+        {name: 'Id', mapping: 'Id'},
+        {name: 'NameLastFirst', type: 'string',
+            convert: function(value, record) {
+                return record.data.LastName + ", " + record.data.FirstName;
+            }
+        },
+        {name: 'DisplayName', type: 'string',
+            convert: function(value, record) {
+                return "<a target='"+record.data.Id+"' href='/"+record.data.Id+"'>"+record.data.LastName + ", " + record.data.FirstName+"</a>";
+            }
+        },
+        {name: 'TransferRequested', type: 'string',
+            convert: function(value, record) {
+                if ( record.raw.StudentProcesses__r != null && Ext.isArray(record.raw.StudentProcesses__r.records) ) {
+                    record.raw.StudentProcesses__r.records = record.raw.StudentProcesses__r.records[0]; //only want the most recent request
+                }
+                return record.raw.StudentProcesses__r == null? '' : "<a target='"+record.raw.StudentProcesses__r.records.Id+"' href='/"+record.raw.StudentProcesses__r.records.Id+"'>View Request Record</a>";
+            }
+        },
+        {name: 'TransferType', type: 'string',
+            convert: function(value, record) {
+                if ( record.raw.StudentProcesses__r != null && Ext.isArray(record.raw.StudentProcesses__r.records) ) {
+                    record.raw.StudentProcesses__r.records = record.raw.StudentProcesses__r.records[0]; //only want the most recent request
+                }
+                return record.raw.StudentProcesses__r == null? '' : (record.raw.StudentProcesses__r.records.Type__c==null?'':record.raw.StudentProcesses__r.records.Type__c);
+            }
+        },
+        {name: 'TransferStatus', type: 'string',
+            convert: function(value, record) {
+                if ( record.raw.StudentProcesses__r != null && Ext.isArray(record.raw.StudentProcesses__r.records) ) {
+                    record.raw.StudentProcesses__r.records = record.raw.StudentProcesses__r.records[0]; //only want the most recent request
+                }
+                return record.raw.StudentProcesses__r == null? '' : (record.raw.StudentProcesses__r.records.Status__c==null?'':record.raw.StudentProcesses__r.records.Status__c);
+            }
+        },
+        {name: 'TransferStage', type: 'string',
+            convert: function(value, record) {
+                if ( record.raw.StudentProcesses__r != null && Ext.isArray(record.raw.StudentProcesses__r.records) ) {
+                    record.raw.StudentProcesses__r.records = record.raw.StudentProcesses__r.records[0]; //only want the most recent request
+                }
+                return record.raw.StudentProcesses__r == null? '' : (record.raw.StudentProcesses__r.records.Stage__c==null?'':record.raw.StudentProcesses__r.records.Stage__c);
+            }
+        },
+        {name: 'TransferredTo', type: 'string',
+            convert: function(value, record) {
+                if ( record.raw.StudentProcesses__r != null && Ext.isArray(record.raw.StudentProcesses__r.records) ) {
+                    record.raw.StudentProcesses__r.records = record.raw.StudentProcesses__r.records[0]; //only want the most recent request
+                }
+                return record.raw.StudentProcesses__r == null? '' : (record.raw.StudentProcesses__r.records.NewMentorName__c==null?'':"<a target='"+record.raw.StudentProcesses__r.records.NewMentorName__c+"' href='/"+record.raw.StudentProcesses__r.records.NewMentorName__c+"'>"+record.raw.StudentProcesses__r.records.NewMentorName__r.Name+"</a>");
+            }
+        },
+        {name: 'ApprovingManager', type: 'string',
+            convert: function(value, record) {
+                if ( record.raw.StudentProcesses__r != null && Ext.isArray(record.raw.StudentProcesses__r.records) ) {
+                    record.raw.StudentProcesses__r.records = record.raw.StudentProcesses__r.records[0]; //only want the most recent request
+                }
+                return record.raw.StudentProcesses__r == null? '' : (record.raw.StudentProcesses__r.records.ApprovingManager__c==null?'':"<a target='"+record.raw.StudentProcesses__r.records.ApprovingManager__c+"' href='/"+record.raw.StudentProcesses__r.records.ApprovingManager__c+"'>"+record.raw.StudentProcesses__r.records.ApprovingManager__r.Name+"</a>");
+            }
+        }
+    ]
+});
+
+Ext.define('WGU.store.StudentStore', {
+    extend: 'Ext.data.Store',
+
+    requires: [
+        'WGU.model.StudentModel'
+    ],
+
+    constructor: function(cfg) {
+        var me = this;
+        cfg = cfg || {};
+        me.callParent([Ext.apply({
+            model: 'WGU.model.StudentModel',
+            storeId: 'StudentStore',
+            proxy: {
+                type: 'memory',
+                reader: {
+                    type: 'json'
+                }
+            }
+        }, cfg)]);
+    }
+});
+
+Ext.define('WGU.store.MentorStore', {
+    extend: 'Ext.data.Store',
+
+    requires: [
+        'WGU.model.MentorModel'
+    ],
+
+    constructor: function(cfg) {
+        var me = this;
+        cfg = cfg || {};
+        me.callParent([Ext.apply({
+            model: 'WGU.model.MentorModel',
+            storeId: 'MentorStore',
+            proxy: {
+                type: 'memory',
+                reader: {
+                    type: 'json'
+                }
+            }
+        }, cfg)]);
+    }
+});
+
+Ext.define('WGU.store.SeparatedMentorStore', {
+    extend: 'Ext.data.Store',
+
+    requires: [
+        'WGU.model.SeparatedMentorModel'
+    ],
+
+    constructor: function(cfg) {
+        var me = this;
+        cfg = cfg || {};
+        me.callParent([Ext.apply({
+            model: 'WGU.model.SeparatedMentorModel',
+            storeId: 'SeparatedMentorStore',
+            proxy: {
+                type: 'memory',
+                reader: {
+                    type: 'json'
+                }
+            }
+        }, cfg)]);
+    }
+});
+
+
+</script>
+
+</body>
+</html>
+</apex:page>

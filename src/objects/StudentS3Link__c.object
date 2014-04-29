@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Custom object to manage URL links to the Amazon S3 storage cloud</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>Caption__c</fullName>
+        <description>Display caption for the file, if any</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter a display caption for the file, if any.</inlineHelpText>
+        <label>Caption</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StudentAttributes__c</fullName>
+        <externalId>false</externalId>
+        <label>Student Attributes</label>
+        <referenceTo>StudentAttributes__c</referenceTo>
+        <relationshipLabel>Amazon S3 Links</relationshipLabel>
+        <relationshipName>AmazonS3Links</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>URL__c</fullName>
+        <description>URL of S3 file</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the URL of the S3 file resource</inlineHelpText>
+        <label>URL</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <label>Student S3 Link</label>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Link Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Student S3 Links</pluralLabel>
+    <recordTypes>
+        <fullName>InspireMeImage</fullName>
+        <active>true</active>
+        <description>Indicting the image is for display on the student&apos;s profile under the &apos;what inspires me&apos; header</description>
+        <label>InspireMeImage</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ProfessionalPhoto</fullName>
+        <active>true</active>
+        <description>Indicating the file is the student&apos;s professional photo submission</description>
+        <label>ProfessionalPhoto</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Resume</fullName>
+        <active>true</active>
+        <description>Indicating the file is the student&apos;s professional resume submission</description>
+        <label>Resume</label>
+    </recordTypes>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Caption__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>RECORDTYPE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Caption__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>RECORDTYPE</searchFilterFields>
+        <searchFilterFields>Caption__c</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

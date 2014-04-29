@@ -1,0 +1,938 @@
+<apex:page title="Western Governors University - Find Invalid Account and Contact" contentType="text/html; charset=UTF-8" standardController="Contact" standardStylesheets="false" showHeader="false" sidebar="false" docType="html-5.0">
+<apex:outputText escape="false" value="{!'<!DOCTYPE html>'}"/>
+<head>
+    <title>Western Governors University - Find Invalid Account and Contact</title>
+    <style>
+        a {color:blue;}      /* unvisited link */
+        a:hover {color:darkblue;}  /* mouse over link */
+        a:visited {color:blue;}  /* visited link */
+        a:active {color:darkblue;}  /* selected link */
+
+        .x-grid-dirty-cell {
+            background-image: none;
+        }
+        .wgu-grid-text {
+            font-size: 9.2px;
+            font-weight: bold;
+        }
+        div.subjectColumn span {
+            font-weight: bold;
+        }
+
+        div#PerformanceSurveyPanelDlg-body .x-form-cb-label {
+            font-size: 10px;
+        }
+        div#PerformanceSurveyPanelDlg .x-panel-default {
+            border-color: #99BCE8;
+        }
+        div#PerformanceSurveyPanelDlg .x-panel-header {
+            border-color: #C7C7C7;
+            background-color: #D3D3D3;
+            background-image: none;
+        }
+        div#PerformanceSurveyPanelDlg .x-panel-header-text {
+            color: #414141;
+        }
+        div#PerformanceSurveyPanelDlg-body.x-panel-body-default {
+            border-color: #C7C7C7;
+        }
+        #fieldset .x-form-display-field {
+            padding-top: 3px;
+            color: white;
+            font-weight: 700;
+        }
+
+    </style>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/> 
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v407}/ext-all.js"/>
+    <link href="{!URLFOR($Resource.StandardPage,'assets/css/standard_page_lte.css')}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{!$Resource.extjsux_v407}/ux/css/CheckHeader.css" />
+   
+    <apex:includeScript value="/soap/ajax/27.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/27.0/apex.js"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v407, 'resources/css/ext-all.css')}"/> <script type="text/javascript" >
+	    if(typeof String.prototype.trim !== 'function') {  //IE8 String.trim() compensator
+	        String.prototype.trim = function() {
+	            return this.replace(/^\s+|\s+$/g, '');
+	        }
+	    }
+	
+	    sforce.connection.init( "{!$Api.session_id}", "/services/Soap/u/27.0" );
+	    $soap = sforce.connection;
+	    $sconsole = (sforce && sforce.console && sforce.console.isInConsole()? sforce.console: false);
+	    var hostparts = location.hostname.split(".");
+	    var orgName = hostparts[0].split("--")[1];
+	    var boxName = orgName;
+	    try {
+	        boxName = $soap.retrieve('Value__c','Runtime__c',["a0P30000009q4RYEAY"])[0].Value__c;
+	    } catch (e) {
+	        boxName = orgName;
+	    };
+	</script> 
+	
+<script type="text/javascript">
+		Ext.Loader.setConfig({enabled: true});
+        Ext.Loader.setPath('Ext.ux', '{!$Resource.extjsux_v407}/ux');
+        Ext.require([
+            'Ext.selection.CellModel',
+            'Ext.grid.*',
+            'Ext.data.*',
+            'Ext.util.*',
+            'Ext.state.*',
+            'Ext,panel.*',
+            'Ext.form.*',
+        	'Ext.layout.container.HBox',
+            'Ext.ux.CheckColumn'
+        ]);
+        Ext.ns("Ext.WGU");
+        
+        //Variable to track whether the checkcolumn is disabled. Defaults to true.
+        var checkDisabled = true;
+        
+        
+        
+        Ext.onReady(function() {
+        
+        	//Cell editing plugin. Necessary to enable changing the checkboxes.
+            var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', 
+            {
+                clicksToEdit: 1
+            });
+            
+            //Check if the user has permissions to make change
+            var profile='';
+            
+            //Check if the user is a mentor by looking for a Mentor object associated with the User
+            try
+            {
+                var hasMentorObj=sforce.connection.query("select MentorRole__c from Mentor__c where User__c='{!$User.Id}' limit 1").records.MentorRole__c;
+                
+                if (hasMentorObj!=null && hasMentorObj!='')
+                {
+                    checkDisabled=false;
+                    profile='Mentor';
+                }
+            }
+            catch(err)
+            {
+                checkDisabled=true;
+            }
+            
+            //If there is no Mentor object for the user query the Profile to determine if they are a Developer or System Administrator
+            if (profile!='Mentor')
+            {
+                try
+                {
+                    //Query the user profile
+                    profile=sforce.connection.query("select Profile.Name from User where id='{!$User.Id}' limit 1").records.Profile.Name;
+                    
+                    //If the user is a Developer or System Administrator the checkcolumn is enabled
+                    if (profile=='System Administrator' || profile=='Developer')
+                    {
+                        checkDisabled=false;
+                    }
+                }
+                catch(err)
+                {
+                    checkDisabled=true;
+                }
+            }
+             
+        
+	    	var MainPanel = Ext.create('Ext.Panel', {
+		        id:'main-panel',
+		        baseCls:'x-plain',
+		        renderTo: Ext.getBody(),
+		        layout: {
+		            type: 'table',
+		            columns: 5
+		        },
+		        // applied to child components
+		        //defaults: {frame:true, width:200, height: 200},
+		        items:[{
+		            xtype: 'tabpanel',
+		            title:'Detect Following Accounts and Contacts Might have Problem:',
+		            colspan:5,
+		            width:1010,
+		            height:400,
+		            items: [ 
+		            {
+			            xtype: 'gridpanel',
+			            title:'Accounts', 
+			            colspan:2,
+			            width:1010,
+			            height:400, 
+		                store: accountStore,
+		                columns: 
+		                [
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Name',
+		                        dataIndex: 'Name',
+		                        width: 100,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true,
+		                        renderer: function(value,meta,record){ 
+		                            return "<a href='/"+record.get('Id')+"' target='_blank'>"+value+"</a>";
+		                        }
+		                    },
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Id',
+		                        dataIndex: 'Id',
+		                        width: 100,
+		                        sortable: true,
+		                        hidden:true,
+		                        menuDisabled: true
+		                    } ,
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Pidm',
+		                        dataIndex: 'Pidm',
+		                        width: 80,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'StudentContact',
+		                        dataIndex: 'StudentContact',
+		                        width: 80,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Owner',
+		                        dataIndex: 'Owner',
+		                        width: 80,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'RecordType',
+		                        dataIndex: 'RecordType',
+		                        width: 80,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Email',
+		                        dataIndex: 'Email',
+		                        width: 80,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Mobile',
+		                        dataIndex: 'Mobile',
+		                        width: 80,
+		                        sortable: false,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Phone',
+		                        dataIndex: 'Phone',
+		                        width: 80,
+		                        sortable: false,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'datecolumn',
+		                        header: 'CreatedDate',
+		                        dataIndex: 'CreatedDate',
+		                        width: 150,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Children',
+		                        dataIndex: 'children',
+		                        width: 150,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'InValid',
+		                        dataIndex: 'isInvalid__c',
+		                        width: 150,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }
+		                     
+		                             
+		                ],  
+		                listeners:
+		                {    
+		                            
+		                            itemclick: function(dv, record, item, index, e) {  
+		                                // addMentorByCourse(record.get('CourseCode__c')); 
+                                          Ext.getCmp('Idx').setValue(record.get('Id'));
+                                          Ext.getCmp('Namex').setValue(record.get('Name'));
+                                          Ext.getCmp('Phonex').setValue(record.get('Phone'));  
+                                          Ext.getCmp('Emailx').setValue(record.get('Email'));  
+                                         // Ext.getCmp('Address').setValue(record.get('Address'));   
+                                          Ext.getCmp('whyx').setValue('');
+                                          Ext.getCmp('button1').setDisabled(true);
+                                          Ext.getCmp('button2').setDisabled(true);    
+                                          if(record.get('children')=='2')
+                                          {
+                                         		Ext.getCmp('whyx').setValue( " Have multiple contacts " );
+                                          }else if(record.get('children')=='0')
+                                          {
+                                          		Ext.getCmp('whyx').setValue( " Don't have any contact point to this account" );
+                                          		Ext.getCmp('button2').setDisabled(false);       
+                                          }
+						   				  if(record.get('IsInvalid')==true)
+                                          {
+                                          		Ext.getCmp('whyx').setValue( " Its StudentContact__c have another parent Account " );
+                                          }         
+                                                      
+		                                }
+		                }
+			            
+			        },{
+			            xtype: 'gridpanel',
+			            title:'Contacts',
+			            colspan:2,
+			            width:1010,
+			            height:400,
+						store: contactStore,
+		                columns: 
+		                [
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'FirstName',
+		                        dataIndex: 'FirstName',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true,
+		                        renderer: function(value,meta,record){ 
+		                            return "<a href='/"+record.get('Id')+"' target='_blank'>"+value+"</a>";
+		                        }
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'LastName',
+		                        dataIndex: 'LastName',
+		                        width: 100,
+		                        sortable: false,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Id',
+		                        dataIndex: 'Id',
+		                        width: 100,
+		                        sortable: false,
+		                        hidden:true,
+		                        menuDisabled: true
+		                    },   
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Email',
+		                        dataIndex: 'Email',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } , 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Fax',
+		                        dataIndex: 'Fax',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } , 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'MobilePhone',
+		                        dataIndex: 'MobilePhone',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } , 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'MailingAddress',
+		                        dataIndex: 'MailingAddress',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } ,
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'OtherPhone',
+		                        dataIndex: 'OtherPhone',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } , 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'HomePhone',
+		                        dataIndex: 'HomePhone',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } , 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Department',
+		                        dataIndex: 'Department',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } , 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'UserName',
+		                        dataIndex: 'UserName',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } , 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'PIDM__c',
+		                        dataIndex: 'PIDM__c',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } , 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'StudentContact',
+		                        dataIndex: 'StudentContact',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } , 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'CreatedDate',
+		                        dataIndex: 'CreatedDate',
+		                        width: 120,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    } , 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'Accountid',
+		                        dataIndex: 'Accountid',
+		                        width: 150,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }, 
+		                    {
+		                        xtype: 'gridcolumn',
+		                        header: 'InValid',
+		                        dataIndex: 'isInvalid__c',
+		                        width: 150,
+		                        sortable: true,
+		                        hideable: false,
+		                        menuDisabled: true
+		                    }
+		                ], 
+		                listeners:
+		                {    
+		                       itemclick: function(dv, record, item, index, e) {  
+		                                // addMentorByCourse(record.get('CourseCode__c')); 
+                                          Ext.getCmp('Idx').setValue(record.get('Id'));
+                                          Ext.getCmp('Namex').setValue(record.get('FirstName')+' '+record.get('LastName'));
+                                          Ext.getCmp('Phonex').setValue(record.get('HomePhone')+' '+record.get('MobilePhone')+ ' '+ record.get('OtherPhone'));  
+                                          Ext.getCmp('Emailx').setValue(record.get('Email'));  
+                                          Ext.getCmp('Addressx').setValue(record.get('MailingAddress')==null?'':record.get('MailingAddress'));  
+                                          Ext.getCmp('whyx').setValue('');
+                                          
+                                          Ext.getCmp('button1').setDisabled(true);
+                                          Ext.getCmp('button2').setDisabled(true);   
+										  if(record.get('Accountid')== null)
+                                          {
+                                          		Ext.getCmp('whyx').setValue( " Don't associate with any account" );
+                                          		Ext.getCmp('button1').setDisabled(false);
+                                          }
+						   				  if(record.get('IsInvalid')==true)
+                                          {
+                                          		Ext.getCmp('whyx').setValue( " Its account's StudentContact__c field point to others " );
+                                          } else 
+                                          {
+                                         		Ext.getCmp('whyx').setValue( " Might Have multiple account's StudentContact__c point to this record " );
+                                          }           
+		                                }
+		                       
+		                } 
+			            
+			        	}]
+			        }
+			        ,{
+			            xtype: 'panel',
+			            title:'Detail',
+			            layout: {
+                                    type: 'fit'
+                                },
+			            colspan:5,
+			            width:1010,
+			            height:200,
+			            items : 
+			            [
+				            {
+					            xtype: 'container', 
+					            colspan:5,
+					            width:1010,
+					            height:200,
+		                        layout: {
+		                               type: 'absolute'
+		                        },
+					            items : 
+					            [
+					               {
+			                           xtype: 'displayfield',
+			                           id: 'Idx',
+			                           x: 5,
+			                           y: 5,
+			                           width: 200,
+			                           fieldLabel: 'Id',
+			                           labelWidth: 20,
+		                               labelAlign: 'left',
+			                           hidden: false,
+			                           fieldStyle: 'font-size: 12px;font-weight: bold;'
+			                       },{
+			                           xtype: 'displayfield',
+			                           id: 'Namex',
+			                           x: 225,
+			                           y: 5,
+			                           width: 200,
+			                           fieldLabel: 'Name',
+			                           labelWidth: 50,
+		                               labelAlign: 'left',
+			                           hidden: false,
+			                           fieldStyle: 'font-size: 12px;font-weight: bold;'
+			                       },{
+			                           xtype: 'displayfield',
+			                           id: 'Emailx',
+			                           x: 5,
+			                           y: 25,
+			                           width: 200,
+			                           fieldLabel: 'Email',
+			                           labelWidth: 50,
+		                               labelAlign: 'left',
+			                           hidden: false,
+			                           fieldStyle: 'font-size: 12px;font-weight: bold;'
+			                       },{
+			                           xtype: 'displayfield',
+			                           id: 'Phonex',
+			                           x: 255,
+			                           y: 25,
+			                           width: 300,
+			                           fieldLabel: 'Phone',
+			                           labelWidth: 50,
+			                           hidden: false,
+			                           fieldStyle: 'font-size: 12px;font-weight: bold;'
+			                       },{
+			                           xtype: 'displayfield',
+			                           id: 'Addressx',
+			                           x: 5,
+			                           y: 45,
+			                           width: 200,
+			                           fieldLabel: 'Address',
+			                           labelWidth: 50,
+		                               labelAlign: 'left',
+			                           hidden: false,
+			                           fieldStyle: 'font-size: 12px;font-weight: bold;'
+			                       },
+			                       {
+			                           xtype: 'displayfield',
+			                           id: 'otherx',
+			                           x: 5,
+			                           y: 65,
+			                           width: 200,
+			                           fieldLabel: 'other',
+			                           labelWidth: 30,
+		                               labelAlign: 'left',
+			                           hidden: false,
+			                           fieldStyle: 'font-size: 12px;font-weight: bold;'
+			                       },
+			                       {
+			                           xtype: 'displayfield',
+			                           id: 'whyx',
+			                           x: 5,
+			                           y: 85,
+			                           width: 400,
+			                           fieldLabel: '<b>problem:</b>',
+			                           labelWidth: 60,
+		                               labelAlign: 'left',
+			                           hidden: false,
+			                           fieldStyle: 'font-size: 12px;font-weight: bold;'
+			                       }
+			                     ]}
+			            ]
+		        	},{
+			            xtype: 'panel',
+			            title:'Operation',
+			            colspan:5,
+			            width:1010,
+			            height:200,
+			            hidden:true,
+			            items : 
+			            [
+				            {
+					            xtype: 'container', 
+					            colspan:5,
+					            width:1010,
+					            height:200,
+		                        layout: {
+		                               type: 'absolute'
+		                        },
+					            items : 
+					            [
+					            	{ xtype: 'tbspacer', height: 7 },
+                                    {
+                                        xtype: 'button',
+                                        id: 'button1', 
+                                        width: '120',
+                                        x: 5,
+                                        y: 5,
+                                        tooltip: 'Create Account to matche the select contact record',
+                                        text: 'Create Account',
+                                        handler: function() {
+                                           var id= Ext.getCmp('Idx').getValue(); 
+                                           if(id!=null)
+                                           {
+                                           		 
+                                           		var result=sforce.apex.execute("AccountUtility", 
+                     							"createAccountsForContactsWebCall", {Ids:[id]});
+                                           		if (result=="true") {
+												    window.alert("Create a account for this contact");
+												  } else {
+												    window.alert("failed to create account for this contact");
+												  }
+                                           		
+                                           }
+                                        }
+                                    },
+                                    { xtype: 'tbspacer', height: 7 },
+                                    {
+                                        xtype: 'button',
+                                        id: 'button2',
+										x: 105,
+										y: 5,
+                                        width: '120',
+                                        tooltip: 'Create Contact to match the account',
+                                        text: 'Create Contact',
+                                        handler: function() {
+                                            
+                                           var id= Ext.getCmp('Idx').getValue();
+                                           var Name= Ext.getCmp('Namex').getValue(); 
+                                           if(id!=null)
+                                           {
+                                           		var contact =  new sforce.SObject("Contact");
+                                           		contact.Name = Name;
+                                           		contact.Id = id;
+                                           		var result=sforce.apex.execute("AccountUtility", 
+                     							"createContactsForAccountsWebCall", {Ids:[id]});
+                                           		if (result=="true") {
+												    window.alert("Create a contact for this account");
+												  } else {
+												    window.alert("failed to create contact for this account");
+												  }
+                                           		
+                                           }
+                                        }
+                                    },
+                                    { xtype: 'tbspacer', height: 7 },
+                                    {
+                                        xtype: 'button',
+                                        id: 'button3',
+										x: 205,
+										y: 5,
+                                        width: '120',
+                                        tooltip: 'Remove this record',
+                                        text: 'Delete',
+                                        handler: function() {
+                                           var id= Ext.getCmp('Idx').getValue();
+                                           if(id!=null)
+                                           {
+                                           		var delResult=sforce.connection.deleteIds([id]);
+                                           		if (delResult[0].getBoolean("success")) {
+												    window.alert("account with id " + delResult[0].id + " deleted");
+												  } else {
+												    window.alert("failed to delete account " + delResult[0]);
+												  }
+                                           		
+                                           }
+	
+                                        }
+                                    }
+					            ]
+					        }
+					    ]
+		        	} 
+		        ]
+	    });
+	    
+	    
+	    
+	    addAccounts();
+	    addContacts();
+	});//end onReady
+	
+	
+	
+	
+	
+	
+	   
+        //Data model for the grid panel
+        Ext.define('accountModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [  
+                {name: 'Id' , mapping: 'Id', type: 'string'},
+                {name: 'Name' , mapping: 'Name', type: 'string'},
+                {name: 'Pidm' , mapping: 'pidm__c', type: 'string'},
+                {name: 'StudentContact' , mapping: 'studentContact__r', type: 'string'},
+                {name: 'StudentContactId' , mapping: 'studentContact__c', type: 'string'}, 
+                {name: 'Owner' , mapping: 'Owner', type: 'string'},
+                {name: 'OwnerId' , mapping: 'Ownerid', type: 'string'},
+                {name: 'RecordType' , mapping: 'RecordType', type: 'string'},
+                {name: 'Email' , mapping: 'Email', type: 'string'},
+                {name: 'Mobile' , mapping: 'Mobile', type: 'string'},
+                {name: 'Phone' , mapping: 'Phone', type: 'string'},
+                {name: 'CreatedDate' , mapping: 'CreatedDate', type: 'date', dateFormat: 'Y-m-d'}, 
+                {name: 'children' , mapping: 'children', type: 'int'}, 
+                {name: 'isInvalid__c' , mapping: 'invalid__c', type: 'boolean'}
+            ]
+        });
+        
+         //Data model for the mentor grid
+        Ext.define('contactModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            
+            fields  : 
+            [ 
+                {name: 'Id' , mapping: 'Id', type: 'string'},
+                {name: 'FirstName' , mapping: 'FirstName', type: 'string'}, 
+                {name: 'LastName' , mapping: 'LastName', type: 'string'}, 
+                {name: 'Email' , mapping: 'Email', type: 'string'}, 
+                {name: 'Fax' , mapping: 'Fax', type: 'string'}, 
+                {name: 'MobilePhone' , mapping: 'MobilePhone', type: 'string'}, 
+                {name: 'MailingAddress' , mapping: 'MailingAddress', type: 'string'},   
+                {name: 'OtherPhone' , mapping: 'OtherPhone', type: 'string'}, 
+                {name: 'HomePhone' , mapping: 'HomePhone', type: 'string'}, 
+                {name: 'Department' , mapping: 'Department', type: 'string'}, 
+                {name: 'UserName' , mapping: 'Mentor__r.username', type: 'string'},  
+                {name: 'StudentContact' , mapping: 'account.StudentContact__c', type: 'string'}, 
+                {name: 'pidm__c' , mapping: 'pidm__c', type: 'string'},
+                {name: 'CreatedDate' , mapping: 'CreatedDate', type: 'date', dateFormat: 'Y-m-d'},
+                {name: 'Accountid' , mapping: 'Accountid', type: 'int'}, 
+                {name: 'isInvalid__c' , mapping: 'isInvalid__c', type: 'boolean'}
+            ]
+        });
+        
+        //Function to convert the date from Salesforce to an ExtJs date. Milliseconds are disabled do to an issue with the date format.
+        function convertDate( dateStr ) 
+        {
+            var date = new Date();
+            var parts = dateStr==null? []: dateStr.split(/[- : T + .]/);
+            var offset = Ext.Date.getGMTOffset(date)/100;
+            if ( parts.length > 0 ) 
+            {
+                date.setFullYear(parts[0]);
+                date.setMonth(parts[1]-1);
+                date.setDate(parts[2]);
+                date.setHours(parts[3]==null?0: (parts[3]*1)+offset);
+                date.setMinutes(parts[4]==null?0: parts[4]);
+                date.setSeconds(parts[5]==null?0: parts[5]);
+                //date.setMilliseconds(parts[6]==null?0: parts[6]);
+            }
+            return date;
+        }
+        
+        //Data store for the grid
+        var accountStore = Ext.create('Ext.data.Store',
+        {
+            model : 'accountModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'Name',
+                direction: 'ASC'
+            },
+            {
+                property: 'Id',
+                direction: 'ASC'
+            }
+            ]
+        });
+        
+        
+         //Data store for the grid
+        var contactStore= Ext.create('Ext.data.Store',
+        {
+            model : 'contactModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'FirstName',
+                direction: 'ASC'
+            }
+            ]
+        });
+        
+        /*
+        * Function to populate the data model via the data store from the StudentCourseRegistration__c Salesforce object
+        id, Name, pidm__c, studentContact__c, Owner.Username, RecordType.DeveloperName, 
+        PersonEmail,PersonMobilePhone, Phone,  CreatedDate,  (select id, FirstName, LastName, pidm__c from Contacts ) 
+        */
+        function addAccounts()
+        {
+            //Clear any data currently in the data store
+            accountStore.removeAll(true); 
+            
+            //Query for all StudentCourseRegistration__c objects associated with the current contact
+            var result = sforce.apex.execute("AccountUtility", 
+                     "huntInvalidAccounts", {});
+           
+          //window.alert(' apex works '  + result.length  );
+         // window.alert(' result: '  + result  );
+            var newModels = [];
+            if ( result.length > 0 ) 
+            {  
+                //Loop through the returned records and add them to the data model
+                
+                for ( var x=0; x < result.length; x++ ) 
+                {
+                    var thisRecord = result[x];
+                    var newRecord = Ext.create('accountModel');        
+                    
+                    newRecord.set( 'Id', thisRecord.Id );
+                    newRecord.set( 'Name', thisRecord.Name); 
+                    newRecord.set( 'pidm__c', thisRecord.Pidm__c); 
+                    newRecord.set( 'StudentContact__r',  (thisRecord.StudentContact__r==null?'':thisRecord.StudentContact__r.FirstName + ' ' +thisRecord.StudentContact__r.LastName ));
+                    newRecord.set( 'StudentContact__c', thisRecord.StudentContact__c ); 
+                    newRecord.set( 'Owner', thisRecord.Owner.Username); 
+                    newRecord.set( 'OwnerId', thisRecord.OwnerId); 
+                    newRecord.set( 'RecordType', thisRecord.RecordType.DeveloperName); 
+                    newRecord.set( 'Email', thisRecord.PersonEmail); 
+                    newRecord.set( 'Mobile', thisRecord.PersonMobilePhone); 
+                    newRecord.set( 'Phone', thisRecord.Phone); 
+                    newRecord.set( 'CreatedDate', thisRecord.CreatedDate); 
+                    newRecord.set( 'children', (thisRecord.Contacts!=null?thisRecord.Contacts.size:0)); 
+                    newRecord.set( 'isInvalid__c', thisRecord.isInvalid__c); 
+                    newModels[x] = newRecord; 
+                }
+                
+               
+            } 
+            //Load the data in to the data store
+                accountStore.loadData( newModels, true );
+        }
+        
+         /*
+        * load mentors by given course code
+        */
+        function addContacts( )
+        {
+             //Clear any data currently in the data store
+            contactStore.removeAll(true); 
+            
+            //Query for all StudentCourseRegistration__c objects associated with the current contact
+            var result = sforce.apex.execute("AccountUtility", 
+                     "huntInvalidContacts", {});
+           
+          //window.alert(' apex works '  + result.length  );
+         // window.alert(' result: '  + result  );
+            var newModels = [];
+            if ( result.length > 0 ) 
+            {  
+                //Loop through the returned records and add them to the data model
+                
+                for ( var x=0; x < result.length; x++ ) 
+                {
+                    var thisRecord = result[x];
+                    var newRecord = Ext.create('accountModel');        
+                    
+                    newRecord.set( 'Id', thisRecord.Id );
+                    newRecord.set( 'FirstName', thisRecord.FirstName); 
+                    newRecord.set( 'LastName', thisRecord.LastName); 
+                    newRecord.set( 'Email', thisRecord.Email); 
+                    newRecord.set( 'Fax', thisRecord.Fax); 
+                    newRecord.set( 'MobilePhone', thisRecord.MobilePhone); 
+                    newRecord.set( 'MailingAddress', thisRecord.MailingStreet + ',' +thisRecord.MailingCity + ','+thisRecord.MailingState + ','+thisRecord.MailingPostalCode  ); 
+                    newRecord.set( 'OtherPhone', thisRecord.OtherPhone); 
+                    newRecord.set( 'HomePhone', thisRecord.HomePhone );  
+                    newRecord.set( 'Department', thisRecord.Department );  
+                    newRecord.set( 'UserName', thisRecord.UserName );  
+                    newRecord.set( 'PIDM__c', thisRecord.PIDM__c );  
+                    newRecord.set( 'StudentContact', thisRecord.StudentContact__c );  
+                    newRecord.set( 'CreatedDate', thisRecord.CreatedDate );    
+                    newRecord.set( 'accountid', thisRecord.accountid); 
+                    newRecord.set( 'isInvalid__c', thisRecord.isInvalid__c); 
+                    newModels[x] = newRecord; 
+                }
+                
+               
+            } 
+            //Load the data in to the data store
+            contactStore.loadData( newModels, true );
+        }
+    </script>
+</head>
+<body> 
+    
+</body>
+</apex:page>

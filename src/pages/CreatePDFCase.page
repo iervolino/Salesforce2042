@@ -1,0 +1,50 @@
+<apex:page standardController="Case" extensions="CreatePDFCaseController">
+  <apex:form >
+  <apex:pageMessages ></apex:pageMessages>
+      <apex:pageBlock >
+      
+          <apex:pageBlockButtons location="bottom" >
+               <apex:commandButton value="View PDF" action="{!viewPDF}"/>
+              <apex:commandButton value="Cancel" action="{!cancel}"/>
+          </apex:pageBlockButtons>
+          <table width="400">
+              <tr>
+                  <td>Name </td>
+                  <td>:</td>
+                  <td><apex:outputField value="{!Case.Contact.Name}" /></td>
+              </tr>
+              <tr>
+                   <td>Email </td>
+                   <td>:</td>
+                   <td><apex:outputField value="{!Case.Contact.Email}" /></td>
+             
+              </tr>  
+               <tr>
+                  <td>Student ID</td>
+                  <td>:</td>
+                  <td><apex:outputField value="{!Case.Contact.StudentID__c}" /></td>
+             
+              </tr>  
+              <tr>
+                  <td>Email Template</td>
+                  <td>:</td>
+                  <td>
+                      <apex:selectList value="{!selET}" size="1" multiselect="false" >
+                      <apex:selectOption itemLabel="Select Template" itemValue="" ></apex:selectOption>
+                      <apex:selectOptions value="{!emailTempsList}"></apex:selectOptions>
+                      <apex:actionSupport action="{!emailContent}" event="onchange" />
+                      </apex:selectList>
+                  </td>
+             
+              </tr>  
+          </table>
+         
+           
+          <apex:pageBlockSection columns="1" > 
+              
+              <apex:inputTextarea richText="true" value="{!content}" />
+              
+          </apex:pageBlockSection>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

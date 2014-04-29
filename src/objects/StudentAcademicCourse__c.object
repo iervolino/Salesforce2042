@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A representation of a course being taken at WGU wither in the past, current enrollment, or tentatively planned in the future. Includes credited courses such as transferred competency units or requirements met while working on  another degree.</description>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>ActiveCurrentTermCourse__c</fullName>
+        <description>Indicator to specify if a course is currently in the student&apos;s term and the student is enrolled or passed the course.</description>
+        <externalId>false</externalId>
+        <formula>IF(StudentContact__r.CurrentTerm__c == Term__c &amp;&amp; ( TEXT(Status__c) == &apos;Registered&apos; || TEXT(Status__c) == &apos;Passed&apos; || TEXT(Status__c) == &apos;Not Passed&apos; ), true, false)</formula>
+        <inlineHelpText>Indicator to specify if a course is currently in the student&apos;s term and the student is enrolled or passed the course.</inlineHelpText>
+        <label>Active Current Term Course</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Attempts__c</fullName>
+        <description>Roll up summary of child Student Academic Course Attempt.</description>
+        <externalId>false</externalId>
+        <label>Attempts</label>
+        <summaryForeignKey>StudentAcademicCourseAttempt__c.StudentAcademicCourse__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>CompetencyUnits__c</fullName>
+        <description>The number of Competency Units this course is will put towards the student&apos;s degree program.</description>
+        <externalId>false</externalId>
+        <label>Competency Units</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompositeKey__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>Composite Key</label>
+        <length>45</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CourseCode__c</fullName>
+        <description>The code the course is registered within Banner and PAMS.</description>
+        <externalId>false</externalId>
+        <label>Course Code</label>
+        <length>25</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CourseMentorStudentAssignment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The most recent course mentor assign to this student.</description>
+        <externalId>false</externalId>
+        <label>Course Mentor Student Assignment</label>
+        <referenceTo>CourseMentorStudentAssignment__c</referenceTo>
+        <relationshipLabel>Student Academic Courses</relationshipLabel>
+        <relationshipName>Student_Academic_Courses</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <description>The last day of the term this course is enrolled. Will not be filled out on records with no term.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The last day of the term this course is enrolled. Will not be filled out on records with no term.</inlineHelpText>
+        <label>End Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FullCourseTitle__c</fullName>
+        <externalId>false</externalId>
+        <label>Full Course Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MentorVerifiedCurrentEngagement__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Engaged denotes whether the student is currently &quot;engaged&quot; in the course. This will clear out when the student completes the course.</description>
+        <externalId>false</externalId>
+        <label>Mentor Verified Current Engagement</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MentorVerifiedEngagementNotedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Mentor Verified Engagement Noted By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>StudentAcademicCoursesEngagementNoted</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>MentorVerifiedEngagementNotedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Mentor Verified Engagement Noted Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>RequirementsCompleted__c</fullName>
+        <description>Count of requirements where Completed__c is true.</description>
+        <externalId>false</externalId>
+        <label>Requirements Completed</label>
+        <summaryFilterItems>
+            <field>StudentAcademicCourseRequirement__c.Completed__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>StudentAcademicCourseRequirement__c.StudentAcademicCourse__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>RequirementsEngagedPreassessment__c</fullName>
+        <description>Count of requirements where EngagedPreassessment__c is true.</description>
+        <externalId>false</externalId>
+        <label>Requirements Engaged Preassessment</label>
+        <summaryFilterItems>
+            <field>StudentAcademicCourseRequirement__c.EngagedPreassessment__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>StudentAcademicCourseRequirement__c.StudentAcademicCourse__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>RequirementsEngaged__c</fullName>
+        <description>Count of requirements where Engaged__c is true.</description>
+        <externalId>false</externalId>
+        <label>Requirements Engaged</label>
+        <summaryFilterItems>
+            <field>StudentAcademicCourseRequirement__c.Engaged__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>StudentAcademicCourseRequirement__c.StudentAcademicCourse__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>RequirementsReferred__c</fullName>
+        <description>Count of requirements where Referred__c is true.</description>
+        <externalId>false</externalId>
+        <label>Requirements Referred</label>
+        <summaryFilterItems>
+            <field>StudentAcademicCourseRequirement__c.Referred__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>StudentAcademicCourseRequirement__c.StudentAcademicCourse__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Requirements__c</fullName>
+        <description>Number of requirements</description>
+        <externalId>false</externalId>
+        <label>Requirements</label>
+        <summaryForeignKey>StudentAcademicCourseRequirement__c.StudentAcademicCourse__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <description>The first day of the term this course is enrolled. Will not be filled out on records with no term.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The first day of the term this course is enrolled. Will not be filled out on records with no term.</inlineHelpText>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>The status of the course in relation to the student&apos;s progress in it or credit to it.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The status of the course in relation to the student&apos;s progress in it or credit to it.</inlineHelpText>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Passed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Waived</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transferred</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Requirements Met</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Registered</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Planned</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unenrolled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>StudentContact__c</fullName>
+        <description>The student for which this course is entered.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The student for which this course is entered.</inlineHelpText>
+        <label>Student Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Student Academic Courses</relationshipLabel>
+        <relationshipName>StudentAcademicCourses</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Term__c</fullName>
+        <description>If course to enroll in the future then no term code may be specified but might be if Flexible Degree Plan was completed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If course to enroll in the future then no term code may be specified but might be if Flexible Degree Plan was completed.</inlineHelpText>
+        <label>Term</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Performance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Objective</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Applicable</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Version__c</fullName>
+        <description>The version of the course that the student is set to take.</description>
+        <externalId>false</externalId>
+        <label>Version</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Student Academic Course</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Course Title</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Student Academic Courses</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

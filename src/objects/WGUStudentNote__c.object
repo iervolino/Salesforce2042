@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>Notes</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>Notes</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <content>Notes</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object stores notes about a student&apos;s interaction with service personnel such as mentors, etc.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AuthorIsCourseMentor__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>The author of this message was a course mentor when the note was created.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The author of this message was a course mentor when the note was created.</inlineHelpText>
+        <label>Author is Course Mentor</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AuthorPidm__c</fullName>
+        <externalId>false</externalId>
+        <label>Author Pidm</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Author__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The user pidm</description>
+        <externalId>false</externalId>
+        <label>User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>WGUStudentNotes</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>InteractionID__c</fullName>
+        <description>This is the interacitonId in talisma that this note came from.</description>
+        <externalId>true</externalId>
+        <label>InteractionID</label>
+        <length>16</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Level1Image__c</fullName>
+        <externalId>false</externalId>
+        <formula>&apos; &apos;</formula>
+        <label>Level 1 Image</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MentorId__c</fullName>
+        <externalId>false</externalId>
+        <formula>Student__r.StudentMentor__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>MentorId</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PIDM__c</fullName>
+        <externalId>true</externalId>
+        <label>PIDM</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PersonalizationActions__c</fullName>
+        <description>These actions are for the Student Personalization project and are for mentors to communicate how they are helping a student if the Student At Risk Score is Red or Yellow</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter in the action for this student if they are an At Risk Student.</inlineHelpText>
+        <label>Personalization Actions</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Create an entire term plan with weekly progress goals that allow the student to achieve OTP</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enroll the student in a cohort</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>When the student fails to achieve the weekly goal, set a follow up call later in the week or the day to provide time for them to accomplish the goal that week</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Create a study calendar with specific times blocked out for schoolwork and ask the student to share it with his or her family/support system</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ask questions to determine if the student is struggling with the content, time management, or motivation. Then set a follow up appointment with an additional person (course mentor, student success mentor, etc.) based upon the student’s response</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Share screens with the student and walk through a learning resource or task together</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Share screens and watch a welcome video together then create a plan for finishing the course</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>When a goal is achieved, discuss what actions the student took to achieve that goal and look for ways to replicate those actions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Review communities with the students and search out tips and information</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Share screens and watch a clip of a graduation speaker and then craft a graduation goal and plan for achieving that goal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Use questions in the course of study to quiz the student. Set up a course mentor appointment to further discuss the topic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>PersonalizationMenuSubType__c</fullName>
+        <description>Sub-type of Personalization menu.</description>
+        <externalId>false</externalId>
+        <label>PersonalizationMenuSubType</label>
+        <picklist>
+            <controllingField>PersonalizationMenu__c</controllingField>
+            <picklistValues>
+                <fullName>Provide information on WellConnect as a resource</fullName>
+                <controllingFieldValues>Personal</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Create a revised term plan with weekly goals</fullName>
+                <controllingFieldValues>Personal</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ask questions to determine student’s motivation and ability to continue</fullName>
+                <controllingFieldValues>Personal</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Revisit the student’s vision statement</fullName>
+                <controllingFieldValues>Personal</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Help the student identify a personal support system for academic accountability</fullName>
+                <controllingFieldValues>Personal</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Help the student connect with the bursar or financial aid support</fullName>
+                <controllingFieldValues>Personal</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Set a follow up call if the student does not achieve a weekly goal</fullName>
+                <controllingFieldValues>Motivational</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Send a follow up email if the student does not achieve a weekly goal</fullName>
+                <controllingFieldValues>Motivational</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Revisit the student’s study calendar identifying specific study times</fullName>
+                <controllingFieldValues>Motivational</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ask the student to share a study calendar with his/her support system</fullName>
+                <controllingFieldValues>Motivational</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Discuss actions the student took when a goal is achieved</fullName>
+                <controllingFieldValues>Motivational</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Watch a clip of a graduation speaker</fullName>
+                <controllingFieldValues>Motivational</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Set a graduation goal with a plan for achieving that goal</fullName>
+                <controllingFieldValues>Motivational</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Set an appointment with the student success center</fullName>
+                <controllingFieldValues>Motivational</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Set a one on one appointment with a course mentor</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Facilitate enrollment of the student in a cohort/bootcamp</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Find and discuss a relevant webinar for the student to attend</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Quiz the student on topics in the course</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Walk through a learning resource (preferably with screen sharing)</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Discuss student’s understanding of task directions</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Discuss student’s understanding of grader feedback</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Watch course videos</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Walk through the community together (preferably with screen sharing)</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Facilitate an appointment with the writing center</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partner with another department on the problem (I.T., assessment, bursar, records, learning resources, etc.)</fullName>
+                <controllingFieldValues>Technical</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Review TaskStream functionality</fullName>
+                <controllingFieldValues>Technical</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Review the student portal functionality</fullName>
+                <controllingFieldValues>Technical</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provide help on using a course of study</fullName>
+                <controllingFieldValues>Technical</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provide help on using a learning resource</fullName>
+                <controllingFieldValues>Technical</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>None of the above</fullName>
+                <controllingFieldValues>Academic</controllingFieldValues>
+                <controllingFieldValues>Motivational</controllingFieldValues>
+                <controllingFieldValues>Personal</controllingFieldValues>
+                <controllingFieldValues>Technical</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>PersonalizationMenu__c</fullName>
+        <description>Categories of personalization : Personal, Motivational, Academic, Technical.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Categories of personalization : Personal, Motivational, Academic, Technical.</inlineHelpText>
+        <label>PersonalizationMenu</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Personal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Motivational</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Academic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technical</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ShortText__c</fullName>
+        <description>Field to store a portion of the Text__c field data in plain text</description>
+        <externalId>false</externalId>
+        <label>ShortText</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentRiskValue__c</fullName>
+        <description>The risk score (0~3) of this student when this note created.</description>
+        <externalId>false</externalId>
+        <label>StudentRiskValue</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Student__c</fullName>
+        <description>The contact record for this student</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The student associated with this note.</inlineHelpText>
+        <label>Student</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipName>WGUStudentNotes</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>SubType__c</fullName>
+        <externalId>false</externalId>
+        <label>Note Sub Type</label>
+        <picklist>
+            <controllingField>Type__c</controllingField>
+            <picklistValues>
+                <fullName>AAV</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Demonstration Teaching</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Excess Attempts</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Experience</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Non-Academic Instructions</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Graduation</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Goals and Tasks</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Student On-Boarding</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OTP</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Term Break</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Withdrawal</fullName>
+                <controllingFieldValues>Live Call</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provided Information on Assessment</fullName>
+                <controllingFieldValues>Email</controllingFieldValues>
+                <controllingFieldValues>Voicemail</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provided Information on Graduation</fullName>
+                <controllingFieldValues>Email</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provided Non-Academic Instructions</fullName>
+                <controllingFieldValues>Email</controllingFieldValues>
+                <controllingFieldValues>Voicemail</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reminded Student of Inactive Protocol</fullName>
+                <controllingFieldValues>Email</controllingFieldValues>
+                <controllingFieldValues>Voicemail</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Requested a Return Call</fullName>
+                <controllingFieldValues>Voicemail</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Responded to a Community Post</fullName>
+                <controllingFieldValues>Email</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Requested a Phone Contact</fullName>
+                <controllingFieldValues>Email</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Requested an Appointment Change</fullName>
+                <controllingFieldValues>Email</controllingFieldValues>
+                <controllingFieldValues>Voicemail</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Requested an Email Update</fullName>
+                <controllingFieldValues>Voicemail</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SurveySelector__c</fullName>
+        <description>This fields uses a formula to decide whether or not this interaction should generate a mentor course survey.</description>
+        <externalId>false</externalId>
+        <formula>IF( AND(MOD( Student__r.NumberOfCourseMentorNotes__c ,10) =0, 
+NULLVALUE( Student__r.LastMentorSurvey__c , TODAY()-60) &lt; TODAY() -30, 
+NOT(ISPICKVAL(Type__c, &apos;Administration (MGR only)&apos;))), 
+&apos;Y&apos;,&apos;N&apos;)</formula>
+        <inlineHelpText>This fields uses a formula to decide whether or not this interaction should generate a mentor course survey.</inlineHelpText>
+        <label>Survey Selector</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SurveySent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox indicating if a survey was sent to the student contact from this note interaction (checked = survey was sent).</description>
+        <externalId>false</externalId>
+        <label>Survey Sent</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Text__c</fullName>
+        <description>The basic rich text area for details of this note</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please enter any details for this note.</inlineHelpText>
+        <label>Text</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <description>Level 1 Note Type</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This note type.</inlineHelpText>
+        <label>Note Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Live Call</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Voicemail</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Instant Message (IM) / Text</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Webinar Attendance Noted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Outreach (CM only)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Administration (MGR only)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>WGUCreationDateTime__c</fullName>
+        <description>This holds the date time stamp of a note.</description>
+        <externalId>false</externalId>
+        <label>Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <label>WGU Student Note</label>
+    <nameField>
+        <label>Subject</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>WGUStudentNotes</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>WGUCreationDateTime__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Author__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>SubType__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATEDBY_USER</customTabListAdditionalFields>
+        <customTabListAdditionalFields>LAST_UPDATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>WGUCreationDateTime__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATEDBY_USER</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATED_DATE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>LAST_UPDATE</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>WGUCreationDateTime__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CREATEDBY_USER</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CREATED_DATE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>LAST_UPDATE</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>WGUCreationDateTime__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATEDBY_USER</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <webLinks>
+        <fullName>TestLink</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>page</linkType>
+        <masterLabel>TestLink</masterLabel>
+        <openType>replace</openType>
+        <page>Notes</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

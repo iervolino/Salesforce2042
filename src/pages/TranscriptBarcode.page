@@ -1,0 +1,95 @@
+<apex:page standardController="StudentTranscript__c" sidebar="false" showHeader="false" renderAs="pdf" >
+   
+ <head>
+  <style> 
+     body {font-family: Arial Unicode MS;}
+     @page {
+      size: landscape;
+      margin-top:60px;
+      margin-bottom:30px;
+      margin-right:0px;
+      margin-left:0px;
+      border:15px solid margin-right:2px;;
+    
+      @top-right {
+        padding-top: 20px; 
+        font-family: Arial Unicode MS;
+        font-size: 24px;
+        background: black;
+        font-weight: bold; 
+        color: white;
+        content:"{!StudentTranscript__c.TranscriptName__c} - {!StudentTranscript__c.StudentID__c}";
+        }
+        
+       @bottom-center {
+        padding-bottom: 15px;
+        font-family: Arial Unicode MS;
+        font-size: 10px;
+        background: black;
+        font-weight: bold; 
+        color: white;
+        content:"This cover page and any attached documents may contain confidential information from Western Governors University. The information is intended only for internal usage.";
+      }
+    }
+    
+       
+  </style>
+ </head>
+
+  <center>
+  <br/>
+    <h1>Cover for Opportunity {!StudentTranscript__c.TranscriptName__c}</h1>
+  </center>
+
+         <table cellpadding="5" align="center"  >
+           <tr>
+               <td>Salesforce Transcript ID: {!StudentTranscript__c.TranscriptID__c}</td>     
+               <td>Student ID: {!StudentTranscript__c.StudentID__c}</td>  
+            
+           </tr>
+           <tr>
+               <td>Accreditation Institution: {!StudentTranscript__c.AccreditationInstitutionName__c}</td>   
+               <td>Accreditation OPEID: {!StudentTranscript__c.TranscriptOPEID__c}</td>                     
+           </tr>
+           <tr>
+                <td>Institution Name: {!StudentTranscript__c.InstitutionAccountName__c}</td>  
+                <td>Document Type: {!StudentTranscript__c.DocumentType__c}</td> 
+           </tr>
+           <tr> 
+                <td>Student Program Name: {!StudentTranscript__c.TranscriptProgram__c}</td> 
+                <td>Transcript Status: {!StudentTranscript__c.TranscriptStatus__c} on {!MONTH(StudentTranscript__c.TranscriptReceivedDate__c)}/{!DAY(StudentTranscript__c.TranscriptReceivedDate__c)}/{!YEAR(StudentTranscript__c.TranscriptReceivedDate__c)}</td>   
+           </tr>
+          </table> 
+
+  <table width="800" cellpadding="5" align="left">
+    
+            <tr>
+             <td><BarcodeZone:ACBarcodeZone value="{!StudentTranscript__c.TranscriptID__c}" BrcdType="{!StudentTranscript__c.BarcodeType__c}"  rendered="true" /></td>
+             <td><BarcodeZone:ACBarcodeZone value="{!StudentTranscript__c.StudentID__c}" BrcdType="{!StudentTranscript__c.BarcodeType__c}" rendered="{!IF(StudentTranscript__c.StudentID__c='NO ID',"false","true")}"/></td>
+     
+            </tr>
+            <tr>
+               <td><BarcodeZone:ACBarcodeZone value="{!StudentTranscript__c.TranscriptStatus__c}" BrcdType="{!StudentTranscript__c.BarcodeType__c}" rendered="true"/></td>       
+               <td><BarcodeZone:ACBarcodeZone value="{!StudentTranscript__c.TranscriptOPEID__c}" BrcdType="{!StudentTranscript__c.BarcodeType__c}" rendered="true"/></td>      
+            </tr>
+             <tr>
+               <td><BarcodeZone:ACBarcodeZone value="{!StudentTranscript__c.OnBaseFirstName__c}" BrcdType="{!StudentTranscript__c.BarcodeType__c}" rendered="true"/></td>       
+               <td><BarcodeZone:ACBarcodeZone value="{!StudentTranscript__c.OnBaseLastName__c}" BrcdType="{!StudentTranscript__c.BarcodeType__c}" rendered="true"/></td>      
+            </tr>
+
+            <tr>
+           
+              <td><BarcodeZone:ACBarcodeZone value="{!StudentTranscript__c.DocumentType__c}" BrcdType="{!StudentTranscript__c.BarcodeType__c}" rendered="true"/></td>      
+              <td><BarcodeZone:ACBarcodeZone value="{!MONTH(StudentTranscript__c.TranscriptReceivedDate__c)}/{!DAY(StudentTranscript__c.TranscriptReceivedDate__c)}/{!YEAR(StudentTranscript__c.TranscriptReceivedDate__c)}" BrcdType="{!StudentTranscript__c.BarcodeType__c}" rendered="true"/></td>
+                </tr>
+          </table>
+          <br/> 
+          <table width="800" cellpadding="5" align="left">
+             <tr>
+         
+             <td><BarcodeZone:ACBarcodeZone value="{!StudentTranscript__c.TranscriptProgram__c}" BrcdType="{!StudentTranscript__c.BarcodeType__c}" rendered="true"/></td>             
+         </tr>       
+ 
+           </table>
+
+          </apex:page>

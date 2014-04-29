@@ -1,0 +1,13 @@
+<apex:page controller="MyStudentsInACourseController" contentType="text/html; charset=UTF-8" 
+     standardStylesheets="false" showHeader="true" sidebar="true" docType="html" id="thisPage">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<br></br>
+<apex:pageBlock title="Managing Students in the following Course(s) {!$User.CoursesIManage__c}" id="thisCourseSelect">
+    <apex:form >
+        <apex:outputText >Enter New Course(s) for Management (comma separated) : <br/></apex:outputText>
+        <apex:inputText value="{!selectedCourses}" ></apex:inputText>&nbsp;&nbsp;
+        <apex:commandButton value="Go" action="{!loadCourses}" reRender="thisCourseSelect"/>
+    </apex:form>
+<apex:enhancedList type="StudentCourseView__c" height="1000" rowsPerPage="50" />
+</apex:pageBlock>
+</apex:page>

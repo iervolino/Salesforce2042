@@ -1,0 +1,10 @@
+<apex:component >
+    <apex:stylesheet value="{!URLFOR($Resource.CourseCommons, 'global/css/build/wgu.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.CourseCommons, 'coursecommons/css/build/courseCommons.min.css')}"/>
+    
+    <apex:includeScript value="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" />
+    <apex:includeScript value="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" />
+    
+    <apex:includeScript value="{!URLFOR($Resource.CourseCommons, 'global/js/build/wgu.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CourseCommons, 'coursecommons/js/build/courseCommons.min.js')}"/>
+</apex:component>

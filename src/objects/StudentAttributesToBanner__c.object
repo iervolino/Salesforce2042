@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Control object for synchronization of Student Attributes with information in Banner</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>CampusCodeOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(StudentAttributes__r.Affiliation__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Campus Code (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CitizenshipOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>text( StudentAttributes__r.CitizenshipStatus__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Citizenship (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CommunityTypeOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>text( StudentAttributes__r.CommunityType__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Community Type (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>/* -0.0416 is used to adjust Daylight Saving Time changing.
+  Delete -0.0416 in Summer;
+  Keep -0.0416 in Winter, 
+  Winter: (LastSynchronizedToBanner__c - StudentAttributes__r.LastModifiedDate) &lt; -0.0011 - 0.0416
+  Summer: (LastSynchronizedToBanner__c - StudentAttributes__r.LastModifiedDate) &lt; -0.0011 
+*/ 
+
+IF(AND(NOT(ResynchronizeToBanner__c), NOT(SynchronizationError__c = &apos;None&apos;), NOT(OR(ISNULL(SynchronizationError__c), ISBLANK(SynchronizationError__c)))), 
+   &apos;Error&apos;, 
+   IF(AND(NOT(OR(ISNULL( StudentAttributes__r.StudentContact__r.PIDM__c ), ISBLANK(StudentAttributes__r.StudentContact__r.PIDM__c))), OR((LastSynchronizedToBanner__c -  StudentAttributes__r.LastModifiedDate ) &lt; -0.0011, ResynchronizeToBanner__c, ISNULL(LastSynchronizedToBanner__c)), 
+   NOT(AND( StudentAttributes__r.LastModifiedBy.FirstName  = &apos;System&apos;, StudentAttributes__r.LastModifiedBy.LastName = &apos;Administrator&apos;))), 
+      &apos;Update&apos;, 
+      IF(AND( StudentAttributes__r.StudentContact__r.BannerReady__c , OR(ISNULL(StudentAttributes__r.StudentContact__r.PIDM__c), ISBLANK(StudentAttributes__r.StudentContact__r.PIDM__c))), 
+         &apos;Insert&apos;, 
+         IF(StudentAttributes__r.StudentContact__r.BannerReady__c, &apos;Current&apos;, &apos;Ignore&apos;) 
+      ) 
+   ) 
+)</formula>
+        <label>Current Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastSynchronizedToBanner__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Synchronized To Banner</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>MaritalStatusOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>text( StudentAttributes__r.MaritalStatus__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Marital Status (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MilitaryStatusOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>text( StudentAttributes__r.MilitaryStatus__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Military Status (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NicknameOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>StudentAttributes__r.Nickname__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Nickname (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ParentsAttendedCollegeOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>text( StudentAttributes__r.ParentsAttendedACollegeOrUniversity__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Parents Attended College (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ParentsGraduatedCollegeOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>text( StudentAttributes__r.ParentsGraduated__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Parents Graduated College (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ResynchronizeToBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Resynchronize To Banner</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StudentAttributes__c</fullName>
+        <externalId>false</externalId>
+        <label>Student Attributes</label>
+        <referenceTo>StudentAttributes__c</referenceTo>
+        <relationshipLabel>Students Attributes To Banner</relationshipLabel>
+        <relationshipName>StudentsAttributesToBanner</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>SynchronizationError__c</fullName>
+        <externalId>false</externalId>
+        <label>Synchronization Error</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <label>Student Attributes To Banner</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>SATB-{0}</displayFormat>
+        <label>Student Attributes To Banner Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Students Attributes To Banner</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

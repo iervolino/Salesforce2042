@@ -1,0 +1,25 @@
+<apex:page standardController="Case" extensions="QuickCaseController" action="{!createCase}" >
+    {!testVal}  
+ <script type="text/javascript">
+    function redirectPage() 
+    {
+        if ('{!objectID}' != "") //if the object id is populated go to the object, else go to the contact
+        window.location="../{!objectId}";
+        else
+        window.location="../{!contactId}";
+    }
+    </script>
+    
+    <apex:emailPublisher autoCollapseBody="false" toVisibility="editableWithLookup" onSubmitSuccess="redirectPage()" emailBodyFormat="HTML" emailBody="{!caseTag}" enableQuickText="true"  showAdditionalFields="true" entityId="{!caseId}" emailBodyHeight="30em" expandableHeader="false" sendButtonName="Send Email" bccVisibility="editableWithLookup" ccVisibility="editableWithLookup" title="Compose Outgoing Email" width="70%"></apex:emailPublisher>
+     <script type="text/javascript">
+        var textAreas=document.getElementsByTagName("textarea");
+        for (var i = 0; i < textAreas.length; i++) 
+        {
+    			if (textAreas[i].name.length>0)
+         	    {
+         			textAreas[i].value = "<BR><BR><BR>" + textAreas[i].value;
+         			i = textAreas.length;
+         		}
+        }   
+	</script>
+</apex:page>

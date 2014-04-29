@@ -1,0 +1,793 @@
+<apex:page title="Western Governors University - Exchange Web Services Tester" contentType="text/html; charset=UTF-8" controller="EWSAdapter" standardStylesheets="false" showHeader="false" sidebar="false" docType="html">
+<apex:outputText escape="false" value="{!'<!DOCTYPE html>'}"/>
+<html>
+<head>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <title>Western Governors University - Exchange Web Services Tester</title>
+</head>
+<body style="font-family:tahoma,arial,verdana,sans-serif;background-color: #F2F2F2;overflow:auto;min-width:1580px;min-height:800px" scroll="yes">
+
+<div id="LoadingDiv" style="font-size:15px;text-align:center;margin:100px 0 0 0;"><strong>Loading EWS Tester<br/>Please wait...</strong></div>
+
+<apex:includeScript value="/soap/ajax/27.0/connection.js"/>
+<apex:includeScript value="/soap/ajax/27.0/apex.js"/>
+<script type="text/javascript" charset="utf-8" src="{!$Resource.WGUMonkeyFix}" id="WGUMonkeyFix"></script>
+
+<script type="text/javascript" >
+    if(typeof String.prototype.trim !== 'function') {  //IE8 String.trim() compensator
+        String.prototype.trim = function() {
+            return this.replace(/^\s+|\s+$/g, '');
+        }
+    }
+
+    sforce.connection.init( "{!$Api.session_id}", "/services/Soap/u/27.0" );
+    $soap = sforce.connection;
+    $apex = sforce.apex;
+    var hostparts = location.hostname.split(".");
+    var orgName = hostparts[0].split("--")[1];
+    var boxName = orgName;
+    try {
+        boxName = $soap.retrieve('Value__c','Runtime__c',["a0P30000009q4RYEAY"])[0].Value__c;
+    } catch (e) {
+        boxName = orgName;
+    };
+    Visualforce.remoting.timeout = 30000; // Set timeout at page level
+</script>
+
+<apex:stylesheet value="{!URLFOR($Resource.extjs_v421, 'resources/css/ext-all.css')}"/>
+
+<script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v421}/ext-all.js"></script>
+
+<script type="text/javascript" >
+
+var WGUpanel;
+
+Ext.onReady(function(){
+
+    delete Ext.tip.Tip.prototype.minWidth;
+
+    Ext.tip.QuickTipManager.init();
+    //setup quick tip default values
+    Ext.apply(Ext.tip.QuickTipManager.getQuickTip(), {
+        maxWidth: 750,
+        minHeight: 75,
+        showDelay: 50,      // Show 50ms after entering target
+        autoWidth: true,
+        autoHeight: true
+    });
+
+    Ext.FocusManager.enable();
+
+    //create main view panel and render automatically into HTML BODY (Ext Viewport)        
+    WGUpanel = new Ext.create('WGU.viewport.EWSPanel',{});
+    var loadingDiv = Ext.fly("LoadingDiv");
+    loadingDiv.hide();
+    Ext.destroy(loadingDiv);
+    
+    Ext.callback( function(){
+        WGUpanel.queryById('MeetingStartDateField').setValue(new Date());
+        WGUpanel.queryById('MeetingEndDateField').setValue(new Date());
+        WGUpanel.queryById('MeetingStartTimeField').setValue(new Date());
+        WGUpanel.queryById('MeetingEndTimeField').setValue(new Date());
+        WGUpanel.queryById('FreeBusyStartDateField').setValue(new Date());
+        WGUpanel.queryById('FreeBusyEndDateField').setValue(new Date());
+        WGUpanel.queryById('FreeBusyStartTimeField').setValue(new Date());
+        WGUpanel.queryById('FreeBusyEndTimeField').setValue(new Date());
+        
+        WGUpanel.onGetTimeZonesButtonClick();
+     }, window, null, 100);
+     
+}); //end Ext.onReady()
+
+
+Ext.define('WGU.viewport.EWSPanel', {
+    extend: 'Ext.container.Viewport',
+
+    autoScroll: true,
+    //minHeight: 650,
+    layout: {
+        type: 'absolute'
+    },
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'textfield',
+                    x: 10,
+                    y: 10,
+                    itemId: 'EmailToField',
+                    fieldLabel: 'To',
+                    allowBlank: false,
+                    blankText: 'e.g., pcoleman@wgu.edu,toliver@wgu.edu',
+                    emptyText: 'e.g., pcoleman@wgu.edu,toliver@wgu.edu'
+                },
+                {
+                    xtype: 'combobox',
+                    x: 290,
+                    y: 10,
+                    itemId: 'EmailFromComboBox',
+                    width: 290,
+                    fieldLabel: 'Team Address',
+                    store: orgWideEmailStore,
+                    valueField: 'Address',
+                    displayField: 'DisplayName',
+                    queryMode: 'local',
+                    typeAhead: true,
+                    forceSelection: true,
+                    multiSelect: false,
+                    readOnly: false,
+                    allowBlank: true,
+                    listConfig: {
+                        width: 400,
+                        maxHeight: 111,
+                        minWidth: 400,
+                        resizable: false,
+                        matchFieldWidth: false
+                    }
+                },
+                {
+                    xtype: 'textfield',
+                    x: 10,
+                    y: 40,
+                    itemId: 'EmailReplyToField',
+                    fieldLabel: 'Reply To:'
+                },
+                {
+                    xtype: 'textfield',
+                    x: 290,
+                    y: 40,
+                    itemId: 'EmailAttachmentIdField',
+                    width: 290,
+                    fieldLabel: 'Attachment Ids',
+                    emptyText: 'e.g., 00Pe0000000ka7o,00Pe0000000kaAT'
+                },
+                {
+                    xtype: 'textfield',
+                    x: 10,
+                    y: 70,
+                    itemId: 'EmailSubjectField',
+                    fieldLabel: 'Subject',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'radiogroup',
+                    x: 290,
+                    y: 70,
+                    width: 320,
+                    fieldLabel: 'Priority',
+                    items: [
+                        {
+                            xtype: 'radiofield',
+                            itemId: 'EmailLowPriority',
+                            name: 'Priority',
+                            boxLabel: 'Low'
+                        },
+                        {
+                            xtype: 'radiofield',
+                            itemId: 'EmailNormalPriority',
+                            name: 'Priority',
+                            boxLabel: 'Normal',
+                            checked: true
+                        },
+                        {
+                            xtype: 'radiofield',
+                            itemId: 'EmailHighPriority',
+                            name: 'Priority',
+                            boxLabel: 'High'
+                        }
+                    ]
+                },
+                {
+                    xtype: 'htmleditor',
+                    x: 10,
+                    y: 100,
+                    height: 100,
+                    itemId: 'EmailTextField',
+                    width: 700,
+                    fieldLabel: 'Message Text',
+                    labelAlign: 'top'
+                },
+                {
+                    xtype: 'button',
+                    x: 610,
+                    y: 90,
+                    itemId: 'SendButton',
+                    width: 100,
+                    text: 'Send Email',
+                    listeners: {
+                        click: {
+                            fn: me.onSendButtonClick,
+                            scope: me
+                        }
+                    }
+                },
+                {
+                    xtype: 'checkboxfield',
+                    x: 720,
+                    y: 10,
+                    width: 400,
+                    itemId: 'UseControllerCheckbox',
+                    fieldLabel: '',
+                    hideEmptyLabel: false,
+                    hideLabel: true,
+                    boxLabel: 'Use EWSAdaper Controller instead of sforce.apex API'
+                },
+                {
+                    xtype: 'textareafield',
+                    x: 720,
+                    y: 220,
+                    height: 70,
+                    itemId: 'TimeZoneTextField',
+                    width: 650,
+                    fieldLabel: 'TimeZones JSON',
+                    labelAlign: 'top'
+                },
+                {
+                    xtype: 'button',
+                    x: 610,
+                    y: 240,
+                    itemId: 'GetTimeZonesButton',
+                    width: 100,
+                    text: 'Get TimeZones',
+                    listeners: {
+                        click: {
+                            fn: me.onGetTimeZonesButtonClick,
+                            scope: me
+                        }
+                    }
+                },
+                {
+                    xtype: 'combobox',
+                    x: 10,
+                    y: 240,
+                    itemId: 'TimeZonesComboBox',
+                    store: timeZoneStore,
+                    valueField: 'id',
+                    displayField: 'name',
+                    queryMode: 'local',
+                    typeAhead: true,
+                    forceSelection: true,
+                    multiSelect: false,
+                    readOnly: false,
+                    width: 490,
+                    fieldLabel: 'TimeZone',
+                    allowBlank: false,
+                    listConfig: {
+                        width: 590,
+                        maxHeight: 111,
+                        minWidth: 590,
+                        resizable: false,
+                        matchFieldWidth: false
+                    }
+
+                },
+                {
+                    xtype: 'textfield',
+                    x: 9,
+                    y: 330,
+                    itemId: 'FreeBusyMailboxesField',
+                    width: 700,
+                    fieldLabel: 'Mailboxes',
+                    allowBlank: false,
+                    blankText: 'e.g., pcoleman@wgu.edu,toliver@wgu.edu',
+                    emptyText: 'e.g., pcoleman@wgu.edu,toliver@wgu.edu'
+                },
+                {
+                    xtype: 'datefield',
+                    x: 9,
+                    y: 360,
+                    itemId: 'FreeBusyStartDateField',
+                    fieldLabel: 'Start Date',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'timefield',
+                    x: 265,
+                    y: 360,
+                    itemId: 'FreeBusyStartTimeField',
+                    fieldLabel: 'Start Time',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'datefield',
+                    x: 9,
+                    y: 390,
+                    itemId: 'FreeBusyEndDateField',
+                    fieldLabel: 'End Date',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'timefield',
+                    x: 265,
+                    y: 390,
+                    itemId: 'FreeBusyEndTimeField',
+                    fieldLabel: 'End Time',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'textareafield',
+                    x: 720,
+                    y: 308,
+                    height: 100,
+                    itemId: 'FreeBusyResultField',
+                    width: 650,
+                    fieldLabel: 'Free/Busy Result JSON',
+                    labelAlign: 'top'
+                },
+                {
+                    xtype: 'button',
+                    x: 610,
+                    y: 390,
+                    itemId: 'FreeBusyQueryButton',
+                    width: 100,
+                    text: 'Get Free/Busy',
+                    listeners: {
+                        click: {
+                            fn: me.onFreeBusyButtonClick,
+                            scope: me
+                        }
+                    }
+                },
+                {
+                    xtype: 'textfield',
+                    x: 10,
+                    y: 450,
+                    itemId: 'MeetingHostField',
+                    fieldLabel: 'Host Address',
+                    emptyText: 'e.g., paul.coleman@wgu.edu',
+                    blankText: 'Must be the primary SMTP address of Exchange mailbox',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'textfield',
+                    x: 265,
+                    y: 450,
+                    itemId: 'MeetingSubjectField',
+                    width: 445,
+                    fieldLabel: 'Meeting Subject',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'textfield',
+                    x: 10,
+                    y: 480,
+                    itemId: 'MeetingRequiredAttendeesField',
+                    width: 700,
+                    fieldLabel: 'Req\'d Attendees',
+                    allowBlank: false,
+                    blankText: 'e.g., pcoleman@wgu.edu,toliver@wgu.edu',
+                    emptyText: 'e.g., pcoleman@wgu.edu,toliver@wgu.edu'
+                },
+                {
+                    xtype: 'textfield',
+                    x: 10,
+                    y: 510,
+                    itemId: 'MeetingOptionalAttendeesField',
+                    width: 700,
+                    fieldLabel: 'Optional Invitees'
+                },
+                {
+                    xtype: 'datefield',
+                    x: 10,
+                    y: 540,
+                    itemId: 'MeetingStartDateField',
+                    fieldLabel: 'Start Date',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'datefield',
+                    x: 10,
+                    y: 570,
+                    itemId: 'MeetingEndDateField',
+                    fieldLabel: 'End Date',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'timefield',
+                    x: 265,
+                    y: 540,
+                    itemId: 'MeetingStartTimeField',
+                    fieldLabel: 'Start Time',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'timefield',
+                    x: 265,
+                    y: 570,
+                    itemId: 'MeetingEndTimeField',
+                    fieldLabel: 'End Time',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'htmleditor',
+                    x: 10,
+                    y: 600,
+                    height: 100,
+                    itemId: 'MeetingMessageTextField',
+                    width: 700,
+                    fieldLabel: 'What\'s this meeting about?',
+                    labelAlign: 'top',
+                    labelSeparator: ' '
+                },
+                {
+                    xtype: 'button',
+                    x: 610,
+                    y: 540,
+                    itemId: 'ScheduleMeetingButton',
+                    width: 100,
+                    text: 'Schedule Meeting',
+                    listeners: {
+                        click: {
+                            fn: me.onScheduleMeetingButtonClick,
+                            scope: me
+                        }
+                    }
+                },
+                {
+                    xtype: 'button',
+                    x: 610,
+                    y: 570,
+                    itemId: 'CancelMeetingButton',
+                    width: 100,
+                    text: 'Cancel Meeting',
+                    listeners: {
+                        click: {
+                            fn: me.onCancelMeetingButtonClick,
+                            scope: me
+                        }
+                    }
+                },
+                {
+                    xtype: 'displayfield',
+                    x: 15,
+                    y: 705,
+                    width: 585,
+                    maxWidth: 585,
+                    shrinkWrap: 0,
+                    fieldLabel: 'New Mtg Id',
+                    itemId: 'MeetingIdField',
+                    value: 'TBD'
+                }
+            ]
+        });
+
+        me.callParent(arguments);
+    },
+
+    onSendButtonClick: function(button, e, eOpts) {
+        var result;
+        var priority = WGUpanel.queryById('EmailLowPriority').checked? 'Low' : ( WGUpanel.queryById('EmailHighPriority').checked? 'High' : 'Normal' );
+        if ( WGUpanel.queryById('EmailReplyToField').getRawValue() != "" ) {
+            //sendEmailReplyTo(String replyToAddress, String[] mailboxes,String htmlBody,String subject,EWSAdapter.Priority importance,String[] attachments)
+            if ( !WGUpanel.queryById('UseControllerCheckbox').checked ) {
+                $apex.execute('EWSAdapter','sendEmailReplyTo',
+                        {
+                            replyToAddress: WGUpanel.queryById('EmailReplyToField').getValue(),
+                            mailboxes: WGUpanel.queryById('EmailToField').getValue().trim().split(','),
+                            htmlBody: WGUpanel.queryById('EmailTextField').getValue(),
+                            subject: WGUpanel.queryById('EmailSubjectField').getValue(),
+                            importance: priority,
+                            attachments: WGUpanel.queryById('EmailAttachmentIdField').getValue().trim()==""? null: WGUpanel.queryById('EmailAttachmentIdField').getValue().trim().split(',')
+                        },
+                        function(result){
+                            console.log( result[0] );
+                        }
+                );
+            } else {
+                    EWSAdapter.sendEmailReplyTo( WGUpanel.queryById('EmailReplyToField').getValue(),
+                        WGUpanel.queryById('EmailToField').getValue().trim().split(','),
+                        WGUpanel.queryById('EmailTextField').getValue(),
+                        WGUpanel.queryById('EmailSubjectField').getValue().trim(),
+                        priority,
+                        WGUpanel.queryById('EmailAttachmentIdField').getValue().trim()==""? null: WGUpanel.queryById('EmailAttachmentIdField').getValue().trim().split(','),
+                        function(result,event){
+                            if (event.status) {
+                                result = Ext.decode(result);
+                                if ( Ext.isChrome ) {
+                                    console.log( result );
+                                }
+                            } else {
+
+                            }
+                        },{ buffer: true, escape: false, timeout: 30000 });         
+            }
+        } else if ( WGUpanel.queryById('EmailFromComboBox').getValue() != null ) {
+            //sendEmailFrom(String fromAddress, String replyToAddress, String[] mailboxes,String htmlBody,String subject,EWSAdapter.Priority importance,String[] attachments)
+            if ( !WGUpanel.queryById('UseControllerCheckbox').checked ) {
+                $apex.execute('EWSAdapter','sendEmailFrom',
+                        {
+                            fromAddress: WGUpanel.queryById('EmailFromComboBox').getValue(),
+                            replyToAddress: WGUpanel.queryById('EmailReplyToField').getValue()==""?WGUpanel.queryById('EmailFromComboBox').getValue():WGUpanel.queryById('EmailReplyToField').getValue(),
+                            mailboxes: WGUpanel.queryById('EmailToField').getValue().split(','),
+                            htmlBody: WGUpanel.queryById('EmailTextField').getValue(),
+                            subject: WGUpanel.queryById('EmailSubjectField').getValue(),
+                            importance: priority,
+                            attachments: WGUpanel.queryById('EmailAttachmentIdField').getValue().trim()==""? null: WGUpanel.queryById('EmailAttachmentIdField').getValue().trim().split(',')
+                        },
+                        function(result){
+                            console.log( result[0] );
+                        }
+                );
+            } else {
+                    EWSAdapter.sendEmailFrom( WGUpanel.queryById('EmailFromComboBox').getValue(),
+                        (WGUpanel.queryById('EmailReplyToField').getValue()==""?WGUpanel.queryById('EmailFromComboBox').getValue():WGUpanel.queryById('EmailReplyToField').getValue()),
+                        WGUpanel.queryById('EmailToField').getValue().trim(),
+                        WGUpanel.queryById('EmailTextField').getValue(),
+                        WGUpanel.queryById('EmailSubjectField').getValue().trim(),
+                        priority,
+                        WGUpanel.queryById('EmailAttachmentIdField').getValue().trim()==""? null: WGUpanel.queryById('EmailAttachmentIdField').getValue().trim().split(','),
+                        function(result,event){
+                            if (event.status) {
+                                result = Ext.decode(result);
+                                if ( Ext.isChrome ) {
+                                    console.log( result );
+                                }
+                            } else {
+
+                            }
+                        },{ buffer: true, escape: false, timeout: 30000 });         
+            }
+        } else {
+            //sendEmailSimple(String mailboxes,String htmlBody,String subject)   
+            if ( !WGUpanel.queryById('UseControllerCheckbox').checked ) {
+                try {
+                    $apex.execute('EWSAdapter','sendEmailSimple',
+                            {
+                                mailboxes: WGUpanel.queryById('EmailToField').getValue().trim(),
+                                htmlBody: WGUpanel.queryById('EmailTextField').getValue(),
+                                subject:  WGUpanel.queryById('EmailSubjectField').getValue().trim()
+                            },
+                            function(result) {
+                                console.log( result[0] );
+                            }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                EWSAdapter.sendEmailSimple( WGUpanel.queryById('EmailToField').getValue().trim(),
+                        WGUpanel.queryById('EmailTextField').getValue(),
+                        WGUpanel.queryById('EmailSubjectField').getValue().trim(),
+                        function(result,event){
+                            if (event.status) {
+                                result = Ext.decode(result);
+                                if ( Ext.isChrome ) {
+                                    console.log( result );
+                                }
+                            } else {
+
+                            }
+                        },{ buffer: true, escape: false, timeout: 30000 });
+            }
+
+        }
+
+    },
+
+    onGetTimeZonesButtonClick: function(button, e, eOpts) {
+        // If EWSAdapter is set as the page controller, use Visualforce remoting
+        if ( WGUpanel.queryById('UseControllerCheckbox').checked ) {
+            /*Visualforce.remoting.Manager.invokeAction(
+             '{!$RemoteAction.EWSAdapter.getTimeZones}',
+                 function(result,event) {
+                     if (event.status) {
+                     WGUpanel.queryById('TimeZoneTextField').setValue(result);
+                     var timezones = Ext.decode(result);
+        
+                     } else if (event.type === 'exception') {
+        
+                     } 
+                 },{ buffer: true, escape: false, timeout: 30000 }
+             );
+             */
+
+            //OR, go directly to the Controller
+            EWSAdapter.getTimeZones( function(result, event) {
+                if (event.status) {
+                    WGUpanel.queryById('TimeZoneTextField').setValue(result);
+                    var TZ = Ext.decode(result);
+                    timeZoneStore.loadRawData( TZ.timezones );
+                    WGUpanel.queryById('TimeZonesComboBox').setValue("Mountain Standard Time");
+
+                } else if (event.type === 'exception') {
+
+                }
+            }, { buffer: true, escape: false, timeout: 30000 });
+
+        } else {
+            //Else, if using a Javascript Button, or another controller is desired, use sforce.apex.execute of webservice methods
+            $apex.execute('EWSAdapter','getTimeZones', {}, 
+                function(result){
+                    result = result[0];
+                    WGUpanel.queryById('TimeZoneTextField').setValue(result);
+                    var TZ = Ext.decode(result);
+                    if ( Ext.isChrome ) {
+                        console.log( TZ );
+                    }
+                    timeZoneStore.loadRawData( TZ.timezones );
+                    WGUpanel.queryById('TimeZonesComboBox').setValue("Mountain Standard Time");
+                }
+            );
+        }
+    },
+
+    onFreeBusyButtonClick: function(button, e, eOpts) {
+        //queryFreeBusy(String[] mailboxes,DateTime startTime,DateTime stopTime,String timezone)
+            var startDate = WGUpanel.queryById('FreeBusyStartDateField').getValue();
+            var endDate = WGUpanel.queryById('FreeBusyEndDateField').getValue();
+            var startTime = WGUpanel.queryById('FreeBusyStartTimeField').getValue();
+            var endTime = WGUpanel.queryById('FreeBusyEndTimeField').getValue();
+            startDate.setHours(startTime.getHours());
+            startDate.setMinutes(startTime.getMinutes());
+            endDate.setHours(endTime.getHours());
+            endDate.setMinutes(endTime.getMinutes());
+        if ( WGUpanel.queryById('UseControllerCheckbox').checked ) {
+            EWSAdapter.queryFreeBusy( WGUpanel.queryById('FreeBusyMailboxesField').getValue().split(','),
+            startDate,
+            endDate,
+            WGUpanel.queryById('TimeZonesComboBox').getValue()==""? "Mountain Standard Time": WGUpanel.queryById('TimeZonesComboBox').getValue(),
+            function(result,event){
+                if ( event.status ) {
+                  WGUpanel.queryById('FreeBusyResultField').setValue(result);
+                }
+            });
+        } else {
+            $apex.execute('EWSAdapter','queryFreeBusy', {
+                mailboxes: WGUpanel.queryById('FreeBusyMailboxesField').getValue().split(','),
+                startTime: startDate,
+                stopTime: endDate,
+                timezone: WGUpanel.queryById('TimeZonesComboBox').getValue()==""? "Mountain Standard Time": WGUpanel.queryById('TimeZonesComboBox').getValue() 
+                }, 
+                function(result){
+                     result = result[0];
+                     WGUpanel.queryById('FreeBusyResultField').setValue(result);
+                }
+            );
+        }
+    },
+
+    onScheduleMeetingButtonClick: function(button, e, eOpts) {
+            var startDate = WGUpanel.queryById('MeetingStartDateField').getValue();
+            var endDate = WGUpanel.queryById('MeetingEndDateField').getValue();
+            var startTime = WGUpanel.queryById('MeetingStartTimeField').getValue();
+            var endTime = WGUpanel.queryById('MeetingEndTimeField').getValue();
+            startDate.setHours(startTime.getHours());
+            startDate.setMinutes(startTime.getMinutes());
+            endDate.setHours(endTime.getHours());
+            endDate.setMinutes(endTime.getMinutes());
+        if ( WGUpanel.queryById('UseControllerCheckbox').checked ) {
+        
+            EWSAdapter.scheduleMeeting( WGUpanel.queryById('MeetingHostField').getValue(),
+            WGUpanel.queryById('MeetingRequiredAttendeesField').getValue().split(','),
+            WGUpanel.queryById('MeetingOptionalAttendeesField').getValue()==""? null: WGUpanel.queryById('MeetingOptionalAttendeesField').getValue().split(','),
+            WGUpanel.queryById('MeetingMessageTextField').getValue().trim(),
+            WGUpanel.queryById('MeetingSubjectField').getValue().trim(),
+            startDate,
+            endDate,
+            WGUpanel.queryById('TimeZonesComboBox').getValue()==""? "Mountain Standard Time": WGUpanel.queryById('TimeZonesComboBox').getValue() ,
+            function(result,event){
+                if ( event.status ) {
+                    console.log(result);
+                    result = Ext.decode(result);
+                    WGUpanel.queryById('MeetingIdField').setValue(result.ScheduleMeetingResult.meetingId);
+                }
+            });
+        
+        } else {
+            //scheduleMeeting(String meetingHost,String[] requiredAttendees,String[] optionalAttendees,String htmlBody,String subject,DateTime startTime,DateTime stopTime,String timezone      
+            $apex.execute('EWSAdapter','scheduleMeeting', {
+                meetingHost: WGUpanel.queryById('MeetingHostField').getValue(),
+                requiredAttendees: WGUpanel.queryById('MeetingRequiredAttendeesField').getValue().split(','),
+                optionalAttendees: WGUpanel.queryById('MeetingOptionalAttendeesField').getValue()==""? null: WGUpanel.queryById('MeetingOptionalAttendeesField').getValue().split(','),
+                htmlBody: WGUpanel.queryById('MeetingMessageTextField').getValue().trim(),
+                subject: WGUpanel.queryById('MeetingSubjectField').getValue().trim(),
+                startTime: startDate,
+                stopTime: endDate,
+                timezone: WGUpanel.queryById('TimeZonesComboBox').getValue()==""? "Mountain Standard Time": WGUpanel.queryById('TimeZonesComboBox').getValue() 
+                }, 
+                function(result){
+                        result = result[0];
+                        console.log(result);
+                        result = Ext.decode(result);
+                        WGUpanel.queryById('MeetingIdField').setValue(result.ScheduleMeetingResult.meetingId);
+                }
+            );
+        }
+    },
+
+    onCancelMeetingButtonClick: function(button, e, eOpts) {
+        if ( WGUpanel.queryById('UseControllerCheckbox').checked ) {
+            
+            EWSAdapter.queryFreeBusy( WGUpanel.queryById('MeetingHostField').getValue(),
+                WGUpanel.queryById('MeetingIdField').getValue(),
+                'Meeting Cancelled, No Time Today',
+                function(result,event){
+                    if ( event.status ) {
+                      console.log(result);
+                    }
+            });
+                    
+        } else {
+        //cancelMeeting(String meetingHost,String meetingEntryId,String htmlBody)
+            $apex.execute('EWSAdapter','cancelMeeting', {
+                meetingHost: WGUpanel.queryById('MeetingHostField').getValue(),
+                meetingEntryId: WGUpanel.queryById('MeetingIdField').getValue(),
+                htmlBody: 'Meeting Cancelled, No Time Today'
+                }, 
+                function(result) {
+                        result = result[0];
+                        console.log( result );
+                        WGUpanel.queryById('MeetingIdField').setValue("");          
+                }
+            );
+        }
+    }
+
+});
+
+Ext.define('TimeZoneModel',
+        {
+            extend  : 'Ext.data.Model',
+            fields  :
+                    [
+                        {name: 'sortorder' , mapping: 'sortorder', type: 'int'},
+                        {name: 'name' , mapping: 'name', type: 'string'},
+                        {name: 'offset' , mapping: 'offset', type: 'int'},
+                        {name: 'id' , mapping: 'id', type: 'string'}
+                    ]
+        });
+
+Ext.define('WGU.data.TimeZoneStore',
+        {
+            extend  : 'Ext.data.Store',
+            model : 'TimeZoneModel',
+            proxy : {
+                type: 'memory',
+                reader: {
+                    type: 'json'
+                }
+            }
+        });
+
+timeZoneStore = new Ext.create('WGU.data.TimeZoneStore', { storeId: 'TimeZoneStore'});
+
+
+Ext.define('OrgWideEmailModel',
+        {
+            extend  : 'Ext.data.Model',
+            fields  :
+                    [
+                        {name: 'DisplayName' , mapping: 'DisplayName__c', type: 'string'},
+                        {name: 'Name' , mapping: 'Name', type: 'string'},
+                        {name: 'Address' , mapping: 'Address__c', type: 'string'},
+                        {name: 'OrgWideEmailRecordId' , mapping: 'OrgWideEmailRecordId__c', type: 'string'}
+                    ]
+        });
+
+Ext.define('WGU.data.OrgWideEmailStore',
+        {
+            extend  : 'Ext.data.Store',
+            model : 'OrgWideEmailModel',
+            proxy : {
+                type: 'memory',
+                reader: {
+                    type: 'json'
+                }
+            }
+        });
+
+orgWideEmailStore = new Ext.create('WGU.data.OrgWideEmailStore', { storeId: 'OrgWideEmailStore'});
+$soap.query("SELECT id, Name, Address__c, DisplayName__c, OrgWideEmailRecordId__c FROM OrgWideEmailAddress__c", function(result) {
+    if ( result && result.size*1 > 0 ) {
+        orgWideEmailStore.loadRawData( result.records );
+    }
+});
+
+</script>
+
+</body>
+</html>
+</apex:page>

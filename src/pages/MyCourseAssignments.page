@@ -1,0 +1,15 @@
+<apex:page controller="MyCourseAssignmentsController" contentType="text/html; charset=UTF-8" 
+     standardStylesheets="false" showHeader="true" sidebar="true" docType="html" id="thisPage">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<br></br>
+<apex:pageBlock title="Managing Course(s) {!$User.CoursesIManage__c}" id="thisCourseSelect">
+    <apex:form >
+        <apex:outputText >Select New Course(s) for Management : <br/></apex:outputText>
+        <apex:selectList value="{!selectedCourses}" multiselect="true" size="3" >
+            <apex:selectOptions value="{!myCourses}"/>
+            <apex:actionSupport action="{!loadCourses}" rerender="thisCourseSelect" event="onchange"/>
+        </apex:selectList>
+    </apex:form>
+<apex:enhancedList type="StudentCourseView__c" height="1000" rowsPerPage="50" />
+</apex:pageBlock>
+</apex:page>

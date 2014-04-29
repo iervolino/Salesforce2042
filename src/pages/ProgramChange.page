@@ -1,0 +1,151 @@
+<apex:page standardController="StudentProcess__c" extensions="ProgramChangeController" sidebar="false" showHeader="false" >
+<table style="background:#B4B2CE" width="100%">
+    <tr>
+        <td width="310">
+            <img width="310" height="86" id="logo" alt="" src="{!URLFOR($Resource.AppealResources,'logo.png')}" class="fixPNG"/>
+        </td>
+    </tr>
+</table>
+<apex:form id="iForm" > 
+<apex:pageMessages />
+<apex:pageBlock rendered="{!NOT(disFlag)}">
+<apex:outputPanel rendered="{!IF(stdProcess.Type__c=='Non-PCE',true,false)}" > 
+    <font size="3"><b>Memorandum of Understanding - Program Change NON-PCE Programs</b></font><br/>
+    <br/>
+    <font size="2">This Memorandum of Understanding (MOU) details the conditions relating to making a program change. </font> 
+    <br/>
+    <br/>
+</apex:outputPanel>    
+<apex:outputPanel rendered="{!IF(stdProcess.Type__c!='Non-PCE',true,false)}"> 
+    <font size="3"><b>Memorandum of Understanding - Program Change</b></font><br/>
+    <br/>
+    <font size="2">This Memorandum of Understanding (MOU) details the conditions relating to making a program change. </font> 
+    <br/>
+    <br/>
+</apex:outputPanel>    
+    <apex:pageBlock >
+        <apex:pageBlockSection collapsible="false" title="Student Information">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >First Name</apex:outputLabel>
+                <apex:outputText >{!stdProcess.FirstName__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Student ID</apex:outputLabel>
+                <apex:outputText >{!stdProcess.StudentID__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Last Name</apex:outputLabel>
+                <apex:outputText >{!stdProcess.LastName__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Mentor Name</apex:outputLabel>
+                <apex:outputText >{!stdProcess.Student__r.MentorName__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Current Program</apex:outputLabel>
+                <apex:outputText >{!stdProcess.ProgramCode__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Mentor Email Address</apex:outputLabel>
+                <apex:outputText >{!stdProcess.MentorEmail__c}</apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                 <apex:outputLabel >New Program</apex:outputLabel>
+                 <apex:outputText >{!stdProcess.NewDegreeProgram__r.Name}</apex:outputText>
+            </apex:pageBlockSectionItem>            
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+     <apex:pageBlock rendered="{!IF(stdProcess.Type__c!='Non-PCE',true,false)}">
+        <apex:pageBlockSection columns="1" title="MEMORANDUM OF UNDERSTANDING for a Program Change:" collapsible="false"> 
+             <ul>
+                <li><font size="2">Once a program change is completed, the student loses all rights to the prior program, including degree plan, courses of study and program requirements.</font></li> 
+                 <li><font size="2"> The student will be required to complete all courses of study and assessments in the new program.</font></li> 
+                 <li><font size="2">A program change may result in the removal of transfer credit or waived assessments based on program requirements.</font></li> 
+                 <li><font size="2">A program change may result in a mentor change.</font></li> 
+                 <li><font size="2">A program change may result in a grade level change and a possible change in Federal Financial Aid funding.</font></li> 
+                 <li><font size="2">A student who has received a mark of NOT PASSED on a course which does not exist in the new degree plan will not be able to resolve that course with a corresponding mark of PASSED.</font></li> 
+                 <li><font size="2">A student who has received a mark of NOT PASSED on an assessment which exists under a new or different name in the new degree plan will not be able to resolve that course with a corresponding mark of PASS.</font></li> 
+                 <li><font size="2">Students may not appeal for changes to academic history as recorded on the transcript, even if courses were renamed/removed from the new degree plan.</font></li> 
+                 <li><font size="2">Any course of study and related assessment(s) with a grade of NOT PASSED in a prior term will continue to count toward the student’s cumulative SAP, even if the course(s) was renamed or does not exist in the new program</font></li> 
+            </ul>
+            <br/>
+            <apex:outputText ><b>Please affirm and acknowledge your understanding and acceptance of the terms of this MOU by approving your request to make the program change having full knowledge of the repercussions as outlined above. 
+            <br/>Your submission will be archived with your Mentor and with WGU Records Department.</b></apex:outputText>
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Approved"  action="{!approvePCE}" disabled="{!disFlag}"/>&nbsp;&nbsp;<apex:commandButton value="Cancel" action="{!cancel}"/> 
+        </apex:pageBlockButtons>       
+    </apex:pageBlock>
+    
+    <apex:pageBlock rendered="{!IF(stdProcess.Type__c=='Non-PCE',true,false)}">
+        <apex:pageBlockSection columns="1" title="MEMORANDUM OF UNDERSTANDING for a Program Change:" collapsible="false"> 
+             <ul>
+                <li><font size="2">Once a program change is completed, the student loses all rights to the prior program, including degree plan, courses of study and program requirements. </font></li>
+                <li><font size="2">The student will be required to complete all courses of study and assessments in the new program. </font></li>
+                <li><font size="2">A program change may result in the removal of transfer credit or waived assessments based on program requirements. </font></li>
+                <li><font size="2">A program change may result in a mentor change. </font></li>
+                 <li><font size="2">A program change may result in a grade level change and a possible change in Federal Financial Aid funding.</font></li> 
+                 <li><font size="2">A student who has received a mark of NOT PASSED on a course which does not exist in the new degree plan will not be able to resolve that course with a corresponding mark of PASSED.</font></li> 
+                 <li><font size="2">A student who has received a mark of NOT PASSED on an assessment which exists under a new or different name in the new degree plan will not be able to resolve that course with a corresponding mark of PASS. </font></li>
+                 <li><font size="2">Students may not appeal for changes to academic history as recorded on the transcript, even if courses were renamed/removed from the new degree plan.</font></li> 
+                 <li><font size="2">Any course of study and related assessment(s) with a grade of NOT PASSED in a prior term will continue to count toward the student’s cumulative SAP, even if the course(s) was renamed or does not exist in the new program. The decision to move to non-pce BAES or MAES should not be made lightly. By opting for the BAES or MAES (non-preclinical experiences) program, students are making the choice not to pursue a teaching degree or certificate at WGU.</font></li> 
+                 <li><font size="2">The Bachelor of Arts in Educational Studies (K–8 level) is a competency-based program that enables students to earn a Bachelor of Arts degree online. The B.A. in Educational Studies includes content knowledge related to elementary level teaching. It does not include a supervised teaching practicum in a real classroom and therefore does not meet the requirements for initial teacher licensure. This program is for individuals who, for various reasons, want the academic knowledge that relates to teaching, but who cannot or do not want to participate in a supervised classroom practicum and do not expect to be eligible to teach as a result of completing the program. This program consists of four balanced areas of study (domains) and competency-based assessments. (Please Note: Students in undergraduate Math or Science degree programs must complete all degree-specific content, including specific and effective teaching practices, or they will be required to complete content related to elementary level teaching.) </font></li>
+                 <li><font size="2">The Master of Arts in Educational Studies (Elementary Education) is a competency-based program that enables students to earn a Master of Arts degree online. The M.A. in Educational Studies includes content knowledge related to elementary-level teaching as well as research, instructional design, and advanced educational psychology competencies. It does not include a supervised teaching practicum in a real classroom and therefore does not meet the requirements for initial teacher licensure. The program is for individuals who, for various reasons, want the academic knowledge that relates to teaching, but who cannot or do not want to participate in a supervised classroom practicum and do not expect to be eligible to teach as a result of completing the program. Once students complete the content and pedagogical knowledge domains of the program, they proceed through the graduate study domains of Research Fundamentals, Instructional Design, and Advanced Educational Psychology. All students complete a capstone project. (Please Note: MAES is for MAT students only. Students in undergraduate licensure programs may not make a program change to MAES.)</font></li>
+            </ul>
+            <apex:pageBlockSectionItem >
+                <apex:outputText >Have you reviewed all the bullet points above?*</apex:outputText>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >                
+                <apex:selectRadio layout="pageDirection" value="{!q1}">
+                    <apex:selectOption itemLabel="Yes" itemValue="Yes" ></apex:selectOption>
+                    <apex:selectOption itemLabel="No" itemValue="No" ></apex:selectOption>
+                </apex:selectRadio>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputText >Have you discussed the reason for your request with your mentor? *</apex:outputText>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >                
+                <apex:selectRadio layout="pageDirection" value="{!q2}">
+                    <apex:selectOption itemLabel="Yes" itemValue="Yes" ></apex:selectOption>
+                    <apex:selectOption itemLabel="No" itemValue="No" ></apex:selectOption>
+                </apex:selectRadio>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputText >Have you reviewed student handbook article 1916 “BAES/MAES Bachelor of Arts or Masters Degree in Educational Studies”? *</apex:outputText>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >                
+                <apex:selectRadio layout="pageDirection" value="{!q3}">
+                    <apex:selectOption itemLabel="Yes" itemValue="Yes" ></apex:selectOption>
+                    <apex:selectOption itemLabel="No" itemValue="No" ></apex:selectOption>
+                </apex:selectRadio>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputText >Do you understand that if this change is made, you will not be able to pursue a teaching degree or certificate at WGU now or in the future? *</apex:outputText>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >                
+                <apex:selectRadio layout="pageDirection" value="{!q4}">
+                    <apex:selectOption itemLabel="Yes" itemValue="Yes" ></apex:selectOption>
+                    <apex:selectOption itemLabel="No" itemValue="No" ></apex:selectOption>
+                </apex:selectRadio>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputText >Do you understand that this request may be denied?*</apex:outputText>                
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >                
+                <apex:selectRadio layout="pageDirection" value="{!q5}">
+                    <apex:selectOption itemLabel="Yes" itemValue="Yes" ></apex:selectOption>
+                    <apex:selectOption itemLabel="No" itemValue="No" ></apex:selectOption>
+                </apex:selectRadio>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Approved"  action="{!approveNonPCE}" disabled="{!disFlag}"/>&nbsp;&nbsp;<apex:commandButton value="Cancel" action="{!cancel}"/> 
+        </apex:pageBlockButtons>       
+    </apex:pageBlock>
+     <apex:outputPanel >
+     <b>Please direct questions to your mentor or you may contact the Records office at records@wgu.edu or 877-435-7948 ext. 3146.</b>
+     </apex:outputPanel> 
+</apex:pageBlock>        
+</apex:form>
+</apex:page>

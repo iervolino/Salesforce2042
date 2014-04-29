@@ -1,0 +1,12 @@
+<apex:page showHeader="false" showChat="false" sidebar="false">
+<div align="left" width="450" height="300">
+<iframe width="450" height="280"
+src="https://wgu.hosted.panopto.com/Panopto/Pages/Embed/Default.aspx?id={!$CurrentPage.parameters.VideoID}"
+frameborder="0" allowfullscreen="true">
+</iframe>
+<br />
+<a title="If this link does not start downloading the video, you may need to right click (or Control+Click for Mac) the video and select Save Video As..." 
+download="http://wgu.hosted.panopto.com/Panopto/Podcast/Syndication/{!$CurrentPage.parameters.VideoID}.mp4" 
+href="http://wgu.hosted.panopto.com/Panopto/Podcast/Syndication/{!$CurrentPage.parameters.VideoID}.mp4" target="_new">Download</a>
+</div>
+</apex:page>

@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Age__c</fullName>
+        <externalId>false</externalId>
+        <formula>LastModifiedDate  - CreatedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Age</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Categories</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Academic Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alumni / Career Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course Mentoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enrollment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Evaluation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finance / Bursar</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Financial Aid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>HR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Institutional Research</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Marketing/PR/Strategic Relations</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Student Experience</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program Development</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Mentoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>University Wide / Multiple Departments</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>MultiselectPicklist</type>
+    </fields>
+    <fields>
+        <fullName>Closed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Closed</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Status</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>New idea</fullName>
+                <color>#0B6FCE</color>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Under review</fullName>
+                <color>#E27001</color>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved for Implementation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed (not applicable)</fullName>
+                <color>#FF6666</color>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed (solution exists)</fullName>
+                <color>#F3D904</color>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed (deferred to department)</fullName>
+                <color>#78C953</color>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed (not implemented)</fullName>
+                <color>#66E9BD</color>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed (Implemented)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SubmittersName__c</fullName>
+        <externalId>false</externalId>
+        <formula>CreatedBy.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Submitter&apos;s Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UniversityGoal__c</fullName>
+        <description>University wide Goals</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Which University-wide goal(s) does the Idea help achieve?</inlineHelpText>
+        <label>University Goal</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Retention and Graduation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Great Place to Work</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Operational Excellence</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Satisfaction</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>YourLocation__c</fullName>
+        <description>Employee work location</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Employee work location</inlineHelpText>
+        <label>Your Location</label>
+        <picklist>
+            <picklistValues>
+                <fullName>SLC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Remote</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arizona</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Indiana</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Texas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Washington</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <listViews>
+        <fullName>ITIdeas</fullName>
+        <columns>IDEA.CREATED_DATE</columns>
+        <columns>IDEA.TITLE</columns>
+        <columns>IDEA.CREATED_BY_NICKNAME</columns>
+        <columns>VOTE_STATS.WEIGHTED_SUM</columns>
+        <columns>IDEA.NUM_COMMENTS</columns>
+        <columns>IDEA.STATUS</columns>
+        <columns>IDEA.CATEGORIES</columns>
+        <columns>COMMUNITY.NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IDEA.CATEGORIES</field>
+            <operation>includes</operation>
+            <value>IT</value>
+        </filters>
+        <filters>
+            <field>IDEA.STATUS</field>
+            <operation>equals</operation>
+            <value>New idea,Under review</value>
+        </filters>
+        <label>IT Ideas</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Ideas_Last_7_Days</fullName>
+        <columns>IDEA.CREATED_DATE</columns>
+        <columns>IDEA.TITLE</columns>
+        <columns>IDEA.CREATED_BY_NICKNAME</columns>
+        <columns>VOTE_STATS.WEIGHTED_SUM</columns>
+        <columns>IDEA.NUM_COMMENTS</columns>
+        <columns>IDEA.STATUS</columns>
+        <columns>IDEA.CATEGORIES</columns>
+        <columns>COMMUNITY.NAME</columns>
+        <columns>IDEA.IDEA_THEME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IDEA.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>LAST_N_DAYS:7</value>
+        </filters>
+        <label>Last 7 Days</label>
+    </listViews>
+    <recordTypes>
+        <fullName>InternalIdeasIdeaRecordType</fullName>
+        <active>true</active>
+        <description>Record Type used to associate ideas with a specific community</description>
+        <label>Employee Suggestion Box: Idea Record Type</label>
+        <picklistValues>
+            <picklist>Categories</picklist>
+            <values>
+                <fullName>Academic Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alumni %2F Career Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Evaluation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance %2F Bursar</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Institutional Research</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Marketing%2FPR%2FStrategic Relations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Student Experience</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program Development</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Mentoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>University Wide %2F Multiple Departments</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Approved for Implementation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed %28Implemented%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed %28deferred to department%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed %28not applicable%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed %28not implemented%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed %28solution exists%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New idea</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Under review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>UniversityGoal__c</picklist>
+            <values>
+                <fullName>Great Place to Work</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Operational Excellence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retention and Graduation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Satisfaction</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>YourLocation__c</picklist>
+            <values>
+                <fullName>Arizona</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Indiana</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Remote</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SLC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Texas</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Washington</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Record_type_for_community_09a3000000052TuAAI_entity_Idea</fullName>
+        <active>true</active>
+        <description>Record type used to associate Idea with a specific community</description>
+        <label>Salesforce Community: Idea Record Type</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Record_type_for_community_09a3000000052umAAA_entity_Idea</fullName>
+        <active>true</active>
+        <description>Record type used to associate Idea with a specific community</description>
+        <label>Mentor SRM Stories: Idea Record Type</label>
+        <picklistValues>
+            <picklist>Categories</picklist>
+            <values>
+                <fullName>Course Mentoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Mentoring</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Closed %28deferred to department%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed %28not applicable%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed %28not implemented%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed %28solution exists%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New idea</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>UniversityGoal__c</picklist>
+            <values>
+                <fullName>Great Place to Work</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Operational Excellence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retention and Graduation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Satisfaction</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>YourLocation__c</picklist>
+            <values>
+                <fullName>Arizona</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Indiana</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Remote</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SLC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Texas</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Washington</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>IDEA.TITLE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>IDEA.BODY</customTabListAdditionalFields>
+        <customTabListAdditionalFields>COMMUNITY.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>IDEA.CREATED_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>IDEA.CREATED_BY_NICKNAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>IDEA.NUM_COMMENTS</customTabListAdditionalFields>
+        <customTabListAdditionalFields>VOTE.HAS_VOTED</customTabListAdditionalFields>
+        <customTabListAdditionalFields>IDEA.CATEGORIES</customTabListAdditionalFields>
+        <customTabListAdditionalFields>IDEA.STATUS</customTabListAdditionalFields>
+        <customTabListAdditionalFields>IDEA.LAST_COMMENT_DATE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>IDEA.TITLE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>COMMUNITY.NAME</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>IDEA.TITLE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>COMMUNITY.NAME</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>IDEA.TITLE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IDEA.BODY</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>COMMUNITY.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IDEA.NUM_COMMENTS</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IDEA.CREATED_BY_NICKNAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IDEA.CATEGORIES</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IDEA.STATUS</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IDEA.CREATED_DATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <validationRules>
+        <fullName>CategoryRequired</fullName>
+        <active>true</active>
+        <description>Make the category field mandatory</description>
+        <errorConditionFormula>ISBLANK(Categories)</errorConditionFormula>
+        <errorMessage>Please choose the department needed to help implement your idea.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>IdeaClose</fullName>
+        <active>true</active>
+        <description>Close Idea once its status is changed</description>
+        <errorConditionFormula>IF(Closed__c = true, IsMerged = false,  IsMerged = true)</errorConditionFormula>
+        <errorMessage>This idea is closed. Please read the comment thread for more information.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>UniversityGoalRequired</fullName>
+        <active>true</active>
+        <description>Make university goal field required</description>
+        <errorConditionFormula>ISBLANK(UniversityGoal__c)</errorConditionFormula>
+        <errorMessage>Please choose at least one university goal that your idea will support.</errorMessage>
+    </validationRules>
+</CustomObject>

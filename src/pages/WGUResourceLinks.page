@@ -1,0 +1,160 @@
+<apex:page title="Western Governors University - Mentor Resource Links" contentType="text/html; charset=UTF-8" standardcontroller="User" standardStylesheets="false" docType="html">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<html>
+<head>
+    <title>Western Governors University - Mentor Resource Links</title>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v420, 'resources/css/ext-all.css')}"/> 
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v420}/ext-all.js"/>
+    
+    <style type="text/css">
+        table { border-collapse:separate; border-spacing: 10px; }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td rowspan="3">
+                <div id="WGUResourcesDiv"/>
+            </td>
+            <td>
+                <div id="WGUCollaborationDiv"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="ToolsDiv"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="WGUApprovalDiv"/>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript" >
+        Ext.Loader.setConfig({enabled: true});
+        Ext.require([
+            '*'
+        ]);
+        Ext.ns("Ext.WGU");
+        
+        var UserPidm='{!$User.pidm__c}';
+        
+        var WGUResources='<a href="javascript:void(window.open(\'https://www.wgu.edu/wgu/ada_form\'))">ADA Self-Disclosure Form</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web3.wgu.edu/wgu/union/student_auth_form.pdf\'))">Authorization to Release Financial Info</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://sites.google.com/a/wgu.edu/career-and-professional-development/\'))">Career and Professional Development Center</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web3.wgu.edu/wgu/student/assessment_score_cover_sheet.doc\'))">Cover Sheet for Assessment Scores</a>'+
+            '<br/><a href="javascript:void(window.open(\'/apex/termbreakrequest\'))">Term Break Information Request</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://www.edmapbookstore.com/storefront/index/WGUSP\'))">Bookstore</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://www.wguonlinestore.com/nat/\'))">Campus Store</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web3.wgu.edu/wgu/student/student_resources.asp\'))">Degree Resources</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://www.igrad.com/Profile\'))">iGrad Financial Literacy Tools</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://sites.google.com/a/wgu.edu/model-capstones/\'))">Model Capstone Archive</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://sites.google.com/a/wgu.edu/capstone-archive\'))">Comprehensive Capstone Archive</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://portal.adp.com/public/index.htm\'))">Human Resource Portal</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://www.jonesegloballibrary.com/wgu_library\'))">Library</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://web3.wgu.edu/wgu/mentor_resources_home.asp\'))">Mentor Resources</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://kb.wgu.edu/display/2/index.aspx?c=12&cpc=3041r5ddxF0IetxgscnfYq4KF2b&cid=3&cat=&catURL=&r=0.0276677012443542\'))">Student Handbook</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web3.wgu.edu/wgu/student/referencing.asp\'))">Referencing and Authenticity Information</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://www.wgu.edu/wgu/student_consumer_guide\'))">Student Consumer Guide</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web3.wgu.edu/wgu/studentnewsletter/default.asp\'))">Student Newsletter</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://sites.google.com/a/wgu.edu/student-success/\'))">Student Success Center</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://svs.wgu.edu/myvideos;jsessionid=f85cb5f1f0d3d3776835b378be37\'))">Student Video System</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web3.wgu.edu/wgu/student/taskstream_documents.asp\'))">TaskStream Help</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://www.wgu.edu/wgu/dell\'))">Technology and Software Deals</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://wgu.mindedgeonline.com/index.php\'))">The WGU Channel</a>';
+            
+        var WGUCollaboration='<a href="javascript:void(window.open(\'https://docs.wgu.edu/Docs/default.aspx\'))">Document Center</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://email.wgu.edu/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2femail.wgu.edu%2fowa%2f\'))">Outlook Web Access</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://docs.wgu.edu/sites/strecords\'))">Student Records</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://na2cps.adobeconnect.com/system/login?domain=wgu.adobeconnect.com&next=%2Fadmin%3Fdomain%3Dwgu.adobeconnect.com&set-lang=en\'))">Web Conferencing</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://community.wgu.edu/clearspacex\'))">Communities</a>';
+            
+        var Tools='<a href="javascript:void(window.open(\'http://web5.wgu.edu/AAP/aap_tool.asp\'))">AAP Template Tool</a>'+
+            '<br/><a href="javascript:void(window.open(\'/apex/fementorlist\'))">Field Experience</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web3.wgu.edu/AAPOrder/Default.aspx\'))">AAP Order</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web5.wgu.edu/AAP/mentor_delegation.asp?mentor_pidm=' + UserPidm + '\'))">Mentor Delegation</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web5.wgu.edu/AAP/pending_referrals.asp?mentor_pidm=' + UserPidm + '\'))">Pending Approvals</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web5.wgu.edu/AAP/aap_inactive.asp?user_pidm=' + UserPidm + '\'))">Last AAP of TB or IG Students</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web5.wgu.edu/AAP/./jive/aap_jive.asp\'))">AAP Jive Linker</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web3.wgu.edu/wgulrtools/LR_Comptencey_linker.asp\'))">LR Competency Linker</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web3.wgu.edu/wgulrtools/text_lr_assmnt_linker.asp\'))">Text LR Linker</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web5.wgu.edu/AAP/./mentor_emailer/MentorEmailer.asp\'))">Mentor Emailer</a>'+
+            '<br/><a href="javascript:void(window.open(\'http://web5.wgu.edu/AAP/./community_emailer/CommEmailer.asp\'))">Community Roster/Emailer</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://web5.wgu.edu/ewb_rpt/ewb_frame.asp\'))">EWB Master Report</a>'+
+            '<br/><a href="javascript:void(window.open(\'https://web3.wgu.edu/wguidcard/luminisstartup.aspx?&#\'))">WGU ID Card</a>';
+            
+        var WGUApproval='<p>This tool allows you to confirm your Academic Activity Verification (AAV) and Projected Graduation Date. Please review each item listed below. In the case of AAV you will see the assessment code, the start and end dates in parentheses and the term number. Approved assessments will move into the current term on your Degree Plan. Please contact your mentor if you have questions.</p>'+
+            '<br/><a href="javascript:void(window.open(\'https://web3.wgu.edu/wguapproval/History.aspx\'))">My AAV Approval History</a>';
+        
+        Ext.onReady(function()
+        {
+            var WGUResourcesPanel = [
+            {
+                title: 'WGU Resources',
+                collapsible:false,
+                width:400,
+                minHeight: 620,
+                html: WGUResources
+            }];
+        
+            var WGUCollaborationPanel = [
+            {
+                title: 'WGU Collaboration',
+                collapsible:false,
+                width:400,
+                minHeight: 130,
+                html: WGUCollaboration
+            }];
+            
+            var ToolsPanel = [
+            {
+                title: 'Tools',
+                collapsible:false,
+                width:400,
+                minHeight: 255,
+                html: Tools
+            }];
+            
+            var WGUApprovalPanel = [
+            {
+                title: 'WGU Approval',
+                collapsible:false,
+                width:400,
+                minHeight: 190,
+                html: WGUApproval
+            }];
+            
+            Ext.each(WGUResourcesPanel, function(config) {
+                Ext.widget('panel', Ext.applyIf(config, {
+                    renderTo: 'WGUResourcesDiv',
+                    bodyPadding: 7
+                }));
+            });
+            
+            Ext.each(WGUCollaborationPanel, function(config) {
+                Ext.widget('panel', Ext.applyIf(config, {
+                    renderTo: 'WGUCollaborationDiv',
+                    bodyPadding: 7
+                }));
+            });
+            
+            Ext.each(ToolsPanel, function(config) {
+                Ext.widget('panel', Ext.applyIf(config, {
+                    renderTo: 'ToolsDiv',
+                    bodyPadding: 7
+                }));
+            });
+            
+            Ext.each(WGUApprovalPanel, function(config) {
+                Ext.widget('panel', Ext.applyIf(config, {
+                    renderTo: 'WGUApprovalDiv',
+                    bodyPadding: 7
+                }));
+            });
+        });
+    </script>            
+</body>
+</html>
+</apex:page>

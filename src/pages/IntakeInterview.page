@@ -1,0 +1,74 @@
+<apex:page standardcontroller="opportunity" extensions="IntakeInterviewFlowController">
+
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.extjs_v340, 'resources/css/ext-all.css')}"/>    
+        <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v340}/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v340}/ext-all.js"></script>     
+    </head>
+    
+  <flow:interview name="IntakeInterview">
+       <apex:param name="OpportunityId" value="{!Id}"/> 
+  </flow:interview>
+  
+  <apex:includeScript value="{!URLFOR($Resource.jquery_v1_8_3, 'js/jquery-1.7.1.min.js')}"/>  
+  
+  <script type="text/javascript" charset="utf-8">
+      var j$ = jQuery.noConflict();
+      
+      var tdSpans = [];    
+      j$('td span').each(function(){ tdSpans.push(this.id); });
+      //alert(tdSpans.length);
+      
+      for( var i = 0; i < tdSpans.length; i++ )
+      {
+          if( tdSpans[i].indexOf(':i:f:pb:d:tableFlag') != -1 )          
+          {
+              //alert(tdSpans[i]);
+              var currentId = tdSpans[i];
+              
+                Ext.onReady(function()
+                {
+                    //alert("ready" + currentId);
+                    var tableHeight = 50;
+    
+                    var myDataString = 'var myData = [ ';
+                        <apex:repeat value="{!myTranscripts}" var="transcript" id="TranscriptRepeat">
+                          <!--apex:param name="contactIdCont" value="{!Id}"/-->
+                            myDataString += "['{!transcript.TranscriptInstitution__r.name}','{!transcript.StartMonthYear__c}', '{!transcript.EndMonthYear__c}', '{!transcript.InstitutionCity__c}', '{!transcript.InstitutionState__c}', '{!transcript.DegreeType__c}', '{!transcript.TranscriptStatus__c}'],";                         
+                            if ( tableHeight < 200 )
+                            {
+                                tableHeight += 23;
+                            }
+                        </apex:repeat>                       
+                    myDataString += " ];";                    
+                                               
+                    eval(myDataString);
+                    var store = new Ext.data.SimpleStore({fields:[{name:'TranscriptInstitution'},{name:'StartMonthYear'},{name:'EndMonthYear'},{name:'InstitutionCity'},{name:'InstitutionState'},{name:'DegreeType'},{name:'TranscriptStatus'}]});
+                    store.loadData(myData);
+                    // CREATE THE GRID
+                    var grid = new Ext.grid.GridPanel({store: store, columns: [
+                    {id: 'TranscriptInstitution', header: "Institution", width: 200, sortable: true, dataIndex: 'TranscriptInstitution'},
+                    {id: 'StartMonthYear', header: "Attended From", width: 100, sortable: true, dataIndex: 'StartMonthYear'},
+                    {id: 'EndMonthYear', header: "To", width: 75, sortable: true, dataIndex: 'EndMonthYear'},
+                    {id: 'InstitutionCity', header: "City", width: 100, sortable: true, dataIndex: 'InstitutionCity'},
+                    {id: 'InstitutionState', header: "State", width: 50, sortable: true, dataIndex: 'InstitutionState'},
+                    {id: 'DegreeType', header: "Degree Type", width: 100, sortable: true, dataIndex: 'DegreeType'},
+                    {id: 'TranscriptStatus', header: "Transcript Status", width: 150, sortable: true, dataIndex: 'TranscriptStatus'}               
+                    ],fitToFrame:true, fitContainer: true, stripeRows:true, autoExpandColumn: 'TranscriptInstitution', height: tableHeight, width: 775, title: 'Transcripts'});
+    
+                    grid.render('myTranscriptList-grid');
+                    grid.getSelectionModel().selectFirstRow();
+                });
+            
+                function insertElementIntoFlow(id, el1)
+                {
+                    var p=document.getElementById(id);
+                    var div=document.createElement('div');
+                    div.id = el1;
+                    p.appendChild(div);
+                }            
+            }
+        }
+        insertElementIntoFlow(currentId, 'myTranscriptList-grid');
+    </script>
+</apex:page>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <description>A temporary page for testing the security of API access for student profile.</description>
+    <label>APITester</label>
+</ApexPage>

@@ -1,0 +1,19 @@
+<apex:component >
+	<div class="full-box">
+        <h1 class='page-header'>Student Handbook Knowledge Base</h1>
+        <div class="form-group--inline half-box break">
+            <input type="text" id="searchAskInput" name="inputboxform" class="left half-box break kb__search" placeholder='What would you like to know?' onfocus="" 
+                onblur="restorePrompt(this); buildSearchHref();" onkeypress="checkForEnter(event, this);" />
+            <span id="searchAskButton" tabindex="2" class="action" onclick="searchButtonClicked(); return false;">
+                <span class="btn btn--square btn--dark"><span class="icon icon--magnify"></span></span>
+            </span>
+            <script type="text/javascript">buildSearchHref();</script>
+        </div>
+    </div>
+    <div class="visible--large">
+        <hr class="hr--tall" />
+    </div>
+    <div class="hidden--large">
+        <hr class="hr--medium" />
+    </div>
+</apex:component>

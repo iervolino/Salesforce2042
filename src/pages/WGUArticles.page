@@ -1,0 +1,378 @@
+<apex:page controller="WGUArticlesController" tabstyle="WGUArticles__tab">
+	<apex:stylesheet value="{!URLFOR($Resource.data_tables_1_9_4, 'css/jquery.dataTables.css')}"/>
+	<apex:stylesheet value="{!URLFOR($Resource.Article_Management_Resources,'style.css')}"/>
+	<apex:stylesheet value="{!URLFOR($Resource.Mentor_Resources,'style.css')}"/>
+	<apex:stylesheet value="{!URLFOR($Resource.jquery_chosen_0_9_13, 'chosen.css')}"/>
+	<apex:stylesheet value="{!URLFOR($Resource.JQuery_UI_1_10_1_css, 'jquery-ui-1.10.1.custom.css')}"/>
+    <div id="header-wrapper">
+      <div id="header">
+        <a href="/home/" class="header-logo"></a>
+      </div>
+    </div>
+
+    <div id="subheader-wrapper">
+      <div class="subheader">
+        <h1>Article Management</h1>        
+      </div>
+    </div>
+    
+    <div id="wrapper"> 
+    <apex:form id="wgu-article-form">
+    	<!-- MODAL FOR Publish/Archive Begin -->
+        <div id="schedulePublishOrArchive" class="hidden">
+        	<div class="popupBackground"></div>
+        	<div class="custPopup">
+        		<div class="mentor-form-wrapper">
+                    <h2 id="articleActionTitle"> Articles</h2>
+                    <div class="student-info-box"></div>
+                   	<label id="articleActionNumberSelected"> Articles Selected</label>
+                   	<div class="popupModalInput">
+                   		<input name="publishDate" type="radio" value="now" checked="true" onclick="javascript:clearScheduledDate();"/>
+		                <label id="articleActionNowLabel"> Now</label><br />
+		                <input name="publishDate" type="radio" value="future"/>
+		                <label id="articleActionScheduleLabel"></label>
+						<apex:inputText id="scheduledDate" value="{!scheduledDate}" onclick="javascript:$('[name=publishDate][value=future]').prop('checked', true);" />
+                   	</div>
+                    <apex:commandButton action="{!submitScheduleRequest}" value="Submit" styleClass="btn green" />
+                    <input type="button" value="Cancel" class="btn grey" onclick="javascript:$('#schedulePublishOrArchive').hide();" />
+                </div>
+        	</div>
+        </div>
+        <!-- MODAL FOR Publish/Archive End -->
+        
+        <!-- MODAL FOR Delete Confirmation Begin -->
+        <div id="deleteArticleConfirmation" class="hidden">
+        	<div class="popupBackground"></div>
+        	<div class="custPopup">
+        		<div class="mentor-form-wrapper">
+                    <h2>Delete Articles</h2>
+                    <div class="student-info-box"></div>
+                    <label id="deleteArticleNumberSelected"> Articles Selected</label>
+                    <p class="popupModalInput"><label>Are you sure you wish to delete the selected articles?</label></p>
+                    <apex:commandButton action="{!deleteArticle}" value="Submit" styleClass="btn green" onclick="javascript:setCheckedArticlesToInput()" />
+                    <input type="button" value="Cancel" class="btn grey" onclick="javascript:$('#deleteArticleConfirmation').hide();" />
+                </div>
+        	</div>
+        </div>
+        <!-- MODAL FOR Delete Confirmation End -->
+
+		<!-- LEFT COLUMN Main Page BEGIN -->
+		 <div class="left-column left-column-relative">
+		 	<div class="box-title">Article Properties</div>
+			<div class="box-content">
+				<div class="search-div-block">
+					<div class="lineItem">
+			       		<input name="publishStatus" type="radio" value="{!draftValue}" />
+			       		<label>{!draftValue} Articles</label>
+			       	</div>
+			       	<div class="lineItem">
+			       		<input name="publishStatus" type="radio" value="{!onlineValue}" />
+			       		<label>Published Articles</label>
+			       	</div>
+			       	<div class="lineItem">
+			       		<input name="publishStatus" type="radio" value="{!archivedValue}" />
+			       		<label>{!archivedValue} Articles</label>
+			       	</div>
+		         	<apex:inputHidden id="publishStatusValue" value="{!PublishStatus}" />
+		         	<div class="lineItem">
+			         	Assigned To: 
+			         	<select id="publishArticleAssignee">
+		       				<option value="{!$User.Id}">Me</option>
+		       				<option value="anyone">Anyone</option>
+		       			</select>
+		       		</div>
+		           	<div id="filter-published-articles-wrapper">
+		      			Search In Article
+		      			<div class="lineItem"><input type="text" id="article-search-term" /></div>
+		      			Course
+		      			<div id="courseFilterListPlaceholder"></div>
+		      		</div>
+			      	<input type="button" value="Go" class="btn green" onclick="javascript:searchArticles();clearPageMessages();" />
+			    	<input id="display-article-clear-button" type="button" value="Clear" class="btn" onclick="javascript:clearFilters();" />
+				</div>
+			</div>
+			<select id="courseFilterList" data-palceholder="Choose a Course..." multiple="multiple" class="hidden"></select>
+		</div>
+		<!-- LEFT COLUMN Main Page END -->
+    
+    	<!-- RIGH COLUMN Main Page BEGIN -->
+		<div class="right-column">
+			<div class="search-div-block">
+				<apex:pageMessages id="pageMessages" /><br/>
+				<div id="responseMessage" class="hidden"></div>
+            	<h2 id="article-list-header">{!IF(PublishStatus='Online','Published',PublishStatus)} Articles List</h2>
+
+	            <apex:commandButton action="{!createArticle}" value="New" styleClass="btn green" id="CreateArticleButton" />
+	            <input type="button" value="Publish" class="btn" id="publishArticleButton" onclick="javascript:handleArticleActionModal(this);" />
+	            <input type="button" value="Archive" class="btn" id="archiveArticleButton" onclick="javascript:handleArticleActionModal(this);" />
+            	<input type="button" value="Delete" class="btn" onclick='javascript:displayDeleteArticlesModal();' id="deleteArticleButton" />
+            	<apex:inputHidden id="knowledgeArticleVersionIds" value="{!knowledgeArticleVersionIds}"/>
+				<div id="wgu-course-article-list-wrapper">
+      				<table id="wgu-course-article-list">
+      					<thead>
+              				<tr>
+              					<th><input id="articleListToggle" type="checkbox" class="checkbox-btn" onclick="toggleAll(this)" /></th>
+              					<th>Action</th>
+              					<th id="article_list_article_title_header">Article Title</th>
+								<th id="article_list_article_type">Type</th>
+								<th id="article_list_article_modified_date">Last Modified Date</th>
+								<th id="article_list_article_created">Created</th>
+								<th id="article_list_article_scheduled_publish_date">{!$ObjectType.KnowledgeBaseReporting__c.fields.ScheduledPublishDate__c.label}</th>
+								<th id="article_list_article_scheduled_archive_date">{!$ObjectType.KnowledgeBaseReporting__c.fields.ScheduledArchiveDate__c.label}</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</apex:form>
+	</div>
+	<script type="text/javascript">
+   		//Do we need to move this to a js script file?  Though this is only used here, but could help performance...
+        // Toggle ALL checkboxes on the form.
+        function toggleAll(checkbox) {
+        	"use strict";
+            $('#wgu-course-article-list>tbody>tr>td:nth-child(1)>input[type=checkbox]').each(function() {
+                $(this).prop('checked', checkbox.checked);
+            });
+        }
+        
+        //Set to hidden input value for checked values in table
+        function setCheckedArticlesToInput() {
+        	"use strict";
+        	$('[id*=":knowledgeArticleVersionIds"]:first').val('');
+        	var knowledgeArticleVersionIds = '';
+        	$('input:checked',  $('#wgu-course-article-list').dataTable().fnGetNodes()).each(function() {
+        		if (knowledgeArticleVersionIds === '') {
+        			knowledgeArticleVersionIds = $(this).val();
+        		} else {
+        			knowledgeArticleVersionIds += (',' +  $(this).val());
+        		}
+        	});
+        	$('[id*=":knowledgeArticleVersionIds"]:first').val(knowledgeArticleVersionIds);
+        }
+        
+        //display confirmation for delete articles
+        function displayDeleteArticlesModal() {
+        	"use strict";
+        	if ($('input:checked',  $('#wgu-course-article-list').dataTable().fnGetNodes()).length > 0) {
+        		$("#deleteArticleNumberSelected").text($('input:checked',  $('#wgu-course-article-list').dataTable().fnGetNodes()).length + "  Articles Selected");
+        		$("#deleteArticleConfirmation").show();
+        	} else {
+	        	var message = { type: 'warning', message: 'Please select one or more Articles to delete.' };
+	        	displayResponseMessage(message);
+	        }
+        }
+        
+        //search articles
+        function searchArticles() {
+        	"use strict";
+        	var userId = '';
+        	var headerText = ($('input[name="publishStatus"]:checked').val() === 'Online' ? 'Published' : $('input[name="publishStatus"]:checked').val()) + ' Articles List';
+        	
+        	$('input[id="deleteArticleButton"]').hide();
+        	$('input[id="publishArticleButton"]').hide();
+        	$('input[id="archiveArticleButton"]').hide();
+        	if ($("#publishArticleAssignee").val() !== "anyone") { 
+        		userId = $("#publishArticleAssignee").val();
+        	} else {
+        		headerText = 'All ' + headerText;
+        	}
+        	
+        	if ($('input[name="publishStatus"]:checked').val() === '{!draftValue}') {
+        		$('input[id="deleteArticleButton"]').show();
+        		$('input[id="publishArticleButton"]').show();
+        	} else if ($('input[name="publishStatus"]:checked').val() === '{!onlineValue}') {
+        		$('input[id="archiveArticleButton"]').show();
+        	} else if ($('input[name="publishStatus"]:checked').val() === '{!archivedValue}') {
+        		$('input[id="deleteArticleButton"]').show();	
+        	}
+    		$('#article-list-header').text(headerText);
+    		$('#articleListToggle').prop('checked', false);
+        	WGUArticlesController.getCourseArticle($('input[name="publishStatus"]:checked').val(), $('#article-search-term').val(), $('#courseFilterList').val(), userId, renderArticlesList);
+        }
+        
+        //render list for all online articles after response
+        renderArticlesList = function(results, event) {
+        	"use strict";
+        	$("#responseMessage").html('');
+        	if (event.status) {
+	        	$(results).each(function(index, courseArticleWrapper) {
+	        		var courseArticle = $(courseArticleWrapper).attr('courseArticle');
+	        		
+        			$(courseArticleWrapper).attr('checkbox', '<input type="checkbox" value="' + $(courseArticle).attr('{!$ObjectType.CourseArticle__kav.fields.Id.name}') + '"/>');
+        			var actionHtml = '<a href="{!courseArticleUrl}?Id=' + $(courseArticle).attr('{!$ObjectType.CourseArticle__kav.fields.KnowledgeArticleId.name}') + 
+	        				'" target="_blank">Preview</a>';
+        			if ($('input[name="publishStatus"]:checked').val() !== '{!archivedValue}') {
+        				actionHtml = '<a href="{!courseArticleEditorUrl}?Id=' + $(courseArticle).attr('{!$ObjectType.CourseArticle__kav.fields.Id.name}') + 
+        						'">Edit</a> | ' + actionHtml; 
+        			}
+        			$(courseArticleWrapper).attr('action', actionHtml);
+        			
+	        		//ArticleType is not required and can be null so set the attribute in case it is missing from the remote call
+	        		if ($(courseArticle).attr('{!$ObjectType.CourseArticle__kav.fields.ArticleType__c.name}') === undefined) {
+	        			$(courseArticle).attr('{!$ObjectType.CourseArticle__kav.fields.ArticleType__c.name}', '');
+	        		}
+	        		
+	        		//update dates
+	        		$(courseArticle).attr('{!$ObjectType.CourseArticle__kav.fields.LastModifiedDate.name}', 
+	        			getArticleTableDate($(courseArticle).attr('{!$ObjectType.CourseArticle__kav.fields.LastModifiedDate.name}')));
+	        		
+	        		$(courseArticle).attr('{!$ObjectType.CourseArticle__kav.fields.CreatedDate.name}', 
+	        			getArticleTableDate($(courseArticle).attr('{!$ObjectType.CourseArticle__kav.fields.CreatedDate.name}')));
+	        		
+	        		if ($(courseArticleWrapper).attr('ScheduledPublishDate') === undefined) {
+	        			$(courseArticleWrapper).attr('ScheduledPublishDate', '');
+	        		} else  {
+	        			$(courseArticleWrapper).attr('ScheduledPublishDate', getArticleTableDate($(courseArticleWrapper).attr('ScheduledPublishDate')));
+	        		}
+	        		
+	        		if ($(courseArticleWrapper).attr('ScheduledArchiveDate') === undefined) {
+	        			$(courseArticleWrapper).attr('ScheduledArchiveDate', '');
+	        		} else {
+	        			$(courseArticleWrapper).attr('ScheduledArchiveDate', 
+	        				getArticleTableDate($(courseArticleWrapper).attr('ScheduledArchiveDate')));
+	        		}
+				});
+				
+				$("#responseMessage").hide();
+			} else {
+				displayResponseMessage(event);
+			}
+			if (results === null) {
+				results = [];
+			}
+			var articleTable = $('#wgu-course-article-list').dataTable();
+			//show only scheduled publish date for draft articles, scheduled archive date for published articles, and neither if archive articles.
+			articleTable.fnSetColumnVis(6, $('input[name="publishStatus"]:checked').val() === '{!draftValue}');
+			articleTable.fnSetColumnVis(7, $('input[name="publishStatus"]:checked').val() === '{!onlineValue}');
+			
+			articleTable.fnClearTable();
+			articleTable.fnAddData(results);
+			//set hidden input field for current rendered tables publish status
+			$('[id*=":publishStatusValue"]:first').val($('input[name="publishStatus"]:checked').val());
+			//resize just in case seems to have some issues in certain browsers
+			if (articleTable.length > 0) {
+				articleTable.fnAdjustColumnSizing();
+			}
+        };
+        
+        getArticleTableDate = function(unformattedDate) {
+        	"use strict";
+        	var localDt = new Date(unformattedDate);
+        	var timezoneDt = new Date(localDt.getTime() + localDt.getTimezoneOffset() * 60000);
+        	return $.datepicker.formatDate('mm/dd/yy', timezoneDt);
+        };
+        
+        renderCourseList = function(results, event) {
+        	"use strict";
+        	if (event.status) {
+        		$(results).each(function(index, course) {
+        			$('#courseFilterList').append('<option value="' + $(course).attr('Id') + '">' + $(course).attr('Name') + '</option>');
+        		});
+        		$('#courseFilterList').chosen({ no_results_text:'No Courses Found.' });
+			} else {
+				displayResponseMessage(event);
+			}
+        };
+        
+        $('#courseFilterList').change(function() {
+        	"use strict";
+        	$('#courseFilterListPlaceholder').height($('#courseFilterList_chzn').height() + 10);
+        });
+        
+        function clearFilters() {
+        	"use strict";
+        	$('#article-search-term').val("");
+        	$("#courseFilterList").val('').trigger('liszt:updated');
+        	$('#courseFilterListPlaceholder').height($('#courseFilterList_chzn').height() + 10);
+        }
+        
+        function clearPageMessages() {
+        	"use strict";
+        	$('[id*=":pageMessages"]').hide();
+        }
+        
+        function clearScheduledDate() {
+        	"use strict";
+        	$('[id*=":scheduledDate"]').val('');
+        }
+        
+        //show modal for article actions
+        function handleArticleActionModal(input) {
+        	"use strict";
+        	if ($('input:checked',  $('#wgu-course-article-list').dataTable().fnGetNodes()).length > 0) {
+	        	$("#articleActionTitle").text($(input).val() + " Articles"); 
+	        	$("#articleActionNumberSelected").text($('input:checked',  $('#wgu-course-article-list').dataTable().fnGetNodes()).length + "  Articles Selected");
+	        	$("#articleActionNowLabel").text($(input).val() + " Now");
+	        	$("#articleActionScheduleLabel").text("Schedule " + $(input).val() + " On: ");
+	        	$("#schedulePublishOrArchive").show();
+	        	$("#responseMessage").html('').hide();
+	        	setCheckedArticlesToInput();
+	        } else {
+	        	var message = { type: 'warning', message: 'Please select one or more Articles to ' + $(input).val() };
+	        	displayResponseMessage(message);
+	        }
+        }
+        
+        function displayResponseMessage(event) {
+        	"use strict";
+        	var displayMessage = false;
+        	var image;
+        	var messageTitleH4;
+        	if (event.type === "exception") {
+        		displayMessage = true;
+        		image = $(document.createElement('img')).attr('alt', 'ERROR').attr('class', 'msgIcon displayInlineBlock').attr('src', '/s.gif').attr('title', 'ERROR');
+        		messageTitleH4 = $(document.createElement('h4')).attr('class', 'errorTitle').text('Error:');
+        		$("#responseMessage").attr("class", "message errorM3");
+        	} else if (event.type === "warning") {
+        		displayMessage = true;
+        		image = $(document.createElement('img')).attr('alt', 'WARNING').attr('class', 'msgIcon displayInlineBlock').attr('src', '/s.gif').attr('title', 'WARNING');
+        		messageTitleH4 = $(document.createElement('h4')).text('Warning:');
+        		$("#responseMessage").attr("class", "message warningM3");
+        	}
+        	
+        	if (displayMessage) {
+        		var wrapper = $(document.createElement('div')).attr('class', 'lineItem');
+        		$(wrapper).append(image);
+        		var messageTextDiv = $(document.createElement('div')).attr('class', 'messageText displayInlineBlock').append(messageTitleH4).append(event.message);
+        		$(wrapper).append(messageTextDiv);
+        		$("#responseMessage").append(wrapper);
+        		$("#responseMessage").show();
+        	}
+        }
+        
+        $(document).ready(function(){
+        	"use strict";
+        	$("input[name=publishStatus][value={!PublishStatus}]").prop('checked', true);
+        	
+        	$('#wgu-course-article-list').dataTable({
+				"iDisplayLength": 50,
+				"bInfo": true,
+           		"bFilter": false,
+                "bProcessing": true,
+                "bDeferRender": true,
+                "aoColumns": [
+					{ "mDataProp": "checkbox", "sWidth": "25px" },
+					{ "mDataProp": "action", "sWidth": "70px" },
+                   	{ "mDataProp": "courseArticle.{!$ObjectType.CourseArticle__kav.fields.Title.name}" },
+                   	{ "mDataProp": "courseArticle.{!$ObjectType.CourseArticle__kav.fields.ArticleType__c.name}" },
+                   	{ "mDataProp": "courseArticle.{!$ObjectType.CourseArticle__kav.fields.LastModifiedDate.name}" },
+                   	{ "mDataProp": "courseArticle.{!$ObjectType.CourseArticle__kav.fields.CreatedDate.name}" },
+                   	{ "mDataProp": "ScheduledPublishDate" },
+                   	{ "mDataProp": "ScheduledArchiveDate" }
+              	],
+              	"aoColumnDefs": [
+					{ "bSortable": false, "aTargets": [0, 1] }
+				]
+			});
+			WGUArticlesController.getCourseList(renderCourseList);
+			searchArticles();
+			$('[id*=":scheduledDate"]').datepicker({minDate: 1});
+        });
+	</script>
+	<apex:includeScript value="{!$Resource.JQuery_1_9_1}"/>
+	<apex:includeScript value="{!$Resource.JQuery_UI_1_10_1}"/>
+	<apex:includeScript value="{!URLFOR($Resource.data_tables_1_9_4, 'js/jquery.dataTables.min.js')}"/>
+	<script type="text/javascript" charset="utf-8" src="{!$Resource.jquery_chosen_0_9_13}/chosen.jquery.min.js"></script>
+</apex:page>

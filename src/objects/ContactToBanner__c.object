@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Control object for synchronization of Contact with Information in Banner.</description>
+    <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>Address1OUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>trim(IF(FIND(&apos;;&apos;,  Contact__r.MailingStreet) &gt; 0, mid(Contact__r.MailingStreet, 0, FIND(&apos;;&apos;, Contact__r.MailingStreet) - 1),
+IF(LEN(Contact__r.MailingStreet) &gt; 30 , mid(Contact__r.MailingStreet, 0, 30), Contact__r.MailingStreet)))</formula>
+        <label>Address 1 (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Address2OUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>trim(IF(FIND(&apos;;&apos;, Contact__r.MailingStreet) &gt; 0, mid(Contact__r.MailingStreet, FIND(&apos;;&apos;, Contact__r.MailingStreet) + 1, 30),
+IF(LEN(Contact__r.MailingStreet) &gt; 30 , mid(Contact__r.MailingStreet, 31, 30), &apos;&apos;)))</formula>
+        <label>Address 2 (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AdjustedGrossIncomeIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Adjusted Gross Income (IN)</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BalanceDueIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Balance Due (IN)</label>
+        <length>3</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BannerEventDateIN__c</fullName>
+        <description>The date/time of the last event captured in Banner. An event may be any change made to a record that triggers a change notification to occur.</description>
+        <externalId>false</externalId>
+        <label>Banner Event Date (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>BannerIDFromBannerIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Banner ID From Banner (IN)</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BannerIdOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.StudentID__c</formula>
+        <label>Banner Id (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CampusCodeIN__c</fullName>
+        <description>The Banner campus code that will be converted to the Salesforce version by the trigger to Contact.</description>
+        <externalId>false</externalId>
+        <label>Campus Code (IN)</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CitizenshipIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Citizenship (IN)</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CityIN__c</fullName>
+        <externalId>false</externalId>
+        <label>City (IN)</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CityOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.MailingCity</formula>
+        <label>City (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CollegeIN__c</fullName>
+        <description>The college that the degree being work on belongs to.</description>
+        <externalId>false</externalId>
+        <label>College (IN)</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ConfidentialIndicatorIN__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Confidential Indicator (IN)</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <description>The Contact that should be synchronized two ways to Banner.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Contact that should be synchronized two ways to Banner.</inlineHelpText>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Contacts To Banner</relationshipLabel>
+        <relationshipName>ContactsToBanner</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>CountryIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Country (IN)</label>
+        <length>2</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CountryOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISNULL(Contact__r.MailingCountry), ISBLANK(Contact__r.MailingCountry)),
+   &apos;US&apos;, Contact__r.MailingCountry
+)</formula>
+        <label>Country (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentStandingIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Current Standing (IN)</label>
+        <length>4</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentStatus__c</fullName>
+        <description>The status of the record to indicate if any synchronization activity should take place on this record to Banner.</description>
+        <externalId>false</externalId>
+        <formula>/* -0.0416 is used to adjust Daylight Saving Time changing.
+  Delete -0.0416 in Summer;
+  Keep -0.0416 in Winter, 
+  Winter: (LastSynchronizedToBanner__c - Contact__r.LastModifiedDate) &lt; -0.0011 - 0.0416
+  Summer: (LastSynchronizedToBanner__c - Contact__r.LastModifiedDate) &lt; -0.0011 
+*/
+
+IF(AND(NOT(ResynchronizeToBanner__c), NOT(SynchronizationError__c = &apos;None&apos;), NOT(OR(ISNULL(SynchronizationError__c), ISBLANK(SynchronizationError__c)))),
+   &apos;Error&apos;,
+   IF(AND(NOT(OR(ISNULL(Contact__r.PIDM__c), ISBLANK(Contact__r.PIDM__c))), OR((LastSynchronizedToBanner__c - Contact__r.LastModifiedDate) &lt; -0.0011, ResynchronizeToBanner__c, ISNULL(LastSynchronizedToBanner__c)),      
+   NOT(AND(Contact__r.LastModifiedBy.FirstName = &apos;System&apos;, Contact__r.LastModifiedBy.LastName = &apos;Administrator&apos;))),
+      &apos;Update&apos;,
+      IF(AND(Contact__r.BannerReady__c,  OR(ISNULL(Contact__r.PIDM__c), ISBLANK(Contact__r.PIDM__c))), 
+         &apos;Insert&apos;,
+         IF(Contact__r.BannerReady__c, &apos;Current&apos;, &apos;Ignore&apos;)
+      )
+   )
+)</formula>
+        <label>Current Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentTermCompletedCUsIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Current Term Completed CUs (IN)</label>
+        <precision>13</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentTermEnrolledCUsIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Current Term Enrolled CUs (IN)</label>
+        <precision>13</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CurrentTermIN__c</fullName>
+        <description>The prospects application term or the students current active term that is not in the future.</description>
+        <externalId>false</externalId>
+        <label>Current Term (IN)</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DeceasedIndicatorIN__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Deceased Indicator (IN)</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>FinancialAidCheckIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Financial Aid Check (IN)</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FinancialAidStatusIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Financial Aid Status (IN)</label>
+        <length>5</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FirstAcademicActivityDateIN__c</fullName>
+        <description>The first date that the student  completed academic activity.</description>
+        <externalId>false</externalId>
+        <label>First Academic Activity Date (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FirstNameIN__c</fullName>
+        <externalId>false</externalId>
+        <label>First Name (IN)</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FirstNameOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.FirstName</formula>
+        <label>First Name (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GenderIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Gender (IN)</label>
+        <length>5</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GradeLevelIN__c</fullName>
+        <description>The grade level the student is in based upon CUs completed towards degree. Freshman, Sophmore, ect.</description>
+        <externalId>false</externalId>
+        <label>Grade Level (IN)</label>
+        <length>25</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HistoricallyAttemptedCUsIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Historically Attempted CUs (IN)</label>
+        <precision>13</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HistoricallyCompletedCUsIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Historically Completed CUs (IN)</label>
+        <precision>13</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HomeExtensionIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Home Extension (IN)</label>
+        <length>25</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HomePhoneIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Home Phone (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>IDMUsernameIN__c</fullName>
+        <description>The WGU username used to sign into Open SSO and managed by the IDM (Identity Management System).</description>
+        <externalId>false</externalId>
+        <label>IDM Username (IN)</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InternationalPhoneNumberIN__c</fullName>
+        <externalId>false</externalId>
+        <label>International Phone Number (IN)</label>
+        <length>16</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InternationalPhoneNumberOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.InternationalPhone__c</formula>
+        <label>International Phone Number (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastAAVDateIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Last AAV Date (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LastLoginIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Login (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LastNameIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Name (IN)</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastNameOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.LastName</formula>
+        <label>Last Name (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastSynchronizedFromBanner__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Synchronized From Banner</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LastSynchronizedToBanner__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Synchronized To Banner</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>MaritalStatusIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Marital Status (IN)</label>
+        <length>60</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MentorPIDMIN__c</fullName>
+        <description>The Banner PIDM ID of the Student Mentor assigned to the student.</description>
+        <externalId>false</externalId>
+        <label>Mentor PIDM (IN)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MiddleInitialOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.middleInitial__c</formula>
+        <label>Middle Initial (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MilitaryStatusIN__c</fullName>
+        <description>Current military status according to current financial aid filing.</description>
+        <externalId>false</externalId>
+        <label>Military Status (IN)</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MobileAreaCodeOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(ISNULL( Contact__r.MobilePhone ), ISBLANK(Contact__r.MobilePhone)),
+&apos;&apos;,
+IF(CONTAINS(Contact__r.MobilePhone, &apos;(&apos;), MID(Contact__r.MobilePhone, 2, 3), MID(Contact__r.MobilePhone, 1, 3)))</formula>
+        <label>Mobile Area Code (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MobileNumberIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Mobile Number (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>MobilePhoneOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISNULL(Contact__r.MobilePhone), ISBLANK(Contact__r.MobilePhone)), 
+    &apos;&apos;,
+    IF (MID(Contact__r.MobilePhone, 4, 1) = &apos;-&apos;,
+       MID(Contact__r.MobilePhone, 5, 3) + MID(Contact__r.MobilePhone, 9, 4),
+       IF(CONTAINS(Contact__r.MobilePhone, &apos;(&apos;), 
+           MID(Contact__r.MobilePhone, 7, 3) + MID(Contact__r.MobilePhone, 11, 4),
+           MID(Contact__r.MobilePhone, 5, 3) + MID(Contact__r.MobilePhone, 10, 4)
+       )
+    )   
+)</formula>
+        <label>Mobile Phone (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MyWGUEmailIN__c</fullName>
+        <externalId>false</externalId>
+        <label>My WGU Email (IN)</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OtherEmailIN__c</fullName>
+        <description>The personal email address for the student that is their primary address.</description>
+        <externalId>false</externalId>
+        <label>Other Email (IN)</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OtherEmailOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.OtherEmail__c</formula>
+        <label>Other Email (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PIDMFromBannerIN__c</fullName>
+        <externalId>false</externalId>
+        <label>PIDM From Banner (IN)</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PIDMOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.PIDM__c</formula>
+        <label>PIDM (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PhoneAreaCodeOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(ISNULL(Contact__r.HomePhone), ISBLANK(Contact__r.HomePhone)),
+IF(CONTAINS(Contact__r.Phone, &apos;(&apos;), MID(Contact__r.Phone, 2, 3), MID(Contact__r.Phone, 1, 3)),
+IF(CONTAINS(Contact__r.HomePhone, &apos;(&apos;), MID(Contact__r.HomePhone, 2, 3), MID(Contact__r.HomePhone, 1, 3)))</formula>
+        <label>Phone Area Code (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PhoneExtensionOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.PhoneExtension__c</formula>
+        <label>Phone Extension (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PhoneOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF (MID(Contact__r.HomePhone, 4, 1) = &apos;-&apos;, MID(Contact__r.HomePhone, 5, 3) + MID(Contact__r.HomePhone, 9, 4), 
+IF(OR(ISNULL(Contact__r.HomePhone), ISBLANK(Contact__r.HomePhone)), 
+IF(CONTAINS(Contact__r.Phone, &apos;(&apos;), MID(Contact__r.Phone, 7, 3) + MID(Contact__r.Phone, 11, 4), MID(Contact__r.Phone, 5, 3) + MID(Contact__r.Phone, 10, 4)), 
+IF(CONTAINS(Contact__r.HomePhone, &apos;(&apos;), MID(Contact__r.HomePhone, 7, 3) + MID(Contact__r.HomePhone, 11, 4), MID(Contact__r.HomePhone, 5, 3) + MID(Contact__r.HomePhone, 10, 4))))</formula>
+        <label>Phone (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PlannedGraduationDateIN__c</fullName>
+        <description>The automatically generated expected graduation date base don the program enrolled in to at the student&apos;s first term.</description>
+        <externalId>false</externalId>
+        <label>Planned Graduation Date (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>PreferredFirstNameIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Preferred First Name (IN)</label>
+        <length>60</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PrefixOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Case(Contact__r.Salutation,
+&apos;Mr.&apos;, &apos;Mr.&apos;,
+&apos;Ms.&apos;, &apos;Ms.&apos;,
+&apos;Mrs.&apos;, &apos;Mrs.&apos;,
+&apos;Dr.&apos;, &apos;Dr.&apos;,
+&apos;Prof.&apos;, &apos;Prof.&apos;,
+&apos;Miss&apos;, &apos;Miss&apos;, &apos;&apos;)</formula>
+        <label>Prefix (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProgramIN__c</fullName>
+        <description>The program code that is currently assigned in Banner.</description>
+        <externalId>false</externalId>
+        <label>Program (IN)</label>
+        <length>25</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProgramNameIN__c</fullName>
+        <description>The name of the degree program that is assigned in the current term to the student.</description>
+        <externalId>false</externalId>
+        <label>Program Name (IN)</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProgramTermIN__c</fullName>
+        <description>The term code of the currently active program.</description>
+        <externalId>false</externalId>
+        <label>Program Term (IN)</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectedDateOfGraduationIN__c</fullName>
+        <description>The date that is agreed upon by the Student Mentor and student upon entering AAV or the current term. Updates with each term registered.</description>
+        <externalId>false</externalId>
+        <label>Projected Date of Graduation (IN)</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ResynchronizeToBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Resynchronize To Banner</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ResynchronizeToSalesforce__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Request that the current synchronization record be repushed into Salesforce.</description>
+        <externalId>false</externalId>
+        <label>Resynchronize to Salesforce</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StateIN__c</fullName>
+        <externalId>false</externalId>
+        <label>State (IN)</label>
+        <length>5</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StateOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.MailingState</formula>
+        <label>State (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StatusIN__c</fullName>
+        <description>The current Banner term status such as AS or TB.</description>
+        <externalId>false</externalId>
+        <label>Status (IN)</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StreetAddressIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Street Address (IN)</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SuffixOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.Suffix__c</formula>
+        <label>Suffix (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SynchronizationError__c</fullName>
+        <description>Any error that occurs while trying to process data between Salesforce and Banner.</description>
+        <externalId>false</externalId>
+        <label>Synchronization Error</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>TermBreakCodeIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Term Break Code (IN)</label>
+        <length>1</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TermBreakEndDateIN__c</fullName>
+        <description>The actual end date of a term break.</description>
+        <externalId>false</externalId>
+        <label>Term Break End Date (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TermBreakStartDateIN__c</fullName>
+        <description>The actual start date of the term break.</description>
+        <externalId>false</externalId>
+        <label>Term Break Start Date (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TermEndDateIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Term End Date (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TermNumberIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Term Number (IN)</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TermStartDateIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Term Start Date (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TimeZoneIN__c</fullName>
+        <description>The time zone the student lives in based upon home phone area code.</description>
+        <externalId>false</externalId>
+        <label>Time Zone (IN)</label>
+        <length>3</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TransferredCUsIN__c</fullName>
+        <description>Competency units transferred into the university on enrollment.</description>
+        <externalId>false</externalId>
+        <label>Transferred CUs (IN)</label>
+        <precision>13</precision>
+        <required>false</required>
+        <scale>3</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UsernameFromBannerIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Username From Banner (IN)</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WGUEmailFromBannerIN__c</fullName>
+        <externalId>false</externalId>
+        <label>WGU Email From Banner (IN)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ZipCodeIN__c</fullName>
+        <externalId>false</externalId>
+        <label>Zip Code (IN)</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ZipCodeOUT__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact__r.MailingPostalCode</formula>
+        <label>Zip Code (OUT)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Contact To Banner</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>LastSynchronizedToBanner__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>AllErrorsForProspects</fullName>
+        <columns>NAME</columns>
+        <columns>SynchronizationError__c</columns>
+        <columns>ResynchronizeToSalesforce__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>SynchronizationError__c</field>
+            <operation>notEqual</operation>
+            <value>None</value>
+        </filters>
+        <filters>
+            <field>SynchronizationError__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ContactToBanner__c.Prospect</value>
+        </filters>
+        <label>All Errors for Prospects</label>
+        <sharedTo>
+            <role>ITHelpDesk</role>
+            <role>IT_Group</role>
+            <role>QATeam</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>AllErrorsForReturning</fullName>
+        <columns>NAME</columns>
+        <columns>SynchronizationError__c</columns>
+        <columns>ResynchronizeToSalesforce__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>SynchronizationError__c</field>
+            <operation>notEqual</operation>
+            <value>None</value>
+        </filters>
+        <filters>
+            <field>SynchronizationError__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ContactToBanner__c.Returning</value>
+        </filters>
+        <label>All Errors for Returning</label>
+        <sharedTo>
+            <role>ITHelpDesk</role>
+            <role>IT_Group</role>
+            <role>QATeam</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>AllErrorsForStudents</fullName>
+        <columns>NAME</columns>
+        <columns>SynchronizationError__c</columns>
+        <columns>ResynchronizeToSalesforce__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>SynchronizationError__c</field>
+            <operation>notEqual</operation>
+            <value>None</value>
+        </filters>
+        <filters>
+            <field>SynchronizationError__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ContactToBanner__c.Student</value>
+        </filters>
+        <label>All Errors for Students</label>
+        <sharedTo>
+            <role>ITHelpDesk</role>
+            <role>IT_Group</role>
+            <role>QATeam</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>AllErrorsFornoType</fullName>
+        <columns>NAME</columns>
+        <columns>SynchronizationError__c</columns>
+        <columns>ResynchronizeToSalesforce__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>SynchronizationError__c</field>
+            <operation>notEqual</operation>
+            <value>None</value>
+        </filters>
+        <filters>
+            <field>SynchronizationError__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+        </filters>
+        <label>All Errors for No Type</label>
+        <sharedTo>
+            <role>ITHelpDesk</role>
+            <role>IT_Group</role>
+            <role>QATeam</role>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <displayFormat>CTB-{0}</displayFormat>
+        <label>Contact To Banner Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Contacts To Banner</pluralLabel>
+    <recordTypes>
+        <fullName>Prospect</fullName>
+        <active>true</active>
+        <description>First time investigation and application into the university.</description>
+        <label>Prospect</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Returning</fullName>
+        <active>true</active>
+        <description>Prospects that were once student but are now attempting to return to the university.</description>
+        <label>Returning</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Student</fullName>
+        <active>true</active>
+        <description>Active students or students on temporary leave.</description>
+        <label>Student</label>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

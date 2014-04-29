@@ -1,0 +1,15 @@
+<apex:page standardController="User"  >
+    <table border="1" width='100%'>
+        <tr><td width="55%"  id="projReqs">
+            	<apex:iframe height="500px" src="PriorityDDAll" scrolling="True"/> </td>
+            <td id="incidents" width="45%" >
+                <apex:iframe height="500px" src="https://srm--devfull--bmcservicedesk.cs16.visual.force.com/apex/SSLandingPage?sfdc.tabName=01ra0000001NwXN" scrolling="True"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="55%" rowspan="2"  >
+            	<apex:iframe height="400px" src="ITSwimLanesbyArea" scrolling="True"/> </td>
+            <td width="45%">Other Requests(Kanban)</td>
+        </tr>
+    </table>
+</apex:page>

@@ -1,0 +1,3536 @@
+<apex:page title="Western Governors University - Student Notes" contentType="text/html; charset=UTF-8" standardController="WGUStudentNote__c" extensions="NotesController" standardStylesheets="false" showHeader="false" sidebar="false" docType="html-5.0">
+<apex:outputText escape="false" value="{!'<!DOCTYPE html>'}"/>
+<html>
+<head>
+    <title>Western Governors University - Student Notes</title>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v407, 'resources/css/ext-all.css')}"/>
+    <apex:includeScript value="{!$Resource.extjs_v407}/ext-all.js"/>
+    <apex:includeScript value="{!$Resource.ckeditor_v364}/ckeditor/ckeditor.js"/>
+    <link href="{!URLFOR($Resource.StandardPage,'assets/css/standard_page_lte.css')}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{!$Resource.extjsux_v407}/ux/grid/css/GridFilters.css" />
+
+    <apex:includeScript value="/soap/ajax/26.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/26.0/apex.js"/>
+    <apex:includeScript value="/support/console/26.0/integration.js"/>
+
+<style>
+    
+     div#performanceSurveyPanel-body .x-form-cb-label {
+         font-size: 10px;
+     }
+     div#performanceSurveyPanel .x-panel-default {
+         border-color: #99BCE8;
+     }
+     div#performanceSurveyPanel .x-panel-header {
+         border-color: #C7C7C7;
+         background-color: #D3D3D3;
+         background-image: none;
+     }
+     div#performanceSurveyPanel .x-panel-header-text {
+         color: #414141;
+     }
+     div#performanceSurveyPanel-body.x-panel-body-default {
+         border-color: #C7C7C7;
+     }
+     
+     
+     div#performanceActionsPanel-body .x-form-cb-label {
+         font-size: 10px;
+     }
+     div#performanceActionsPanel .x-panel-default {
+         border-color: #99BCE8;
+     }
+     div#performanceActionsPanel .x-panel-header {
+         border-color: #C7C7C7;
+         background-color: #D3D3D3;
+         background-image: none;
+     }
+     div#performanceActionsPanel .x-panel-header-text {
+         color: #414141;
+     }
+     div#performanceActionsPanel-body.x-panel-body-default {
+         border-color: #C7C7C7;
+     }
+     
+     span.cke_skin_kama {
+         -moz-border-radius: 0 !important;
+         -webkit-border-radius: 0 !important;
+         -o-border-radius: 0 !important;
+         border: 1px solid #D3D3D3 !important;
+         padding: 0 !important;
+     }
+     .cke_focus { outline:0 }
+     .x-grid-dirty-cell {
+         background-image: none;
+     }
+     #fieldset .x-form-display-field {
+         padding-top: 3px;
+         color: white;
+         font-weight: 700;
+     }
+     a#studentHomePhoneA.cell {
+         background-position: -18px -70px;
+     }
+     a#studentEmailA.email {
+         background-position: -18px -53px;
+     }
+     #StudentDetailBannerContainer a {
+         padding: 1px 1px 1px 24px;
+         background: url({!$Resource.StandardPage}/assets/images/global-sprite.png) no-repeat;
+     }
+</style>
+
+
+</head>
+<body>
+
+    
+<script type="text/javascript">
+var $soap = (sforce? sforce.connection: null);
+if (sforce && sforce.connection) {
+    sforce.connection.sessionId = '{!$Api.Session_ID}';
+}
+var $sconsole = (sforce && sforce.console && sforce.console.isInConsole()? sforce.console: null);
+var $apex = ( sforce? sforce.apex: null );
+
+
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+String.prototype.startsWith = function (str){
+    return this.indexOf(str) == 0;
+};
+
+
+Ext.Loader.setConfig({enabled: true});
+Ext.Loader.setPath('Ext.ux', '{!$Resource.extjsux_v407}/ux');
+Ext.require([
+    'Ext.grid.*',
+    'Ext.data.*',
+    'Ext.ux.grid.FiltersFeature'
+]);
+Ext.override(Ext.data.Store, {
+    loadDataViaReader : function(data, append) {
+        var me      = this,
+                result  = me.proxy.reader.read(data),
+                records = result.records;
+
+        me.loadRecords(records, { addRecords: append });
+        me.fireEvent('load', me, result.records, true);
+    }
+});
+Ext.override(Ext.grid.Scroller, {
+    onAdded: function() {
+        this.callParent(arguments);
+        var me = this;
+        if (me.scrollEl) {
+            me.mun(me.scrollEl, 'scroll', me.onElScroll, me);
+            me.mon(me.scrollEl, 'scroll', me.onElScroll, me);
+        }
+    }
+});
+var WGUView;
+var detailBanner;
+var studentBanner;
+var performanceToolTip;
+var attachmentImage;
+var closeWindowBtn;
+var noteTypesPNG =  '{!$Resource.noteTypesPNG}/';
+var blankNoteJSON = '{"attributes":{"type": "WGUStudentNote__c","url":null},"ShortText__c":null,"WGUCreationDateTime__c":null,"Text__c":null,"SystemModstamp":null,"SubType__c":null,"Student__c":null,"PIDM__c":null,"Name":null,"MentorId__c":null,"Level1Image__c":null,"LastModifiedDate":null,"LastModifiedById":null,"LastActivityDate":null,"IsDeleted": false,"InteractionID__c":null,"Id":null,"CreatedDate":null,"CreatedById":null,"Type__c":null,"Author__c":null,"Author__r":{"attributes":{"type": "User","url":null},"Name":null},"CreatedBy":{"attributes":{"type": "User","url":null},"Name":null},"AuthorPidm__c":null}';
+var blankSurveyJSON = '{"attributes":{"type":"WGUStudentPerformanceSurvey__c","url":null},"EvidenceOfAcademicActivity__c":null,"GoalPerformanceSinceLastCall__c":null,"WGUStudentNote__c":null,"Student__c":null,"Name":null,"LastModifiedDate":null,"LastModifiedById":null,"Id":null,"CreatedDate":null,"CreatedById":null,"CreatedBy":{"attributes":{"type":"User","url":null},"Name":null}}';
+var surveyRecord = Ext.decode( blankSurveyJSON );
+var noteRecord = Ext.decode( blankNoteJSON );
+var validNoteTypes = [];
+//12-10 action type
+var validActionTypes = [];
+var thisUserId = "{!JSENCODE($User.Id)}";
+var thisUserName = "{!JSENCODE($User.Username)}";
+var thisUserFullName = "{!JSENCODE($User.FirstName + ' ' + $User.LastName)}";
+var thisUserPIDM = "{!JSENCODE($User.PIDM__c)}";
+var isStudentMentor = false;
+var studentRecord;
+var talismaLinkUrl = 'https://webapp4.wgu.edu/MentorNotes?pidm=';
+var isPortalAccess = false;
+var isEditable = false;
+var isGetNotesDone = true;
+var isGetSurveysDone = false;
+var notesQueryLocator = 0;
+var surveysQueryLocator = 0;
+var pidm;
+var noteId;
+var studentAccountId;
+var studentWGUId;
+var contactId;
+var baseNoteTypeApexDivChangeFunction;
+var noteTypeCombo;
+var noteSubTypeCombo;
+//12-10 action type
+var actionTypeCombo;
+var actionSubTypeCombo;
+
+var noteSubjectTextField;
+var noteHTMLTextEditor;
+var saveNoteButton;
+var lastNoteTypeValue;
+var noteHistoryGridPanel;
+var noteSubTypeStoreData = new Array();
+var noteSubTypeMetaData = Ext.decode('{!NoteSubTypeMetaJSON}');
+var noteSubTypeStore;
+//12-10
+var actionSubTypeStoreData = new Array();
+var actionSubTypeMetaData = Ext.decode('{!ActionSubTypeMetaJSON}');
+var actionSubTypeStore;
+
+var filterCombo;
+var searchTextField;
+var ZeroPercentRadio;
+var ParitalPercentRadio;
+var HundredPercentRadio;
+var EngagedInNewStudentProtocolsCheckbox;
+var EngagedInLearningResourceCheckbox;
+var UtilizedACommunityResourceCheckbox;
+var AttendedASeminarCheckbox;
+var MetWithACourseMentorCheckbox;
+var TookAPreAssessmentCheckbox;
+var ScheduledAnAssessmentCheckbox;
+var TookAndFailedAnAssessmentCheckbox;
+var TookAndPassedAnAssessmentCheckbox;
+var SubmittedATaskStreamTaskCheckbox;
+var RevisedATaskStreamTaskCheckbox;
+var NoEvidenceIsPresentCheckbox;
+//Variable to store student's At Risk Score for validation
+//Added 10/3/2013 by Katarina Melki
+var AtRiskScore;
+//yemeng 10/11/13 mode 
+var modeType='new';
+
+var noteTypeStore = Ext.create('Ext.data.Store', {
+    fields: ['value', 'name'],
+    data : {!NoteTypeJSON}
+});
+//12-10 action type
+var actionTypeStore = Ext.create('Ext.data.Store', {
+    fields: ['value', 'name'],
+    data : {!ActionTypeJSON}
+});
+
+var noteTypesFilterStore = Ext.create('Ext.data.Store', {
+    fields: ['value', 'name'],
+    data : {!NoteTypeFilterJSON}
+});
+
+function returnObject() {
+    this.success = true;
+    this.message = 'Operation Ran Successfully';
+    this.values = new Array();
+}
+
+function getSubTypePickListValues(typeValue, index) {
+    var returnObj = new returnObject();
+    try {
+        var picklistValues = noteSubTypeMetaData.picklistValues;
+
+        // sub function to do the validFor test
+        function isDependentValue(index, validFor) {
+            var base64 = new sforce.Base64Binary("");
+            var decoded = base64.decode(validFor);
+            var bits = decoded.charCodeAt(index >> 3);
+
+            return ((bits & (0x80 >> (index % 8))) != 0);
+        }
+
+        for (var i = 0; i < picklistValues.length; i++) {
+            if (isDependentValue(index, picklistValues[i].validFor)) {
+                var newValue = new Object();
+                newValue.label = picklistValues[i].label;
+                newValue.value = picklistValues[i].value;
+                newValue.defaultValue = picklistValues[i].defaultValue;
+                newValue.validFor = picklistValues[i].validFor;
+                newValue.validForName = typeValue;
+                returnObj.values.push(newValue);
+            }
+        }
+
+    } catch (exception) {
+        returnObj.success = false;
+        returnObj.message = exception;
+    }
+    return returnObj;
+}
+
+//12-10 action type
+function getActionSubTypePickListValues(typeValue, index) {
+    var returnObj = new returnObject();
+    try {
+        var picklistValues = actionSubTypeMetaData.picklistValues;
+
+        // sub function to do the validFor test
+        function isDependentValue(index, validFor) {
+            var base64 = new sforce.Base64Binary("");
+            var decoded = base64.decode(validFor);
+            var bits = decoded.charCodeAt(index >> 3);
+
+            return ((bits & (0x80 >> (index % 8))) != 0);
+        }
+
+        for (var i = 0; i < picklistValues.length; i++) {
+            if (isDependentValue(index, picklistValues[i].validFor)) {
+                var newValue = new Object();
+                newValue.label = picklistValues[i].label;
+                newValue.value = picklistValues[i].value;
+                newValue.defaultValue = picklistValues[i].defaultValue;
+                newValue.validFor = picklistValues[i].validFor;
+                newValue.validForName = typeValue;
+                returnObj.values.push(newValue);
+            }
+        }
+
+    } catch (exception) {
+        returnObj.success = false;
+        returnObj.message = exception;
+    }
+    return returnObj;
+}
+(function() { //get dependent picklist values for Note Sub Types
+    var x = 0;
+    noteTypeStore.each(function (record) {
+        var noteTypeValue = record.data.value;
+        validNoteTypes[x] = noteTypeValue;
+        noteSubTypeStoreData[x] = { 'noteType': noteTypeValue, subTypes: [] };
+        var currValues = getSubTypePickListValues( noteTypeValue, x );
+        if ( currValues.success ) {
+            for ( y=0; y< currValues.values.length; y++ ) {
+                if ( currValues.values[y].validForName == noteTypeValue ) {
+                    var noteSubTypeValue = currValues.values[y].value;
+                    var jsonStr = '{ "noteSubType": "'+noteSubTypeValue+'", "noteSubTypeValue": "'+noteSubTypeValue+'"}';
+                    noteSubTypeStoreData[x].subTypes[y] = Ext.decode(jsonStr);
+                }
+            }
+        }
+        x++;
+    }, this);
+})();
+
+//12-10 
+(function() { //get dependent picklist values for Action Sub Types
+    var x = 0;
+    actionTypeStore.each(function (record) {
+        var actionTypeValue = record.data.value;
+        validActionTypes[x] = actionTypeValue;
+        actionSubTypeStoreData[x] = { 'actionType': actionTypeValue, subTypes: [] };
+        var currValues = getActionSubTypePickListValues( actionTypeValue, x );
+        if ( currValues.success ) {
+            for ( y=0; y< currValues.values.length; y++ ) {
+                if ( currValues.values[y].validForName == actionTypeValue ) {
+                    var actionSubTypeValue = currValues.values[y].value;
+                    var jsonStr = '{ "actionSubType": "'+actionSubTypeValue+'", "actionSubTypeValue": "'+actionSubTypeValue+'"}';
+                    actionSubTypeStoreData[x].subTypes[y] = Ext.decode(jsonStr);
+                }
+            }
+        }
+        x++;
+    }, this);
+})();
+//Code should be added about here-ish to retrieve picklist values for the Performance Actions (assuming that field will be a picklist) and add them to the performanceActionStore.
+//Noted 10/4/2013 by Katarina Melki
+
+Ext.onReady(function(){
+    Ext.tip.QuickTipManager.init();
+    Ext.FocusManager.enable();
+    WGUView = Ext.create('WGU.view.WGUViewport');
+    WGUView.render(Ext.getBody());
+
+    attachmentImage = Ext.create('Ext.Img', {
+        src: noteTypesPNG+'Attachment.png',
+        renderTo: 'noteViewerAttachment'
+    });
+    performanceToolTip = Ext.create('Ext.tip.ToolTip', {
+                target: 'noteViewerAttachment',
+                maxHeight: 200,
+                maxWidth: 500,
+                width: 500,
+                showDelay: 150,
+                dismissDelay: 0,
+                html: 'No Assessment Data for this Note'
+            });
+
+
+    filterCombo = Ext.getCmp('noteTypeFilterCombo');
+    searchTextField = Ext.getCmp('noteTextFilterTextField');
+
+    pidm = getParameterByName("pidm");
+    isPortalAccess = ( pidm != null );
+    noteId = getParameterByName("id");
+    contactId = ( '{!JSENCODE(WGUStudentNote__c.Student__c)}' != ''? '{!JSENCODE(WGUStudentNote__c.Student__c)}': getParameterByName("contactId") );
+    studentAccountId = getParameterByName("accountId");
+    studentWGUId = getParameterByName("studentId");
+
+    CKEDITOR.replace( 'noteHTMLTextEditor', {
+        on : {
+            instanceReady : function( ev ) {
+                CKEDITOR.instances.noteHTMLTextEditor.document.on( 'keydown', function(ev) {
+                   if ( ( (ev.data.getKey() == 83 || ev.data.getKey() == 115) && ev.data.$.ctrlKey ) || (ev.data.getKey() == 19) ) {
+                     saveNoteButtonClick();
+                     ev.data.preventDefault();
+                   } else {
+                    disableSave();
+                   }
+                });
+
+            }
+        },
+        toolbar: [
+            ['Cut','Copy','Paste','Link'],['Bold', 'Italic', 'Underline'],['JustifyLeft','JustifyCenter','JustifyRight'],['BulletedList','NumberedList','Indent','Outdent'],['Font','FontSize','TextColor','BGColor', '-','SpellChecker'],['Source']
+        ],
+
+        uiColor: '#2356AD',
+        toolbarCanCollapse: false,
+        resize_enabled:  false,
+        height: ''+(Ext.getCmp('noteHTMLTextEditorWrapper').getHeight()-40)+'px',
+        width: ''+(Ext.getCmp('noteHTMLTextEditorWrapper').getWidth()-2)+'px',
+        customConfig: '',
+        removePlugins: 'elementspath,maximize,resize,image',
+        removeDialogTabs: 'link:advanced;table:advanced',
+        enterMode: CKEDITOR.ENTER_BR,
+        shiftEnterMode: CKEDITOR.ENTER_P,
+        forcePasteAsPlainText: false,
+        forceSimpleAmpersand: true
+
+    });
+
+    CKEDITOR.replace( 'noteViewerHTML', {
+        on : {
+            instanceReady : function( ev ) {
+            }
+        },
+        toolbar: [],
+        uiColor: '#F2F2F2',
+        toolbarCanCollapse: false,
+        resize_enabled:  false,
+        height: ''+(Ext.getCmp('noteViewerHTMLWrapper').getHeight()-100)+'px',
+        width: ''+(Ext.getCmp('noteViewerHTMLWrapper').getWidth()-2)+'px',
+        customConfig: '',
+        removePlugins: 'elementspath,maximize,resize,image',
+        removeDialogTabs: 'link:advanced;table:advanced',
+        enterMode: CKEDITOR.ENTER_BR,
+        shiftEnterMode: CKEDITOR.ENTER_P,
+        forcePasteAsPlainText: false,
+        forceSimpleAmpersand: true,
+        readOnly: true
+    });
+
+    detailBanner = Ext.getCmp('NoteDetailBannerContainer');
+    studentBanner = Ext.getCmp('StudentDetailBannerContainer');
+
+    closeWindowBtn =  new Ext.Button({
+        text    : isPortalAccess? 'Close Window': 'View Student',
+        tooltip : isPortalAccess? 'Close this window': 'Return to this student\'s complete record',
+        handler : closeNotePageClick,
+        height: 25,
+        width: 100
+    });
+    closeWindowBtn.render('cancelBtnDiv');
+
+    noteHistoryGridPanel = Ext.getCmp('noteHistoryGridPanel');
+    noteHistoryGridPanel.getDockedItems()[0].add(searchTextField);
+    noteHistoryGridPanel.child('[dock=top]').add([
+        '->',  //align right
+        '-',   //vertical spacer
+        {
+            text: 'Clear Form',
+            style: 'border-color: #81A4D0;',
+            width: 80,
+            tooltip: 'Start a new note with a blank form',
+            handler: newNoteButtonClick
+        },
+        '-',
+        {
+            text: 'Clear Filters',
+            style: 'border-color: #81A4D0;',
+            width: 80,
+            tooltip: 'View all notes in the grid (remove all filters)',
+            handler: clearFiltersClick
+        },
+        '-',
+        {
+            text: 'Refresh',
+            style: 'border-color: #81A4D0;',
+            width: 80,
+            tooltip: 'Refresh the complete list of this student\'s notes from the server',
+            handler: viewHistoryButtonClick
+        }
+
+    ]);
+
+
+    filterCombo.setRawValue('All');
+    filterCombo.on('select', function(combo, records, opts){
+        var val = records[0].get('value');
+        var searchText = searchTextField.getRawValue()==null? '': searchTextField.getRawValue();
+        noteHistoryGridPanel.getStore().filterBy( function(record) {
+            if ( val == 'All' && searchText == '' ) {
+                return true;
+            } else {
+                if ( searchText != '' ) {
+                    return (record.get('Type__c') == val) && ( record.get('Text__c').indexOf(searchText) != -1 ) ;
+                } else {
+                    return record.get('Type__c') == val;
+                }
+            }
+        }, this);
+    });
+
+
+
+    //get var instances of div components
+    noteTypeCombo = Ext.getCmp('noteTypeCombo');
+    noteTypeCombo.on('change', noteTypeComboChange);
+    var x = 0;
+    noteTypeStore.each( function(record) {
+        validNoteTypes[x++] = record.get('value');
+    }, this);
+
+    noteSubTypeCombo = Ext.getCmp('noteSubTypeCombo');
+    noteSubTypeCombo.on({
+        'change' : disableSave,
+        scope: noteSubTypeCombo
+    });
+    //12-10 action type
+    actionTypeCombo = Ext.getCmp('actionTypeCombo');
+    actionTypeCombo.on('change', actionTypeComboChange);
+    var x = 0;
+    actionTypeStore.each( function(record) {
+        validActionTypes[x++] = record.get('value');
+    }, this);
+
+    actionSubTypeCombo = Ext.getCmp('actionSubTypeCombo');
+    actionSubTypeCombo.on({
+        'change' : actionSubTypeComboChange,
+        scope: actionSubTypeCombo
+    });
+    
+    noteSubjectTextField = Ext.getCmp('noteSubjectTextField');
+    noteHTMLTextEditor = CKEDITOR.instances.noteHTMLTextEditor;
+
+    noteSubjectTextField.on({
+        'change' : noteSubjectTextFieldChange,
+        scope: noteSubjectTextField
+    });
+    //yemeng 10/10
+    performanceActionCombo = Ext.getCmp('performanceActionCombo');  
+    performanceActionCombo.on({
+        'change' : performanceActionComboChange,
+        scope: performanceActionCombo
+    }); 
+    
+    saveNoteButton = Ext.getCmp('saveNoteButton');
+    saveNoteButton.on({
+        'click' : saveNoteButtonClick,
+        scope: saveNoteButton
+    });
+
+    //process URL QueryString inputs 
+    if ( noteId ) {		//load note
+        NotesController.getNoteJSONById( noteId,  processNoteAjaxResponse, {escape:false} );
+    } else if ( studentAccountId || contactId || studentWGUId  ) {   //load student and then load note.
+        if ( studentAccountId ) {
+            NotesController.getStudentJSON( studentAccountId, false, processStudentAjaxResponse, {escape:false} );
+        } else if ( studentWGUId ) {
+            NotesController.getStudentJSONByStudentWGUId( studentWGUId, processStudentAjaxResponse, {escape:false} );
+        } else {
+            NotesController.getStudentJSONByContactId( contactId, processStudentAjaxResponse, {escape:false} );
+        }
+    } else if ( pidm ) {
+        NotesController.getStudentJSON( pidm, true, processStudentAjaxResponse, {escape:false} );
+    } else {
+        Ext.MessageBox.show({
+            title:'Student or Note Context Missing',
+            msg: 'This page requires a data context for a specific student or note.<br/>Please supply an Account Id, PIDM, or Student Note Id:<br/>e.g. ../apex/notes?accountId=  ../apex/notes?pidm=  ../apex/notes?id=',
+            buttons: Ext.Msg.OK,
+            icon: Ext.Msg.INFO
+        });
+        noteHTMLTextEditor.setReadOnly(true);
+        noteHTMLTextEditor.setUiColor( 'Maroon' );
+        WGUView.setDisabled(true);
+        studentBanner.setDisabled(true);
+        detailBanner.setDisabled(true);
+    }
+
+    ZeroPercentRadio = Ext.getCmp('ZeroPercentRadio');
+    ParitalPercentRadio = Ext.getCmp('ParitalPercentRadio');
+    HundredPercentRadio = Ext.getCmp('HundredPercentRadio');
+    EngagedInNewStudentProtocolsCheckbox = Ext.getCmp('EngagedInNewStudentProtocolsCheckbox');
+    EngagedInLearningResourceCheckbox = Ext.getCmp('EngagedInLearningResourceCheckbox');
+    UtilizedACommunityResourceCheckbox = Ext.getCmp('UtilizedACommunityResourceCheckbox');
+    AttendedASeminarCheckbox = Ext.getCmp('AttendedASeminarCheckbox');
+    MetWithACourseMentorCheckbox = Ext.getCmp('MetWithACourseMentorCheckbox');
+    TookAPreAssessmentCheckbox = Ext.getCmp('TookAPreAssessmentCheckbox');
+    ScheduledAnAssessmentCheckbox = Ext.getCmp('ScheduledAnAssessmentCheckbox');
+    TookAndFailedAnAssessmentCheckbox = Ext.getCmp('TookAndFailedAnAssessmentCheckbox');
+    TookAndPassedAnAssessmentCheckbox = Ext.getCmp('TookAndPassedAnAssessmentCheckbox');
+    SubmittedATaskStreamTaskCheckbox = Ext.getCmp('SubmittedATaskStreamTaskCheckbox');
+    RevisedATaskStreamTaskCheckbox = Ext.getCmp('RevisedATaskStreamTaskCheckbox');
+    NoEvidenceIsPresentCheckbox = Ext.getCmp('NoEvidenceIsPresentCheckbox');
+
+    noteTypeCombo.focus();
+}); //end Ext.OnReady()
+
+
+
+function clearFiltersClick() {
+    filterCombo.setRawValue('All');
+    searchTextField.setRawValue('');
+    noteHistoryGridPanel.filters.clearFilters();
+    noteHistoryGridPanel.getStore().filterBy( function(record) {
+        return true;
+    }, this);
+    notesStore.sort('WGUCreationDateTime__c', 'DESC');
+    Ext.Function.defer( function() {
+        noteHistoryGridPanel.columns[3].setSortState(null);
+        noteHistoryGridPanel.columns[3].setSortState('DESC');
+    }, 500);
+}
+
+function resetStudentPerformanceSurvey(){
+    var radiobuttons = Ext.select('.progressCls').elements;
+    for (var i = 0; i < radiobuttons.length; i++) {
+        Ext.getCmp(radiobuttons[i].id).setValue(false);
+    }
+    var checkboxes = Ext.select('.evidenceCls').elements;
+    for (var i = 0; i < checkboxes.length; i++) {
+        Ext.getCmp(checkboxes[i].id).setValue(false);
+    }
+}
+
+function newNoteButtonClick( e, target, options ) {
+    clearFiltersClick();
+    noteRecord = Ext.decode( blankNoteJSON );
+    isEditable = true;
+    saveNoteButton.setDisabled( true );
+    noteHTMLTextEditor.setReadOnly( false );
+    noteHTMLTextEditor.setUiColor( '#2356AD' );
+    noteSubjectTextField.setReadOnly( false );
+    noteTypeCombo.setReadOnly( false );
+    noteSubTypeCombo.setReadOnly( false );
+    //Reset Student Performance Action selected value
+    //Added 10/3/2013 by Katarina Melki
+    //Edit 12-10
+    //Ext.getCmp('performanceActionCombo').reset();
+    Ext.getCmp('actionTypeCombo').reset();
+    Ext.getCmp('actionSubTypeCombo').reset();
+
+    noteSubjectTextField.setValue( '' );
+    noteHTMLTextEditor.setData( '' );
+    Ext.getCmp('noteCreatedDateTimeText').setValue('');
+    Ext.getCmp('noteEditStatusText').setValue( 'New Note' );
+    // yemeng 10/11
+    modeType='new';
+    Ext.getCmp('noteAuthorText').setValue( '' );
+    noteTypeCombo.setValue(null);
+    noteSubTypeCombo.setReadOnly(true);
+    noteSubTypeCombo.setValue(null);
+    noteSubTypeCombo.setRawValue('');
+
+    noteRecord.Author__c = thisUserId;
+    noteRecord.AuthorPidm__c = thisUserPIDM;
+    noteRecord.Student__c = studentRecord.Id;
+    noteRecord.PIDM__c = studentRecord.PIDM__c;
+
+    resetStudentPerformanceSurvey();
+    HundredPercentRadio.setRawValue( isStudentMentor );
+
+    var radiobuttons = Ext.select('.progressCls').elements;
+    for (var i = 0; i < radiobuttons.length; i++) {
+        Ext.getCmp(radiobuttons[i].id).setReadOnly(false);
+    }
+    var checkboxes = Ext.select('.evidenceCls').elements;
+    for (var i = 0; i < checkboxes.length; i++) {
+        Ext.getCmp(checkboxes[i].id).setReadOnly(false);
+    }
+
+    Ext.getCmp('performanceSurveyPanel').setTitle('Student Performance Questions (' + (isStudentMentor? 'Required': 'Optional') + '):');
+    if ( !isStudentMentor ) {
+            var El = Ext.get(Ext.select('#performanceSurveyPanel .x-panel-header').elements[0]);
+            El.setStyle('background-color',(isStudentMentor? '#D3E1F1': '#D3D3D3'));
+            El.setStyle('border-color',(isStudentMentor? '#99BCE8': '#C7C7C7'));
+            El = Ext.get(Ext.select('#performanceSurveyPanel-body').elements[0]);
+            El.setStyle('color','#6D6D6D');
+            El.setStyle('border-color','#C7C7C7');
+            Ext.get('performanceQuestion1Label').setStyle('color','#6D6D6D');   
+            Ext.get('performanceQuestion2Label').setStyle('color','#6D6D6D');
+    } else {
+        var El = Ext.get(Ext.select('#performanceSurveyPanel .x-panel-header').elements[0]);
+        El.setStyle('background-color', '#97B0DA');
+        El.setStyle('border-color', '#99BCE8');
+        El = Ext.get(Ext.select('#performanceSurveyPanel-body').elements[0]);
+        El.setStyle('color','black');
+        El.setStyle('border-color','#99BCE8');
+        Ext.get('performanceQuestion1Label').setStyle('color','black');   
+        Ext.get('performanceQuestion2Label').setStyle('color','black');
+    }
+
+    CKEDITOR.instances.noteHTMLTextEditor.document.on( 'keydown', function(ev) {
+                   if ( ( (ev.data.getKey() == 83 || ev.data.getKey() == 115) && ev.data.$.ctrlKey ) || (ev.data.getKey() == 19) ) {
+                     saveNoteButtonClick();
+                     ev.data.preventDefault();
+                   } else {
+                    disableSave();
+                   }
+    });
+}
+
+
+function viewHistoryButtonClick( e, target, options ) {
+    if (studentRecord.Id) {
+        notesQueryLocator = 0;
+        clearFiltersClick();
+        noteHistoryGridPanel.setLoading('Refreshing Notes List...');
+        NotesController.getNotesJSONByOffset( studentRecord.Id, notesQueryLocator, function(result, er) {
+            if ( er.status ) {
+                try {
+                    var parsedResult = Ext.decode(result);
+                    isGetNotesDone = parsedResult.isDone;
+                    notesQueryLocator = parsedResult.queryLocator;
+                    if ( parsedResult.Records.length > 0 ) {
+                        for ( var record in parsedResult.Records ) {
+                            parsedResult.Records[record].Text__c = ( parsedResult.Records[record].Text__c==null? null :Base64.decode( parsedResult.Records[record].Text__c ) );
+                            var shortText = parsedResult.Records[record].Text__c==null? null: parsedResult.Records[record].Text__c.replace( /<[^<|>]+?>/gi,'' );
+                            parsedResult.Records[record].ShortText__c = Ext.String.ellipsis(shortText,100,true);
+                            if ( Ext.Array.contains(validNoteTypes, parsedResult.Records[record].Type__c ) ) {
+                                parsedResult.Records[record].Level1Image__c = parsedResult.Records[record].Type__c==null?'':(noteTypesPNG+parsedResult.Records[record].Type__c.replace(/\s+/g, '').replace('/', '')+'.png');
+                            } else {
+                                parsedResult.Records[record].Level1Image__c = noteTypesPNG+'unknown.gif';
+                            }
+                            if ( parsedResult.Records[record].Author__r == null ) {
+                                parsedResult.Records[record].Author__r = { Name: '' };
+                            }
+                        }
+                    }
+                    notesStore.loadDataViaReader( parsedResult ); //the line actually load all notes
+                } finally {
+                    noteHistoryGridPanel.setLoading(false);
+                }
+                if ( !isGetNotesDone ) {
+                    addMoreRecords();
+                } else {
+                    getPerformanceResponses();
+                }
+            } else {
+                noteHistoryGridPanel.setLoading(false);
+                if ( er && er.type == "exception" ) {
+                    Ext.MessageBox.show({
+                        title:'Refresh History Program Exception',
+                        msg: er.message + '<br/>Reference: NotesController.getNotesJSONByOffset()',
+                        buttons: Ext.Msg.OK,
+                        icon: Ext.Msg.ERROR
+                    });
+                }
+            }
+        }, {escape:false} );
+    }
+}
+
+//Code will need to be modified in one of the two following functions to allow for pulling the value of the performance action.
+//Additionally the corresponding data model and Notes Controller class functions will need to be modified to handle the new data field.
+//Noted 10/4/2013 by Katarina Melki
+//This is not the main function to load notes data  -yemeng 
+
+function addMoreRecords() {
+    if ( !isGetNotesDone ) {
+        NotesController.getNotesJSONByOffset( studentRecord.Id, notesQueryLocator, function(result, er) {
+            if ( er.status ) {
+                var parsedResult = Ext.decode(result);
+                isGetNotesDone = parsedResult.isDone;
+                notesQueryLocator = parsedResult.queryLocator;
+                if ( parsedResult.Records.length > 0 ) {
+                    var newModels = [];
+                    for ( var x=0; x < parsedResult.Records.length; x++ ) {
+                        var thisRecord = parsedResult.Records[x];
+                        thisRecord.Text__c = ( thisRecord.Text__c==null? null :Base64.decode( thisRecord.Text__c ) );
+                        var newRecord = Ext.create('NotesModel');
+                        newRecord.set( 'Id', thisRecord.Id );
+                        newRecord.set( 'WGUCreationDateTime__c', thisRecord.WGUCreationDateTime__c );
+                        newRecord.set( 'Text__c', thisRecord.Text__c  );
+                        newRecord.set( 'Type__c', thisRecord.Type__c  );
+                        if ( Ext.Array.contains(validNoteTypes, thisRecord.Type__c ) ) {
+                            newRecord.set( 'Level1Image__c', (noteTypesPNG+thisRecord.Type__c.replace(/\s+/g, '').replace('/', '')+'.png') );
+                        } else {
+                            newRecord.set( 'Level1Image__c', noteTypesPNG+'unknown.gif' );
+                        }
+                        newRecord.set( 'SubType__c', thisRecord.SubType__c );
+                        newRecord.set( 'Name', thisRecord.Name  );
+                        newRecord.set( 'Author__c', thisRecord.Author__c  );
+                        if ( thisRecord.Author__r == null ) {
+                            thisRecord.Author__r = { Name: '' };
+                        }
+                        newRecord.set( 'AuthorName', thisRecord.Author__r.Name  );
+                        newRecord.set( 'AuthorPidm__c', thisRecord.AuthorPidm__c  );
+                        newRecord.set( 'Student__c', thisRecord.Student__c  );
+                        newRecord.set( 'PIDM__c', thisRecord.PIDM__c  );
+                        newRecord.set( 'ShortText__c', thisRecord.Text__c==null?null:Ext.String.ellipsis(thisRecord.Text__c.replace( /<[^<|>]+?>/gi,'' ),100,true)  );
+                        // yemeng  10-9-13 
+                        newRecord.set( 'PersonalizationActions__c', thisRecord.PersonalizationActions__c  ); 
+                        newRecord.set( 'PersonalizationMenu__c', thisRecord.PersonalizationMenu__c  ); 
+                        newRecord.set( 'PersonalizationMenuSubType__c', thisRecord.PersonalizationMenuSubType__c  ); 
+                        newModels[x] = newRecord;
+                    }
+                    notesStore.loadData( newModels, true );
+                    if ( !isGetNotesDone ) {
+                        addMoreRecords();
+                    } else {
+                        getPerformanceResponses();
+                    }
+                }
+            } else {
+                isGetNotesDone = true;
+                if ( er && er.type == "exception" ) {
+                    Ext.MessageBox.show({
+                        title:'Refresh History Program Exception',
+                        msg: er.message + '<br/>Reference: addMoreRecords() -> NotesController.getNotesJSONByOffset()',
+                        buttons: Ext.Msg.OK,
+                        icon: Ext.Msg.ERROR
+                    });
+                }
+            }
+        }, {escape:false} );
+    }
+}
+
+function getPerformanceResponses() {
+    if ( !isGetSurveysDone ) {
+        NotesController.getPerformanceSurveyJSONByOffset( studentRecord.Id, surveysQueryLocator, function(result, er) {
+            if ( er.status ) {
+                var parsedResult = Ext.decode(result);
+                isGetSurveysDone = parsedResult.isDone;
+                surveysQueryLocator = parsedResult.queryLocator;
+                if ( parsedResult.Records.length > 0 ) {
+                    var newModels = [];
+                    for ( var x=0; x < parsedResult.Records.length; x++ ) {
+                        var thisRecord = parsedResult.Records[x];
+                        var newRecord = Ext.create('SurveyModel');
+                        newRecord.set( 'Id', thisRecord.Id );
+                        newRecord.set( 'NoteSubject', thisRecord.Name  );
+                        newRecord.set( 'EvidenceOfAcademicActivity__c', thisRecord.EvidenceOfAcademicActivity__c );
+                        newRecord.set( 'GoalPerformanceSinceLastCall__c', thisRecord.GoalPerformanceSinceLastCall__c  );
+                        newRecord.set( 'Student__c', thisRecord.Student__c );
+                        newRecord.set( 'WGUStudentNote__c', thisRecord.WGUStudentNote__c  );
+                        newModels[x] = newRecord;
+                    }
+                    surveyStore.loadData( newModels, true );
+                    if ( !isGetSurveysDone ) {
+                        getPerformanceResponses();
+                    } else {
+                        //reset tokens for future refresh
+                        isGetSurveysDone = false;
+                        surveysQueryLocator = 0;
+                    }
+                }
+            } else {
+                isGetSurveysDone = false;
+                surveysQueryLocator = 0;
+                if ( er && er.type == "exception" ) {
+                    Ext.MessageBox.show({
+                        title:'Performance Survey Program Exception',
+                        msg: er.message + '<br/>Reference: getPerformanceResponses() -> NotesController.getPerformanceSurveyJSONByOffset()',
+                        buttons: Ext.Msg.OK,
+                        icon: Ext.Msg.ERROR
+                    });
+                }
+            }
+        }, {escape:false} );
+    }
+}
+
+function closeNotePageClick( e, target, options ) {
+    if ( isPortalAccess ) {
+        window.open('','_self','');
+        window.close();
+        if (!window.closed) {
+            var messageText = '';
+            if ( Ext.isWindows || Ext.isLinux ) {
+                messageText = 'Your browser security setting requires you to close this window manually.<br/>Try clicking the window\'s [X] button or pressing CTRL+W with your keyboard.';
+            } else if ( Ext.isMac ) {
+                messageText = 'Your browser security setting requires you to close this window manually.<br/>Try clicking the window\'s (X) button or pressing Command+W with your keyboard.';
+            } else {
+                messageText = 'Your browser security setting requires you to close this window manually.';
+            }
+            Ext.MessageBox.show({
+                title:'Browser Security Preventing Close',
+                msg: messageText,
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.INFO
+            });
+        }
+    } else if ( studentAccountId != null ) {
+        return window.location = '/'+studentAccountId;
+    }
+}
+
+function saveNoteButtonClick(e, target, options) {
+    var subject = noteSubjectTextField.getValue() != null && noteSubjectTextField.getValue().trim() != "";
+    var noteType = noteTypeCombo.getValue() != null && noteTypeCombo.getValue() != "";
+    var noteSubType = (noteSubTypeCombo.getRawValue() != '' && noteSubTypeStore.data.items.length>0) || (noteSubTypeStore.data.items.length==0);
+    var note = noteHTMLTextEditor.getData().trim() != '' && noteHTMLTextEditor.getData().trim() != "<br>" && noteHTMLTextEditor.getData().trim() != "<br/>" && noteHTMLTextEditor.getData().trim() != "\n" && noteHTMLTextEditor.getData().trim() != "<br />" && noteHTMLTextEditor.getData().trim() != "<br />\n";
+    var performanceQuestion1Satisfied = ( ZeroPercentRadio.getValue() || ParitalPercentRadio.getValue() || HundredPercentRadio.getValue() );
+    var performanceQuestion2Satisfied = ( EngagedInNewStudentProtocolsCheckbox.getValue() ||
+            EngagedInLearningResourceCheckbox.getValue() ||
+            UtilizedACommunityResourceCheckbox.getValue() ||
+            AttendedASeminarCheckbox.getValue() ||
+            MetWithACourseMentorCheckbox.getValue() ||
+            TookAPreAssessmentCheckbox.getValue() ||
+            ScheduledAnAssessmentCheckbox.getValue() ||
+            TookAndFailedAnAssessmentCheckbox.getValue() ||
+            TookAndPassedAnAssessmentCheckbox.getValue() ||
+            SubmittedATaskStreamTaskCheckbox.getValue() ||
+            RevisedATaskStreamTaskCheckbox.getValue() ||
+            NoEvidenceIsPresentCheckbox.getValue() );
+    var performance = ( (isStudentMentor &&  performanceQuestion1Satisfied &&  performanceQuestion2Satisfied )  || !isStudentMentor || ( isStudentMentor && Ext.getCmp('noteEditStatusText').getRawValue() == 'Edit Mode' ) );
+    //Determine if the Student Performance Action is required and a valid action selected
+    //Current check is valid for a 0-3 scoring scheme that was detailed but is not valid if the existing 0-100 scoring system is to be used.
+    //Added 10/3/2013 by Katarina Melki
+    
+     var action=(isStudentMentor 
+     && ((AtRiskScore==1||AtRiskScore==2)
+        		&& (( Ext.getCmp('actionTypeCombo').getValue()!=null && Ext.getCmp('actionSubTypeCombo').getValue()!=null&& noteTypeCombo.getValue()== 'Live Call')
+        			|| noteTypeCombo.getValue()!= 'Live Call'))
+        ||(AtRiskScore==3||AtRiskScore==0||AtRiskScore==null)) || !isStudentMentor;
+        
+    if (  subject && note && noteType && noteSubType && action & performance ) {
+        //yemeng if performance action changed, it should allow the save
+        if ( noteRecord.Text__c && noteHTMLTextEditor.getData().trim() == noteRecord.Text__c.trim() &&   Ext.getCmp('actionTypeCombo').getValue()==noteRecord.PersonalizationMenu__c && Ext.getCmp('actionSubTypeCombo').getValue()==noteRecord.PersonalizationMenuSubType__c) {
+            Ext.MessageBox.show({
+                title:'Save Not Needed',
+                msg: 'The note text has not changed. Saving is not necessary.',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.INFO
+            });
+        } else if ( !isStudentMentor ) {
+            if ( (performanceQuestion1Satisfied && !performanceQuestion2Satisfied) || (!performanceQuestion1Satisfied && performanceQuestion2Satisfied) ) {
+                Ext.MessageBox.show({
+                    title:'Cancel Incomplete Student Performance Questions?',
+                    msg: 'You have answered only one of the optional student performance questions.<br/>Do you want to cancel your incomplete response?<br/>[click No to complete both questions before saving]',
+                    buttons: Ext.Msg.YESNO,
+                    icon: Ext.Msg.QUESTION,
+                    fn: function(btn, text) {
+                        if (btn == 'yes') {
+                            if ( performanceQuestion1Satisfied ) {
+                                var radiobuttons = Ext.select('.progressCls').elements;
+                                for (var i = 0; i < radiobuttons.length; i++) {
+                                    Ext.getCmp(radiobuttons[i].id).setValue(false);
+                                }
+                            } else {
+                                var checkboxes = Ext.select('.evidenceCls').elements;
+                                for (var i = 0; i < checkboxes.length; i++) {
+                                    Ext.getCmp(checkboxes[i].id).setValue(false);
+                                }
+                            }
+                            saveNote();
+                        }
+                    }
+                });
+            } else {
+                saveNote();
+            }
+        } else {
+            saveNote();
+        }
+
+    } else {
+        if ( !subject ) {
+            Ext.MessageBox.show({
+                title:'Subject Required',
+                msg: 'Please specify a subject.',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.INFO
+            });
+            noteSubjectTextField.focus();
+        } else if ( !noteType ) {
+            Ext.MessageBox.show({
+                title:'Note Type Required',
+                msg: 'Please specify a valid note type.',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.INFO
+            });
+            noteTypeCombo.focus();
+        } else if ( !noteSubType ) {
+            Ext.MessageBox.show({
+                title:'Note Sub Type Required',
+                msg: 'Please specify a valid note sub type.',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.INFO
+            });
+            noteSubType.focus();
+        } else if ( !note ){
+            Ext.MessageBox.show({
+                title:'Note Content Required',
+                msg: 'Please specify content for the student note.',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.INFO
+            });
+            CKEDITOR.instances.noteHTMLTextEditor.focusManager.focus();
+        } else if ( !performance ) {
+            Ext.MessageBox.show({
+                title:'Performance Survey Responses Required',
+                msg: 'As this student\'s mentor, please answer all performance survey questions.',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.INFO
+            });
+        } 
+        //Message for missing required Student Performance Actions
+        //Added 10/3/2013 by Katarina Melki
+        else if ( !action ) 
+        {
+            Ext.MessageBox.show({
+                title:'Performance Action Required',
+                msg: 'As this student\'s mentor, please select a Student Performance Action.',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.INFO
+            });
+        }
+    }
+}
+
+function saveNote() {
+    //Code needs to be added somewhere below to handle saving the performance action.
+    //The exact position and nature of that code will depend on where the performance action is to be saved.
+    //Corresponding modifications will need to be made to the Notes Controller calss as well.
+    //Noted 10/4/2013 by Katarina Melki
+
+    var noteHTML = Base64.encode( noteHTMLTextEditor.getData().trim() );
+    noteRecord.ShortText__c = CKEDITOR.instances.noteHTMLTextEditor.getData().trim().replace( /<[^<|>]+?>/gi,'' );
+    //yemeng 10-11/13
+    //noteRecord.Id = (Ext.getCmp('noteEditStatusText').getRawValue() == 'New Note')? null: noteRecord.Id;
+    noteRecord.Id = (modeType == 'new')? null: noteRecord.Id;
+    noteRecord.Text__c = noteHTML;
+    noteRecord.Type__c = noteTypeCombo.getValue();
+    noteRecord.SubType__c = noteSubTypeCombo.getRawValue();
+    noteRecord.Name = noteSubjectTextField.getValue().trim();
+    //performance action: yemeng zhu 10/9/13
+    //yemeng 10-16 live call 
+    // Edit 12-10
+	if(noteTypeCombo.getValue()== 'Live Call' &&  AtRiskScore!=0 && AtRiskScore!=null)
+	{
+    	//noteRecord.PersonalizationActions__c = Ext.getCmp('performanceActionCombo').getValue();
+    	noteRecord.PersonalizationMenu__c = Ext.getCmp('actionTypeCombo').getValue();
+    	noteRecord.PersonalizationMenuSubType__c = Ext.getCmp('actionSubTypeCombo').getValue();
+	}else
+	{
+    	//noteRecord.PersonalizationActions__c = null;
+    	noteRecord.PersonalizationMenu__c = null;
+    	noteRecord.PersonalizationMenuSubType__c = null;
+	} 
+    Ext.getCmp('noteHTMLTextEditorWrapper').setLoading('Saving Note...');
+    var noteJson = Ext.encode( noteRecord );
+    NotesController.saveNoteJSON( noteJson, function( result, er ) {
+        try {
+            if ( er.status ) {
+                recordsObj = Ext.decode( result );
+                result = recordsObj.Records[0];
+                if ( result.Id ) {
+                    noteRecord.Id = result.Id;
+                    noteRecord.WGUCreationDateTime__c = result.WGUCreationDateTime__c;
+                    noteRecord.Text__c = Base64.decode( result.Text__c );
+                    noteRecord.Author__r = result.Author__r;
+                    Ext.getCmp('noteAuthorText').setValue( result.Author__r!= null? result.Author__r.Name: '' );
+
+                    try {
+                        var performanceQuestion1Satisfied = ( ZeroPercentRadio.getValue() || ParitalPercentRadio.getValue() || HundredPercentRadio.getValue() );
+                        var performanceQuestion2Satisfied = ( EngagedInNewStudentProtocolsCheckbox.getValue() ||
+                                EngagedInLearningResourceCheckbox.getValue() ||
+                                UtilizedACommunityResourceCheckbox.getValue() ||
+                                AttendedASeminarCheckbox.getValue() ||
+                                MetWithACourseMentorCheckbox.getValue() ||
+                                TookAPreAssessmentCheckbox.getValue() ||
+                                ScheduledAnAssessmentCheckbox.getValue() ||
+                                TookAndFailedAnAssessmentCheckbox.getValue() ||
+                                TookAndPassedAnAssessmentCheckbox.getValue() ||
+                                SubmittedATaskStreamTaskCheckbox.getValue() ||
+                                RevisedATaskStreamTaskCheckbox.getValue() ||
+                                NoEvidenceIsPresentCheckbox.getValue() );
+                        if ( performanceQuestion1Satisfied && performanceQuestion2Satisfied ) {
+                            surveyRecord = Ext.decode( blankSurveyJSON );
+                            surveyRecord.WGUStudentNote__c = noteRecord.Id;
+                            surveyRecord.Student__c = studentRecord.Id;
+                            surveyRecord.Name = studentRecord.FirstName + ' ' + studentRecord.LastName + ' ' + Ext.Date.format(convertDate(noteRecord.WGUCreationDateTime__c), "m/d/Y g:i a T");
+                            if ( HundredPercentRadio.getValue() ) {
+                                surveyRecord.GoalPerformanceSinceLastCall__c = HundredPercentRadio.boxLabel;
+                            } else if ( ParitalPercentRadio.getValue() ) {
+                                surveyRecord.GoalPerformanceSinceLastCall__c = ParitalPercentRadio.boxLabel;
+                            } else {
+                                surveyRecord.GoalPerformanceSinceLastCall__c = ZeroPercentRadio.boxLabel;
+                            }
+                            var firstValue = true;
+                            surveyRecord.EvidenceOfAcademicActivity__c = '';
+                            var checkboxes = Ext.select('.evidenceCls').elements;
+                            for (var i = 0; i < checkboxes.length; i++) {
+                                var checkbox = Ext.getCmp(checkboxes[i].id)
+                                if ( checkbox.getValue() ) {
+                                    surveyRecord.EvidenceOfAcademicActivity__c += (firstValue?'':';') + checkbox.boxLabel;
+                                    if ( firstValue ) {
+                                      firstValue = false;
+                                    }
+                                }
+                            }
+
+                            var surveyRecordJSON = Ext.encode( surveyRecord );
+                            NotesController.saveSurveyJSON( surveyRecordJSON , function( result, er ) {
+                                if ( er.status && result != null ) {
+                                    var parsedResult = Ext.decode(result);
+                                    var thisRecord = parsedResult.Records[0];
+                                    var newRecord = Ext.create('SurveyModel');
+                                    newRecord.set( 'Id', thisRecord.Id );
+                                    newRecord.set( 'NoteSubject', thisRecord.Name  );
+                                    newRecord.set( 'EvidenceOfAcademicActivity__c', thisRecord.EvidenceOfAcademicActivity__c );
+                                    newRecord.set( 'GoalPerformanceSinceLastCall__c', thisRecord.GoalPerformanceSinceLastCall__c  );
+                                    newRecord.set( 'Student__c', thisRecord.Student__c );
+                                    newRecord.set( 'WGUStudentNote__c', thisRecord.WGUStudentNote__c  );
+                                    surveyStore.add( newRecord );
+                                } else {
+                                    if ( er && er.type == "exception" ) {
+                                        Ext.MessageBox.show({
+                                            title:'Save Student Performance Program Exception',
+                                            msg: er.message + '<br/>Reference: saveNote() -> NotesController.saveSurveyJSON()',
+                                            buttons: Ext.Msg.OK,
+                                            icon: Ext.Msg.ERROR
+                                        });
+                                    }
+                                }
+                            }, {escape:false} );
+                        }
+                    } catch (e) {
+                        // do not let performance survey exception interfere with Note processing
+                    }
+
+                    clearFiltersClick();
+                    var foundIndex = notesStore.findExact( 'Id', result.Id );
+                    if ( foundIndex == -1 ) {
+                        //add new record to data grid
+                        var newRecord = Ext.create('NotesModel');
+                        newRecord.set( 'Id', noteRecord.Id );
+                        newRecord.set( 'WGUCreationDateTime__c', noteRecord.WGUCreationDateTime__c );
+                        if ( noteRecord.WGUCreationDateTime__c  ) {
+                            Ext.getCmp('noteCreatedDateTimeText').setValue(Ext.Date.format(convertDate(noteRecord.WGUCreationDateTime__c), "m/d/Y g:i a T"));
+                        }
+                        newRecord.set( 'Text__c', noteRecord.Text__c  );
+                        newRecord.set( 'Type__c', noteRecord.Type__c  );
+                        if ( Ext.Array.contains(validNoteTypes, noteRecord.Type__c ) ) {
+                            newRecord.set( 'Level1Image__c', (noteTypesPNG+noteRecord.Type__c.replace(/\s+/g, '').replace('/', '')+'.png') );
+                        } else {
+                            newRecord.set( 'Level1Image__c', noteTypesPNG+'unknown.gif' );
+                        }
+                        newRecord.set( 'SubType__c', noteRecord.SubType__c );
+                        newRecord.set( 'Name', noteRecord.Name  );
+                        newRecord.set( 'Author__c', noteRecord.Author__c  );
+                        newRecord.set( 'AuthorName', noteRecord.Author__r.Name  );
+                        newRecord.set( 'AuthorPidm__c', noteRecord.AuthorPidm__c  );
+                        newRecord.set( 'Student__c', noteRecord.Student__c  );
+                        newRecord.set( 'PIDM__c', noteRecord.PIDM__c  );
+                        newRecord.set( 'ShortText__c', noteRecord.Text__c==null?null:Ext.String.ellipsis(noteRecord.Text__c.replace( /<[^<|>]+?>/gi,'' ),100,true)  );
+                        //save newly added record into noteStore
+                       // record.set('PersonalizationActions__c', noteRecord.PersonalizationActions__c );  
+                        newRecord.set('PersonalizationMenu__c', noteRecord.PersonalizationMenu__c );  
+                        newRecord.set('PersonalizationMenuSubType__c', noteRecord.PersonalizationMenuSubType__c );     
+                        notesStore.insert( 0, newRecord );
+                        noteHistoryGridPanel.getSelectionModel().select(0);
+
+                    } else {
+                        //update exisiting record
+                        var record = notesStore.getAt(foundIndex);
+                        record.set('Text__c', noteRecord.Text__c );
+                        record.set('ShortText__c', noteRecord.ShortText__c );
+                        record.set('SubType__c', noteRecord.SubType__c );
+                        record.set('Name', noteRecord.Name ); //subject
+   						//performance action: yemeng zhu 10/9/13  
+   						//save changes back to noteStore
+                       // record.set('PersonalizationActions__c', noteRecord.PersonalizationActions__c );  
+                        record.set('PersonalizationMenu__c', noteRecord.PersonalizationMenu__c );  
+                        record.set('PersonalizationMenuSubType__c', noteRecord.PersonalizationMenuSubType__c );   
+                    }
+                    noteHistoryGridPanel.getView().refresh();
+
+                    newNoteButtonClick();
+                    Ext.get(Ext.select('#noteEditStatusText .x-form-display-field').elements[0]).setStyle('color','lightgreen');
+                    Ext.getCmp('noteEditStatusText').setValue('Note saved successfully');
+                    //yemeng 10-10 'New Note' issue: 
+                    //    this will change the mode back to 'new mode'  after 3000 milisecond. so if user click any
+                    //   record right after save and enter the 'edit' mode too early, it will set back to 'new mode' by this piece of code at 3000 milisecond.
+                    //   and when saving it , it will save as new record.
+                    modeType = 'new';
+                    setTimeout(function() {
+                        Ext.get(Ext.select('#noteEditStatusText .x-form-display-field').elements[0]).setStyle('color','yellow');
+                        Ext.getCmp('noteEditStatusText').setValue('New Note');
+                    }, 3000);
+
+                    NotesController.getNotesCountByContactId( studentRecord.Id, function( result, er ) {
+                        if ( er.status && result != null ) {
+                            Ext.getCmp('studentNoteCountText').setRawValue( result.toString() );
+                            if ( result != notesStore.count() ) {
+                                viewHistoryButtonClick();
+                            }
+                        } else {
+                            if ( er && er.type == "exception" ) {
+                                Ext.MessageBox.show({
+                                    title:'Refresh Note Count Program Exception',
+                                    msg: er.message + '<br/>Reference: getNoteCount() -> NotesController.getNotesCountByContactId()',
+                                    buttons: Ext.Msg.OK,
+                                    icon: Ext.Msg.ERROR
+                                });
+                            }
+                        }
+                    }, {escape:false} );
+                }
+                Ext.getCmp('gridViewCards').getLayout().setActiveItem(0);
+            } else {
+                if ( er && er.type == "exception" ) {
+                    Ext.MessageBox.show({
+                        title:'Save Note Program Exception',
+                        msg: er.message + '<br/>Reference: saveNote() -> NotesController.saveNoteJSON()',
+                        buttons: Ext.Msg.OK,
+                        icon: Ext.Msg.ERROR
+                    });
+                }
+            }
+        } finally {
+            Ext.getCmp('noteHTMLTextEditorWrapper').setLoading(false);
+        }
+    }, {escape:false} );
+}
+
+function disableSave() {
+//yemeng 10/11
+	if(modeType == 'edit')
+	{
+		Ext.getCmp('noteEditStatusText').setValue('Edit Mode');
+	}else if (modeType == 'new')
+	{
+		Ext.getCmp('noteEditStatusText').setValue('New Note');		
+	}
+	
+	//yemeng 10-16 live call 
+	if(noteTypeCombo.getValue()== 'Live Call' &&  (AtRiskScore==1||AtRiskScore==2))//required
+	{
+		Ext.getCmp('performanceActionsPanel').setDisabled(false);
+	}
+	else if(noteTypeCombo.getValue()== 'Live Call' &&  AtRiskScore==3  )//optional
+	{
+		Ext.getCmp('performanceActionsPanel').setDisabled(false);
+	}else
+	{
+		Ext.getCmp('performanceActionsPanel').setDisabled(true);
+		//Ext.getCmp('performanceActionsPanel').getEl().hide();
+	}
+    isEditable = ( Ext.getCmp('noteEditStatusText').getRawValue()=='New Note' || thisUserId == noteRecord.Author__c );
+    var subject = noteSubjectTextField.getValue() != null && noteSubjectTextField.getValue() != "";
+    var noteType = noteTypeCombo.getValue() != null && noteTypeCombo.getValue() != "";
+    var noteSubType = (noteSubTypeCombo.getRawValue()!='' && noteSubTypeStore.count()>0) || (noteSubTypeStore.count()==0);
+    var performanceQuestion1Satisfied = ( ZeroPercentRadio.getValue() || ParitalPercentRadio.getValue() || HundredPercentRadio.getValue() );
+    var performanceQuestion2Satisfied = ( EngagedInNewStudentProtocolsCheckbox.getValue() ||
+            EngagedInLearningResourceCheckbox.getValue() ||
+            UtilizedACommunityResourceCheckbox.getValue() ||
+            AttendedASeminarCheckbox.getValue() ||
+            MetWithACourseMentorCheckbox.getValue() ||
+            TookAPreAssessmentCheckbox.getValue() ||
+            ScheduledAnAssessmentCheckbox.getValue() ||
+            TookAndFailedAnAssessmentCheckbox.getValue() ||
+            TookAndPassedAnAssessmentCheckbox.getValue() ||
+            SubmittedATaskStreamTaskCheckbox.getValue() ||
+            RevisedATaskStreamTaskCheckbox.getValue() ||
+            NoEvidenceIsPresentCheckbox.getValue() ); 
+    var performance = ( (isStudentMentor &&  performanceQuestion1Satisfied &&  performanceQuestion2Satisfied )  || !isStudentMentor || ( isStudentMentor && Ext.getCmp('noteEditStatusText').getRawValue() == 'Edit Mode' ) );
+
+    //performance action: yemeng zhu 10/9/13   --edit 12-10 for action type
+	//for score 1 and 2  must pick up 1 from 11 Performance Questions
+	// for score 3:optional
+	//for score 0 and null: disable the panel
+     var action=(isStudentMentor && ((AtRiskScore==1||AtRiskScore==2)
+     									&& (( Ext.getCmp('actionTypeCombo').getValue()!=null && Ext.getCmp('actionSubTypeCombo').getValue()!=null && noteTypeCombo.getValue()== 'Live Call')
+        									|| noteTypeCombo.getValue()!= 'Live Call'))
+        ||(AtRiskScore==3||AtRiskScore==0||AtRiskScore==null)) || !isStudentMentor;
+    
+    if (  subject && noteType && noteSubType && isEditable && performance && action ) {
+        saveNoteButton.setDisabled( false );
+    } else {
+        saveNoteButton.setDisabled( true );
+    }
+
+}
+
+function noteSubjectTextFieldChange(e, target, options) {
+    disableSave();
+}
+//yemeng 10/10
+function performanceActionComboChange(e, target, options) {
+    disableSave();
+} 
+function noteTypeComboChange(e, target, options) {
+    if ( noteTypeCombo.getValue() == '' && lastNoteTypeValue == noteSubjectTextField.getValue() ) {
+        noteSubjectTextField.setRawValue('') ;
+    } else {
+        if ( noteSubjectTextField.getValue() == '' || lastNoteTypeValue == noteSubjectTextField.getValue() ) {
+            noteSubjectTextField.setValue( noteTypeCombo.getValue() ) ;
+        }
+    }
+
+    lastNoteTypeValue = noteTypeCombo.getValue();
+    if ( noteTypeCombo.getValue() == '' ) {
+        noteSubTypeCombo.setRawValue('');
+        noteSubTypeCombo.setReadOnly(true);
+    } else {
+        noteSubTypeStore.setRecordSet(noteTypeCombo.getValue());
+        if ( noteSubTypeStore.count() == 0 ) {
+            noteSubTypeCombo.setValue('');
+            noteSubTypeCombo.setReadOnly( true );
+        } else {
+            if ( noteSubTypeCombo.getRawValue() != '' ) {
+                var index = noteSubTypeStore.findExact('noteSubType', noteSubTypeCombo.getRawValue());
+                if ( index == -1 ) {
+                    noteSubTypeCombo.setRawValue('');
+                }
+            }
+            noteSubTypeCombo.setReadOnly( false );
+        }
+    }
+    disableSave();
+}
+
+
+//12-10
+function actionTypeComboChange(e, target, options) {
+     
+    lastActionTypeValue = actionTypeCombo.getValue();
+    if ( actionTypeCombo.getValue() == '' ) {
+        actionSubTypeCombo.setRawValue('');
+        actionSubTypeCombo.setReadOnly(true);
+    } else {
+        actionSubTypeStore.setRecordSet(actionTypeCombo.getValue());
+        if ( actionSubTypeStore.count() == 0 ) {
+            actionSubTypeCombo.setValue('');
+            actionSubTypeCombo.setReadOnly( true );
+        } else {
+            if ( actionSubTypeCombo.getRawValue() != '' ) {
+                var index = actionSubTypeStore.findExact('actionSubType', actionSubTypeCombo.getRawValue());
+                if ( index == -1 ) {
+                    actionSubTypeCombo.setRawValue('');
+                }
+            }
+            actionSubTypeCombo.setReadOnly( false );
+        }
+    }
+    disableSave();
+}
+function actionSubTypeComboChange(e, target, options) { 
+    disableSave();
+}
+
+
+
+//load 1 note after selected
+function loadNoteRecord( note ) {
+    if (note) {
+        if ( Ext.getCmp('gridViewCards').getLayout().getActiveItem().getId() == "noteHistoryGridPanel" ) {
+            resetStudentPerformanceSurvey();
+
+            isEditable = (thisUserId == note.Author__c);
+            CKEDITOR.instances.noteHTMLTextEditor.setReadOnly( !isEditable );
+            CKEDITOR.instances.noteHTMLTextEditor.setUiColor( isEditable? '#2356AD': 'Black' );
+            CKEDITOR.instances.noteHTMLTextEditor.setData( note.Text__c==null?'':note.Text__c );
+
+            Ext.getCmp('noteCreatedDateTimeText').setValue( note.WGUCreationDateTime__c? Ext.Date.format(note.WGUCreationDateTime__c, "m/d/Y g:i a T"): '' );
+            Ext.getCmp('noteEditStatusText').setValue( isEditable? 'Edit Mode': 'Read Only Mode' );
+            //yemeng 10-11-13
+            modeType = (isEditable? 'edit':'read');
+            Ext.get(Ext.select('#noteEditStatusText .x-form-display-field').elements[0]).setStyle('color',(isEditable?'yellow':'white'));
+
+            Ext.getCmp('noteAuthorText').setValue( note.Author__r!= null? note.Author__r.Name: note.AuthorName );
+            noteSubjectTextField.setRawValue( note.Name==null?'':note.Name );
+            noteTypeCombo.setValue(note.Type__c);
+            noteSubTypeStore.setRecordSet(noteTypeCombo.getValue());
+            noteSubTypeCombo.setRawValue( note.SubType__c? note.SubType__c: null );
+            lastNoteTypeValue = note.Type__c;
+            // load note.PersonalizationActions__c data
+            //yemeng 10/9/13
+			//Ext.getCmp('performanceActionCombo').setValue(note.PersonalizationActions__c);
+			Ext.getCmp('actionTypeCombo').setValue(note.PersonalizationMenu__c);
+			Ext.getCmp('actionSubTypeCombo').setValue(note.PersonalizationMenuSubType__c);
+            
+            
+            if ( isEditable ) {
+                noteSubjectTextField.setReadOnly( (note.Name != null) && (note.Name.trim() != '')  );
+                noteTypeCombo.setReadOnly( (note.Type__c != null) && (note.Type__c.trim() != '') );
+                if ( noteSubTypeStore.count() == 0 || ( noteTypeStore.findExact( 'value', note.Type__c ) == -1 ) ) {
+                    noteSubTypeCombo.setValue( ( noteTypeStore.findExact( 'value', note.Type__c ) == -1 )? note.SubType__c :'');
+                    noteSubTypeCombo.setReadOnly( true );
+                } else {
+                    noteSubTypeCombo.setReadOnly( (note.SubType__c != null) && (note.SubType__c.trim() != '') );
+                }
+                //yemeng  10/9/13
+               // Ext.getCmp('performanceActionCombo').setReadOnly(false);
+                Ext.getCmp('actionTypeCombo').setReadOnly(false);
+                Ext.getCmp('actionSubTypeCombo').setReadOnly(false);
+            } else {
+                noteSubjectTextField.setReadOnly( true  );
+                noteTypeCombo.setReadOnly( true );
+                noteSubTypeCombo.setReadOnly( true );
+                //yemeng 10/9/13
+                //Ext.getCmp('performanceActionCombo').setReadOnly(true);
+                Ext.getCmp('actionTypeCombo').setReadOnly(true);
+                Ext.getCmp('actionSubTypeCombo').setReadOnly(true);
+            }
+
+            var radiobuttons = Ext.select('.progressCls').elements;
+            for (var i = 0; i < radiobuttons.length; i++) {
+                Ext.getCmp(radiobuttons[i].id).setReadOnly(true);
+            }
+            var checkboxes = Ext.select('.evidenceCls').elements;
+            for (var i = 0; i < checkboxes.length; i++) {
+                Ext.getCmp(checkboxes[i].id).setReadOnly(true);
+            }
+
+            //Code should be added somewhere around here to populate the performance action if one is present.
+            //Some code may need to be added to any calling functions as well, dependant on where the performance action is stored.
+            //Noted 10/4/2013 by Katarina Melki
+            
+            if (note.Id) {
+                var foundIndex = surveyStore.findExact( 'WGUStudentNote__c', note.Id );
+                if ( foundIndex != -1 ) {
+                    var survey = surveyStore.getAt(foundIndex);
+                    if ( survey.get('GoalPerformanceSinceLastCall__c') ) {
+                        var performancePercent = survey.get('GoalPerformanceSinceLastCall__c');
+                        if ( performancePercent == 'Yes - 100%' ) {
+                            HundredPercentRadio.setValue(true);
+                        } else if ( performancePercent == 'Partially Met' ) {
+                            ParitalPercentRadio.setValue(true);
+                        } else {
+                            ZeroPercentRadio.setValue(true);
+                        }
+                    }
+
+                    if ( survey.get('EvidenceOfAcademicActivity__c') ) {
+                        var checkboxes = Ext.select('.evidenceCls').elements;
+                        var evidences = survey.get('EvidenceOfAcademicActivity__c').split(';');
+                        for ( var x = 0; x < evidences.length ; x++ ) {
+                            for (var i = 0; i < checkboxes.length; i++) {
+                                var checkbox = Ext.getCmp(checkboxes[i].id);
+                                if ( checkbox.boxLabel.toLowerCase() == evidences[x].toLowerCase() ) {
+                                    checkbox.setValue(true);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    Ext.getCmp('performanceSurveyPanel').setTitle('Student Performance Questions for this Note:');
+                    var El = Ext.get(Ext.select('#performanceSurveyPanel .x-panel-header').elements[0]);
+                    El.setStyle('background-color', '#EBEFF3');
+                    El.setStyle('border-color', '#99BCE8');
+                    El = Ext.get(Ext.select('#performanceSurveyPanel-body').elements[0]);
+                    El.setStyle('color','black');
+                    El.setStyle('border-color','#99BCE8');
+                                    Ext.get('performanceQuestion1Label').setStyle('color','#505050');   
+                                    Ext.get('performanceQuestion2Label').setStyle('color','#505050');
+
+                } else {
+                    Ext.getCmp('performanceSurveyPanel').setTitle('No Student Performance Questions for this Note:');
+                    var El = Ext.get(Ext.select('#performanceSurveyPanel .x-panel-header').elements[0]);
+                    El.setStyle('background-color','lightgray');
+                    El.setStyle('border-color','#C7C7C7');
+                    El = Ext.get(Ext.select('#performanceSurveyPanel-body').elements[0]);
+                    El.setStyle('color','#929292');
+                    El.setStyle('border-color','#C7C7C7');
+                    Ext.get('performanceQuestion1Label').setStyle('color','#929292');   
+                    Ext.get('performanceQuestion2Label').setStyle('color','#929292');
+
+                }
+            }
+        } else {
+
+            CKEDITOR.instances.noteHTMLTextEditor.setData( '' );
+            noteSubjectTextField.setRawValue( '' );
+            noteTypeCombo.setValue(null);
+            noteSubTypeCombo.setValue(null);
+
+            Ext.getCmp('noteViewerType').setRawValue( note.Type__c );
+            Ext.getCmp('noteViewerSubType').setRawValue( note.SubType__c );
+            Ext.getCmp('noteViewerSubject').setRawValue( note.Name );
+            Ext.getCmp('noteViewerAuthor').setRawValue( note.Author__r? note.Author__r.Name: '' );
+            Ext.getCmp('noteViewerCreationDate').setRawValue( (note.WGUCreationDateTime__c? Ext.Date.format(note.WGUCreationDateTime__c, "m/d/Y g:i a T"): '') );
+
+            CKEDITOR.instances.noteViewerHTML.setData( note.Text__c==null?'':note.Text__c );
+            
+            if (note.Id) {
+                var foundIndex = surveyStore.findExact( 'WGUStudentNote__c', note.Id );
+                if ( foundIndex != -1 ) {
+                    var survey = surveyStore.getAt(foundIndex);
+                    var performancePercent = survey.get('GoalPerformanceSinceLastCall__c');
+                    var evidences = survey.get('EvidenceOfAcademicActivity__c').split(';');
+                    var evidenceHTML = '';
+                    var firstItem = true;
+                    for ( var x = 0; x < evidences.length ; x++ ) {
+                      evidenceHTML += (firstItem?'':'<br/>') + evidences[x];
+                      if ( firstItem ) {
+                        firstItem = false;
+                      }
+                    }
+                    performanceToolTip.update('<p style="font-weight:bold;padding:1px 0 4px 0;">Student Performance Questions for this Note:</p><table style="border:0;width:100%"><tr style="padding:0 0 5px 0;font-weight:bold"><td style="">Did this student meet the academic progress goals set on the last call?</td><td style="">What evidence is present that this student has been academically active since the previous call?</td></tr><tr style=""><td style="margin:3px 0 0 5px">'+performancePercent+'</td><td style="margin:3px 0 0 5px">'+evidenceHTML+'</td></tr></table>');
+                    performanceToolTip.setWidth(500);
+                    attachmentImage.setDisabled(false);
+                } else {
+                    performanceToolTip.update('<p style="font-weight:bold">No Student Performance Questions for this Note</p>');
+                    performanceToolTip.setWidth(290);
+                    attachmentImage.setDisabled(true);
+                }
+            }
+        }
+
+        CKEDITOR.instances.noteHTMLTextEditor.document.on( 'keydown', function(ev) {
+               if ( ( (ev.data.getKey() == 83 || ev.data.getKey() == 115) && ev.data.$.ctrlKey ) || (ev.data.getKey() == 19) ) {
+                 saveNoteButtonClick();
+                 ev.data.preventDefault();
+               } else {
+                disableSave();
+               }
+        });
+        saveNoteButton.setDisabled( !isEditable  );
+
+    }
+}
+function processNoteAjaxResponse(result, er) {
+    if ( er.status ) {
+
+        noteRecord = Ext.decode( result ).Records[0];
+        noteRecord.Text__c = noteRecord.Text__c == null? null: Base64.decode(noteRecord.Text__c);
+        noteRecord.ShortText__c = Ext.String.ellipsis(noteRecord.Text__c.replace( /<[^<|>]+?>/gi,'' ),100,true);
+        noteRecord.WGUCreationDateTime__c = convertDate( noteRecord.WGUCreationDateTime__c );
+        try { loadNoteRecord( noteRecord ); } catch (er) {}
+        if ( noteRecord.Student__c != null ) {
+            if ( contactId != noteRecord.Student__c ) {
+                contactId = noteRecord.Student__c;
+            };
+            NotesController.getStudentJSONByContactId( contactId, processStudentAjaxResponse, {escape:false} );
+        } else {
+            Ext.MessageBox.show({
+                title:'Note Error',
+                msg: 'Note id: ' + noteRecord.id + ' does not have an associated Student assignment.',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.ERROR
+            });
+        }
+
+    } else {
+        if ( er && er.type == "exception" ) {
+            Ext.MessageBox.show({
+                title:'Retrieve Note by Id Program Exception',
+                msg: er.message + '<br/>Reference: processNoteAjaxResponse() -> NotesController.saveNoteJSON()',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.ERROR
+            });
+        }
+    }
+} 
+//From OnReady:  major function to load students info from contact object and then load notes into page
+function processStudentAjaxResponse(result, er) {
+    if ( er.status ) {
+        var results = Ext.decode( result );
+        if ( results.count != 0 ) {
+            studentRecord = results.Records[0];
+            talismaLinkUrl = talismaLinkUrl + studentRecord.PIDM__c;
+
+            if ( studentRecord.Id != null && contactId != studentRecord.Id ) {
+                contactId = studentRecord.Id;
+            }
+            if ( studentRecord.AccountId != null && studentAccountId != studentRecord.AccountId ) {
+                studentAccountId = studentRecord.AccountId;
+            }
+            if ( studentRecord.PIDM__c != null && pidm != studentRecord.PIDM__c ) {
+                pidm = studentRecord.PIDM__c;
+            }
+            isStudentMentor = ( studentRecord.Mentor__c === thisUserId || studentRecord.MentorPidm__c === thisUserPIDM );
+            Ext.getCmp('performanceSurveyPanel').setTitle('Student Performance Questions (' + (isStudentMentor? 'Required': 'Optional') + '):');
+                    if ( !isStudentMentor ) {
+                        var El = Ext.get(Ext.select('#performanceSurveyPanel .x-panel-header').elements[0]);
+                        El.setStyle('background-color',(isStudentMentor? '#D3E1F1': '#D3D3D3'));
+                        El.setStyle('border-color',(isStudentMentor? '#99BCE8': '#C7C7C7'));
+                        El = Ext.get(Ext.select('#performanceSurveyPanel-body').elements[0]);
+                        El.setStyle('color','#6D6D6D');
+                        El.setStyle('border-color','#C7C7C7');
+                        Ext.get('performanceQuestion1Label').setStyle('color','#6D6D6D');   
+                        Ext.get('performanceQuestion2Label').setStyle('color','#6D6D6D');
+                         
+                    } else {
+                        var El = Ext.get(Ext.select('#performanceSurveyPanel .x-panel-header').elements[0]);
+                        El.setStyle('background-color', '#97B0DA');
+                        El.setStyle('border-color', '#99BCE8');
+                        El = Ext.get(Ext.select('#performanceSurveyPanel-body').elements[0]);
+                        El.setStyle('color','black');
+                        El.setStyle('border-color','#99BCE8');
+                        Ext.get('performanceQuestion1Label').setStyle('color','black');   
+                        Ext.get('performanceQuestion2Label').setStyle('color','black');
+                         
+                    }
+            
+            //If an AtRiskScore is present and is equal to 1, 2, or 3 modify the Student Performance Actions panel title to include the proper At Risk Indicator and enable the panel
+            //Added 10/3/2013 by Katarina Melki
+            AtRiskScore=studentRecord.StudentRiskScore__c;
+            if (AtRiskScore!=null && AtRiskScore>0)
+            {
+                var tempTitle='Student Performance Actions ';
+                //Using 100 based scoring until switch to 0-3 scoring occurs. Scoring setup is probably not accurate as-is. Yay!!!
+                //The current images used below are too big. They need to be replaced with versions no taller than 10 pixels.
+                //This is causing alignment issues that just look bad. 
+                if (AtRiskScore==3)
+                {
+                    tempTitle='<img src="{!$Resource.riskTypesPNG}/riskTypesPNG/smGreenCheck.png" /> &nbsp;  '+tempTitle +'(Optional):'  ;
+                }
+                else if (AtRiskScore==2)
+                {
+                    tempTitle='<img src="{!$Resource.riskTypesPNG}/riskTypesPNG/smYellowMark.png" /> &nbsp; '+tempTitle +'(Live Call):';
+                }
+                else if (AtRiskScore==1)
+                {
+                    tempTitle='<img src="{!$Resource.riskTypesPNG}/riskTypesPNG/smRedStar.png" /> &nbsp; '+tempTitle+'(Live Call):' ;
+                }
+            
+                Ext.getCmp('performanceActionsPanel').setTitle(tempTitle);
+                Ext.getCmp('performanceActionsPanel').setDisabled(false);
+            }
+            else
+            {
+            
+                Ext.getCmp('performanceActionsPanel').setDisabled(true);
+            }
+            
+            WGUView.getView().setWindowTitle( studentRecord.FirstName + ' ' + studentRecord.LastName );
+            Ext.getCmp('studentCurrentTermText').setValue( (studentRecord.TermCode__c != null? studentRecord.TermCode__c: "Unknown") );
+            var studentHomePhone = Ext.getCmp('studentPhoneText');
+            if ( studentRecord.Phone || studentRecord.HomePhone ) {
+                var phoneNumber = (studentRecord.HomePhone!=null? studentRecord.HomePhone: studentRecord.Phone);
+                studentHomePhone.setValue('<a id=\"studentHomePhoneA\" class=\"cell\" href=\"tel:'+phoneNumber+'\">'+phoneNumber+'</a>' );
+                if ( phoneNumber.toLowerCase().substring('found') != -1 ) {
+                    studentHomePhone.setWidth( 150 );
+                }
+            } else {
+                studentHomePhone.setValue('No Phone # Found');
+            }
+            var studentEmail = Ext.getCmp('studentEmailText');
+            if ( studentRecord.Email ) {
+                studentEmail.setValue( '<a id=\"studentEmailA\" class=\"email\" href=\"mailto:'+studentRecord.Email+'\">'+studentRecord.Email+'</a>' );
+            } else {
+                studentHomePhone.setValue('No Email Found');
+            }
+
+            noteRecord.Author__c = thisUserId;
+            noteRecord.AuthorPidm__c = thisUserPIDM;
+            noteRecord.Student__c = studentRecord.Id;
+            noteRecord.PIDM__c = studentRecord.PIDM__c;
+			//only count() of notes
+            NotesController.getNotesCountByContactId( studentRecord.Id, function( result, er ) {
+                if ( er.status && result != null ) {
+                    Ext.getCmp('studentNoteCountText').setRawValue( result.toString() );
+                    viewHistoryButtonClick();//load note history
+                } else {
+                    if ( er && er.type == "exception" ) {
+                        Ext.MessageBox.show({
+                            title:'Refresh Note Count Program Exception',
+                            msg: er.message + '<br/>Reference: getNoteCount() -> NotesController.getNotesCountByContactId()',
+                            buttons: Ext.Msg.OK,
+                            icon: Ext.Msg.ERROR
+                        });
+                    }
+                }
+            }, {escape:false} );
+        } else {
+            var msg = '';
+            if ( studentAccountId ) {
+                msg = 'Student Account Id: ' + studentAccountId;
+            } else if ( pidm ) {
+                msg = 'Student PIDM: ' + pidm;
+            } else if ( contactId ) {
+                msg = 'Student Contact Id: ' + contactId;
+            } else if ( studentWGUId ) {
+                msg = 'WGU Student Id: ' + studentWGUId;
+            } else {
+                msg = 'context lookup';
+            }
+            Ext.MessageBox.show({
+                title:'Student Not Found',
+                msg: 'No student was found for ' + msg + '<br/>This page requires a data context for a specific student or a note.<br/>Please supply an Account Id, PIDM, or Student Note Id:<br/>e.g. ../apex/notes?accountId=  ../apex/notes?pidm=  ../apex/notes?id=',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.ERROR
+            });
+        }
+    } else {
+        if ( er && er.type == "exception" ) {
+            Ext.MessageBox.show({
+                title:'Get Student Record Program Exception',
+                msg: er.message + '<br/>Reference: processStudentAjaxResponse()',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.ERROR
+            });
+        }
+    }
+    disableSave();
+}
+
+
+Ext.Date.patterns = {
+    ISO8601Long:"Y-m-d H:i:s",
+    ISO8601Short:"Y-m-d",
+    ShortDate: "n/j/Y",
+    LongDate: "l, F d, Y",
+    FullDateTime: "l, F d, Y g:i:s A",
+    MonthDay: "F d",
+    ShortTime: "g:i A",
+    LongTime: "g:i:s A",
+    SortableDateTime: "Y-m-d\\TH:i:s",
+    UniversalSortableDateTime: "Y-m-d H:i:sO",
+    Zulu: "Y-m-d\\TH:i:s\\Z",
+    YearMonth: "F, Y"
+};
+
+Ext.define('WGU.container.StudentNoteContainer', {
+    extend: 'Ext.container.Container',
+    alias: 'widget.wgustudentnotecontainer',
+    id: 'StudentNoteContainer',
+    height: 524,
+    width: 960,
+    layout: {
+        align: 'stretch',
+        type: 'vbox'
+    },
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'container',
+                    id: 'noteEntryContainer',
+                    minHeight: 355,
+                    height: Ext.isChrome||Ext.isSafari||Ext.isIE? 366: 360,
+                    layout: {
+                        align: 'stretch',
+                        type: 'vbox'
+                    },
+                    items: [
+                        {
+                            xtype: 'container',
+                            id: 'noteEntryWrapperContainer',
+                            flex: 1,
+                            layout: {
+                                align: 'stretch',
+                                type: 'vbox'
+                            },
+                            items: [
+                                {
+                                    xtype: 'container',
+                                    id: 'noteEntryTopContainer',
+                                    height: 234,
+                                    layout: {
+                                        type: 'absolute'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'button',
+                                            id: 'saveNoteButton',
+                                            x: 0,
+                                            y: 0,
+                                            height: 40,
+                                            width: 100,
+                                            text: 'Save Note',
+                                            style: 'border-color: lightgreen;',
+                                            disabled: true
+                                        },
+                                        {
+                                            xtype: 'combo',
+                                            x: 130,
+                                            y: 0,
+                                            id: 'noteTypeCombo',
+                                            editable: false,
+                                            multiSelect: false,
+                                            fieldLabel: 'Note Type',
+                                            tabIndex: 1,
+                                            labelAlign: 'top',
+                                            labelStyle: 'font-size: 10.5px;font-weight: 700',
+                                            width: 180,
+                                            queryMode: 'local',
+                                            displayField: 'name',
+                                            valueField: 'value',
+                                            store: noteTypeStore,
+                                            allowBlank: true
+                                        },
+                                        {
+                                            xtype: 'combo',
+                                            x: 320,
+                                            y: 0,
+                                            id: 'noteSubTypeCombo',
+                                            editable: false,
+                                            typeAhead: false,
+                                            multiSelect: false,
+                                            fieldLabel: 'Note Sub Type',
+                                            tabIndex: 2,
+                                            labelAlign: 'top',
+                                            labelStyle: 'font-size: 10.5px;font-weight: 700',
+                                            width: 250,
+                                            queryMode: 'local',
+                                            displayField: 'noteSubType',
+                                            valueField: 'noteSubTypeValue',
+                                            store: noteSubTypeStore,
+                                            disabled: false,
+                                            readOnly: true,
+                                            allowBlank: true,
+                                            listConfig: {
+                                                resizable: false,
+                                                width: 250,
+                                                matchFieldWidth: false,
+                                                minWidth: 250
+                                            }
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            x: 580,
+                                            y: 0,
+                                            id: 'noteSubjectTextField',
+                                            fieldLabel: 'Subject',
+                                            tabIndex: 3,
+                                            labelStyle: 'font-size: 10.5px;font-weight: 700',
+                                            labelAlign: 'top',
+                                            allowBlank: true,
+                                            width: 377,
+                                            maxLength: 80,
+                                            enableKeyEvents: true,
+                                            listeners: {
+                                                keydown: {
+                                                    fn: me.onSubjectTextKeyDown
+                                                }
+                                            }
+                                        },
+                                        {
+                                            xtype: 'panel',
+                                            id: 'performanceSurveyPanel',
+                                            cls: 'performanceSurveyPanel',
+                                            title: 'Student Performance Questions',
+                                            bodyStyle: 'background:#F2F2F2;',
+                                            x: 0,
+                                            y: 47,
+                                            width: 957,
+                                            height: 100,
+                                            border: 1,
+                                            layout: {
+                                                type: 'absolute'
+                                            },
+                                            items: [
+                                                {
+                                                    xtype: 'label',
+                                                    id: 'performanceQuestion1Label',
+                                                    style: 'font-size:10.5px;font-weight: bold;color: #505050;',
+                                                    width: 225,
+                                                    x: 5,
+                                                    y: 2,
+                                                    text: 'Did this student meet the academic progress goals set on the last call?'
+                                                },
+                                                {
+                                                    xtype: 'radiofield',
+                                                    id: 'HundredPercentRadio',
+                                                    x: 5,
+                                                    y: 33,
+                                                    cls: 'progressCls',
+                                                    style: 'font-size:10px;',
+                                                    boxLabel: 'Yes - 100%',
+                                                    checked: isStudentMentor,
+                                                    handler: me.disableSave,
+                                                    name: 'goalPerformanceObj'
+                                                },
+                                                {
+                                                    xtype: 'radiofield',
+                                                    id: 'ParitalPercentRadio',
+                                                    x: 85,
+                                                    y: 33,
+                                                    cls: 'progressCls',
+                                                    style: 'font-size:10px;',
+                                                    boxLabel: 'Partially Met',
+                                                    checked: false,
+                                                    handler: me.disableSave,
+                                                    name: 'goalPerformanceObj'
+                                                },
+                                                {
+                                                    xtype: 'radiofield',
+                                                    id: 'ZeroPercentRadio',
+                                                    x: 165,
+                                                    y: 33,
+                                                    cls: 'progressCls',
+                                                    style: 'font-size:10px;',
+                                                    boxLabel: 'No - 0%',
+                                                    checked: false,
+                                                    handler: me.disableSave,
+                                                    name: 'goalPerformanceObj'
+                                                },
+                                                {
+                                                    xtype: 'label',
+                                                    id: 'performanceQuestion2Label',
+                                                    style: 'font-size:10.5px;font-weight: bold;color: #505050;',
+                                                    x: 257,
+                                                    y: 2,
+                                                    text: 'What evidence is present that this student has been academically active since the previous call?'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'EngagedInNewStudentProtocolsCheckbox',
+                                                    x: 257,
+                                                    y: 17,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Engaged in New Student Protocols',
+                                                    checked: false,
+                                                    inputValue: 'Engaged in New Student Protocols'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'EngagedInLearningResourceCheckbox',
+                                                    x: 257,
+                                                    y: 33,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Engaged in a Learning Resource',
+                                                    checked: false,
+                                                    inputValue: 'Engaged in a Learning Resource'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'UtilizedACommunityResourceCheckbox',
+                                                    x: 257,
+                                                    y: 49,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Utilized a Community Resource',
+                                                    checked: false,
+                                                    inputValue: 'Utilized a Community Resource'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'AttendedASeminarCheckbox',
+                                                    x: 447,
+                                                    y: 17,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Attended a Seminar',
+                                                    checked: false,
+                                                    inputValue: 'Attended a Seminar'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'MetWithACourseMentorCheckbox',
+                                                    x: 447,
+                                                    y: 33,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Met with a Course Mentor',
+                                                    checked: false,
+                                                    inputValue: 'Met with a Course Mentor'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'TookAPreAssessmentCheckbox',
+                                                    x: 447,
+                                                    y: 49,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Took a Pre-Assessment',
+                                                    checked: false,
+                                                    inputValue: 'Took a Pre-Assessment'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'ScheduledAnAssessmentCheckbox',
+                                                    x: 606,
+                                                    y: 17,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Scheduled an Assessment',
+                                                    checked: false,
+                                                    inputValue: 'Scheduled an Assessment'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'TookAndFailedAnAssessmentCheckbox',
+                                                    x: 606,
+                                                    y: 33,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Took and Failed an Assessment',
+                                                    checked: false,
+                                                    inputValue: 'Took and Failed an Assessment'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'TookAndPassedAnAssessmentCheckbox',
+                                                    x: 606,
+                                                    y: 49,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Took and Passed an Assessment',
+                                                    checked: false,
+                                                    inputValue: 'Took and Passed an Assessment'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'SubmittedATaskStreamTaskCheckbox',
+                                                    x: 790,
+                                                    y: 17,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Submitted a TaskStream Task',
+                                                    checked: false,
+                                                    inputValue: 'Submitted a TaskStream Task'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'RevisedATaskStreamTaskCheckbox',
+                                                    x: 790,
+                                                    y: 33,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'Revised a TaskStream Task',
+                                                    checked: false,
+                                                    inputValue: 'Revised a TaskStream Task'
+                                                },
+                                                {
+                                                    xtype: 'checkboxfield',
+                                                    id: 'NoEvidenceIsPresentCheckbox',
+                                                    x: 790,
+                                                    y: 49,
+                                                    cls: 'evidenceCls',
+                                                    style: 'font-size:10px;',
+                                                    handler: me.onPerformanceEvidenceCheckChange,
+                                                    fieldLabel: '',
+                                                    hideLabel: true,
+                                                    boxLabel: 'No Evidence is Present',
+                                                    checked: false,
+                                                    inputValue: 'No Evidence is Present'
+                                                }
+
+                                            ]
+                                        },
+                                        
+                                        //Current code would enable and disable this panel but keep it visible at all times.
+                                        //Hiding the panel will require significant changes to the layout setup of this section to allow for resizing.
+                                        //Student Performance Action drop-down in panel.
+                                        //Added 10/3/2013 by Katarina Melki
+                                        {
+                                            xtype: 'panel',
+                                            id: 'performanceActionsPanel',
+                                            cls: 'performanceSurveyPanel',
+                                            title: 'Student Performance Actions:',
+                                            bodyStyle: 'background:#F2F2F2;',
+                                            x: 0,
+                                            y: 153,
+                                            width: 957,
+                                            height: 60,
+                                            border: 1, 
+                                            layout: { type: 'absolute' },
+                                            items: 
+                                            [
+                                                {
+                                                    xtype: 'combo',
+                                                    id: 'performanceActionCombo',
+                                                    typeAhead: true,
+                                                    width: 945,
+                                                    x: 5,
+                                                    y: 2,
+                                            		hidden: true,
+                                                    store: performanceActionStore,
+                                                    displayField: 'text',
+                                                    valueField: 'text',
+                                                    emptyText: 'Select Student Performance Action...',
+                                                    valueNotFoundText: 'Select Student Performance Action...',
+                                                    queryMode: 'local',
+                                                    editable: false
+                                                },
+                                                //12/10 personalization new sub-type change
+                                                {
+		                                            xtype: 'combo',
+		                                            x: 5,
+		                                            y: 5,
+		                                            id: 'actionTypeCombo',
+		                                            editable: false,
+		                                            multiSelect: false,
+		                                            fieldLabel: 'Action Type',
+		                                            tabIndex: 1,
+		                                            labelAlign: 'left',
+		                                            labelStyle: 'font-size: 10.5px;font-weight: 700',
+		                                            width: 280,
+		                                            queryMode: 'local',
+		                                            displayField: 'name',
+		                                            valueField: 'value',
+		                                            store: actionTypeStore,
+		                                            disabled: false,
+		                                            allowBlank: true
+		                                        },
+		                                        {
+		                                            xtype: 'combo',
+		                                            x: 300,
+		                                            y: 5,
+		                                            id: 'actionSubTypeCombo',
+		                                            editable: false,
+		                                            typeAhead: false,
+		                                            multiSelect: false,
+		                                            fieldLabel: 'Action Sub Type',
+		                                            tabIndex: 2,
+		                                            labelAlign: 'left',
+		                                            labelStyle: 'font-size: 10.5px;font-weight: 700',
+		                                            width: 450,
+		                                            queryMode: 'local',
+		                                            displayField: 'actionSubType',
+		                                            valueField: 'actionSubTypeValue',
+		                                            store: actionSubTypeStore,
+		                                            disabled: false,
+		                                            readOnly: true,
+		                                            allowBlank: true,
+		                                            listConfig: {
+		                                                resizable: false,
+		                                                width: 250,
+		                                                matchFieldWidth: false,
+		                                                minWidth: 250
+		                                            }
+		                                        }   
+                                            ]
+                                        },
+                                                                            
+                                        
+                                        {
+                                            xtype: 'label',
+                                            style: 'font-size: 10.5px;font-weight: 700',
+                                            x: 2,
+                                            y: 218,
+                                            text: 'Academic Progress Goals and Other Notes:'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    listeners: {
+                                        resize: {
+                                            fn: me.onNoteEntryContainerResize,
+                                            scope: me
+                                        }
+                                    },
+                                    layout: {
+                                        type: 'fit'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'container',
+                                            id: 'noteHTMLTextEditorWrapper',
+                                            html: '<textarea id="noteHTMLTextEditor" name="noteHTMLTextEditor"></textarea>'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    xtype: 'splitter'
+                },
+                {
+                    xtype: 'container',
+                    id: 'gridViewCards',
+                    minHeight: 91,
+                    maintainFlex: true,
+                    flex: 1,
+                    layout: {
+                        align: 'stretch',
+                        type: 'card'
+                    },
+                    layoutConfig:{
+                        animate: true
+                    },
+                    items: [
+                        {
+                            xtype: 'gridpanel',
+                            flex: 1,
+                            maintainFlex: true,
+                            id: 'noteHistoryGridPanel',
+                            store: notesStore,
+                            title: '',
+                            forceFit: true,
+                            enableColumnHide: false,
+                            columnLines: false,
+                            multiSelect: false,
+                            viewConfig: {
+                                itemId: 'note-grid-view',
+                                stripeRows: true,
+                                floating: false,
+                                trackOver: true,
+                                listeners: {
+                                    itemclick: {
+                                        fn: me.onGridviewItemClick,
+                                        scope: me
+                                    },
+                                    itemdblclick: {
+                                        fn: me.onGridviewItemDblClick,
+                                        scope: me
+                                    }
+                                }
+                            },
+                            listeners : {
+                                itemcontextmenu :  function( grid, record, item, index, event){
+                                    event.stopEvent();
+                                    var grid = Ext.getCmp('noteHistoryGridPanel');
+                                    var selModel = grid.getSelectionModel();
+                                    if (selModel instanceof Ext.selection.RowModel) {
+                                        if (!selModel.isSelected(record)) {
+                                            selModel.select(record);
+                                            grid.fireEvent('itemclick', grid, record, item, index, event);
+                                        }
+                                    }
+                                    var menu = Ext.create('Ext.menu.Menu',{
+                                        plain: true,
+                                        items: [{
+                                            text: 'Open in Note View Mode',
+                                            handler: function() {
+                                                var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                var selected = grid.getSelectionModel().getSelection();
+                                                if ( selected.length > 0 ) {
+                                                    me.onGridviewItemDblClick( grid.getView(), selected[0], null, selected[0].index, null, null);
+                                                } else {
+                                                    grid.getSelectionModel().select(0,false,false);
+                                                    grid.getView().focusRow(0);
+                                                    selected = grid.getSelectionModel().getSelection();
+                                                    me.onGridviewItemDblClick( grid.getView(), selected[0], null, selected[0].index, null, null);
+                                                }
+                                                Ext.getCmp('studentNoteIndexText').setRawValue( (selected[0].index+1)+' of '+ Ext.getCmp('studentNoteCountText').getRawValue() );
+                                            }
+                                        }]
+                                    });
+                                    menu.showAt(event.xy);
+                                }
+                            },
+                            columns: [
+                                {
+                                    xtype: 'gridcolumn',
+                                    text: 'Team / Author',
+                                    dataIndex: 'AuthorName',
+                                    width: 130,
+                                    filterable: true,
+                                    sortable: true
+                                },
+                                {
+                                    xtype: 'templatecolumn',
+                                    text: 'Type',
+                                    tpl: Ext.create('Ext.XTemplate',
+                                            '<tpl for=".">',
+                                            '<img src="{Level1Image__c}"/>',
+                                            '</tpl>'),
+                                    width: 50,
+                                    align: 'center',
+                                    sortable: false
+                                },
+                                {
+                                    xtype: 'templatecolumn',
+                                    text: 'Subject / Text',
+                                    tpl: Ext.create('Ext.XTemplate',
+                                            '<tpl for=".">',
+                                            '<div id="{Id}" class="subjectColumn"><span>{Name}: </span>{ShortText__c}</div>',
+                                            '</tpl>'),
+                                    width: 654,
+                                    sortable: false
+                                },
+                                {
+                                    xtype: 'datecolumn',
+                                    text: 'Date',
+                                    dataIndex: 'WGUCreationDateTime__c',
+                                    width: 105,
+                                    filterable: true,
+                                    format: "Y-m-d",
+                                    sortable: true
+                                }
+                            ],
+                            features: [
+                                {
+                                    ftype: 'filters',
+                                    encode: true,
+                                    local: true
+                                }
+                            ],
+                            dockedItems: [
+                                {
+                                    xtype: 'toolbar',
+                                    dock: 'top',
+                                    items: ['-',
+                                        {
+                                            xtype: 'button',
+                                            text:  'View Notes',
+                                            style: 'border-color: #81A4D0;',
+                                            tooltip: 'View the full text of all notes one at a time',
+                                            width: 70,
+                                            handler: function() {
+                                                var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                var selected = grid.getSelectionModel().getSelection();
+                                                if ( selected.length == 0 ){
+                                                    grid.getSelectionModel().select(0,false,false);
+                                                    grid.getView().focusRow(0);
+                                                    selected = grid.getSelectionModel().getSelection();
+                                                }
+                                                me.onGridviewItemDblClick(null, selected[0], null, null, null, null );
+                                                Ext.getCmp('studentNoteIndexText').setRawValue( (selected[0].index+1)+' of '+ Ext.getCmp('studentNoteCountText').getRawValue() );
+                                            }
+                                        },'-',
+                                        {
+                                            xtype: 'combo',
+                                            id: 'noteTypeFilterCombo',
+                                            fieldLabel: 'Note Type Filter',
+                                            labelWidth: 88,
+                                            queryMode: 'local',
+                                            displayField: 'name',
+                                            valueField: 'value',
+                                            store: noteTypesFilterStore,
+                                            listConfig: {
+                                                resizable: false,
+                                                width: 180,
+                                                matchFieldWidth: false,
+                                                minWidth: 180
+                                            }
+
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            id: 'noteTextFilterTextField',
+                                            fieldLabel: 'Note Text Filter',
+                                            enableKeyEvents: true,
+                                            labelAlign: 'right',
+                                            listeners: {
+                                                keyup: {
+                                                    fn: function(field, e){
+                                                        var val = field.getValue()==null? '' : field.getValue().trim();
+                                                        var noteTypeVal = (filterCombo.getRawValue()==null || filterCombo.getRawValue()=='') ?'All': filterCombo.getRawValue();
+
+                                                        noteHistoryGridPanel.getStore().filterBy( function(record) {
+                                                            if ( val == '' && noteTypeVal == 'All' ) {
+                                                                return true;
+                                                            } else {
+                                                                if ( noteTypeVal == 'All' ) {
+                                                                    return (record.get('Text__c').indexOf(val) != -1);
+                                                                } else {
+                                                                    return (record.get('Text__c').indexOf(val) != -1) && record.get('Type__c')==noteTypeVal;
+                                                                }
+                                                            }
+                                                        }, this);
+                                                    },
+                                                    buffer: 250
+                                                }
+                                            }
+                                        }]
+                                }],
+                            selModel: Ext.create('Ext.selection.RowModel', {
+                                enableKeyNav: true,
+                                mode: 'SINGLE',
+                                allowDeselect: false,
+                                ignoreRightMouseSelection: true,
+                                listeners: {
+                                    selectionchange: function( thisModel, selected, eOpts ) {
+                                        if ( selected.length > 0 ) {
+                                            me.onGridviewItemClick( null, selected[0], null, null, null, eOpts );
+                                        }
+                                    }
+                                }
+                            })
+                        },
+                        {
+                            xtype: 'panel',
+                            id: 'noteViewPanel',
+                            flex: 1,
+                            maintainFlex: true,
+                            layout: {
+                                align: 'stretch',
+                                type: 'vbox'
+                            },
+                            listeners: {
+                                resize: {
+                                    fn: me.onNoteViewContainerResize,
+                                    scope: me
+                                }
+                            },
+                            title: '',
+                            bodyStyle: 'background:#F2F2F2;',
+                            items: [
+                                {
+                                    xtype: 'container',
+                                    id: 'noteViewTopContainer',
+                                    height: 55,
+                                    layout: {
+                                        type: 'absolute'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'displayfield',
+                                            x: 12,
+                                            y: 2,
+                                            width: 64,
+                                            value: '',
+                                            fieldLabel: 'Note Details',
+                                            labelStyle: 'font-size: 11px;color: #797979;',
+                                            fieldStyle: 'font-size: 11px;font-weight: bold;color: #505050;',
+                                            labelAlign: 'left',
+                                            labelPad: 0,
+                                            labelWidth: 70
+                                        },
+                                        {
+                                            xtype: 'displayfield',
+                                            id: 'noteViewerType',
+                                            x: 87,
+                                            y: 5,
+                                            width: 166,
+                                            value: '',
+                                            fieldLabel: 'Note Type',
+                                            labelStyle: 'font-size: 10.5px;color: #797979;',
+                                            fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #505050;',
+                                            labelAlign: 'top',
+                                            labelPad: 0,
+                                            labelWidth: 70
+                                        },
+                                        {
+                                            xtype: 'displayfield',
+                                            id: 'noteViewerSubType',
+                                            x: 253,
+                                            y: 5,
+                                            width: 205,
+                                            value: '',
+                                            fieldLabel: 'Sub Type',
+                                            labelStyle: 'font-size: 10.5px;color: #797979;',
+                                            fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #505050;',
+                                            labelAlign: 'top',
+                                            labelPad: 0,
+                                            labelWidth: 70
+                                        },
+                                          {
+                                               xtype: 'displayfield',
+                                               id: 'noteViewerSubject',
+                                               x: 463,
+                                               y: 5,
+                                               width: 460,
+                                               value: '',
+                                               fieldLabel: 'Subject',
+                                               labelStyle: 'font-size: 10.5px;color: #797979;',
+                                               fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #505050;',
+                                               labelAlign: 'top',
+                                               labelPad: 0,
+                                               labelWidth: 70
+                                          },
+                                          {
+                                               xtype: 'component',
+                                               id: 'noteViewerAttachment',
+                                               x: 925,
+                                               y: 5,
+                                               width: 32,
+                                               height: 32,
+                                               visible: true
+                                          }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    id: 'noteViewCKEditorContainer',
+                                    flex: 1,
+                                    padding: 3,
+                                    layout: {
+                                        type: 'fit'
+                                    },
+                                    listeners: {
+                                        resize: {
+                                            fn: me.onNoteViewContainerResize,
+                                            scope: me
+                                        }
+                                    },
+                                    items: [
+                                        {
+
+                                            xtype: 'container',
+                                            id: 'noteViewerHTMLWrapper',
+                                            html: '<textarea id="noteViewerHTML" name="noteViewerHTML"></textarea>'
+                                        }
+                                    ]
+                                }
+                            ],
+                            dockedItems: [
+                                {
+                                    xtype: 'toolbar',
+                                    dock: 'top',
+                                    items: ['-',
+                                        {
+                                            xtype: 'button',
+                                            text: 'View Grid',
+                                            style: 'border-color: #81A4D0;',
+                                            width: 65,
+                                            tooltip: 'Return to the grid view of this student\'s notes',
+                                            handler: function() {
+                                                Ext.getCmp('gridViewCards').getLayout().setActiveItem(0);
+                                                var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                if ( grid.getSelectionModel().getSelection().length > 0 ){
+                                                    var row = grid.getSelectionModel().getSelection()[0];
+                                                    grid.getView().focusRow(row.index);
+                                                    Ext.getCmp('studentNoteIndexText').setRawValue( (row.index+1)+' of '+Ext.getCmp('studentNoteCountText').getRawValue());
+                                                }
+                                            }
+                                        },
+                                        '-',
+                                        {
+                                            xtype: 'displayfield',
+                                            id: 'studentNoteIndexText',
+                                            fieldLabel: 'Note',
+                                            labelWidth: 31,
+                                            labelAlign: 'left',
+                                            width: 165,
+                                            value: '0 of 0',
+                                            fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #2356AD; margin: -2px 3px 0 0;',
+                                            labelStyle: 'font-size: 10.5px;margin: -3px 3px 0 0;',
+                                            labelPad: '0 0 0 0'
+                                        },
+                                        {
+                                            xtype: 'displayfield',
+                                            id: 'noteViewerAuthor',
+                                            fieldLabel: 'Author',
+                                            labelWidth: 42,
+                                            labelAlign: 'left',
+                                            width: 207,
+                                            value: '',
+                                            fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #2356AD;margin: -2px 3px 0 0;',
+                                            labelStyle: 'font-size: 10.5px;margin: -3px 3px 0 0;',
+                                            labelPad: '0 0 0 0'
+                                        },
+                                        {
+                                            xtype: 'displayfield',
+                                            id: 'noteViewerCreationDate',
+                                            fieldLabel: 'Created',
+                                            labelWidth: 45,
+                                            labelAlign: 'left',
+                                            width: 204,
+                                            value: '',
+                                            fieldStyle: 'font-size: 10.5px;font-weight: bold;color: #2356AD;margin: -2px 3px 0 0;',
+                                            labelStyle: 'font-size: 10.5px;margin: -3px 3px 0 0;',
+                                            labelPad: '0 0 0 0'
+                                        },
+                                        '->',
+                                        '-',
+                                        {
+                                            text: 'Clear Form',
+                                            style: 'border-color: #81A4D0;',
+                                            width: 65,
+                                            tooltip: 'Start a new note with a blank form',
+                                            handler: newNoteButtonClick
+                                        },
+                                        '-',
+                                        {
+                                            xtype: 'button',
+                                            id: 'firstNoteButton',
+                                            text: '<< First',
+                                            style: 'border-color: #81A4D0;',
+                                            disabled: false,
+                                            tooltip: 'Go to the first note in the history grid',
+                                            handler: function() {
+                                                var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                grid.getSelectionModel().select(0,false,false);
+                                                grid.getView().focusRow(0);
+                                                Ext.getCmp('studentNoteIndexText').setRawValue( '1 of '+Ext.getCmp('studentNoteCountText').getRawValue());
+                                            }
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            id: 'previousNoteButton',
+                                            text: '< Prev',
+                                            style: 'border-color: #81A4D0;',
+                                            disabled: false,
+                                            tooltip: 'Go to the previous note in the history grid',
+                                            handler: function() {
+                                                var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                if ( grid.getSelectionModel().getSelection().length > 0 ){
+                                                    var row = grid.getSelectionModel().getSelection()[0];
+                                                    if ( row && row.index != 0 ){
+                                                        grid.getSelectionModel().select(row.index-1,false,false);
+                                                        grid.getView().focusRow(row.index-1);
+                                                        Ext.getCmp('studentNoteIndexText').setRawValue( (row.index)+' of '+Ext.getCmp('studentNoteCountText').getRawValue());
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            text: 'Next >',
+                                            style: 'border-color: #81A4D0;',
+                                            id: 'nextNoteButton',
+                                            tooltip: 'Go to the next note in the history grid',
+                                            handler: function() {
+                                                var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                var lastRowIndex = grid.getStore().count()-1;
+                                                if ( grid.getSelectionModel().getSelection().length > 0 ){
+                                                    var row = grid.getSelectionModel().getSelection()[0];
+                                                    if (row && row.index != lastRowIndex ){
+                                                        grid.getSelectionModel().select(row.index+1 ,false,false);
+                                                        grid.getView().focusRow(row.index+1);
+                                                        Ext.getCmp('studentNoteIndexText').setRawValue( (row.index+2)+' of '+Ext.getCmp('studentNoteCountText').getRawValue());
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            id: 'lastNoteButton',
+                                            text: 'Last >>',
+                                            style: 'border-color: #81A4D0;',
+                                            tooltip: 'Go to the last note in the history grid',
+                                            handler: function() {
+                                                var grid = Ext.getCmp('noteHistoryGridPanel');
+                                                var lastRowIndex = grid.getStore().count()-1;
+                                                grid.getSelectionModel().select(lastRowIndex ,false,false);
+                                                grid.getView().focusRow(lastRowIndex);
+                                                Ext.getCmp('studentNoteIndexText').setRawValue( grid.getStore().count()+' of '+Ext.getCmp('studentNoteCountText').getRawValue());
+                                            }
+                                        }
+                                    ]
+                                }]
+                        }
+                    ]
+                }
+            ]
+        });
+
+        me.callParent(arguments);
+    },
+    onPerformanceEvidenceCheckChange: function( checkbox, checked ) {
+        if ( checkbox.id == 'NoEvidenceIsPresentCheckbox' && checked ) {
+            EngagedInNewStudentProtocolsCheckbox.setValue(false);
+            EngagedInLearningResourceCheckbox.setValue(false);
+            UtilizedACommunityResourceCheckbox.setValue(false);
+            AttendedASeminarCheckbox.setValue(false);
+            MetWithACourseMentorCheckbox.setValue(false);
+            TookAPreAssessmentCheckbox.setValue(false);
+            ScheduledAnAssessmentCheckbox.setValue(false);
+            TookAndFailedAnAssessmentCheckbox.setValue(false);
+            TookAndPassedAnAssessmentCheckbox.setValue(false);
+            SubmittedATaskStreamTaskCheckbox.setValue(false);
+            RevisedATaskStreamTaskCheckbox.setValue(false);
+        } else if ( checked && NoEvidenceIsPresentCheckbox.getRawValue() ) {
+            NoEvidenceIsPresentCheckbox.setValue(false);
+        }
+        disableSave();
+    },
+    onSubjectTextKeyDown: function( sender, event, eOpts ) {
+      if ( event.TAB == event.getKey() ) {
+         if ( isStudentMentor ) {
+           HundredPercentRadio.focus();
+         } else {
+           Ext.select('iframe').elements[0].focus();
+           CKEDITOR.instances.noteHTMLTextEditor.focus();
+         }
+         event.preventDefault();
+       }
+    },
+    onNoteEntryContainerResize: function( container, adjWidth, adjHeight, eOpts ) {
+        if ( CKEDITOR.instances && CKEDITOR.instances.noteHTMLTextEditor ) {
+            CKEDITOR.instances.noteHTMLTextEditor.resize(adjWidth, adjHeight);
+            CKEDITOR.instances.noteHTMLTextEditor.document.on( 'keydown', function(ev) {
+                   if ( ( (ev.data.getKey() == 83 || ev.data.getKey() == 115) && ev.data.$.ctrlKey ) || (ev.data.getKey() == 19) ) {
+                     saveNoteButtonClick();
+                     ev.data.preventDefault();
+                   } else {
+                    disableSave();
+                   }
+            });            
+        }
+    },
+    onNoteViewContainerResize: function( container, adjWidth, adjHeight, eOpts ) {
+        if ( CKEDITOR.instances && CKEDITOR.instances.noteViewerHTML ) {
+            CKEDITOR.instances.noteViewerHTML.resize(adjWidth-6, adjHeight-100);
+        }
+    },
+    // on click a note in the list, load the note to page
+    onGridviewItemClick: function(dataview, record, item, index, e, options) {
+        var gridRecord = record.data;
+        noteRecord = Ext.decode( blankNoteJSON );
+        noteRecord.Text__c = gridRecord.Text__c;
+        noteRecord.ShortText__c = noteRecord.Text__c==null? null: Ext.String.ellipsis(gridRecord.Text__c.replace( /<[^<|>]+?>/gi,'' ),100,true);
+        noteRecord.Type__c = gridRecord.Type__c;
+        noteRecord.SubType__c = gridRecord.SubType__c;
+        noteRecord.Id = gridRecord.Id;
+        noteRecord.Name = gridRecord.Name;
+        noteRecord.Author__c = gridRecord.Author__c;
+        noteRecord.AuthorPidm__c = gridRecord.AuthorPidm__c;
+        noteRecord.Student__c = gridRecord.Student__c;
+        noteRecord.PIDM__c = gridRecord.PIDM__c;
+        noteRecord.ShortText__c = gridRecord.ShortText__c;
+        noteRecord.Author__r = { Name: gridRecord.AuthorName };
+        noteRecord.WGUCreationDateTime__c = gridRecord.WGUCreationDateTime__c;
+        //10-9-13  yemeng zhu
+        //edit 12-10 action type
+       // noteRecord.PersonalizationActions__c = gridRecord.PersonalizationActions__c;
+        noteRecord.PersonalizationMenu__c = gridRecord.PersonalizationMenu__c;
+        noteRecord.PersonalizationMenuSubType__c = gridRecord.PersonalizationMenuSubType__c;
+        loadNoteRecord(noteRecord);
+    },
+    onGridviewItemDblClick: function(dataview, record, item, index, e, options) {
+        newNoteButtonClick();
+        Ext.getCmp('gridViewCards').getLayout().setActiveItem(1);
+        this.onGridviewItemClick(dataview, record, item, index, e, options);
+        var grid = Ext.getCmp('noteHistoryGridPanel');
+        if ( grid.getSelectionModel().getSelection().length > 0 ){
+            var row = grid.getSelectionModel().getSelection()[0];
+            Ext.getCmp('studentNoteIndexText').setRawValue( (row.index+1)+' of '+Ext.getCmp('studentNoteCountText').getRawValue());
+        }
+    }
+});
+
+Ext.define('WGU.view.StudentNoteView', {
+    extend: 'Ext.container.Container',
+    alias: 'widget.wgustudentnoteview',
+    layout: {
+        align: 'stretch',
+        type: 'vbox'
+    },
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'container',
+                    id: 'StudentDetailBannerContainer',
+                    height: 26,
+                    margin: '3 0 0 0',
+                    width: 960,
+                    layout: {
+                        type: 'absolute'
+                    },
+                    items: [
+                        {
+                            xtype: 'component',
+                            id: 'cancelBtnDiv',
+                            x: 0,
+                            y: 0,
+                            width: 120
+                        },
+                        {
+                            xtype: 'displayfield',
+                            x: 123,
+                            y: 0,
+                            width: 185,
+                            margin: '2 0 0 5',
+                            id: 'studentPhoneText',
+                            value: '',
+                            fieldLabel: '',
+                            fieldStyle: 'color: #2356AD;font-weight: 700;',
+                            labelWidth: 47,
+                            preventMark: true
+                        },
+                        {
+                            xtype: 'displayfield',
+                            x: 313,
+                            y: 0,
+                            margin: '2 0 0 7',
+                            width: 255,
+                            id: 'studentEmailText',
+                            value: '',
+                            fieldLabel: '',
+                            fieldStyle: 'color: #2356AD;font-weight: 700;',
+                            labelWidth: 47,
+                            preventMark: true
+                        },
+                        {
+                            xtype: 'displayfield',
+                            x: 578,
+                            y: 0,
+                            width: 167,
+                            margin: '2 0 0 3',
+                            id: 'studentCurrentTermText',
+                            value: '',
+                            fieldLabel: 'Current Term',
+                            labelStyle: 'color: black',
+                            fieldStyle: 'color: #2356AD;font-weight: 700;',
+                            hideLabel: false,
+                            labelWidth: 78,
+                            preventMark: true
+                        },
+                        {
+                            xtype: 'displayfield',
+                            id: 'studentNoteCountText',
+                            x: 740,
+                            y: 0,
+                            margin: '2 0 0 0',
+                            width: 120,
+                            value: '',
+                            fieldLabel: 'Note Count',
+                            labelStyle: 'color: black;',
+                            fieldStyle: 'color: #2356AD;font-weight: 700;',
+                            hideLabel: false,
+                            labelWidth: 68,
+                            preventMark: true
+                        },
+                        {
+                            xtype: 'button',
+                            id: 'talismaNotesButton',
+                            tooltip: 'View notes for this student in the legacy notes system',
+                            x: 860,
+                            y: 0,
+                            width: 100,
+                            text: 'Talisma Notes',
+                            handler: function(){
+                                talismaWindow = window.open(talismaLinkUrl, "_blank", "location=1,status=1,scrollbars=1,width=800,height=600");
+                                talismaWindow.moveTo(0, 0);
+                            }
+                        }
+                    ]
+                },
+                {
+                    xtype: 'container',
+                    id: 'NoteDetailBannerContainer',
+                    style: 'border: 1px solid #333;  background-color: #797979;  font-size: 12px;  font-weight: 400;  line-height: 34px;  color: #FFF;  text-shadow: -1px -1px rgba(0, 0, 0, 0.4);  -webkit-box-shadow: inset 0 0 0 1px #8C8C8C;  -moz-box-shadow: inset 0 0 0 1px #8C8C8C;  box-shadow: inset 0 0 0 1px #8C8C8C;  box-shadow: inset 1px 1px 1px 0 #A5A5A5;',
+                    height: 23,
+                    padding: '0 8 0 10',
+                    margin: '3 0 3 0',
+                    width: 957,
+                    layout: {
+                        type: 'absolute'
+                    },
+                    items: [
+                        {
+                            xtype: 'displayfield',
+                            id: 'noteAuthorText',
+                            width: 240,
+                            x: 78,
+                            y: 0,
+                            value: '',
+                            padding: '1 0 0 0',
+                            fieldLabel: 'Author',
+                            labelStyle: 'font-size: 10.5px; color: #F2F2F2;',
+                            fieldStyle: 'font-size: 10.5px; color: #F2F2F2;font-weight: 700;',
+                            labelWidth: 47,
+                            preventMark: true
+                        },
+                        {
+                            xtype: 'displayfield',
+                            id: 'noteCreatedDateTimeText',
+                            width: 250,
+                            x: 320,
+                            y: 0,
+                            value: '',
+                            padding: '1 0 0 0',
+                            fieldLabel: 'Created',
+                            labelStyle: 'font-size: 10.5px; color: #F2F2F2;',
+                            fieldStyle: 'font-size: 10.5px; color: #F2F2F2;font-weight: 400;',
+                            labelWidth: 47,
+                            preventMark: true
+                        },
+                        {
+                            xtype: 'displayfield',
+                            id: 'noteEditStatusText',
+                            width: 150,
+                            x: 580,
+                            y: 0,
+                            value: 'New Note',
+                            fieldLabel: '',
+                            labelStyle: 'color: yellow;',
+                            fieldStyle: 'color: yellow;font-weight: 700;',
+                            hideLabel: true,
+                            labelWidth: 47,
+                            preventMark: true
+                        }
+                    ]
+                },
+                {
+                    xtype: 'wgustudentnotecontainer',
+                    flex: 1
+                }
+            ]
+        });
+
+        me.callParent(arguments);
+    }
+
+});
+
+Ext.define('NotesModel', {
+    extend  : 'Ext.data.Model',
+    fields  : [
+        {name: 'Id' , mapping: 'Id', type: 'string'},
+        {name: 'Name' , mapping: 'Name', type: 'string'},
+        {name: 'Student__c' , mapping: 'Student__c', type: 'string'},
+        {name: 'Author__c' , mapping: 'Author__c', type: 'string'},
+        {name: 'AuthorName' , mapping: 'Author__r.Name', type: 'string'},
+        {name: 'PIDM__c' , mapping: 'PIDM__c', type: 'string'},
+        {name: 'AuthorPidm__c' , mapping: 'AuthorPidm__c', type: 'string'},
+        {name: 'Level1Image__c' , mapping: 'Level1Image__c', type: 'string'},
+        {name: 'WGUCreationDateTime__c',
+            mapping: 'WGUCreationDateTime__c',
+            type: 'date',
+            convert: function(dateStr, record) {
+                var date = new Date();
+                if ( dateStr ) {
+                    date = convertDate(dateStr)
+                }
+                return date;
+            }
+        },
+        {name: 'Type__c' , mapping: 'Type__c', type: 'string'},
+        {name: 'SubType__c' , mapping: 'SubType__c', type: 'string'},
+        {name: 'Text__c' , mapping: 'Text__c', type: 'string'},
+        {name: 'ShortText__c' , mapping: 'ShortText__c', type: 'string'},
+       // {name: 'PersonalizationActions__c' , mapping: 'PersonalizationActions__c', type: 'string'}
+        {name: 'PersonalizationMenu__c' , mapping: 'PersonalizationMenu__c', type: 'string'},
+        {name: 'PersonalizationMenuSubType__c' , mapping: 'PersonalizationMenuSubType__c', type: 'string'}
+    ]
+});
+
+function convertDate( dateStr ) {
+    var date = new Date();
+    var parts = dateStr==null? []: dateStr.split(/[- : T + .]/);
+    var offset = Ext.Date.getGMTOffset(date)/100;
+    if ( parts.length > 0 ) {
+        //convert strings to integers
+        parts[0] = (parts[0]? parts[0]*1 :0);
+        parts[1] = (parts[1]? (parts[1]*1)-1 :0);  //month is zero based (0 - 11)
+        parts[2] = (parts[2]? parts[2]*1 :0);
+        parts[3] = (parts[3]? (parts[3]*1)+offset :0); //adjust hour from GMT
+        parts[4] = (parts[4]? parts[4]*1 :0);
+        parts[5] = (parts[5]? parts[5]*1 :0);
+        parts[6] = (parts[6]? parts[6]*1 :0);
+        //load up date object with converted values
+        date.setFullYear(parts[0],parts[1],parts[2]);
+        date.setHours(parts[3],parts[4],parts[5],parts[6]);
+    }
+    return date;
+}
+
+Ext.define('NoteSubTypeModel', {
+    extend  : 'Ext.data.Model',
+    fields  : [
+        {name: 'noteSubType' , mapping: 'noteSubType', type: 'string'},
+        {name: 'noteSubTypeValue' , mapping: 'noteSubTypeValue', type: 'string'}
+    ]
+});
+
+//12-10 action subtype
+Ext.define('ActionSubTypeModel', {
+    extend  : 'Ext.data.Model',
+    fields  : [
+        {name: 'actionSubType' , mapping: 'actionSubType', type: 'string'},
+        {name: 'actionSubTypeValue' , mapping: 'actionSubTypeValue', type: 'string'}
+    ]
+});
+
+Ext.define('SurveyModel', {
+    extend  : 'Ext.data.Model',
+    fields  : [
+        {name: 'Id' , mapping: 'Id', type: 'string'},
+        {name: 'Student__c' , mapping: 'Student_c', type: 'string'},
+        {name: 'WGUStudentNote__c' , mapping: 'WGUStudentNote__c', type: 'string'},
+        {name: 'NoteSubject' , mapping: 'Name', type: 'string'},
+        {name: 'EvidenceOfAcademicActivity__c' , mapping: 'EvidenceOfAcademicActivity__c', type: 'string'},
+        {name: 'GoalPerformanceSinceLastCall__c' , mapping: 'GoalPerformanceSinceLastCall__c', type: 'string'}
+    ]
+});
+
+if ( !noteSubTypeStore ) {
+    noteSubTypeStore = Ext.create('Ext.data.Store', {
+        model: 'NoteSubTypeModel',
+        proxy: {
+            type: 'memory',
+            reader: {
+                type: 'json',
+                root: 'subTypes'
+            }
+        },
+        remoteSort: false,
+        recordSets : noteSubTypeStoreData,
+        setRecordSet: function(record) {
+            var result;
+            if ( this.recordSets && record ) {
+                for ( var x=0; x < this.recordSets.length; x++ ) {
+                    if ( this.recordSets[x].noteType == record ) {
+                        this.loadDataViaReader(this.recordSets[x], false);
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+    });
+}
+//12-10 action sub type 
+if ( !actionSubTypeStore ) {
+    actionSubTypeStore = Ext.create('Ext.data.Store', {
+        model: 'ActionSubTypeModel',
+        proxy: {
+            type: 'memory',
+            reader: {
+                type: 'json',
+                root: 'subTypes'
+            }
+        },
+        remoteSort: false,
+        recordSets : actionSubTypeStoreData,
+        setRecordSet: function(record) {
+            var result;
+            if ( this.recordSets && record ) {
+                for ( var x=0; x < this.recordSets.length; x++ ) {
+                    if ( this.recordSets[x].actionType == record ) {
+                        this.loadDataViaReader(this.recordSets[x], false);
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+    });
+}
+if ( !surveyStore ) {
+    var surveyStore = Ext.create('Ext.data.Store', {
+        model : 'SurveyModel',
+        proxy : {
+            type: 'memory',
+            autoSync: true,
+            reader: {
+                type: 'json',
+                root: 'Records'
+            }
+        },
+        remoteSort: true
+    });
+}
+
+if ( !notesStore ) {
+    var notesStore = Ext.create('Ext.data.Store', {
+        model : 'NotesModel',
+        proxy : {
+            type: 'memory',
+            autoSync: true,
+            reader: {
+                type: 'json',
+                root: 'Records'
+            }
+        },
+        remoteSort: false,
+        sorters: [{
+            property: 'WGUCreationDateTime__c',
+            direction: 'DESC'
+        }]
+    });
+}
+
+//These values are hard ocded only until a place is established to store this data.
+//Once a place to store the performance action has been established, and it should likely be a picklist, a data model should be made and this store converted to a standard data store using that data model.
+//Code will be needed to pull the available values for the picklist.
+//Basically it should look just like the noteSubType store, model, and code.
+//Student Performance Actions Store to be used with the Student Performance Actions drop-down
+//Added 10/3/2013 by Katarina Melki
+if (!performanceActionStore)
+{
+    var performanceActionStore = new Ext.data.ArrayStore({
+            fields: ['text'],
+            data: [
+                ['Create an entire term plan with weekly progress goals that allow the student to achieve OTP'],
+                ['Enroll the student in a cohort'],
+                ['When the student fails to achieve the weekly goal, set a follow up call later in the week or the day to provide time for them to accomplish the goal that week'],
+                ['Create a study calendar with specific times blocked out for schoolwork and ask the student to share it with his or her family/support system'],
+                ['Ask questions to determine if the student is struggling with the content, time management, or motivation. Then set a follow up appointment with an additional person (course mentor, student success mentor, etc.) based upon the student’s response'],
+                ['Share screens with the student and walk through a learning resource or task together'],
+                ['Share screens and watch a welcome video together then create a plan for finishing the course'],
+                ['When a goal is achieved, discuss what actions the student took to achieve that goal and look for ways to replicate those actions'],
+                ['Review communities with the students and search out tips and information'],
+                ['Share screens and watch a clip of a graduation speaker and then craft a graduation goal and plan for achieving that goal'],
+                ['Use questions in the course of study to quiz the student. Set up a course mentor appointment to further discuss the topic']
+            ]
+        });
+}
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(window.location.search);
+    if(results == null)
+        return null;
+    else
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+var Base64 = {
+
+    // private property
+    _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+
+    // public method for encoding
+    encode : function (input) {
+        var output = "";
+        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+        var i = 0;
+
+        input = Base64._utf8_encode(input);
+
+        while (i < input.length) {
+
+            chr1 = input.charCodeAt(i++);
+            chr2 = input.charCodeAt(i++);
+            chr3 = input.charCodeAt(i++);
+
+            enc1 = chr1 >> 2;
+            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+            enc4 = chr3 & 63;
+
+            if (isNaN(chr2)) {
+                enc3 = enc4 = 64;
+            } else if (isNaN(chr3)) {
+                enc4 = 64;
+            }
+
+            output = output +
+                    this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+                    this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+
+        }
+
+        return output;
+    },
+
+    // public method for decoding
+    decode : function (input) {
+        var output = "";
+        var chr1, chr2, chr3;
+        var enc1, enc2, enc3, enc4;
+        var i = 0;
+
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+
+        while (i < input.length) {
+
+            enc1 = this._keyStr.indexOf(input.charAt(i++));
+            enc2 = this._keyStr.indexOf(input.charAt(i++));
+            enc3 = this._keyStr.indexOf(input.charAt(i++));
+            enc4 = this._keyStr.indexOf(input.charAt(i++));
+
+            chr1 = (enc1 << 2) | (enc2 >> 4);
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+            chr3 = ((enc3 & 3) << 6) | enc4;
+
+            output = output + String.fromCharCode(chr1);
+
+            if (enc3 != 64) {
+                output = output + String.fromCharCode(chr2);
+            }
+            if (enc4 != 64) {
+                output = output + String.fromCharCode(chr3);
+            }
+
+        }
+
+        output = Base64._utf8_decode(output);
+
+        return output;
+
+    },
+
+    // private method for UTF-8 encoding
+    _utf8_encode : function (string) {
+        string = string.replace(/\r\n/g,"\n");
+        var utftext = "";
+
+        for (var n = 0; n < string.length; n++) {
+
+            var c = string.charCodeAt(n);
+
+            if (c < 128) {
+                utftext += String.fromCharCode(c);
+            }
+            else if((c > 127) && (c < 2048)) {
+                utftext += String.fromCharCode((c >> 6) | 192);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+            else {
+                utftext += String.fromCharCode((c >> 12) | 224);
+                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+
+        }
+
+        return utftext;
+    },
+
+    // private method for UTF-8 decoding
+    _utf8_decode : function (utftext) {
+        var string = "";
+        var i = 0;
+        var c = c1 = c2 = 0;
+
+        while ( i < utftext.length ) {
+
+            c = utftext.charCodeAt(i);
+
+            if (c < 128) {
+                string += String.fromCharCode(c);
+                i++;
+            }
+            else if((c > 191) && (c < 224)) {
+                c2 = utftext.charCodeAt(i+1);
+                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                i += 2;
+            }
+            else {
+                c2 = utftext.charCodeAt(i+1);
+                c3 = utftext.charCodeAt(i+2);
+                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                i += 3;
+            }
+
+        }
+
+        return string;
+    }
+
+};
+
+Ext.define('WGU.view.WGUView', {
+    extend: 'Ext.container.Container',
+    alias: 'widget.wguview',
+    id: 'wguview',
+    minHeight: 600,
+    minWidth: 800,
+    layout: {
+        type: 'border'
+    },
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'container',
+                    region: 'center',
+                    minHeight: 450,
+                    style: '{ background-color: #F2F2F2;}',
+                    itemId: 'wgu-center',
+                    id: 'wgu-center',
+                    layout: {
+                        align: 'stretch',
+                        type: 'hbox'
+                    },
+                    items: [
+                        {
+                            xtype: 'container',
+                            flex: 1,
+                            id: 'wgu-center-left',
+                            itemId: 'wgu-center-left'
+                        },
+                        {
+                            xtype: 'container',
+                            id: 'wgu-view-body',
+                            itemId: 'wgu-view-body',
+                            layout: {
+                                align: 'stretch',
+                                type: 'vbox'
+                            },
+                            minHeight: 450,
+                            width: 960,
+                            items: [{
+                                xtype:'wgustudentnoteview',
+                                flex: 1
+                            },
+                                {
+                                    xtype:'container',
+                                    height: 10
+                                }]
+                        },
+                        {
+                            xtype: 'container',
+                            flex: 1,
+                            id: 'wgu-center-right',
+                            itemId: 'wgu-center-right'
+                        }
+                    ]
+                },
+                {
+                    xtype: 'container',
+                    region: 'north',
+                    height: 84,
+                    id: 'wgu-header-container',
+                    maxHeight: 84,
+                    minHeight: 84,
+                    layout: {
+                        align: 'stretch',
+                        type: 'vbox'
+                    },
+                    items: [
+                        {
+                            xtype: 'container',
+                            flex: 1,
+                            height: 34,
+                            id: 'wgu-header',
+                            maxHeight: 34,
+                            minHeight: 34,
+                            style: (!Ext.isIE8 && !Ext.isIE7)?'{ z-index: 2; background-color: #182A7C; background-image: -webkit-linear-gradient(top, #2356AD 0%, #0E004E 100%); background-image: -moz-linear-gradient(top, #2356AD 0%, #0E004E 100%); background-image: -ms-linear-gradient(top, #2356AD 0%, #0E004E 100%); background-image: -o-linear-gradient(top, #2356AD 0%, #0E004E 100%); background-image: linear-gradient(top, #2356AD 0%, #0E004E 100%); -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);}': 'z-index: 2; background-color: #182A7C;',
+                            layout: {
+                                align: 'stretch',
+                                type: 'hbox'
+                            },
+                            items: [
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    id: '',
+                                    itemId: 'wgu-header-left'
+                                },
+                                {
+                                    xtype: 'container',
+                                    id: 'wgu-header-center',
+                                    itemId: 'wgu-header-center',
+                                    style: 'padding: 1px 1px 1px 24px; margin: 3px 0 0 0; background: url({!$Resource.StandardPage}/assets/images/wgu.png) no-repeat;',
+                                    minWidth: 800,
+                                    width: 960,
+                                    layout: {
+                                        type: 'absolute'
+                                    }
+                                },
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    id: '',
+                                    itemId: 'wgu-header-right'
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'container',
+                            flex: 1,
+                            height: 50,
+                            id: 'wgu-sub-header',
+                            style: '{ border-bottom: 1px solid #5273AB; float: left; position: relative; z-index: 1; background: #6589C6; -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4); -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4); box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);    color: white;',
+                            maxHeight: 50,
+                            minHeight: 50,
+                            layout: {
+                                align: 'stretch',
+                                type: 'hbox'
+                            },
+                            items: [
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    itemId: 'wgu-sub-header-left'
+                                },
+                                {
+                                    xtype: 'container',
+                                    id: 'wgu-sub-header-center',
+                                    itemId: 'wgu-sub-header-center',
+                                    minWidth: 800,
+                                    width: 960,
+                                    layout: {
+                                        type: 'absolute'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'displayfield',
+                                            x: 3,
+                                            y: 14,
+                                            width: 650,
+                                            labelWidth: 105,
+                                            id: 'sub-header-label',
+                                            fieldStyle: '{ color: white; font-weight: 700; font-size: 15px; font-style: italic; }',
+                                            value: '',
+                                            fieldLabel: 'Notes for Student',
+                                            hideEmptyLabel : false,
+                                            hideLable: false,
+                                            labelStyle: 'padding-top: 6px;'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    itemId: 'wgu-sub-header-right'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    xtype: 'container',
+                    region: 'south',
+                    height: 34,
+                    id: 'wgu-footer-container',
+                    maxHeight: 66,
+                    minHeight: 34,
+                    layout: {
+                        align: 'stretch',
+                        type: 'vbox'
+                    },
+                    items: [
+                        {
+                            xtype: 'container',
+                            flex: 1,
+                            height: 32,
+                            hidden: true,
+                            id: 'wgu-sub-footer',
+                            maxHeight: 32,
+                            minHeight: 32
+                        },
+                        {
+                            xtype: 'container',
+                            flex: 1,
+                            height: 34,
+                            id: 'wgu-footer',
+                            maxHeight: 34,
+                            minHeight: 34,
+                            style: (!Ext.isIE8 && !Ext.isIE7)?'{ background-color: #182A7C; background-image: -webkit-linear-gradient(top, #2356AD, #0E004E); background-image: -moz-linear-gradient(top , #2356AD, #0E004E); background-image: -ms-linear-gradient(top, #2356AD, #0E004E); background-image: -o-linear-gradient(top, #2356AD, #0E004E); background-image: linear-gradient(top, #2356AD, #0E004E); -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); color: #FFF;}': 'background-color: #182A7C;' ,
+                            layout: {
+                                align: 'stretch',
+                                type: 'hbox'
+                            },
+                            items: [
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    itemId: 'wgu-footer-left'
+                                },
+                                {
+                                    xtype: 'container',
+                                    id: 'wgu-footer-center',
+                                    itemId: 'wgu-footer-center',
+                                    minWidth: 800,
+                                    style: '{ color: white; font-size: 10px; }',
+                                    width: 960,
+                                    layout: {
+                                        type: 'absolute'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'label',
+                                            x: 3,
+                                            y: 11,
+                                            text: '© 2012 - Western Governors University'
+                                        },
+                                        {
+                                            xtype: 'label',
+                                            x: 888,
+                                            y: 11,
+                                            html: '<a href="http://kb.wgu.edu/" style="color: white;" target="_blank">Help & Support</a>'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'container',
+                                    flex: 1,
+                                    itemId: 'wgu-footer-right'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        });
+
+        me.callParent(arguments);
+    },
+    addBodyElement: function(body) {
+        var viewBody = Ext.getCmp('wgu-view-body');
+        viewBody.add(body);
+        viewBody.doLayout();
+    },
+    removeBodyElement: function() {
+        var viewBody = Ext.getCmp('wgu-view-body');
+        if (viewBody.items) {
+            viewBody.remove(viewBody.items[0], true);
+            viewBody.doLayout();
+        }
+    },
+    getCenter: function() {
+        return Ext.getCmp('wgu-center');
+    },
+    getBody: function() {
+        return Ext.getCmp('wgu-view-body');
+    },
+    setWindowTitleLabel: function(labelText) {
+        Ext.getCmp('sub-header-label').labelEl.dom.innerText = labelText + ':';
+    },
+    setWindowTitleLabelWidth: function(labelWidth) {
+        Ext.getCmp('sub-header-label').labelEl.setWidth(labelWidth);
+    },
+    setWindowTitle: function(titleText) {
+        Ext.getCmp('sub-header-label').setRawValue(titleText);
+    },
+    setWindowTitleWidth: function(width) {
+        var labelWidth = Ext.getCmp('sub-header-label').labelEl.getWidth();
+        Ext.getCmp('sub-header-label').setWidth(width);
+        Ext.get('sub-header-label-bodyEl').setWidth( (width-labelWidth)-10 );
+    }
+
+});
+
+Ext.define('WGU.view.WGUViewport', {
+    extend: 'Ext.container.Viewport',
+    requires: [
+        'WGU.view.WGUView'
+    ],
+    alias: 'widget.wguviewport',
+    id: 'wguviewport',
+    minHeight: 600,
+    minWidth: 800,
+    layout: {
+        type: 'fit'
+    },
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.applyIf(me, {
+            items: [ {
+                xtype: 'wguview',
+                id: 'wgu-view-view'
+            }]
+        });
+
+        me.callParent(arguments);
+    },
+    getView: function() {
+        return Ext.getCmp('wgu-view-view');
+    }
+});
+
+</script>
+</body>
+</html>
+</apex:page>

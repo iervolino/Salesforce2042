@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>26.0</apiVersion>
+    <description>App-specific header component for FDP.</description>
+    <label>FDP Scripts Component</label>
+</ApexComponent>

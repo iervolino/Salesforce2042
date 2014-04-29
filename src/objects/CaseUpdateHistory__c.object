@@ -1,0 +1,2638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object stores a snapshot of case information created by trigger when a case status changes. This object is intended for analytic use only. It is a child to case in a master detail relationship.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AppealStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>Appeal Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Denied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Initial Pend</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Final Pend</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Case__c</fullName>
+        <externalId>false</externalId>
+        <label>Case</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Case Update Histories</relationshipLabel>
+        <relationshipName>CaseUpdateHistories</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Escalated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Escalated</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Origin__c</fullName>
+        <externalId>false</externalId>
+        <label>Origin</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Web</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Banner Event</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Owner__c</fullName>
+        <description>Owner of the case at the time that the case is edited</description>
+        <externalId>false</externalId>
+        <label>Owner</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ParentCaseCreatedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent Case Created Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>PreviousStatusChangeTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Previous Status Change Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>PreviousStatusValue__c</fullName>
+        <externalId>false</externalId>
+        <label>Previous Status Value</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Escalated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Updated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer/Student Response Needed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Staff Response Needed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Priority__c</fullName>
+        <externalId>false</externalId>
+        <label>Priority</label>
+        <picklist>
+            <picklistValues>
+                <fullName>High</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medium</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Reason</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1098-T</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2nd Term Exmpt</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3P (Third Party)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4th Fail</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AAV</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Absences</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Access Assistance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Access Code Order</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Account Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ADA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Advanced Programs</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Anthem Singers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appeal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Application Fee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Application Question</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessments</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Attention Error</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Authorizations</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Award</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BAES/MAES</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Balance Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Benefit Status</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bursar</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cancel Submission</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Capstone</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cash Receipts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cert Status</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Change Personal Information</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Citations</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cohort</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Collections</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Continuing Graduate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>COS Link</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>COS Problem</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cost Breakdown</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course Description</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CU Compliance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Data Cleanup</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Default Prevention</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Deficiency Response</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Degree Plan Change</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disbursement/Remaining Funds</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disbursement Question</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Discounts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Document Status</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Drop Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DT Scholarship Question</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Early Return Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EC/AC Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Electronic Transcript</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>End of Term</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enrollment &amp; Marketing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enrollment Confirmation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enrollment Inquiry/Research</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enroll Student Assessments</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Evaluation Feedback Link</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EWB</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Excessive Attempt Questions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Exclusion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Exempt</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expedite Grading Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Extension Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>External Scholarship</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Feedback Clarification</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Experiences</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finaid Payment Balance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finaid Payment Posted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finalizing Accommodation(s)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Financial Aid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Financial Aid Issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>First Contact</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Follow Up</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Follow-up Finaid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Follow-up Records</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Funding Question</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>General</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>General Question</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grade Change</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grade Level</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grading release Error</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grading Time</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Graduation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grouping</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health Professions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Help with Learning Resource</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information Technology</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information to gain competency</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internal Escalation to 3129</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internal Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>JUNK/Delete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LDA Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Learning Resources &amp; Program Development</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Library Assistance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>License Recommendation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Manager Permissions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Manual Recheck</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor Change</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mentor Recommendation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Military</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Missing Docs/Requirements/Verification</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Missing Requirements</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mixer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>My FA Plan</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Negative Feedback</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NSLDS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Observation/Eval Forms</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Open Doc</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Originality or TII</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Originality Questions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Package Needed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Packaging/Awards/Disbursement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Part Time</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Payments</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PCE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Placement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Positive Feedback</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Posting Issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Precert Needed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program book requests</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program Change</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program Changes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program Feedback Link</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program Management Task</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Proration Requests</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ptask Appeal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ptask Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>QLT Proof</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Question/Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>RBI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Readmission Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Re-appeal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Refund Needed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Remove Assessments</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Resource Information</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Resource Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Responses (Appeal, Posting)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Restart/Continuing Grads</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Retake Fees</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Revision Needed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>RSVPs</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SAP</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scholarships</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Score Report</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scoring Rules</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service Failure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Shipping Notice</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Special Fees</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Special Research</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Staff Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Statement Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stop Payment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Accounts/Bursar</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Audit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Concerns</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Essay</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Hardship</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Records</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Speakers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Success</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Suggestion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>System Failure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Task Directions or Link Issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Taskstream Access for Students</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Taskstream Directions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Taskstream Passcodes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TA Status</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teacher Field Experiences</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teacher Licensing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teacher Success</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teach Grant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Term Break</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Term Breaks</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TIA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TPA/TWS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transcript Evaluations</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transcripts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transferring Scores</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transfer to other Department</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tuition Deferral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Turn It In Report</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Verification Needed to Student Start</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Volunteers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Webcam</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Williams &amp; Fudge</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Withdrawal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Withdrawal Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Withdrawals</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Write Letter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>XS Funds</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Zaner Bloser (Going Away)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scores</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PLA - Provisional Letter of Acceptance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EWB Add</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EWB Drop</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>RN Verification</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prelicensure Docs</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teacher License/MOU</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CTS MOU - Commitment to Success</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Credit Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enrollment Agreement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>RA request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>RecordType__c</fullName>
+        <externalId>false</externalId>
+        <label>Record Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>ADA Support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Academic Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Admissions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alumni</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alumni Relations</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AppSupport</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assessment Scheduling</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bursar</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bursar-Withdrawal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CAREforce Team</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Career Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community Admin</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course Mentor Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ECare</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EWB Adds</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enrollment Case</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Excessive Attempts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Placement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finaid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Graduation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ITHelpDesk</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Learning Resources</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Military Support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Performance Task</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program Change</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program Feedback</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Readmission</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Records</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scholarship</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scores</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Concern</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teacher Licensure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teacher Success</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Term Break</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transcripts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Withdrawal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>StatusChangeTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Status Change Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>StatusValue__c</fullName>
+        <externalId>false</externalId>
+        <label>Status Value</label>
+        <picklist>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Open: Updated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Open: WGU Response Needed / In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Open: Student Response Needed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Escalated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TestPreviousTime__c</fullName>
+        <externalId>false</externalId>
+        <label>TestPreviousTime</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>TimeInStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>Time In Status</label>
+        <precision>11</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Feature Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Positive Feedback</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Negative Feedback</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Problem</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Question</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Question/Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Resource Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service Failure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Standard Process</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Suggestion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>System Failure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Breakdown of Service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service Lapse</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assistance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>FYI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Case Update History</label>
+    <nameField>
+        <displayFormat>CaseUpdateHistory-{0000}</displayFormat>
+        <label>Case Update History Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Case Update Histories</pluralLabel>
+    <recordTypes>
+        <fullName>CaseStatusUpdate</fullName>
+        <active>true</active>
+        <description>The record type that stores case update history when a case status is updated.</description>
+        <label>Case Status Update</label>
+        <picklistValues>
+            <picklist>AppealStatus__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Final Pend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Pend</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Origin__c</picklist>
+            <values>
+                <fullName>Banner Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Web</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PreviousStatusValue__c</picklist>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer%2FStudent Response Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Escalated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Staff Response Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Updated</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Priority__c</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medium</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reason__c</picklist>
+            <values>
+                <fullName>1098-T</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2nd Term Exmpt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3P %28Third Party%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4th Fail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AAV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ADA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Absences</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Access Assistance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Access Code Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Account Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advanced Programs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Anthem Singers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Application Fee</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Application Question</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Attention Error</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Authorizations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Award</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BAES%2FMAES</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Balance Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefit Status</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bursar</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>COS Link</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>COS Problem</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CTS MOU - Commitment to Success</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CU Compliance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancel Submission</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Capstone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cash Receipts</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cert Status</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change Personal Information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Citations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cohort</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Collections</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Continuing Graduate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cost Breakdown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Description</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Scholarship Question</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Data Cleanup</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Default Prevention</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deficiency Response</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Degree Plan Change</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disbursement Question</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disbursement%2FRemaining Funds</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discounts</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document Status</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Drop Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EC%2FAC Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EWB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EWB Add</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EWB Drop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Early Return Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronic Transcript</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>End of Term</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enroll Student Assessments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment %26 Marketing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment Confirmation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment Inquiry%2FResearch</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Evaluation Feedback Link</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Excessive Attempt Questions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exclusion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Exempt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expedite Grading Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Extension Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Scholarship</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feedback Clarification</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Experiences</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finaid Payment Balance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finaid Payment Posted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finalizing Accommodation%28s%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Financial Aid Issue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up Finaid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up Records</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Funding Question</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General Question</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grade Change</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grade Level</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grading Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grading release Error</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Graduation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grouping</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Professions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Help with Learning Resource</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information to gain competency</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Escalation to 3129</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JUNK%2FDelete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LDA Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources %26 Program Development</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Library Assistance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>License Recommendation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manager Permissions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Recheck</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentor Change</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentor Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentor Recommendation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mentoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Military</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Missing Docs%2FRequirements%2FVerification</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Missing Requirements</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mixer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>My FA Plan</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NSLDS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Negative Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Credit Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Observation%2FEval Forms</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open Doc</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Originality Questions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Originality or TII</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PLA - Provisional Letter of Acceptance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Package Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Packaging%2FAwards%2FDisbursement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Part Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Payments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Placement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Positive Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Posting Issue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Precert Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prelicensure Docs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program Change</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program Changes</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program Feedback Link</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program Management Task</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program book requests</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proration Requests</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ptask Appeal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ptask Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>QLT Proof</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Question%2FInquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RA request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RBI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RN Verification</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RSVPs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Re-appeal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Readmission Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Refund Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Remove Assessments</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resource Information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resource Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Responses %28Appeal%2C Posting%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Restart%2FContinuing Grads</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retake Fees</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revision Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scholarships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Score Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scores</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scoring Rules</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service Failure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping Notice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Special Fees</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Special Research</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Staff Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Statement Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stop Payment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Accounts%2FBursar</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Audit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Concerns</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Essay</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Hardship</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Inquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Records</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Speakers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Success</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Suggestion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>System Failure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TA Status</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TIA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TPA%2FTWS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Task Directions or Link Issue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Taskstream Access for Students</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Taskstream Directions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Taskstream Passcodes</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teach Grant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teacher Field Experiences</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teacher License%2FMOU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teacher Licensing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teacher Success</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Term Break</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Term Breaks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transcript Evaluations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transcripts</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transfer to other Department</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transferring Scores</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tuition Deferral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Turn It In Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Verification Needed to Student Start</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Volunteers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Webcam</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Williams %26 Fudge</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Withdrawal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Withdrawal Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Withdrawals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Write Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XS Funds</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Zaner Bloser %28Going Away%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>RecordType__c</picklist>
+            <values>
+                <fullName>ADA Support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Academic Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Admissions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alumni</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alumni Relations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>AppSupport</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assessment Scheduling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bursar</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bursar-Withdrawal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CAREforce Team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Career Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community Admin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentor Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ECare</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EWB Adds</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enrollment Case</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Excessive Attempts</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Field Placement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finaid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Graduation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ITHelpDesk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Learning Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Military Support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Performance Task</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program Change</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Readmission</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Records</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scholarship</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scores</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teacher Licensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teacher Success</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Term Break</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transcripts</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Withdrawal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>StatusValue__c</picklist>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Escalated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open%3A Student Response Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open%3A Updated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open%3A WGU Response Needed %2F In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>Assistance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Breakdown of Service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FYI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feature Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Negative Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Positive Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Problem</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Question</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Question%2FInquiry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resource Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service Failure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service Lapse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service Request</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Standard Process</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Suggestion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>System Failure</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

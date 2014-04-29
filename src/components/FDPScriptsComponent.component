@@ -1,0 +1,10 @@
+<apex:component >
+    <apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/jquery-1.7.2.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/jquery-ui-1.8.19.custom.min.js')}"/>
+    <!-- <apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/prefix-free.js')}"/> -->
+    <apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/json2.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/tooltip.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/popover.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.easyXDM,'easyXDM.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/dp.js')}"/>
+</apex:component>

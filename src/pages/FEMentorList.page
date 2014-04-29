@@ -1,0 +1,22 @@
+<apex:page sidebar="0" standardStylesheets="true" >
+<apex:pageBlock >
+
+<h1 style="color: #2157AD; font-size: 18px; font-family: 'Times New Roman', serif; padding: 10px 0 0 0px">
+    Field Experience Management System
+</h1>
+<br></br>
+<br></br>
+<h2 style="color: #69696B; font-size: 13.5px; font-family: 'Times New Roman', serif;">
+    The View Menu allows you to see different groups of Field Experiences for your students. To see all your students Field Experience applications, please select the option "1: All My Students." 
+    <br></br>
+    <br></br>
+    In order to complete a Mentor Evaluation, please select the appropriate student's field experience application. You will then have the option to complete the evaluation.
+</h2>
+</apex:pageBlock>
+
+    <br></br>
+    <br></br>
+    <br></br>
+    <apex:listViews type="FieldExperience__c"/>
+
+</apex:page>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <customSettingsVisibility>Public</customSettingsVisibility>
+    <description>Zip Code to TimeZone Lookup</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>StateCode__c</fullName>
+        <description>State abbreviation code</description>
+        <externalId>false</externalId>
+        <label>StateCode</label>
+        <length>2</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TimeZoneKey__c</fullName>
+        <description>Time Zone code from IANA time zone database, used by Salesforce for TimeZoneSidKey on the User record</description>
+        <externalId>false</externalId>
+        <label>TimeZoneKey</label>
+        <length>20</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>TimeZoneByZip</label>
+</CustomObject>

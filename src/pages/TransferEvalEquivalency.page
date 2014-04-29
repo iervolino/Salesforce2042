@@ -1,0 +1,83 @@
+<apex:page standardController="TransferEvaluation__c" Extensions="EvalTranscriptController" sidebar="false" showHeader="false" showChat="false"  >
+ <head>
+  <style> 
+     #Degree { 
+          height: 104px; 
+          width: 104px; 
+          position: fixed; 
+          top: 20%; 
+          z-index: 999;
+          transform: rotate(-90deg);
+          -webkit-transform: rotate(-90deg); 
+          -moz-transform: rotate(-90deg); 
+          -o-transform: rotate(-90deg);
+        }  
+         #Changes { 
+          height: 104px; 
+          width: 104px; 
+          position: fixed; 
+          top: 60%; 
+          z-index: 999;
+          transform: rotate(-90deg);
+          -webkit-transform: rotate(-90deg); 
+          -moz-transform: rotate(-90deg); 
+          -o-transform: rotate(-90deg);
+        } 
+        #Table
+        {
+        position: absolute;
+        left: 30px;
+  
+        }
+</style>
+ </head>    
+    <apex:form style="overflow: auto" >           
+           <div id="Degree">  
+             <apex:commandButton id="SaveButton" value="Save Changes" action="{!saveEquivCourses}" reRender="pb2" />  
+             </div> <div id="Changes">  
+             <apex:commandButton id="ApplyDegrees" action="{!applyDegrees}" value="Apply Degrees"   reRender="pb2" />         
+            </div>
+           
+  
+  <div id="Table"> 
+        <apex:pageBlock title="Equivalent Courses" id="pb2" >
+        <apex:pageBlockTable value="{!equivCourses}" var="eqc" align="center" style="overflow-y: scroll; overflow-x: hidden;"  >
+        
+            <apex:column HeaderValue="Code" value="{!eqc.WGUCourse__c}" style="width: 5%"  />
+            <apex:column HeaderValue="Title" value="{!eqc.WGUTitle__c}" style="width: 13%"  />
+            <apex:column HeaderValue="CUs" value="{!eqc.CompetencyUnits__c}" style="width: 1%" />
+            <apex:column HeaderValue="Satisfied By" value="{!eqc.SatisfiedBy__c}" style="width: 15%"/>
+             <apex:column headerValue="Degree" >
+                <apex:inputField style="width: 40px"  value="{!eqc.TransferAttendance__c}"  />
+             </apex:column>
+           <apex:column headerValue="Course"  >
+                <apex:inputField style="width: 40px" value="{!eqc.TransferredCourse__c}" />  
+            </apex:column>
+             <apex:column headerValue="Group" >
+                 <apex:inputField style="width: 50px" value="{!eqc.TransferredGroup__c}"/>
+           </apex:column>
+              <apex:column headerValue="RS">
+                <apex:outputField style="width:1%;" value="{!eqc.RequirementSatisfied__c}">
+                    <apex:inlineEditSupport event="onclick" showOnEdit="saveButton" />
+                </apex:outputField>
+           </apex:column>
+              <apex:column headerValue="Under Review">
+                <apex:outputField style="width:1%;" value="{!eqc.UnderReview__c}">
+                    <apex:inlineEditSupport event="onclick" showOnEdit="saveButton" />
+                </apex:outputField>
+           </apex:column>
+             <apex:column value="{!eqc.TransferRuleText__c}" style="width: 30%"  />
+            <apex:column headerValue="RS Comments">
+                <apex:outputField value="{!eqc.EvaluationComments__c}" style="width: 20%" >
+                    <apex:inlineEditSupport event="onclick" showOnEdit="saveButton" />
+                </apex:outputField>
+           </apex:column>
+           
+        </apex:pageBlockTable>
+   
+    </apex:pageBlock>
+ </div>
+    </apex:form>
+  
+
+</apex:page>

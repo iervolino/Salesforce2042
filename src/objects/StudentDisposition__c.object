@@ -1,0 +1,4685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Contains information about student disposition concerns. This object contains sensitive student information and should only be available to a limited number of profiles.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AreaOfConcern__c</fullName>
+        <externalId>false</externalId>
+        <label>Area Of Concern</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Organization</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Word choice</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sentence fluency</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Conventions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Caring and considerate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Affirming of diversity</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reflective practitioner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Equitable and fair</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Belief all students can learn</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Collaborative</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technologically proficient</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Professional leadership</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Professional Behavior and Communication</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Concern about PCE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Concern about DT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Concern about Practicum</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Concern about passing of courses</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Absences in DT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TWS/ed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other (Please Describe)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>N/A</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ANA Provision #1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ANA Provision #2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ANA Provision #3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ANA Provision #4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ANA Provision #5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ANA Provision #6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ANA Provision #7</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ANA Provision #8</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ANA Provision #9</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TPA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>AssessmentName__c</fullName>
+        <externalId>false</externalId>
+        <label>Assessment Name</label>
+        <length>150</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assessment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Assessment</label>
+        <referenceTo>TaskStreamAssessment__c</referenceTo>
+        <relationshipLabel>Student Concerns</relationshipLabel>
+        <relationshipName>StudentConcerns</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AssignedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Assigned Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AssignedTime__c</fullName>
+        <externalId>false</externalId>
+        <formula>ROUND(8*(
+(5*FLOOR((DATEVALUE(ResolvedDate__c)-DATE(1996,01,01))/7) +
+MIN(5, 
+    MOD(DATEVALUE(ResolvedDate__c)-DATE(1996,01,01), 7) +
+    MIN(1, 24/8*(MOD(ResolvedDate__c-DATETIMEVALUE(&apos;1996-01-01 14:00:00&apos;), 1)))
+))
+-
+(5*FLOOR((DATEVALUE(AssignedDate__c)-DATE(1996,01,01))/7) +
+MIN(5, 
+    MOD(DATEVALUE(AssignedDate__c)-DATE(1996,01,01), 7) +
+    MIN(1, 24/8*(MOD(AssignedDate__c-DATETIMEVALUE(&apos;1996-01-01 14:00:00&apos;), 1)))
+))
+), 1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Business hours between Assigned Date to Resolved Date</inlineHelpText>
+        <label>Assigned Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedTo__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Assigned To</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>StudentConcerns</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CWECompleted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>CWE Completed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Case__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Case</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipName>StudentDispositions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CodeofConductPrimarySanction__c</fullName>
+        <externalId>false</externalId>
+        <label>Code of Conduct Primary Sanction</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disciplinary Probation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disposition Level 1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disposition Level 2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Formal Warning</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Revocation of Admission and/or Degree</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>CodeofConductStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>Code of Conduct Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Processed for Student Conduct Board Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed by Student Conduct Board</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Return to Department</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ConcernType__c</fullName>
+        <description>Record types available</description>
+        <externalId>false</externalId>
+        <label>Concern Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Academic Authenticity/Originality Concern</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Articulation Concern</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>IT and Business Disposition Concern</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nursing College Disposition Concern</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teachers College Disposition Concern</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Teachers College Field Concern (Practicum, DT or PCE)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ContactedByCollege__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Contacted By College</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DateOfSubmissionIntoTaskstream__c</fullName>
+        <description>Date field that indicates the date the student submitted their task in Taskstream.</description>
+        <externalId>false</externalId>
+        <label>Date of Submission into Taskstream</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Department__c</fullName>
+        <description>Submitter&apos;s Department</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Submitter&apos;s Department</inlineHelpText>
+        <label>Department</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Evaluator__c</fullName>
+        <externalId>false</externalId>
+        <label>Evaluator</label>
+        <length>150</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FailNumber__c</fullName>
+        <description>Total failed attempts on a given task logged by the submitter.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total failed attempts on a given task logged by the submitter.</inlineHelpText>
+        <label>Fail Number</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FieldExperience__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Field Experience</label>
+        <referenceTo>FieldExperience__c</referenceTo>
+        <relationshipName>StudentDispositions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>FollowUpDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Follow Up Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FormAreaOfConcern__c</fullName>
+        <externalId>false</externalId>
+        <label>Form Area Of Concern</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HighestOverallSimilarity__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(RevisedOverallSimilarity__c  &gt;  OverallSimilarity__c, RevisedOverallSimilarity__c , OverallSimilarity__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Highest Overall Similarity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HighestTopIndividual__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(RevisedTopIndividual__c &gt;=  TopIndividual__c, RevisedTopIndividual__c, TopIndividual__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Highest Top Individual</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InvestigationStartDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Investigation Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>InvestigationTime__c</fullName>
+        <externalId>false</externalId>
+        <formula>ROUND(8*( 
+(5*FLOOR((DATEVALUE(ResolvedDate__c)-DATE(1996,01,01))/7) + 
+MIN(5, 
+MOD(DATEVALUE(ResolvedDate__c)-DATE(1996,01,01), 7) + 
+MIN(1, 24/8*(MOD(ResolvedDate__c-DATETIMEVALUE(&apos;1996-01-01 14:00:00&apos;), 1))) 
+)) 
+- 
+(5*FLOOR((DATEVALUE(InvestigationStartDate__c )-DATE(1996,01,01))/7) + 
+MIN(5, 
+MOD(DATEVALUE(InvestigationStartDate__c )-DATE(1996,01,01), 7) + 
+MIN(1, 24/8*(MOD(InvestigationStartDate__c -DATETIMEVALUE(&apos;1996-01-01 14:00:00&apos;), 1))) 
+)) 
+), 1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Business hours between Investigation Start Date and Resolution Date</inlineHelpText>
+        <label>Investigation Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IssueSubType__c</fullName>
+        <externalId>false</externalId>
+        <label>Issue Sub-Type</label>
+        <picklist>
+            <controllingField>TypeOfIssue__c</controllingField>
+            <picklistValues>
+                <fullName>Requirements Not Met</fullName>
+                <controllingFieldValues>Academic Authenticity</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Originality Referral</fullName>
+                <controllingFieldValues>Academic Authenticity</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Security Investigation</fullName>
+                <controllingFieldValues>Academic Authenticity</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Proctored Exam Violation</fullName>
+                <controllingFieldValues>Academic Authenticity</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appeal for 3rd Cohort</fullName>
+                <controllingFieldValues>Appeal</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appeal to Repeat DT</fullName>
+                <controllingFieldValues>Appeal</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Preappeal</fullName>
+                <controllingFieldValues>Appeal</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DT-Conflict</fullName>
+                <controllingFieldValues>DT-Conflict</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DT-HT Conflict</fullName>
+                <controllingFieldValues>DT-Conflict</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DT-CS Conflict</fullName>
+                <controllingFieldValues>DT-Conflict</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DT personal issues</fullName>
+                <controllingFieldValues>DT-Conflict</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Violation of State Nurse Practice Act</fullName>
+                <controllingFieldValues>Criminal Acts</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Commission of or conviction for a felony or misdemeanor offense, including DUI</fullName>
+                <controllingFieldValues>Criminal Acts</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Act of abuse (physical or emotional)</fullName>
+                <controllingFieldValues>Abuse of Patients</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Act of cruelty or patient endangerment</fullName>
+                <controllingFieldValues>Abuse of Patients</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Committing or soliciting any unlawful sexual act or committing any act of sexual harassment</fullName>
+                <controllingFieldValues>Abuse of Patients</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Soliciting, encouraging or consummating a romantic or inappropriate relationship with a patient</fullName>
+                <controllingFieldValues>Abuse of Patients</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Furnishing alcohol or illegal/unauthorized drugs to any patient</fullName>
+                <controllingFieldValues>Abuse of Patients</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Encouraging, promoting, extolling, or supporting any illegal, unethical, inappropriate, or dangerous activity</fullName>
+                <controllingFieldValues>Abuse of Patients</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Falsifying, deliberately misrepresenting, or omitting professional qualifications when applying for enrollment</fullName>
+                <controllingFieldValues>Misrepresentation, Falsification or Omission</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Falsifying, deliberately misrepresenting, or omitting information in patient care documentation/medical records</fullName>
+                <controllingFieldValues>Misrepresentation, Falsification or Omission</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Falsifying, deliberately misrepresenting, or omitting reasons for absences or leaves</fullName>
+                <controllingFieldValues>Misrepresentation, Falsification or Omission</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Soliciting the purchase of any item or service in a private remunerative capacity</fullName>
+                <controllingFieldValues>Improper Remunerative Conduct</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accepting gifts for personal use or gain where there may be the appearance of a conflict of interest</fullName>
+                <controllingFieldValues>Improper Remunerative Conduct</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Providing nursing care outside of WGU scheduled while representing self as WGU nursing student</fullName>
+                <controllingFieldValues>Improper Remunerative Conduct</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Harassment</fullName>
+                <controllingFieldValues>Unprofessional Conduct</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Threats</fullName>
+                <controllingFieldValues>Unprofessional Conduct</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physical Abuse</fullName>
+                <controllingFieldValues>Unprofessional Conduct</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>MatchDetail__c</fullName>
+        <description>Open text field used to explain who (which student) the match was to.</description>
+        <externalId>false</externalId>
+        <label>Match Detail</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Match_Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Match Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MentorEmail__c</fullName>
+        <externalId>false</externalId>
+        <label>Mentor Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MentorName__c</fullName>
+        <externalId>false</externalId>
+        <label>Mentor Name</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MyConcerns__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF($User.PIDM__c =  AssignedTo__r.PIDM__c, 1, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>My Concerns</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OverallSimilarity__c</fullName>
+        <externalId>false</externalId>
+        <label>Overall Similarity</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ReasonForConcern__c</fullName>
+        <externalId>false</externalId>
+        <label>Reason For Concern</label>
+        <length>20000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ReferralResolutionPath__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Referral__r.ResolutionPath__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Referral Resolution Path</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referral__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Lookup field to the Code of Conduct Referral</description>
+        <externalId>false</externalId>
+        <label>Referral</label>
+        <referenceTo>CodeofConductReferral__c</referenceTo>
+        <relationshipLabel>Student Concerns</relationshipLabel>
+        <relationshipName>Student_Concerns</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ResolutionTime__c</fullName>
+        <description>Business hours between the creation of the record and its resolution</description>
+        <externalId>false</externalId>
+        <formula>ROUND(8*(
+(5*FLOOR((DATEVALUE(ResolvedDate__c)-DATE(1996,01,01))/7) +
+MIN(5, 
+    MOD(DATEVALUE(ResolvedDate__c)-DATE(1996,01,01), 7) +
+    MIN(1, 24/8*(MOD(ResolvedDate__c-DATETIMEVALUE(&apos;1996-01-01 14:00:00&apos;), 1)))
+))
+-
+(5*FLOOR((DATEVALUE(CreatedDate )-DATE(1996,01,01))/7) +
+MIN(5, 
+    MOD(DATEVALUE(CreatedDate )-DATE(1996,01,01), 7) +
+    MIN(1, 24/8*(MOD(CreatedDate -DATETIMEVALUE(&apos;1996-01-01 14:00:00&apos;), 1)))
+))
+), 1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Business hours between the creation of the record and its resolution</inlineHelpText>
+        <label>Resolution Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Resolution__c</fullName>
+        <externalId>false</externalId>
+        <label>Resolution</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Action not Required</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Already Evaluated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Already Released</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Caution Sent</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Content removed DMCA takedown notice sent</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CWE Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DT Extended</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Failed DT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Incorrect Submission</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Level 1 warning</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Level 1—Warning Only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Level 1—Warning with remediation plan</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Level 2—Corrective action to SCB</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Level 2—Disciplinary probation to SCB</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Level 2 warning</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Level 3: conditional continuation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Level 3: removal from program</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Level 3—Corrective action to SCB</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Level 3—Removal from nursing program to SCB</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>N/A</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Concern</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No warning issued</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Placement Change</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Returned to Department</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Returned to queue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reviewed – Not WGU content</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SCB Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Special Investigation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submission review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Warning Sent</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Withdraw from DT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ResolvedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Resolved Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>RevisedOverallSimilarity__c</fullName>
+        <externalId>false</externalId>
+        <label>Revised Overall Similarity</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RevisedTopIndividual__c</fullName>
+        <externalId>false</externalId>
+        <label>Revised Top Individual</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SCBPrimarySanction__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Referral__r.CodeofConductPrimarySanction__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SCB Primary Sanction</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SCBStatus__c</fullName>
+        <description>Formula field that brings over the status of the code of conduct referral.</description>
+        <externalId>false</externalId>
+        <formula>TEXT(Referral__r.Status__c)</formula>
+        <label>SCB Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SendAACWEEmail__c</fullName>
+        <description>Link for sending AA CWE email template to student and mentor</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;/_ui/core/email/author/EmailAuthor?p26=noreply.originality@wgu.edu&amp;p2_lkid=&quot; &amp; Student__r.Id &amp; &quot;&amp;p3_lkid=&quot; &amp; Id &amp; &quot;&amp;p4=&quot; &amp; MentorEmail__c &amp; &quot;&amp;template_id=00Xa0000001j4WC&amp;rtype=003&amp;retURL=%2F&quot; &amp; Id,IMAGE(&quot;/img/icon/mail24.png&quot;,&quot;Send CWE Email&quot;),&quot;_self&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Link for sending AA CWE email template to student and mentor</inlineHelpText>
+        <label>Send AA CWE Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SendAASubmissionReviewEmail__c</fullName>
+        <description>Link for sending AA Submission Review email template to student and mentor</description>
+        <externalId>false</externalId>
+        <formula>CASE( upper( StudentCollege__c ),
+     &quot;TC&quot;, 
+          HYPERLINK(&quot;/_ui/core/email/author/EmailAuthor?p26=noreply.originality@wgu.edu&amp;p2_lkid=&quot; &amp; Student__r.Id &amp; &quot;&amp;p3_lkid=&quot; &amp; Id &amp; &quot;&amp;p4=&quot; &amp; MentorEmail__c &amp; &quot;&amp;p5=teachersuccess@wgu.edu&amp;template_id=00Xa0000001j4Vx&amp;rtype=003&amp;retURL=%2F&quot; &amp; Id,IMAGE(&quot;/img/icon/contracts24.png&quot;,&quot;Send Subumission Review Email&quot;),&quot;_self&quot;),
+     &quot;HE&quot;,
+          HYPERLINK(&quot;/_ui/core/email/author/EmailAuthor?p26=noreply.originality@wgu.edu&amp;p2_lkid=&quot; &amp; Student__r.Id &amp; &quot;&amp;p3_lkid=&quot; &amp; Id &amp; &quot;&amp;p4=&quot; &amp; MentorEmail__c &amp; &quot;&amp;p5=juliet.kolde@wgu.edu&amp;template_id=00Xa0000001j4Vx&amp;rtype=003&amp;retURL=%2F&quot; &amp; Id,IMAGE(&quot;/img/icon/contracts24.png&quot;,&quot;Send Submission Review Email&quot;),&quot;_self&quot;),
+     HYPERLINK(&quot;/_ui/core/email/author/EmailAuthor?p26=noreply.originality@wgu.edu&amp;p2_lkid=&quot; &amp; Student__r.Id &amp; &quot;&amp;p3_lkid=&quot; &amp; Id &amp; &quot;&amp;p4=&quot; &amp; MentorEmail__c &amp; &quot;&amp;template_id=00Xa0000001j4Vx&amp;rtype=003&amp;retURL=%2F&quot; &amp; Id,IMAGE(&quot;/img/icon/contracts24.png&quot;,&quot;Send Submission Review Email&quot;),&quot;_self&quot;)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Link for sending AA Submission Review email template to student and mentor</inlineHelpText>
+        <label>Send AA Submission Review Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SendAAWarningEmail__c</fullName>
+        <description>Link for sending AA Warning email template to student and mentor</description>
+        <externalId>false</externalId>
+        <formula>CASE( upper( StudentCollege__c ),
+     &quot;TC&quot;, 
+          HYPERLINK(&quot;/_ui/core/email/author/EmailAuthor?p26=noreply.originality@wgu.edu&amp;p2_lkid=&quot; &amp; Student__r.Id &amp; &quot;&amp;p3_lkid=&quot; &amp; Id &amp; &quot;&amp;p4=&quot; &amp; MentorEmail__c &amp; &quot;&amp;p5=teachersuccess@wgu.edu&amp;template_id=00Xa0000001j439&amp;rtype=003&amp;retURL=%2F&quot; &amp; Id,IMAGE(&quot;/img/msg_icons/warning24.png&quot;,&quot;Send Warning Email&quot;),&quot;_self&quot;),
+     &quot;HE&quot;,
+          HYPERLINK(&quot;/_ui/core/email/author/EmailAuthor?p26=noreply.originality@wgu.edu&amp;p2_lkid=&quot; &amp; Student__r.Id &amp; &quot;&amp;p3_lkid=&quot; &amp; Id &amp; &quot;&amp;p4=&quot; &amp; MentorEmail__c &amp; &quot;&amp;p5=juliet.kolde@wgu.edu&amp;template_id=00Xa0000001j439&amp;rtype=003&amp;retURL=%2F&quot; &amp; Id,IMAGE(&quot;/img/msg_icons/warning24.png&quot;,&quot;Send Warning Email&quot;),&quot;_self&quot;),
+     HYPERLINK(&quot;/_ui/core/email/author/EmailAuthor?p26=noreply.originality@wgu.edu&amp;p2_lkid=&quot; &amp; Student__r.Id &amp; &quot;&amp;p3_lkid=&quot; &amp; Id &amp; &quot;&amp;p4=&quot; &amp; MentorEmail__c &amp; &quot;&amp;template_id=00Xa0000001j439&amp;rtype=003&amp;retURL=%2F&quot; &amp; Id,IMAGE(&quot;/img/msg_icons/warning24.png&quot;,&quot;Send Warning Email&quot;),&quot;_self&quot;)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Link for sending AA Warning email template to student and mentor</inlineHelpText>
+        <label>Send AA Warning Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SpecificEvidence__c</fullName>
+        <externalId>false</externalId>
+        <label>Specific Evidence</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Appeal Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appeal Denied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>ARG Evaluation Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Open: Student Response Needed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Open: WGU Response Needed / In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Additional Info</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Under Submission Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Under Student Conduct Board Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>StudentCollege__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Student College at the time the Concern was created</inlineHelpText>
+        <label>Student College</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentID__c</fullName>
+        <externalId>false</externalId>
+        <label>Student ID</label>
+        <length>9</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentName__c</fullName>
+        <externalId>false</externalId>
+        <label>Student Name</label>
+        <length>150</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentProgram__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Student Program at the time the Concern was created</inlineHelpText>
+        <label>Student Program</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentSFID__c</fullName>
+        <externalId>false</externalId>
+        <formula>Student__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student SFID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentState__c</fullName>
+        <externalId>false</externalId>
+        <formula>Student__r.MailingState</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student State</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Student__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Student</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Student Concerns</relationshipLabel>
+        <relationshipName>StudentDispositions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SubmittedBy__c</fullName>
+        <externalId>false</externalId>
+        <label>Submitted By</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Clinical Supervisor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cohort Facilitator</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grader</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Host Teacher</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Non-WGU Affiliated Complainant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Staff Member</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prinicipal/Asst. Principal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>N/A</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SubmittersEmail__c</fullName>
+        <description>Text field to allow mapping of qualtrics form field.</description>
+        <externalId>false</externalId>
+        <label>Submitter&apos;s Email</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SubmittersName__c</fullName>
+        <externalId>false</externalId>
+        <label>Submitter&apos;s Name</label>
+        <length>150</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TaskFailedAttempts__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(TaskFailure__r.NumberFailedAttempts__c) &amp; &quot; Failed Attempts&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Task Failed Attempts</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TaskFailedName__c</fullName>
+        <externalId>false</externalId>
+        <formula>TaskFailure__r.TaskTitle__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Task Failed Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TaskFailure__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Task Failure</label>
+        <referenceTo>TaskStreamTaskFailure__c</referenceTo>
+        <relationshipLabel>Student Concerns</relationshipLabel>
+        <relationshipName>StudentConcerns</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TaskLastFailedDate__c</fullName>
+        <externalId>false</externalId>
+        <formula>TaskFailure__r.LastFailedAttempt__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Task Last Failed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TaskName__c</fullName>
+        <externalId>false</externalId>
+        <label>Task Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TaskOwner__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(AssignedTo__c),  LastModifiedById,  AssignedTo__r.Id )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Task Owner</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Team__c</fullName>
+        <externalId>false</externalId>
+        <label>Team</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Cap_BU_GR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cap_BU_UG</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cap_HP</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cap_IT_GR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cap_IT_UG</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cap_TE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_BU_GR_Fin</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_BU_GR_Ldr</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_BU_UG_Fin</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_BU_UG_Ldr</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_GE_Com</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_GE_Hmt</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_GE_Lit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_GE_SS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_HI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_HP</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_IT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_TE_Fie</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_TE_Fou</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_TE_Lan</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_TE_MEd</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_TE_Mat</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_TE_Ped</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_TE_Sci</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PA_TE_Spe</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>N/A</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Originality</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TermEndDate__c</fullName>
+        <description>Formula that brings over the student&apos;s current term end date from the contact record.</description>
+        <externalId>false</externalId>
+        <formula>Student__r.TermEndDate__c</formula>
+        <label>Term End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TermStartDate__c</fullName>
+        <description>Formula that brings over the student&apos;s current term start date from the contact record.</description>
+        <externalId>false</externalId>
+        <formula>Student__r.TermStartDate__c</formula>
+        <label>Term Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TopIndividual__c</fullName>
+        <externalId>false</externalId>
+        <label>Top Individual</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>TypeOfIssue__c</fullName>
+        <externalId>false</externalId>
+        <label>Type Of Issue</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Academic Authenticity</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Articulation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Content</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unprofessional Conduct</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Policy/Procedures</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Consult</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Counseled Out of Licensure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Absences</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appeal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Classroom Environment and Management</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cohort</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Collaborative Practitioner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DT-Conflict</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ethical Practitioner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lesson Planning</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lesson Presentation/ Implementation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Observation Forms</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PCE Problem</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Professional Practitioner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reflective Practitioner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TPA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TWS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Watch</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Placement Concerns during DT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Criminal Acts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Abuse of Patients</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alcohol or Drugs</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Improper Remunerative Conduct</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sharing Confidential / Identifying Patient Information</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Violation of ANA Code of Ethics</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Abuse of Student Conduct System</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Misrepresentation, Falsification or Omission</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Theft of or Damage to WGU or other property</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Misuse of WGU Systems or Resources</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disruption or Obstruction of WGU Activities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other (Text Field)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Vendor__c</fullName>
+        <externalId>false</externalId>
+        <label>Vendor</label>
+        <picklist>
+            <picklistValues>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Caveon Crawls</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Student Concern</label>
+    <listViews>
+        <fullName>AllStudentDispositions</fullName>
+        <columns>NAME</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>Status__c</columns>
+        <columns>Resolution__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Student Dispositions</label>
+        <sharedTo>
+            <group>CodeofConduct</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ConcernsforArticulation</fullName>
+        <columns>NAME</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>FormAreaOfConcern__c</columns>
+        <columns>AssessmentName__c</columns>
+        <columns>FailNumber__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>CWECompleted__c</columns>
+        <columns>Status__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Queue</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Resolved,Appeal Approved,Appeal Denied,Under Student Conduct Board Review</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.ArticulationConcern</value>
+        </filters>
+        <label>Concerns for Articulation</label>
+        <queue>ConcernArticulation</queue>
+        <sharedTo>
+            <group>CodeofConduct</group>
+            <group>ConcernArticulation</group>
+            <group>ConcernEvaluation</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ConcernsforCodeofConduct</fullName>
+        <columns>Student__c</columns>
+        <columns>NAME</columns>
+        <columns>ConcernType__c</columns>
+        <columns>CodeofConductStatus__c</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>ReferralResolutionPath__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Under Student Conduct Board Review</value>
+        </filters>
+        <filters>
+            <field>SCBPrimarySanction__c</field>
+            <operation>equals</operation>
+        </filters>
+        <label>Concerns for Code of Conduct</label>
+        <sharedTo>
+            <group>CodeofConduct</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ConcernsforCodeofConductforTeams</fullName>
+        <columns>NAME</columns>
+        <columns>AreaOfConcern__c</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>Student__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>Status__c</columns>
+        <columns>ResolvedDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Under Student Conduct Board Review</value>
+        </filters>
+        <label>Concerns for Code of Conduct for Teams</label>
+        <sharedTo>
+            <group>CodeofConduct</group>
+            <group>ConcernEvaluation</group>
+            <group>ConcernITandBusiness</group>
+            <group>ConcernNursing</group>
+            <group>ConcernTeachers</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ConcernsforITandBusiness</fullName>
+        <columns>NAME</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>Status__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Queue</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Resolved,Appeal Approved,Appeal Denied,Under Student Conduct Board Review</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.ITandBusinessCollegeConcerns</value>
+        </filters>
+        <label>Concerns for IT and Business</label>
+        <queue>ConcernITandBusiness</queue>
+        <sharedTo>
+            <group>CodeofConduct</group>
+            <group>ConcernITandBusiness</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ConcernsforNursing</fullName>
+        <booleanFilter>(1 AND 2) OR (3 AND 4 AND 5 AND 8) OR (5 AND 6 AND 7 AND 8 )</booleanFilter>
+        <columns>NAME</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Resolved,Appeal Approved,Appeal Denied,Under Student Conduct Board Review</value>
+        </filters>
+        <filters>
+            <field>ConcernType__c</field>
+            <operation>equals</operation>
+            <value>Nursing College Disposition Concern</value>
+        </filters>
+        <filters>
+            <field>ConcernType__c</field>
+            <operation>equals</operation>
+            <value>Academic Authenticity/Originality Concern,Articulation Concern</value>
+        </filters>
+        <filters>
+            <field>Resolution__c</field>
+            <operation>equals</operation>
+            <value>Caution Sent,CWE Referral,Warning Sent</value>
+        </filters>
+        <filters>
+            <field>StudentCollege__c</field>
+            <operation>equals</operation>
+            <value>HE</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.ConcernClosed</value>
+        </filters>
+        <filters>
+            <field>SCBPrimarySanction__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>ContactedByCollege__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>Concerns for Nursing</label>
+        <sharedTo>
+            <group>CodeofConduct</group>
+            <group>ConcernNursing</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ConcernsforOriginality</fullName>
+        <columns>NAME</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>Assessment__c</columns>
+        <columns>TaskFailure__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Queue</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Resolved,Appeal Approved,Appeal Denied,Under Student Conduct Board Review</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.AcademicAuthenticityOriginalityConcern</value>
+        </filters>
+        <label>Concerns for Originality</label>
+        <queue>ConcernEvaluation</queue>
+        <sharedTo>
+            <group>CodeofConduct</group>
+            <group>ConcernEvaluation</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ConcernsforTeachers</fullName>
+        <booleanFilter>(1 AND 2) OR  (3 AND 4 AND 5 AND 6) OR (2 AND 6 AND 5 AND 7 AND 8)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>Status__c</columns>
+        <columns>Resolution__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OWNER.FIRST_NAME</field>
+            <operation>contains</operation>
+            <value>Concern-Teachers</value>
+        </filters>
+        <filters>
+            <field>AssignedTo__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>ConcernType__c</field>
+            <operation>equals</operation>
+            <value>Academic Authenticity/Originality Concern,Articulation Concern</value>
+        </filters>
+        <filters>
+            <field>Resolution__c</field>
+            <operation>equals</operation>
+            <value>Caution Sent,CWE Referral,Warning Sent</value>
+        </filters>
+        <filters>
+            <field>StudentCollege__c</field>
+            <operation>equals</operation>
+            <value>TC</value>
+        </filters>
+        <filters>
+            <field>ContactedByCollege__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>SCBPrimarySanction__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.ConcernClosed</value>
+        </filters>
+        <label>Concerns for Teachers</label>
+        <sharedTo>
+            <group>CodeofConduct</group>
+            <group>ConcernTeachers</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>NursingDispositions</fullName>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ConcernType__c</field>
+            <operation>equals</operation>
+            <value>Nursing College Disposition Concern</value>
+        </filters>
+        <filters>
+            <field>StudentCollege__c</field>
+            <operation>equals</operation>
+            <value>HE</value>
+        </filters>
+        <label>Nursing Dispositions</label>
+        <sharedTo>
+            <group>CodeofConduct</group>
+            <group>ConcernNursing</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>NursingOriginalityConcerns</fullName>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ConcernType__c</field>
+            <operation>equals</operation>
+            <value>Academic Authenticity/Originality Concern,Articulation Concern</value>
+        </filters>
+        <filters>
+            <field>StudentCollege__c</field>
+            <operation>equals</operation>
+            <value>HE</value>
+        </filters>
+        <label>Nursing Originality Concerns</label>
+        <sharedTo>
+            <group>CodeofConduct</group>
+            <group>ConcernNursing</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>TSConcerns</fullName>
+        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Student__c</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>ReasonForConcern__c</columns>
+        <columns>Status__c</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>ConcernType__c</columns>
+        <columns>StudentCollege__c</columns>
+        <columns>ResolvedDate__c</columns>
+        <filterScope>Queue</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Resolved,Appeal Approved,Appeal Denied,Under Student Conduct Board Review</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.TeachersCollegeDispositionConcern</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.TeachersCollegeFieldConcernPracticumDTorPCE</value>
+        </filters>
+        <label>TS Concerns-Open</label>
+        <queue>ConcernTeachers</queue>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <role>TeacherSuccess</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>TSHearingConcerns</fullName>
+        <booleanFilter>((1 AND 2) OR (2 AND 3 AND 4)) AND 5</booleanFilter>
+        <columns>NAME</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>Status__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Resolved,Appeal Approved,Appeal Denied,Under Student Conduct Board Review</value>
+        </filters>
+        <filters>
+            <field>MyConcerns__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CodeofConductPrimarySanction__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Under Student Conduct Board Review</value>
+        </filters>
+        <filters>
+            <field>ContactedByCollege__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>TS Hearing Concerns</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>TeacherSuccess</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>TS_Concerns_ALL</fullName>
+        <booleanFilter>1 OR 2 or (3 and 4)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>ReasonForConcern__c</columns>
+        <columns>Status__c</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>Student__c</columns>
+        <columns>StudentCollege__c</columns>
+        <columns>ResolvedDate__c</columns>
+        <columns>Resolution__c</columns>
+        <columns>ResolutionTime__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.TeachersCollegeDispositionConcern</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.TeachersCollegeFieldConcernPracticumDTorPCE</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.ConcernClosed</value>
+        </filters>
+        <filters>
+            <field>OWNER.ALIAS</field>
+            <operation>equals</operation>
+            <value>concern-teachers</value>
+        </filters>
+        <label>TS Concerns-ALL</label>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <group>TeacherSuccess</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>TS_Concerns_for_Teachers</fullName>
+        <booleanFilter>(1 AND 2) OR  (3 AND 4 AND 5 AND 6) OR (2 AND 6 AND 5 AND 7 AND 8)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>IssueSubType__c</columns>
+        <columns>StudentProgram__c</columns>
+        <columns>Status__c</columns>
+        <columns>Resolution__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>OWNER.FIRST_NAME</field>
+            <operation>contains</operation>
+            <value>Concern-Teachers</value>
+        </filters>
+        <filters>
+            <field>AssignedTo__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>ConcernType__c</field>
+            <operation>equals</operation>
+            <value>Academic Authenticity/Originality Concern,Articulation Concern</value>
+        </filters>
+        <filters>
+            <field>Resolution__c</field>
+            <operation>equals</operation>
+            <value>Caution Sent,CWE Referral,Warning Sent</value>
+        </filters>
+        <filters>
+            <field>StudentCollege__c</field>
+            <operation>equals</operation>
+            <value>TC</value>
+        </filters>
+        <filters>
+            <field>ContactedByCollege__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>SCBPrimarySanction__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.ConcernClosed</value>
+        </filters>
+        <label>TS-Concerns for Teachers</label>
+        <sharedTo>
+            <group>CodeofConduct</group>
+            <group>ConcernTeachers</group>
+            <group>SRMSupport</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>z_TS_Concerns_Open</fullName>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Student__c</columns>
+        <columns>TypeOfIssue__c</columns>
+        <columns>ReasonForConcern__c</columns>
+        <columns>Status__c</columns>
+        <columns>AssignedTo__c</columns>
+        <columns>ConcernType__c</columns>
+        <columns>StudentCollege__c</columns>
+        <columns>ResolvedDate__c</columns>
+        <filterScope>Queue</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Resolved,Appeal Approved,Appeal Denied,Under Student Conduct Board Review</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>StudentDisposition__c.TeachersCollegeDispositionConcern</value>
+        </filters>
+        <label>z_TS Concerns-Open</label>
+        <queue>ConcernTeachers</queue>
+        <sharedTo>
+            <group>SRMSupport</group>
+            <role>TeacherSuccess</role>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Concern Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Student Concerns</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>AcademicAuthenticityOriginalityConcern</fullName>
+        <active>true</active>
+        <description>Student Concern on Academic Authenticity or Originality</description>
+        <label>Academic Authenticity/Originality Concern</label>
+        <picklistValues>
+            <picklist>AreaOfConcern__c</picklist>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductPrimarySanction__c</picklist>
+            <values>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Probation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revocation of Admission and%2For Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductStatus__c</picklist>
+            <values>
+                <fullName>Closed by Student Conduct Board</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Processed for Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ConcernType__c</picklist>
+            <values>
+                <fullName>Academic Authenticity%2FOriginality Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Articulation Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT and Business Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Field Concern %28Practicum%2C DT or PCE%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IssueSubType__c</picklist>
+            <values>
+                <fullName>Originality Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctored Exam Violation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Security Investigation</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Resolution__c</picklist>
+            <values>
+                <fullName>Already Evaluated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Already Released</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CWE Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Caution Sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Content removed DMCA takedown notice sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Submission</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No warning issued</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Returned to queue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reviewed %E2%80%93 Not WGU content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SCB Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Special Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Submission review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Warning Sent</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Appeal Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Open%3A Student Response Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open%3A WGU Response Needed %2F In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Additional Info</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Submission Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SubmittedBy__c</picklist>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Team__c</picklist>
+            <values>
+                <fullName>Cap_BU_GR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_BU_UG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_HP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_IT_GR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_IT_UG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_TE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Originality</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_GR_Fin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_GR_Ldr</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_UG_Fin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_UG_Ldr</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Com</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Hmt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_GE_SS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_HI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_HP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Fie</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Fou</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Lan</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_MEd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Mat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Ped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Sci</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Spe</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TypeOfIssue__c</picklist>
+            <values>
+                <fullName>Academic Authenticity</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>Caveon Crawls</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ArticulationConcern</fullName>
+        <active>true</active>
+        <description>Student Concern on Articulation</description>
+        <label>Articulation Concern</label>
+        <picklistValues>
+            <picklist>AreaOfConcern__c</picklist>
+            <values>
+                <fullName>Conventions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Organization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sentence fluency</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Word choice</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductPrimarySanction__c</picklist>
+            <values>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Probation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revocation of Admission and%2For Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductStatus__c</picklist>
+            <values>
+                <fullName>Closed by Student Conduct Board</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Processed for Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ConcernType__c</picklist>
+            <values>
+                <fullName>Academic Authenticity%2FOriginality Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Articulation Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT and Business Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Field Concern %28Practicum%2C DT or PCE%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IssueSubType__c</picklist>
+            <values>
+                <fullName>Requirements Not Met</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Resolution__c</picklist>
+            <values>
+                <fullName>Already Evaluated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Already Released</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CWE Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Caution Sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Submission</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No warning issued</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SCB Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Special Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Submission review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Warning Sent</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>ARG Evaluation Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Open%3A Student Response Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open%3A WGU Response Needed %2F In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Additional Info</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Submission Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SubmittedBy__c</picklist>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Team__c</picklist>
+            <values>
+                <fullName>Cap_BU_GR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_BU_UG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_HP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_IT_GR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_IT_UG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_TE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_GR_Fin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_GR_Ldr</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_UG_Fin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_UG_Ldr</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Com</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Hmt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_GE_SS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_HI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_HP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Fie</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Fou</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Lan</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_MEd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Mat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Ped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Sci</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Spe</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TypeOfIssue__c</picklist>
+            <values>
+                <fullName>Articulation</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>Caveon Crawls</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ConcernClosed</fullName>
+        <active>true</active>
+        <description>Concerns closed</description>
+        <label>Concern Closed</label>
+        <picklistValues>
+            <picklist>AreaOfConcern__c</picklist>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductPrimarySanction__c</picklist>
+            <values>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Probation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disposition Level 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disposition Level 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revocation of Admission and%2For Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductStatus__c</picklist>
+            <values>
+                <fullName>Closed by Student Conduct Board</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Processed for Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Return to Department</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IssueSubType__c</picklist>
+            <values>
+                <fullName>Originality Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctored Exam Violation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requirements Not Met</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Security Investigation</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Resolution__c</picklist>
+            <values>
+                <fullName>Already Evaluated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Already Released</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CWE Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Caution Sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Content removed DMCA takedown notice sent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No warning issued</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reviewed %E2%80%93 Not WGU content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SCB Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Special Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Submission review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Warning Sent</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>ARG Evaluation Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Open%3A Student Response Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open%3A WGU Response Needed %2F In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Passed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Additional Info</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Submission Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SubmittedBy__c</picklist>
+            <values>
+                <fullName>Clinical Supervisor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cohort Facilitator</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grader</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Host Teacher</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-WGU Affiliated Complainant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Staff Member</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prinicipal%2FAsst%2E Principal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Team__c</picklist>
+            <values>
+                <fullName>Cap_BU_GR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_BU_UG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_HP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_IT_GR</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_IT_UG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cap_TE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_GR_Fin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_GR_Ldr</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_UG_Fin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_BU_UG_Ldr</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Com</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Hmt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Lit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_GE_SS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_HI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_HP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_IT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Fie</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Fou</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Lan</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_MEd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Mat</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Ped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Sci</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA_TE_Spe</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TypeOfIssue__c</picklist>
+            <values>
+                <fullName>Academic Authenticity</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>Caveon Crawls</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>DispositionConcern</fullName>
+        <active>true</active>
+        <label>Disposition Concern</label>
+        <picklistValues>
+            <picklist>CodeofConductPrimarySanction__c</picklist>
+            <values>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Probation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revocation of Admission and%2For Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ConcernType__c</picklist>
+            <values>
+                <fullName>Academic Authenticity%2FOriginality Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Articulation Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT and Business Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Field Concern %28Practicum%2C DT or PCE%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Under Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Submission Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Team__c</picklist>
+            <values>
+                <fullName>PA_GE_Hmt</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ITandBusinessCollegeConcerns</fullName>
+        <active>true</active>
+        <description>Student Code of Conduct Concern for IT and Business College</description>
+        <label>IT and Business College Concerns</label>
+        <picklistValues>
+            <picklist>AreaOfConcern__c</picklist>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductPrimarySanction__c</picklist>
+            <values>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Probation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revocation of Admission and%2For Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductStatus__c</picklist>
+            <values>
+                <fullName>Closed by Student Conduct Board</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Processed for Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ConcernType__c</picklist>
+            <values>
+                <fullName>Academic Authenticity%2FOriginality Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Articulation Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT and Business Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Field Concern %28Practicum%2C DT or PCE%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IssueSubType__c</picklist>
+            <values>
+                <fullName>Harassment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Originality Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Abuse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctored Exam Violation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Security Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Threats</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Resolution__c</picklist>
+            <values>
+                <fullName>Incorrect Submission</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 1 warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 2 warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 3%3A conditional continuation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 3%3A removal from program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No warning issued</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SCB Referral</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Appeal Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Open%3A Student Response Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open%3A WGU Response Needed %2F In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Submission Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SubmittedBy__c</picklist>
+            <values>
+                <fullName>Non-WGU Affiliated Complainant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Team__c</picklist>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Hmt</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TypeOfIssue__c</picklist>
+            <values>
+                <fullName>Abuse of Student Conduct System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Academic Authenticity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disruption or Obstruction of WGU Activities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Misrepresentation%2C Falsification or Omission</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Misuse of WGU Systems or Resources</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28Text Field%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Theft of or Damage to WGU or other property</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unprofessional Conduct</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>Caveon Crawls</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>NursingCollegeDispositionConcern</fullName>
+        <active>true</active>
+        <description>Student Concerns for Nursing College</description>
+        <label>Nursing College Disposition Concern</label>
+        <picklistValues>
+            <picklist>AreaOfConcern__c</picklist>
+            <values>
+                <fullName>ANA Provision %231</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANA Provision %232</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANA Provision %233</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANA Provision %234</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANA Provision %235</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANA Provision %236</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANA Provision %237</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANA Provision %238</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ANA Provision %239</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductPrimarySanction__c</picklist>
+            <values>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Probation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revocation of Admission and%2For Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductStatus__c</picklist>
+            <values>
+                <fullName>Closed by Student Conduct Board</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Processed for Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ConcernType__c</picklist>
+            <values>
+                <fullName>Academic Authenticity%2FOriginality Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Articulation Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT and Business Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Field Concern %28Practicum%2C DT or PCE%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IssueSubType__c</picklist>
+            <values>
+                <fullName>Accepting gifts for personal use or gain where there may be the appearance of a conflict of interest</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Act of abuse %28physical or emotional%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Act of cruelty or patient endangerment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commission of or conviction for a felony or misdemeanor offense%2C including DUI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Committing or soliciting any unlawful sexual act or committing any act of sexual harassment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Encouraging%2C promoting%2C extolling%2C or supporting any illegal%2C unethical%2C inappropriate%2C or dangerous activity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Falsifying%2C deliberately misrepresenting%2C or omitting information in patient care documentation%2Fmedical records</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Falsifying%2C deliberately misrepresenting%2C or omitting professional qualifications when applying for enrollment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Falsifying%2C deliberately misrepresenting%2C or omitting reasons for absences or leaves</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Furnishing alcohol or illegal%2Funauthorized drugs to any patient</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Harassment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Originality Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Abuse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Providing nursing care outside of WGU scheduled while representing self as WGU nursing student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Security Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Soliciting the purchase of any item or service in a private remunerative capacity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Soliciting%2C encouraging or consummating a romantic or inappropriate relationship with a patient</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Threats</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Violation of State Nurse Practice Act</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Resolution__c</picklist>
+            <values>
+                <fullName>Incorrect Submission</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 1%E2%80%94Warning Only</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 1%E2%80%94Warning with remediation plan</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 2%E2%80%94Corrective action to SCB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 2%E2%80%94Disciplinary probation to SCB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 3%E2%80%94Corrective action to SCB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 3%E2%80%94Removal from nursing program to SCB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No warning issued</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SCB Referral</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Appeal Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Open%3A Student Response Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open%3A WGU Response Needed %2F In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Submission Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SubmittedBy__c</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Team__c</picklist>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Hmt</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TypeOfIssue__c</picklist>
+            <values>
+                <fullName>Abuse of Patients</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Academic Authenticity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alcohol or Drugs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Criminal Acts</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Improper Remunerative Conduct</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Misrepresentation%2C Falsification or Omission</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sharing Confidential %2F Identifying Patient Information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Violation of ANA Code of Ethics</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>Caveon Crawls</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>TeachersCollegeDispositionConcern</fullName>
+        <active>true</active>
+        <description>Student Concerns for Teacher&apos;s College</description>
+        <label>Teachers College Disposition Concern</label>
+        <picklistValues>
+            <picklist>AreaOfConcern__c</picklist>
+            <values>
+                <fullName>Affirming of diversity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Belief all students can learn</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Caring and considerate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Collaborative</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equitable and fair</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Professional Behavior and Communication</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Professional leadership</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reflective practitioner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technologically proficient</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductPrimarySanction__c</picklist>
+            <values>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Probation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revocation of Admission and%2For Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductStatus__c</picklist>
+            <values>
+                <fullName>Closed by Student Conduct Board</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Processed for Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ConcernType__c</picklist>
+            <values>
+                <fullName>Academic Authenticity%2FOriginality Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Articulation Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT and Business Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Field Concern %28Practicum%2C DT or PCE%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IssueSubType__c</picklist>
+            <values>
+                <fullName>Harassment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Originality Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Abuse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Proctored Exam Violation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Security Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Threats</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Resolution__c</picklist>
+            <values>
+                <fullName>Incorrect Submission</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 1 warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 2 warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 3%3A conditional continuation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Level 3%3A removal from program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No warning issued</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SCB Referral</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Appeal Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Open%3A Student Response Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open%3A WGU Response Needed %2F In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Submission Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SubmittedBy__c</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Team__c</picklist>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Hmt</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TypeOfIssue__c</picklist>
+            <values>
+                <fullName>Academic Authenticity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consult</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Counseled Out of Licensure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Policy%2FProcedures</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unprofessional Conduct</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>Caveon Crawls</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>TeachersCollegeFieldConcernPracticumDTorPCE</fullName>
+        <active>true</active>
+        <description>Field Concern/Issue for Practicum, DT or PCE for Teacher&apos;s College</description>
+        <label>Teachers College Field Concern (Practicum, DT or PCE)</label>
+        <picklistValues>
+            <picklist>AreaOfConcern__c</picklist>
+            <values>
+                <fullName>Absences in DT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Concern about DT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Concern about PCE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Concern about Practicum</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Concern about passing of courses</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28Please Describe%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TPA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TWS%2Fed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductPrimarySanction__c</picklist>
+            <values>
+                <fullName>Disciplinary Expulsion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Expulsion from Academic Program</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Probation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disciplinary Suspension</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dismissal of Charges</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Warning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Informal Resolution</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Revocation of Admission and%2For Degree</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CodeofConductStatus__c</picklist>
+            <values>
+                <fullName>Closed by Student Conduct Board</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Processed for Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>ConcernType__c</picklist>
+            <values>
+                <fullName>Academic Authenticity%2FOriginality Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Articulation Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IT and Business Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nursing College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Disposition Concern</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Teachers College Field Concern %28Practicum%2C DT or PCE%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IssueSubType__c</picklist>
+            <values>
+                <fullName>Appeal for 3rd Cohort</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal to Repeat DT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT personal issues</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT-CS Conflict</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT-Conflict</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT-HT Conflict</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preappeal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Resolution__c</picklist>
+            <values>
+                <fullName>Action not Required</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT Extended</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Failed DT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Incorrect Submission</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No warning issued</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Placement Change</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SCB Referral</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Withdraw from DT</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Appeal Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal Denied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appealed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Open%3A Student Response Needed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Open%3A WGU Response Needed %2F In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Student Conduct Board Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Submission Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>SubmittedBy__c</picklist>
+            <values>
+                <fullName>Clinical Supervisor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cohort Facilitator</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Host Teacher</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prinicipal%2FAsst%2E Principal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Team__c</picklist>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>PA_GE_Hmt</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TypeOfIssue__c</picklist>
+            <values>
+                <fullName>Absences</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Appeal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Classroom Environment and Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cohort</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Collaborative Practitioner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DT-Conflict</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ethical Practitioner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lesson Planning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lesson Presentation%2F Implementation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Observation Forms</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PCE Problem</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Placement Concerns during DT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Professional Practitioner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reflective Practitioner</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TPA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TWS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Watch</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Vendor__c</picklist>
+            <values>
+                <fullName>Caveon Crawls</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TaskStream</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Resolution__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>StudentCollege__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Resolution__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>StudentProgram__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>StudentCollege__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>ResolvedRequiresResolution</fullName>
+        <active>true</active>
+        <description>Require a Resolution be selected if Status = Resolved</description>
+        <errorConditionFormula>AND(ISPICKVAL(Status__c,&quot;Resolved&quot;),ISPICKVAL(Resolution__c,&quot;&quot;))</errorConditionFormula>
+        <errorDisplayField>Resolution__c</errorDisplayField>
+        <errorMessage>Resolution is Required if Status = Resolved</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>NursingDispositionsEmail</fullName>
+        <availability>online</availability>
+        <description>Quick button used to send an email from nursingdispositions@wgu.edu</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Nursing Disposition Email</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/_ui/core/email/author/EmailAuthor?p3_lkid={!StudentDisposition__c.Id}&amp;&amp;p26=nursingdispositions@wgu.edu</url>
+    </webLinks>
+    <webLinks>
+        <fullName>QuickTSEmail</fullName>
+        <availability>online</availability>
+        <description>Create a Teacher Success Case linked to the Student Concern</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Quick TS Email</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/apex/QuickCase?ContactId={!StudentDisposition__c.StudentSFID__c}&amp;ObjectId={!StudentDisposition__c.Id}&amp;RecordType=Teacher+Success</url>
+    </webLinks>
+    <webLinks>
+        <fullName>SendNotification</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Send Notification</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/_ui/core/email/author/EmailAuthor?p3_lkid={!StudentDisposition__c.Id}&amp;&amp;p26=teachersuccess@wgu.edu&amp;template_id=00Xa0000001j27P</url>
+    </webLinks>
+</CustomObject>

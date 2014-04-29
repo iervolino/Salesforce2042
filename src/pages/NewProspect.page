@@ -1,0 +1,55 @@
+<apex:page Controller="CAREProfileController">
+  <apex:form >
+        <apex:pageBlock title="New Prospect Form:">
+          <apex:pageBlockSection title="Contact Information:" >
+              <apex:inputText value="{!contact.firstName}" id="firstname" label="First Name"/>
+              <apex:inputText value="{!contact.lastName}" id="lastname" label="Last Name"/>
+              <apex:inputText value="{!attributes.Nickname__c}" id="nickname" label="Preferred Name"/>
+              <apex:selectList value="{!marketingProgram}" id="program" label="Program of Interest" size="1" required="true">
+                  <apex:selectOption itemLabel="--Required--" itemValue=""></apex:selectOption>
+                  <apex:selectOptions value="{!programs}"/>
+              </apex:selectList>
+              <apex:inputText value="{!contact.Email}" id="email" label="Email Address"/>
+              <apex:outputText value=" "/>
+              <apex:inputText value="{!contact.phone}" id="phone" label="Primary Phone Number"/>
+              <apex:inputText value="{!contact.OtherPhone}" id="alternatephone" label="Other Phone Number"/>
+              <apex:selectList value="{!attributes.Affiliation__c}" id="campus" label="Campus" size="1">
+                  <apex:selectOption itemLabel="--Select a Campus--" itemValue=""></apex:selectOption>
+                  <apex:selectOption itemLabel="WGU - National" itemValue="WGU"></apex:selectOption>
+                  <apex:selectOption itemLabel="WGU - Indiana" itemValue="WGU-IN"></apex:selectOption>
+                  <apex:selectOption itemLabel="WGU - Texas" itemValue="WGU-TX"></apex:selectOption>
+                  <apex:selectOption itemLabel="WGU - Washington" itemValue="WGU-WA"></apex:selectOption>
+                  <apex:selectOption itemLabel="WGU - Tennessee" itemValue="WGU-TN"></apex:selectOption>
+                  <apex:selectOption itemLabel="WGU - Missouri" itemValue="WGU-MO"></apex:selectOption>
+
+              </apex:selectList> 
+              <apex:selectList value="{!fieldRep}" id="fieldrep" label="Field Rep" size="1">
+                  <apex:selectOption itemLabel="--None--" itemValue=""/>
+                  <apex:selectOption itemLabel="Ken Sorber" itemValue="Ken Sorber"/>
+                  <apex:selectOption itemLabel="Mike Manning" itemValue="Mike Manning"/>
+                  <apex:selectOption itemLabel="Ann Miller" itemValue="Ann Miller"/>
+                  <apex:selectOption itemLabel="Bob Rustad" itemValue="Bob Rustad"/>
+                  <apex:selectOption itemLabel="Dan Bseiso" itemValue="Dan Bseiso"/>
+                  <apex:selectOption itemLabel="Enrique Arvayo" itemValue="Enrique Arvayo"/>
+                  <apex:selectOption itemLabel="Doug Hooper" itemValue="Doug Hooper"/>
+                  <apex:selectOption itemLabel="Darian Collins" itemValue="Darian Collins"/>
+                  <apex:selectOption itemLabel="Wendy Prater" itemValue="Wendy Prater"/>
+                  <apex:selectOption itemLabel="Linda Harris" itemValue="Linda Harris"/>
+                  <apex:selectOption itemLabel="Kristian Fitzgerald" itemValue="Kristian Fitzgerald"/>
+                  <apex:selectOption itemLabel="Joe Rodriguez" itemValue="Joe Rodriguez"/>
+              </apex:selectList>     
+          </apex:pageBlockSection>
+          <apex:pageBlockSection title="Address Information">
+              <apex:inputText value="{!contact.mailingStreet}" id="street" label="Address"/>
+              <apex:inputText value="{!contact.mailingCity}" id="city" label="City"/>
+              <apex:selectList value="{!contact.mailingState}" id="state" label="State" size="1">
+                  <apex:selectOptions value="{!StatesSelectList}"></apex:selectOptions>
+              </apex:selectList> 
+              <apex:inputText value="{!contact.mailingPostalCode}" id="postalcode" label="Zip Code"/>   
+          </apex:pageBlockSection>
+          <apex:pageBlockButtons location="bottom">
+              <apex:commandButton action="{!save}" value="Save"/>
+          </apex:pageBlockButtons>
+      </apex:pageBlock>    
+  </apex:form>
+</apex:page>

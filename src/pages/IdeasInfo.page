@@ -1,0 +1,72 @@
+<apex:page standardController="Idea" standardStylesheets="true" showHeader="true" sidebar="true" title="WGU Ideas Information" tabStyle="WGUIdeasHelp__tab"  >
+<apex:form id="IdeasHelp" > 
+<div class="bPageTitle">
+ <div class="ptBody secondaryPalette brndScnBrd">
+    <div class="content">
+        <img src="/s.gif" class="pageTitleIcon" title="WGU Idea" alt="WGU Idea"/>
+            <h1 class="pageType">WGU Ideas</h1><span class="titleSeparatingColon">:</span>
+            <h2 class="pageDescription">How to use WGU Ideas</h2>
+        <div class="blank"></div>
+    </div> </div> </div>
+
+<apex:pageBlock >
+
+     <apex:pageBlockButtons >
+           <apex:commandButton value="Post your Idea" onclick="/ideas/editIdea.apexp" action="/ideas/editIdea.apexp" />
+           <apex:commandButton value="Back to Ideas Page" onclick="/ideas/ideaList.apexp" action="/ideas/ideaList.apexp"  />
+           <apex:commandButton value="Send Feedback" onclick="mailto:ideas@wgu.edu" action="mailto:ideas@wgu.edu" />
+        </apex:pageBlockButtons>
+      
+    <apex:pageBlockSection collapsible="false" title="Share Your Ideas Here!" columns="1" >
+         <p>Do you have an idea that could improve how we serve our students and help further WGU mission? <b>Share it here!</b> Once your idea is posted, your colleagues can review it and share their own thoughts and comments. Please be clear and complete in your description, and avoid acronyms or departmental jargon. We want ideas everyone can understand and get behind!</p>
+         <p>Your ideas will be considered by WGU Ideas moderators from across the university, and within about 30 days, status updates will let you know what is happening with your suggestion.</p>
+    </apex:pageBlockSection>
+    
+   
+    <apex:pageBlockSection collapsible="true" title="What WGU Ideas is" columns="1"  >
+        <p>WGU Ideas is a private community, visible only to WGU faculty and staff, where employees can share their good ideas to help improve the university as we work toward our goals, especially graduation rate, student satisfaction, operational excellence, and becoming a Great Place to Work.</p>
+        <p>As a social community, it enables employees to not only share their own ideas but also to view their colleagues’ ideas, comment, brainstorm, promote their favorite ideas, etc.</p>
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection collapsible="true" title="What WGU Ideas is not" columns="1"  >
+        <p>WGU Ideas it not intended to be a forum for submitting formal complaints; addressing human resources, benefits, ethics, or personnel issues; airing grievances without presenting a workable, constructive solution; or offering suggestions that don’t promote big-picture university goals.</p>       
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection collapsible="true" title="What to expect after you’ve submitted an idea" columns="1"  >
+        <p>WGU Ideas moderators are employees university-wide who have other job duties and responsibilities, so please expect at least 30 days before a new idea receives a status update or other action.</p>
+        <p>Remember, not all ideas can or will be implemented, and implementation decisions are left to the affected departments and leadership staff. Promotions, demotions, and comments your idea receives will not be a determining factor in whether it’s implemented.</p>
+        <p>You can expect that, when your idea is advanced or closed, it will receive a comment from the WGU Ideas moderator explaining the decision.</p>
+        <p>Even when an idea is accepted for implementation, it may take quite some time before any action is taken. Updates on the implementation process will not be posted in WGU Ideas once an idea has been closed and passed on to the relevant department. Depending on the nature of the idea, the person who submitted it may or may not be brought in as part of the implementation process.</p>   
+    </apex:pageBlockSection>  
+    
+     <apex:pageBlockSection collapsible="true" title="What happens when an idea is submitted" columns="1"  >
+        <ol> 
+            <li>An employee leaves an idea at <a href="/ideas/ideaList.apexp">WGU Ideas</a>. The idea entry will include a title and a description of what is being proposed and how it would meet university goals. Dropdown menus specify which goal(s) the idea aims to support and whether the idea is university-wide or for a specific department to consider. </li><br/>
+            <li>The system scans the ideas database for similar ideas that may already exist, based on title. The employee is expected to review those ideas and avoid submitting duplicates.</li><br/>
+            <li>The idea is submitted, and other employees are now able to view the idea, “promote” or “demote” it to indicate their level of agreement with the suggestion, and leave comments expressing their opinions or adding additional insights, clarifying information, etc. This collaborative activity is intended to provide for multiple voices to be heard and to maximize the impact of the suggestion, as well as to help moderators see which ideas are generating the most interest. This activity and the resulting “score” given to an idea have no impact on its implementation.</li><br/>
+            <li>Shortly after an idea is submitted, the WGU Ideas moderator from the relevant department reads the idea and any comments and, based on his or her knowledge of the department, determines how to move forward – whether to begin the process of implementing the idea, bring it to a department leader for further consideration, or close the idea.</li><br/>
+            <li>At this point and throughout the life of an idea, the Department Moderator provides information about where the idea stands by assigning it a status, as well as leaving a comment explaining the reason for a status decision. The statuses that can be assigned to an idea are:</li> 
+            <ul><dt>
+                <dd><li><b>New idea:</b> This idea has not yet been reviewed by a moderator.</li></dd>
+                <dd><li><b>Under review:</b> A moderator has reviewed the idea and is considering next steps.</li></dd>
+                <dd><li><b>Closed (solution exists):</b> The aims of this idea are achieved by a policy or resource already in place at the university; a comment from the moderator will provide details or additional information.</li></dd>
+                <dd><li><b>Closed (approved for implementation):</b> The moderator and departmental decision-makers have decided to put this idea into place.  While the implementation may not be immediate, it will be added to departmental priorities to be addressed.</li></dd>
+                <dd><li><b>Closed (not applicable):</b> This idea falls outside the types of suggestions WGU Ideas is intended to address. A moderator comment will explain why. </li></dd>
+                <dd><li><b>Closed (deferred to department):</b> Lack of resources, inopportune timing, or other reasons prevent this idea from being implemented at the time, but it may warrant future consideration by the relevant department(s).</li></dd>
+                <dd><li><b>Closed (not implemented):</b> The decision has been made not to implement this idea.</li></dd>
+            </dt><br/>When an idea is closed, the ability of users to comment, promote, or demote is turned off.</ul> 
+           <br/> 
+            <li>The moderator ushers all open ideas through the appropriate process for consideration, ensuring the right people know about the idea and following up on until the idea reaches a “closed” status. Moderators are identified with a yellow star next to their name when they leave comments. </li><br/>
+            <li>Once a month, WGU Ideas moderators will meet to address any ideas that may require interdepartmental collaboration, to address questions and concerns, and to share success stories.</li>
+
+        </ol>
+    </apex:pageBlockSection>
+      
+     <apex:pageBlockSection collapsible="false" title="Training Resources" columns="1" >
+         <p>You’re welcome to use the following tools to learn more about WGU Ideas:</p>
+         <ul><li>Training Presentation – Watch a short video presentation about WGU Ideas <a href="http://wgu.adobeconnect.com/wguideasorientation/" target="_blank"><b><u>here</u></b></a>.</li>
+             <li>Quick Guide – Download or print off a quick reference guide <a href="https://srm.my.salesforce.com/servlet/servlet.FileDownload?file=015a00000038jbw" target="_blank"><b><u>here</u></b></a>.</li></ul>
+     </apex:pageBlockSection>
+      </apex:pageBlock>
+</apex:form>
+</apex:page>

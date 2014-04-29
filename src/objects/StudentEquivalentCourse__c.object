@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>WGU&apos;s courses and the link between transfered course for which a student may receive credit.</description>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>CompetencyUnits__c</fullName>
+        <description>Competency Units associated to the WGU course</description>
+        <externalId>false</externalId>
+        <formula>WGUCourseInProgram__r.Course__r.CompetencyUnits__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Competency Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EvalComments__c</fullName>
+        <description>Comments added by the Evaluator</description>
+        <externalId>false</externalId>
+        <label>Eval Comments</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>EvaluationComments__c</fullName>
+        <externalId>false</externalId>
+        <label>RS Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsTestData__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field to indicate if the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Is Test Data</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NEW_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A temporary holding field for the new SF ID of this record (person account conversion).</description>
+        <externalId>false</externalId>
+        <label>NEW_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OLD_Id__c</fullName>
+        <description>A temporary holding field for the SF ID of this record, to be used for data migration from a person account org to a non-person account org. Declared as External Id for Upsert operations via the SOAP, REST, or BULK APIs.</description>
+        <externalId>true</externalId>
+        <label>OLD_Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PushedToBanner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Pushed To Banner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>RequirementSatisfied__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Whether or not the requirements are met for displaying competency</description>
+        <externalId>false</externalId>
+        <label>Requirement Satisfied</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SatisfiedBy__c</fullName>
+        <description>This field tells what of the many options satisfied the requirement.  Can be the course, degree, course group.  This is used for the PDF output.</description>
+        <externalId>false</externalId>
+        <formula>if(LEN(  TransferredGroup__c ) &gt;0, TransferredGroup__c,
+if(LEN( EvaluationComments__c ) &gt; 0  &amp;&amp; RequirementSatisfied__c , EvaluationComments__c,
+
+if(LEN( TransferAttendance__c ) &gt;0, TransferAttendance__r.DegreeAwarded__r.Name &amp; &apos; - &apos; &amp;  TransferAttendance__r.StudentTransferInstitution__r.TranscriptInstitution__r.Name,
+
+
+if(AND(LEN( TransferredCourse__c ) &gt;0,  TransferredCourse__r.Subject__c != &apos;Req Satisfied&apos;),  TransferredCourse__r.CourseTitle__c &amp; &apos; (&apos; &amp; TransferredCourse__r.Grade__c &amp; &apos;) - &apos; &amp; TransferredCourse__r.StudentTransferInstitution__r.TranscriptInstitution__r.Name,
+
+NULL ))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>This field tells what of the many options satisfied the requirement.  Can be the course, degree, course group. This is mainly used for the PDF output.</inlineHelpText>
+        <label>Satisfied By</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SatisfiedInd__c</fullName>
+        <description>Evaluation Satisfied.</description>
+        <externalId>false</externalId>
+        <formula>IF ( UnderReview__c &amp;&amp; RequirementSatisfied__c = FALSE, &apos;N&apos;, IF (LEN ( TransferredCourse__c ) &gt; 0, &apos;Y&apos;, IF (LEN ( TransferredGroup__c ) &gt; 0, &apos;Y&apos;, IF (LEN ( TransferAttendance__c ) &gt; 0, &apos;Y&apos;, IF ( RequirementSatisfied__c , &apos;Y&apos;, &apos;N&apos;)))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Satisfied Ind</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( AND(OR(SatisfiedBy__c &lt;&gt; NULL, RequirementSatisfied__c = true),UnderReview__c = false), &quot;Met&quot;,IF( UnderReview__c , &quot;Under Review&quot;, &quot;Not Met&quot;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TransferAttendance__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Transfer Attendance</description>
+        <externalId>false</externalId>
+        <label>Transfer Attendance</label>
+        <referenceTo>TransferAttendance__c</referenceTo>
+        <relationshipLabel>Student Equivalent Courses</relationshipLabel>
+        <relationshipName>Student_Equivalent_Courses</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TransferCourseName__c</fullName>
+        <description>Subject associated to the transferred course</description>
+        <externalId>false</externalId>
+        <formula>TransferredCourse__r.Subject__c &amp; &apos; &apos; &amp;   TransferredCourse__r.Course__c &amp; &apos; - &apos; &amp;   TransferredCourse__r.StudentTransferInstitution__r.TranscriptInstitution__r.Name</formula>
+        <label>Transfer Course</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TransferEvaluation__c</fullName>
+        <description>Related Transfer Evaluation</description>
+        <externalId>false</externalId>
+        <label>Transfer Evaluation</label>
+        <referenceTo>TransferEvaluation__c</referenceTo>
+        <relationshipLabel>Student Equivalent Courses</relationshipLabel>
+        <relationshipName>StudentEquivalentCourses</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>TransferRuleText__c</fullName>
+        <description>Rule used to evaluate course transfer</description>
+        <externalId>false</externalId>
+        <formula>WGUCourseInProgram__r.TransferRule__c &amp; &apos; &apos; &amp; WGUCourseInProgram__r.TransferRuleExt__c</formula>
+        <label>Transfer Rule Text</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TransferredCourseGroup__c</fullName>
+        <description>Transfer course group associated with the transferred course</description>
+        <externalId>false</externalId>
+        <formula>TransferredCourse__r.CourseGroup__c</formula>
+        <label>Transferred Course Group</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TransferredCourse__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Transferred Course</label>
+        <referenceTo>StudentTransferredCourse__c</referenceTo>
+        <relationshipLabel>Student Equivalent Courses</relationshipLabel>
+        <relationshipName>StudentEquivalentCourses</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TransferredDegree__c</fullName>
+        <description>Degree awarded from transfer institution</description>
+        <externalId>false</externalId>
+        <formula>TransferAttendance__r.DegreeAwarded__r.Name &amp; &apos; - &apos; &amp;  TransferAttendance__r.StudentTransferInstitution__r.TranscriptInstitution__r.Name</formula>
+        <label>Transferred Degree</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TransferredGroup__c</fullName>
+        <description>The Group of Courses that Satisfies this requirement</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Group of Courses that Satisfies this requirement.  This must match exactly to course groups from the institution</inlineHelpText>
+        <label>Transferred Group</label>
+        <length>2</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UnderReview__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates that a decision has not been made, but is under review for course equivalency</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicate that Student Equivalent course in currently under review</inlineHelpText>
+        <label>Under Review</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>WGUCourseInProgram__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>WGU Course In Program</label>
+        <referenceTo>WGUCourseInProgram__c</referenceTo>
+        <relationshipLabel>Student Equivalent Courses</relationshipLabel>
+        <relationshipName>Student_Equivalent_Courses</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>WGUCourse__c</fullName>
+        <externalId>false</externalId>
+        <formula>WGUCourseInProgram__r.Course__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>WGU Course</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WGUGrade__c</fullName>
+        <description>The Grade of the course for WGU.  Can be either Transfered or Requirement Satisfied</description>
+        <externalId>false</externalId>
+        <formula>IF(OR(RequirementSatisfied__c = TRUE,  LEN(TransferAttendance__c )&gt;0), &apos;RS&apos;, 
+   IF (OR(LEN(TransferredCourse__c ) &gt;0, LEN( TransferredGroup__c ) &gt;0), &apos;TR&apos;, 
+       &apos;Not Met&apos;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The Grade of the course for WGU.  Can be either Transfered or Requirement Satisfied</inlineHelpText>
+        <label>WGUGrade</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WGUTitle__c</fullName>
+        <externalId>false</externalId>
+        <formula>WGUCourseInProgram__r.Course__r.Title__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>WGU Title</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Student Equivalent Course</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Student Equivalent Course Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Student Equivalent Courses</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

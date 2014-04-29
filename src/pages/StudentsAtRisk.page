@@ -1,0 +1,555 @@
+<apex:page contentType="text/html; charset=UTF-8" standardController="User" extensions="StudentsAtRiskController" standardStylesheets="false" docType="html">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<html>
+<head>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v420, 'resources/css/ext-all.css')}"/> 
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v420}/ext-all.js"/>
+    <link rel="stylesheet" type="text/css" href="{!$Resource.extjsux_v407}/ux/css/CheckHeader.css" />
+   
+    <apex:includeScript value="/soap/ajax/28.0/connection.js"/>
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.WGUMonkeyFix}" id="WGUMonkeyFix"></script>
+    
+    <script type="text/javascript" >
+        //This is a work-around due to the session id not populating automatically like it should
+        sforce.connection.init("{!$Api.Session_ID}","/services/Soap/u/28.0");
+    </script>
+    
+    <style type="text/css">
+        .x-grid-dirty-cell { background-image: none; }
+        .x-grid-checkheader-disabled { background-image: url('{!$Resource.disabledcheckbox}/unchecked-disabled.gif'); }
+        .x-grid-checkheader-checked-disabled { background-image: url('{!$Resource.disabledcheckbox}/checked-disabled.gif'); }
+        .x-column-header-inner .x-column-header-text {
+            white-space: normal;
+        }
+
+        .x-column-header-inner {
+            line-height: normal;
+            padding-top: 3px !important;
+            padding-bottom: 3px !important;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="divMentorCombo" />
+    <div id="divAtRisk" />
+    
+    <script type="text/javascript" >
+        Ext.Loader.setConfig({enabled: true});
+        Ext.Loader.setPath('Ext.ux', '{!$Resource.extjs_v420}/examples/ux');
+        Ext.require([
+            'Ext.selection.CellModel',
+            'Ext.*',
+            'Ext.ux.CheckColumn'
+        ]);
+        Ext.ns("Ext.WGU");
+        
+        /*
+        * Extensions to 'Ext.ux.CheckColumn' to allow full disabling of checkboxes.
+        */
+        Ext.define('MyApp.ux.DisableCheckColumn', 
+        {
+            extend: 'Ext.ux.CheckColumn',
+            alias: 'widget.disablecheckcolumn',
+        
+            //Only process events for checkboxes that do not have a "disabled" class
+            processEvent: function(type, view, cell, recordIndex, cellIndex, e) 
+            {
+                var me = this;
+                var record=view.panel.store.getAt(recordIndex);
+            }        
+        });
+        
+        //Data model of Student At Risk data for the grid panel
+        Ext.define('StudentModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [ 
+                {name: 'Id', mapping: 'Id', type: 'string'},
+                {name: 'ContactId', mapping: 'Student__c', type: 'string'},
+                {name: 'Name', mapping: 'StudentName__c', type: 'string'},
+                {name: 'NameLastFirst', mapping: 'StudentDisplayName__c', type: 'string'},
+                {name: 'StudentId', mapping: 'StudentID__c', type: 'string'},
+                {name: 'PastEndDateCount', mapping: 'PastEndDateCount__c', type: 'int'},
+                {name: 'ObjectiveFailCount', mapping: 'ObjectiveFailCount__c', type: 'int'},
+                {name: 'PerformanceFailCount', mapping: 'PerformanceFailCount__c', type: 'int'},
+                {name: 'Inactive', mapping: 'ActivityConcerns__c', type: 'bool'},
+                {name: 'EventDate', mapping: 'LastRiskEventDate__c', type: 'date', dateFormat: 'c'},
+                {name: 'Event', mapping: 'LastRiskEventType__c', type: 'string'},
+                {name: 'RiskCount', mapping: 'TotalRiskCount__c', type: 'int'},
+                {name: 'Trend', mapping: 'RiskTrend__c', type: 'int'},
+                {name: 'TrendSinceDate', mapping: 'TrendCalculatedSince__c', type: 'date', dateFormat: 'c'}
+            ]
+        });
+        
+        //Data model for mentor users for the mentor drop down
+        Ext.define('MentorModel', 
+        { 
+            extend  : 'Ext.data.Model',   
+            fields  : 
+            [ 
+                {name: 'Id', type: 'string'},
+                {name: 'UserId', type: 'string'},
+                {name: 'Name', type: 'string'},
+                {name: 'NameLastFirst', type: 'string'}
+            ]
+        });
+        
+        //Data store of Student At Risk data for the grid
+        var AtRiskStore = Ext.create('Ext.data.Store',
+        {
+            model : 'StudentModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'NameLastFirst',
+                direction: 'ASC'
+            }]
+        });
+        
+        //Data store for mentor users for the mentor drop down
+        var MentorStore = Ext.create('Ext.data.Store',
+        {
+            model : 'MentorModel',
+            proxy :
+            {
+                type: 'memory',
+                autoSync: true,
+                reader:
+                {
+                    type: 'json',
+                    root: 'Records'
+                }
+            },
+            remoteSort: false,
+            sorters:
+            [{
+                property: 'NameLastFirst',
+                direction: 'ASC'
+            }]
+        });
+        
+        var MentorSelect=Ext.create('Ext.container.Container',
+        {
+            items: [
+                {
+                    xtype: 'combo',
+                    id: 'selectMentor',
+                    fieldLabel: '',
+                    labelAlign: 'top',                    
+                    width: 220,
+                    typeAhead: true,
+                    store: MentorStore,
+                    displayField: 'NameLastFirst',
+                    valueField: 'UserId',
+                    emptyText: 'Select a Mentor...',
+                    valueNotFoundText: 'Select a Mentor...',
+                    queryMode: 'local',
+                    listeners: 
+                    {
+                        change: 
+                        {
+                            fn: function(field, newValue, oldValue, eOpts)
+                                {
+                                    addRecords(newValue);
+                                }
+                        }
+                    }
+                }
+            ],
+            renderTo: 'divMentorCombo'
+        });
+        
+        var AtRiskGrid = Ext.create('Ext.grid.Panel',
+        {
+            title: 'Students At Risk',
+            store: AtRiskStore,
+            columns:
+            [
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Student Name',
+                    dataIndex: 'NameLastFirst',
+                    width: 150,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        meta.tdAttr='data-qwidth="'+record.get('Name').length*14+'" data-qtip="Open tab for '+record.get('Name')+'"';
+                        return value;
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Student ID',
+                    dataIndex: 'StudentId',
+                    width: 75,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        meta.tdAttr='data-qwidth="'+record.get('Name').length*14+'" data-qtip="Open tab for '+record.get('Name')+'"';
+                        return value;
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'End Date >7 Days Occurred',
+                    dataIndex: 'PastEndDateCount',
+                    width: 100,
+                    align: 'center',
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        if (value==0)
+                        {
+                            meta.tdAttr='data-qwidth="200" data-qtip="The student does not have any courses that were not passed by 7 days after the course end date"';
+                        
+                            return "";
+                        }
+                        else
+                        {
+                            if (value>1)
+                            {
+                                meta.tdAttr='data-qwidth="200" data-qtip="The student has ' + value + ' courses that were not passed by 7 days after the course end date"';
+                            }
+                            else
+                            {
+                                meta.tdAttr='data-qwidth="200" data-qtip="The student has 1 course that was not passed by 7 days after the course end date"';
+                            }
+                        
+                            return value;
+                        }
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Assessment Failures >1',
+                    width: 145,
+                    align: 'center',
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    columns: [
+                            {
+                                xtype: 'gridcolumn',
+                                header: 'Objective',
+                                dataIndex: 'ObjectiveFailCount',
+                                width: 65,
+                                align: 'center',
+                                sortable: true,
+                                hideable: false,
+                                menuDisabled: true,
+                                renderer: function(value, meta, record)
+                                {
+                                    if (value==0)
+                                    {
+                                        meta.tdAttr='data-qwidth="200" data-qtip="The student has not failed any objective assessments 2 or more times"';
+                                    
+                                        return "";
+                                    }
+                                    else
+                                    {
+                                        if (value>1)
+                                        {
+                                            meta.tdAttr='data-qwidth="200" data-qtip="The student has ' + value + ' objective assessments that were failed 2 or more times"';
+                                        }
+                                        else
+                                        {
+                                            meta.tdAttr='data-qwidth="200" data-qtip="The student has 1 objective assessment that was failed 2 or more times"';
+                                        }
+                                    
+                                        return value;
+                                    }
+                                }
+                            },
+                            {
+                                xtype: 'gridcolumn',
+                                header: 'Performance',
+                                dataIndex: 'PerformanceFailCount',
+                                width: 80,
+                                align: 'center',
+                                sortable: true,
+                                hideable: false,
+                                menuDisabled: true,
+                                renderer: function(value, meta, record)
+                                {
+                                    if (value==0)
+                                    {
+                                        meta.tdAttr='data-qwidth="200" data-qtip="The student has not failed any performance assessments 2 or more times"';
+                                    
+                                        return "";
+                                    }
+                                    else
+                                    {
+                                        if (value>1)
+                                        {
+                                            meta.tdAttr='data-qwidth="200" data-qtip="The student has ' + value + ' preformance assessments that were failed 2 or more times"';
+                                        }
+                                        else
+                                        {
+                                            meta.tdAttr='data-qwidth="200" data-qtip="The student has 1 preformance assessment that was failed 2 or more times"';
+                                        }
+                                    
+                                        return value;
+                                    }
+                                }
+                            }
+                        ]
+                },
+                {
+                    xtype: 'disablecheckcolumn',
+                    header: 'Activity Concerns',
+                    dataIndex: 'Inactive',
+                    width: 65,
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record) 
+                    {
+                        //Custom render function to handle disabled checkboxes
+                        var cssPrefix = Ext.baseCSSPrefix,
+                            cls = [cssPrefix + 'grid-checkheader'];
+                
+                        if (value) 
+                        {
+                            cls.push(cssPrefix + 'grid-checkheader-checked-disabled');
+                            meta.tdAttr='data-qwidth="200" data-qtip="The student has not met activity goals for the past 30 days"';
+                        } 
+                        else
+                        {
+                            cls.push(cssPrefix + 'grid-checkheader-disabled');
+                            meta.tdAttr='data-qwidth="200" data-qtip="The student has met activity goals for the past 30 days"';
+                        }
+                
+                        return '<div class="' + cls.join(' ') + '">&#160;</div>';                    
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Last Risk Event',
+                    width: 190,
+                    align: 'center',
+                    sortable: false,
+                    hideable: false,
+                    menuDisabled: true,
+                    columns: [
+                        {
+                            xtype: 'gridcolumn',
+                            header: 'Event',
+                            dataIndex: 'Event',
+                            width: 115,
+                            align: 'center',
+                            sortable: true,
+                            hideable: false,
+                            menuDisabled: true,
+                            renderer: function(value, meta, record)
+                            {
+                                meta.tdAttr='data-qwidth="200" data-qtip="Most recent At Risk event type"';
+                                return value;
+                            }
+                        },
+                        {
+                            xtype: 'datecolumn',
+                            header: 'Event Date',
+                            dataIndex: 'EventDate',
+                            width: 80,
+                            align: 'center',
+                            format: "m/d/Y",
+                            sortable: true,
+                            hideable: false,
+                            menuDisabled: true,
+                            renderer: function(value, meta, record)
+                            {
+                                meta.tdAttr='data-qwidth="200" data-qtip="Most recent date of an At Risk event"';                               
+                                
+                                return Ext.Date.format(value, "m/d/Y");
+                            }
+                        }
+                    ]
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Total At Risk Events',
+                    dataIndex: 'RiskCount',
+                    width: 80,
+                    align: 'center',
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        meta.tdAttr='data-qwidth="200" data-qtip="Total count of all At Risk events for the student"';
+                        return value;
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    header: 'Risk Trend',
+                    dataIndex: 'Trend',
+                    width: 50,
+                    align: 'center',
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        meta.tdAttr='data-qwidth="200" data-qtip="Change in total count of all At Risk events for the student since the Total At Risk was last calculated"';
+                        
+                        if (value>0)
+                        {
+                            return '+'+value+' <img src="{!$Resource.TrendArrows}/Arrow-R-Up.jpg" />';
+                        }
+                        else if (value<0)
+                        {
+                            return value+' <img src="{!$Resource.TrendArrows}/Arrow-G-Down.jpg" />';
+                        }
+                        else
+                        {
+                            return value;
+                        }
+                    }
+                },
+                {
+                    xtype: 'datecolumn',
+                    header: 'Trend Calculated Since',
+                    dataIndex: 'TrendSinceDate',
+                    width: 100,
+                    align: 'center',
+                    format: "m/d/Y",
+                    sortable: true,
+                    hideable: false,
+                    menuDisabled: true,
+                    renderer: function(value, meta, record)
+                    {
+                        meta.tdAttr='data-qwidth="200" data-qtip="Previous Trend calculation date from which the current Trend is calculated"';                               
+                        
+                        return Ext.Date.format(value, "m/d/Y");
+                    }
+                }
+            ],
+            width: 980,
+            height: 300,
+            renderTo: 'divAtRisk',
+            bbar:['<span id=\'total\'>Loading...</span>'],
+            listeners:
+            {
+                itemclick: function(grid, record, item, index, e, eOpts)
+                {
+                    window.open("/"+record.get('ContactId'));
+                }
+            }
+        });
+        
+        Ext.onReady(function()
+        {
+            Ext.tip.QuickTipManager.init();
+            MentorSelect.hide();
+            
+            //Query for whether the user can view other mentors' At Risk
+            var CanViewOthers='false';
+            
+            try
+            {
+                CanViewOthers=sforce.connection.query("select CanSelectOtherMentorsinMyStudents__c from Mentor__c where User__c='{!$User.Id}' limit 1").records.CanSelectOtherMentorsinMyStudents__c;
+            }
+            catch (err)
+            {
+                CanViewOthers='false';
+            }
+            
+            //Enable and populate Mentor dropdown for users able to use it
+            if (CanViewOthers=='true' || '{!$User.ProfileName__c}'=='System Administrator' || '{!$User.ProfileName__c}'=='Developer')
+            {
+                MentorSelect.show();
+            
+                sforce.connection.query("SELECT Id, Name, User__r.FirstName, User__r.LastName, User__c FROM Mentor__c WHERE MentorRole__c!='None' AND isTestData__c=false AND User__r.isActive=true AND User__r.isEmployee__c=true",
+                    function(result)
+                    {
+                        result.size *= 1;
+                        result.done = result.done == "true";
+                        result.records = !Ext.isArray(result.records)? (result.size>0?[result.records]:[]): result.records;
+                    
+                        if (result.records.length>0) 
+                        {
+                            for (var x=0; x<result.records.length; x++) 
+                            {
+                                var thisRecord = result.records[x];
+                                var newRecord = Ext.create('MentorModel');
+                                
+                                newRecord.set('Id', thisRecord.Id);
+                                newRecord.set('Name', thisRecord.Name);
+                                newRecord.set('NameLastFirst', thisRecord.User__r.LastName+", "+thisRecord.User__r.FirstName);
+                                newRecord.set('UserId', thisRecord.User__c);
+                        
+                                MentorStore.loadData([newRecord], true);
+                            }                           
+                            
+                            MentorSelect.getComponent('selectMentor').select(MentorStore.findRecord('UserId', '{!$User.Id}'));
+                        }
+                    });
+            }
+            else
+            {
+                MentorSelect.hide();
+                addRecords('{!$User.Id}');
+            }
+        });
+        
+        function addRecords(MentorId)
+        {
+            //Clear any data currently in the data store
+            AtRiskStore.removeAll(true);
+            
+            AtRiskGrid.getView().setLoading('Retrieving Student List...');
+            
+            StudentsAtRiskController.getAtRiskRecords(MentorId, function(result)
+                {
+                    if (result!=null)
+                    {
+                        var records=Ext.decode(result);
+                        
+                        AtRiskStore.loadRawData(records, true);
+                            
+                        //Remove students with no At Risk Items
+                        for (var i=AtRiskStore.getCount()-1; i>=0; i--)
+                        {
+                            if (AtRiskStore.getAt(i).get('RiskCount')==0)
+                            {
+                                AtRiskStore.removeAt(i);
+                            }
+                        }
+                        
+                        //Set total count text on status bar
+                        Ext.get('total').update('Total '+AtRiskStore.getCount()+' Students At Risk of '+records.length+' Total Assigned, Active, and Enrolled Students');
+                    }
+                    else
+                    {
+                        //If result comes back as null try the addRecords function again.
+                        //This is to handle an odd timing bug that is difficult to reproduce and always goes away the on the second attempt to load a particular mentor's students.
+                        addRecords(MentorId);
+                    }
+                    
+                    AtRiskGrid.getView().setLoading(false);
+                }, { buffer: true, escape: false, timeout: 30000 });
+        }       
+    </script>
+</body>
+</html>
+</apex:page>

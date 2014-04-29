@@ -1,0 +1,163 @@
+<apex:page title="Western Governors University - My Students" contentType="text/html; charset=UTF-8" standardStylesheets="false" showHeader="true" sidebar="false" docType="html">
+<html>
+<head> 
+    <apex:includeScript value="/soap/ajax/27.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/27.0/apex.js"/>
+    <apex:includeScript value="/support/console/27.0/integration.js"/>
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.WGUMonkeyFix}" id="WGUMonkeyFix"></script>
+
+    <script type="text/javascript" >
+        sforce.connection.init( "{!$Api.session_id}", "/services/Soap/u/27.0" );
+        $soap = sforce.connection;
+    </script>
+    <link href="{!$Resource.profile}/images/favicon.ico" rel="SHORTCUT ICON"/>
+    <apex:stylesheet value="{!URLFOR($Resource.extjs_v420, 'resources/css/ext-all.css')}"/>
+
+    <script type="text/javascript" charset="utf-8" src="{!$Resource.extjs_v420}/ext-all.js"></script>
+    <title>WGU - BogifyEmail</title>
+    
+    <style>
+        .x-grid-dirty-cell {
+             background-image: none;
+        }
+    </style>
+    
+</head>
+
+<body style="font-family:tahoma,arial,verdana,sans-serif;">
+    <div id="TopButtonsDiv" style="width:100%"/><br></br>
+    <div id="SoqlStatementsDiv" style="width:100%"/>
+
+<script type="text/javascript" >
+    var SoqlOutputText = 'No SOQL Statements Defined';
+
+    Ext.onReady(function()
+    {
+        Ext.tip.QuickTipManager.init();
+        var SoqlStatementsPanel = [
+        {
+            id: 'SoqlStatementsPanel',
+            title: 'SOQL Statements',
+            collapsible:true,
+            width: 1200,
+            height: 500,
+            html: SoqlOutputText
+        }];
+
+        Ext.each (SoqlStatementsPanel, function(config) {
+            Ext.widget('panel', 
+            Ext.applyIf(config, {
+                renderTo: 'SoqlStatementsDiv',
+                bodyPadding: 0
+            }));
+        });
+    });
+     
+     Ext.create('Ext.Button', {
+        text: 'Generate SOQL',
+        tooltip: 'Find All Email Fields and Generate SOQL Statements',
+        renderTo: 'TopButtonsDiv',
+        listeners: {
+            click: function () {
+                Ext.getCmp('SoqlStatementsPanel').setLoading('Finding all email fields and generating SOQL Statements...');
+                setTimeout(function(){
+                    getEmailFields();
+                    Ext.getCmp('SoqlStatementsPanel').setLoading(false);
+                },500);
+                
+            }    
+        }
+    }); 
+                   
+    function getEmailFields() {
+          var describeGlobal;
+          try { describeGlobal = $soap.describeGlobal(); } catch (e) {} 
+          var processedSObjects = [];
+          var avoidSObjects = ["SRMChange__c","Scontrol","Scripts__c","AccountContactRole","AccountShare","AdditionalNumber","Approval","Asset","Attachment","BrandTemplate","BusinessHours","BusinessProcess","CampaignMember","CaseContactRole","CaseTeamMember","CaseTeamRole","CaseTeamTemplate","CaseTeamTemplateMember","CategoryData","CategoryNode","CollaborationGroup","CollaborationGroupMember","CollaborationGroupMemberRequest","ContentDocument","ContentDocumentLink","ContentVersion","Contract","ContractContactRole","CustomConsoleComponent","Document","DocumentAttachmentMap","EmailServicesAddress","EmailServicesFunction","EmailTemplate","FieldPermissions","Folder","Group","Holiday","IDEPerspective","IDEWorkspace","Lead","MailmergeTemplate","Note","ObjectPermissions","OpportunityCompetitor","OpportunityContactRole","OpportunityLineItem","OpportunityShare","Organization","PermissionSet","Pricebook2","PricebookEntry","ProcessInstanceWorkitem","Product2","Profile","PushTopic","Question","RecordType","Reply","SelfServiceUser","Solution","StaticResource","Task","TraceFlag","UserRole","User","WebLink"];
+        
+          var sobjectIndex = 0;
+          for ( x=0; x < describeGlobal.sobjects.length; x++ ) {
+            var sObject = describeGlobal.sobjects[x];
+            if ( sObject.updateable=='true' && sObject.customSetting=='false' && sObject.deprecatedAndHidden=='false' && !sObject.name.endsWith('History') && !sObject.name.endsWith('Feed') && !sObject.name.startsWith('Apex') && !sObject.name.startsWith('OrgWideEmailAddress') && !sObject.name.startsWith('CRMfusionDBR101') && !sObject.name.startsWith('ortoo_qra') && !Ext.Array.contains(avoidSObjects, sObject.name) ) {
+                var currentSObject = {sobject:sObject.name, emailFields:[]};
+                console.log( "Created SObject: " + currentSObject.sobject );
+                processedSObjects.push( currentSObject );
+                var sobject;
+                try { sobject = $soap.describeSObject( describeGlobal.sobjects[x].name ); } catch(e) {}
+                for ( y=0; y < sobject.fields.length; y++ ) {
+                  var field = sobject.fields[y];
+                  if ( field && field.type && field.type == 'email' && ( sobject.name!=="Account"?true: field.name.indexOf("__pc")==-1 && field.name.indexOf("PersonEmail")==-1 ) ) {
+                    currentSObject.emailFields.push(field.name);
+                  }
+                }
+            }
+          }
+         
+          sobjectsWithEmail = [];
+          sandboxName = location.hostname.split("--")[1];
+          for ( var i = 0; i < processedSObjects.length; i++ ) {
+            var sobj = processedSObjects[i]; 
+            if ( sobj.emailFields.length > 0 ) {
+              var SOQL = "SELECT "
+              for ( var f = 0; f < sobj.emailFields.length; f++ ) {
+                SOQL += f==0? sobj.emailFields[f] : ","+sobj.emailFields[f];
+              }
+              SOQL += " FROM " + sobj.sobject + " WHERE "+sobj.emailFields[0] + " != NULL AND (NOT "+sobj.emailFields[0]+" LIKE \\\'%@"+sandboxName+".%\\\')\'";
+              sobj.SOQL = SOQL;
+              sobj.AnonymousApex = "BogifyEmailBatchUtility batch = new BogifyEmailBatchUtility('"+ SOQL +"');\r\nDatabase.executeBatch(batch,2000);";
+              sobjectsWithEmail.push( sobj );
+            }
+          }
+          console.log( "" );          
+          console.log( "<<<<<<<<<<<< JSON RESULTS >>>>>>>>>>>>" );
+          console.log( Ext.encode( sobjectsWithEmail ) );
+          console.log( "<<<<<<<<<<<< JSON RESULTS >>>>>>>>>>>>" );
+          console.log( "" );          
+          console.log( "<<<<<<<<<<<<< SOQL STATEMENTS >>>>>>>>>>>>" );
+          SoqlOutputText = '';
+          for( var s = 0; s < sobjectsWithEmail.length; s++ ) {
+            console.log( sobjectsWithEmail[s].SOQL );
+            SoqlOutputText = (SoqlOutputText+"<br>"+sobjectsWithEmail[s].SOQL);
+          }
+          console.log( "" );          
+          console.log( "<<<<<<<<<<<<< Anonymous Apex >>>>>>>>>>>>" );
+          for( var s = sobjectsWithEmail.length-1; s >= 0 ; s-- ) {
+            /*
+            var queryResult = $soap.query("Select count() From AsyncApexJob WHERE JobType = 'BatchApex' AND Status NOT IN ('Completed','Aborted','Failed')");
+            queryResult.size = queryResult.size*1;
+            if ( queryResult.size > 4 ) {
+              setTimeout( function(){tryBatchApexAgain(sobjectsWithEmail)}, 10000 );
+            } else {
+              sforce.apex.executeAnonymous( sobjectsWithEmail[s].AnonymousApex );
+              Ext.Array.erase( sobjectsWithEmail, s, 1 );    
+            }
+            */
+            console.log( sobjectsWithEmail[s].AnonymousApex );
+          }
+          populateSOQLStatementPanel()
+    }
+
+    function populateSOQLStatementPanel() {
+        Ext.getCmp('SoqlStatementsPanel').body.update(SoqlOutputText);
+        console.log ('SoqlStatement Panel Updated to ' + SoqlOutputText); 
+    } 
+
+    function tryBatchApexAgain(sobjectsWithEmail) {
+          /* Commented out until we are ready to run all batch jobs from the page
+          for( var s = sobjectsWithEmail.length-1; s >= 0 ; s-- ) {
+            var queryResult = $soap.query("Select count() From AsyncApexJob WHERE JobType = 'BatchApex' AND Status NOT IN ('Completed','Aborted','Failed')");
+            queryResult.size = queryResult.size*1;
+            if ( queryResult.size > 4 ) {
+              setTimeout( function(){tryBatchApexAgain(sobjectsWithEmail)}, 10000 );
+            } else {
+              sforce.apex.executeAnonymous( sobjectsWithEmail[s].AnonymousApex );
+              Ext.Array.erase( sobjectsWithEmail, s, 1 );    
+            }
+          }
+          */
+    }
+
+</script>
+</body>
+</html>
+</apex:page>

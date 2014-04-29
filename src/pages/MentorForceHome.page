@@ -1,0 +1,4 @@
+<apex:page >
+<apex:iframe src="/apex/StudentsAtRisk?id={!$User.Id}" height="310px"/>
+<chatter:newsFeed />
+</apex:page>

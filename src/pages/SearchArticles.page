@@ -1,0 +1,89 @@
+<apex:page controller="SearchArticlesController" showHeader="false" standardStylesheets="false">
+
+  <apex:stylesheet value="{!URLFOR($Resource.SearchArticles_css,'style.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.Mentor_Resources,'style.css')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.easyXDM,'easyXDM.min.js')}"/>
+  <apex:includeScript value="{!$Resource.jquery_v171}"/>
+
+  <html lang="en-US" dir="ltr">
+  
+  <head>
+  </head>
+  
+  <body class="min-height"> 
+  
+    <apex:form >
+    	<c:CourseKbContactMentor courseCode="{!courseCode}" componentAttributes="{!componentAttributes}" mentorEmail="{!mentorEmail}" mentorName="{!mentorName}" />
+	    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable">
+	      <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+	        <span class="ui-dialog-title">Search Results for: {!combinedSearchTerm}&nbsp;&nbsp;&nbsp;&nbsp;Course: {!IF(ISBLANK(courseCode), 'All', courseCode)}&nbsp;&nbsp;&nbsp;&nbsp;
+	            <apex:outputText value="{!'Major Version: ' + majorVersionToDisplay}" />
+	        </span>
+	      </div>
+	
+	      <div id="subheader-wrapper">
+	        <div class="subheader">
+	            <apex:inputText value="{!searchTerm}" id="searchInput" style="margin:13px 0 0 10px; float:left;" />   
+	            <apex:commandButton action="{!doSearch}" value="" image="{!URLFOR($Resource.SearchArticles_css,'images/search-btn-cropped.png')}" style="background:#6589C6;border-style:none;padding:0px 0px 0px 0px;margin:12px 0px 0px 10px;float:left" id="searchButton" onclick="javascript:postNewSize();" />
+	            <apex:commandButton action="{!showPopup}" value="Contact My Mentor" styleClass="btn-upload" id="contactMyMentorButton" rendered="{!showContactMyMentorButton}" />
+	        </div>
+	      </div>
+	
+	      <div class="clear"></div>
+	
+	      <div class="modal-fixed-height ui-dialog-content ui-widget-content">
+	        <div class="modal-errors"><apex:pageMessages rendered="{!!componentAttributes.displayMessages}" /></div>
+	          <div class="search-div-block">
+	            <label>Refine Search<sub> (Enter term(s) to search for within your current results)</sub></label>
+	            <apex:inputText value="{!refineSearchTerm}" id="refineSearchInput" />
+	            <apex:commandButton action="{!refineSearch}" styleClass="btn green" value="Refine Search" id="refineSearchButton" style="margin-left: 10px;" onclick="javascript:postNewSize();" />
+	          </div>
+	        <ul class="search-results">
+	          <apex:repeat value="{!articleViewList}" var="articleView" id="LearningArticleSearchResults" rendered="{!AND(NOT(ISNULL(articleViewList)),articleViewList.size>0)}">
+	            <li class="{!articleView.imageClass}">
+	           		<h2><a href="{!BaseURL + 'apex/CourseArticle?id=' + articleView.courseArticle.KnowledgeArticleId + '&searchTerm=' + SearchTerm + '&courseCode=' + CourseCode + '&courseId=' + CourseId + IF(ISBLANK(refineSearchTerm), '', '&refineSearchTerm=' + RefineSearchTerm) + '&rtn=/apex/SearchArticles'}">{!articleView.courseArticle.Title}</a></h2>
+	           		<p>Summary: {!articleView.courseArticle.Summary}</p>
+	           		<span class="search-results-view">Viewed {!articleView.viewCount} times</span>
+	            </li>
+	          </apex:repeat>  
+	          <li style="display:{!IF(OR(ISNULL(articleViewList),articleViewList.size=0), 'inherit', 'none')}">
+	            <apex:outputText value="No results found" /> 
+	          </li>
+	        </ul>
+	      </div>
+	    </div>
+    </apex:form>
+  </body>
+  <script type="text/javascript">
+    jQuery.noConflict();
+    
+    function getURLParameter(name) {
+        return decodeURI(
+            (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
+    }
+
+    jQuery(function() {
+        document.postNewSize = function() {
+           if(document.socket != null) {
+             document.socket.postMessage(document.body.scrollHeight);
+           }
+        };
+        // This must occur after everything else.
+        //Don't put this before anything important.
+		if(!(typeof(window['JSON']) == 'object' && window['JSON'])) {
+		    var json_load = document.createElement('script');
+		    json_load.type = "text/javascript";
+		    json_load.src = "{!URLFOR($Resource.FDP_Resources,'assets/js/json2.js')}";
+		    document.body.appendChild(json_load);
+		}
+		document.socket = new easyXDM.Socket({
+		    onReady: function() {
+		        document.socket.postMessage(document.body.scrollHeight);
+		    }
+		});
+    });
+
+  </script>
+</html>
+</apex:page>

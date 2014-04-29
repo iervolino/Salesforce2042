@@ -1,0 +1,3 @@
+<apex:page standardController="Opportunity">
+    <apex:iframe src="https://secure.eloqua.com/pp/pp.aspx?emailAddress={!opportunity.ContactEmail__c}" />
+</apex:page>

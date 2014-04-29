@@ -1,0 +1,24 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" contentType="text/html" cache="true" controller="OssoVerifyController" action="{!initialize}">
+<apex:outputText escape="false" value="{!'<!DOCTYPE html>'}"/>
+<html>
+  <head>
+    <apex:outputText rendered="{!useEasyXDM}">
+    <script type="text/javascript" src="{!URLFOR($Resource.easyXDM,'easyXDM.min.js')}">
+    </script>
+    <script type="text/javascript">
+      var transport = new easyXDM.Socket({
+        local: '/name.html',
+        swf:"{!URLFOR($Resource.easyXDM,'assets/js/easyxdm.swf')}",
+        onReady: function() {
+        },
+        onMessage: function(message,origin) {
+        }
+      });
+    </script>
+    </apex:outputText>
+  </head>
+  <body>
+    <h2>You now have a valid salesforce session</h2>
+  </body>
+</html>
+</apex:page>

@@ -1,0 +1,23 @@
+<apex:page title="FDP - Redirector" contentType="text/html; charset=UTF-8" standardStylesheets="false" showHeader="false" sidebar="false" docType="html">
+<apex:outputText escape="false" value="{!"<!DOCTYPE html>"}"/>
+<html>
+<head>
+    <script type="text/javascript">
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+    
+        function redir(){
+             var inProdOrg = "{!$Organization.Id}".indexOf("00D30000001GkGU") == 0; //match against prod org id (sandbox org ids change after refresh)
+             var isStudent = "{!$User.ProfileName__c}" === "Student Profile";
+             var redirURL = "https://" + (inProdOrg? '': 'l1') + "webapp18.wgu.edu/fdp" + (isStudent? "": ("/for/"+ getParameterByName("pidm") ) ); 
+             window.location.replace(redirURL); 
+        }
+    </script>
+</head>
+<body  onLoad="redir()" />
+</html>
+</apex:page>

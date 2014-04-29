@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Provides the definition of a service including submissions and usage examples.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>DataInformation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The information definition that this service is related.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The information definition that this service is related.</inlineHelpText>
+        <label>Data Information</label>
+        <referenceTo>DataInformation__c</referenceTo>
+        <relationshipLabel>Service Definitions</relationshipLabel>
+        <relationshipName>DataServiceDefinitions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DataObject__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The data source that this service fronts.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The data source that this service fronts.</inlineHelpText>
+        <label>Data Object</label>
+        <referenceTo>DataObject__c</referenceTo>
+        <relationshipLabel>Service Definitions</relationshipLabel>
+        <relationshipName>DataServiceDefinitions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>10000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ProductionEndpoint__c</fullName>
+        <description>The production submission endpoint.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The production submission endpoint.</inlineHelpText>
+        <label>Production Endpoint</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>RemoteWSDL__c</fullName>
+        <description>The WSDL for the service at its remote source. This can also be attached to this record entry when applicable.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The WSDL for the service at its remote source. This can also be attached to this record entry when applicable.</inlineHelpText>
+        <label>Remote WSDL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>SOAPVersion__c</fullName>
+        <description>The version of SOAP used for this service.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The version of SOAP used for this service.</inlineHelpText>
+        <label>SOAP Version</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1.1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1.2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Security__c</fullName>
+        <description>A secured service performs both authentication and encryption of the communication. Common encryption would be the HTTPS protocol being used to access the service.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>A secured service performs both authentication and encryption of the communication. Common encryption would be the HTTPS protocol being used to access the service.</inlineHelpText>
+        <label>Security</label>
+        <picklist>
+            <picklistValues>
+                <fullName>HTTPS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OAuth</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>HTTP Header Authorization Token</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SAML</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OpenSSO Token</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WS-Security</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <label>Data Service Definition</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Data Service Definitions</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>REST</fullName>
+        <active>true</active>
+        <label>REST</label>
+        <picklistValues>
+            <picklist>SOAPVersion__c</picklist>
+            <values>
+                <fullName>1%2E1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%2E2</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Security__c</picklist>
+            <values>
+                <fullName>HTTP Header Authorization Token</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HTTPS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OAuth</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OpenSSO Token</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAML</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>SOAP</fullName>
+        <active>true</active>
+        <label>SOAP</label>
+        <picklistValues>
+            <picklist>SOAPVersion__c</picklist>
+            <values>
+                <fullName>1%2E1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%2E2</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Security__c</picklist>
+            <values>
+                <fullName>HTTP Header Authorization Token</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HTTPS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OAuth</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OpenSSO Token</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SAML</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>WS-Security</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

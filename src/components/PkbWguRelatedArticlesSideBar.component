@@ -1,0 +1,26 @@
+<apex:component >
+<apex:attribute name="pkbCon" type="pkb_Controller" required="true" description="handle to the pkb controller" />
+<apex:attribute name="relatedListKeyword" type="String" required="true" description="keyword for article list vf component" />
+	<!-- Related Articles -->
+    <apex:outputText >
+        <div class="quarter-box break kb__sidebar visible--large">
+            <h3>Related Articles</h3>
+            <hr />
+            <knowledge:articleList articleVar="a" 
+                pageSize="{!pkbCon.relatedArticles+1}"
+                keyword="{!relatedListKeyword}"
+                pageNumber="1"
+                language="{!pkbCon.selectedLanguage}">
+                    <apex:variable var="typeName" value="{!SUBSTITUTE(a.articleTypeName, '__kav', '')}" />
+                    <apex:variable var="feedback" value="{!pkbCon.feedbackSourceParam}={!pkbCon.feedbackRelated}" />
+                    <apex:variable var="params" value="{!IF(ISBLANK(pkbCon.allSearchParams), feedback, pkbCon.allSearchParams+ '&' +feedback)}" />
+                    <apex:variable var="articleURL" value="{!$Site.CurrentSiteUrl}articles{!pkbCon.selectedLanguageURL}{!typeName}/{!a.urlName}" />
+                    <apex:outputPanel layout="block" rendered="{!(LEFT(pkbCon.theArticle.Id, 15) != LEFT(a.Id, 15))}" style="margin-bottom: 5px;">
+                        <a class="relatedLink" href="{!articleURL}?{!params}">{!a.Title}</a>
+                    </apex:outputPanel>
+            </knowledge:articleList>
+        </div>
+      </apex:outputText>
+
+    <div class='spacer-padding--30 hidden--large'></div>
+</apex:component>

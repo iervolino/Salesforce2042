@@ -1,0 +1,54 @@
+<apex:page standardController="CourseArticle__kav" extensions="CourseArticleController" showHeader="false">
+	<apex:stylesheet value="{!URLFOR($Resource.Article_Resources,'style.css')}"/>
+  	<apex:stylesheet value="{!URLFOR($Resource.Create_Article_Resources,'style.css')}"/>
+  	 <div id="header-wrapper">
+		<div id="header">
+			<a href="#" class="header-logo"></a>
+		</div>
+	</div>
+	<div id="subheader-wrapper">
+		<div class="subheader">
+			<h1>{!CourseArticle__kav.title}</h1>
+			<apex:form >
+				<ul class="btns-top">
+					<li><apex:commandButton action="{!EditArticle}" styleClass="btn" value="EDIT" rendered="{!isInternalUser}" /></li>
+					<li><apex:commandButton action="{!ReturnToSearch}" styleClass="btn" value="BACK TO SEARCH" /></li>
+            	</ul>
+          	</apex:form>
+		</div>
+	</div>
+	<div id="wrapper">
+		<knowledge:articleRendererToolBar articleId="{!$CurrentPage.parameters.id}" canvote="true" /><br/>
+		<apex:outputField value="{!CourseArticle__kav.RichTextArea__c}" />
+        <apex:outputLink value="{!URLFOR($Action.CourseArticle__kav.FileFieldDownload, CourseArticle__kav.id, ['field'=$ObjectType.CourseArticle__kav.fields.FileUpload__Body__s.name])}" 
+        	rendered="{!courseArticle.FileUpload__Name__s != null}">{!courseArticle.FileUpload__Name__s}</apex:outputLink>
+	</div>
+	<script type="text/javascript">
+		jQuery.noConflict();
+  		$(document).ready(function(){
+  			$('div.versioningPanel').parent().remove();
+  			
+		    jQuery(function() {
+		        document.postNewSize = function() {
+		           if(document.socket != null) {
+		             document.socket.postMessage(document.body.scrollHeight);
+		           }
+		        };
+		        // This must occur after everything else.
+		        //Don't put this before anything important.
+	            if(!(typeof(window['JSON']) == 'object' && window['JSON'])) {
+	                var json_load = document.createElement('script');
+	                json_load.type = "text/javascript";
+	                json_load.src = "{!URLFOR($Resource.FDP_Resources,'assets/js/json2.js')}";
+	                document.body.appendChild(json_load);
+	            }
+	            document.socket = new easyXDM.Socket({
+	                onReady: function() {
+	                    document.socket.postMessage(document.body.scrollHeight);
+	                }
+	            });
+		    });
+  		});
+  	</script>
+  	<apex:includeScript value="{!$Resource.JQuery_1_9_1}"/>
+</apex:page>

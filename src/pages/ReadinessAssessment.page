@@ -1,0 +1,23 @@
+<apex:page standardController="ReadinessAssessment__c" extensions="ReadinessAssessmentExtensionController">
+  <html>
+      <body>
+          Transferring... Please Wait
+          <form id="postForm" action="{!actionURL}" method="POST">
+              <input type="hidden" name="module" value="G" />
+              <input type="hidden" name="pros_pidm" value="{!ReadinessAssessment__c.CAREProfile__r.Account.Pidm__c}" />
+              <input type="hidden" name="test_date" value="" id="postDate" />
+              <input type="hidden" name="assmnt_code" value="{!ReadinessAssessment__c.AssessmentCode__c}" />
+              <div style="display:none" id="formattedDate">
+                  <apex:outputText value="{0,date,MM'/'dd'/'yyyy HH:mm:ss}">
+                      <apex:param value="{!ReadinessAssessment__c.DateTaken__c}"/>
+                  </apex:outputText>
+              </div>
+          </form>
+          
+          <script type="text/javascript">
+              document.getElementById('postDate').value = document.getElementById('formattedDate').innerHTML.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+              document.getElementById('postForm').submit();
+          </script>
+      </body>
+  </html>
+</apex:page>

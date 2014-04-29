@@ -1,0 +1,1106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object used by WGU Commons to manage the access level that students have to a community, a group, and custom groups.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>AdministrationType__c</fullName>
+        <externalId>false</externalId>
+        <label>Administration Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Announcement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Quick Tip</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Document</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>AnnouncementRecord__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Announcement Record</label>
+        <referenceTo>CommunityAccessControl__c</referenceTo>
+        <relationshipLabel>Community Access Controls</relationshipLabel>
+        <relationshipName>StudentAnnouncements</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AnnouncementStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(DateAnnouncementExpires__c = NULL, DateAnnouncementExpires__c &gt;=  TODAY()) , &apos;Active&apos;, &apos;Archived&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Announcement Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CAREProfile__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>CARE Profile</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Learning Communities</relationshipLabel>
+        <relationshipName>CommunityAccessControls</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CaseId__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Id of the case that was created by the question posted,</description>
+        <externalId>false</externalId>
+        <label>Case Id</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Learning Community</relationshipLabel>
+        <relationshipName>CommunityAccessControls</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CommunityId__c</fullName>
+        <description>Id of the community that the student is assigned to.</description>
+        <externalId>false</externalId>
+        <label>Community Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CommunityStatus__c</fullName>
+        <description>Status level of the student in the learning community</description>
+        <externalId>false</externalId>
+        <label>Community Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Viewer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Contributor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Super Viewer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>CustomGroupId__c</fullName>
+        <description>Id of the custom group</description>
+        <externalId>false</externalId>
+        <label>Custom Group Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomGroup__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If the associated group is a group made by the student.</description>
+        <externalId>false</externalId>
+        <label>Custom Group</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DateAnnouncementExpires__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Announcement Expires</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DegreeProgram__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Degree program the student is enrolled in</description>
+        <externalId>false</externalId>
+        <label>Degree Program</label>
+        <referenceTo>WGUDegreeProgram__c</referenceTo>
+        <relationshipLabel>Learning Communities</relationshipLabel>
+        <relationshipName>CommunityAccessControls</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>GroupId__c</fullName>
+        <description>Id of the group that the student is assigned to.</description>
+        <externalId>false</externalId>
+        <label>Group Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GroupLevel__c</fullName>
+        <externalId>false</externalId>
+        <label>Group Level</label>
+        <picklist>
+            <picklistValues>
+                <fullName>College</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Program</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ModerationNeeded__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(TEXT(CommunityStatus__c) = &apos;Super Viewer&apos;, TRUE, FALSE)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Moderation Needed</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MyResponse__c</fullName>
+        <description>Response that was made by the course mentor</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The response from the Course Mentor.</inlineHelpText>
+        <label>My Response</label>
+        <length>5000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>OriginalPostId__c</fullName>
+        <description>The Id of the original post that they student made.</description>
+        <externalId>false</externalId>
+        <label>Original Post Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PostStatus__c</fullName>
+        <description>The current status of the post.</description>
+        <externalId>false</externalId>
+        <label>Post Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Unanswered</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Student Responded</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Waiting for Clarification</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Course Mentor Satisfied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Q/A</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Q/A Resolved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>PostType__c</fullName>
+        <externalId>false</externalId>
+        <label>Post Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Post</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Question__c</fullName>
+        <description>Original question text that was asked by the student.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Original question that was asked by the student.</inlineHelpText>
+        <label>Question</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentResponse__c</fullName>
+        <description>Response that was provided by another student.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The answer that was provided by a peer.</inlineHelpText>
+        <label>Student Response</label>
+        <length>5000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>StudentStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Student__r.Status__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Student Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StudentUser__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Student User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>CommunityAccessControls</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Student__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Look up to the student</description>
+        <externalId>false</externalId>
+        <label>Student</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Learning Communities</relationshipLabel>
+        <relationshipName>CommunityAccessControls</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ViewedByStudent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Viewed by Student</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>WGUCourseInProgram__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The course that is in the program that the student is assigned to.</description>
+        <externalId>false</externalId>
+        <label>WGU Course In Program</label>
+        <referenceTo>WGUCourseInProgram__c</referenceTo>
+        <relationshipLabel>Learning Communities</relationshipLabel>
+        <relationshipName>CommunityAccessControls</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>WGUCourse__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>WGU Course</label>
+        <referenceTo>WGUCourse__c</referenceTo>
+        <relationshipLabel>Community Access Controls</relationshipLabel>
+        <relationshipName>CommunityAccessControls</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Community Access Control</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Access For</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Community Access Controls</pluralLabel>
+    <recordTypes>
+        <fullName>CommunityAccess</fullName>
+        <active>true</active>
+        <description>Record type for setting the access level to a community</description>
+        <label>Community Access</label>
+        <picklistValues>
+            <picklist>AdministrationType__c</picklist>
+            <values>
+                <fullName>Announcement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quick Tip</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CommunityStatus__c</picklist>
+            <values>
+                <fullName>Contributor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Super Viewer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viewer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>GroupLevel__c</picklist>
+            <values>
+                <fullName>College</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostStatus__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentor Satisfied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Responded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unanswered</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Clarification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostType__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>CommunityAdministration</fullName>
+        <active>true</active>
+        <description>Record type to hold the Announcements, Quick Tips, and Documents</description>
+        <label>Community Administration</label>
+        <picklistValues>
+            <picklist>AdministrationType__c</picklist>
+            <values>
+                <fullName>Announcement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quick Tip</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CommunityStatus__c</picklist>
+            <values>
+                <fullName>Contributor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Super Viewer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viewer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>GroupLevel__c</picklist>
+            <values>
+                <fullName>College</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostStatus__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentor Satisfied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Responded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unanswered</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Clarification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostType__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>CourseAnnouncement</fullName>
+        <active>true</active>
+        <description>Record type for the announcements that are made by course mentors for a course.</description>
+        <label>Course Announcement</label>
+        <picklistValues>
+            <picklist>AdministrationType__c</picklist>
+            <values>
+                <fullName>Announcement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quick Tip</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CommunityStatus__c</picklist>
+            <values>
+                <fullName>Contributor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Super Viewer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viewer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>GroupLevel__c</picklist>
+            <values>
+                <fullName>College</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostStatus__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentor Satisfied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Responded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unanswered</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Clarification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostType__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>CustomGroupAccess</fullName>
+        <active>true</active>
+        <description>Record type for managing custom groups made by students in a community</description>
+        <label>Custom Group Access</label>
+        <picklistValues>
+            <picklist>AdministrationType__c</picklist>
+            <values>
+                <fullName>Announcement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quick Tip</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CommunityStatus__c</picklist>
+            <values>
+                <fullName>Contributor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Super Viewer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viewer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>GroupLevel__c</picklist>
+            <values>
+                <fullName>College</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostStatus__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentor Satisfied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Responded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unanswered</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Clarification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostType__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>GroupAccess</fullName>
+        <active>true</active>
+        <description>Record type to hold the access level students have to the groups in a community</description>
+        <label>Group Access</label>
+        <picklistValues>
+            <picklist>AdministrationType__c</picklist>
+            <values>
+                <fullName>Announcement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quick Tip</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CommunityStatus__c</picklist>
+            <values>
+                <fullName>Contributor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Super Viewer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viewer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>GroupLevel__c</picklist>
+            <values>
+                <fullName>College</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostStatus__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentor Satisfied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Responded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unanswered</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Clarification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostType__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>GroupAssignment</fullName>
+        <active>true</active>
+        <label>Group Assignment</label>
+        <picklistValues>
+            <picklist>AdministrationType__c</picklist>
+            <values>
+                <fullName>Announcement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quick Tip</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CommunityStatus__c</picklist>
+            <values>
+                <fullName>Contributor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Super Viewer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viewer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>GroupLevel__c</picklist>
+            <values>
+                <fullName>College</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostStatus__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentor Satisfied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Responded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unanswered</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Clarification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostType__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Post</fullName>
+        <active>true</active>
+        <description>Record type for the post that is made to a chatter group.</description>
+        <label>Post</label>
+        <picklistValues>
+            <picklist>AdministrationType__c</picklist>
+            <values>
+                <fullName>Announcement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Document</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quick Tip</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CommunityStatus__c</picklist>
+            <values>
+                <fullName>Contributor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Removed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Super Viewer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Viewer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>GroupLevel__c</picklist>
+            <values>
+                <fullName>College</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Program</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostStatus__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Course Mentor Satisfied</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Q%2FA Resolved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student Responded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unanswered</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting for Clarification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PostType__c</picklist>
+            <values>
+                <fullName>Comment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Post</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

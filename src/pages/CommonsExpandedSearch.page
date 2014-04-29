@@ -1,0 +1,126 @@
+<apex:page sidebar="false" title="Community Search" showHeader="false" standardstylesheets="false" controller="CommonsExpandedSearchController" applyBodyTag="false">
+    <head>
+        <title>Course Search</title>
+        <c:CommonsStaticResources />
+    </head>
+  
+    <div class='cc-popup cc-popup--search non-responsive'>
+        <div class="banner__ribbon">
+            <h2><span class='btn btn--square btn--dark '><span class='icon icon--magnify'></span></span>Course Search</h2>
+        </div>
+        <div class="cc-popup__content cc-popup__content--header cc-popup__content--700">
+            <div class='well clearfix well--invisible'>
+                <p class='left spacer-padding--10'>Search results for: <span class="semi-bold">{!courseTitle} {!courseCode}</span></p>
+                <button class='btn btn--sprite right' data-btn='mentor' data-params="assessmentCode={!courseCode}" data-url='{!$Label.URL_for_Mentor_Contact_Info}'><span class='sprite sprite--blue--person'></span>Contact A Course Mentor</button>
+            </div>
+            <div class="well small  break half-box">
+                <p class='small semi-bold'>New Keyword Search:</p>
+                <div style='height:29px' ></div>
+                <!--<p class="small semi-bold">New Keyword Search In:</p>-->
+                <!--<div class='cc-popup__content__checkboxes spacer-margin--5 checkboxes--blue checkboxes--small clearfix'>
+                    <input type='checkbox' checked='checked' id='check1' /><label for='check1'>Knowledge Base</label>
+                    <input type='checkbox' checked='checked' id='check2' /><label for='check2'>FAQs</label>
+                    <input type='checkbox' checked='checked' id='check3' /><label for='check3'>Chatter</label>
+                </div>-->
+                
+                <div class="form-group--inline spacer-margin--5">
+                    <input type="text" placeholder='New Keyword Search' /><button data-search='new' class='btn btn--square btn--dark'><span class="icon icon--magnify"></span></button>
+                </div>
+                <apex:form >
+                    <apex:actionFunction name="redoSearch" action="{!redoSearch}" reRender="searchResults">
+                        <apex:param id="redoSearchTerm" name="redoSearchTerm" value="" />
+                    </apex:actionFunction>
+                </apex:form>
+            </div>
+            <div class="well small half-box ">
+                <p class="semi-bold small">Refine Current Search:</p>
+                <p class='spacer-margin--5'>Enter keyword(s) to search for within your <br />current results</p>
+                <div class="form-group--inline spacer-margin--5">
+                    <input type="text" placeholder='Refine Current Search' /><button data-search='refine' class='btn btn--square btn--dark'><span class="icon icon--magnify"></span></button>
+                </div>
+                <apex:form >
+                    <apex:actionFunction name="refineSearch" action="{!refineSearch}" reRender="searchResults">
+                        <apex:param id="refineSearchTerm" name="refineSearchTerm" value="" />
+                    </apex:actionFunction>
+                </apex:form>
+            </div>
+                    
+            <div class="well break small full-box ">
+                <apex:outputPanel id="searchResults">
+                    <apex:variable var="refinedSearchText" value=" > {!refineSearchTerm}" rendered="{!NOT(ISBLANK(refineSearchTerm))}" />
+                    <apex:variable var="refinedSearchText" value="" rendered="{!ISBLANK(refineSearchTerm)}" />
+                    <p><span class='semi-bold'>Search Results for: </span>{!searchTerm}{!refinedSearchText}</p>
+                    <div class='scroll scroll--results' style='max-height: 300px'>
+                        <apex:repeat value="{!paginator.currentPage.pageContentList}" var="articleView">
+                            <apex:variable var="resourceType" value="video" rendered="{!articleView.courseArticle.ArticleType__c == 'Welcome Video'}" />
+                            <apex:variable var="resourceType" value="resource" rendered="{!articleView.courseArticle.ArticleType__c != 'Welcome Video'}" />
+                            <div class='search search--{!resourceType}'>
+                                <a target="_blank" href="{!'/apex/CourseArticle?id=' + articleView.courseArticle.KnowledgeArticleId + '&groupId=' + groupId + '&searchTerm=' + SearchTerm + '&courseCode=' + courseCode + IF(ISBLANK(refineSearchTerm), '', '&refineSearchTerm=' + RefineSearchTerm) + '&rtn=/apex/CommonsExpandedSearch'}" class='bold'>{!articleView.courseArticle.Title}</a>
+                                <p class='semi-bold'>{!articleView.courseArticle.Summary}</p>
+                                <p class='search__views'>Viewed {!articleView.viewCount} times</p>
+                            </div>
+                        </apex:repeat>
+                    </div>
+                    <apex:outputPanel rendered="{!paginator.isAll == false}">
+                        <div class="pagination small text-right">
+                            <span>Showing {!paginator.currentPage.pageStart}-{!paginator.currentPage.pageEnd} of {!paginator.totalResults} Results</span>
+                            <ul>
+                                <apex:outputPanel rendered="{!paginator.showPrevious}">
+                                    <li><span class="a" data-pagination="1"><span class="icon icon--triangle-left-double"></span></span></li>
+                                    <li><span class="a" data-pagination="{!paginator.pageNum - 1}"><span class="icon icon--triangle-left"></span></span></li>
+                                </apex:outputPanel>
+                                <li>Page</li>
+                                <apex:repeat value="{!paginator.availablePageList}" var="num">
+                                    <apex:variable var="active" value="pagination--active" rendered="{!num.currentPage}" />
+                                    <apex:variable var="active" value="" rendered="{!num.currentPage == false}" />
+                                    <li class="{!active}"><span class="a" data-pagination="{!num.pageNum}">{!num.pageNum}</span></li>
+                                </apex:repeat>
+                                <apex:outputPanel rendered="{!paginator.showNext}">
+                                    <li><span class="a" data-pagination="{!paginator.pageNum + 1}"><span class="icon icon--triangle-right"></span></span></li>
+                                    <li><span class="a" data-pagination="{!paginator.totalPage}"><span class="icon icon--triangle-right-double"></span></span></li>
+                                </apex:outputPanel>
+                            </ul>
+                        </div>
+                        <apex:form >
+                            <apex:actionFunction name="changePage" action="{!paginator.changePage}" reRender="searchResults">
+                                <apex:param id="page" name="page" value="" />
+                            </apex:actionFunction>
+                        </apex:form>
+                    </apex:outputPanel>
+                    <!--<div class="pagination small text-right">
+                        <span>Showing 1-10 of 99 Results</span>
+                        <ul>
+                            <li><a href="#" class=""><span class="icon icon--triangle-left-double"></span></a></li>
+                            <li><a href="#" class=""><span class="icon icon--triangle-left"></span></a></li>
+                            <li>Page</li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li class="pagination--active"><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#" class=""><span class="icon icon--triangle-right"></span></a></li>
+                            <li><a href="#" class=""><span class="icon icon--triangle-right-double"></span></a></li>
+                        </ul>
+                    </div>-->
+                </apex:outputPanel>
+            </div>
+            <div class='well small well--bottom full-box'>
+                <p class='bold'>Can't Find What You're Searching For?</p>
+                <p class='spacer-margin--5'>Post your question to Course Chatter</p>
+                <div class="form-group--inline spacer-margin--10">
+                    <input type="text" placeholder='Write a Question' /><button data-search-chatter='hello' class='btn btn--square btn--dark'><span class="icon icon--chatter"></span></button>
+                </div>
+            </div>  
+            <div class="well well--invisible full-box">
+                <button class="btn right" data-action='close'><span class="icon icon--close"></span> Close Window</button>
+            </div>
+            <apex:form >
+                <apex:actionFunction name="postMessageToChatter" action="{!postMessageToChatter}" reRender="none">
+                    <apex:param id="message" name="message" value="" />
+                    <apex:param id="question" name="question" value="" />
+                    <apex:param id="feedItemId" name="feedItemId" value="" />
+                </apex:actionFunction>
+            </apex:form>
+        </div>
+    </div>
+</apex:page>

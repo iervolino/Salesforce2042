@@ -1,0 +1,173 @@
+<apex:page standardController="Project__c" sidebar="false" showHeader="false" >
+  <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
+    'version':'1','packages':['timeline']}]}"/>
+    <script src="/soap/ajax/9.0/connection.js" type="text/javascript"/>
+    <apex:includeScript value="{!URLFOR($Resource.JQuery_1_9_1)}"  />
+<apex:includeScript value="{!URLFOR($Resource.JQuery_UI_1_10_1)}"  />
+<apex:stylesheet value="{!URLFOR($Resource.JQuery_UI_1_10_1_css)}"  />
+<script type="text/javascript">
+    
+ var $soap = (sforce? sforce.connection: null);
+if (sforce && sforce.connection) 
+{
+    sforce.connection.sessionId = '{!$Api.Session_ID}';
+}
+var $sconsole = (sforce && sforce.console && sforce.console.isInConsole()? sforce.console: null);
+var $apex = ( sforce? sforce.apex: null );
+
+function populateProjects() {
+       
+    
+  qr_pf = sforce.connection.query("Select Id, Name, BusinessUnitRank__c, WGUGoalAlignment__c, ProjectStatus__c, PriorityTier__c "+
+                                      "from Project__c "+
+                                      " where ProjectStatus__c not in ('Complete','Cancelled')"+
+                                      " and  BusinessUnitSponsor__c='" + document.getElementById('{!$Component.theForm.busAreaFilter}').value + "'"  +
+                                      " order by BusinessUnitRank__c,ProjectRank__c,  Name desc ") ; 
+    var projects = qr_pf.getArray("records");
+    //loop through portfolios and seperate them in the table
+    document.getElementById('mainBody').innerHTML = "";
+    for (i=0;i<qr_pf.size; i++)
+    {
+           //create table rows and cells
+        var tableRow = document.createElement('tr'); 
+        tableRow.style.height = '50px';
+        tableRow.className = "dataRow";
+        var rankCell = document.createElement('td');
+        var origRankCell = document.createElement('td');
+        var projCell = document.createElement('td');
+        var goalCell = document.createElement('td');
+        var statusCell =document.createElement('td');
+        var tierCell =document.createElement('td');
+        var idCell =document.createElement('td');
+        
+        //set properties for the table cells
+        rankCell.className = "index";
+		rankCell.innerHTML = i + 1;
+        rankCell.width = '5%';
+        origRankCell.innerHTML = i + 1;
+        origRankCell.className ="origIndex";
+        origRankCell.width = '5%';
+        projCell.className = "project";
+        projCell.className="dataCell";
+        //add link with mini layout on mouseover        
+        mouseOverText = "<a id='"+ projects[i].Id  +"' onmouseover=LookupHoverDetail.getHover('"+ projects[i].Id  + "','/" +
+            projects[i].Id  +"/m?retURL="+ projects[i].Id  +"&isAjaxRequest=1').show();"+
+                    " onmouseout=LookupHoverDetail.getHover('"+ projects[i].Id  +"').hide();" +
+                    " onfocus=LookupHoverDetail.getHover('"+ projects[i].Id  +"', '/"+ projects[i].Id  +"/m?retURL="+ projects[i].Id  +"&isAjaxRequest=1').show();" +
+                    " onblur=LookupHoverDetail.getHover('"+ projects[i].Id  +"').hide();" +
+                    "href='/"+ projects[i].Id  +"'>" + projects[i].Name +"</a>";           
+        projCell.innerHTML =mouseOverText;  
+        projCell.width = '30%';
+        goalCell.innerHTML = projects[i].WGUGoalAlignment__c;
+        goalCell.width = '45%';
+        statusCell.innerHTML =  projects[i].ProjectStatus__c;
+        statusCell.width='10%';
+        tierCell.width = '5%';
+        tierCell.innerHTML = projects[i].PriorityTier__c;
+            
+        idCell.innerHTML = projects[i].Id;
+        idCell.className='idCell';
+        
+        //append cells to row
+        tableRow.appendChild(rankCell);
+        tableRow.appendChild(origRankCell);
+        tableRow.appendChild(tierCell);
+        tableRow.appendChild(statusCell);
+		tableRow.appendChild(projCell);
+        tableRow.appendChild(goalCell);
+ 		tableRow.appendChild(idCell);
+
+        //append row to table body
+        document.getElementById('mainBody').appendChild(tableRow);
+     } 
+}
+        
+</script>
+<script type='text/javascript'>
+$(window).load(function(){
+    populateProjects();
+    //helper to keep the column size constant
+	var fixHelperModified = function(e, tr) {
+    var $originals = tr.children();
+    var $helper = tr.clone();
+    $helper.children().each(function(index) {
+        $(this).width($originals.eq(index).width())
+    });
+    return $helper;
+},
+    updateIndex = function(e, ui) {
+        //resequence the values
+        $('td.index', ui.item.parent()).each(function (i) {
+			$(this).html(i + 1);
+        });
+		ui.item.addClass("changed"); 
+        
+    };
+    
+    //make the the table sortable by row   
+$("#mainTab tbody").sortable({
+    helper: fixHelperModified,
+    update: updateIndex,
+    cursor:"Move",
+    containment: "parent"
+}).disableSelection();
+});
+
+function SaveRecs()
+{
+        var tabBody = document.getElementById("mainBody");
+    	var children = tabBody.childNodes;
+		var projects = [];
+    	//loop through the rows excluding hearder
+    	for (var i=0; i<children.length;i++)
+        {
+                var newProject = new sforce.SObject("Project__c");
+                newProject.id =children[i].lastChild.innerHTML; //get the SF Id from the hidden field
+                newProject.BusinessUnitRank__c = children[i].firstChild.innerHTML; //update the rank
+                projects.push(newProject); //add to update array
+        }
+    	result = sforce.connection.update(projects); //send update to salesforce
+    	
+    	populateProjects();
+        return false;
+    
+};    
+    
+</script>
+    <style>
+    .changed
+    {
+        background-color:#D8EDF3;
+        border-color:orange;
+        border-style:solid;
+    }
+    td.idCell
+    {
+     	display:none;   
+    }
+    </style>
+         <apex:form id="theForm">
+     	<apex:commandButton value="Save Changes" title="Save Changes" onclick="return SaveRecs();"/>
+         <apex:commandButton value="Cancel" title="Save Changes"/>
+         <apex:inputField value="{!Project__c.BusinessUnitSponsor__c}" onChange="populateProjects();" id="busAreaFilter" />
+     </apex:form>
+ <apex:pageBlock >
+ <apex:pageBlockSection columns="1" >
+
+     
+     
+    <table class="detailList" width="60%">
+        <td class = "dataCol first last " colspan="2">
+         	<table id="mainTab" class="list" width="60%" >
+    		<thead class="headerRow">
+                <tr class="headerRow"><th>Rank</th><th>Orig Rank</th><th>Tier</th><th>Status</th><th>Project</th><th>Goals</th></tr>
+    		</thead>
+    		<tbody id="mainBody">
+    		</tbody>
+			</table>
+        </td>
+     </table>
+     </apex:pageBlockSection>
+
+         </apex:pageBlock>      
+</apex:page>

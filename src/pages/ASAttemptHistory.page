@@ -1,0 +1,55 @@
+<apex:page standardController="StudentTaskAttempt__c" sidebar="false" showHeader="false" >
+ <script src="/soap/ajax/9.0/connection.js" type="text/javascript"/>    
+<script type="text/javascript">
+    
+var $soap = (sforce? sforce.connection: null);
+if (sforce && sforce.connection) 
+{
+    sforce.connection.sessionId = '{!$Api.Session_ID}';
+}
+var $sconsole = (sforce && sforce.console && sforce.console.isInConsole()? sforce.console: null);
+var $apex = ( sforce? sforce.apex: null );
+    
+function displayAttempts()
+{
+      var qr_pf = sforce.connection.query("Select Id, Name, AssessmentTaskCode__c,Attempted__c, Passed__c" + 
+                                          " from StudentAcademicCourseAttempt__c " +
+                                          " where AssessmentTaskCode__c = '{!StudentTaskAttempt__c.Assessment__r.Name}' "+
+                                          " and  StudentAcademicCourse__r.StudentContact__r.pidm__c ='{!StudentTaskAttempt__c.Student__r.Pidm__c}' " + 
+                                          " order by Attempted__c desc limit 10  ");
+  	var attempts = qr_pf.getArray("records");
+    for (i=0;i<qr_pf.size; i++)
+    {
+           //create table rows and cells
+        var tableRow = document.createElement('tr'); 
+        tableRow.style.height = '10px';
+        tableRow.className = "dataRow";
+        var AssessmentCell = document.createElement('td');
+        AssessmentCell.innerHTML= attempts[i].AssessmentTaskCode__c;
+        var dateCell = document.createElement('td');
+        var d = new Date(attempts[i].Attempted__c);
+        dateCell.innerHTML=d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
+        var result;
+        if (attempts[i].Passed__c =='true')
+            result = 'Passed';
+        else
+            result = 'Not Passed';
+
+        var resultCell = document.createElement('td');
+        resultCell.innerHTML= result;
+		tableRow.appendChild(AssessmentCell);
+        tableRow.appendChild(dateCell);
+        tableRow.appendChild(resultCell);
+        document.getElementById('mainBody').appendChild(tableRow);
+   	}
+}    
+    window.onload = function() { displayAttempts(); };
+    </script>	
+         	<table id="mainTab" class="list" width="20%" >
+    		<thead class="headerRow">
+                <tr class="headerRow"><th>Assessment</th><th>Date</th><th>Result</th></tr>
+    		</thead>
+    		<tbody id="mainBody">
+    		</tbody>
+			</table>
+</apex:page>

@@ -1,0 +1,182 @@
+<apex:component >
+
+    <!--import fonts from the big G-->
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css' />
+    <apex:stylesheet value="{!URLFOR($Resource.FDP_Resources,'assets/css/reset.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.FDP_Resources,'assets/css/degreePlan.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.FDP_Resources,'assets/css/layout.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.FDP_Resources,'assets/css/degree-plan.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.FDP_Resources,'assets/css/degreePlan.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.FDP_Resources,'assets/css/components.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.FDP_Resources,'assets/css/degree-plan-2.css')}"/>
+    
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"/>
+    <script>
+    	jQuery.noConflict();
+    </script>
+	<apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/checkbox-scripts.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/mustache.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/jquery.ui.core.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/jquery.ui.widget.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/jquery.ui.mouse.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/jquery.ui.slider.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/jquery-ui-1.8.17.custom.min.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/prefix-free.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.FDP_Resources,'assets/js/switch.js')}"/>
+
+<script type="text/javascript">
+jQuery(function() {
+
+    jQuery('a .expand-term').parent().click(function() {
+        jQuery(this).parent().toggleClass('collapsed').siblings('div.term-body').slideToggle(200);
+        return false;
+    });
+
+  jQuery(".dp-remaining" ).sortable({
+        placeholder: "sortable-placeholder",
+        revert: 200,
+        handle: '.grabber',
+        connectWith: '.dp-remaining',
+        cursor: 'move',
+        start: function(event, ui) {
+            // To demo the locked style
+            //jQuery('ol.dp-remaining li:first').addClass('locked');
+        },
+        stop: function(event, ui) {
+            var moved = jQuery(ui.item);
+            moved.children('ul.dp-req').addClass('moved');
+            moved.parents('.term-body').addClass('moved');
+            var termId = moved.parents('.dp-term').attr('id');
+            termId = termId.replace('term-','');
+            var courseId = moved.attr('id');
+            courseId = courseId.replace('course-','');
+            
+            // To demo the locked style
+            //jQuery('li.locked').removeClass('locked');
+        }
+    });
+
+    
+});
+
+</script>
+<script type="text/javascript">
+// Configure the Google Webfonts.
+WebFontConfig = {
+    google: { families: [ 'Lato:300,400,700,300italic,400italic,700italic:latin', 'Droid+Serif:400,700,400italic,700italic:latin' ] }
+};
+// Run this when the page is ready.
+jQuery(function() {     
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+        
+    // grows a search box like a weed
+    jQuery('#header .wgu-search input').focus(function() {
+        jQuery(this).animate({'width':'200px'});
+    }).blur(function() {
+        jQuery(this).animate({'width':'46px'});
+    });
+    
+    jQuery('#notifications a, #profile a').click(function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        console.log('here');
+        jQuery('.dd-tab',jQuery(this).parents('li')).toggleClass('active');
+        jQuery('.dd-dropdown',jQuery(this).parents('li')).toggleClass('show-dd');
+    }); 
+    jQuery('.dd-dropdown').on("click", function(event){
+        event.stopPropagation();
+    });
+    jQuery(document).on("click", function(event){
+        jQuery('.dd-tab').removeClass('active');
+        jQuery('.dd-dropdown').removeClass('show-dd');
+    });
+    
+    jQuery('#footer .button.contacts').toggle(function() {
+        jQuery(this).addClass('active');
+        jQuery('#footer-contacts-menu').show();
+        var contactListHeight = jQuery('#footer-contacts-menu').outerHeight();      
+        jQuery('#footer-contacts-menu .right-panel').css({'height':contactListHeight + 'px'});
+    }, function() {
+        jQuery(this).removeClass('active');
+        jQuery('#footer-contacts-menu').hide();
+    }); 
+    
+    jQuery('#footer-contacts-menu > .contacts-list li').click(function() {
+        jQuery('#footer-contacts-menu .right-panel').children().hide();
+        jQuery('#footer-contacts-menu .right-panel .contacts-list').show();
+    });
+    
+    jQuery('#footer-contacts-menu .right-panel .contacts-list li').click(function() {
+        jQuery('#footer-contacts-menu .right-panel').children().hide();
+        jQuery('#footer-contacts-menu .right-panel .contact-detail-wrapper').show();
+    });
+    
+    
+    
+});
+</script>
+
+<style>
+
+.line-through {
+    position: relative;
+    padding: 0;
+    text-align: center;
+    clear:both;
+    height:20px;
+    font-family:'Droid Serif', Georgia, "Times New Roman", Times, serif;
+    font-size:11px;
+    font-style:italic;
+    line-height:16px;
+}
+.line-through h2 {
+    display: inline-block;  
+}
+.line-through .absolute {
+    float: left;
+    margin-right: 70px;
+    position:absolute;
+    text-align:center;
+}
+
+.line-through .absolute sup {
+    font-size:7px;
+    padding-bottom:5px;
+    display:inline-block;
+    margin-top:-2px;
+    vertical-align:top;
+}
+.line-through .line {
+    display: block;
+    position: absolute;
+    height: 0px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #fff;
+    margin-top:7px;
+}
+
+.line-through div:first-child {
+    color:#585858;
+}
+
+.line1, .line2 {
+    border-color:#bdbdbe;
+}
+
+.line-through .line3, .line-through .line4 {
+    border-top:1px solid #93acd4;
+}
+
+.line-through div.remaining-text {
+    color:#2356ad !important;
+}
+
+</style>
+</apex:component>

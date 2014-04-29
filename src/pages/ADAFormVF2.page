@@ -1,0 +1,78 @@
+<apex:page standardController="ADAFile__c" extensions="ADAFormController" sidebar="false" showHeader="true">
+    <!--<script language="JavaScript">
+    if('{!confirm}' == 'yes') {
+        alert('ADA Referral Form submitted.');
+        window.location.replace('https://www.wgu.edu');
+    }
+    </script>-->
+    
+    <table style="background:#B4B2CE" width="100%">
+    <tr>
+        <td width="310">
+            <img width="310" height="86" id="logo" alt="" src="{!URLFOR($Resource.AppealResources,'logo.png')}" class="fixPNG"/>
+        </td>
+    </tr>
+</table>
+<apex:form id="iForm" > 
+<apex:pageMessages />
+<apex:pageBlock title="ADA Referral Form" rendered="{!flag}">
+      <a href="http://kb.wgu.edu/article.aspx?article=1019&p=3" target="_blank">Students with Disabilities Policies and Procedures</a>
+     <br></br>
+     <br></br>
+
+    <apex:pageBlockSection collapsible="false" title="Student Information">
+
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Student's First Name</apex:outputLabel>
+                <apex:inputField value="{!studentInfo.FirstName__c}" required="true" id="first"></apex:inputField>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Student's Last Name</apex:outputLabel>
+                <apex:inputField value="{!studentInfo.LastName__c}" required="true" id="last"></apex:inputField>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Student's ID</apex:outputLabel>
+                <apex:inputField value="{!studentInfo.StudentID__c}" required="true" id="id"></apex:inputField>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Email</apex:outputLabel>
+                <apex:inputField value="{!studentInfo.PrimaryEmail__c}" required="true"></apex:inputField>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Time Zone</apex:outputLabel>
+                <apex:inputField value="{!studentInfo.TimeZone__c}"></apex:inputField>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Student's Status</apex:outputLabel>
+                <apex:inputField value="{!studentInfo.StudentStatus__c}" required="true"></apex:inputField>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Reason for Referral</apex:outputLabel>
+                <apex:inputField value="{!studentInfo.Message__c}" style="width:100%;" required="true"></apex:inputField>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Is the Student Aware of the Referral?</apex:outputLabel>
+                <apex:inputField value="{!studentInfo.Awareness__c}"></apex:inputField>
+            </apex:pageBlockSectionItem>
+        	<apex:pageBlockSectionItem >
+                <apex:outputLabel >Perferred Method</apex:outputLabel>
+                <apex:inputField value="{!studentInfo.ContactMethod__c}" required="true"></apex:inputField>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Best Time to Contact</apex:outputLabel>
+                <apex:inputField value="{!studentInfo.BestTimetoContact__c}" required="true"></apex:inputField>
+            </apex:pageBlockSectionItem>
+                                   
+        </apex:pageBlockSection>
+
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Submit" action="{!submit}"/>
+            <apex:commandButton value="Cancel" action="{!cancel}"/>
+            
+        </apex:pageBlockButtons>
+</apex:pageBlock>
+<table width="100%"><tr><td align="center">
+<apex:commandButton value="Go to my Home Page" action="{!homepage}" rendered="{!NOT(flag)}"/>
+</td></tr></table>
+</apex:form> 
+</apex:page>
